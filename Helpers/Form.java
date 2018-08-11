@@ -1,0 +1,93 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Helpers;
+
+import java.io.IOException;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.stage.Window;
+
+/**
+ *
+ * @author Lei
+ */
+public class Form {
+    
+    private String p = "";
+    private Stage stage = new Stage();
+    private Parent parent;
+    
+    public Form(String Path){
+        this.parent = null;
+        try {
+
+            this.parent = FXMLLoader.load(getClass().getResource(Path));
+    
+        }catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public Form() {}
+
+    
+    public void setPath(String Path) {
+        this.p = Path;
+    }
+    
+    public String getPath(){
+        return this.p;
+    }
+    
+    
+    public void open(){
+        
+        Scene s = new Scene(this.parent);
+        
+        this.stage.initStyle(StageStyle.DECORATED);
+        this.stage.setScene(s);
+        this.stage.show();
+    }
+    
+    public void open(StageStyle stageSytle){
+        
+        Scene s = new Scene(this.parent);
+        
+        this.stage.initStyle(stageSytle);
+        this.stage.setScene(s);
+        this.stage.show();
+    }
+    
+    public void open(StageStyle stageSytle, Boolean isFullScreen){
+        
+        Scene s = new Scene(this.parent);
+        
+        if (isFullScreen) {
+           this.stage.setFullScreen(true);
+        }
+        
+        this.stage.initStyle(stageSytle);
+        this.stage.setScene(s);
+        this.stage.show();
+    }
+    
+    public static void close(Stage target){
+        target.close();
+    }
+    
+    public static void close(Window w){
+        ( (Stage) w ).close();
+    }
+    
+    
+    public static void close(Node n) {
+        ( (Stage) n.getScene().getWindow()).close();
+    }
+}

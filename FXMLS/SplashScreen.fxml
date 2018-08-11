@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="406.0" prefWidth="530.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.SplashScreenController">
+   <children>
+      <BorderPane prefHeight="406.0" prefWidth="543.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <ImageView fitHeight="418.0" fitWidth="548.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@../Assets/splash.jpg" />
+               </image>
+            </ImageView>
+         </center>
+         <bottom>
+            <VBox prefHeight="34.0" prefWidth="548.0">
+               <children>
+                  <ProgressBar fx:id="LoadingBar" maxHeight="-Infinity" prefHeight="0.0" prefWidth="548.0" progress="0.0" style="-fx-accent: #2dbe60;" />
+                  <AnchorPane prefHeight="200.0" prefWidth="548.0">
+                     <children>
+                        <Label fx:id="loadingPercentage" text="0.00 %" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
+                           <font>
+                              <Font name="Continuum Medium" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="loadingStatus" text="Loading ..." AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="0.0">
+                           <font>
+                              <Font name="Continuum Medium" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>
