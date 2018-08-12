@@ -36,20 +36,14 @@ public class RouteConfig {
         {"hr4analytics", "/FXMLS/HR4/HR4_Analytics.fxml"},
         {"hr4payroll", "/FXMLS/HR4/HR4_Payroll.fxml"},
         {"hr4cnp", "/FXMLS/HR4/HR4_Compensation_and_Planning.fxml"},
-<<<<<<< HEAD
         {"hr4chc", "/FXMLS/HR4/HR4_Core_Human_Capital_Management.fxml"},
         
         //Logistic2
         {"log2vendorportal", "/FXMLS/Log2/Log2_Vendor_Portal.fxml"},
         {"Log2AuditManagement", "/FXMLS/Log2/Log2_Audit_Management.fxml"}
         
-        
-        
-=======
-        {"hr4chc", "/FXMLS/HR4/HR4_Core_Human_Capital_Management.fxml"}
       
         //Core2    
->>>>>>> fa256acd025e8fdbfb08aa29082e8bf5fbcbca4f
             
             
     };
