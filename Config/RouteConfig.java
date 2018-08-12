@@ -41,7 +41,7 @@ public class RouteConfig {
         //Logistic2
         {"log2vendorportal", "/FXMLS/Log2/Log2_Vendor_Portal.fxml"},
         {"Log2AuditManagement", "/FXMLS/Log2/Log2_Audit_Management.fxml"},
-        
+      
         //Core2    
         {"core2SN","/FXMLS/Core2/ServiceNetwork.fxml"},
         {"core2SP","/FXMLS/Core2/ServiceProvider.fxml"},
