@@ -42,7 +42,14 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <VBox prefHeight="555.0" prefWidth="229.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <VBox prefHeight="555.0" prefWidth="229.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <JFXButton id="core2SN" onAction="#triggerButton" prefHeight="27.0" prefWidth="206.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="Service Network" />
+                                    <JFXButton id="core2SP" onAction="#triggerButton" prefHeight="27.0" prefWidth="206.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="Service Provider" />
+                                    <JFXButton id="core2CRM" onAction="#triggerButton" prefHeight="27.0" prefWidth="206.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="Customer Relationship Management" />
+                                    <JFXButton id="core2SR" onAction="#triggerButton" prefHeight="27.0" prefWidth="206.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="Schedule and Rates" />
+                                    <JFXButton id="core2SOP" onAction="#triggerButton" prefHeight="27.0" prefWidth="206.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="Standard Operational Procedure" />
+                                 </children></VBox>
                            </children>
                         </AnchorPane>
                      </content>
