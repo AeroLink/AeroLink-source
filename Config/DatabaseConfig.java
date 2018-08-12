@@ -14,7 +14,7 @@ import java.sql.Connection;
 public class DatabaseConfig {
     
     public static String PROVIDER = "mysql";
-    public static String IP = "192.168.8.102";
+    public static String IP = "192.168.8.100";
     public static String PORT = "3306";
     public static String DATABASE = "aerolink";
     public static String USER = "root";
