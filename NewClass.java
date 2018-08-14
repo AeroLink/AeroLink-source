@@ -4,6 +4,7 @@ import Model.Users;
 import Synapse.Crypt;
 import Synapse.DB.MySql;
 import Synapse.Database;
+import Synapse.Model;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -30,11 +31,11 @@ public class NewClass {
         
         Users u = new Users();
         
-        HashMap user = Crypt.Encrypt("test");
-        u.insert(0, "username", user.get("cipher"), user.get("iv"));
+        List list = u.join(Model.JOIN.INNER, "tbl_user_permissions", "user_id", "=", "id").get();
         
-        System.out.println("User Saved");
-    
+        
+       
+        System.out.println(Arrays.asList(list.toArray()).get(0));
     }
     
 }

@@ -45,6 +45,11 @@ public class Model {
             
             try {
                 
+                if(joined) {
+                    Query += this.joinConstruct;
+                    this.joined = false;
+                }
+                
                 if(where){
                     Query += "WHERE " + this.whereConstruct;
                     this.pst = Session.INSTANCE.getConnection().prepareStatement(Query);
@@ -208,6 +213,37 @@ public class Model {
         return false;
     }
     //end insertions
+
+    
+    //Joins
+    //TODO : Re illuminate - will fix redudancy later
+    private String joinConstruct = "";
+    private Boolean joined = false;
+    
+    public enum JOIN {
+        INNER, LEFT, RIGHT
+    }
+    
+    /**
+     * Usage Example:
+     * 
+     * Users.join(JOIN.INNER, "tbl_user_permissions", "user_id", "=", "id").get();
+     * 
+     * 
+     * @param joinProc
+     * @param table2
+     * @param table2_key
+     * @param logical_operator
+     * @param table1_key
+     * @return
+     */
+    public Model join(JOIN joinProc, String table2, String table2_key, String logical_operator, String table1_key) {
+        
+        this.joinConstruct = joinProc + " JOIN " + table2 + " ON " + table2 + "." + table2_key +  " " + logical_operator + " " + Session.table + "." + table1_key + " ";
+        this.joined = true;
+        return this;
+    }
+    
 
     public void clear(){
         this.whereValues = new ArrayList<>();

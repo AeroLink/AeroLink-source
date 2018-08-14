@@ -16,6 +16,7 @@ public class Users extends Synapse.Model{
     public Users() {
         setTable("tbl_users");
         setColumns("id", "username", "password", "ivp");
+        
     }
     
 }
