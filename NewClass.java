@@ -5,6 +5,7 @@ import Synapse.Crypt;
 import Synapse.DB.MySql;
 import Synapse.Database;
 import Synapse.Model;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -28,14 +29,21 @@ public class NewClass {
         db.DB_INIT(new MySql());
         db.startConnection();
         
-        
         Users u = new Users();
         
-        List list = u.join(Model.JOIN.INNER, "tbl_user_permissions", "user_id", "=", "id").get();
-        
+        List results = u.get(); // get all rows
         
        
-        System.out.println(Arrays.asList(list.toArray()).get(0));
+        for(int i = 0; i < results.size(); i++){
+            HashMap hash = (HashMap) results.get(i); // get all colums and values .. username = "BlackStar"
+            
+            System.out.println(hash.get("username"));
+        }
+        
+        
+        
+        
+        
     }
     
 }
