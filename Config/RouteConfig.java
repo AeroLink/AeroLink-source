@@ -25,6 +25,14 @@ public class RouteConfig {
         {"performance", "/FXMLS/HR1/HR1_Performance_Management.fxml"},
         {"social", "/FXMLS/HR1/HR1_Social_Recognition.fxml"},
         
+              
+        //HR2
+        {"learning_management", "/FXMLS/HR2/HR2_Learning_Management.fxml"},
+        {"training_management", "/FXMLS/HR2/HR2_Training_Management.fxml"},
+        {"competency_management", "/FXMLS/HR2/HR2_Competency_Management.fxml"},
+        {"succession_planning", "/FXMLS/HR2/HR2_Succession_Planning.fxml"},
+       // {"social", "/FXMLS/HR1/HR1_Social_Recognition.fxml"},
+        
         //HR3
         {"hr3sns", "/FXMLS/HR3/HR3_Shift_and_Scheduling.fxml"},
         {"hr3tna", "/FXMLS/HR3/HR3_Time_and_Attendance.fxml"},

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="634.0" prefWidth="784.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.HR2_Training_ManagementController">
+   <children>
+      <Label layoutX="14.0" layoutY="83.0" prefHeight="18.0" prefWidth="100.0" text="Employee ID">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="113.0" prefHeight="19.0" prefWidth="117.0" text="Employee Name">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="141.0" prefHeight="19.0" prefWidth="86.0" text="Job Position">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="169.0" prefHeight="18.0" prefWidth="63.0" text="Title">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="198.0" prefHeight="18.0" prefWidth="50.0" text="Trainor">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txt_emp_id" focusColor="#353843" layoutX="146.0" layoutY="73.0" maxWidth="185.0" minWidth="185.0" prefHeight="31.0" prefWidth="185.0" unFocusColor="#b2b1b1">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txt_employee_name" focusColor="#353843" layoutX="146.0" layoutY="103.0" maxWidth="185.0" minWidth="185.0" prefHeight="31.0" prefWidth="185.0" unFocusColor="#b2b1b1">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txt_job_position" focusColor="#353843" layoutX="146.0" layoutY="131.0" maxWidth="185.0" minWidth="185.0" prefHeight="31.0" prefWidth="185.0" unFocusColor="#b2b1b1">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txt_trainor" focusColor="#353843" layoutX="146.0" layoutY="188.0" maxWidth="185.0" minWidth="185.0" prefHeight="31.0" prefWidth="185.0" unFocusColor="#b2b1b1">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font></JFXTextField>
+      <AnchorPane layoutX="2.0" layoutY="400.0" prefHeight="236.0" prefWidth="784.0">
+         <children>
+            <ScrollPane prefHeight="280.0" prefWidth="784.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="277.0" prefWidth="785.0">
+                     <children>
+                        <TableView fx:id="list_of_trainees" layoutX="-2.0" layoutY="-1.0" prefHeight="280.0" prefWidth="1019.0">
+                          <columns>
+                            <TableColumn prefWidth="105.0" text="Employee ID" />
+                            <TableColumn prefWidth="15.0" text="Employee Name" />
+                              <TableColumn prefWidth="75.0" text="Job Position" />
+                              <TableColumn prefWidth="75.0" text="Title" />
+                              <TableColumn prefWidth="75.0" text="Trainor" />
+                              <TableColumn prefWidth="75.0" text="Type of Training" />
+                              <TableColumn prefWidth="75.0" text="Location" />
+                              <TableColumn prefWidth="75.0" text="Date Start" />
+                              <TableColumn prefWidth="75.0" text="Date End" />
+                              <TableColumn prefWidth="75.0" text="Time Start" />
+                              <TableColumn prefWidth="75.0" text="Time End" />
+                              <TableColumn prefWidth="75.0" text="Budget Cost" />
+                              <TableColumn prefWidth="75.0" text="Organizer" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+      <JFXTextField fx:id="txt_title" focusColor="#353843" layoutX="146.0" layoutY="159.0" maxWidth="185.0" minWidth="185.0" prefHeight="31.0" prefWidth="185.0" unFocusColor="#b2b1b1">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </JFXTextField>
+      <Label layoutX="14.0" layoutY="229.0" prefHeight="19.0" prefWidth="117.0" text="Type of Training">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="260.0" prefHeight="19.0" prefWidth="63.0" text="Location">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txt_location" focusColor="#353843" layoutX="146.0" layoutY="250.0" maxWidth="185.0" minWidth="185.0" prefHeight="31.0" prefWidth="185.0" unFocusColor="#b2b1b1">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </JFXTextField>
+      <Label layoutX="351.0" layoutY="83.0" prefHeight="18.0" prefWidth="100.0" text="Date_Start">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="351.0" layoutY="113.0" prefHeight="19.0" prefWidth="117.0" text="Date_End">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="351.0" layoutY="141.0" prefHeight="19.0" prefWidth="86.0" text="Time Start">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="351.0" layoutY="169.0" prefHeight="18.0" prefWidth="63.0" text="Time End">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="351.0" layoutY="198.0" prefHeight="19.0" prefWidth="100.0" text="Budget Cost">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txt_date_start" focusColor="#353843" layoutX="483.0" layoutY="73.0" maxWidth="185.0" minWidth="185.0" prefHeight="31.0" prefWidth="185.0" unFocusColor="#b2b1b1">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txt_date_end" focusColor="#353843" layoutX="483.0" layoutY="103.0" maxWidth="185.0" minWidth="185.0" prefHeight="31.0" prefWidth="185.0" unFocusColor="#b2b1b1">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txt_time_start" focusColor="#353843" layoutX="483.0" layoutY="131.0" maxWidth="185.0" minWidth="185.0" prefHeight="31.0" prefWidth="185.0" unFocusColor="#b2b1b1">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txt_budget_cost" focusColor="#353843" layoutX="483.0" layoutY="188.0" maxWidth="185.0" minWidth="185.0" prefHeight="31.0" prefWidth="185.0" unFocusColor="#b2b1b1">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txt_time_end" focusColor="#353843" layoutX="483.0" layoutY="159.0" maxWidth="185.0" minWidth="185.0" prefHeight="31.0" prefWidth="185.0" unFocusColor="#b2b1b1">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </JFXTextField>
+      <Label layoutX="351.0" layoutY="229.0" prefHeight="19.0" prefWidth="117.0" text="Organizer">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txt_organizer" focusColor="#353843" layoutX="483.0" layoutY="219.0" maxWidth="185.0" minWidth="185.0" prefHeight="31.0" prefWidth="185.0" unFocusColor="#b2b1b1">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXComboBox fx:id="type_of_training" layoutX="152.0" layoutY="224.0" prefHeight="25.0" prefWidth="171.0" />
+      <JFXTextField fx:id="txt_name_of_trainee11" focusColor="#353843" layoutX="546.0" layoutY="27.0" maxWidth="215.0" minWidth="185.0" prefHeight="35.0" prefWidth="215.0" promptText="Search" unFocusColor="#b2b1b1">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXButton fx:id="btn_new" layoutX="32.0" layoutY="319.0" prefHeight="28.0" prefWidth="94.0" style="-fx-background-color: #00b359;" text="New" textFill="WHITE">
+         <font>
+            <Font name="Lato Regular" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btn_edit" layoutX="32.0" layoutY="357.0" prefHeight="29.0" prefWidth="94.0" style="-fx-background-color: #00b359;" text="Edit" textFill="WHITE">
+         <font>
+            <Font name="Lato Regular" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btn_save" layoutX="152.0" layoutY="319.0" onAction="#Save" prefHeight="28.0" prefWidth="94.0" style="-fx-background-color: #00b359;" text="Save" textFill="WHITE">
+         <font>
+            <Font name="Lato Regular" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btn_update" layoutX="152.0" layoutY="358.0" prefHeight="28.0" prefWidth="94.0" style="-fx-background-color: #00b359;" text="Update" textFill="WHITE">
+         <font>
+            <Font name="Lato Regular" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btn_delete" layoutX="265.0" layoutY="319.0" prefHeight="29.0" prefWidth="94.0" style="-fx-background-color: #00b359;" text="Delete" textFill="WHITE">
+         <font>
+            <Font name="Lato Regular" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+   </children>
+</AnchorPane>
