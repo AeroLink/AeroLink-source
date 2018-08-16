@@ -8,7 +8,10 @@ package Synapse;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,8 +21,19 @@ public class Model {
 
 
     //TODO : Update and Delete .. Joins and Relationships;
+    //TODO : Re illuminate - will fix redudancy later
+    private String joinConstruct = "";
+    private Boolean joined = false;
     
-    private String whereConstruct;
+    public enum JOIN {
+        INNER, LEFT, RIGHT
+    }
+    
+    private String whereConstruct = "";
+    
+    private String finalQuery;
+    private ArrayList<Object> finalValues = new ArrayList<Object>();
+            
     private ArrayList<Object> whereValues = new ArrayList<>();
     private Boolean where = false;
     private PreparedStatement pst;
@@ -128,8 +142,9 @@ public class Model {
    
     public Model where(String col, String operator, String value){
         this.where = true;
-        this.whereConstruct = "";
-        
+        this.whereConstruct += col + " " + operator + " ? ";
+        this.whereValues.add(value);
+    
         return this;
     }
     
@@ -173,7 +188,7 @@ public class Model {
         return false;
     }
     
-    public Boolean insert(String[][] vals) {
+    public Boolean insert(Object[][] vals) {
         if (Session.INSTANCE.hasConnection()) {
             String columns = "", values = "";
             for(int i = 0; i < vals.length; i++) {
@@ -202,7 +217,7 @@ public class Model {
                     this.pst.setObject(i, sp[i - 1]);
                 }
                 
-                return this.pst.executeUpdate() != 0 ? true : false;
+                return this.pst.executeUpdate() != 0;
 
             }catch(SQLException ex ){
                 System.out.println("SQL Error -> " + ex.getMessage());
@@ -215,14 +230,95 @@ public class Model {
     //end insertions
 
     
-    //Joins
-    //TODO : Re illuminate - will fix redudancy later
-    private String joinConstruct = "";
-    private Boolean joined = false;
+    //Update 
+    public Model update(Object[][] vals){
     
-    public enum JOIN {
-        INNER, LEFT, RIGHT
+        this.finalQuery = "";
+        this.finalValues = new ArrayList<Object>();
+        
+        if (Session.INSTANCE.hasConnection()) {
+            
+            String columns = "";
+            
+            for(int i = 0; i < vals.length; i++) {
+                
+                if(vals[i].length < 2) {
+                    System.out.println(Response.ORM_ERR_02);
+                    break;
+                }
+                
+                if(i == (vals.length - 1)) {
+                    columns += vals[i][0] + " = ?";
+                    this.finalValues.add(vals[i][1]);
+                }else{
+                    columns += vals[i][0] + " = ?,";
+                    this.finalValues.add(vals[i][1]);
+                }
+                
+            }
+            
+            this.finalQuery = "UPDATE " + Session.table + " SET " + columns ; 
+            System.out.println(this.finalQuery);
+            return this;
+
+        }
+        
+        return null;
     }
+    
+    public Model delete(){
+       
+        if (Session.INSTANCE.hasConnection()) {
+            
+            this.finalQuery = "DELETE FROM " + Session.table;
+            return this;
+
+        }
+        
+        return null;
+    }
+    
+    public Boolean executeUpdate(){
+       
+        try {
+            
+            
+            if(where) {
+                
+                this.pst = Session.INSTANCE.getConnection().prepareStatement(this.finalQuery + " WHERE " + this.whereConstruct);
+                if (this.finalValues != null) {
+                    this.finalValues.addAll(this.whereValues);
+                    System.out.println(Arrays.asList(this.finalValues.toArray()));
+                    for(int i = 1; i <= this.finalValues.size(); i++){
+                        this.pst.setObject(i, this.finalValues.get(i - 1));
+                    }
+                }else {
+                    System.out.println(Arrays.asList(this.whereValues.toArray()));
+                    
+                    for(int i = 1; i <= this.whereValues.size(); i++){
+                        this.pst.setObject(i, this.whereValues.get(i - 1));
+                    }
+                }
+                
+                
+            }
+            
+            
+            
+            Boolean rt = this.pst.executeUpdate() != 0;
+            
+            this.finalQuery = "";
+            this.finalValues = new ArrayList<Object>();
+            this.clear();
+            
+            return rt;
+        } catch (SQLException ex) {
+            Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
+    }
+    //Joins
     
     /**
      * Usage Example:

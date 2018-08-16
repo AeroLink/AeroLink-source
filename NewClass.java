@@ -4,14 +4,6 @@ import Model.Users;
 import Synapse.Crypt;
 import Synapse.DB.MySql;
 import Synapse.Database;
-import Synapse.Model;
-import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -34,7 +26,15 @@ public class NewClass {
         
         Users u = new Users();
         
-        u.insert(0, "admin", Crypt.Encrypt("edenramoneda"));
+        //u.insert(0, "adminxaasasaaa", Crypt.Encrypt("edenramoneda"));
+        
+        
+        u.update(new Object[][] {
+            {"username", "admin"}
+        }).where("id", "=", "19").executeUpdate();
+
+        //u.delete().where("id", "=", "20").executeUpdate();
+        
     }
     
 }
