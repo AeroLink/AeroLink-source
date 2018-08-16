@@ -23,11 +23,12 @@ public class loginController {
          
             { "username", "=", u }
         
-        }).get("id","username", "password", "ivp");
+        }).get("id","username", "password");
         
         
         if(res.size() != 0) {
-            if(Synapse.Crypt.Decrypt((byte[]) res.get(0).get("ivp"), (byte[]) res.get(0).get("password")).equals(p)) {
+            System.out.println();
+            if(Synapse.Crypt.Decrypt(res.get(0).get("password").toString()).equals(p)) {
                 return true;
             }
         }

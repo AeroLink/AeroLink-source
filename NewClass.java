@@ -5,8 +5,11 @@ import Synapse.Crypt;
 import Synapse.DB.MySql;
 import Synapse.Database;
 import Synapse.Model;
+import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,19 +34,7 @@ public class NewClass {
         
         Users u = new Users();
         
-        List results = u.get(); // get all rows
-        
-       
-        for(int i = 0; i < results.size(); i++){
-            HashMap hash = (HashMap) results.get(i); // get all colums and values .. username = "BlackStar"
-            
-            System.out.println(hash.get("username"));
-        }
-        
-        
-        
-        
-        
+        u.insert(0, "admin", Crypt.Encrypt("edenramoneda"));
     }
     
 }

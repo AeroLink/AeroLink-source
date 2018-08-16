@@ -30,6 +30,7 @@ public class LoadSubSystem {
             Node n = (Node) root;
             borderPane.centerProperty().set(n);
         } catch (IOException ex) {
+            ex.printStackTrace();
             System.out.println(ex.getMessage());
         }
         

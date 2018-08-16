@@ -174,6 +174,28 @@
                         <FontAwesomeIconView fill="#34a853" glyphName="USER" size="15" />
                      </graphic>
                   </TitledPane>
+                  <TitledPane animated="false" text="User Management">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="573.0" prefWidth="229.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <JFXButton id="usmManageUsers" alignment="TOP_LEFT" onAction="#triggerButton" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Manage Users" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <effect>
+                        <Blend mode="OVERLAY" />
+                     </effect>
+                     <graphic>
+                        <FontAwesomeIconView fill="#34a853" glyphName="USER" size="15" />
+                     </graphic>
+                  </TitledPane>
                </panes>
             </Accordion>
             <Separator layoutY="73.0" prefHeight="14.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="73.0" />

@@ -6,6 +6,7 @@
 package Synapse;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.ByteBuffer;
 import java.security.AlgorithmParameters;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -13,6 +14,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.InvalidParameterSpecException;
 import java.security.spec.KeySpec;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,7 +38,7 @@ public class Crypt {
     
     }
     
-    public static HashMap Encrypt(String target) {
+    public static String Encrypt(String target) {
         try {
 
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
@@ -45,26 +47,64 @@ public class Crypt {
             byte[] iv = params.getParameterSpec(IvParameterSpec.class).getIV();
             byte[] ciphertext = cipher.doFinal(target.getBytes("UTF-8"));
             
-            HashMap hm = new HashMap();
+            ArrayList<Object> l = new ArrayList<>();
+        
+            for(byte b : ciphertext) {
+                String hex = (int) b < 0 ? "n" + Integer.toHexString(Math.abs(b)) : Integer.toHexString(b) ; 
+                l.add(hex + "ü");
+            }
+
+            l.add("xipvx");
+
+            for(byte b : iv) {
+                String hex = (int) b < 0 ? "n" + Integer.toHexString(Math.abs(b)) : Integer.toHexString(b) ; 
+                l.add(hex + "ü");
+            }
+
+            String finalString = "";
+
+            for(Object obj : l) {
+                finalString += obj;
+            }
             
-            hm.put("iv", iv);
-            hm.put("cipher", ciphertext);
+            return finalString;
             
-            return hm;
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException | NoSuchPaddingException | InvalidKeyException | InvalidParameterSpecException | IllegalBlockSizeException | BadPaddingException ex) {
             Logger.getLogger(Crypt.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
     
-    public static String Decrypt(byte[] iv, byte[] ciphertext){
+    public static String Decrypt(String encrypted){
         
+        String[] arr = encrypted.split("xipvx");
+        
+        String[] arr2 = arr[0].split("ü");
+        String[] arr1 = arr[1].split("ü");
+        
+        ByteBuffer b = ByteBuffer.allocate(arr2.length);
+        
+        for(String a : arr2) {
+            if(a != null && a != "") {
+                int value = a.contains("n") ? Math.negateExact(Integer.parseUnsignedInt(a.substring(1), 16)) : Integer.parseUnsignedInt(a, 16);
+                b.put((byte) value);
+            }
+        }
+        
+        ByteBuffer iv = ByteBuffer.allocate(arr1.length);
+        
+        for(String a : arr1) {
+            if(a != null && a != "") {
+                int value = a.contains("n") ? Math.negateExact(Integer.parseUnsignedInt(a.substring(1), 16)) : Integer.parseUnsignedInt(a, 16);
+                iv.put((byte) value);
+            }
+        }
         
         try {
             
             Cipher c = Cipher.getInstance("AES/CBC/PKCS5Padding");
-            c.init(Cipher.DECRYPT_MODE, CreateSecretKey() , new IvParameterSpec(iv));
-            return new String(c.doFinal(ciphertext), "UTF-8");
+            c.init(Cipher.DECRYPT_MODE, CreateSecretKey() , new IvParameterSpec(iv.array()));
+            return new String(c.doFinal(b.array()), "UTF-8");
             
         } catch (NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException | UnsupportedEncodingException | InvalidKeyException | InvalidAlgorithmParameterException ex) {
             Logger.getLogger(Crypt.class.getName()).log(Level.SEVERE, null, ex);
