@@ -84,8 +84,8 @@ public class SplashScreenController implements Initializable {
     
     public void PassedLogin(){
        Platform.runLater(() -> {
-           Helpers.Form.close(LoadingBar);
-           Helpers.Form frm = new Helpers.Form("/FXMLS/Login.fxml");
+           Synapse.Form.close(LoadingBar);
+           Synapse.Form frm = new Synapse.Form("/FXMLS/Login.fxml");
            frm.open(StageStyle.UNDECORATED, false);
        });
     }

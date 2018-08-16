@@ -4,8 +4,7 @@
  * and open the template in the editor.
  */
 package Synapse.Components;
-
-import FXMLS.USM.Controllers.IUsers;
+    
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,6 +14,7 @@ import javafx.scene.control.TableCell;
 /**
  *
  * @author Lei
+ * @param <rt>
  */
 public class ButtonInCell<rt extends RecursiveTreeObject> {
     

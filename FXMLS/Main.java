@@ -7,7 +7,7 @@ package FXMLS;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import Helpers.Form;
+import Synapse.Form;
 import javafx.stage.StageStyle;
 
 /**

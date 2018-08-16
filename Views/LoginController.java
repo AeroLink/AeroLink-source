@@ -6,7 +6,7 @@
 package Views;
 
 import Controllers.USM.loginController;
-import Helpers.Form;
+import Synapse.Form;
 import Synapse.Route;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;

@@ -7,7 +7,7 @@ package Core;
  */
 
 import Config.*;
-import Helpers.Form;
+import Synapse.Form;
 import Synapse.Session;
 import javafx.stage.StageStyle;
 

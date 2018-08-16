@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Helpers;
+package Synapse;
 
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
@@ -64,6 +64,12 @@ public class Form {
         this.stage.setScene(s);
         this.stage.show();
     }
+
+    public Stage getStage() {
+        return stage;
+    }
+    
+    
     
     public void open(StageStyle stageSytle, Boolean isFullScreen){
         

@@ -5,6 +5,7 @@
  */
 package FXMLS.USM.Controllers;
 
+import Synapse.Components.Modal.Modal;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
@@ -15,6 +16,7 @@ import javafx.event.EventHandler;
 public class Handlers {
     
      public static EventHandler<ActionEvent> triggerPermissionsModal = (ActionEvent event) -> {
-         System.out.println("Event Trigger");
+        Modal md = Modal.getInstance();
+        md.open();
      };
 }
