@@ -282,7 +282,7 @@ public class HR2_Competency_ManagementController implements Initializable {
 
                                     };
                                     
-                                 /*          String[][] jp =
+                                           String[][] jp =
                                     {
                                                     {"emp_id" , txt_emp_id.getText()},
                                                     {"job_position" , txt_job_position.getText()}
@@ -294,10 +294,10 @@ public class HR2_Competency_ManagementController implements Initializable {
                                                     {"emp_id" , txt_emp_id.getText()},
                                                     {"department" , txt_department.getText()}
                                                     
-                                    };*/
+                                    };
                                                             tm.insert(cm_data);
-                                                          //    tm.insert(jp);
-                                                             //   tm.insert(department);
+                                                              tm.insert(jp);
+                                                                tm.insert(department);
                                                            JOptionPane.showMessageDialog(null,"saved");
                             }catch(Exception e)
                             {

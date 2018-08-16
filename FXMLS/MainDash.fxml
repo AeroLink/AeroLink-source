@@ -75,10 +75,10 @@
                                     <JFXButton id="performance" alignment="TOP_LEFT" onAction="#triggerButton" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Perfomance Management" />
                                     <JFXButton id="social" alignment="TOP_LEFT" onAction="#triggerButton" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Social Recognition" />
                                     <Separator prefHeight="0.0" prefWidth="201.0" style="-fx-border-color: gray;" />
-                                    <JFXButton alignment="TOP_LEFT" onAction="#triggerButton" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Learning Management" />
-                                    <JFXButton alignment="TOP_LEFT" onAction="#triggerButton" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Training Management" />
-                                    <JFXButton alignment="TOP_LEFT" onAction="#triggerButton" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Compentency Management" />
-                                    <JFXButton alignment="TOP_LEFT" onAction="#triggerButton" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Sucession Planning" />
+                                    <JFXButton id="learning_management" alignment="TOP_LEFT" onAction="#triggerButton" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Learning Management" />
+                                    <JFXButton id="training_management" alignment="TOP_LEFT" onAction="#triggerButton" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Training Management" />
+                                    <JFXButton id="competency_management" alignment="TOP_LEFT" onAction="#triggerButton" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Compentency Management" />
+                                    <JFXButton id="succession_planning" alignment="TOP_LEFT" onAction="#triggerButton" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Sucession Planning" />
                                     <Separator prefHeight="0.0" prefWidth="201.0" style="-fx-border-color: gray;" />
                                     <JFXButton id="hr3sns" alignment="TOP_LEFT" onAction="#triggerButton" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Shift and Scheduling" />
                                     <JFXButton id="hr3tna" alignment="TOP_LEFT" onAction="#triggerButton" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Time and Attendance" />

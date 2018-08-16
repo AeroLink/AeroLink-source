@@ -62,19 +62,19 @@
                      <children>
                         <TableView fx:id="list_of_trainees" layoutX="-2.0" layoutY="-1.0" prefHeight="280.0" prefWidth="1019.0">
                           <columns>
-                            <TableColumn prefWidth="105.0" text="Employee ID" />
-                            <TableColumn prefWidth="15.0" text="Employee Name" />
-                              <TableColumn prefWidth="75.0" text="Job Position" />
-                              <TableColumn prefWidth="75.0" text="Title" />
-                              <TableColumn prefWidth="75.0" text="Trainor" />
-                              <TableColumn prefWidth="75.0" text="Type of Training" />
-                              <TableColumn prefWidth="75.0" text="Location" />
-                              <TableColumn prefWidth="75.0" text="Date Start" />
-                              <TableColumn prefWidth="75.0" text="Date End" />
-                              <TableColumn prefWidth="75.0" text="Time Start" />
-                              <TableColumn prefWidth="75.0" text="Time End" />
-                              <TableColumn prefWidth="75.0" text="Budget Cost" />
-                              <TableColumn prefWidth="75.0" text="Organizer" />
+                            <TableColumn fx:id="emp_id" prefWidth="105.0" text="Employee ID" />
+                            <TableColumn fx:id="emp_name" prefWidth="15.0" text="Employee Name" />
+                              <TableColumn fx:id="job_position" prefWidth="75.0" text="Job Position" />
+                              <TableColumn fx:id="title" prefWidth="75.0" text="Title" />
+                              <TableColumn fx:id="trainor" prefWidth="75.0" text="Trainor" />
+                              <TableColumn fx:id="tbl_type_of_training" prefWidth="75.0" text="Type of Training" />
+                              <TableColumn fx:id="location" prefWidth="75.0" text="Location" />
+                              <TableColumn fx:id="date_start" prefWidth="75.0" text="Date Start" />
+                              <TableColumn fx:id="date_end" prefWidth="75.0" text="Date End" />
+                              <TableColumn fx:id="time_start" prefWidth="75.0" text="Time Start" />
+                              <TableColumn fx:id="time_end" prefWidth="75.0" text="Time End" />
+                              <TableColumn fx:id="budget_cost" prefWidth="75.0" text="Budget Cost" />
+                              <TableColumn fx:id="organizer" prefWidth="75.0" text="Organizer" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

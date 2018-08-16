@@ -194,19 +194,7 @@ public class HR2_Succession_PlanningController implements Initializable {
 
                                     };
                                     
-                                 /*          String[][] jp =
-                                    {
-                                                    {"emp_id" , txt_emp_id.getText()},
-                                                    {"job_position" , txt_job_position.getText()}
-                                                    
-                                    };
-                                           
-                                                   String[][] department =
-                                    {
-                                                    {"emp_id" , txt_emp_id.getText()},
-                                                    {"department" , txt_department.getText()}
-                                                    
-                                    };*/
+                            
                                                             tm.insert(successors);
                                                             tm.insert(sp);
                                                           //    tm.insert(jp);
