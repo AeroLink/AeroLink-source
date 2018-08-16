@@ -6,10 +6,6 @@
 package Synapse.Components.Modal;
 
 import Synapse.Form;
-import Synapse.Route;
-import java.io.IOException;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.stage.StageStyle;
 
 /**
