@@ -14,10 +14,10 @@ import java.sql.Connection;
 public class DatabaseConfig {
     
     public static String PROVIDER = "mysql";
-    public static String IP = "192.168.1.1";
+    public static String IP = "localhost";
     public static String PORT = "3306";
     public static String DATABASE = "aerolink";
     public static String USER = "root";
-    public static String PASSWORD = "43r0l1nk!@#";
+    public static String PASSWORD = "";
  
 }

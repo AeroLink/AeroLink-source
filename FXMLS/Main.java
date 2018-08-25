@@ -15,10 +15,11 @@ import javafx.stage.StageStyle;
  * @author Lei
  */
 public class Main extends Application {
-    
+
     @Override
     public void start(Stage primaryStage) {
-       Core.Bootstrap.build();
+        Core.Bootstrap.build();
+        
     }
 
     /**
@@ -27,5 +28,5 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
