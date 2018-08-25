@@ -53,6 +53,34 @@ public class HR2_Learning_ManagementController implements Initializable {
     private MenuItem item_add_new_question;
     @FXML
     private TableView<?> tbl_choices_data;
+    @FXML
+    private MenuItem menu_add_new_course;
+    @FXML
+    private MenuItem menu_save_new_course;
+    @FXML
+    private MenuItem menu_edit_course;
+    @FXML
+    private MenuItem menu_update_course;
+    @FXML
+    private MenuItem menu_delete_course;
+    @FXML
+    private MenuItem item_save_new_question;
+    @FXML
+    private MenuItem item_edit_question;
+    @FXML
+    private MenuItem item_update_question;
+    @FXML
+    private MenuItem item_delete_question;
+    @FXML
+    private MenuItem menu_add_new_choice;
+    @FXML
+    private MenuItem menu_save_new_choice;
+    @FXML
+    private MenuItem menu_edit_choice;
+    @FXML
+    private MenuItem menu_update_choice;
+    @FXML
+    private MenuItem menu_delete_choice;
 
     /**
      * Initializes the controller class.

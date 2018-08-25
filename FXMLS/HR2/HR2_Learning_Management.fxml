@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
@@ -86,15 +88,21 @@
                               </Label>
                               <MenuButton layoutX="727.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="147.0" style="-fx-background-color: #00b36b;" text="Settings" textFill="WHITE">
                                 <items>
-                                  <MenuItem mnemonicParsing="false" text="Add New Course" />
-                                  <MenuItem mnemonicParsing="false" text="Save New Course" />
-                                    <MenuItem mnemonicParsing="false" text="Edit Course" />
-                                    <MenuItem mnemonicParsing="false" text="Update Course" />
-                                    <MenuItem mnemonicParsing="false" text="Delete Course" />
+                                  <MenuItem fx:id="menu_add_new_course" mnemonicParsing="false" text="Add New Course" />
+                                  <MenuItem fx:id="menu_save_new_course" mnemonicParsing="false" text="Save New Course" />
+                                    <MenuItem fx:id="menu_edit_course" mnemonicParsing="false" text="Edit Course" />
+                                    <MenuItem fx:id="menu_update_course" mnemonicParsing="false" text="Update Course" />
+                                    <MenuItem fx:id="menu_delete_course" mnemonicParsing="false" text="Delete Course" />
                                 </items>
                                  <font>
                                     <Font name="Roboto Regular" size="20.0" />
                                  </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
                               </MenuButton>
                            </children>
                         </Pane>
@@ -113,14 +121,20 @@
                         <MenuButton layoutX="716.0" layoutY="370.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="147.0" style="-fx-background-color: #00b36b;" text="Settings" textFill="WHITE">
                            <items>
                               <MenuItem fx:id="item_add_new_question" mnemonicParsing="false" text="Add new Question" />
-                              <MenuItem mnemonicParsing="false" text="Save new Question" />
-                              <MenuItem mnemonicParsing="false" text="Edit Question" />
-                              <MenuItem mnemonicParsing="false" text="Update Question" />
-                              <MenuItem mnemonicParsing="false" text="Delete Question" />
+                              <MenuItem fx:id="item_save_new_question" mnemonicParsing="false" text="Save new Question" />
+                              <MenuItem fx:id="item_edit_question" mnemonicParsing="false" text="Edit Question" />
+                              <MenuItem fx:id="item_update_question" mnemonicParsing="false" text="Update Question" />
+                              <MenuItem fx:id="item_delete_question" mnemonicParsing="false" text="Delete Question" />
                            </items>
                            <font>
                               <Font name="Roboto Regular" size="20.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
                         </MenuButton>
                         <Label layoutX="14.0" layoutY="605.0" prefHeight="38.0" prefWidth="106.0" style="-fx-text-inner-color: #3d3d29;" text="Choices" textFill="#3d3d29">
                            <font>
@@ -142,15 +156,21 @@
                         </TableView>
                         <MenuButton layoutX="720.0" layoutY="653.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="147.0" style="-fx-background-color: #00b36b;" text="Settings" textFill="WHITE">
                            <items>
-                              <MenuItem mnemonicParsing="false" text="Add new Choice" />
-                              <MenuItem mnemonicParsing="false" text="Save new Choice" />
-                              <MenuItem mnemonicParsing="false" text="Edit Choice" />
-                              <MenuItem mnemonicParsing="false" text=" Update Choice" />
-                              <MenuItem mnemonicParsing="false" text="Delete Choice" />
+                              <MenuItem fx:id="menu_add_new_choice" mnemonicParsing="false" text="Add new Choice" />
+                              <MenuItem fx:id="menu_save_new_choice" mnemonicParsing="false" text="Save new Choice" />
+                              <MenuItem fx:id="menu_edit_choice" mnemonicParsing="false" text="Edit Choice" />
+                              <MenuItem fx:id="menu_update_choice" mnemonicParsing="false" text=" Update Choice" />
+                              <MenuItem fx:id="menu_delete_choice" mnemonicParsing="false" text="Delete Choice" />
                            </items>
                            <font>
                               <Font name="Roboto Regular" size="20.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
                         </MenuButton>
                      </children>
                   </AnchorPane>
