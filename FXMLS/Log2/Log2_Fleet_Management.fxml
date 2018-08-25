@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="847.0" prefWidth="985.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Log2.Log2_Fleet_ManagementController">
+   <children>
+      <Label layoutX="466.0" layoutY="407.0" text="Fleet Management" />
+   </children>
+</AnchorPane>
