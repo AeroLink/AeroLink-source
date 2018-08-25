@@ -37,7 +37,7 @@
                               <Font name="Arial Bold" size="17.0" />
                            </font>
                         </Label>
-                        <Label layoutX="14.0" layoutY="224.0" text="Date recieved :">
+                        <Label layoutX="14.0" layoutY="224.0" text="Date recieved ">
                            <font>
                               <Font name="Arial Bold" size="17.0" />
                            </font>
