@@ -1,97 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXCheckBox?>
-<?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXDatePicker?>
-<?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1130.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
    <children>
-      <TabPane prefHeight="720.0" prefWidth="1130.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text=" Leave Request">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Label layoutX="27.0" layoutY="22.0" text="Leave Request" textFill="#00b359" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
-                           <font>
-                              <Font size="28.0" />
-                           </font>
-                        </Label>
-                        <JFXTextField layoutX="27.0" layoutY="89.0" maxWidth="268.0" minWidth="268.0" prefHeight="31.0" prefWidth="268.0" promptText="Employee ID" />
-                        <JFXTextField layoutX="27.0" layoutY="152.0" maxWidth="268.0" minWidth="268.0" prefHeight="31.0" prefWidth="268.0" promptText="Employee Name" />
-                        <JFXTextField layoutX="27.0" layoutY="212.0" maxWidth="268.0" minWidth="268.0" prefHeight="31.0" prefWidth="268.0" promptText="Position" />
-                        <JFXComboBox layoutX="331.0" layoutY="92.0" prefHeight="25.0" prefWidth="216.0" promptText="Type of Leave" />
-                        <JFXComboBox layoutX="331.0" layoutY="155.0" prefHeight="25.0" prefWidth="216.0" promptText="Range of Leave" />
-                        <JFXDatePicker layoutX="582.0" layoutY="89.0" prefHeight="31.0" prefWidth="217.0" promptText="Date Start" />
-                        <JFXDatePicker layoutX="582.0" layoutY="152.0" prefHeight="31.0" prefWidth="217.0" promptText="Date End" />
-                        <Button layoutX="684.0" layoutY="215.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: #00b359;" text="Submit" textFill="#fffdfd" />
-                        <TableView layoutX="14.0" layoutY="286.0" prefHeight="347.0" prefWidth="1096.0">
-                          <columns>
-                            <TableColumn prefWidth="138.0" text="Employee ID" />
-                            <TableColumn prefWidth="145.0" text="Emp_Name" />
-                              <TableColumn prefWidth="220.0" text="Position" />
-                              <TableColumn prefWidth="161.0" text="Type Of Leave" />
-                              <TableColumn prefWidth="127.0" text="Range of Leave" />
-                              <TableColumn prefWidth="143.0" text="Date Start" />
-                              <TableColumn prefWidth="161.0" text="Date End" />
-                          </columns>
-                        </TableView>
-                        <JFXCheckBox layoutX="852.0" layoutY="100.0" text="Approve" />
-                        <JFXCheckBox layoutX="852.0" layoutY="139.0" text="Decline" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="Leave Request">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Label text="Leave Request" textFill="#00b359" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
-                           <font>
-                              <Font size="28.0" />
-                           </font>
-                        </Label>
-                        <JFXTextField layoutX="31.0" layoutY="108.0" maxWidth="226.0" minWidth="226.0" prefHeight="31.0" prefWidth="226.0" promptText="Employee ID" />
-                        <JFXTextField layoutX="35.0" layoutY="164.0" maxWidth="223.0" minWidth="217.0" prefHeight="31.0" prefWidth="223.0" promptText="Employee Name " />
-                        <JFXTextField layoutX="35.0" layoutY="222.0" maxWidth="221.0" minWidth="212.0" prefHeight="31.0" prefWidth="221.0" promptText="Date Applied" />
-                     </children></AnchorPane>
-            </content>
-          </Tab>
-            <Tab text="Leave Summary">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Label text="Leave Summary" textFill="#00b359" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
-                           <font>
-                              <Font size="28.0" />
-                           </font>
-                        </Label>
-                        <AnchorPane layoutX="12.0" layoutY="69.0" prefHeight="603.0" prefWidth="1106.0" />
-                        <TableView layoutX="38.0" layoutY="149.0" prefHeight="504.0" prefWidth="1082.0">
-                           <columns>
-                              <TableColumn prefWidth="96.99996948242188" text="Employee ID" />
-                              <TableColumn prefWidth="162.0" text="Emp_Name" />
-                              <TableColumn prefWidth="149.0" text="Position" />
-                              <TableColumn prefWidth="130.0" text="Type Of Leave" />
-                              <TableColumn prefWidth="119.0" text="Range of Leave" />
-                              <TableColumn prefWidth="140.0" text="Date Start" />
-                              <TableColumn prefWidth="139.0" text="Date End" />
-                              <TableColumn prefWidth="145.0" text="Status" />
-                           </columns>
-                        </TableView>
-                     </children></AnchorPane>
-              </content>
-            </Tab>
-        </tabs>
-      </TabPane>
+      <Label layoutX="211.0" layoutY="89.0" text="Leave Management" />
    </children>
 </AnchorPane>

@@ -11,8 +11,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="680.0" prefWidth="828.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.HR2_Training_ManagementController">
+<AnchorPane id="AnchorPane" prefHeight="634.0" prefWidth="784.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.HR2_Training_ManagementController">
    <children>
+      <Label layoutX="14.0" layoutY="83.0" prefHeight="18.0" prefWidth="100.0" text="Employee ID">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="113.0" prefHeight="19.0" prefWidth="117.0" text="Employee Name">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </Label>
       <Label layoutX="14.0" layoutY="141.0" prefHeight="19.0" prefWidth="86.0" text="Job Position">
          <font>
             <Font name="Lato Regular" size="15.0" />
@@ -23,31 +33,48 @@
             <Font name="Lato Regular" size="15.0" />
          </font>
       </Label>
+      <Label layoutX="14.0" layoutY="198.0" prefHeight="18.0" prefWidth="50.0" text="Trainor">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txt_emp_id" focusColor="#353843" layoutX="146.0" layoutY="73.0" maxWidth="185.0" minWidth="185.0" prefHeight="31.0" prefWidth="185.0" unFocusColor="#b2b1b1">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txt_employee_name" focusColor="#353843" layoutX="146.0" layoutY="103.0" maxWidth="185.0" minWidth="185.0" prefHeight="31.0" prefWidth="185.0" unFocusColor="#b2b1b1">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font></JFXTextField>
       <JFXTextField fx:id="txt_job_position" focusColor="#353843" layoutX="146.0" layoutY="131.0" maxWidth="185.0" minWidth="185.0" prefHeight="31.0" prefWidth="185.0" unFocusColor="#b2b1b1">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txt_trainor" focusColor="#353843" layoutX="146.0" layoutY="188.0" maxWidth="185.0" minWidth="185.0" prefHeight="31.0" prefWidth="185.0" unFocusColor="#b2b1b1">
          <font>
             <Font name="Lato Regular" size="15.0" />
          </font></JFXTextField>
       <AnchorPane layoutX="2.0" layoutY="400.0" prefHeight="236.0" prefWidth="784.0">
          <children>
-            <ScrollPane prefHeight="280.0" prefWidth="828.0">
+            <ScrollPane prefHeight="280.0" prefWidth="784.0">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="277.0" prefWidth="828.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="277.0" prefWidth="785.0">
                      <children>
                         <TableView fx:id="list_of_trainees" layoutX="-2.0" layoutY="-1.0" prefHeight="280.0" prefWidth="1019.0">
                           <columns>
-                            <TableColumn fx:id="col_emp_id" prefWidth="105.0" text="Employee ID" />
-                            <TableColumn fx:id="col_emp_name" prefWidth="15.0" text="Employee Name" />
-                              <TableColumn fx:id="col_job_position" prefWidth="75.0" text="Job Position" />
-                              <TableColumn fx:id="col_title" prefWidth="75.0" text="Title" />
-                              <TableColumn fx:id="col_trainor" prefWidth="75.0" text="Trainor" />
-                              <TableColumn fx:id="col_type_of_training" prefWidth="75.0" text="Type of Training" />
-                              <TableColumn fx:id="col_location" prefWidth="75.0" text="Location" />
-                              <TableColumn fx:id="col_date_start" prefWidth="75.0" text="Date Start" />
-                              <TableColumn fx:id="col_date_end" prefWidth="75.0" text="Date End" />
-                              <TableColumn fx:id="col_time_start" prefWidth="75.0" text="Time Start" />
-                              <TableColumn fx:id="col_time_end" prefWidth="75.0" text="Time End" />
-                              <TableColumn fx:id="col_budget_cost" prefWidth="75.0" text="Budget Cost" />
-                              <TableColumn fx:id="col_organizer" prefWidth="75.0" text="Organizer" />
+                            <TableColumn fx:id="emp_id" prefWidth="105.0" text="Employee ID" />
+                            <TableColumn fx:id="emp_name" prefWidth="15.0" text="Employee Name" />
+                              <TableColumn fx:id="job_position" prefWidth="75.0" text="Job Position" />
+                              <TableColumn fx:id="title" prefWidth="75.0" text="Title" />
+                              <TableColumn fx:id="trainor" prefWidth="75.0" text="Trainor" />
+                              <TableColumn fx:id="tbl_type_of_training" prefWidth="75.0" text="Type of Training" />
+                              <TableColumn fx:id="location" prefWidth="75.0" text="Location" />
+                              <TableColumn fx:id="date_start" prefWidth="75.0" text="Date Start" />
+                              <TableColumn fx:id="date_end" prefWidth="75.0" text="Date End" />
+                              <TableColumn fx:id="time_start" prefWidth="75.0" text="Time Start" />
+                              <TableColumn fx:id="time_end" prefWidth="75.0" text="Time End" />
+                              <TableColumn fx:id="budget_cost" prefWidth="75.0" text="Budget Cost" />
+                              <TableColumn fx:id="organizer" prefWidth="75.0" text="Organizer" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

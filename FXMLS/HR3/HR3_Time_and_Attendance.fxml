@@ -1,74 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1130.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR3.HR3_Time_and_AttendanceController">
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
    <children>
-      <TabPane prefHeight="720.0" prefWidth="1130.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Attendance Monitor">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="tbl_attendance" layoutX="7.0" layoutY="209.0" prefHeight="475.0" prefWidth="1115.0">
-                          <columns>
-                            <TableColumn fx:id="tbl_ID" prefWidth="83.99996948242188" text="Employee ID" />
-                            <TableColumn fx:id="tbl_fname" prefWidth="110.0" text="First Name" />
-                              <TableColumn fx:id="tbl_mname" prefWidth="111.0" text="Middle Name" />
-                              <TableColumn fx:id="tbl_lname" prefWidth="123.0" text="Last Name" />
-                              <TableColumn fx:id="tbl_position" prefWidth="126.0" text="Position" />
-                              <TableColumn fx:id="tbl_depart" prefWidth="210.0" text="Department" />
-                              <TableColumn fx:id="tbl_date" prefWidth="113.0" text="Date" />
-                              <TableColumn fx:id="tbl_timein" prefWidth="121.0" text="Time_In" />
-                              <TableColumn fx:id="tbl_timeout" prefWidth="116.0" text="Time_Out" />
-                          </columns>
-                        </TableView>
-                        <JFXTextField fx:id="txt_ID" layoutX="5.0" layoutY="140.0" maxWidth="233.0" minWidth="212.0" prefHeight="31.0" prefWidth="233.0" promptText="Search Employee ID" />
-                        <JFXButton fx:id="btn_search" buttonType="RAISED" layoutX="227.0" layoutY="143.0" text="Search" />
-                        <Label text="Attendance Monitor" textFill="#00b359" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
-                           <font>
-                              <Font size="28.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="Daily Time Record">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Label text="Daily Time Record" textFill="#00b359" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
-                           <font>
-                              <Font size="28.0" />
-                           </font>
-                        </Label>
-                     </children></AnchorPane>
-            </content>
-          </Tab>
-            <Tab text="Attendance Report">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <AnchorPane prefHeight="691.0" prefWidth="1130.0" />
-                        <Label layoutX="10.0" layoutY="10.0" text="Attendance Record" textFill="#00b359" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
-                           <font>
-                              <Font size="28.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-        </tabs>
-      </TabPane>
+      <Label layoutX="76.0" layoutY="119.0" text="Time and Attendance" />
    </children>
 </AnchorPane>

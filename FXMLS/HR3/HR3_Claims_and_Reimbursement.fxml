@@ -1,76 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="HR3_CR" prefHeight="720.0" prefWidth="1130.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
    <children>
-      <TabPane prefHeight="720.0" prefWidth="1130.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Reimbursement Request">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView layoutX="5.0" layoutY="243.0" prefHeight="429.0" prefWidth="1120.0">
-                          <columns>
-                            <TableColumn prefWidth="83.0" text="Employee ID" />
-                              <TableColumn prefWidth="237.0" text="Employee Name" />
-                              <TableColumn prefWidth="129.0" text="Amount" />
-                              <TableColumn prefWidth="154.0" text="Receipt" />
-                              <TableColumn prefWidth="166.0" text="Date" />
-                            <TableColumn prefWidth="191.0" text="Approval" />
-                              <TableColumn prefWidth="159.0" text="Consent" />
-                          </columns>
-                        </TableView>
-                        <Label layoutX="424.0" layoutY="98.0" text="Import Receipt" />
-                        <Label layoutX="422.0" layoutY="132.0" text="Import Consent" />
-                        <Button layoutX="651.0" layoutY="167.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Save" />
-                        <TextField layoutX="28.0" layoutY="94.0" prefHeight="25.0" prefWidth="250.0" promptText="Employee " />
-                        <TextField layoutX="28.0" layoutY="128.0" prefHeight="25.0" prefWidth="250.0" promptText="Amount" />
-                        <TextField layoutX="28.0" layoutY="192.0" prefHeight="25.0" prefWidth="170.0" promptText="Search ID" />
-                        <TextField layoutX="525.0" layoutY="94.0" prefHeight="25.0" prefWidth="201.0" promptText="View" />
-                        <TextField layoutX="525.0" layoutY="128.0" prefHeight="25.0" prefWidth="201.0" promptText="View" />
-                        <Label text="Reimbursement Request" textFill="#1f0fff" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
-                           <font>
-                              <Font size="28.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="Claim Pending">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Label text="Claim Pending" textFill="#1f0fff" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
-                           <font>
-                              <Font size="28.0" />
-                           </font>
-                        </Label>
-                     </children></AnchorPane>
-            </content>
-          </Tab>
-            <Tab text="Claim History">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Label text="Claim History" textFill="#1f0fff" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
-                           <font>
-                              <Font size="28.0" />
-                           </font>
-                        </Label>
-                     </children></AnchorPane>
-              </content>
-            </Tab>
-        </tabs>
-      </TabPane>
+      <Label layoutX="83.0" layoutY="79.0" text="Claims And Reimbursement" />
    </children>
 </AnchorPane>

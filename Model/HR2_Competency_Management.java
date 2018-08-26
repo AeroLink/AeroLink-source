@@ -8,7 +8,6 @@ package Model;
 
 import static Synapse.Model.setColumns;
 import static Synapse.Model.setTable;
-import java.util.List;
 
 /**
  * 
@@ -18,13 +17,13 @@ public class HR2_Competency_Management extends Synapse.Model{
         
          public HR2_Competency_Management()
             {
-                   setColumns("job_id","skill_id","skill","skill_description");
-                    setTable("tbl_hr2_skillset");
+                   setColumns("emp_id","emp_name","age","date_of_birth","address","contact_number","email","birthplace","status","guardian","nationality","school_level");
+                    setTable("tbl_competency_management");
                     
-
+                      setColumns("emp_id","job_position");
+                    setTable("tbl_job_positions");
+                    
+                      setColumns("emp_id","department");
+                    setTable("tbl_department");
             }
-
-    public List where() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

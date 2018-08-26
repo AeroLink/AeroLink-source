@@ -1,182 +1,156 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="658.0" prefWidth="875.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.HR2_Learning_ManagementController">
+<AnchorPane id="AnchorPane" prefHeight="772.0" prefWidth="856.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.HR2_Learning_ManagementController">
    <children>
-      <ScrollPane prefHeight="718.0" prefWidth="875.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="895.0" prefWidth="876.0">
+      <Label layoutX="27.0" layoutY="113.0" prefHeight="29.0" prefWidth="102.0" text="Employee Id">
+         <font>
+            <Font name="Lato Regular" size="17.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txt_emp_id" layoutX="27.0" layoutY="142.0" maxWidth="218.0" minWidth="207.0" prefHeight="31.0" prefWidth="218.0" unFocusColor="#9e9c9c">
+         <font>
+            <Font name="Lato Regular" size="13.0" />
+         </font>
+      </JFXTextField>
+      <Label layoutX="27.0" layoutY="173.0" prefHeight="29.0" prefWidth="131.0" text="Employee Name">
+         <font>
+            <Font name="Lato Regular" size="17.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txt_emp_name" layoutX="27.0" layoutY="202.0" maxWidth="218.0" minWidth="207.0" prefHeight="31.0" prefWidth="218.0" unFocusColor="#9e9c9c">
+         <font>
+            <Font name="Lato Regular" size="13.0" />
+         </font>
+      </JFXTextField>
+      <Label layoutX="27.0" layoutY="233.0" prefHeight="29.0" prefWidth="102.0" text="Course Title">
+         <font>
+            <Font name="Lato Regular" size="17.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txt_course_title" layoutX="27.0" layoutY="262.0" maxWidth="218.0" minWidth="207.0" prefHeight="31.0" prefWidth="218.0" unFocusColor="#9e9c9c">
+         <font>
+            <Font name="Lato Regular" size="13.0" />
+         </font>
+      </JFXTextField>
+      <Label layoutX="27.0" layoutY="293.0" prefHeight="29.0" prefWidth="149.0" text="Course Description">
+         <font>
+            <Font name="Lato Regular" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="330.0" layoutY="112.0" prefHeight="29.0" prefWidth="102.0" text="Coordinator">
+         <font>
+            <Font name="Lato Regular" size="17.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txt_coordinator" layoutX="330.0" layoutY="141.0" maxWidth="218.0" minWidth="207.0" prefHeight="31.0" prefWidth="218.0" unFocusColor="#9e9c9c">
+         <font>
+            <Font name="Lato Regular" size="13.0" />
+         </font>
+      </JFXTextField>
+      <Label layoutX="330.0" layoutY="172.0" prefHeight="29.0" prefWidth="102.0" text="Duration">
+         <font>
+            <Font name="Lato Regular" size="17.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txt_duration" layoutX="330.0" layoutY="201.0" maxWidth="218.0" minWidth="207.0" prefHeight="31.0" prefWidth="218.0" unFocusColor="#9e9c9c">
+         <font>
+            <Font name="Lato Regular" size="13.0" />
+         </font>
+      </JFXTextField>
+      <Label layoutX="330.0" layoutY="231.0" prefHeight="29.0" prefWidth="102.0" text="Status">
+         <font>
+            <Font name="Lato Regular" size="17.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txt_status" layoutX="330.0" layoutY="260.0" maxWidth="218.0" minWidth="207.0" prefHeight="31.0" prefWidth="218.0" unFocusColor="#9e9c9c">
+         <font>
+            <Font name="Lato Regular" size="13.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txt_course_description" layoutX="27.0" layoutY="322.0" maxWidth="218.0" minWidth="207.0" prefHeight="31.0" prefWidth="218.0" unFocusColor="#9e9c9c">
+         <font>
+            <Font name="Lato Regular" size="13.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txt_emp_id1" layoutX="599.0" layoutY="28.0" maxWidth="218.0" minWidth="207.0" prefHeight="31.0" prefWidth="218.0" promptText="Search" unFocusColor="#9e9c9c">
+         <font>
+            <Font name="Lato Regular" size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXButton fx:id="btn_new" layoutX="609.0" layoutY="116.0" prefHeight="35.0" prefWidth="198.0" style="-fx-background-color: #00b359;" text="New" textFill="WHITE">
+         <font>
+            <Font name="Lato Regular" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btn_edit" layoutX="609.0" layoutY="170.0" prefHeight="35.0" prefWidth="198.0" style="-fx-background-color: #00b359;" text="Edit" textFill="WHITE">
+         <font>
+            <Font name="Lato Regular" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btn_save" layoutX="609.0" layoutY="228.0" prefHeight="35.0" prefWidth="198.0" style="-fx-background-color: #00b359;" text="Save" textFill="WHITE">
+         <font>
+            <Font name="Lato Regular" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btn_update" layoutX="609.0" layoutY="285.0" prefHeight="35.0" prefWidth="198.0" style="-fx-background-color: #00b359;" text="Update" textFill="WHITE">
+         <font>
+            <Font name="Lato Regular" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btn_delete" layoutX="609.0" layoutY="341.0" prefHeight="35.0" prefWidth="198.0" style="-fx-background-color: #00b359;" text="Delete" textFill="WHITE">
+         <font>
+            <Font name="Lato Regular" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <ScrollPane layoutY="405.0" prefHeight="365.0" prefWidth="856.0">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="367.0" prefWidth="855.0">
                <children>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="897.0" prefWidth="877.0">
-                     <children>
-                        <Label layoutX="14.0" layoutY="126.0" prefHeight="29.0" prefWidth="83.0" text="Course_ID">
-                           <font>
-                              <Font name="Lato Regular" size="17.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="14.0" layoutY="162.0" prefHeight="29.0" prefWidth="98.0" text="Course_Title">
-                           <font>
-                              <Font name="Lato Regular" size="17.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="14.0" layoutY="199.0" prefHeight="29.0" prefWidth="154.0" text="Course_Description">
-                           <font>
-                              <Font name="Lato Regular" size="17.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="14.0" layoutY="234.0" prefHeight="29.0" prefWidth="83.0" text="Created by">
-                           <font>
-                              <Font name="Lato Regular" size="17.0" />
-                           </font>
-                        </Label>
-                        <JFXTextField fx:id="txt_course_id" layoutX="183.0" layoutY="121.0" maxWidth="212.0" minWidth="212.0" prefHeight="31.0" prefWidth="212.0" unFocusColor="#757575">
-                           <font>
-                              <Font name="Lato Regular" size="17.0" />
-                           </font>
-                        </JFXTextField>
-                        <JFXTextField fx:id="txt_course_title" layoutX="183.0" layoutY="157.0" maxWidth="212.0" minWidth="212.0" prefHeight="31.0" prefWidth="212.0" unFocusColor="#757575">
-                           <font>
-                              <Font name="Lato Regular" size="17.0" />
-                           </font>
-                        </JFXTextField>
-                        <JFXTextField fx:id="txt_course_description" layoutX="183.0" layoutY="194.0" maxWidth="212.0" minWidth="212.0" prefHeight="31.0" prefWidth="212.0" unFocusColor="#757575">
-                           <font>
-                              <Font name="Lato Regular" size="17.0" />
-                           </font>
-                        </JFXTextField>
-                        <JFXTextField fx:id="txt_course_created_by" layoutX="183.0" layoutY="229.0" maxWidth="212.0" minWidth="212.0" prefHeight="31.0" prefWidth="212.0" unFocusColor="#757575">
-                           <font>
-                              <Font name="Lato Regular" size="17.0" />
-                           </font>
-                        </JFXTextField>
-                        <TableView fx:id="tbl_course_data" layoutX="412.0" layoutY="95.0" prefHeight="200.0" prefWidth="443.0">
-                          <columns>
-                            <TableColumn maxWidth="1.0" minWidth="1.0" prefWidth="1.0" text="Course ID" />
-                            <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Course Title" />
-                              <TableColumn maxWidth="300.0" minWidth="300.0" prefWidth="300.0" text="Course Description" />
-                              <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" text="Created by" />
-                          </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
-                        <Label layoutX="14.0" layoutY="315.0" prefHeight="38.0" prefWidth="106.0" style="-fx-text-inner-color: #3d3d29;" text="Questions" textFill="#3d3d29">
-                           <font>
-                              <Font name="Lato Regular" size="22.0" />
-                           </font>
-                        </Label>
-                        <Separator layoutX="14.0" layoutY="352.0" prefHeight="2.0" prefWidth="865.0" style="-fx-background-color: #5c5c3d;" />
-                        <Pane layoutX="-4.0" layoutY="-2.0" prefHeight="57.0" prefWidth="881.0" style="-fx-background-color: #00cc66;">
-                           <children>
-                              <Label layoutX="13.0" layoutY="5.0" prefHeight="38.0" prefWidth="125.0" style="-fx-text-inner-color: #fff;" text="Add Course" textFill="WHITE">
-                                 <font>
-                                    <Font name="Lato Regular" size="22.0" />
-                                 </font>
-                              </Label>
-                              <MenuButton layoutX="727.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="147.0" style="-fx-background-color: #00b36b;" text="Settings" textFill="WHITE">
-                                <items>
-                                  <MenuItem fx:id="menu_add_new_course" mnemonicParsing="false" text="Add New Course" />
-                                  <MenuItem fx:id="menu_save_new_course" mnemonicParsing="false" text="Save New Course" />
-                                    <MenuItem fx:id="menu_edit_course" mnemonicParsing="false" text="Edit Course" />
-                                    <MenuItem fx:id="menu_update_course" mnemonicParsing="false" text="Update Course" />
-                                    <MenuItem fx:id="menu_delete_course" mnemonicParsing="false" text="Delete Course" />
-                                </items>
-                                 <font>
-                                    <Font name="Roboto Regular" size="20.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <opaqueInsets>
-                                    <Insets />
-                                 </opaqueInsets>
-                              </MenuButton>
-                           </children>
-                        </Pane>
-                        <TableView fx:id="tbl_questions_data" layoutX="14.0" layoutY="438.0" prefHeight="147.0" prefWidth="840.0">
-                           <columns>
-                              <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" text="Question ID" />
-                              <TableColumn maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="Question Number" />
-                              <TableColumn maxWidth="300.0" minWidth="300.0" prefWidth="300.0" text="Question" />
-                              <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" text="Answer ID" />
-                              <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" text="Course ID" />
-                           </columns>
-                           <columnResizePolicy>
-                             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
-                        <MenuButton layoutX="716.0" layoutY="370.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="147.0" style="-fx-background-color: #00b36b;" text="Settings" textFill="WHITE">
-                           <items>
-                              <MenuItem fx:id="item_add_new_question" mnemonicParsing="false" text="Add new Question" />
-                              <MenuItem fx:id="item_save_new_question" mnemonicParsing="false" text="Save new Question" />
-                              <MenuItem fx:id="item_edit_question" mnemonicParsing="false" text="Edit Question" />
-                              <MenuItem fx:id="item_update_question" mnemonicParsing="false" text="Update Question" />
-                              <MenuItem fx:id="item_delete_question" mnemonicParsing="false" text="Delete Question" />
-                           </items>
-                           <font>
-                              <Font name="Roboto Regular" size="20.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </MenuButton>
-                        <Label layoutX="14.0" layoutY="605.0" prefHeight="38.0" prefWidth="106.0" style="-fx-text-inner-color: #3d3d29;" text="Choices" textFill="#3d3d29">
-                           <font>
-                              <Font name="Lato Regular" size="22.0" />
-                           </font>
-                        </Label>
-                        <Separator layoutX="14.0" layoutY="642.0" prefHeight="2.0" prefWidth="865.0" style="-fx-background-color: #5c5c3d;" />
-                        <TableView fx:id="tbl_choices_data" layoutX="12.0" layoutY="726.0" prefHeight="147.0" prefWidth="853.0">
-                           <columns>
-                              <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" text="Choice ID" />
-                              <TableColumn maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="Choices" />
-                              <TableColumn maxWidth="300.0" minWidth="300.0" prefWidth="300.0" text="Question ID" />
-                              <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" text="Answer ID" />
-                              <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" text="Course ID" />
-                           </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
-                        <MenuButton layoutX="720.0" layoutY="653.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="147.0" style="-fx-background-color: #00b36b;" text="Settings" textFill="WHITE">
-                           <items>
-                              <MenuItem fx:id="menu_add_new_choice" mnemonicParsing="false" text="Add new Choice" />
-                              <MenuItem fx:id="menu_save_new_choice" mnemonicParsing="false" text="Save new Choice" />
-                              <MenuItem fx:id="menu_edit_choice" mnemonicParsing="false" text="Edit Choice" />
-                              <MenuItem fx:id="menu_update_choice" mnemonicParsing="false" text=" Update Choice" />
-                              <MenuItem fx:id="menu_delete_choice" mnemonicParsing="false" text="Delete Choice" />
-                           </items>
-                           <font>
-                              <Font name="Roboto Regular" size="20.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </MenuButton>
-                     </children>
-                  </AnchorPane>
+                  <TableView fx:id="cm_data" prefHeight="365.0" prefWidth="856.0">
+                     <columns>
+                        <TableColumn prefWidth="75.0" text="Employee Id" />
+                        <TableColumn prefWidth="75.0" text="Employee Name" />
+                        <TableColumn prefWidth="75.0" text="Course Title" />
+                        <TableColumn prefWidth="75.0" text="Course Description" />
+                        <TableColumn prefWidth="75.0" text="Coordinator" />
+                        <TableColumn prefWidth="57.0" text="Duration" />
+                        <TableColumn prefWidth="65.0" text="Status" />
+                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </TableView>
                </children>
             </AnchorPane>
-        </content>
+         </content>
       </ScrollPane>
    </children>
 </AnchorPane>
