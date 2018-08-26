@@ -40,15 +40,13 @@ public class Log2_Vendor_PortalController implements Initializable {
         
         try{
             browser.browse(new URI ("http://localhost/Forms/loginadmin.php"));
-        }
+            }
         
-        catch(IOException err){
+              catch(IOException err){
         
     }
-        catch(URISyntaxException err){
+              catch(URISyntaxException err){
         }    
     }   
         
-    
-    
 }
