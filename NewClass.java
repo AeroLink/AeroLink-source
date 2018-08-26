@@ -26,6 +26,8 @@ public class NewClass {
         db.DB_INIT(new MySql());
         db.startConnection();
         
+
+        //new 
         Users u = new Users();
         
         //u.insert(0, "adminxaasasaaa", Crypt.Encrypt("edenramoneda"));
