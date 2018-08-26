@@ -133,18 +133,18 @@ public class HR2_Training_ManagementController implements Initializable {
     private void DisplayData()
     {
         emp_id.setCellValueFactory(new PropertyValueFactory<>("emp_id"));
-           emp_name.setCellValueFactory(new PropertyValueFactory<>("emp_name"));
-              job_position.setCellValueFactory(new PropertyValueFactory<>("job_position"));
-                 title.setCellValueFactory(new PropertyValueFactory<>("title"));
-                    trainor.setCellValueFactory(new PropertyValueFactory<>("trainor"));
-                    tbl_type_of_training.setCellValueFactory(new PropertyValueFactory<>("tbl_type_of_training"));
-                       location.setCellValueFactory(new PropertyValueFactory<>("location"));
-                          date_start.setCellValueFactory(new PropertyValueFactory<>("date_start"));
-                             date_end.setCellValueFactory(new PropertyValueFactory<>("date_end"));
-                                time_start.setCellValueFactory(new PropertyValueFactory<>("time_start"));
-                                   time_end.setCellValueFactory(new PropertyValueFactory<>("time_end"));
-                                      budget_cost.setCellValueFactory(new PropertyValueFactory<>("budget_cost"));
-                                         organizer.setCellValueFactory(new PropertyValueFactory<>("organizer"));
+        emp_name.setCellValueFactory(new PropertyValueFactory<>("emp_name"));
+        job_position.setCellValueFactory(new PropertyValueFactory<>("job_position"));
+        title.setCellValueFactory(new PropertyValueFactory<>("title"));
+        trainor.setCellValueFactory(new PropertyValueFactory<>("trainor"));
+        tbl_type_of_training.setCellValueFactory(new PropertyValueFactory<>("tbl_type_of_training"));
+        location.setCellValueFactory(new PropertyValueFactory<>("location"));
+        date_start.setCellValueFactory(new PropertyValueFactory<>("date_start"));
+        date_end.setCellValueFactory(new PropertyValueFactory<>("date_end"));
+        time_start.setCellValueFactory(new PropertyValueFactory<>("time_start"));
+        time_end.setCellValueFactory(new PropertyValueFactory<>("time_end"));
+        budget_cost.setCellValueFactory(new PropertyValueFactory<>("budget_cost"));
+        organizer.setCellValueFactory(new PropertyValueFactory<>("organizer"));
                                         
     }
     
@@ -175,22 +175,21 @@ public class HR2_Training_ManagementController implements Initializable {
                 hm.get("organizer");
                 
                dv.add(
-                    new Training_ManagementClass(
-                            String.valueOf(hm.get("emp_id")),
-                            String.valueOf(hm.get("emp_name")),
-                            String.valueOf(hm.get("job_position")),
-                            String.valueOf(hm.get("title")),
-                            String.valueOf(hm.get("trainor")),
-                            String.valueOf(hm.get("tbl_type_of_training")),
-                            String.valueOf(hm.get("location")),
-                            String.valueOf(hm.get("date_start")),
-                            String.valueOf(hm.get("date_end")),
-                            String.valueOf(hm.get("time_start")),
-                            String.valueOf(hm.get("time_end")),
-                            String.valueOf(hm.get("budget_cost")),
-                            String.valueOf(hm.get("organizer"))
-
-                    ) );   
+               new Training_ManagementClass(
+                   String.valueOf(hm.get("emp_id")),
+                   String.valueOf(hm.get("emp_name")),
+                   String.valueOf(hm.get("job_position")),
+                   String.valueOf(hm.get("title")),
+                   String.valueOf(hm.get("trainor")),
+                   String.valueOf(hm.get("tbl_type_of_training")),
+                   String.valueOf(hm.get("location")),
+                   String.valueOf(hm.get("date_start")),
+                   String.valueOf(hm.get("date_end")),
+                   String.valueOf(hm.get("time_start")),
+                   String.valueOf(hm.get("time_end")),
+                   String.valueOf(hm.get("budget_cost")),
+                   String.valueOf(hm.get("organizer"))
+                 ) );   
             }
             list_of_trainees.setItems(dv);
                 
@@ -206,8 +205,8 @@ public class HR2_Training_ManagementController implements Initializable {
                         btn_update,
                         btn_delete,
                         txt_employee_name,
-                         txt_job_position,
-                         txt_title,
+                        txt_job_position,
+                        txt_title,
                         txt_location,
                         txt_date_start,
                         txt_date_end,

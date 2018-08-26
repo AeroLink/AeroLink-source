@@ -4,6 +4,8 @@ import Model.Users;
 import Synapse.Crypt;
 import Synapse.DB.MySql;
 import Synapse.Database;
+import java.util.Arrays;
+import java.util.List;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -28,10 +30,13 @@ public class NewClass {
         
         //u.insert(0, "adminxaasasaaa", Crypt.Encrypt("edenramoneda"));
         
+        List list = u.where("id", "like", "%1%").get();
         
-        u.update(new Object[][] {
-            {"username", "admin"}
-        }).where("id", "=", "19").executeUpdate();
+        System.out.println(Arrays.asList(list));
+//        
+//        u.update(new Object[][] {
+//            {"username", "admin"}
+//        }).where("id", "=", "19").executeUpdate();
 
         //u.delete().where("id", "=", "20").executeUpdate();
         

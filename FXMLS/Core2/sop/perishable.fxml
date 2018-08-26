@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="260.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Core2.sop.PerishableController">
+   <children>
+      <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="32.0" prefWidth="134.0" style="-fx-background-color: #34A853;" text="Perishable" textFill="#fcf8f8">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="Tare" layoutX="14.0" layoutY="46.0" prefHeight="151.0" prefWidth="572.0" text="Details:&#10;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. &#10;" wrapText="true" />
+      <JFXButton fx:id="btn_save" layoutX="277.0" layoutY="215.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #34A853;" text="SAVE" textFill="#f2eeee">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btn_update" layoutX="436.0" layoutY="215.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: red;" text="UPDATE" textFill="#f2eeee">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+      <FontAwesomeIconView fill="#f5f0f0" glyphName="SAVE" layoutX="290.0" layoutY="237.0" size="20" />
+      <FontAwesomeIconView fill="#f5f0f0" glyphName="PENCIL" layoutX="447.0" layoutY="237.0" size="20" />
+   </children>
+</AnchorPane>

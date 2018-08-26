@@ -108,26 +108,21 @@ public class HR2_Competency_ManagementController implements Initializable {
                    }*/
             }    
    
-    
-                  /*       public EventHandler evt = new EventHandler<KeyEvent>()
+                        /*
+                         public EventHandler evt = new EventHandler<KeyEvent>()
                             {
-
-
-                                     @Override
-                                     public void handle(KeyEvent event) {
-                                        validations n = new validations();
-                                                 JFXTextField jft = (JFXTextField) event.getSource();
-
-                                                     if(!n.maximumChars(jft, 25))
-                                                     {
-                                                                       Alert alert = new Alert(Alert.AlertType.ERROR);
-                                                                                          alert.initStyle(StageStyle.UNDECORATED);
-                                                                                          alert.setTitle("Error");
-                                                                                          alert.setContentText("Maximum 25 Character only"); 
-                                                                                          alert.showAndWait();
-                                                     }
-                                     }*/
-                    
+                                @Override
+                                public void handle(KeyEvent event) {
+                                validations n = new validations();
+                                JFXTextField jft = (JFXTextField) event.getSource();
+                               if(!n.maximumChars(jft, 25)){
+                                Alert alert = new Alert(Alert.AlertType.ERROR);
+                                alert.initStyle(StageStyle.UNDECORATED);
+                                alert.setTitle("Error");
+                                alert.setContentText("Maximum 25 Character only"); 
+                                alert.showAndWait();
+                               }
+                       */
     public void DisableComponents()
     {
     
