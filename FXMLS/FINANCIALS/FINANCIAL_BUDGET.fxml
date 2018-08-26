@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="id_budget" prefHeight="713.0" prefWidth="993.0" style="-fx-background-color: #E1E8ED;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane prefHeight="616.0" prefWidth="987.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Allocation">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="29.0" layoutY="68.0" text="Allocation no" />
+                        <JFXTextField layoutX="120.0" layoutY="61.0" />
+                        <DatePicker layoutX="122.0" layoutY="120.0" prefHeight="25.0" prefWidth="141.0" />
+                        <Label layoutX="52.0" layoutY="124.0" text="Date" />
+                        <Label layoutX="51.0" layoutY="192.0" text="Particulars" />
+                        <JFXTextField layoutX="120.0" layoutY="185.0" maxWidth="343.0" minWidth="343.0" prefHeight="31.0" prefWidth="343.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Untitled Tab 2">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

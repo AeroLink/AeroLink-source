@@ -193,7 +193,7 @@ public class HR2_Competency_ManagementController implements Initializable {
                             
                         }catch(Exception e)
                         {
-                            JOptionPane.showMessageDialog(null, e);
+                             e.printStackTrace();
                         }
     }
     
@@ -298,10 +298,14 @@ public class HR2_Competency_ManagementController implements Initializable {
                                                             tm.insert(cm_data);
                                                               tm.insert(jp);
                                                                 tm.insert(department);
-                                                           JOptionPane.showMessageDialog(null,"saved");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+             alert.initStyle(StageStyle.UNDECORATED);
+             alert.setTitle("Saved");
+             alert.setContentText("DATA HAS BEEN SAVED"); 
+             alert.showAndWait();
                             }catch(Exception e)
                             {
-                                                            JOptionPane.showMessageDialog(null,e.getMessage());
+                                                           e.printStackTrace();
                             }
     }
     
