@@ -47,7 +47,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import javax.swing.JOptionPane;
-import net.proteanit.sql.DbUtils;
 /**
  * FXML Controller class
  *

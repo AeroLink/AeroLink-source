@@ -95,7 +95,7 @@ public class HR2_Learning_ManagementController implements Initializable {
         DisableComponents();
         
         //for course section
-        btn_new.setOnAction(e -> New());
+//        btn_new.setOnAction(e -> New());
         item_add_new_question.setOnAction(e -> Open_LM_Questions());
              
         
