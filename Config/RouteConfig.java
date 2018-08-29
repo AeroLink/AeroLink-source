@@ -56,15 +56,18 @@ public class RouteConfig {
         {"hr4chc", "/FXMLS/HR4/HR4_Core_Human_Capital_Management.fxml"},
         
         //Logistic2
-        {"log2vendorportal", "/FXMLS/Log2/Log2_Vendor_Portal.fxml"},
-        {"Log2AuditManagement", "/FXMLS/Log2/Log2_Audit_Management.fxml"},
+        {"log2vp", "/FXMLS/Log2/Log2_Vendor_Portal.fxml"},
+        {"log2am", "/FXMLS/Log2/Log2_Audit_Management.fxml"},
+        {"log2dt", "/FXMLS/Log2/Log2_Document_Tracking.fxml"},
+        {"log2fm", "/FXMLS/Log2/Log2_Fleet_Management.fxml"},
+        {"log2vr", "/FXMLS/Log2/Log2_Vehicle_Reservation.fxml"},
       
         //Core2    
         {"core2SN","/FXMLS/Core2/ServiceNetwork.fxml"},
         {"core2SP","/FXMLS/Core2/ServiceProvider.fxml"},
         {"core2SR","/FXMLS/Core2/ScheduleRates.fxml"},
         {"core2SOP","/FXMLS/Core2/StandardOperationalProcedure.fxml"},
-        {"core2CRM","/FXML/Core2/CustomerRelationshipManagement.fxml"},
+        {"core2CRM","/FXMLS/Core2/CustomerRelationshipManagement.fxml"},
            
             
         //USM

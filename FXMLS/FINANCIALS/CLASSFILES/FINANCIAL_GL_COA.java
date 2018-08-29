@@ -25,6 +25,7 @@ public class FINANCIAL_GL_COA {
              public String getCode_no(){
             return code_no.get();
              }
+           
               public String getAccount_title(){
             return account_title.get();
              }

@@ -21,6 +21,7 @@ public class FINANCE_GL extends Synapse.Model{
          
         setColumns("coa_id","code_no","account_title");
         setTable("tbl_finance_coa");
+    
     }
      public List where() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

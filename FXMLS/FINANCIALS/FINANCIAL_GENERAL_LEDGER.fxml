@@ -12,52 +12,58 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="id_gl" prefHeight="713.0" prefWidth="993.0" style="-fx-background-color: #E1E8ED;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.FINANCIALS.FINANCIAL_GENERAL_LEDGERController">
+<AnchorPane id="id_gl" prefHeight="667.0" prefWidth="993.0" style="-fx-background-color: #E1E8ED;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.FINANCIALS.FINANCIAL_GENERAL_LEDGERController">
    <children>
       <TabPane prefHeight="671.0" prefWidth="993.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Jorunal Entry">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="415.0" prefWidth="503.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="642.0" prefWidth="985.0">
                      <children>
-                        <JFXButton layoutX="62.0" layoutY="535.0" onAction="#clicke_coa" prefHeight="34.0" prefWidth="214.0" style="-fx-background-color: #34A853;" stylesheets="@../../Assets/css/MainPanel.css" text="Chart of Accounts" textFill="WHITE" />
-                        <JFXTextField disable="true" focusColor="#34a853" layoutX="147.0" layoutY="40.0" maxWidth="66.0" minWidth="66.0" prefHeight="31.0" prefWidth="66.0" unFocusColor="#34a853" />
-                        <Label layoutX="65.0" layoutY="47.0" text="Journal ID" />
-                        <Label layoutX="67.0" layoutY="90.0" text="Date" />
-                        <JFXDatePicker layoutX="146.0" layoutY="83.0" prefHeight="31.0" prefWidth="177.0" promptText="Date" />
-                        <Label layoutX="54.0" layoutY="163.0" text="Account Title" />
-                        <JFXComboBox layoutX="148.0" layoutY="159.0" prefHeight="25.0" prefWidth="172.0" promptText="Account Title" />
-                        <Label layoutX="66.0" layoutY="219.0" text="Debit" />
-                        <JFXTextField layoutX="140.0" layoutY="212.0" promptText="Debit" />
-                        <JFXTextField layoutX="140.0" layoutY="270.0" promptText="Credit" />
-                        <Label layoutX="66.0" layoutY="277.0" text="Credit" />
-                        <TableView layoutX="347.0" layoutY="30.0" prefHeight="283.0" prefWidth="632.0">
+                        <JFXButton layoutX="581.0" layoutY="566.0" onAction="#clicke_coa" prefHeight="34.0" prefWidth="214.0" style="-fx-background-color: #34A853;" stylesheets="@../../Assets/css/MainPanel.css" text="Chart of Accounts" textFill="WHITE" />
+                        <JFXTextField disable="true" focusColor="#34a853" layoutX="196.0" layoutY="383.0" maxWidth="66.0" minWidth="66.0" prefHeight="31.0" prefWidth="66.0" unFocusColor="#34a853" />
+                        <Label layoutX="110.0" layoutY="390.0" text="Journal ID" />
+                        <Label layoutX="135.0" layoutY="439.0" text="Date" />
+                        <JFXDatePicker layoutX="193.0" layoutY="432.0" prefHeight="31.0" prefWidth="177.0" promptText="Date" />
+                        <Label layoutX="90.0" layoutY="494.0" text="Account Title" />
+                        <JFXComboBox layoutX="196.0" layoutY="490.0" prefHeight="25.0" prefWidth="172.0" />
+                        <Label layoutX="437.0" layoutY="455.0" text="Debit" />
+                        <JFXTextField layoutX="479.0" layoutY="448.0" promptText="00.0" />
+                        <Label layoutX="675.0" layoutY="455.0" text="Credit" />
+                        <JFXTextField layoutX="723.0" layoutY="448.0" promptText="00.0" />
+                        <TableView layoutX="36.0" layoutY="84.0" prefHeight="260.0" prefWidth="907.0">
                           <columns>
                             <TableColumn prefWidth="75.0" text="Journal_ID" />
-                            <TableColumn prefWidth="109.0" text="Date" />
-                              <TableColumn prefWidth="136.0" text="Account Title" />
-                              <TableColumn prefWidth="160.0" text="Debit" />
-                              <TableColumn prefWidth="151.0" text="Credit" />
+                            <TableColumn prefWidth="168.0" text="Date" />
+                              <TableColumn prefWidth="183.0" text="Account Title" />
+                              <TableColumn prefWidth="235.0" text="Debit" />
+                              <TableColumn prefWidth="265.0" text="Credit" />
                           </columns>
                         </TableView>
-                        <JFXButton layoutX="65.0" layoutY="347.0" prefHeight="29.0" prefWidth="122.0" style="-fx-background-color: #34A853;" text="Save" textFill="WHITE" />
-                        <ImageView fitHeight="29.0" fitWidth="27.0" layoutX="77.0" layoutY="347.0" pickOnBounds="true" preserveRatio="true">
+                        <JFXButton layoutX="169.0" layoutY="569.0" prefHeight="29.0" prefWidth="122.0" style="-fx-background-color: #34A853;" text="Save" textFill="WHITE" />
+                        <ImageView fitHeight="29.0" fitWidth="27.0" layoutX="181.0" layoutY="569.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../Assets/icons8_Save_30px.png" />
                            </image>
                         </ImageView>
-                        <JFXButton layoutX="230.0" layoutY="347.0" prefHeight="29.0" prefWidth="122.0" style="-fx-background-color: #34A853;" text="Edit" textFill="WHITE" />
-                        <ImageView fitHeight="29.0" fitWidth="27.0" layoutX="244.0" layoutY="347.0" pickOnBounds="true" preserveRatio="true">
+                        <JFXButton layoutX="346.0" layoutY="569.0" prefHeight="29.0" prefWidth="122.0" style="-fx-background-color: #34A853;" text="Edit" textFill="WHITE" />
+                        <ImageView fitHeight="29.0" fitWidth="27.0" layoutX="360.0" layoutY="569.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../Assets/icons8_Edit_Property_25px.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="25.0" fitWidth="37.0" layoutX="81.0" layoutY="540.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="25.0" fitWidth="37.0" layoutX="600.0" layoutY="571.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../Assets/icons8_List_View_30px.png" />
                            </image>
                         </ImageView>
+                        <Label layoutX="51.0" layoutY="20.0" text="Journal Entries">
+                           <font>
+                              <Font size="35.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
             </content>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="847.0" prefWidth="985.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Log2.Log2_Document_TrackingController">
+   <children>
+      <Label layoutX="533.0" layoutY="14.0" text="Document Tracking">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <TabPane layoutX="56.0" layoutY="31.0" prefHeight="686.0" prefWidth="788.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Request">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="55.0" text="Document_Id :">
+                           <font>
+                              <Font name="Arial" size="17.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="102.0" text="Department : ">
+                           <font>
+                              <Font name="Arial" size="17.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="148.0" text="Type of Document : ">
+                           <font>
+                              <Font name="Arial" size="17.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="191.0" text="Remarks : ">
+                           <font>
+                              <Font name="Arial" size="17.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="236.0" text="Date of Request : ">
+                           <font>
+                              <Font name="Arial" size="17.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField focusColor="WHITE" layoutX="179.0" layoutY="50.0" maxWidth="209.0" minWidth="209.0" prefHeight="31.0" prefWidth="205.0" />
+                        <JFXTextField focusColor="WHITE" layoutX="179.0" layoutY="97.0" maxWidth="209.0" minWidth="203.0" prefHeight="31.0" prefWidth="205.0" />
+                        <JFXTextField focusColor="WHITE" layoutX="181.0" layoutY="143.0" maxWidth="205.0" minWidth="200.0" prefHeight="31.0" prefWidth="205.0" />
+                        <JFXTextField focusColor="WHITE" layoutX="181.0" layoutY="186.0" maxWidth="205.0" minWidth="205.0" prefHeight="31.0" prefWidth="205.0" />
+                        <JFXTextField focusColor="WHITE" layoutX="182.0" layoutY="231.0" maxWidth="204.0" minWidth="204.0" prefHeight="31.0" prefWidth="205.0" />
+                        <TableView layoutX="14.0" layoutY="301.0" prefHeight="275.0" prefWidth="561.0">
+                          <columns>
+                            <TableColumn prefWidth="112.0" text="Document_Id" />
+                            <TableColumn prefWidth="112.0" text="Department" />
+                              <TableColumn prefWidth="112.0" text="Type of Document" />
+                              <TableColumn prefWidth="112.0" text="Remarks" />
+                              <TableColumn prefWidth="112.0" text="Date of Request" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="---">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+          <Tab text="---">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+          <Tab text="---">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

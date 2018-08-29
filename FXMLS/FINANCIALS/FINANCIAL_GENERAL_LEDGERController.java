@@ -43,9 +43,10 @@ public class FINANCIAL_GENERAL_LEDGERController implements Initializable {
     private void clicke_coa(ActionEvent event) throws IOException {
      // new Form(Route.routes.get("id_coa").toString()).open(StageStyle.DECORATED, false);
       try{
-          FXMLLoader loader=new FXMLLoader(getClass().getResource("/FXMLS/FINANCIALS/GENERAL_LEDGER/ChartOfAccounts.fxml"));
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLS/FINANCIALS/GENERAL_LEDGER/ChartOfAccounts.fxml"));
           Parent root1 = (Parent) loader.load();
           Stage stage = new Stage();
+          stage.setTitle("Chart Of Accounts");
           stage.setScene(new Scene(root1));
           stage.show();
       }catch(Exception e){

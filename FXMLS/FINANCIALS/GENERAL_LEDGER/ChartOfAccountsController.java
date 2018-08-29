@@ -8,9 +8,13 @@ package FXMLS.FINANCIALS.GENERAL_LEDGER;
 import FXMLS.FINANCIALS.CLASSFILES.FINANCIAL_AP;
 import FXMLS.FINANCIALS.CLASSFILES.FINANCIAL_GL_COA;
 import Model.FINANCE_GL;
+
 import Model.FINANCIAL_APR;
+import Model.FINANCIAL_DISBURSEMENT_VOUCHER;
+import Synapse.Model;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import com.sun.org.apache.bcel.internal.generic.Select;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -44,6 +48,7 @@ public class ChartOfAccountsController implements Initializable {
     private JFXTextField code_txtfield;
     
 ObservableList<String> sdl = FXCollections.observableArrayList();
+
     @FXML
     private TableColumn<FINANCIAL_GL_COA, String> gl_coa_id;
     @FXML
@@ -55,18 +60,50 @@ ObservableList<String> sdl = FXCollections.observableArrayList();
     private JFXButton search_btn;
     @FXML
     private JFXTextField search_coa_txtfield;
+    @FXML
+    private JFXButton coa_new_btn;
+    @FXML
+    private JFXButton coa_edit_btn;
+    @FXML
+    private JFXButton coa_delete_btn;
+ List del;
+  ObservableList<FINANCIAL_GL_COA> gl_coa;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+         gl_coa= FXCollections.observableArrayList();
         coa_add_btn.setOnMouseClicked(e -> save());
+        
+        //coa_delete_btn.setOnMouseClicked(e -> Delete());
+    
+        //coa_edit_btn.setOnMouseClicked(e -> UpdateTable());
         search_coa_txtfield.setOnKeyTyped(e -> SearchCOA());
+        coa_new_btn.setOnMouseClicked(e -> enable());
         displayData();
         loadDataCOA();
+        disable();
      
+   
     }    
-
+    
+    public void disable(){
+        coa_edit_btn.setDisable(true);
+        coa_delete_btn.setDisable(true);
+        coa_add_btn.setDisable(true);
+        code_txtfield.setDisable(true);
+        acc_title_txtfield.setDisable(true);
+        
+    }
+    public void enable(){
+        coa_edit_btn.setDisable(false);
+        coa_delete_btn.setDisable(false);
+        coa_add_btn.setDisable(false);
+        code_txtfield.setDisable(false);
+        acc_title_txtfield.setDisable(false);
+        
+    }
     public void SearchCOA()
     {
         //object conditions[][] ={
@@ -83,16 +120,16 @@ ObservableList<String> sdl = FXCollections.observableArrayList();
     
     
     public void displayData(){
-           gl_coa_id.setCellValueFactory(new PropertyValueFactory<>("code_no"));
-           gl_acc_title_id.setCellValueFactory(new PropertyValueFactory<>("account_title"));
+       gl_coa_id.setCellValueFactory(new PropertyValueFactory<>("code_no"));
+       gl_acc_title_id.setCellValueFactory(new PropertyValueFactory<>("account_title"));
     }
     
     
     
     public void loadDataCOA(){
          FINANCE_GL coa = new FINANCE_GL();
-         ObservableList<FINANCIAL_GL_COA> gl_coa = FXCollections.observableArrayList();
-         
+         ObservableList<FINANCIAL_GL_COA> gl_coa1 = FXCollections.observableArrayList();
+          
             List b = coa.get();
             
             for(Object d : b)
@@ -101,26 +138,32 @@ ObservableList<String> sdl = FXCollections.observableArrayList();
                 
                 hm.get("code_no");
                 hm.get("account_title");
-               
                 
-               gl_coa.add(new FINANCIAL_GL_COA(
+               gl_coa1.add(new FINANCIAL_GL_COA(
                 String.valueOf(hm.get("code_no")),
                 String.valueOf(hm.get("account_title"))
                 ) );   
+               
             }
-            coa_table.setItems(gl_coa);
+            coa_table.setItems(gl_coa1);
+            
             }
+
+    
     
     public void save(){
            
             FINANCE_GL coa = new FINANCE_GL();
+            
           try
         {
            String[][] coa_table =
         {
         {"code_no" , code_txtfield.getText()},
         {"account_title" , acc_title_txtfield.getText()}
-        };                            
+        };           
+           
+           
         if(coa.insert(coa_table)){
          Alert alert = new Alert(Alert.AlertType.INFORMATION);
              alert.initStyle(StageStyle.UNDECORATED);
@@ -130,11 +173,14 @@ ObservableList<String> sdl = FXCollections.observableArrayList();
              code_txtfield.clear();
              acc_title_txtfield.clear();
         }else{
-              Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+              Alert alert = new Alert(Alert.AlertType.ERROR);
              alert.initStyle(StageStyle.UNDECORATED);
-             alert.setTitle("CAUTION!");
+             alert.setTitle("ERROR");
              alert.setContentText("PLEASE FILL THE EMPTY FIELDS"); 
              alert.showAndWait();
+             code_txtfield.clear();
+             acc_title_txtfield.clear();
+            
         }
                                        
             }catch(Exception e)
@@ -143,6 +189,7 @@ ObservableList<String> sdl = FXCollections.observableArrayList();
                }
    displayData();
    loadDataCOA();
+    disable();
     }
     
     

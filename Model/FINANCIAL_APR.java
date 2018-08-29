@@ -14,6 +14,8 @@ public class FINANCIAL_APR extends Synapse.Model{
             public FINANCIAL_APR(){
                 setColumns("ap_id","ap_date","ap_payee","ap_particular","ap_amount");
                 setTable("tbl_finance_accounts_payable");
+                
+                
             }
     
 }

@@ -10,42 +10,50 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="id_apr" prefHeight="713.0" prefWidth="993.0" style="-fx-background-color: #E1E8ED;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.FINANCIALS.FINANCIAL_APRController">
    <children>
-      <TabPane prefHeight="609.0" prefWidth="993.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="713.0" prefWidth="993.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Payable Record">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="520.0" prefWidth="755.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="713.0" prefWidth="993.0">
                      <children>
-                        <JFXTextField fx:id="search_field" layoutX="104.0" layoutY="36.0" promptText="Search" />
-                        <TableView fx:id="ap_table" layoutX="55.0" layoutY="86.0" prefHeight="294.0" prefWidth="681.0">
+                        <JFXTextField fx:id="search_field" layoutX="174.0" layoutY="114.0" maxWidth="323.0" minWidth="240.0" prefHeight="31.0" prefWidth="323.0" promptText="Search" />
+                        <TableView fx:id="ap_table" layoutX="146.0" layoutY="164.0" prefHeight="469.0" prefWidth="681.0">
                           <columns>
                             <TableColumn fx:id="ap_id" prefWidth="75.0" text="ap_id" />
                             <TableColumn fx:id="ap_date" prefWidth="180.0" text="Date" />
-                              <TableColumn fx:id="ap_payee" prefWidth="122.0" text="Payee" />
+                              <TableColumn fx:id="ap_payee" prefWidth="122.0" text="Claimants" />
                               <TableColumn fx:id="ap_particular" prefWidth="183.0" text="Particular" />
                               <TableColumn fx:id="ap_amount" prefWidth="120.0" text="Amount" />
                           </columns>
                         </TableView>
-                        <JFXButton layoutX="570.0" layoutY="37.0" prefHeight="29.0" prefWidth="141.0" style="-fx-background-color: #34A853;" stylesheets="@../../Assets/css/MainPanel.css" text="Refresh" textFill="#f8f8f8" />
-                        <JFXButton layoutX="570.0" layoutY="399.0" prefHeight="30.0" prefWidth="141.0" style="-fx-background-color: #34A853;" stylesheets="@../../Assets/css/MainPanel.css" text="Post to Ledger" textFill="#f8f8f8" />
-                        <Label layoutX="55.0" layoutY="43.0" text="Search" />
-                        <ImageView fitHeight="23.0" fitWidth="32.0" layoutX="590.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+                        <Label layoutX="85.0" layoutY="112.0" text="Filter">
+                           <font>
+                              <Font size="25.0" />
+                           </font></Label>
+                        <JFXButton buttonType="RAISED" layoutX="515.0" layoutY="116.0" prefHeight="29.0" prefWidth="130.0" style="-fx-background-color: #34A853;" stylesheets="@../../Assets/css/MainPanel.css" text="Go" textFill="#f8f8f8" />
+                        <ImageView fitHeight="23.0" fitWidth="32.0" layoutX="528.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../Assets/icons8_Refresh_30px.png" />
+                              <Image url="@../../Assets/icons8_Search_30px.png" />
                            </image>
                         </ImageView>
+                        <Label layoutX="328.0" layoutY="26.0" prefHeight="45.0" prefWidth="235.0" text="Accounts Payable">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
           <Tab text="Receivable Record">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="713.0" prefWidth="993.0">
                      <children>
-                        <TableView fx:id="ar_table" layoutX="63.0" layoutY="69.0" prefHeight="297.0" prefWidth="711.0">
+                        <TableView fx:id="ar_table" layoutX="141.0" layoutY="162.0" prefHeight="479.0" prefWidth="711.0">
                           <columns>
                             <TableColumn fx:id="ar_id" prefWidth="75.0" text="ar_id" />
                             <TableColumn fx:id="ar_invoice_no" prefWidth="119.0" text="Invoice_no" />
@@ -55,14 +63,23 @@
                               <TableColumn fx:id="ar_amount" prefWidth="144.0" text="Amount" />
                           </columns>
                         </TableView>
-                        <JFXTextField layoutX="63.0" layoutY="26.0" promptText="Search" />
-                        <JFXButton layoutX="638.0" layoutY="27.0" prefHeight="29.0" prefWidth="121.0" style="-fx-background-color: #34A853;" stylesheets="@../../Assets/css/MainPanel.css" text="Refresh" textFill="#f8f8f8" />
-                        <JFXButton layoutX="618.0" layoutY="385.0" prefHeight="30.0" prefWidth="141.0" style="-fx-background-color: #34A853;" stylesheets="@../../Assets/css/MainPanel.css" text="Post to Ledger" textFill="#f8f8f8" />
-                        <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="648.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+                        <JFXTextField layoutX="151.0" layoutY="119.0" maxWidth="319.0" minWidth="319.0" prefHeight="31.0" prefWidth="319.0" promptText="Search" />
+                        <JFXButton buttonType="RAISED" layoutX="476.0" layoutY="120.0" prefHeight="29.0" prefWidth="121.0" style="-fx-background-color: #34A853;" stylesheets="@../../Assets/css/MainPanel.css" text="Go" textFill="#f8f8f8" />
+                        <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="491.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../Assets/icons8_Refresh_30px.png" />
+                              <Image url="@../../Assets/icons8_Search_30px.png" />
                            </image>
                         </ImageView>
+                        <Label layoutX="79.0" layoutY="115.0" text="Filter">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="335.0" layoutY="34.0" text="Accounts Receivable">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
                      </children></AnchorPane>
             </content>
           </Tab>
