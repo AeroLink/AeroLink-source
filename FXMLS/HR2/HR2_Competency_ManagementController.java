@@ -48,6 +48,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import javax.swing.JOptionPane;
+
 /**
  * FXML Controller class
  *
@@ -150,7 +151,7 @@ public class HR2_Competency_ManagementController implements Initializable {
         try {
             for (Node c : d) {
                 if (c instanceof JFXTextField) {
-                    JFXTextField m = (JFXTextField) c;               
+                    JFXTextField m = (JFXTextField) c;
                     m.setDisable(true);
                 }
                 if (c instanceof JFXButton) {
@@ -217,47 +218,31 @@ public class HR2_Competency_ManagementController implements Initializable {
     @FXML
     public void Search_Skills() {
 
-        hr2hmc = new HR2_Competency_Management();
+        HR2_Competency_Management hr2hmc = new HR2_Competency_Management();
+        HR2_Competency competency = new HR2_Competency();
+        HR2_Jobs j = new HR2_Jobs();
 
-        try {
-
-            List listSkills = hr2hmc.where(new Object[][]{
-                {"skill_id", "like", "%" + txt_Search_Jobs.getText() + "%"}
-            }).get();
-
-            /*       List listSkills = (List) j.join(Model.JOIN.INNER, "tbl_hr2_competency", "job_id", "=", "tbl_hr2_competency"
-                                                                 ,Model.JOIN.INNER,"tbl_hr2_skillset" , "skill_id").where(new Object[][]
-                                  {
-                                       {"job_id", "like", "%" + txt_Search_Jobs.getText() +  "%"} 
-                                  }).get();*/
-            //   {"job_id", "like", " (SELECT id from tbl_jobs WHERE id = 1)"}
-            tbl_Skills.getItems().clear();
-
-            ObservableList<HR2_Competency_ManagementClass> hr2jc = FXCollections.observableArrayList();
-
-            for (Object d : listSkills) {
-                HashMap hm1 = (HashMap) d;
-                //RS
-                hm1.get("skill_id");
-                hm1.get("skill");
-                hm1.get("skill_description");
-
-                hr2jc.add(
-                        new HR2_Competency_ManagementClass(
-                                String.valueOf(hm1.get("skill_id")),
-                                String.valueOf(hm1.get("skill")),
-                                String.valueOf(hm1.get("skill_description"))
-                        ));
-
-                tbl_Skillsets_related_to_Jobs.setItems(hr2jc);
-                tbl_Skills.setItems(hr2jc);
-
-                //SearchRelatedSkills(listSkills);
-            }
-
+            try {
+ 
+                List listSkills = hr2hmc.where(new Object[][]{
+                                      {"job_id", "like", "%" + txt_Search_Jobs.getText() +  "%"}
+                                  }).get();
+                               
+            
+                                  
+                                  
+                                     //  {"job_id", "like", " (SELECT id from tbl_jobs WHERE id = 1)"}
+                                  
+             
+           
+            //SearchRelatedSkills(listSkills);
+ 
+                             
         } catch (Exception e) {
             System.out.println(e);
         }
+
+     
     }
 
     //Initializing data
@@ -287,7 +272,6 @@ public class HR2_Competency_ManagementController implements Initializable {
         /* List listjobs = jobxs.where(new Object[][]{
             {"job_id", "like", "%" + txt_Search_Jobs.getText() + "%"}
         }).get();*/
-
  /*    List listSkills = hr2hmc.where(new Object[][]{
                                       {"job_id", "like", "%" + txt_Search_Jobs.getText() +  "%"}
                                   }).join(Model.JOIN.INNER, table2, table2_key, logical_operator, table1_key).get();
@@ -298,7 +282,6 @@ public class HR2_Competency_ManagementController implements Initializable {
         List jobsRes = hrc
                 .join(Model.JOIN.INNER, "tbl_hr4_jobs", "job_id", "=", "job_id")
                 .join(Model.JOIN.INNER, "tbl_hr2_skillset", "skill_id", "=", "skill_id")
-               // .groupBy("tbl_hr2_competency.job_id")
                 .where(new Object[][]{
             {"tbl_hr2_competency.job_id", "like", "%" + txt_Search_Jobs.getText() + "%"}
         }).get();
@@ -307,10 +290,10 @@ public class HR2_Competency_ManagementController implements Initializable {
         //Load Jobs
         ObservableList<HR2_JobsClass> hr2jc1 = FXCollections.observableArrayList();
 
-        /*    List SkillsRes = hrc.join(Model.JOIN.INNER, "tbl_hr2_skillset", "skill_id", "=", "skill_id")
+        /* List SkillsRes = hrc.join(Model.JOIN.INNER, "tbl_hr2_skillset", "skill_id", "=", "skill_id")
                             .where(new Object[][]{
                             {"tbl_hr2_competency.job_id", "like", "%" + txt_Search_Jobs.getText() + "%"}
-                        }).get();*/
+                       }).get();*/
         for (Object d : jobsRes) {
             HashMap hm1 = (HashMap) d;
             //RS
@@ -329,6 +312,7 @@ public class HR2_Competency_ManagementController implements Initializable {
         SearchRelatedSkills(jobsRes);
         tbl_Job_Skillsets.getItems().clear();
         tbl_Job_Skillsets.setItems(hr2jc1);
+
     }
 
     //In Job Skillsets
@@ -337,51 +321,31 @@ public class HR2_Competency_ManagementController implements Initializable {
         tbl_Skillsets_related_to_Jobs.getItems().clear();
 
         ObservableList<HR2_Competency_ManagementClass> hr2jc = FXCollections.observableArrayList();
-
+         
+         try {
             for (Object d : skills) {
                 HashMap hm1 = (HashMap) d;
                 //RS
                 hm1.get("skill_id");
                 hm1.get("skill");
                 hm1.get("skill_description");
-
+ 
                 hr2jc.add(
                         new HR2_Competency_ManagementClass(
                                 String.valueOf(hm1.get("skill_id")),
                                 String.valueOf(hm1.get("skill")),
                                 String.valueOf(hm1.get("skill_description"))
                         ));
+ 
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+ 
+        tbl_Skillsets_related_to_Jobs.setItems(hr2jc);
     
-           hr2hmc = new HR2_Competency_Management();
-           
-           
-                        try
 
-                        {
-                                 
-                                  List listSkills = hr2hmc.where(new Object[][]{
-                                      {"job_id", "like", "%" + txt_Search_Jobs.getText() +  "%"}
-                                  }).get();
-                                  
-
-                                 /* 
-                                  
-                                        {"job_id", "like", " (SELECT id from tbl_jobs WHERE id = 1)"}
-                                  
-
-                                    */
-                                 //SearchJobs(txt_Search_Jobs.getText());
-                                  SearchRelatedSkills(listSkills);
-
-
-                        }catch(Exception e)
-                        {
-                             e.printStackTrace();
-                        }}
-           
-   }
-
-
+    }
 
     //Display Data
     private void loadData() {
@@ -431,16 +395,14 @@ public class HR2_Competency_ManagementController implements Initializable {
 
             }
 
-           
             tbl_Job_Skillsets.setItems(hr2jc);
             tbl_Skillsets_related_to_Jobs.setItems(hmc);
 
         } catch (Exception e) {
             System.out.println(e);
         }
-       
-    }
 
+    }
 
     public void Save() {
         HR2_Competency_Management tm = new HR2_Competency_Management();
