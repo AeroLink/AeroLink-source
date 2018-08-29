@@ -56,6 +56,13 @@ public class RouteConfig {
         {"core2SR","/FXMLS/Core2/ScheduleRates.fxml"},
         {"core2SOP","/FXMLS/Core2/StandardOperationalProcedure.fxml"},
         {"core2CRM","/FXML/Core2/CustomerRelationshipManagement.fxml"},
+        
+        //Core1   
+        {"core1_booking","/FXMLS/core1/Core1_booking.fxml"},
+        {"core1pom","/FXMLS/core1/Core1_pom.fxml"},
+        {"core1consol","/FXMLS/core1/Core1_consol.fxml"},
+        {"core1mawb","/FXMLS/core1/Core1_mawb.fxml"},
+        {"core1sf","/FXML/core1/Core1_shipment.fxml"},
            
             
         //USM

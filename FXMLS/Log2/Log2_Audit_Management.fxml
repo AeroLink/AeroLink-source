@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
+<?import com.jfoenix.controls.JFXBadge?>
+<?import com.jfoenix.controls.JFXColorPicker?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXDialog?>
+<?import com.jfoenix.controls.JFXDialogLayout?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXDrawersStack?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141">
+<AnchorPane id="AnchorPane" prefHeight="597.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="237.0" layoutY="183.0" text="Audit Management" />
+      <JFXBadge layoutX="103.0" layoutY="269.0" prefHeight="126.0" prefWidth="163.0" />
+      <JFXColorPicker layoutX="142.0" layoutY="30.0" />
+      <JFXComboBox layoutX="128.0" layoutY="85.0" prefHeight="25.0" prefWidth="109.0" />
+      <JFXDatePicker layoutX="155.0" layoutY="126.0" />
+      <JFXDialog prefHeight="70.0" prefWidth="109.0">
+         <children>
+            <JFXDialogLayout />
+         </children>
+      </JFXDialog>
+      <JFXDrawer layoutX="429.0" layoutY="29.0" prefHeight="95.0" prefWidth="109.0">
+         <children>
+            <JFXDrawersStack prefHeight="95.0" prefWidth="88.0" />
+         </children>
+      </JFXDrawer>
    </children>
 </AnchorPane>

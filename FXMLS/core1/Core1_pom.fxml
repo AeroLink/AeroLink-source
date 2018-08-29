@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="684.0" prefWidth="1111.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.core1.Core1_pomController">
+   <children>
+      <AnchorPane fx:id="mainPane" layoutX="-1.0" layoutY="96.0" prefHeight="588.0" prefWidth="1156.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <AnchorPane layoutX="14.0" layoutY="-6.0" prefHeight="56.0" prefWidth="1200.0" style="-fx-background-color: #10102c;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="14.0" layoutY="9.0" prefHeight="38.0" prefWidth="343.0" text="Purchase Order Management" textFill="#f5f5f5">
+               <font>
+                  <Font size="26.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+         </children>
+      </AnchorPane>
+      <JFXButton layoutY="56.0" onAction="#load_entry" prefHeight="39.0" prefWidth="386.0" ripplerFill="WHITE" stylesheets="@../../Assets/css/pom.css" text="Purchase Entry">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="393.0" layoutY="56.0" onAction="#load_summary" prefHeight="39.0" prefWidth="343.0" ripplerFill="WHITE" stylesheets="@../../Assets/css/pom.css" text="Summary / Update Status">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
