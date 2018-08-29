@@ -149,7 +149,7 @@
                               <Font name="Lato Regular" size="13.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextField fx:id="txt_Search_Jobs" layoutX="14.0" layoutY="31.0" maxWidth="346.0" minWidth="156.0" onKeyTyped="#SearchJobs" prefHeight="32.0" prefWidth="346.0" promptText="Search">
+                        <JFXTextField fx:id="txt_Search_Jobs" layoutX="14.0" layoutY="31.0" maxWidth="346.0" minWidth="156.0" onKeyReleased="#SearchJobs" prefHeight="32.0" prefWidth="346.0" promptText="Search">
                            <font>
                               <Font name="Lato Regular" size="14.0" />
                            </font>
