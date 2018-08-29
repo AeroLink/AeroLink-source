@@ -132,21 +132,6 @@ public class HR2_Training_ManagementController implements Initializable {
     }    
     private void DisplayData()
     {
-<<<<<<< HEAD
-        emp_id.setCellValueFactory(new PropertyValueFactory<>("emp_id"));
-        emp_name.setCellValueFactory(new PropertyValueFactory<>("emp_name"));
-        job_position.setCellValueFactory(new PropertyValueFactory<>("job_position"));
-        title.setCellValueFactory(new PropertyValueFactory<>("title"));
-        trainor.setCellValueFactory(new PropertyValueFactory<>("trainor"));
-        tbl_type_of_training.setCellValueFactory(new PropertyValueFactory<>("tbl_type_of_training"));
-        location.setCellValueFactory(new PropertyValueFactory<>("location"));
-        date_start.setCellValueFactory(new PropertyValueFactory<>("date_start"));
-        date_end.setCellValueFactory(new PropertyValueFactory<>("date_end"));
-        time_start.setCellValueFactory(new PropertyValueFactory<>("time_start"));
-        time_end.setCellValueFactory(new PropertyValueFactory<>("time_end"));
-        budget_cost.setCellValueFactory(new PropertyValueFactory<>("budget_cost"));
-        organizer.setCellValueFactory(new PropertyValueFactory<>("organizer"));
-=======
         col_emp_id.setCellValueFactory(new PropertyValueFactory<>("emp_id"));
            col_emp_name.setCellValueFactory(new PropertyValueFactory<>("emp_name"));
               col_job_position.setCellValueFactory(new PropertyValueFactory<>("job_position"));
@@ -160,8 +145,6 @@ public class HR2_Training_ManagementController implements Initializable {
                         col_time_end.setCellValueFactory(new PropertyValueFactory<>("time_end"));
                             col_budget_cost.setCellValueFactory(new PropertyValueFactory<>("budget_cost"));
                              col_organizer.setCellValueFactory(new PropertyValueFactory<>("organizer"));
->>>>>>> 6634ad01e80c1cab3e552daa47b308f35291d7af
-                                        
     }
     
     private void loadData()
