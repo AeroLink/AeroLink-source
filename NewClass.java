@@ -29,7 +29,6 @@ public class NewClass {
         
         //initialize DB Connection
         db.startConnection();
-        
         //Please, Don't mess up > < ! .. 
         //God Bless this Code ..
         
