@@ -15,9 +15,9 @@ public class DatabaseConfig {
     
     public static String PROVIDER = "mysql";
     public static String IP = "localhost";
-    public static String PORT = "3306";
+    public static String PORT = "3308";
     public static String DATABASE = "aerolink";
     public static String USER = "root";
-    public static String PASSWORD = "";
+    public static String PASSWORD = "adminroot";
  
 }

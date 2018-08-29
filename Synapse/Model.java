@@ -366,6 +366,7 @@ public class Model {
      * @return
      */
     public Model join(JOIN joinProc, String table2, String table2_key, String logical_operator, String table1_key) {
+        
         this.joinConstruct += joinProc + " JOIN " + table2 + " ON " + table2 + "." + table2_key +  " " + logical_operator + " " + Session.table + "." + table1_key + " ";
         this.joined = true;
         return this;
