@@ -5,10 +5,7 @@ import Model.Users;
 import Synapse.Crypt;
 import Synapse.DB.MySql;
 import Synapse.Database;
-<<<<<<< HEAD
-=======
 import Synapse.Model;
->>>>>>> 6634ad01e80c1cab3e552daa47b308f35291d7af
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,15 +33,6 @@ public class NewClass {
         //Please, Don't mess up > < ! .. 
         //God Bless this Code ..
         
-<<<<<<< HEAD
-        List list = u.where("id", "like", "%1%").get();
-        
-        System.out.println(Arrays.asList(list));
-//        
-//        u.update(new Object[][] {
-//            {"username", "admin"}
-//        }).where("id", "=", "19").executeUpdate();
-=======
         UserPermissions up = new UserPermissions();
         List list = up
                 .join(Model.JOIN.INNER, "tbl_users", "id", "=", "user_id")
@@ -52,7 +40,6 @@ public class NewClass {
                 .get("tbl_users.id", "GROUP_CONCAT(tbl_permissions.permission) as permissions");
         
         System.out.println(Arrays.asList(list));
->>>>>>> 6634ad01e80c1cab3e552daa47b308f35291d7af
 
         
     }
