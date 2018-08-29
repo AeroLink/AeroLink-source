@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="CRM1" prefHeight="325.0" prefWidth="493.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Core2.crm.CRMtbLocalController">
+   <children>
+      <Label layoutX="84.0" layoutY="42.0" text="Location">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="337.0" layoutY="42.0" text="Total">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="52.0" layoutY="99.0" prefHeight="30.0" prefWidth="137.0" style="-fx-background-color: #34A853;" textAlignment="CENTER" textFill="#f2efef">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="52.0" layoutY="143.0" prefHeight="30.0" prefWidth="137.0" style="-fx-background-color: #34A853;" textAlignment="CENTER" textFill="#f2efef">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="52.0" layoutY="184.0" prefHeight="30.0" prefWidth="137.0" style="-fx-background-color: #34A853;" textAlignment="CENTER" textFill="#f2efef">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="293.0" layoutY="97.0" prefHeight="30.0" prefWidth="137.0" style="-fx-background-color: #34A853;" textAlignment="CENTER" textFill="#f2efef">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="293.0" layoutY="141.0" prefHeight="30.0" prefWidth="137.0" style="-fx-background-color: #34A853;" textAlignment="CENTER" textFill="#f2efef">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="293.0" layoutY="182.0" prefHeight="30.0" prefWidth="137.0" style="-fx-background-color: #34A853;" textAlignment="CENTER" textFill="#f2efef">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

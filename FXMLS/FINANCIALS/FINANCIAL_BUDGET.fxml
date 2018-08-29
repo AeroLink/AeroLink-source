@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="id_budget" prefHeight="713.0" prefWidth="993.0" style="-fx-background-color: #E1E8ED;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane prefHeight="713.0" prefWidth="993.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Allocation">
+            <content>
+              <AnchorPane disable="true" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="722.0" layoutY="146.0" text="Allocation no" />
+                        <Label layoutX="111.0" layoutY="135.0" text="Date" />
+                        <Label layoutX="96.0" layoutY="195.0" text="Particulars" />
+                        <Label layoutX="820.0" layoutY="142.0" prefHeight="21.0" prefWidth="40.0" style="-fx-border-color: black;" />
+                        <JFXDatePicker layoutX="172.0" layoutY="128.0" />
+                        <JFXTextArea layoutX="172.0" layoutY="195.0" maxWidth="690.0" minWidth="690.0" prefHeight="92.0" prefWidth="690.0" />
+                        <TableView layoutX="173.0" layoutY="374.0" prefHeight="200.0" prefWidth="689.0">
+                          <columns>
+                            <TableColumn prefWidth="118.0" text="Code" />
+                            <TableColumn prefWidth="388.0" text="Account Title" />
+                              <TableColumn prefWidth="181.0" text="Amount" />
+                          </columns>
+                        </TableView>
+                        <Label layoutX="65.0" layoutY="39.0" text="Budget">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="127.0" layoutY="28.0" prefHeight="44.0" prefWidth="174.0" style="-fx-border-color: green;" />
+                        <JFXComboBox layoutX="217.0" layoutY="314.0" prefHeight="25.0" prefWidth="157.0" />
+                        <Label layoutX="175.0" layoutY="318.0" text="Code" />
+                        <JFXTextField disable="true" focusColor="#308a42" layoutX="488.0" layoutY="311.0" unFocusColor="GREEN" />
+                        <Label layoutX="403.0" layoutY="318.0" text="Account Title" />
+                        <Label layoutX="652.0" layoutY="318.0" text="Amount" />
+                        <JFXButton layoutX="182.0" layoutY="596.0" prefHeight="35.0" prefWidth="139.0" style="-fx-background-color: #34A853;" text="Save" textFill="WHITE" />
+                        <ImageView fitHeight="25.0" fitWidth="29.0" layoutX="198.0" layoutY="601.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Assets/icons8_Save_30px_1.png" />
+                           </image>
+                        </ImageView>
+                        <JFXTextField layoutX="711.0" layoutY="311.0" />
+                        <JFXTextField layoutX="715.0" layoutY="595.0" maxWidth="142.0" minWidth="89.0" prefHeight="37.0" prefWidth="142.0" promptText="Total" style="-fx-border-color: green;" unFocusColor="GREEN" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Budget Request">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+            <Tab text="Reports">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

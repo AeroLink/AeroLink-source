@@ -152,14 +152,7 @@ public class HR2_Competency_ManagementController implements Initializable {
         try {
             for (Node c : d) {
                 if (c instanceof JFXTextField) {
-                    JFXTextField m = (JFXTextField) c;
-                    /*  validations v = new validations();
-                                                                             v.maximumChars(m, 25);
-                                                                             Alert alert = new Alert(Alert.AlertType.ERROR);
-                                                                                             alert.initStyle(StageStyle.UNDECORATED);
-                                                                                             alert.setTitle("Error");
-                                                                                             alert.setContentText("Maximum 25 Character only"); 
-                                                                                             alert.showAndWait();      */
+                    JFXTextField m = (JFXTextField) c;               
                     m.setDisable(true);
                 }
                 if (c instanceof JFXButton) {
@@ -347,7 +340,6 @@ public class HR2_Competency_ManagementController implements Initializable {
 
         ObservableList<HR2_Competency_ManagementClass> hr2jc = FXCollections.observableArrayList();
 
-        try {
             for (Object d : skills) {
                 HashMap hm1 = (HashMap) d;
                 //RS
@@ -361,15 +353,37 @@ public class HR2_Competency_ManagementController implements Initializable {
                                 String.valueOf(hm1.get("skill")),
                                 String.valueOf(hm1.get("skill_description"))
                         ));
+    
+           hr2hmc = new HR2_Competency_Management();
+           
+           
+                        try
 
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+                        {
+                                 
+                                  List listSkills = hr2hmc.where(new Object[][]{
+                                      {"job_id", "like", "%" + txt_Search_Jobs.getText() +  "%"}
+                                  }).get();
+                                  
 
-        tbl_Skillsets_related_to_Jobs.setItems(hr2jc);
+                                 /* 
+                                  
+                                        {"job_id", "like", " (SELECT id from tbl_jobs WHERE id = 1)"}
+                                  
 
-    }
+                                    */
+                                 //SearchJobs(txt_Search_Jobs.getText());
+                                  SearchRelatedSkills(listSkills);
+
+
+                        }catch(Exception e)
+                        {
+                             e.printStackTrace();
+                        }}
+           
+   }
+
+
 
     //Display Data
     private void loadData() {
@@ -419,13 +433,16 @@ public class HR2_Competency_ManagementController implements Initializable {
 
             }
 
+           
             tbl_Job_Skillsets.setItems(hr2jc);
             tbl_Skillsets_related_to_Jobs.setItems(hmc);
 
         } catch (Exception e) {
             System.out.println(e);
         }
+       
     }
+
 
     public void Save() {
         HR2_Competency_Management tm = new HR2_Competency_Management();

@@ -17,6 +17,15 @@ public class RouteConfig {
     public static String[][] links = {
         
         {"Main", "/FXMLS/MainDash.fxml"},
+        //coac
+       //{"id_coa", "/FXMLS/FINANCIALS/GENERAL_LEDGER/ChartOfAccounts.fxml"},
+        
+         //FINANCIALS
+        {"id_apr", "/FXMLS/FINANCIALS/FINANCIAL_APR.fxml"},
+        {"id_budget", "/FXMLS/FINANCIALS/FINANCIAL_BUDGET.fxml"},
+        {"id_collection", "/FXMLS/FINANCIALS/FINANCIAL_COLLECTION.fxml"},
+        {"id_disbursement", "/FXMLS/FINANCIALS/FINANCIAL_DISBURSEMENT.fxml"},
+        {"id_gl", "/FXMLS/FINANCIALS/FINANCIAL_GENERAL_LEDGER.fxml"},
         
         //HR1
         {"hr1RCC", "/FXMLS/HR1/HR1_Recruitment.fxml"},
@@ -58,7 +67,7 @@ public class RouteConfig {
         {"core2SP","/FXMLS/Core2/ServiceProvider.fxml"},
         {"core2SR","/FXMLS/Core2/ScheduleRates.fxml"},
         {"core2SOP","/FXMLS/Core2/StandardOperationalProcedure.fxml"},
-        {"core2CRM","/FXML/Core2/CustomerRelationshipManagement.fxml"},
+        {"core2CRM","/FXMLS/Core2/CustomerRelationshipManagement.fxml"},
            
             
         //USM

@@ -32,7 +32,8 @@ public class NewClass {
         
         //Please, Don't mess up > < ! .. 
         //God Bless this Code ..
-        
+
+
         UserPermissions up = new UserPermissions();
         List list = up
                 .join(Model.JOIN.INNER, "tbl_users", "id", "=", "user_id")
