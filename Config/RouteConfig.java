@@ -17,6 +17,15 @@ public class RouteConfig {
     public static String[][] links = {
         
         {"Main", "/FXMLS/MainDash.fxml"},
+        //coac
+       //{"id_coa", "/FXMLS/FINANCIALS/GENERAL_LEDGER/ChartOfAccounts.fxml"},
+        
+         //FINANCIALS
+        {"id_apr", "/FXMLS/FINANCIALS/FINANCIAL_APR.fxml"},
+        {"id_budget", "/FXMLS/FINANCIALS/FINANCIAL_BUDGET.fxml"},
+        {"id_collection", "/FXMLS/FINANCIALS/FINANCIAL_COLLECTION.fxml"},
+        {"id_disbursement", "/FXMLS/FINANCIALS/FINANCIAL_DISBURSEMENT.fxml"},
+        {"id_gl", "/FXMLS/FINANCIALS/FINANCIAL_GENERAL_LEDGER.fxml"},
         
         //HR1
         {"hr1RCC", "/FXMLS/HR1/HR1_Recruitment.fxml"},
@@ -47,14 +56,18 @@ public class RouteConfig {
         {"hr4chc", "/FXMLS/HR4/HR4_Core_Human_Capital_Management.fxml"},
         
         //Logistic2
-        {"log2vendorportal", "/FXMLS/Log2/Log2_Vendor_Portal.fxml"},
-        {"Log2AuditManagement", "/FXMLS/Log2/Log2_Audit_Management.fxml"},
+        {"log2vp", "/FXMLS/Log2/Log2_Vendor_Portal.fxml"},
+        {"log2am", "/FXMLS/Log2/Log2_Audit_Management.fxml"},
+        {"log2dt", "/FXMLS/Log2/Log2_Document_Tracking.fxml"},
+        {"log2fm", "/FXMLS/Log2/Log2_Fleet_Management.fxml"},
+        {"log2vr", "/FXMLS/Log2/Log2_Vehicle_Reservation.fxml"},
       
         //Core2    
         {"core2SN","/FXMLS/Core2/ServiceNetwork.fxml"},
         {"core2SP","/FXMLS/Core2/ServiceProvider.fxml"},
         {"core2SR","/FXMLS/Core2/ScheduleRates.fxml"},
         {"core2SOP","/FXMLS/Core2/StandardOperationalProcedure.fxml"},
+<<<<<<< HEAD
         {"core2CRM","/FXML/Core2/CustomerRelationshipManagement.fxml"},
         
         //Core1   
@@ -63,6 +76,9 @@ public class RouteConfig {
         {"core1consol","/FXMLS/core1/Core1_consol.fxml"},
         {"core1mawb","/FXMLS/core1/Core1_mawb.fxml"},
         {"core1sf","/FXML/core1/Core1_shipment.fxml"},
+=======
+        {"core2CRM","/FXMLS/Core2/CustomerRelationshipManagement.fxml"},
+>>>>>>> 6b280e19310fa651afadf627a1a1e4773021d4bf
            
             
         //USM

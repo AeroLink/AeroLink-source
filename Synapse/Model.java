@@ -25,13 +25,16 @@ public class Model {
     private String joinConstruct = "";
     private Boolean joined = false;
     
+    private String groupBy = "";
+    
     public enum JOIN {
         INNER, LEFT, RIGHT
     }
     
     private String whereConstruct = "";
     
-    private String finalQuery;
+    private String finalQuery = "SELECT * From " ;
+    
     private ArrayList<Object> finalValues = new ArrayList<Object>();
             
     private ArrayList<Object> whereValues = new ArrayList<>();
@@ -51,28 +54,45 @@ public class Model {
         return cols;
     }
     
+    public void Where_PrepareStatementSession(){
+        try {
+            this.pst = Session.INSTANCE.getConnection().prepareStatement(this.finalQuery);
+            for(int i = 1; i <= this.whereValues.size(); i++) {
+                System.out.println(this.whereValues.get(i - 1));
+                this.pst.setObject(i, this.whereValues.get(i - 1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public List get(){
-        
-        String Query = "SELECT * From " + Session.table + " ";
         
         if (Session.INSTANCE.hasConnection()) {
             
+            this.finalQuery += Session.table + " ";
             try {
                 
-                if(joined) {
-                    Query += this.joinConstruct;
+                if(this.joined) {
+                    this.finalQuery += this.joinConstruct;
                     this.joined = false;
                 }
                 
-                if(where){
-                    Query += "WHERE " + this.whereConstruct;
-                    this.pst = Session.INSTANCE.getConnection().prepareStatement(Query);
-                    for(int i = 1; i <= this.whereValues.size(); i++) {
-                        System.out.println(this.whereValues.get(i - 1));
-                        this.pst.setObject(i, this.whereValues.get(i - 1));
+                if(this.where){
+                    this.finalQuery += "WHERE " + this.whereConstruct;
+                    
+                    if(!"".equals(this.groupBy)) {
+                        this.finalQuery += this.groupBy;
                     }
+
+                    this.Where_PrepareStatementSession();
+                    
+                    
                 }else {
-                    this.pst = Session.INSTANCE.getConnection().prepareStatement(Query);
+                    if(!"".equals(this.groupBy)){
+                        this.finalQuery += this.groupBy;
+                    }
+                    this.pst = Session.INSTANCE.getConnection().prepareStatement(this.finalQuery);
                 }
                 
                 this.clear();
@@ -88,20 +108,32 @@ public class Model {
     
     public List get(String... cols){
         
-        String Query = "SELECT " + Helpers.combine(cols, ",") + " From " + Session.table + " ";
+        this.finalQuery = "SELECT " + Helpers.combine(cols, ",") + " From " + Session.table + " ";
         
         if (Session.INSTANCE.hasConnection()) {
             
             try {
                 
-                if(where){
-                    Query += "WHERE " + this.whereConstruct;
-                    this.pst = Session.INSTANCE.getConnection().prepareStatement(Query);
-                    for(int i = 1; i <= this.whereValues.size(); i++) {
-                        this.pst.setObject(i, this.whereValues.get(i - 1));
+                if(this.joined) {
+                    this.finalQuery += this.joinConstruct;
+                    this.joined = false;
+                }
+                
+                if(this.where){
+                    this.finalQuery += "WHERE " + this.whereConstruct;
+                    
+                    if(!"".equals(this.groupBy)) {
+                        this.finalQuery += this.groupBy;
                     }
+
+                    this.Where_PrepareStatementSession();
+                    
+                    
                 }else {
-                    this.pst = Session.INSTANCE.getConnection().prepareStatement(Query);
+                    if(!"".equals(this.groupBy)){
+                        this.finalQuery += this.groupBy;
+                    }
+                    this.pst = Session.INSTANCE.getConnection().prepareStatement(this.finalQuery);
                 }
                 
                 this.clear();
@@ -335,16 +367,29 @@ public class Model {
      */
     public Model join(JOIN joinProc, String table2, String table2_key, String logical_operator, String table1_key) {
         
-        this.joinConstruct = joinProc + " JOIN " + table2 + " ON " + table2 + "." + table2_key +  " " + logical_operator + " " + Session.table + "." + table1_key + " ";
+        this.joinConstruct += joinProc + " JOIN " + table2 + " ON " + table2 + "." + table2_key +  " " + logical_operator + " " + Session.table + "." + table1_key + " ";
         this.joined = true;
         return this;
     }
     
+    /**
+     *
+     * Usage : Model.groupBy(column).get();
+     * 
+     * @param column
+     * @return
+     */
+    public Model groupBy(String column) {
+    
+        this.groupBy += " GROUP BY " + column;
+        return this;
+    }
 
     public void clear(){
         this.whereValues = new ArrayList<>();
         this.whereConstruct = "";
         this.where = false;
+        this.finalQuery = "";
     }
     
 }

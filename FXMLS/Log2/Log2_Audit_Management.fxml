@@ -10,6 +10,7 @@
 <?import com.jfoenix.controls.JFXDrawersStack?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<<<<<<< HEAD
 <AnchorPane id="AnchorPane" prefHeight="597.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <JFXBadge layoutX="103.0" layoutY="269.0" prefHeight="126.0" prefWidth="163.0" />
@@ -26,5 +27,10 @@
             <JFXDrawersStack prefHeight="95.0" prefWidth="88.0" />
          </children>
       </JFXDrawer>
+=======
+<AnchorPane id="AnchorPane" prefHeight="847.0" prefWidth="985.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Log2.Log2_Audit_ManagementController">
+   <children>
+      <Label layoutX="499.0" layoutY="449.0" text="Audit Management" />
+>>>>>>> 6b280e19310fa651afadf627a1a1e4773021d4bf
    </children>
 </AnchorPane>
