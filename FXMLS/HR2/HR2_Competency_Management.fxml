@@ -30,7 +30,7 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <JFXTextField fx:id="txt_search_skills" layoutX="14.0" layoutY="14.0" maxWidth="471.0" minWidth="446.0" prefHeight="31.0" prefWidth="446.0" promptText="Search">
+                        <JFXTextField fx:id="txt_search_skills" layoutX="14.0" layoutY="14.0" maxWidth="471.0" minWidth="446.0" onKeyReleased="#Search_Skills" prefHeight="31.0" prefWidth="446.0" promptText="Search">
                            <font>
                               <Font name="Lato Regular" size="16.0" />
                            </font>
