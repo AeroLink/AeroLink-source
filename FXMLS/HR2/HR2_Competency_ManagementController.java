@@ -125,7 +125,6 @@ public class HR2_Competency_ManagementController implements Initializable {
 
                  btn_save.setOnMouseClicked(e -> Save());
 
-<<<<<<< HEAD
              @Override
             public void initialize(URL url, ResourceBundle rb) {
                   
@@ -166,7 +165,6 @@ public class HR2_Competency_ManagementController implements Initializable {
                                }
                        */
     public void DisableComponents()
-=======
                 DisableComponents();
 
                 DisplayData();
@@ -306,7 +304,6 @@ public class HR2_Competency_ManagementController implements Initializable {
                 }
     @FXML
     public void SearchSkills()
->>>>>>> 6634ad01e80c1cab3e552daa47b308f35291d7af
     {
            hr2hmc = new HR2_Competency_Management();
            
@@ -332,11 +329,8 @@ public class HR2_Competency_ManagementController implements Initializable {
 
                         }catch(Exception e)
                         {
-<<<<<<< HEAD
                              e.printStackTrace();
-=======
                             System.out.println(e);
->>>>>>> 9258e00b4ac8c48cf1042f7365f42be7c423bfae
                         }
            
    }
@@ -532,7 +526,6 @@ public class HR2_Competency_ManagementController implements Initializable {
                                    
                            
                                                             tm.insert(cm_data);
-<<<<<<< HEAD
                                                               tm.insert(jp);
                                                                 tm.insert(department);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -543,7 +536,6 @@ public class HR2_Competency_ManagementController implements Initializable {
                             }catch(Exception e)
                             {
                                                            e.printStackTrace();
-=======
                                         
                                                            Alert saved = new Alert(Alert.AlertType.INFORMATION);
                                                                   saved.setContentText("Saved");
@@ -553,7 +545,6 @@ public class HR2_Competency_ManagementController implements Initializable {
                             }catch(Exception e)
                             {
                                                                JOptionPane.showMessageDialog(null,e);
->>>>>>> 9258e00b4ac8c48cf1042f7365f42be7c423bfae
                             }
     }
      
