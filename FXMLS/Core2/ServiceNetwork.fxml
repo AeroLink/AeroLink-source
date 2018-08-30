@@ -28,7 +28,7 @@
                               <JFXTextField fx:id="bemail" focusColor="#34a853" labelFloat="true" layoutX="-1.0" layoutY="215.0" maxWidth="275.0" minWidth="273.0" prefHeight="40.0" prefWidth="275.0" promptText="Branch Email" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" />
                               <JFXTextField fx:id="bcontact" focusColor="#34a853" labelFloat="true" layoutY="278.0" maxWidth="275.0" minWidth="273.0" prefHeight="40.0" prefWidth="275.0" promptText="Branch Contact Number" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                               <JFXTextField fx:id="bmanager" focusColor="#34a853" labelFloat="true" layoutY="341.0" maxWidth="275.0" minWidth="273.0" prefHeight="40.0" prefWidth="275.0" promptText="Branch Manager" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                              <JFXButton fx:id="badd" layoutX="2.0" layoutY="390.0" onAction="#addBranch" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: #34A853;" text="ADD" textFill="WHITE">
+                              <JFXButton fx:id="badd" layoutX="2.0" layoutY="390.0" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: #34A853;" text="ADD" textFill="WHITE">
                                  <font>
                                     <Font size="15.0" />
                                  </font>

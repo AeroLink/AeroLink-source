@@ -23,6 +23,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -60,70 +61,96 @@ public class ServiceNetworkController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //initCol();
-        GenerateTable();
-    }    
-
-        /*private void initCol(){
+        badd.setOnMouseClicked(e -> Save());
+        DisplayData();
+        loadData();
+        
+    }  
+    // fxid and 
+    private void DisplayData(){
         codeCol.setCellValueFactory(new PropertyValueFactory<>("branch_code"));
         locationCol.setCellValueFactory(new PropertyValueFactory<>("branch_location"));
         addressCol.setCellValueFactory(new PropertyValueFactory<>("branch_address"));
         emailCol.setCellValueFactory(new PropertyValueFactory<>("branch_email"));
         contactCol.setCellValueFactory(new PropertyValueFactory<>("branch_contact"));
-        managerCol.setCellValueFactory(new PropertyValueFactory<>("branch_manager"));
-    }*/   
-
-    
-    public void GenerateTable(){
-        tableView.getColumns().removeAll(tableView.getColumns());
-        tableView.getItems().clear();
-        //System.out.println("anjmhgvjhynvjyuh");
-        
-        TableColumn<ServiceNetworkTableController, String> Bcode = new TableColumn<>("code");
-        TableColumn<ServiceNetworkTableController, String> Blocation = new TableColumn<>("location");
-        TableColumn<ServiceNetworkTableController, String> Baddress = new TableColumn<>("address");
-        TableColumn<ServiceNetworkTableController, String> Bemail = new TableColumn<>("email");
-        TableColumn<ServiceNetworkTableController, String> Bcontact = new TableColumn<>("contact");
-        TableColumn<ServiceNetworkTableController, String> Bmanager = new TableColumn<>("manager");
-        
-        Bcode.setCellValueFactory((TableColumn.CellDataFeatures<ServiceNetworkTableController, String> param) -> param.getValue().branch_code);
-        Blocation.setCellValueFactory((TableColumn.CellDataFeatures<ServiceNetworkTableController, String> param) -> param.getValue().branch_location);
-        Baddress.setCellValueFactory((TableColumn.CellDataFeatures<ServiceNetworkTableController, String> param) -> param.getValue().branch_address);
-        Bemail.setCellValueFactory((TableColumn.CellDataFeatures<ServiceNetworkTableController, String> param) -> param.getValue().branch_email);
-        Bcontact.setCellValueFactory((TableColumn.CellDataFeatures<ServiceNetworkTableController, String> param) -> param.getValue().branch_contact);
-        Bmanager.setCellValueFactory((TableColumn.CellDataFeatures<ServiceNetworkTableController, String> param) -> param.getValue().branch_manager);
-    
-        C2_Servicenetwork sn = new C2_Servicenetwork();
-        List row = sn.get();
-        
-        for(Object m : row){
-            HashMap map = (HashMap) m;
-            
-            String code = String.valueOf(map.get("branch_code"));
-            String location = String.valueOf(map.get("branch_location"));
-            String address = String.valueOf(map.get("branch_address"));
-            String email = String.valueOf(map.get("branch_email"));
-            String contact = String.valueOf(map.get("branch_contact"));
-            String manager = String.valueOf(map.get("branch_manager"));
-            
-            this.list.add(new ServiceNetworkTableController(code,location,address,email,contact,manager));
-        }
-    
-        tableView.setItems(this.list);
-        tableView.getColumns().addAll(Bcode,Blocation,Baddress,Bemail,Bcontact,Bmanager);
-        
+        managerCol.setCellValueFactory(new PropertyValueFactory<>("branch_manager"));                                        
     }
-    
-    /*private void loadData(){
-        C2_Servicenetwork database = new C2_Servicenetwork();
-        List list = database.get();
-        for(int i = 0; i < list.size(); i++){
-            System.out.println();
+    // SELECT QUERY
+    private void loadData(){
+        C2_Servicenetwork sv = new C2_Servicenetwork();
+        ObservableList<ServiceNetworkTableController> svtl = FXCollections.observableArrayList();
+        List b = sv.get();
+            
+            for(Object d : b){
+                HashMap hm = (HashMap) d;
+                
+                hm.get("branch_code");
+                hm.get("branch_location");
+                hm.get("branch_address");
+                hm.get("branch_email");
+                hm.get("branch_contact");
+                hm.get("branch_manager");
+                
+               svtl.add(
+               new ServiceNetworkTableController(
+                   String.valueOf(hm.get("branch_code")),
+                   String.valueOf(hm.get("branch_location")),
+                   String.valueOf(hm.get("branch_address")),
+                   String.valueOf(hm.get("branch_email")),
+                   String.valueOf(hm.get("branch_contact")),
+                   String.valueOf(hm.get("branch_manager"))
+                 ) );   
+            }
+            tableView.setItems(svtl);          
+    }
+    // INSERT QUERY
+    public void Save(){
+      C2_Servicenetwork sv = new C2_Servicenetwork();
+      // ginawa ko to para mag popup yung else sa loob ng try
+      String code = bcode.getText();
+      String location = blocation.getText();
+      String address = baddress.getText();
+      String email = bemail.getText();
+      String contact = bcontact.getText();
+      String manager = bmanager.getText();
+      
+        try{
+            String[][] sn_data = {
+                {"branch_code" , bcode.getText()},
+                {"branch_location" , blocation.getText()},
+                {"branch_address" , baddress.getText()},
+                {"branch_email" , bemail.getText()},
+                {"branch_contact" , bcontact.getText()},
+                {"branch_manager" , bmanager.getText()}
+            }; 
+                // Data Save kapag kumpleto yung nilagay sa mga JFXTextField
+                if(sv.insert(sn_data)){
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setHeaderText(null);
+                    alert.setContentText("Data Saved");
+                    alert.showAndWait();
+                    
+                    bcode.setText("");
+                    blocation.setText("");
+                    baddress.setText("");
+                    bemail.setText("");
+                    bcontact.setText("");
+                    bmanager.setText("");
+                }else{
+                    // Not Inserted kapag hindi kumpleto oh walang nilagay sa mga JFXTextField
+                    if((code.isEmpty() || location.isEmpty() || address.isEmpty() || email.isEmpty() || contact.isEmpty() || manager.isEmpty())){
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setHeaderText(null);
+                        alert.setContentText("Not Inserted");
+                        alert.showAndWait();
+              }
+            } 
+                
+        }catch(Exception e){
+            e.printStackTrace();
         }
-    }*/
-    
-    @FXML
-    private void addBranch(ActionEvent event) {
-        //insert
-        
+        // para sa realty update ng data
+        DisplayData();
+        loadData();
     }
 }

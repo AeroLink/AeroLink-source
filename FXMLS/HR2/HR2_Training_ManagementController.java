@@ -28,6 +28,7 @@ import FXMLS.HR2.ClassFiles.Training_ManagementClass;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.List;
+import javafx.scene.control.Alert;
 import javafx.scene.control.cell.PropertyValueFactory;
 /**
  * FXML Controller class
@@ -68,49 +69,48 @@ public class HR2_Training_ManagementController implements Initializable {
     private JFXTextField txt_budget_cost;
     @FXML
     private JFXTextField txt_organizer;
-    @FXML
-    private TableColumn<Training_ManagementClass, String> tbl_type_of_training;
+
     @FXML
     private JFXTextField txt_time_end;
     @FXML
     private JFXTextField txt_emp_id;
     @FXML
     private JFXTextField txt_trainor;
-
-
-    /**
-     * Initializes the controller class.
-     */
     
+    @FXML
+       private JFXComboBox<String> type_of_training;
     
      ObservableList<String> sdl = FXCollections.observableArrayList("Internal" , "External");
+     
     @FXML
-    private TableColumn<Training_ManagementClass, String> emp_id;
+    private TableColumn<Training_ManagementClass, String> col_emp_id;
     @FXML
-    private TableColumn<Training_ManagementClass, String> emp_name;
+    private TableColumn<Training_ManagementClass, String> col_emp_name;
     @FXML
-    private TableColumn<Training_ManagementClass, String> job_position;
+    private TableColumn<Training_ManagementClass, String> col_job_position;
     @FXML
-    private TableColumn<Training_ManagementClass, String> title;
+    private TableColumn<Training_ManagementClass, String> col_title;
     @FXML
-    private TableColumn<Training_ManagementClass, String> trainor;
+    private TableColumn<Training_ManagementClass, String> col_trainor;
     @FXML
-    private TableColumn<Training_ManagementClass, String> location;
+    private TableColumn<Training_ManagementClass, String> col_type_of_training;
     @FXML
-    private TableColumn<Training_ManagementClass, String> date_start;
+    private TableColumn<Training_ManagementClass, String> col_location;
     @FXML
-    private TableColumn<Training_ManagementClass, String> date_end;
+    private TableColumn<Training_ManagementClass, String> col_date_start;
     @FXML
-    private TableColumn<Training_ManagementClass, String> time_start;
+    private TableColumn<Training_ManagementClass, String> col_date_end;
     @FXML
-    private TableColumn<Training_ManagementClass, String> time_end;
+    private TableColumn<Training_ManagementClass, String> col_time_start;
     @FXML
-    private TableColumn<Training_ManagementClass, String> budget_cost;
+    private TableColumn<Training_ManagementClass, String> col_time_end;
     @FXML
-    private TableColumn<Training_ManagementClass, String> organizer;
+    private TableColumn<Training_ManagementClass, String> col_budget_cost;
     @FXML
-
-    private JFXComboBox<String> type_of_training;
+    private TableColumn<Training_ManagementClass, String> col_organizer;
+    @FXML
+    private JFXTextField txt_name_of_trainee11;
+   
     
        
     @Override
@@ -132,6 +132,7 @@ public class HR2_Training_ManagementController implements Initializable {
     }    
     private void DisplayData()
     {
+<<<<<<< HEAD
         emp_id.setCellValueFactory(new PropertyValueFactory<>("emp_id"));
         emp_name.setCellValueFactory(new PropertyValueFactory<>("emp_name"));
         job_position.setCellValueFactory(new PropertyValueFactory<>("job_position"));
@@ -145,6 +146,21 @@ public class HR2_Training_ManagementController implements Initializable {
         time_end.setCellValueFactory(new PropertyValueFactory<>("time_end"));
         budget_cost.setCellValueFactory(new PropertyValueFactory<>("budget_cost"));
         organizer.setCellValueFactory(new PropertyValueFactory<>("organizer"));
+=======
+        col_emp_id.setCellValueFactory(new PropertyValueFactory<>("emp_id"));
+           col_emp_name.setCellValueFactory(new PropertyValueFactory<>("emp_name"));
+              col_job_position.setCellValueFactory(new PropertyValueFactory<>("job_position"));
+                 col_title.setCellValueFactory(new PropertyValueFactory<>("title"));
+                    col_trainor.setCellValueFactory(new PropertyValueFactory<>("trainor"));
+                    col_type_of_training.setCellValueFactory(new PropertyValueFactory<>("type_of_training"));
+                       col_location.setCellValueFactory(new PropertyValueFactory<>("location"));
+                       col_date_start.setCellValueFactory(new PropertyValueFactory<>("date_start"));
+                       col_date_end.setCellValueFactory(new PropertyValueFactory<>("date_end"));
+                        col_time_start.setCellValueFactory(new PropertyValueFactory<>("time_start"));
+                        col_time_end.setCellValueFactory(new PropertyValueFactory<>("time_end"));
+                            col_budget_cost.setCellValueFactory(new PropertyValueFactory<>("budget_cost"));
+                             col_organizer.setCellValueFactory(new PropertyValueFactory<>("organizer"));
+>>>>>>> 6634ad01e80c1cab3e552daa47b308f35291d7af
                                         
     }
     
@@ -347,7 +363,11 @@ public class HR2_Training_ManagementController implements Initializable {
                            
                                                             tm.insert(cm_data);
                                         
-                                                           JOptionPane.showMessageDialog(null,"Saved");
+                                                           Alert saved = new Alert(Alert.AlertType.INFORMATION);
+                                                                  saved.setContentText("Saved");
+                                                                  saved.showAndWait();
+                                                                  
+                                                                  
                             }catch(Exception e)
                             {
                                                                JOptionPane.showMessageDialog(null,e);

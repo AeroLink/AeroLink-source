@@ -5,9 +5,6 @@
  */
 package Model;
 
-import java.sql.ResultSet;
-
-
 /**
  *
  * @author jpeg
@@ -24,13 +21,5 @@ public class C2_Servicenetwork extends Synapse.Model {
                 "branch_manager");
         setTable("tbl_core2_add_branch");
     }
-
-    public C2_Servicenetwork(String code, String location, String address, String email, String contact, String manager) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public ResultSet execQuery(String qu) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-    
 }
+

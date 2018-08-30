@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -15,42 +16,108 @@
    <children>
       <TabPane prefHeight="600.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
-          <Tab text="List of Provider">
+          <Tab text="Add Provider">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Pane focusTraversable="true" layoutX="24.0" layoutY="58.0" prefHeight="239.0" prefWidth="354.0" style="-fx-background-color: #FFFFFF;">
+                        <Pane layoutX="48.0" layoutY="51.0" prefHeight="470.0" prefWidth="1024.0" style="-fx-background-color: white;">
                            <children>
-                              <JFXTextField focusColor="#34a853" labelFloat="true" layoutY="30.0" maxWidth="350.0" minWidth="343.0" prefHeight="30.0" prefWidth="350.0" promptText="Provider Name:" />
-                              <JFXTextField focusColor="#34a853" labelFloat="true" layoutY="75.0" maxWidth="350.0" minWidth="343.0" prefHeight="30.0" prefWidth="350.0" promptText="Location:" />
-                              <JFXTextField focusColor="#34a853" labelFloat="true" layoutX="1.0" layoutY="118.0" maxWidth="350.0" minWidth="343.0" prefHeight="30.0" prefWidth="350.0" promptText="Contact Number:" />
-                              <JFXTextField focusColor="#34a853" labelFloat="true" layoutY="164.0" maxWidth="350.0" minWidth="343.0" prefHeight="30.0" prefWidth="350.0" promptText="Email:" />
-                              <JFXTextField focusColor="#34a853" labelFloat="true" layoutX="2.0" layoutY="210.0" maxWidth="350.0" minWidth="343.0" prefHeight="30.0" prefWidth="350.0" promptText="Website:" />
+                              <JFXButton fx:id="padd" layoutX="792.0" layoutY="425.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #34A853;" text="ADD " textFill="#eeecec">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#eeeaea" glyphName="PLUS" size="20" />
+                                 </graphic>
+                              </JFXButton>
+                              <Label alignment="CENTER" layoutX="641.0" layoutY="205.0" prefHeight="30.0" prefWidth="107.0" text="Services" textFill="#34a853" underline="true">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#34a853" glyphName="ROCKET" size="20" />
+                                 </graphic>
+                              </Label>
+                              <JFXCheckBox fx:id="pdoor" layoutX="691.0" layoutY="238.0" prefHeight="30.0" prefWidth="160.0" text="Door to Door" />
+                              <JFXCheckBox fx:id="ppickup" layoutX="691.0" layoutY="271.0" prefHeight="30.0" prefWidth="160.0" text="Pick Up" />
+                              <JFXCheckBox fx:id="pexpress" layoutX="691.0" layoutY="304.0" prefHeight="30.0" prefWidth="160.0" text="Express" />
+                              <Label alignment="CENTER" layoutX="641.0" layoutY="22.0" prefHeight="30.0" prefWidth="107.0" text="Country" textFill="#34a853" underline="true">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#34a853" glyphName="GLOBE" size="20" />
+                                 </graphic>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="641.0" layoutY="120.0" prefHeight="30.0" prefWidth="107.0" text="Region" textFill="#34a853" underline="true">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#34a853" glyphName="GLOBE" size="20" />
+                                 </graphic>
+                              </Label>
+                              <JFXTextField fx:id="pcountry" focusColor="#34a853" labelFloat="true" layoutX="694.0" layoutY="66.0" maxWidth="250.0" minWidth="154.0" prefHeight="30.0" prefWidth="250.0" promptText="Country" />
+                              <JFXTextField fx:id="pregion" focusColor="#34a853" labelFloat="true" layoutX="694.0" layoutY="165.0" maxWidth="250.0" minWidth="154.0" prefHeight="30.0" prefWidth="250.0" promptText="Region" />
+                              <JFXTextField fx:id="pother" focusColor="#34a853" labelFloat="true" layoutX="692.0" layoutY="350.0" maxWidth="250.0" minWidth="154.0" prefHeight="30.0" prefWidth="250.0" promptText="Other Services" />
+                              <JFXTextField fx:id="phousenumber" focusColor="#34a853" labelFloat="true" layoutX="377.0" layoutY="69.0" maxWidth="250.0" minWidth="163.0" prefHeight="30.0" prefWidth="250.0" promptText="House Number" />
+                              <Label alignment="CENTER" layoutX="338.0" layoutY="25.0" prefHeight="30.0" prefWidth="107.0" text="Location" textFill="#34a853" underline="true">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#34a853" glyphName="MAP" size="20" />
+                                 </graphic>
+                              </Label>
+                              <JFXTextField fx:id="pstreet" focusColor="#34a853" labelFloat="true" layoutX="376.0" layoutY="116.0" maxWidth="250.0" minWidth="248.0" prefHeight="30.0" prefWidth="250.0" promptText="Street" />
+                              <JFXTextField fx:id="pbarangay" focusColor="#34a853" labelFloat="true" layoutX="377.0" layoutY="163.0" maxWidth="250.0" minWidth="246.0" prefHeight="30.0" prefWidth="250.0" promptText="Barangay" />
+                              <JFXTextField fx:id="pcity" focusColor="#34a853" labelFloat="true" layoutX="376.0" layoutY="212.0" maxWidth="250.0" minWidth="208.0" prefHeight="30.0" prefWidth="250.0" promptText="City / Monicipality" />
+                              <JFXTextField fx:id="pprovince" focusColor="#34a853" labelFloat="true" layoutX="376.0" layoutY="259.0" maxWidth="250.0" minWidth="226.0" prefHeight="30.0" prefWidth="250.0" promptText="Province" />
+                              <JFXTextField fx:id="pzip" focusColor="#34a853" labelFloat="true" layoutX="377.0" layoutY="306.0" maxWidth="250.0" minWidth="203.0" prefHeight="30.0" prefWidth="250.0" promptText="Zip Code" />
+                              <JFXTextField fx:id="pcompany" focusColor="#34a853" labelFloat="true" layoutX="60.0" layoutY="60.0" maxWidth="343.0" minWidth="248.0" prefHeight="30.0" prefWidth="250.0" promptText="Company Name" />
+                              <Label alignment="CENTER" layoutX="31.0" layoutY="16.0" prefHeight="30.0" prefWidth="107.0" text="Company" textFill="#34a853" underline="true">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#34a853" glyphName="BUILDING" size="20" />
+                                 </graphic>
+                              </Label>
+                              <JFXTextField fx:id="pcontact" focusColor="#34a853" labelFloat="true" layoutX="61.0" layoutY="151.0" maxWidth="250.0" minWidth="239.0" prefHeight="30.0" prefWidth="250.0" promptText="Contact Number" />
+                              <JFXTextField fx:id="pemail" focusColor="#34a853" labelFloat="true" layoutX="62.0" layoutY="194.0" maxWidth="250.0" minWidth="247.0" prefHeight="31.0" prefWidth="250.0" promptText="Email" />
+                              <Label alignment="CENTER" layoutX="31.0" layoutY="105.0" prefHeight="30.0" prefWidth="107.0" text="Contact" textFill="#34a853" underline="true">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#34a853" glyphName="PHONE" size="20" />
+                                 </graphic>
+                              </Label>
+                              <JFXTextField fx:id="pusername" focusColor="#34a853" labelFloat="true" layoutX="62.0" layoutY="307.0" maxWidth="250.0" minWidth="236.0" prefHeight="30.0" prefWidth="250.0" promptText="Username" />
+                              <Label alignment="CENTER" layoutX="35.0" layoutY="251.0" prefHeight="30.0" prefWidth="107.0" text="Account" textFill="#34a853" underline="true">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#34a853" glyphName="USER" size="20" />
+                                 </graphic>
+                              </Label>
+                              <JFXPasswordField fx:id="ppassword" focusColor="#34a853" labelFloat="true" layoutX="62.0" layoutY="356.0" maxWidth="337.0" minWidth="247.0" prefHeight="30.0" prefWidth="250.0" promptText="Password" />
                            </children>
                         </Pane>
-                        <TableView layoutX="407.0" layoutY="58.0" prefHeight="489.0" prefWidth="698.0">
-                          <columns>
-                            <TableColumn prefWidth="75.0" text="Provider Name" />
-                              <TableColumn prefWidth="75.0" text="Location" />
-                              <TableColumn prefWidth="75.0" text="Contact" />
-                              <TableColumn prefWidth="75.0" text="Email" />
-                              <TableColumn prefWidth="75.0" text="Website" />
-                          </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
-                        <JFXButton layoutX="228.0" layoutY="303.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #34A853;" text="ADD " textFill="#eeecec">
+                        <JFXButton fx:id="btn_registered" layoutX="48.0" layoutY="14.0" onAction="#listprovider" prefHeight="31.0" prefWidth="246.0" style="-fx-background-color: #34A853;" text="LIST OF REGISTERED" textFill="#eeecec">
                            <font>
                               <Font size="15.0" />
                            </font>
+                           <graphic>
+                              <FontAwesomeIconView fill="#eeeaea" glyphName="LIST" size="20" />
+                           </graphic>
                         </JFXButton>
-                        <FontAwesomeIconView fill="#eeeaea" glyphName="PLUS" layoutX="244.0" layoutY="326.0" size="20" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Untitled Tab 2">
+          <Tab text="List of Provider">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
             </content>

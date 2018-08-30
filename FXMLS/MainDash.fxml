@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="847.0" prefWidth="1216.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.MainDashController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="847.0" prefWidth="1216.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.MainDashController">
    <left>
       <AnchorPane prefHeight="841.0" prefWidth="231.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
          <children>
@@ -116,11 +116,11 @@
                                     <JFXButton id="hr1RCC" alignment="TOP_LEFT" onAction="#triggerButton" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Asset Management" />
                                     <JFXButton id="hr1RCC" alignment="TOP_LEFT" onAction="#triggerButton" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Procurement" />
                                     <Separator prefHeight="14.0" prefWidth="200.0" />
-                                    <JFXButton id="hr1RCC" alignment="TOP_LEFT" onAction="#triggerButton" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Audit Management" />
-                                    <JFXButton id="hr1RCC" alignment="TOP_LEFT" onAction="#triggerButton" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Vendor Portal" />
-                                    <JFXButton id="hr1RCC" alignment="TOP_LEFT" onAction="#triggerButton" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Fleet Management" />
-                                    <JFXButton id="hr1RCC" alignment="TOP_LEFT" onAction="#triggerButton" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Vehice Management" />
-                                    <JFXButton id="hr1RCC" alignment="TOP_LEFT" onAction="#triggerButton" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Document Tracking System" />
+                                    <JFXButton id="log2am" alignment="TOP_LEFT" onAction="#triggerButton" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="Audit Management" />
+                                    <JFXButton id="log2vp" alignment="TOP_LEFT" onAction="#triggerButton" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="Vendor Portal" />
+                                    <JFXButton id="log2fm" alignment="TOP_LEFT" onAction="#triggerButton" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="Fleet Management" />
+                                    <JFXButton id="log2vr" alignment="TOP_LEFT" onAction="#triggerButton" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="Vehice Reservation" />
+                                    <JFXButton id="log2dt" alignment="TOP_LEFT" onAction="#triggerButton" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="Document Tracking System" />
                                  </children>
                               </VBox>
                            </children></AnchorPane>
