@@ -35,18 +35,6 @@ public class NewClass {
         
         //List list = u.where("id", "like", "%1%").get();
         
-        List list = u.where("id", "like", "%1%").get();
-        
-        System.out.println(Arrays.asList(list));
-//        
-//        u.update(new Object[][] {
-//            {"username", "admin"}
-//        }).where("id", "=", "19").executeUpdate();
-        System.out.println(Arrays.asList(list));
-//        
-//        u.update(new Object[][] {
-//            {"username", "admin"}
-//        }).where("id", "=", "19").executeUpdate();
         UserPermissions up = new UserPermissions();
         List list = up
                 .join(Model.JOIN.INNER, "tbl_users", "id", "=", "user_id")
