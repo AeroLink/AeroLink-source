@@ -19,7 +19,7 @@ public class HR2_Jobs extends Synapse.Model{
             {
                     
                       setColumns("job_id","title","description");
-                    setTable("tbl_jobs");
+                    setTable("tbl_hr4_jobs");
     
                     
 

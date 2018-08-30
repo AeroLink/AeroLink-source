@@ -32,9 +32,6 @@ public class NewClass {
         
         //Please, Don't mess up > < ! .. 
         //God Bless this Code ..
-        
-        //List list = u.where("id", "like", "%1%").get();
-        
         UserPermissions up = new UserPermissions();
         List list = up
                 .join(Model.JOIN.INNER, "tbl_users", "id", "=", "user_id")

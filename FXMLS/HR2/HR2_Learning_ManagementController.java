@@ -25,6 +25,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -45,6 +46,8 @@ public class HR2_Learning_ManagementController implements Initializable {
     private JFXTextField txt_course_description;
     @FXML
     private JFXTextField txt_course_created_by;
+    @FXML
+    private JFXTextField txt_number_of_questions;
     @FXML
     private TableView<?> tbl_course_data;
     @FXML
@@ -81,6 +84,37 @@ public class HR2_Learning_ManagementController implements Initializable {
     private MenuItem menu_update_choice;
     @FXML
     private MenuItem menu_delete_choice;
+    @FXML
+    private TableColumn<?, ?> col_course_id_pk;
+    @FXML
+    private TableColumn<?, ?> col_course_title;
+    @FXML
+    private TableColumn<?, ?> col_course_description;
+    @FXML
+    private TableColumn<?, ?> col_created_by;
+    @FXML
+    private TableColumn<?, ?> col_number_of_questions;
+    @FXML
+    private TableColumn<?, ?> col_question_id_pk;
+    @FXML
+    private TableColumn<?, ?> col_question_number;
+    @FXML
+    private TableColumn<?, ?> col_question;
+    @FXML
+    private TableColumn<?, ?> col_choice_id_fk;
+    @FXML
+    private TableColumn<?, ?> col_course_id_fk1;
+    @FXML
+    private TableColumn<?, ?> col_choice_id_pk;
+    @FXML
+    private TableColumn<?, ?> col_choices;
+    @FXML
+    private TableColumn<?, ?> col_question_fk;
+    @FXML
+    private TableColumn<?, ?> col_couse_id_fk;
+    @FXML
+    private TableColumn<?, ?> col_is_checked;
+
 
     /**
      * Initializes the controller class.
@@ -95,9 +129,11 @@ public class HR2_Learning_ManagementController implements Initializable {
         DisableComponents();
         
         //for course section
-//        btn_new.setOnAction(e -> New());
+        menu_add_new_course.setOnAction(e -> New());
+        
         item_add_new_question.setOnAction(e -> Open_LM_Questions());
-             
+        
+        DisableComponents();
         
     }
     
@@ -122,19 +158,12 @@ public class HR2_Learning_ManagementController implements Initializable {
 
     public void DisableComponents() {
 
-      /*  Node[] d = {       
+        Node[] d = {       
                 
-                        btn_edit,
-                        btn_save,
-                        btn_update,
-                        btn_delete,
-                        txt_emp_id,
-                        txt_emp_name,
+                        txt_course_id,
                         txt_course_title,
                         txt_course_description,
-                        txt_coordinator,
-                        txt_duration,
-                        txt_status
+                        txt_course_created_by
             
                 };
                         try
@@ -144,13 +173,13 @@ public class HR2_Learning_ManagementController implements Initializable {
                                     if(c instanceof JFXTextField)
                                     {
                                                 JFXTextField m = (JFXTextField) c;
-                                                    validations v = new validations();
+                                            /*        validations v = new validations();
                                                          v.maximumChars(m, 25);
                                                          Alert alert = new Alert(Alert.AlertType.ERROR);
                                                                          alert.initStyle(StageStyle.UNDECORATED);
                                                                          alert.setTitle("Error");
                                                                          alert.setContentText("Maximum 25 Character only"); 
-                                                                         alert.showAndWait();             
+                                                                         alert.showAndWait();     */        
                                         m.setDisable(true);
                                     }
                                     if(c instanceof JFXButton)
@@ -176,31 +205,22 @@ public class HR2_Learning_ManagementController implements Initializable {
                         }catch(Exception e)
                         {
                             JOptionPane.showMessageDialog(null, e);
-                        }*/
+                        }
         }
-    }
+   
 
     //TEMPORARY CODE //WILL FIX THE REDUNDANCY
-    /*    public void New()
+        public void New()
     {
           
         Node[] d = {
-                        
-                    
-                 
-                        txt_emp_id,
-                        txt_emp_name,
-                        btn_edit,
-                        btn_save,
-                        btn_update,
-                        btn_delete,
-                        txt_emp_id,
-                        txt_emp_name,
-                        txt_course_title,
-                        txt_course_description,
-                        txt_coordinator,
-                        txt_duration,
-                        txt_status
+
+                txt_course_id,
+                txt_course_title,
+                txt_course_description,
+                txt_course_created_by
+                
+                
                 };
                         try
                         {
@@ -235,7 +255,7 @@ public class HR2_Learning_ManagementController implements Initializable {
                         }
     }
     
-    public void Save()
+   /* public void Save()
     {
                    HR2_Learning_Management lm = new HR2_Learning_Management();
 
@@ -264,4 +284,4 @@ public class HR2_Learning_ManagementController implements Initializable {
     
      */
 
-
+ }
