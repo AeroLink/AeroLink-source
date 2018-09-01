@@ -10,17 +10,18 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="871.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.HR2_Competency_ManagementController">
    <children>
-      <TabPane layoutX="-2.0" layoutY="1.0" prefHeight="707.0" prefWidth="876.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="708.0" prefWidth="874.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Skills">
+          <Tab text="Set Skills">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tbl_Skills" layoutX="29.0" layoutY="256.0" prefHeight="194.0" prefWidth="797.0">
+                        <TableView fx:id="tbl_Skills" layoutX="25.0" layoutY="443.0" prefHeight="194.0" prefWidth="797.0">
                           <columns>
                             <TableColumn fx:id="col_skill_ID" prefWidth="75.0" text="Skill ID" />
                             <TableColumn fx:id="col_Skill" prefWidth="75.0" text="Skill" />
@@ -35,82 +36,90 @@
                               <Font name="Lato Regular" size="16.0" />
                            </font>
                         </JFXTextField>
-                        <Label layoutX="25.0" layoutY="76.0" prefHeight="27.0" prefWidth="47.0" text="Skill_ID">
-                           <font>
-                              <Font name="Lato Regular" size="13.0" />
-                           </font>
-                        </Label>
-                        <JFXTextField fx:id="txt_skill_id" layoutX="171.0" layoutY="76.0" maxWidth="185.0" minWidth="156.0" prefHeight="31.0" prefWidth="185.0">
-                           <font>
-                              <Font name="Lato Regular" size="13.0" />
-                           </font>
-                        </JFXTextField>
-                        <Label layoutX="25.0" layoutY="107.0" prefHeight="27.0" prefWidth="25.0" text="Skill">
-                           <font>
-                              <Font name="Lato Regular" size="13.0" />
-                           </font>
-                        </Label>
-                        <JFXTextField fx:id="txt_skill" layoutX="171.0" layoutY="107.0" maxWidth="184.0" minWidth="156.0" prefHeight="31.0" prefWidth="184.0">
-                           <font>
-                              <Font name="Lato Regular" size="13.0" />
-                           </font>
-                        </JFXTextField>
-                        <Label layoutX="25.0" layoutY="138.0" prefHeight="27.0" prefWidth="101.0" text="Skill_Description">
-                           <font>
-                              <Font name="Lato Regular" size="13.0" />
-                           </font>
-                        </Label>
-                        <JFXTextField fx:id="txt_skill_description" layoutX="171.0" layoutY="138.0" maxWidth="184.0" minWidth="156.0" prefHeight="31.0" prefWidth="184.0">
-                           <font>
-                              <Font name="Lato Regular" size="13.0" />
-                           </font>
-                        </JFXTextField>
-                        <JFXButton fx:id="btn_new" layoutX="29.0" layoutY="486.0" prefHeight="35.0" prefWidth="198.0" style="-fx-background-color: #00b359;" text="New" textFill="WHITE">
-                           <font>
-                              <Font name="Lato Regular" size="14.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </JFXButton>
-                        <JFXButton fx:id="btn_edit" layoutX="29.0" layoutY="535.0" prefHeight="35.0" prefWidth="198.0" style="-fx-background-color: #00b359;" text="Edit" textFill="WHITE">
-                           <font>
-                              <Font name="Lato Regular" size="14.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </JFXButton>
-                        <JFXButton fx:id="btn_save" layoutX="251.0" layoutY="486.0" prefHeight="35.0" prefWidth="198.0" style="-fx-background-color: #00b359;" text="Save" textFill="WHITE">
-                           <font>
-                              <Font name="Lato Regular" size="14.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </JFXButton>
-                        <JFXButton fx:id="btn_update" layoutX="251.0" layoutY="537.0" prefHeight="35.0" prefWidth="198.0" style="-fx-background-color: #00b359;" text="Update" textFill="WHITE">
-                           <font>
-                              <Font name="Lato Regular" size="14.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </JFXButton>
-                        <JFXButton fx:id="btn_delete" layoutX="485.0" layoutY="535.0" prefHeight="35.0" prefWidth="198.0" style="-fx-background-color: #00b359;" text="Delete" textFill="WHITE">
-                           <font>
-                              <Font name="Lato Regular" size="14.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </JFXButton>
-                        <Label layoutX="25.0" layoutY="170.0" prefHeight="27.0" prefWidth="78.0" text="Select Jobs">
-                           <font>
-                              <Font name="Lato Regular" size="13.0" />
-                           </font>
-                        </Label>
-                        <JFXComboBox fx:id="select_jobs" layoutX="177.0" layoutY="171.0" prefHeight="25.0" prefWidth="169.0" />
+                        <Pane layoutX="31.0" layoutY="104.0" prefHeight="293.0" prefWidth="334.0" style="-fx-border-color: #e0e0d1; -fx-background-color: #fff;">
+                           <children>
+                              <Label layoutX="16.0" layoutY="20.0" prefHeight="27.0" prefWidth="47.0" text="Skill_ID">
+                                 <font>
+                                    <Font name="Lato Regular" size="14.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="txt_skill_id" layoutX="12.0" layoutY="47.0" maxWidth="302.0" minWidth="156.0" prefHeight="32.0" prefWidth="297.0">
+                                 <font>
+                                    <Font name="Lato Regular" size="13.0" />
+                                 </font>
+                              </JFXTextField>
+                              <Label layoutX="16.0" layoutY="82.0" prefHeight="27.0" prefWidth="25.0" text="Skill">
+                                 <font>
+                                    <Font name="Lato Regular" size="14.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="txt_skill" layoutX="11.0" layoutY="103.0" maxWidth="300.0" minWidth="156.0" prefHeight="32.0" prefWidth="300.0">
+                                 <font>
+                                    <Font name="Lato Regular" size="13.0" />
+                                 </font>
+                              </JFXTextField>
+                              <Label layoutX="16.0" layoutY="140.0" prefHeight="27.0" prefWidth="109.0" text="Skill_Description">
+                                 <font>
+                                    <Font name="Lato Regular" size="14.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="txt_skill_description" layoutX="11.0" layoutY="167.0" maxWidth="300.0" minWidth="156.0" prefHeight="32.0" prefWidth="300.0">
+                                 <font>
+                                    <Font name="Lato Regular" size="13.0" />
+                                 </font>
+                              </JFXTextField>
+                              <Label layoutX="18.0" layoutY="202.0" prefHeight="27.0" prefWidth="78.0" text="Select Jobs">
+                                 <font>
+                                    <Font name="Lato Regular" size="14.0" />
+                                 </font>
+                              </Label>
+                              <JFXComboBox fx:id="select_jobs" layoutX="20.0" layoutY="229.0" prefHeight="25.0" prefWidth="283.0" />
+                           </children>
+                        </Pane>
+                        <Pane layoutX="393.0" layoutY="104.0" prefHeight="279.0" prefWidth="228.0" style="-fx-border-color: #e0e0d1; -fx-background-color: #fff;">
+                           <children>
+                              <JFXButton fx:id="btn_new" layoutX="15.0" layoutY="14.0" prefHeight="35.0" prefWidth="198.0" style="-fx-background-color: #00b359;" text="New" textFill="WHITE">
+                                 <font>
+                                    <Font name="Lato Regular" size="14.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                              <JFXButton fx:id="btn_save" layoutX="15.0" layoutY="122.0" prefHeight="35.0" prefWidth="198.0" style="-fx-background-color: #00b359;" text="Save" textFill="WHITE">
+                                 <font>
+                                    <Font name="Lato Regular" size="14.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                              <JFXButton fx:id="btn_update" layoutX="15.0" layoutY="177.0" prefHeight="35.0" prefWidth="198.0" style="-fx-background-color: #00b359;" text="Update" textFill="WHITE">
+                                 <font>
+                                    <Font name="Lato Regular" size="14.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                              <JFXButton fx:id="btn_delete" layoutX="15.0" layoutY="230.0" prefHeight="35.0" prefWidth="198.0" style="-fx-background-color: #00b359;" text="Delete" textFill="WHITE">
+                                 <font>
+                                    <Font name="Lato Regular" size="14.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                              <JFXButton fx:id="btn_edit" layoutX="15.0" layoutY="66.0" prefHeight="35.0" prefWidth="198.0" style="-fx-background-color: #00b359;" text="Edit" textFill="WHITE">
+                                 <font>
+                                    <Font name="Lato Regular" size="14.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                           </children>
+                        </Pane>
                      </children>
                   </AnchorPane>
             </content>

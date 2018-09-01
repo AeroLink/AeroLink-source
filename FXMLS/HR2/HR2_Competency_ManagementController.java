@@ -59,8 +59,7 @@ public class HR2_Competency_ManagementController implements Initializable {
     @FXML
     private JFXButton btn_new;
     @FXML
-    private JFXButton btn_edit;
-    @FXML
+  
     private JFXButton btn_save;
     @FXML
     private JFXButton btn_update;
@@ -113,6 +112,8 @@ public class HR2_Competency_ManagementController implements Initializable {
 
     HR2_Competency competency;
     HR2_Competency_Management hr2hmc;
+    @FXML
+    private JFXButton btn_edit;
 
     /**
      * Initializes the controller class.
@@ -177,14 +178,12 @@ public class HR2_Competency_ManagementController implements Initializable {
     public void New() {
 
         Node[] d = {
-            btn_edit,
             btn_save,
-            btn_update,
-            btn_delete,
-            txt_skill_id,
             txt_skill,
             txt_skill_description,
-            select_jobs
+            select_jobs,
+                
+                
 
         };
 
@@ -219,30 +218,40 @@ public class HR2_Competency_ManagementController implements Initializable {
     public void Search_Skills() {
 
         HR2_Competency_Management hr2hmc = new HR2_Competency_Management();
-        HR2_Competency competency = new HR2_Competency();
-        HR2_Jobs j = new HR2_Jobs();
 
-            try {
- 
-                List listSkills = hr2hmc.where(new Object[][]{
-                                      {"job_id", "like", "%" + txt_Search_Jobs.getText() +  "%"}
-                                  }).get();
-                               
-            
-                                  
-                                  
-                                     //  {"job_id", "like", " (SELECT id from tbl_jobs WHERE id = 1)"}
-                                  
-             
-           
-            //SearchRelatedSkills(listSkills);
- 
-                             
+        try {
+
+            List listSkills = hr2hmc.where(new Object[][]{
+                {"skill_id", "like", "%" + txt_Search_Jobs.getText() + "%"}
+            }).get();
+
+            ObservableList<HR2_Competency_ManagementClass> hr2jc = FXCollections.observableArrayList();
+
+            for (Object d : listSkills) {
+                HashMap hm1 = (HashMap) d;
+                //RS
+                hm1.get("skill_id");
+                hm1.get("skill");
+                hm1.get("skill_description");
+
+                hr2jc.add(
+                        new HR2_Competency_ManagementClass(
+                                String.valueOf(hm1.get("skill_id")),
+                                String.valueOf(hm1.get("skill")),
+                                String.valueOf(hm1.get("skill_description"))
+                        ));
+
+                tbl_Skills.getItems().clear();
+                tbl_Skills.setItems(hr2jc);
+                System.out.println(listSkills);
+              
+
+            }
         } catch (Exception e) {
             System.out.println(e);
         }
 
-     
+        //  {"job_id", "like", " (SELECT id from tbl_jobs WHERE id = 1)"}
     }
 
     //Initializing data
@@ -252,7 +261,7 @@ public class HR2_Competency_ManagementController implements Initializable {
         col_skill_ID.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Competency_ManagementClass, String> param) -> param.getValue().Skill_ID);
         col_Skill.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Competency_ManagementClass, String> param) -> param.getValue().Skill);
         col_Skill_Description.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Competency_ManagementClass, String> param) -> param.getValue().Skill_Description);
-
+        
         //Job SkillSets
         col_job_id.setCellValueFactory((TableColumn.CellDataFeatures<HR2_JobsClass, String> param) -> param.getValue().Job_ID);
         col_job_title.setCellValueFactory((TableColumn.CellDataFeatures<HR2_JobsClass, String> param) -> param.getValue().Title);
@@ -261,6 +270,7 @@ public class HR2_Competency_ManagementController implements Initializable {
         col_skill_id1.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Competency_ManagementClass, String> param) -> param.getValue().Skill_ID);
         col_skill1.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Competency_ManagementClass, String> param) -> param.getValue().Skill);
         col_skill_description1.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Competency_ManagementClass, String> param) -> param.getValue().Skill_Description);
+        
 
     }
 
@@ -269,13 +279,6 @@ public class HR2_Competency_ManagementController implements Initializable {
     @FXML
     public void SearchJobs() {
 
-        /* List listjobs = jobxs.where(new Object[][]{
-            {"job_id", "like", "%" + txt_Search_Jobs.getText() + "%"}
-        }).get();*/
- /*    List listSkills = hr2hmc.where(new Object[][]{
-                                      {"job_id", "like", "%" + txt_Search_Jobs.getText() +  "%"}
-                                  }).join(Model.JOIN.INNER, table2, table2_key, logical_operator, table1_key).get();
-         */
         HR2_Jobs j = new HR2_Jobs();
         HR2_Competency hrc = new HR2_Competency();
 
@@ -290,10 +293,6 @@ public class HR2_Competency_ManagementController implements Initializable {
         //Load Jobs
         ObservableList<HR2_JobsClass> hr2jc1 = FXCollections.observableArrayList();
 
-        /* List SkillsRes = hrc.join(Model.JOIN.INNER, "tbl_hr2_skillset", "skill_id", "=", "skill_id")
-                            .where(new Object[][]{
-                            {"tbl_hr2_competency.job_id", "like", "%" + txt_Search_Jobs.getText() + "%"}
-                       }).get();*/
         for (Object d : jobsRes) {
             HashMap hm1 = (HashMap) d;
             //RS
@@ -321,29 +320,28 @@ public class HR2_Competency_ManagementController implements Initializable {
         tbl_Skillsets_related_to_Jobs.getItems().clear();
 
         ObservableList<HR2_Competency_ManagementClass> hr2jc = FXCollections.observableArrayList();
-         
-         try {
+
+        try {
             for (Object d : skills) {
                 HashMap hm1 = (HashMap) d;
                 //RS
                 hm1.get("skill_id");
                 hm1.get("skill");
                 hm1.get("skill_description");
- 
+
                 hr2jc.add(
                         new HR2_Competency_ManagementClass(
                                 String.valueOf(hm1.get("skill_id")),
                                 String.valueOf(hm1.get("skill")),
                                 String.valueOf(hm1.get("skill_description"))
                         ));
- 
+
             }
         } catch (Exception e) {
             System.out.println(e);
         }
- 
+
         tbl_Skillsets_related_to_Jobs.setItems(hr2jc);
-    
 
     }
 
@@ -406,7 +404,7 @@ public class HR2_Competency_ManagementController implements Initializable {
 
     public void Save() {
         HR2_Competency_Management tm = new HR2_Competency_Management();
-
+     
         try {
 
             String[][] cm_data
@@ -416,7 +414,9 @@ public class HR2_Competency_ManagementController implements Initializable {
                         {"skill_description", txt_skill_description.getText()},};
 
             tm.insert(cm_data);
-
+          // new HR2_Competency_ManagementController().tbl_Skills.setItems((ObservableList<HR2_Competency_ManagementClass>) hr2hmc);
+            loadData();
+            DisableComponents();
             Alert saved = new Alert(Alert.AlertType.INFORMATION);
             saved.setContentText("Saved");
             saved.showAndWait();
@@ -425,5 +425,29 @@ public class HR2_Competency_ManagementController implements Initializable {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-
+    
+    public void Delete()
+    {
+        Alert delete = new Alert(Alert.AlertType.CONFIRMATION);
+        
+        if(delete.equals(true))
+        {
+              HR2_Competency_Management cm = new HR2_Competency_Management();
+                      
+              List deleteSkills = cm.delete().where(new Object[][]{
+                {"skill_id", "like", "%" + txt_Search_Jobs.getText() + "%"}
+            }).get();
+        }
+        else
+        {
+            
+        }
+      
+    }
+    
+    public void Update()
+    {
+        HR2_Competency_Management cm = new HR2_Competency_Management();
+      
+    }
 }

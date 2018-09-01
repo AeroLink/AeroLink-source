@@ -18,7 +18,7 @@ public class HR2_Competency_Management extends Synapse.Model{
         
          public HR2_Competency_Management()
             {
-                   setColumns("job_id","skill_id","skill","skill_description");
+                   setColumns("skill_id","skill","skill_description");
                     setTable("tbl_hr2_skillset");
                     
 

@@ -30,6 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 import javafx.scene.control.Alert;
 import javafx.scene.control.cell.PropertyValueFactory;
+
 /**
  * FXML Controller class
  *
@@ -37,323 +38,235 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class HR2_Training_ManagementController implements Initializable {
 
-   
     @FXML
     private JFXButton btn_save;
-    @FXML
-    private TableView<Training_ManagementClass> list_of_trainees;
-  
+
     @FXML
     private JFXButton btn_new;
-    @FXML
     private JFXButton btn_edit;
     @FXML
-    private JFXButton btn_update;
-    @FXML
-    private JFXButton btn_delete;
-    @FXML
-    private JFXTextField txt_employee_name;
+    private JFXTextField txt_training_id;
     @FXML
     private JFXTextField txt_job_position;
     @FXML
-    private JFXTextField txt_title;
+    private JFXTextField txt_training_title;
+    @FXML
+    private JFXTextField txt_training_description;
+    @FXML
+    private JFXTextField txt_trainor;
+    @FXML
+    private JFXTextField txt_start_time;
+    @FXML
+    private JFXTextField txt_end_time;
+    @FXML
+    private JFXDatePicker txt_start_date;
+    @FXML
+    private JFXDatePicker txt_end_date;
     @FXML
     private JFXTextField txt_location;
     @FXML
-    private JFXTextField txt_date_start;
-    @FXML
-    private JFXTextField txt_date_end;
-    @FXML
-    private JFXTextField txt_time_start;
+    private JFXTextField txt_vehicle;
     @FXML
     private JFXTextField txt_budget_cost;
     @FXML
-    private JFXTextField txt_organizer;
-
+    private JFXComboBox<?> txt_type_of_training;
     @FXML
-    private JFXTextField txt_time_end;
+    private JFXTextField txt_search_trainings;
     @FXML
-    private JFXTextField txt_emp_id;
+    private TableView<?> training_management_data;
     @FXML
-    private JFXTextField txt_trainor;
-    
+    private TableColumn<?, ?> col_training_ID;
     @FXML
-       private JFXComboBox<String> type_of_training;
-    
-     ObservableList<String> sdl = FXCollections.observableArrayList("Internal" , "External");
-     
+    private TableColumn<?, ?> col_job_position;
     @FXML
-    private TableColumn<Training_ManagementClass, String> col_emp_id;
+    private TableColumn<?, ?> col_training_title;
     @FXML
-    private TableColumn<Training_ManagementClass, String> col_emp_name;
+    private TableColumn<?, ?> col_training_description;
     @FXML
-    private TableColumn<Training_ManagementClass, String> col_job_position;
+    private TableColumn<?, ?> col_trainor;
     @FXML
-    private TableColumn<Training_ManagementClass, String> col_title;
+    private TableColumn<?, ?> col_start_date;
     @FXML
-    private TableColumn<Training_ManagementClass, String> col_trainor;
+    private TableColumn<?, ?> col_end_date;
     @FXML
-    private TableColumn<Training_ManagementClass, String> col_type_of_training;
+    private TableColumn<?, ?> col_start_time;
     @FXML
-    private TableColumn<Training_ManagementClass, String> col_location;
+    private TableColumn<?, ?> col_end_time;
     @FXML
-    private TableColumn<Training_ManagementClass, String> col_date_start;
+    private TableColumn<?, ?> col_type_of_training;
     @FXML
-    private TableColumn<Training_ManagementClass, String> col_date_end;
+    private TableColumn<?, ?> col_location;
     @FXML
-    private TableColumn<Training_ManagementClass, String> col_time_start;
+    private TableColumn<?, ?> col_vehicle;
     @FXML
-    private TableColumn<Training_ManagementClass, String> col_time_end;
+    private TableColumn<?, ?> col_budget_cost;
     @FXML
-    private TableColumn<Training_ManagementClass, String> col_budget_cost;
-    @FXML
-    private TableColumn<Training_ManagementClass, String> col_organizer;
-    @FXML
-    private JFXTextField txt_name_of_trainee11;
+    private TableColumn<?, ?> col_alter;
    
-    
-       
+
+  //  ObservableList<String> sdl = FXCollections.observableArrayList("Internal", "External");
+
+  
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-            
-             type_of_training.setItems(sdl);
-                 type_of_training.setPromptText("Choose Level");
-                 
-            btn_new.setOnMouseClicked(e -> New());
-            DisableComponents();
-            
-            DisplayData();
-            
-            loadData();
-              
-               
-         //   btn_save.setOnAction(e -> Save());
-    }    
-    private void DisplayData()
-    {
-        col_emp_id.setCellValueFactory(new PropertyValueFactory<>("emp_id"));
-           col_emp_name.setCellValueFactory(new PropertyValueFactory<>("emp_name"));
-              col_job_position.setCellValueFactory(new PropertyValueFactory<>("job_position"));
-                 col_title.setCellValueFactory(new PropertyValueFactory<>("title"));
-                    col_trainor.setCellValueFactory(new PropertyValueFactory<>("trainor"));
-                    col_type_of_training.setCellValueFactory(new PropertyValueFactory<>("type_of_training"));
-                       col_location.setCellValueFactory(new PropertyValueFactory<>("location"));
-                       col_date_start.setCellValueFactory(new PropertyValueFactory<>("date_start"));
-                       col_date_end.setCellValueFactory(new PropertyValueFactory<>("date_end"));
-                        col_time_start.setCellValueFactory(new PropertyValueFactory<>("time_start"));
-                        col_time_end.setCellValueFactory(new PropertyValueFactory<>("time_end"));
-                            col_budget_cost.setCellValueFactory(new PropertyValueFactory<>("budget_cost"));
-                             col_organizer.setCellValueFactory(new PropertyValueFactory<>("organizer"));
+
+     //   type_of_training.setItems(sdl);
+     //   type_of_training.setPromptText("Choose Level");
+
+        btn_new.setOnMouseClicked(e -> New());
+        DisableComponents();
+
+        DisplayData();
+
+        loadData();
+
+        //   btn_save.setOnAction(e -> Save());
     }
-    
-    private void loadData()
-    {
-           
+
+    private void DisplayData() {
+       
+     
+    }
+
+    private void loadData() {
+
         HR2_Training_Management tm = new HR2_Training_Management();
-        
+
         ObservableList<Training_ManagementClass> dv = FXCollections.observableArrayList();
-            List b = tm.get();
-            
-            for(Object d : b)
-            {
-                HashMap hm = (HashMap) d;
-                
-                hm.get("emp_id");
-                hm.get("emp_name");
-                hm.get("job_position");
-                hm.get("title");
-                hm.get("trainor");
-                hm.get("tbl_type_of_training");
-                hm.get("location");
-                hm.get("date_start");
-                hm.get("date_end");
-                hm.get("time_start");
-                hm.get("time_end");
-                hm.get("budget_cost");
-                hm.get("organizer");
-                
-               dv.add(
-               new Training_ManagementClass(
-                   String.valueOf(hm.get("emp_id")),
-                   String.valueOf(hm.get("emp_name")),
-                   String.valueOf(hm.get("job_position")),
-                   String.valueOf(hm.get("title")),
-                   String.valueOf(hm.get("trainor")),
-                   String.valueOf(hm.get("tbl_type_of_training")),
-                   String.valueOf(hm.get("location")),
-                   String.valueOf(hm.get("date_start")),
-                   String.valueOf(hm.get("date_end")),
-                   String.valueOf(hm.get("time_start")),
-                   String.valueOf(hm.get("time_end")),
-                   String.valueOf(hm.get("budget_cost")),
-                   String.valueOf(hm.get("organizer"))
-                 ) );   
-            }
-            list_of_trainees.setItems(dv);
-                
-    }
-     public void DisableComponents()
-    {
+        List b = tm.get();
+
+        for (Object d : b) {
+            HashMap hm = (HashMap) d;
+
+            hm.get("emp_id");
+            hm.get("emp_name");
+            hm.get("job_position");
+            hm.get("title");
+            hm.get("trainor");
+            hm.get("tbl_type_of_training");
+            hm.get("location");
+            hm.get("date_start");
+            hm.get("date_end");
+            hm.get("time_start");
+            hm.get("time_end");
+            hm.get("budget_cost");
+            hm.get("organizer");
+
+            dv.add(
+                    new Training_ManagementClass(
+                            String.valueOf(hm.get("emp_id")),
+                            String.valueOf(hm.get("emp_name")),
+                            String.valueOf(hm.get("job_position")),
+                            String.valueOf(hm.get("title")),
+                            String.valueOf(hm.get("trainor")),
+                            String.valueOf(hm.get("tbl_type_of_training")),
+                            String.valueOf(hm.get("location")),
+                            String.valueOf(hm.get("date_start")),
+                            String.valueOf(hm.get("date_end")),
+                            String.valueOf(hm.get("time_start")),
+                            String.valueOf(hm.get("time_end")),
+                            String.valueOf(hm.get("budget_cost")),
+                            String.valueOf(hm.get("organizer"))
+                    ));
+        }
     
-                    
-            Node[] d = {
-                        
-                        btn_edit,
-                        btn_save,
-                        btn_update,
-                        btn_delete,
-                        txt_employee_name,
-                        txt_job_position,
-                        txt_title,
-                        txt_location,
-                        txt_date_start,
-                        txt_date_end,
-                        txt_time_start,
-                        txt_budget_cost,
-                        txt_organizer,
-                        type_of_training,
-                        txt_time_end,
-                        txt_emp_id,
-                        txt_trainor
-                };
-                        try
-                        {
-                            for(Node c : d)
-                            {
-                                    if(c instanceof JFXTextField)
-                                    {
-                                                JFXTextField m = (JFXTextField) c;
-                                                  /*  validations v = new validations();
+
+    }
+
+    public void DisableComponents() {
+
+        Node[] d = {
+            btn_edit,
+            btn_save,
+       
+        };
+        try {
+            for (Node c : d) {
+                if (c instanceof JFXTextField) {
+                    JFXTextField m = (JFXTextField) c;
+                    /*  validations v = new validations();
                                                          v.maximumChars(m, 25);
                                                          Alert alert = new Alert(Alert.AlertType.ERROR);
                                                                          alert.initStyle(StageStyle.UNDECORATED);
                                                                          alert.setTitle("Error");
                                                                          alert.setContentText("Maximum 25 Character only"); 
-                                                                         alert.showAndWait();      */          
-                                        m.setDisable(true);
-                                    }
-                                    if(c instanceof JFXButton)
-                                    {
-                                        JFXButton m1 = (JFXButton) c;
-                                        m1.setDisable(true);
-                                    }
-                                    if(c instanceof JFXDatePicker)
-                                    {
-                                        JFXDatePicker m2 = (JFXDatePicker) c;
-                                        m2.setDisable(true);
-                                    }
-                                          if(c instanceof JFXComboBox)
-                                    {
-                                        JFXComboBox m3 = (JFXComboBox) c;
-                                        m3.setDisable(true);
-                                    }
-                                    
-                                            
-                                           
-                            }    
-                            
-                        }catch(Exception e)
-                        {
-                            JOptionPane.showMessageDialog(null, e);
-                        }
+                                                                         alert.showAndWait();      */
+                    m.setDisable(true);
+                }
+                if (c instanceof JFXButton) {
+                    JFXButton m1 = (JFXButton) c;
+                    m1.setDisable(true);
+                }
+                if (c instanceof JFXDatePicker) {
+                    JFXDatePicker m2 = (JFXDatePicker) c;
+                    m2.setDisable(true);
+                }
+                if (c instanceof JFXComboBox) {
+                    JFXComboBox m3 = (JFXComboBox) c;
+                    m3.setDisable(true);
+                }
+
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
-    
-    public void New()
-    {
-            
+
+    public void New() {
+
         Node[] d = {
-                        
-                         btn_edit,
-                        btn_save,
-                        btn_update,
-                        btn_delete,
-                        txt_employee_name,
-                         txt_job_position,
-                         txt_title,
-                        txt_location,
-                        txt_date_start,
-                        txt_date_end,
-                        txt_time_start,
-                        txt_budget_cost,
-                        txt_organizer,
-                        type_of_training,
-                        txt_time_end,
-                        txt_emp_id,
-                        txt_trainor
-             
-                };
-                        try
-                        {
-                            for(Node c : d)
-                            {
-                                   
-                                    if(c instanceof JFXTextField)
-                                    {
-                                        JFXTextField m = (JFXTextField) c;
-                                        m.setDisable(false);
-                                    }
-                                    if(c instanceof JFXButton)
-                                    {
-                                        JFXButton m1 = (JFXButton) c;
-                                        m1.setDisable(false);
-                                    }
-                                    if(c instanceof JFXDatePicker)
-                                    {
-                                        JFXDatePicker m2 = (JFXDatePicker) c;
-                                        m2.setDisable(false);
-                                    }
-                                          if(c instanceof JFXComboBox)
-                                    {
-                                        JFXComboBox m3 = (JFXComboBox) c;
-                                        m3.setDisable(false);
-                                    }
-                            }    
-                            
-                        }catch(Exception e)
-                        {
-                            JOptionPane.showMessageDialog(null, e);
-                        }
+            btn_edit,
+            btn_save,
+            
+
+        };
+        
+        try {
+            for (Node c : d) {
+
+                if (c instanceof JFXTextField) {
+                    JFXTextField m = (JFXTextField) c;
+                    m.setDisable(false);
+                }
+                if (c instanceof JFXButton) {
+                    JFXButton m1 = (JFXButton) c;
+                    m1.setDisable(false);
+                }
+                if (c instanceof JFXDatePicker) {
+                    JFXDatePicker m2 = (JFXDatePicker) c;
+                    m2.setDisable(false);
+                }
+                if (c instanceof JFXComboBox) {
+                    JFXComboBox m3 = (JFXComboBox) c;
+                    m3.setDisable(false);
+                }
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
-    
-    @FXML
-     public void Save()
-    {
-                   HR2_Training_Management tm = new HR2_Training_Management();
-                            
-                            try
-                            {
 
+    public void Save() {
+        HR2_Training_Management tm = new HR2_Training_Management();
 
-                                    String[][] cm_data =
-                                    {
-                                                    {"emp_id" , "1"},
-                                                    {"emp_name" , "sample"},
-                                                    {"job_position" , txt_job_position.getText()},
-                                                    {"title" , txt_title.getText()},
-                                                    {"trainor" , txt_trainor.getText()},
-                                                    {"type_of_training" , type_of_training.getValue().toString()},
-                                                    {"location" , txt_location.getText()},
-                                                    {"date_start" , txt_date_start.getText()},
-                                                    {"date_end" , txt_date_end.getText()},
-                                                    {"time_start" , txt_time_start.getText()},
-                                                    {"time_end" , txt_time_end.getText()},
-                                                    {"budget_cost" , txt_budget_cost.getText()},
-                                                    {"organizer" , txt_organizer.getText()}
+        try {
 
-                                    };
-                                   
-                           
-                                                            tm.insert(cm_data);
-                                        
-                                                           Alert saved = new Alert(Alert.AlertType.INFORMATION);
-                                                                  saved.setContentText("Saved");
-                                                                  saved.showAndWait();
-                                                                  
-                                                                  
-                            }catch(Exception e)
-                            {
-                                                               JOptionPane.showMessageDialog(null,e);
-                            }
+            String[][] cm_data
+                    = {
+                     
+
+                    };
+
+            tm.insert(cm_data);
+
+            Alert saved = new Alert(Alert.AlertType.INFORMATION);
+            saved.setContentText("Saved");
+            saved.showAndWait();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
 }

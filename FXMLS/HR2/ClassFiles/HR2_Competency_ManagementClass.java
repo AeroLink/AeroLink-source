@@ -23,5 +23,6 @@ public class HR2_Competency_ManagementClass {
         this.Skill_Description = new SimpleStringProperty(Skill_Description);
 
     }
+   
 
 }
