@@ -21,10 +21,11 @@ public class Database {
         private static final Database Own = new Database();
     }
     
+    
     public static Database getInstance(){
         return dbOwnInstance.Own;
     }
-
+ 
     public Database DB_INIT(iDB db){
         
         this.INSTANCE_DATABASE = db;

@@ -8,7 +8,7 @@ package FXMLS.HR2;
 import Model.HR2_Competency_Management;
 import Model.HR2_Succession_Planning;
 import Synapse.Database;
-import Synapse.DB.MySql;
+import Synapse.DB.MYSQL;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -56,7 +56,7 @@ public class HR2_Succession_PlanningController implements Initializable {
         
                    
             Database d = Database.getInstance();
-            d.DB_INIT(new MySql());
+            d.DB_INIT(new MYSQL());
             d.startConnection();
             
         DisableComponents();

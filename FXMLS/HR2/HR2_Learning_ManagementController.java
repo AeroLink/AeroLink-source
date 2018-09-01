@@ -8,7 +8,7 @@ package FXMLS.HR2;
 import Model.HR2_Competency_Management;
 import Model.HR2_Learning_Management;
 import Synapse.Database;
-import Synapse.DB.MySql;
+import Synapse.DB.MYSQL;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -123,7 +123,7 @@ public class HR2_Learning_ManagementController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         Database d = Database.getInstance();
-        d.DB_INIT(new MySql());
+        d.DB_INIT(new MYSQL());
         d.startConnection();
 
         DisableComponents();

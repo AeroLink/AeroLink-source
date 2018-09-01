@@ -17,7 +17,7 @@ import java.sql.SQLException;
  *
  * @author Lei
  */
-public class MySql extends Session implements iDB{
+public class MYSQL extends Session implements iDB{
 
     private Connection CONNECTION;
     private String Host = "jdbc:mysql://";
@@ -28,12 +28,11 @@ public class MySql extends Session implements iDB{
     public Boolean start() {
         try {
             
-            Class.forName("com.mysql.jdbc.Driver");
             Connection connection = (Connection) DriverManager.getConnection(this.Host + this.Ip + ":" + this.Port + "/" + this.Database, this.User, this.Password);
             this.CONNECTION = connection;
             return true;
             
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
   
             System.out.println(ex.getMessage());
             return false;

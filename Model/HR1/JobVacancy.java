@@ -3,19 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
-
+package Model.HR1;
 
 /**
  *
  * @author Lei
  */
-public class Permissions extends Synapse.Model{
-    
-    
-    public Permissions(){
-        setColumns("id", "permissions");
-        setTable("aerolink.tbl_permissions");
-    }
+public class JobVacancy extends Synapse.Model{
     
 }

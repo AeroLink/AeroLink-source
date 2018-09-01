@@ -5,8 +5,10 @@
  */
 package Controllers;
 
-import Synapse.DB.MySql;
+import Config.DatabaseConfig;
 import Synapse.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,11 +16,16 @@ import Synapse.*;
  */
 public class SplashScreen{
     
-    
+    public void startConnection(){
+        try {
+            Database.getInstance().DB_INIT((iDB)Class.forName("Synapse.DB." + DatabaseConfig.PROVIDER.toUpperCase()).newInstance()).startConnection();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            Logger.getLogger(SplashScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+    }
     public boolean checkCon(){
-        
-       Database.getInstance().DB_INIT(new MySql()).startConnection();
+        this.startConnection();
        return Session.INSTANCE.hasConnection();
-       
     }
 }

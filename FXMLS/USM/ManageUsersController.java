@@ -81,6 +81,8 @@ public class ManageUsersController implements Initializable {
         created_at.setCellValueFactory( (TableColumn.CellDataFeatures<IUsers, String> param) -> param.getValue().created_at);
         updated_at.setCellValueFactory((TableColumn.CellDataFeatures<IUsers, String> param) -> param.getValue().update_at);
     
+        
+        //Select Query
         Users u = new Users();
         List rows = u.get();
         

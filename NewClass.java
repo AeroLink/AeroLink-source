@@ -3,7 +3,7 @@ import Model.Sample;
 import Model.UserPermissions;
 import Model.Users;
 import Synapse.Crypt;
-import Synapse.DB.MySql;
+import Synapse.DB.MYSQL;
 import Synapse.Database;
 import Synapse.Model;
 import java.util.Arrays;
@@ -25,7 +25,7 @@ public class NewClass {
         
         //Declaring new Instance of Database
         Database db =  Database.getInstance();
-        db.DB_INIT(new MySql());
+        db.DB_INIT(new MYSQL());
         
         //initialize DB Connection
         db.startConnection();

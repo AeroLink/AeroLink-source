@@ -12,7 +12,7 @@ package Model;
 public class UserPermissions extends Synapse.Model{
 
     public UserPermissions() {
-        setTable("tbl_user_permissions");
+        setTable("aerolink.tbl_user_permissions");
         setColumns("id", "user_id", "permission_id");
     }
     
