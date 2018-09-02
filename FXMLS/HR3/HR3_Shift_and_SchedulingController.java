@@ -5,7 +5,7 @@
  */
 package FXMLS.HR3;
 
-import Model.HR2_Learning_Management;
+
 import Model.HR3_Shift_and_Scheduling;
 import Synapse.DB.MySql;
 import com.jfoenix.controls.JFXButton;

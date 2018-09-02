@@ -23,13 +23,10 @@
                      <children>
                         <TableView fx:id="tbl_Skills" layoutX="25.0" layoutY="443.0" prefHeight="194.0" prefWidth="797.0">
                           <columns>
-                            <TableColumn fx:id="col_skill_ID" prefWidth="75.0" text="Skill ID" />
-                            <TableColumn fx:id="col_Skill" prefWidth="75.0" text="Skill" />
-                              <TableColumn fx:id="col_Skill_Description" prefWidth="75.0" text="Skill Description" />
+                            <TableColumn fx:id="col_skill_ID" minWidth="100.0" prefWidth="75.0" resizable="false" text="Skill ID" />
+                            <TableColumn fx:id="col_Skill" minWidth="300.0" prefWidth="75.0" resizable="false" text="Skill" />
+                              <TableColumn fx:id="col_Skill_Description" minWidth="400.0" prefWidth="75.0" resizable="false" text="Skill Description" />
                           </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
                         </TableView>
                         <JFXTextField fx:id="txt_search_skills" layoutX="14.0" layoutY="14.0" maxWidth="471.0" minWidth="446.0" onKeyReleased="#Search_Skills" prefHeight="31.0" prefWidth="446.0" promptText="Search">
                            <font>
@@ -165,23 +162,17 @@
                         </JFXTextField>
                         <TableView fx:id="tbl_Job_Skillsets" layoutX="25.0" layoutY="230.0" prefHeight="202.0" prefWidth="740.0">
                           <columns>
-                            <TableColumn fx:id="col_job_id" prefWidth="75.0" text="Job ID" />
-                              <TableColumn fx:id="col_job_title" prefWidth="75.0" text="Job Title" />
-                              <TableColumn fx:id="col_job_description" prefWidth="75.0" text="Job Description" />
+                            <TableColumn fx:id="col_job_id" minWidth="100.0" prefWidth="75.0" resizable="false" text="Job ID" />
+                              <TableColumn fx:id="col_job_title" minWidth="300.0" prefWidth="75.0" text="Job Title" />
+                              <TableColumn fx:id="col_job_description" minWidth="400.0" prefWidth="75.0" text="Job Description" />
                           </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
                         </TableView>
                         <TableView fx:id="tbl_Skillsets_related_to_Jobs" layoutX="25.0" layoutY="446.0" prefHeight="202.0" prefWidth="740.0">
                            <columns>
-                              <TableColumn fx:id="col_skill_id1" prefWidth="75.0" text="Skill ID" />
-                              <TableColumn fx:id="col_skill1" prefWidth="75.0" text="Skill" />
-                              <TableColumn fx:id="col_skill_description1" prefWidth="75.0" text="Skill Description" />
+                              <TableColumn fx:id="col_skill_id1" minWidth="100.0" prefWidth="75.0" resizable="false" text="Skill ID" />
+                              <TableColumn fx:id="col_skill1" minWidth="300.0" prefWidth="75.0" resizable="false" text="Skill" />
+                              <TableColumn fx:id="col_skill_description1" minWidth="400.0" prefWidth="75.0" resizable="false" text="Skill Description" />
                            </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
                         </TableView>
                      </children>
                   </AnchorPane>

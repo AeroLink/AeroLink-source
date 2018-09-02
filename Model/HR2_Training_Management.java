@@ -14,7 +14,9 @@ public class HR2_Training_Management extends Synapse.Model{
         
             public HR2_Training_Management()
             {
-                   setColumns("emp_id", "emp_name" , "job_position","title","trainor","type_of_training", "location","date_start","date_end","time_start","time_end","budget_cost","organizer");
-                    setTable("tbl_training_management");
+                   setColumns("training_id","job_position","training_title","training_description",
+                           "trainor","start_date","end_date","start_time","end_time",
+                           "type_of_training","location","vehicle","budget_cost");
+                    setTable("tbl_hr2_training");
             }
 }

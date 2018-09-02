@@ -200,19 +200,20 @@
                         <TableView fx:id="training_management_data" layoutX="14.0" layoutY="115.0" prefHeight="348.0" prefWidth="819.0">
                           <columns>
                             <TableColumn fx:id="col_training_ID" minWidth="20.0" prefWidth="75.0" resizable="false" text="Training ID" />
-                            <TableColumn fx:id="col_job_position" minWidth="90.0" prefWidth="75.0" resizable="false" text="Job Position" />
-                              <TableColumn fx:id="col_training_title" minWidth="90.0" prefWidth="75.0" resizable="false" text="Training Title" />
-                              <TableColumn fx:id="col_training_description" minWidth="120.0" prefWidth="75.0" resizable="false" text="Training Description" />
-                              <TableColumn fx:id="col_trainor" minWidth="90.0" prefWidth="75.0" resizable="false" text="Trainor" />
+                            <TableColumn fx:id="col_job_position" minWidth="200.0" prefWidth="75.0" resizable="false" text="Job Position" />
+                              <TableColumn fx:id="col_training_title" minWidth="200.0" prefWidth="75.0" resizable="false" text="Training Title" />
+                              <TableColumn fx:id="col_training_description" minWidth="300.0" prefWidth="75.0" resizable="false" text="Training Description" />
+                              <TableColumn fx:id="col_trainor" minWidth="200.0" prefWidth="75.0" resizable="false" text="Trainor" />
                               <TableColumn fx:id="col_start_date" minWidth="90.0" prefWidth="75.0" resizable="false" text="Start Date" />
                               <TableColumn fx:id="col_end_date" minWidth="90.0" prefWidth="75.0" resizable="false" text="End Date" />
                               <TableColumn fx:id="col_start_time" minWidth="90.0" prefWidth="75.0" resizable="false" text="Start Time" />
                               <TableColumn fx:id="col_end_time" minWidth="90.0" prefWidth="75.0" resizable="false" text="End Time" />
-                              <TableColumn fx:id="col_type_of_training" minWidth="90.0" prefWidth="75.0" resizable="false" text="Type of Training" />
-                              <TableColumn fx:id="col_location" minWidth="90.0" prefWidth="75.0" resizable="false" text="Location" />
-                              <TableColumn fx:id="col_vehicle" minWidth="90.0" prefWidth="75.0" resizable="false" text="Vehicle" />
-                              <TableColumn fx:id="col_budget_cost" minWidth="90.0" prefWidth="75.0" resizable="false" text="Budget Cost" />
-                              <TableColumn fx:id="col_alter" minWidth="90.0" prefWidth="75.0" resizable="false" text="Alter" />
+                              <TableColumn fx:id="col_type_of_training" minWidth="200.0" prefWidth="75.0" resizable="false" text="Type of Training" />
+                              <TableColumn fx:id="col_location" minWidth="200.0" prefWidth="75.0" resizable="false" text="Location" />
+                              <TableColumn fx:id="col_vehicle" minWidth="200.0" prefWidth="75.0" resizable="false" text="Vehicle" />
+                              <TableColumn fx:id="col_budget_cost" minWidth="150.0" prefWidth="75.0" resizable="false" text="Budget Cost" />
+                              <TableColumn fx:id="col_edit" minWidth="80.0" prefWidth="75.0" resizable="false" text="Edit" />
+                              <TableColumn fx:id="col_delete" minWidth="80.0" prefWidth="75.0" resizable="false" text="Delete" />
                           </columns>
                         </TableView>
                      </children>

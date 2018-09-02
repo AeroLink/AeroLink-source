@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FXMLS.HR2;
+package FXMLS.HR2.Modals;
 
 import com.jfoenix.controls.JFXComboBox;
 import java.net.URL;
