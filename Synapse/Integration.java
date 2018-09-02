@@ -3,19 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package Synapse;
+
 
 
 /**
  *
  * @author Lei
  */
-public class Permissions extends Synapse.Model{
+public interface Integration{
     
-    
-    public Permissions(){
-        setColumns("id", "permissions");
-        setTable("aerolink.tbl_permissions");
-    }
+    public <classModel extends Synapse.Model> classModel integrateTo(classModel c);
     
 }

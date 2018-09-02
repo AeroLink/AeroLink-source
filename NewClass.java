@@ -1,11 +1,14 @@
 
+import Config.DatabaseConfig;
 import Model.Sample;
 import Model.UserPermissions;
 import Model.Users;
 import Synapse.Crypt;
-import Synapse.DB.MySql;
+import Synapse.DB.MSSQL;
+import Synapse.DB.MYSQL;
 import Synapse.Database;
 import Synapse.Model;
+import Synapse.Session;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,7 +28,14 @@ public class NewClass {
         
         //Declaring new Instance of Database
         Database db =  Database.getInstance();
-        db.DB_INIT(new MySql());
+        
+        Session.Database = DatabaseConfig.DATABASE;
+        Session.Ip = DatabaseConfig.IP;
+        Session.Password = DatabaseConfig.PASSWORD;
+        Session.Port = DatabaseConfig.PORT;
+        Session.User = DatabaseConfig.USER;
+        
+        db.DB_INIT(new MSSQL());
         
         //initialize DB Connection
         db.startConnection();
@@ -33,12 +43,14 @@ public class NewClass {
         //God Bless this Code ..
         
         UserPermissions up = new UserPermissions();
-        List list = up
-                .join(Model.JOIN.INNER, "tbl_users", "id", "=", "user_id")
-                .join(Model.JOIN.INNER, "tbl_permissions", "id", "=", "permission_id")
-                .get("tbl_users.id", "GROUP_CONCAT(tbl_permissions.permission) as permissions");
+
+        up.delete().where(new Object[][] {
+            {"id", "=", 3}
+        }).executeUpdate();
         
-        System.out.println(Arrays.asList(list));
+        //List list = up.get();
+        
+        //System.out.println(Arrays.asList(list));
 
         
     }

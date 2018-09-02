@@ -8,7 +8,7 @@ package samplepack;
 
 import Model.a;
 import Synapse.Database;
-import Synapse.DB.MySql;
+import Synapse.DB.MYSQL;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class sample {
             //Database Initialization
             
             Database d = Database.getInstance();
-            d.DB_INIT(new MySql());
+            d.DB_INIT(new MYSQL());
             d.startConnection();
             
             a s = new a();

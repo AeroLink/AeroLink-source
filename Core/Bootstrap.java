@@ -7,8 +7,12 @@ package Core;
  */
 
 import Config.*;
+import Synapse.Database;
 import Synapse.Form;
 import Synapse.Session;
+import Synapse.iDB;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.stage.StageStyle;
 
 /**
@@ -21,15 +25,13 @@ public class Bootstrap {
         
         //Building routes
         Session.links =  RouteConfig.links;
-        
         //Building Database Configs
+        
         Session.Database = DatabaseConfig.DATABASE;
         Session.Ip = DatabaseConfig.IP;
         Session.Password = DatabaseConfig.PASSWORD;
         Session.Port = DatabaseConfig.PORT;
         Session.User = DatabaseConfig.USER;
-        
-        
         //Start app
         new Form("/FXMLS/SplashScreen.fxml").open(StageStyle.UNDECORATED);
         

@@ -7,7 +7,7 @@ package FXMLS.HR3;
 
 
 import Model.HR3_Shift_and_Scheduling;
-import Synapse.DB.MySql;
+import Synapse.DB.MYSQL;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
