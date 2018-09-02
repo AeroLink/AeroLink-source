@@ -94,7 +94,8 @@ public class Model {
                     }
                     this.pst = Session.INSTANCE.getConnection().prepareStatement(this.finalQuery);
                 }
-                
+     
+                System.out.println(this.finalQuery);
                 this.clear();
                 return R2SL.convert(pst.executeQuery());
             } catch (SQLException ex) {
@@ -389,7 +390,8 @@ public class Model {
         this.whereValues = new ArrayList<>();
         this.whereConstruct = "";
         this.where = false;
-        this.finalQuery = "";
+        this.groupBy = "";
+        this.finalQuery = "Select * From ";
     }
     
 }
