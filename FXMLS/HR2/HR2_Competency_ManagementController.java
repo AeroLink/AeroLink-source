@@ -220,7 +220,7 @@ public class HR2_Competency_ManagementController implements Initializable {
         try {
 
             List listSkills = hr2hmc.where(new Object[][]{
-                {"skill_id", "like", "%" + txt_search_skills.getText() + "%"}
+                {"skill_id", "like", "%" + SearchText + "%"}
             }).get();
 
             SearchRelatedSkillsTab(listSkills);
