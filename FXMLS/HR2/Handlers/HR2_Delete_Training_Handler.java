@@ -7,6 +7,7 @@
 package FXMLS.HR2.Handlers;
 
 import Synapse.Components.Modal.Modal;
+import Synapse.Form;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 

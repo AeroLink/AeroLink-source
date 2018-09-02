@@ -43,7 +43,7 @@ public class Model {
     private static String[] cols;
     
     public static void setTable(String table) {
-        Session.table = table;
+        Session.table = (Session.provider.equals("mssql") ? Session.schema + "." : "") + table;
     }
     
     public static void setColumns(String... vals ){

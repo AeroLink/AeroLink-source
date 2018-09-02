@@ -32,6 +32,9 @@ public class Bootstrap {
         Session.Password = DatabaseConfig.PASSWORD;
         Session.Port = DatabaseConfig.PORT;
         Session.User = DatabaseConfig.USER;
+        Session.schema = DatabaseConfig.schema;
+        Session.provider = DatabaseConfig.PROVIDER;
+        
         //Start app
         new Form("/FXMLS/SplashScreen.fxml").open(StageStyle.UNDECORATED);
         

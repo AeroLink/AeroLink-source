@@ -132,11 +132,6 @@ public class HR2_Learning_ManagementController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-        Database d = Database.getInstance();
-        d.DB_INIT(new MYSQL());
-        d.startConnection();
-
         DisableComponents();
 
         //for course section
