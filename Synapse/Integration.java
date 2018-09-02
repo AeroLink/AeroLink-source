@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model.HR1;
+package Synapse;
 
 
 
@@ -11,12 +11,8 @@ package Model.HR1;
  *
  * @author Lei
  */
-public class JobVacancy extends Synapse.Model{
-
-    public JobVacancy() {
-        
-    }
-
+public interface Integration{
     
+    public <classModel extends Synapse.Model> classModel integrateTo(classModel c);
     
 }
