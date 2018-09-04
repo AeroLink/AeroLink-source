@@ -65,6 +65,8 @@ public class Session implements IModule {
     public static String Database = "aerolink";
     public static String User = "root";
     public static String Password = "";
+    public static String schema = "";
+    public static String provider = "";
     
     public static String[][] links;
     

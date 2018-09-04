@@ -14,7 +14,7 @@ package Model;
 public class Users extends Synapse.Model{
 
     public Users() {
-        setTable("aerolink.tbl_users");
+        setTable("tbl_users");
         setColumns("id", 
                 "username", 
                 "password");

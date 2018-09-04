@@ -5,6 +5,7 @@
  */
 package FXMLS.HR2.ClassFiles;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
@@ -16,6 +17,7 @@ public class HR2_Competency_ManagementClass {
     public SimpleStringProperty Skill_ID;
     public SimpleStringProperty Skill;
     public SimpleStringProperty Skill_Description;
+    public static final AtomicInteger count = new AtomicInteger(0);
 
     public HR2_Competency_ManagementClass(String Skill_ID, String Skill, String Skill_Description) {
         this.Skill_ID = new SimpleStringProperty(Skill_ID);
@@ -23,5 +25,4 @@ public class HR2_Competency_ManagementClass {
         this.Skill_Description = new SimpleStringProperty(Skill_Description);
 
     }
-
 }

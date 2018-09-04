@@ -6,7 +6,6 @@
 package FXMLS.HR2;
 
 import Model.HR2_Competency_Management;
-import Model.HR2_Succession_Planning;
 import Synapse.Database;
 import Synapse.DB.MYSQL;
 import com.jfoenix.controls.JFXButton;
@@ -170,7 +169,7 @@ public class HR2_Succession_PlanningController implements Initializable {
                         }
     }
     
-    public void Save()
+/*    public void Save()
     {
                    HR2_Succession_Planning tm = new HR2_Succession_Planning();
                             
@@ -204,6 +203,6 @@ public class HR2_Succession_PlanningController implements Initializable {
                             {
                                                             JOptionPane.showMessageDialog(null,e.getMessage());
                             }
-    }
+    }*/
     
 }

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package FXMLS.HR2.Controllers;
+package FXMLS.HR2.Handlers;
 
 import javafx.scene.Node;
 

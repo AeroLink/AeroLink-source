@@ -45,6 +45,10 @@ public class Form {
     public String getPath(){
         return this.p;
     }
+
+    public Parent getParent() {
+        return this.parent;
+    }
     
     
     public void open(){

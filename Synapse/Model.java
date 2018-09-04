@@ -43,7 +43,7 @@ public class Model {
     private static String[] cols;
     
     public static void setTable(String table) {
-        Session.table = table;
+        Session.table = (Session.provider.equals("mssql") ? Session.schema + "." : "") + table;
     }
     
     public static void setColumns(String... vals ){
@@ -94,7 +94,8 @@ public class Model {
                     }
                     this.pst = Session.INSTANCE.getConnection().prepareStatement(this.finalQuery);
                 }
-                
+     
+                System.out.println(this.finalQuery);
                 this.clear();
                 return R2SL.convert(pst.executeQuery());
             } catch (SQLException ex) {
@@ -389,7 +390,8 @@ public class Model {
         this.whereValues = new ArrayList<>();
         this.whereConstruct = "";
         this.where = false;
-        this.finalQuery = "";
+        this.groupBy = "";
+        this.finalQuery = "Select * From ";
     }
     
 }

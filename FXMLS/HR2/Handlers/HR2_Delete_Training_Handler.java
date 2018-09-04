@@ -3,26 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FXMLS.USM.Controllers;
+
+package FXMLS.HR2.Handlers;
 
 import Synapse.Components.Modal.Modal;
 import Synapse.Form;
-import Synapse.Route;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.stage.Stage;
 
 /**
- *
- * @author Lei
+ * 
+ * @author Eden Ramoneda
  */
-public class Handlers {
+public class HR2_Delete_Training_Handler {
     
-     public static int permission_user_id = 0;
-     
      public static EventHandler<ActionEvent> triggerPermissionsModal = (ActionEvent event) -> {
-//        SetPermissionUSMController.UserID = FXMLS.USM.ManageUsersController
-        Modal md = Modal.getInstance(new Form("/FXMLS/USM/Controllers/SetPermissionUSM.fxml").getParent());
+        Modal md = Modal.getInstance();
         md.open();
      };
 }

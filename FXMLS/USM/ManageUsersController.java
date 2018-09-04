@@ -6,18 +6,20 @@
 package FXMLS.USM;
 
 import FXMLS.USM.Controllers.IUsers;
+import FXMLS.USM.Controllers.SetPermissionUSMController;
 import Model.Users;
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import Synapse.Components.Modal.Modal;
+import Synapse.Form;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableCell;
@@ -32,7 +34,7 @@ import javafx.util.Callback;
 public class ManageUsersController implements Initializable {
 
     @FXML
-    private TableView<IUsers> tblUsers;
+    public TableView<IUsers> tblUsers;
 
     
     ObservableList<IUsers> obj = FXCollections.observableArrayList();
@@ -43,6 +45,7 @@ public class ManageUsersController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         GenerateTable();
+        tblUsers.getSelectionModel().selectFirst();
     } 
     
     public void GenerateTable(){
@@ -72,7 +75,14 @@ public class ManageUsersController implements Initializable {
         setPerms.setCellFactory(new Callback<TableColumn<IUsers, Boolean>, TableCell<IUsers, Boolean>>() {
             @Override
             public TableCell<IUsers, Boolean> call(TableColumn<IUsers, Boolean> param) {
-                return new Synapse.Components.ButtonInCell<IUsers>().create("Permissions", FXMLS.USM.Controllers.Handlers.triggerPermissionsModal);
+                return new Synapse.Components.ButtonInCell<IUsers>().create("Permissions", new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent e) {
+                        SetPermissionUSMController.UserID = Integer.parseInt(tblUsers.getSelectionModel().getSelectedItem().id.getValue());
+                        Modal md = Modal.getInstance(new Form("/FXMLS/USM/Controllers/SetPermissionUSM.fxml").getParent());
+                        md.open();
+                    }
+                });
             }
         });
         
