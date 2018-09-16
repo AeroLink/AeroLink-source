@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
@@ -26,10 +27,8 @@ public class MainDashController implements Initializable {
     @FXML
     private BorderPane DropPoint;
     @FXML
-    private JFXTabPane TabPane;
-    @FXML
     private JFXButton btnRight;
-    @FXML
+    
     private AnchorPane ACPaneRight;
 
     
@@ -44,7 +43,7 @@ public class MainDashController implements Initializable {
     
     @FXML
     public void triggerButton(ActionEvent event) {
-        LoadSubSystem loadSubSystem = new Helpers.LoadSubSystem(((JFXButton) event.getSource()).getId(), DropPoint);
+        LoadSubSystem loadSubSystem = new Helpers.LoadSubSystem(((MenuItem) event.getSource()).getId(), DropPoint);
     }
 
     @FXML

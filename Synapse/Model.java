@@ -7,8 +7,10 @@ package Synapse;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +22,7 @@ import java.util.logging.Logger;
 public class Model {
 
 
+    private String global_table = "";
     //TODO : Update and Delete .. Joins and Relationships;
     //TODO : Re illuminate - will fix redudancy later
     private String joinConstruct = "";
@@ -44,6 +47,10 @@ public class Model {
     
     public static void setTable(String table) {
         Session.table = (Session.provider.equals("mssql") ? Session.schema + "." : "") + table;
+    }
+
+    public void initTable(String table) {
+        this.global_table = (Session.provider.equals("mssql") ? Session.schema + "." : "") + table;
     }
     
     public static void setColumns(String... vals ){
@@ -70,7 +77,7 @@ public class Model {
         
         if (Session.INSTANCE.hasConnection()) {
             
-            this.finalQuery += Session.table + " ";
+            this.finalQuery += this.global_table + " ";
             try {
                 
                 if(this.joined) {
@@ -109,7 +116,7 @@ public class Model {
     
     public List get(String... cols){
         
-        this.finalQuery = "SELECT " + Helpers.combine(cols, ",") + " From " + Session.table + " ";
+        this.finalQuery = "SELECT " + Helpers.combine(cols, ",") + " From " + this.global_table + " ";
         
         if (Session.INSTANCE.hasConnection()) {
             
@@ -126,7 +133,7 @@ public class Model {
                     if(!"".equals(this.groupBy)) {
                         this.finalQuery += this.groupBy;
                     }
-
+                    
                     this.Where_PrepareStatementSession();
                     
                     
@@ -136,7 +143,7 @@ public class Model {
                     }
                     this.pst = Session.INSTANCE.getConnection().prepareStatement(this.finalQuery);
                 }
-                
+                System.out.println(this.finalQuery);
                 this.clear();
                 return R2SL.convert(pst.executeQuery());
             } catch (SQLException ex) {
@@ -202,7 +209,7 @@ public class Model {
             }
             try {
                 
-                String Query = "INSERT INTO " + Session.table + "(" + Helpers.combine(cols, ",") + ") VALUES (" + valC + ")";
+                String Query = "INSERT INTO " + this.global_table + "(" + Helpers.combine(cols, ",") + ") VALUES (" + valC + ")";
                 System.out.println(Query);
                 this.pst = Session.INSTANCE.getConnection().prepareStatement(Query);
                 
@@ -243,7 +250,7 @@ public class Model {
             
             try{
 
-                String query = "INSERT INTO " + Session.table + "(" + columns + ") VALUES ("+ Helpers.Prepared_combine(values.split(",").length, ",") +")"; 
+                String query = "INSERT INTO " + this.global_table + "(" + columns + ") VALUES ("+ Helpers.Prepared_combine(values.split(",").length, ",") +")"; 
                 this.pst = Session.INSTANCE.getConnection().prepareStatement(query);
                 String[] sp = values.split(",");
                 for(int i = 1; i <= sp.length; i++){
@@ -261,7 +268,54 @@ public class Model {
         return false;
     }
     //end insertions
+    
+    public int insert(Object[][] vals, Boolean returnID) {
+        if (Session.INSTANCE.hasConnection()) {
+            String columns = "";
+            List values = new ArrayList<>();
+            for(int i = 0; i < vals.length; i++) {
+                
+                if(vals[i].length < 2) {
+                    System.out.println(Response.ORM_ERR_02);
+                    break;
+                }
+                
+                if(i == (vals.length - 1)) {
+                    columns += vals[i][0];
+                }else{
+                    columns += vals[i][0] + ",";
+                }
+                
+                values.add(vals[i][1]);
+                
+            }
+            
+            String query = "";
+            try{
 
+                query = "INSERT INTO " + this.global_table + "(" + columns + ") VALUES ("+ Helpers.Prepared_combine(values.toArray().length, ",") +")"; 
+                
+                this.pst = returnID ? Session.INSTANCE.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS) : Session.INSTANCE.getConnection().prepareStatement(query);
+                
+                Object[] sp = values.toArray();
+                for(int i = 1; i <= sp.length; i++){
+                    this.pst.setObject(i, sp[i - 1]);
+                }
+                
+                Boolean success = this.pst.executeUpdate() != 0;
+                
+                return success ? (returnID  ?  Integer.parseInt(((HashMap) R2SL.convert(this.pst.getGeneratedKeys()).get(0)).get("GENERATED_KEYS").toString()) : 1) : 0; 
+            }catch(SQLException ex ){
+                ex.printStackTrace();
+                System.err.println("SQL Error -> " + ex.getMessage());
+                System.err.println(query);
+            }
+        }
+        
+        
+        return 0;
+    }
+    
     
     //Update 
     public Model update(Object[][] vals){
@@ -290,7 +344,7 @@ public class Model {
                 
             }
             
-            this.finalQuery = "UPDATE " + Session.table + " SET " + columns ; 
+            this.finalQuery = "UPDATE " + this.global_table + " SET " + columns ; 
             System.out.println(this.finalQuery);
             return this;
 
@@ -303,7 +357,7 @@ public class Model {
        
         if (Session.INSTANCE.hasConnection()) {
             
-            this.finalQuery = "DELETE FROM " + Session.table;
+            this.finalQuery = "DELETE FROM " + this.global_table;
             return this;
 
         }
@@ -368,7 +422,14 @@ public class Model {
      */
     public Model join(JOIN joinProc, String table2, String table2_key, String logical_operator, String table1_key) {
         
-        this.joinConstruct += joinProc + " JOIN " + table2 + " ON " + table2 + "." + table2_key +  " " + logical_operator + " " + Session.table + "." + table1_key + " ";
+        this.joinConstruct += joinProc + " JOIN " + table2 + " ON " + table2 + "." + table2_key +  " " + logical_operator + " " + this.global_table + "." + table1_key + " ";
+        this.joined = true;
+        return this;
+    }
+    
+    public Model join(JOIN joinProc, String table2, String table2_key, String table2_alias, String logical_operator, String table1_key) {
+        
+        this.joinConstruct += joinProc + " JOIN " + table2 + " as " + table2_alias + " ON " + table2_alias + "." + table2_key + " " + logical_operator + " " + this.global_table + "." + table1_key + " ";
         this.joined = true;
         return this;
     }
@@ -392,6 +453,8 @@ public class Model {
         this.where = false;
         this.groupBy = "";
         this.finalQuery = "Select * From ";
+        this.joinConstruct = "";
+        this.joined = false;
     }
     
 }

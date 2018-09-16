@@ -12,23 +12,13 @@ and open the template in the editor.
 
 
 .btn-rounded{
-  -fx-background-color: white, white;
-  -fx-background-radius: 50%;
-  -fx-background-insets: -1.4, 0;
-  -fx-border-radius: 15;
-  -fx-border-width: 2;
-  -fx-padding: 0;
-  -fx-font-size: 0;
-}
-
-.nav-menu:focused{
-    -fx-background-color: #34A853;
-    -fx-text-fill: white;
-}
-
-.nav-menu:hover{
-    -fx-background-color: #34A853;
-    -fx-text-fill: white;
+    -fx-background-color: white, white;
+    -fx-background-radius: 50%;
+    -fx-background-insets: -1.4, 0;
+    -fx-border-radius: 15;
+    -fx-border-width: 2;
+    -fx-padding: 0;
+    -fx-font-size: 0;
 }
 
 
@@ -36,3 +26,104 @@ and open the template in the editor.
     -fx-background-color: #34A853;
     -fx-text-fill: white;
 }
+
+.btn-danger{
+    -fx-background-color:  #EA4335;
+    -fx-text-fill: white;
+    
+}
+
+
+
+
+#tab .tab-label{
+    -fx-background-color: white;
+    -fx-text-fill: #34A853;
+}
+
+#tab:selected .tab-label{
+    -fx-background-color:  #34A853 ;
+    -fx-text-fill: white;
+}
+
+.tab-header-background {
+    -fx-background-color: white;
+}
+
+
+.tab-pane > .tab-header-area > .headers-region > .tab {
+    -fx-background-radius: 0;
+}
+
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-radius: 0;
+}
+
+.menu-bar {
+    -fx-background-color: #34A853;
+    -fx-font-size: 10pt;
+
+}
+
+.menu .label{    
+    -fx-text-fill:  white;
+}
+
+.menu-button:hover,
+.menu-button:selected,
+.menu-button:showing{
+    -fx-background-color: white;
+}
+
+.menu-button:hover > .label,
+.menu-button:selected > .label,
+.menu-button:showing > .label{
+    -fx-text-fill: #34A853;
+}
+
+.menu-button:hover  .fontIcon,
+.menu-button:selected  .fontIcon,
+.menu-button:showing     .fontIcon {
+    -fx-fill: #34A853;
+}
+
+.menu:hover .context-menu .label {
+    -fx-text-fill:  black;
+}
+
+.menu-item:hover,
+.menu-item:selected,
+.menu-item:showing{
+    -fx-background-color: #34A853;
+    -fx-text-fill: white !important;
+}
+
+.menu-item:hover .fontIcon,
+.menu-item:selected .fontIcon,
+.menu-item:showing .fontIcon{
+    -fx-fill: white;
+}
+
+
+
+/* Table */
+
+.table-view {
+    -fx-background-color: transparent;
+}
+
+.table-view:focused {
+
+    -fx-background-color: transparent;
+}
+
+.table-row-cell:selected{
+    -fx-background-color: #34A853;
+    -fx-background-insets : 0, 0 0 1 0;
+}
+
+.table-row-cell:selected  .text  {
+    -fx-fill : white;
+}
+
+

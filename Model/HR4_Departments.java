@@ -5,17 +5,16 @@
  */
 package Model;
 
-
 /**
  *
  * @author Lei
  */
-public class Permissions extends Synapse.Model{
-    
-    
-    public Permissions(){
-        setColumns("id", "permissions");
-        this.initTable("aerolink.tbl_permissions");
+public class HR4_Departments extends Synapse.Model{
+
+    public HR4_Departments() {
+        this.initTable("tbl_hr4_department");
+        setColumns("id", "dept_name", "dept_desc");
     }
+    
     
 }

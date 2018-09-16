@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTogglePane?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.SidePanelController">
+   <children>
+      <TitledPane text="Human Resource ">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIconView fill="#34a853" glyphName="GROUP" size="15" />
+         </graphic>
+         <effect>
+            <Blend mode="OVERLAY" />
+         </effect>
+      </TitledPane>
+      <AnchorPane prefHeight="75.0" prefWidth="231.0" style="-fx-background-color: #fff;">
+         <children>
+            <ImageView fitHeight="57.0" fitWidth="65.0" layoutX="9.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Assets/300%20x%20300.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="72.0" layoutY="4.0" prefHeight="53.0" prefWidth="159.0" text="AeroLink" textFill="#2dbe60">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <Label layoutX="73.0" layoutY="43.0" text="Freight Management System" />
+         </children>
+      </AnchorPane>
+      <Separator prefWidth="200.0" />
+      <Accordion prefHeight="688.0" prefWidth="231.0">
+         <panes>
+            <TitledPane prefHeight="574.0" prefWidth="231.0" text="Core">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="555.0" prefWidth="229.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <JFXButton id="core1_booking" prefHeight="27.0" prefWidth="206.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="Booking" />
+                              <JFXButton id="core1pom" prefHeight="27.0" prefWidth="206.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="Purchase Order Management" />
+                              <JFXButton id="core1consol" prefHeight="27.0" prefWidth="206.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="Consolidation/Deconsolidation" />
+                              <JFXButton id="core1mawb" prefHeight="27.0" prefWidth="206.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="Master &amp; House Bill of Lading" />
+                              <JFXButton id="core1sf" prefHeight="27.0" prefWidth="206.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="Shipment Files" />
+                              <Separator prefHeight="0.0" prefWidth="201.0" style="-fx-border-color: gray;" />
+                              <JFXButton id="core2SN" prefHeight="27.0" prefWidth="206.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="Service Network" />
+                              <JFXButton id="core2SN" prefHeight="27.0" prefWidth="206.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="Service Provider" />
+                              <JFXButton id="core2SN" prefHeight="27.0" prefWidth="206.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="Customer Relationship Management">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton id="core2SN" prefHeight="27.0" prefWidth="206.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="Standard Operation Procedures" />
+                              <JFXButton id="core2SN" prefHeight="27.0" prefWidth="206.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="Schedule and Rate" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="#34a853" glyphName="CUBE" size="15" />
+               </graphic>
+               <effect>
+                  <Blend mode="OVERLAY" />
+               </effect>
+            </TitledPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="9.0" prefWidth="229.0">
+               <children>
+                  <VBox layoutX="32.0" layoutY="48.0" prefHeight="530.0" prefWidth="219.0" stylesheets="@../Assets/css/MainPanel.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <JFXButton id="hr1RCC" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Recruitment" />
+                        <JFXButton id="applicant" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Applicant Management" />
+                        <JFXButton id="newHire" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="New Hire on Board" />
+                        <JFXButton id="performance" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Perfomance Management" />
+                        <JFXButton id="social" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Social Recognition" />
+                        <Separator prefHeight="0.0" prefWidth="201.0" style="-fx-border-color: gray;" />
+                        <JFXButton id="learning_management" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Learning Management" />
+                        <JFXButton id="training_management" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Training Management" />
+                        <JFXButton id="competency_management" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Compentency Management" />
+                        <JFXButton id="succession_planning" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Sucession Planning" />
+                        <Separator prefHeight="0.0" prefWidth="201.0" style="-fx-border-color: gray;" />
+                        <JFXButton id="hr3sns" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Shift and Scheduling" />
+                        <JFXButton id="hr3tna" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Time and Attendance" />
+                        <JFXButton id="hr3cnr" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Claims and Reimbursement" />
+                        <JFXButton id="hr3lm" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Leave Management" />
+                        <JFXButton id="hr3tm" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Timesheet Management" />
+                        <Separator prefHeight="0.0" prefWidth="201.0" style="-fx-border-color: gray;" />
+                        <JFXButton id="hr4analytics" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Analytics" />
+                            <JFXButton id="hr4payroll" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Payroll" />
+                        <JFXButton id="hr4cnp" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Compensation and Planning" />
+                        <JFXButton id="hr4chc" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Core Human Capital Management" />
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <TitledPane prefHeight="506.0" prefWidth="231.0" text="Logistics">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="294.0" prefWidth="229.0">
+                     <children>
+                        <VBox layoutX="24.0" layoutY="24.0" prefHeight="281.0" prefWidth="205.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <JFXButton id="hr1RCC" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Warehouse Management" />
+                              <JFXButton id="hr1RCC" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Maintenance &amp; Overhaul" />
+                              <JFXButton id="hr1RCC" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Asset Management" />
+                              <JFXButton id="hr1RCC" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Procurement" />
+                              <Separator prefHeight="14.0" prefWidth="200.0" />
+                              <JFXButton id="log2am" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="Audit Management" />
+                              <JFXButton id="log2vp" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="Vendor Portal" />
+                              <JFXButton id="log2fm" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="Fleet Management" />
+                              <JFXButton id="log2vr" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="Vehice Reservation" />
+                              <JFXButton id="log2dt" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="Document Tracking System" />
+                              <JFXTogglePane />
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="#34a853" glyphName="TRUCK" size="15" />
+               </graphic>
+               <effect>
+                  <Blend mode="OVERLAY" />
+               </effect>
+            </TitledPane>
+            <TitledPane prefHeight="693.0" prefWidth="221.0" text="Financials">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="524.0" prefWidth="229.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <JFXButton id="id_collection" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="Collections" />
+                              <JFXButton id="id_budget" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="Budget Management" />
+                              <JFXButton id="id_disbursement" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="Disbursement" />
+                              <JFXButton id="id_apr" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="AP &amp; AR" />
+                              <JFXButton id="id_gl" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" stylesheets="@../Assets/css/MainPanel.css" text="General Ledger" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <effect>
+                  <Blend mode="OVERLAY" />
+               </effect>
+               <graphic>
+                  <FontAwesomeIconView fill="#34a853" glyphName="MONEY" size="15" />
+               </graphic>
+            </TitledPane>
+            <TitledPane animated="false" text="Administrative">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <effect>
+                  <Blend mode="OVERLAY" />
+               </effect>
+               <graphic>
+                  <FontAwesomeIconView fill="#34a853" glyphName="USER" size="15" />
+               </graphic>
+            </TitledPane>
+            <TitledPane animated="false" text="User Management">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="573.0" prefWidth="229.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <JFXButton id="usmManageUsers" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="262.0" styleClass="nav-menu" text="Manage Users" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <effect>
+                  <Blend mode="OVERLAY" />
+               </effect>
+               <graphic>
+                  <FontAwesomeIconView fill="#34a853" glyphName="USER" size="15" />
+               </graphic>
+            </TitledPane>
+         </panes>
+      </Accordion>
+   </children>
+</VBox>

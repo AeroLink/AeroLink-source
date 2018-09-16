@@ -22,12 +22,16 @@ public class ModalController implements Initializable {
 
     @FXML
     private BorderPane DropPoint;
+    @FXML
+    private AnchorPane acpane;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        acpane.setPrefHeight(((AnchorPane) Synapse.Components.Modal.Modal.ow).getPrefHeight());
+        acpane.setPrefWidth(((AnchorPane) Synapse.Components.Modal.Modal.ow).getPrefWidth());
         DropPoint.centerProperty().set((Node) Synapse.Components.Modal.Modal.ow);
     }    
     
