@@ -5,18 +5,14 @@
  */
 package Model.HR1;
 
-
-
 /**
  *
  * @author Lei
  */
-public class JobVacancy extends Synapse.Model{
+public class JobPosting extends Synapse.Model{
 
-    public JobVacancy() {
-        this.initTable("tbl_hr4_job_limit");
+    public JobPosting() {
+        this.initTable("tbl_hr1_jobPosting");
     }
-
-    
-    
+     
 }

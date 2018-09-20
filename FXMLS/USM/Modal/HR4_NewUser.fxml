@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="236.0" prefWidth="248.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.USM.Modal.HR4_NewUserController">
+   <children>
+      <JFXTextField fx:id="txtUsername" focusColor="#34a853" labelFloat="true" layoutX="16.0" layoutY="74.0" maxWidth="260.0" minWidth="180.0" prefHeight="31.0" prefWidth="215.0" promptText="Username" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" />
+      <Label layoutX="47.0" layoutY="11.0" text="New User Account">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnSubmit" graphicTextGap="10.0" layoutX="16.0" layoutY="180.0" onAction="#submitUser" prefHeight="31.0" prefWidth="80.0" styleClass="btn-primary" stylesheets="@../../../Assets/css/MainPanel.css" text="Submit" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0">
+         <graphic>
+            <FontAwesomeIconView fill="WHITE" glyphName="SEND" />
+         </graphic>
+      </JFXButton>
+      <FontAwesomeIconView fill="#34a853" glyphName="USER" layoutX="16.0" layoutY="31.0" size="22" />
+      <Separator layoutX="24.0" layoutY="46.0" prefWidth="200.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" />
+      <JFXPasswordField fx:id="txtPassword" focusColor="#34a853" labelFloat="true" layoutX="24.0" layoutY="132.0" promptText="Password" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" />
+   </children>
+</AnchorPane>

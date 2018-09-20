@@ -8,10 +8,12 @@ package Views;
 import Controllers.USM.loginController;
 import Synapse.Form;
 import Synapse.Route;
+import Synapse.Session;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -47,6 +49,9 @@ public class LoginController implements Initializable {
             Helpers.AlertResponse alert = new Helpers.AlertResponse(Alert.AlertType.INFORMATION, "Congratulations", "Login Success", "Passing to Dashboard");
             alert.open();
             
+            System.out.println(Arrays.asList(Session.getPermissions()));
+            
+            System.out.println(Session.hasPermission("can_HR3_Shift_and_Scheduling"));
             new Form(Route.routes.get("Main").toString()).open(StageStyle.UNDECORATED, true);
             Form.close(btnSignIn);
         }else {

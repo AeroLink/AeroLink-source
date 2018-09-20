@@ -16,7 +16,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <JFXButton layoutX="521.0" layoutY="10.0" prefHeight="29.0" prefWidth="109.0" ripplerFill="WHITE" style="-fx-background-color: #2dbe60;" text="New Permission" textFill="WHITE" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-      <JFXComboBox layoutX="196.0" layoutY="10.0" prefHeight="29.0" prefWidth="318.0" promptText="Permissions" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="126.0" />
+      <JFXButton layoutX="521.0" layoutY="10.0" onAction="#setPermission" prefHeight="29.0" prefWidth="109.0" ripplerFill="WHITE" style="-fx-background-color: #2dbe60;" text="Set Permission" textFill="WHITE" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+      <JFXComboBox fx:id="comboPermissions" layoutX="196.0" layoutY="10.0" prefHeight="29.0" prefWidth="318.0" promptText="Permissions" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="126.0" />
    </children>
 </AnchorPane>

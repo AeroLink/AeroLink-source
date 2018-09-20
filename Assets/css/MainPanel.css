@@ -112,6 +112,10 @@ and open the template in the editor.
     -fx-background-color: transparent;
 }
 
+.table-column {
+    -fx-alignment: CENTER;
+}
+
 .table-view:focused {
 
     -fx-background-color: transparent;

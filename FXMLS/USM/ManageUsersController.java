@@ -10,6 +10,7 @@ import FXMLS.USM.Controllers.SetPermissionUSMController;
 import Model.Users;
 import Synapse.Components.Modal.Modal;
 import Synapse.Form;
+import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -38,6 +39,8 @@ public class ManageUsersController implements Initializable {
 
     
     ObservableList<IUsers> obj = FXCollections.observableArrayList();
+    @FXML
+    private JFXButton btnNewUser;
         
     /**
      * Initializes the controller class.
@@ -105,6 +108,13 @@ public class ManageUsersController implements Initializable {
         tblUsers.setItems(this.obj);
         tblUsers.getColumns().addAll(id, username, created_at, updated_at, setPerms);
     
+    }
+
+    @FXML
+    private void OpenModalNewUser(ActionEvent event) {
+        
+        Modal md = Modal.getInstance(new Form("/FXMLS/USM/Modal/HR4_NewUser.fxml").getParent());
+        md.open();
     }
      
     

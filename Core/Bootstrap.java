@@ -27,6 +27,10 @@ public class Bootstrap {
         Session.links =  RouteConfig.links;
         //Building Database Configs
         
+        ModularPermissionConfig.initModuleConfig();
+        
+        Session.ModularPermission = ModularPermissionConfig.modules;
+        
         Session.Database = DatabaseConfig.DATABASE;
         Session.Ip = DatabaseConfig.IP;
         Session.Password = DatabaseConfig.PASSWORD;

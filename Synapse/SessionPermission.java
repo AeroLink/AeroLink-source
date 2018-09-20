@@ -3,20 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model.HR1;
+package Synapse;
 
-
+import java.util.HashMap;
+import java.util.List;
 
 /**
  *
  * @author Lei
  */
-public class JobVacancy extends Synapse.Model{
-
-    public JobVacancy() {
-        this.initTable("tbl_hr4_job_limit");
-    }
-
+public class SessionPermission {
     
+
     
 }

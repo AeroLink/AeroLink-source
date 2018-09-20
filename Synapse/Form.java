@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
@@ -81,6 +82,8 @@ public class Form {
         
         if (isFullScreen) {
            this.stage.setFullScreen(true);
+           this.stage.fullScreenExitKeyProperty().setValue(KeyCombination.NO_MATCH);
+           this.stage.setAlwaysOnTop(true);
         }
         
         this.stage.initStyle(stageSytle);

@@ -5,7 +5,12 @@
  */
 package Synapse;
 
+import java.security.Permission;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  *
@@ -52,9 +57,9 @@ public class Session implements IModule {
     }
     
     public static HashMap getSession() {
-        return session;
+        return session;   
     }
-    
+   
     
     //Database
     public static iDB INSTANCE;
@@ -70,9 +75,30 @@ public class Session implements IModule {
     
     public static String[][] links;
     
-
+    public static HashMap ModularPermission;
+    
+    private static List userPermission = new ArrayList<>();
+    
+    public static void addPermission(String p){
+         userPermission.add(p);
+    }
+    
+    public static Boolean hasPermission(String permission){
+        return userPermission.contains(permission);
+    }
+    
+    public static List getPermissions(){
+        return userPermission;
+    }
+    
     public static String table = "";
     public static Boolean where = false;
     public static String whereValues = "";
     
+    
+    //Threads
+    public static ExecutorService SessionThreads = Executors.newCachedThreadPool();
+    
+    //forms
+    public static String CurrentRoute = "";
 }

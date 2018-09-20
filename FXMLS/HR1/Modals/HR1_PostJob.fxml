@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="354.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR1.Modals.HR1_PostJobController">
+   <children>
+      <StackPane fx:id="stackpane" prefHeight="376.0" prefWidth="600.0">
+         <children>
+            <AnchorPane prefHeight="333.0" prefWidth="595.0" style="-fx-background-color: white;">
+               <children>
+                  <Label fx:id="lblJob" layoutX="42.0" layoutY="23.0" text="Position">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Separator layoutX="14.0" layoutY="55.0" prefHeight="0.0" prefWidth="589.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+                  <FontAwesomeIconView fx:id="jobID" fill="#34a853" glyphName="PAPER_PLANE_ALT" layoutX="15.0" layoutY="43.0" size="22" AnchorPane.leftAnchor="14.0" />
+                  <Label layoutX="14.0" layoutY="62.0" text="Description :">
+                     <font>
+                        <Font name="System Bold Italic" size="11.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="txtDesc" layoutX="14.0" layoutY="83.0" prefHeight="139.0" prefWidth="572.0" promptText="Job Description" wrapText="true" AnchorPane.leftAnchor="14.0">
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font>
+                  </TextArea>
+                  <JFXButton fx:id="btnPost" alignment="CENTER" graphicTextGap="10.0" layoutX="421.0" layoutY="321.0" onAction="#submitPost" prefHeight="31.0" prefWidth="150.0" styleClass="btn-primary" stylesheets="@../../../Assets/css/MainPanel.css" text="Post" AnchorPane.rightAnchor="24.0">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="SEND" />
+                     </graphic>
+                  </JFXButton>
+                  <TextField fx:id="txtOpen" editable="false" layoutX="14.0" layoutY="258.0" prefHeight="25.0" prefWidth="184.0" AnchorPane.leftAnchor="14.0" />
+                  <Label layoutX="14.0" layoutY="233.0" text="Number of Open Position :" AnchorPane.leftAnchor="14.0">
+                     <font>
+                        <Font name="System Bold Italic" size="11.0" />
+                     </font>
+                  </Label>
+                  <JFXDatePicker fx:id="dtpPublish" defaultColor="#34a853" editable="false" layoutX="20.0" layoutY="327.0" prefHeight="31.0" prefWidth="173.0" promptText="Publish On" />
+                  <Label layoutX="20.0" layoutY="305.0" text="Date will be published:">
+                     <font>
+                        <Font name="System Bold Italic" size="11.0" />
+                     </font>
+                  </Label>
+                  <JFXDatePicker fx:id="dtpExpire" defaultColor="#34a853" editable="false" layoutX="211.0" layoutY="327.0" prefHeight="31.0" prefWidth="173.0" promptText="Expire On" />
+                  <Label layoutX="211.0" layoutY="305.0" text="Date will be expired:">
+                     <font>
+                        <Font name="System Bold Italic" size="11.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="cboStatus" layoutX="421.0" layoutY="258.0" prefWidth="150.0" />
+                  <TextField fx:id="txtSalary" layoutX="209.0" layoutY="258.0" prefHeight="25.0" prefWidth="200.0" />
+                  <Label layoutX="211.0" layoutY="233.0" text="Assumed Salary :">
+                     <font>
+                        <Font name="System Bold Italic" size="11.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="421.0" layoutY="233.0" text="Employment Status :">
+                     <font>
+                        <Font name="System Bold Italic" size="11.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+         <padding>
+            <Insets bottom="5.0" right="5.0" />
+         </padding>
+      </StackPane>
+   </children>
+</AnchorPane>
