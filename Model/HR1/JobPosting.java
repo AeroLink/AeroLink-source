@@ -12,7 +12,7 @@ package Model.HR1;
 public class JobPosting extends Synapse.Model{
 
     public JobPosting() {
-        this.initTable("tbl_hr1_jobPosting");
+        this.initTable("tbl_hr1_posting");
     }
      
 }

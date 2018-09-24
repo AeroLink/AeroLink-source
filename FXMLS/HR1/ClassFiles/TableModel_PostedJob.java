@@ -12,23 +12,26 @@ import javafx.beans.property.StringProperty;
  *
  * @author Lei
  */
-public class TableModel_jLimit {
+public class TableModel_PostedJob {
     
     public StringProperty id;
-    public StringProperty job_id;
-    public StringProperty job_open;
     public StringProperty job_title;
-    public StringProperty status;
-    public StringProperty opened_date;
-    
-    public TableModel_jLimit(String id, String job_id, String job_open, String job_title, String status, String open_date) {
+    public StringProperty postingDate;
+    public StringProperty views;
+    public StringProperty applicants;
+
+    public TableModel_PostedJob(String id, String job_title, String postingDate, String views, String applicants) {
         this.id = new SimpleStringProperty(id);
-        this.job_id = new SimpleStringProperty(job_id);
-        this.job_open = new SimpleStringProperty(job_open);
         this.job_title = new SimpleStringProperty(job_title);
-        this.status = new SimpleStringProperty(status);
-        this.opened_date = new SimpleStringProperty(open_date);
+        this.postingDate = new SimpleStringProperty(postingDate);
+        this.views = new SimpleStringProperty(views);
+        this.applicants = new SimpleStringProperty(applicants);
     }
+
+
+    
+    
+    
     
     
     

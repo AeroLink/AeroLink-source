@@ -104,6 +104,7 @@ public class Model {
                 this.clear();
                 return R2SL.convert(pst.executeQuery());
             } catch (SQLException ex) {
+                Response.ErrorResponse();
                 System.out.println("SQL Error -> " + ex.getMessage());
             }
 
@@ -144,6 +145,8 @@ public class Model {
                 this.clear();
                 return R2SL.convert(pst.executeQuery());
             } catch (SQLException ex) {
+
+                Response.ErrorResponse();
                 System.out.println("SQL Error -> " + ex.getMessage());
             }
 
@@ -217,6 +220,8 @@ public class Model {
                 return this.pst.execute();
 
             } catch (SQLException ex) {
+
+                Response.ErrorResponse();
                 System.out.println("SQL Error -> " + ex.getMessage());
             }
 
@@ -259,6 +264,7 @@ public class Model {
 
             } catch (SQLException ex) {
 
+                Response.ErrorResponse();
                 System.err.println("SQL Error -> " + ex.getMessage() + "\nSQL Query -> " + query + "\nSQL Values ->" + Arrays.asList(values));
             }
         }
@@ -304,6 +310,8 @@ public class Model {
 
                 return success ? (returnID ? Integer.parseInt(((HashMap) R2SL.convert(this.pst.getGeneratedKeys()).get(0)).get("GENERATED_KEYS").toString()) : 1) : 0;
             } catch (SQLException ex) {
+
+                Response.ErrorResponse();
                 ex.printStackTrace();
                 System.err.println("SQL Error -> " + ex.getMessage());
                 System.err.println(query);
@@ -392,6 +400,8 @@ public class Model {
 
             return rt;
         } catch (SQLException ex) {
+
+            Response.ErrorResponse();
             Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -417,6 +427,16 @@ public class Model {
 
         this.joinConstruct += joinProc + " JOIN " + table2 + " ON " + table2 + "." + table2_key + " " + logical_operator + " " + this.global_table + "." + table1_key + " ";
         this.joined = true;
+        return this;
+    }
+
+    public Model join(JOIN joinProc, String table2, String table2_key, String logical_operator, String table1, String table1_key, Boolean otherJoin) {
+
+        if (otherJoin) {
+            this.joinConstruct += joinProc + " JOIN " + table2 + " ON " + table2 + "." + table2_key + " " + logical_operator + " " + table1 + "." + table1_key + " ";
+            this.joined = true;
+        }
+
         return this;
     }
 

@@ -5,6 +5,7 @@
  */
 package FXMLS.USM.Modal;
 
+import Model.UserPermissions;
 import Model.Users;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
@@ -41,11 +42,17 @@ public class HR4_NewUserController implements Initializable {
     @FXML
     private void submitUser(ActionEvent event) {
         Users u = new Users();
-        if (u.insert(new Object[][]{
+        UserPermissions up = new UserPermissions();
+
+        int id = u.insert(new Object[][]{
             {"username", txtUsername.getText()},
             {"password", Synapse.Crypt.Encrypt(txtPassword.getText())}
-        })) {
-
+        }, true);
+        if (id != 0) {
+            up.insert(new Object[][]{
+                {"user_id", id},
+                {"permission_id", 53}
+            });
             Helpers.AlertResponse alert = new Helpers.AlertResponse(Alert.AlertType.INFORMATION, "Congratulations", "New User was added", "User" + txtUsername.getText() + " was added to the database");
             alert.open();
         }

@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.HTMLEditor?>
 
-<AnchorPane id="AnchorPane" prefHeight="459.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR1.Modals.HR1_PostJobController">
+<AnchorPane id="AnchorPane" prefHeight="459.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR1.Modals.HR1_EditJobController">
    <children>
       <StackPane fx:id="stackpane" prefHeight="459.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -31,7 +31,7 @@
                         <Font name="System Bold Italic" size="11.0" />
                      </font>
                   </Label>
-                  <JFXButton fx:id="btnPost" alignment="CENTER" graphicTextGap="10.0" layoutX="421.0" layoutY="408.0" onAction="#submitPost" prefHeight="31.0" prefWidth="150.0" styleClass="btn-primary" stylesheets="@../../../Assets/css/MainPanel.css" text="Post" AnchorPane.rightAnchor="24.0">
+                  <JFXButton fx:id="btnPost" alignment="CENTER" graphicTextGap="10.0" layoutX="421.0" layoutY="408.0" onAction="#submitPost" prefHeight="31.0" prefWidth="119.0" styleClass="btn-primary" stylesheets="@../../../Assets/css/MainPanel.css" text="Update" AnchorPane.rightAnchor="24.0">
                      <graphic>
                         <FontAwesomeIconView fill="WHITE" glyphName="SEND" />
                      </graphic>
@@ -67,6 +67,11 @@
                      </font>
                   </Label>
                   <HTMLEditor fx:id="txtDesc" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="12.0" layoutY="78.0" prefHeight="232.0" prefWidth="567.0" />
+                  <JFXButton alignment="CENTER" graphicTextGap="10.0" layoutX="460.0" layoutY="18.0" onAction="#closeJob" prefHeight="31.0" prefWidth="119.0" styleClass="btn-danger" stylesheets="@../../../Assets/css/MainPanel.css" text="Close this Job">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" />
+                     </graphic>
+                  </JFXButton>
                </children>
             </AnchorPane>
          </children>

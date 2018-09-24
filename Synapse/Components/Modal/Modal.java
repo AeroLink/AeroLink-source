@@ -45,6 +45,8 @@ public class Modal {
         this.f.getStage().resizableProperty().set(false);
         
     }
+    
+    
 
     public Form getF() {
         return f;

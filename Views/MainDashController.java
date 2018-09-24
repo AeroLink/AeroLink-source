@@ -53,6 +53,8 @@ public class MainDashController implements Initializable {
     private ContextMenu contextM;
     @FXML
     private MenuItem userManagement;
+    @FXML
+    private MenuItem importAndExport;
 
     /**
      * Initializes the controller class.
@@ -91,7 +93,6 @@ public class MainDashController implements Initializable {
             userManagement.setOnAction(event -> {
                 Session.CurrentRoute = "usmManageUsers" ;
                 LoadSubSystem loadSubSystem = new Helpers.LoadSubSystem("usmManageUsers", DropPoint);
-
             });
         }
     }

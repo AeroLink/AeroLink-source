@@ -19,7 +19,7 @@ public class HR2_Competency extends Synapse.Model {
        public HR2_Competency()
             {
                    setColumns("job_id","skill_id");
-                    setTable("tbl_hr2_competency");
+                    this.initTable("tbl_hr2_competency");
 
             }
 

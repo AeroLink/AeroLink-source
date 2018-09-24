@@ -7,7 +7,10 @@ package FXMLS.HR1.Modals;
 
 import FXMLS.HR1.ClassFiles.HR1_PostJobSelection;
 import Model.HR1.JobPosting;
+import Model.HR1.JobVacancy;
+import Model.HR2_Competency;
 import Model.HR4_Jobs;
+import Synapse.Model;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
@@ -23,6 +26,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
+import javafx.scene.web.HTMLEditor;
 
 /**
  * FXML Controller class
@@ -38,7 +42,7 @@ public class HR1_PostJobController implements Initializable {
     @FXML
     private FontAwesomeIconView jobID;
     @FXML
-    private TextArea txtDesc;
+    private HTMLEditor txtDesc;
     @FXML
     private JFXButton btnPost;
     @FXML
@@ -52,44 +56,79 @@ public class HR1_PostJobController implements Initializable {
     @FXML
     private TextField txtSalary;
 
+    String htmlText = "";
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        
         jobID.setId(HR1_PostJobSelection.jobID);
         txtOpen.setText(HR1_PostJobSelection.OpenPos);
         lblJob.setText(HR1_PostJobSelection.jobTitle);
-        
+
         HR4_Jobs jobs = new HR4_Jobs();
-        
-        jobs.where(new Object[][] {
+
+        jobs.where(new Object[][]{
             {"job_id", "=", HR1_PostJobSelection.jobID}
         }).get().stream().forEach(row -> {
-            txtDesc.appendText("Job Description\n\n" + ( (HashMap) row ).get("description") + "\n\n" );
+            htmlText += "<h3>Job Description : </h3>  </br></br>" + ((HashMap) row).get("description") + "</br></br>";
         });
+
+        htmlText += "<h3>Competencies : </h3>  </br></br><ul>";
+
+        HR2_Competency competency = new HR2_Competency();
+
+        competency.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "job_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_hr2_skillset", "skill_id", "=", "skill_id")
+                .where(new Object[][]{
+            {"aerolink.tbl_hr4_jobs.job_id", "=", HR1_PostJobSelection.jobID}
+        }).get("aerolink.tbl_hr2_skillset.skill as skill", "aerolink.tbl_hr2_skillset.skill_description as description").stream().forEach(row -> {
+            htmlText += " <li><h5>" + ((HashMap) row).get("skill") + "</h5><p>" + ((HashMap) row).get("description") + "</p></li>";
+        });
+
+        htmlText += "</ul></br></br>";
+        
+        txtDesc.setHtmlText(htmlText);
         
         Object[] cbo = {"Full Time", "Part Time"};
         cboStatus.getItems().addAll(cbo);
-        
-    }    
+
+    }
 
     @FXML
     private void submitPost(ActionEvent event) {
         JobPosting jp = new JobPosting();
-        
-        if(jp.insert(new Object[][] {
-            {"jobPosted_id", HR1_PostJobSelection.id},
-            {"title", lblJob.getText()},
-            {"description", txtDesc.getText()},
-            {"status", cboStatus.getSelectionModel().getSelectedItem().toString()},
-            {"salary", txtSalary.getText()},
-            {"publish_on", dtpPublish.getValue().toString()},
-            {"until", dtpExpire.getValue().toString() }
-                
-        })) {
-            Helpers.EIS_Response.SuccessResponse("Success", "Job was successfully Posted");
+        JobVacancy jv = new JobVacancy();
+
+        try {
+            int id = jp.insert(new Object[][]{
+                {"jobPosted_id", HR1_PostJobSelection.id},
+                {"title", lblJob.getText()},
+                {"description", txtDesc.getHtmlText()},
+                {"status", cboStatus.getSelectionModel().getSelectedItem().toString()},
+                {"salary", txtSalary.getText()},
+                {"publish_on", dtpPublish.getValue().toString()},
+                {"until", dtpExpire.getValue().toString()}
+
+            }, true);
+
+            if (id != 0) {
+
+                jv.update(new Object[][]{
+                    {"isPosted", 1}
+                }).where(new Object[][]{
+                    {"id", "=", HR1_PostJobSelection.id}
+                }).executeUpdate();
+
+                Helpers.EIS_Response.SuccessResponse("Success", "Job was successfully Posted");
+            }
+
+        } catch (Exception e) {
+            Helpers.EIS_Response.ErrorResponse("Wait!", "You got some error on your inputs");
         }
     }
-    
+
 }

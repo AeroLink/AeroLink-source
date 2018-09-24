@@ -30,7 +30,7 @@ and open the template in the editor.
 .btn-danger{
     -fx-background-color:  #EA4335;
     -fx-text-fill: white;
-    
+
 }
 
 
@@ -67,6 +67,19 @@ and open the template in the editor.
 
 .menu .label{    
     -fx-text-fill:  white;
+}
+
+
+.menu-button {
+    -fx-background-color: #34A853;
+}
+
+.menuButton {
+    -fx-background-color: white;
+}
+
+.menuButton > .label {
+    -fx-text-fill: #34a853;
 }
 
 .menu-button:hover,

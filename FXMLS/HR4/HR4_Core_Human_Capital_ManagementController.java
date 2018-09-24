@@ -18,14 +18,16 @@ import Synapse.Components.Modal.Modal;
 import Synapse.Form;
 import Synapse.Model;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -56,6 +58,10 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
     ExecutorService e = Executors.newFixedThreadPool(1);
 
     HR4_Jobs jobs = new HR4_Jobs();
+    @FXML
+    private JFXTextField txtSearch;
+    @FXML
+    private JFXButton btnSearch;
 
     /**
      * Initializes the controller class.
@@ -72,6 +78,29 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         this.populateTable();
         tbl_jobs.setContextMenu(contextMenuJobs);
 
+        txtSearch.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            search();
+        });
+        btnSearch.setOnMouseClicked(event -> search());
+    }
+
+    public void search() {
+
+        tbl_jobs.getItems().clear();
+        List rs = jobs
+                .join(Model.JOIN.LEFT, "aerolink.tbl_hr4_department", "id", "tblD", "=", "dept_id")
+                .join(Model.JOIN.LEFT, "aerolink.tbl_hr4_job_classifications", "id", "tblC", "=", "classification_id")
+                .join(Model.JOIN.LEFT, "aerolink.tbl_hr4_job_designations", "id", "tblDD", "=", "designation_id")
+                .where(new Object[][]{
+            {"aerolink.tbl_hr4_jobs.title", "like", "%" + txtSearch.getText() + "%"}
+        })
+                .get("job_id",
+                        "title",
+                        "description",
+                        "CONCAT(tblD.id, ' - ', tblD.dept_name) as department",
+                        "CONCAT(tblC.id, ' - ', tblC.class_name) as classification",
+                        "CONCAT(tblDD.id, ' - ', tblDD.designation) as designation");
+        this.AddJobToTable(rs);
     }
 
     public void generateTable() {
@@ -112,8 +141,8 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
                         if (count != Global_Count) {
                             rs = jobs
                                     .join(Model.JOIN.LEFT, "aerolink.tbl_hr4_department", "id", "tblD", "=", "dept_id")
-                                    .join(Model.JOIN.LEFT, "aerolink.tbl_hr4_job_classifications", "id", "tblC" ,"=", "classification_id")
-                                    .join(Model.JOIN.LEFT, "aerolink.tbl_hr4_job_designations", "id", "tblDD" ,"=", "designation_id")
+                                    .join(Model.JOIN.LEFT, "aerolink.tbl_hr4_job_classifications", "id", "tblC", "=", "classification_id")
+                                    .join(Model.JOIN.LEFT, "aerolink.tbl_hr4_job_designations", "id", "tblDD", "=", "designation_id")
                                     .get("job_id",
                                             "title",
                                             "description",
@@ -125,17 +154,17 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
 
                         return rs;
                     }).thenAccept((rs) -> {
-                        if(!rs.isEmpty()) {
+                        if (!rs.isEmpty()) {
                             AddJobToTable(rs);
                         }
                     });
-                    
+
                     Thread.sleep(3000);
                 }
             }
         }
         );
-        
+
         th.setDaemon(true);
         th.start();
     }
@@ -143,7 +172,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
     public void AddJobToTable(List rs) {
 
         obj.clear();
-        
+
         for (Object row : rs) {
             HashMap crow = (HashMap) row;
             String id = String.valueOf(crow.get("job_id"));

@@ -17,7 +17,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane fx:id="DropPoint" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="442.0" prefWidth="649.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.MainDashController">
    <top>
       <VBox BorderPane.alignment="CENTER">
@@ -47,6 +46,7 @@
                         <ContextMenu fx:id="contextM">
                           <items>
                             <MenuItem fx:id="userManagement" mnemonicParsing="false" text="User Management" />
+                              <MenuItem fx:id="importAndExport" mnemonicParsing="false" text="Import and Export" />
                           </items>
                         </ContextMenu>
                      </contextMenu>
