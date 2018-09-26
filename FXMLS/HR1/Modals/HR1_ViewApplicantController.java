@@ -6,7 +6,16 @@
 package FXMLS.HR1.Modals;
 
 import FXMLS.HR1.ClassFiles.HR1_Applicant;
+import FXMLS.HR1.ClassFiles.TableModel_Schedules;
+import Model.HR1.HR1_AppStages;
 import Model.HR1.HR1_Applicants;
+import Model.HR1.HR1_JobOffers;
+import Model.HR1.JobPosting;
+import Model.HR4.HR4_Employee;
+import Model.UserPermissions;
+import Model.Users;
+import Synapse.Components.Modal.Modal;
+import Synapse.Form;
 import Synapse.Model;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
@@ -15,14 +24,27 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
@@ -31,6 +53,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * FXML Controller class
@@ -43,6 +67,10 @@ public class HR1_ViewApplicantController implements Initializable {
     HR1_Applicants applicant_pivot = new HR1_Applicants(true);
     HR1_Applicants applicant_answers = new HR1_Applicants("pre_screening");
     HR1_Applicants applicant_schedules = new HR1_Applicants("app_schedule");
+    HR1_AppStages hiring_stages = new HR1_AppStages();
+    HR1_AppStages hiring_stages_results = new HR1_AppStages("stage_results");
+
+    StringProperty StageID;
 
     @FXML
     private BorderPane centerDrop;
@@ -87,13 +115,51 @@ public class HR1_ViewApplicantController implements Initializable {
     @FXML
     private JFXButton btnSubmit;
     @FXML
-    private ListView<?> listSchedules;
+    private TableView<TableModel_Schedules> listSchedules;
     @FXML
     private TitledPane jobTitle;
     @FXML
     private StackPane spane;
     @FXML
     private AnchorPane workflowPane;
+    @FXML
+    private JFXButton btn0;
+    @FXML
+    private JFXButton btn3;
+    @FXML
+    private JFXButton btn6;
+    @FXML
+    private JFXButton btn5;
+    @FXML
+    private JFXButton btn4;
+    @FXML
+    private JFXButton btn1;
+    @FXML
+    private JFXButton btn2;
+    @FXML
+    private MenuItem menuER;
+    @FXML
+    private MenuItem menuJobOffer;
+    @FXML
+    private MenuItem menuEC;
+    @FXML
+    private MenuItem menuWR;
+    @FXML
+    private AnchorPane jobOfferPane;
+    @FXML
+    private JFXButton btnOfferAccepted;
+    @FXML
+    private JFXButton btnOfferDeclined;
+    @FXML
+    private AnchorPane paneRatings;
+    @FXML
+    private MenuItem menuDeny;
+    @FXML
+    private AnchorPane paneContract;
+    @FXML
+    private TextArea txtpath;
+    @FXML
+    private MenuItem menuHiring;
 
     /**
      * Initializes the controller class.
@@ -101,7 +167,6 @@ public class HR1_ViewApplicantController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-
         lblAppFull.setText(HR1_Applicant.fullname);
         jobTitle.setText("Applying for " + HR1_Applicant.job_title);
         txtEducAttain.setText(HR1_Applicant.educAttain);
@@ -124,10 +189,130 @@ public class HR1_ViewApplicantController implements Initializable {
 
         });
 
-        if (HR1_Applicant.stage_id.equals("0")) {
+        StageID = new SimpleStringProperty(" ");
+
+        StageID.addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            generateWorkflow();
+        });
+
+        StageID.setValue(HR1_Applicant.stage_id);
+
+        this.generateSchedules();
+        this.renderSchedules();
+
+        btnSubmit.setOnAction(event -> {
+            if (hiring_stages_results.insert(new Object[][]{
+                {"app_id", HR1_Applicant.app_id},
+                {"stage_id", StageID.getValue()},
+                {"result", txtPercentage.getText()},
+                {"remarks", txtRemarks.getText()}
+            })) {
+                StageID.setValue(String.valueOf(Integer.parseInt(StageID.getValue()) + 1));
+                applicant_pivot.update(new Object[][]{
+                    {"status", StageID.getValue()}
+                }).where(new Object[][]{
+                    {"app_id", "=", HR1_Applicant.app_id}
+                }).executeUpdate();
+
+                Helpers.EIS_Response.SuccessResponse("Success", "Applicant was successfully evaluated");
+
+            }
+        });
+
+        menuWR.setOnAction(value -> viewResults());
+        menuDeny.setOnAction(value -> {
+            DenyApplication();
+        });
+
+        btnOfferDeclined.setOnMouseClicked(value -> DeniedApplication());
+        btnOfferAccepted.setOnMouseClicked(value -> AcceptedOffer());
+    }
+
+    public void generateWorkflow() {
+        if (StageID.getValue().equals("0")) {
             workflowPane.setDisable(true);
             ProceedToInit();
+        } else {
+            OpeningStages(StageID.getValue());
+
+            hiring_stages.where(new Object[][]{
+                {"stage_id", "=", StageID.getValue()}
+            }).get().stream().forEach(event -> {
+                HashMap row = (HashMap) event;
+
+                lblWorkFlowName.setText(row.get("stage_name").toString());
+                lblWorkflowDesc.setText(row.get("stage_description").toString());
+
+            });
+
+            paneRatings.setVisible(true);
+
+            if (Integer.parseInt(StageID.getValue()) >= 2) {
+                menuER.setDisable(false);
+            }
+
+            if (Integer.parseInt(StageID.getValue()) >= 5) {
+                paneRatings.setVisible(false);
+                jobOfferPane.setVisible(true);
+                menuJobOffer.setDisable(false);
+            }
+
+            if (Integer.parseInt(StageID.getValue()) == 6) {
+
+                jobOfferPane.setVisible(false);
+                paneRatings.setVisible(false);
+                menuEC.setDisable(false);
+                paneContract.setVisible(true);
+            }
         }
+
+        menuHiring.setOnAction(value -> this.Hiring());
+    }
+
+    public void OpeningStages(String id) {
+        JFXButton[] Stages_Buttons = {btn0, btn1, btn2, btn3, btn4, btn5, btn6};
+
+        for (int i = 0; i < Stages_Buttons.length; i++) {
+            if (i <= Integer.parseInt(id)) {
+                Stages_Buttons[i].setDisable(false);
+            } else {
+                Stages_Buttons[i].setDisable(true);
+            }
+        }
+
+    }
+
+    public void generateSchedules() {
+        listSchedules.getItems().clear();
+        listSchedules.getColumns().removeAll(listSchedules.getColumns());
+
+        TableColumn<TableModel_Schedules, String> Sdate = new TableColumn<>("Scheduled Date");
+
+        Sdate.setCellValueFactory(value -> value.getValue().combination);
+
+        listSchedules.getColumns().add(Sdate);
+
+    }
+
+    public void renderSchedules() {
+        ObservableList<TableModel_Schedules> scheds = FXCollections.observableArrayList();
+
+        applicant_schedules.where(new Object[][]{
+            {"app_id", "=", HR1_Applicant.app_id}
+        }).get().stream().forEach(callback -> {
+            HashMap row = (HashMap) callback;
+
+            scheds.add(new TableModel_Schedules(
+                    row.get("schedule_id").toString(),
+                    row.get("purpose").toString(),
+                    row.get("scheduled_date").toString(),
+                    (row.get("scheduled_date").toString() + " - " + row.get("purpose").toString()),
+                    row.get("status").toString()
+            ));
+        });
+
+        listSchedules.getItems().clear();
+        listSchedules.setItems(scheds);
     }
 
     @FXML
@@ -205,6 +390,12 @@ public class HR1_ViewApplicantController implements Initializable {
 
     @FXML
     private void btnAppSched(ActionEvent event) {
+        Modal md = Modal.getInstance(new Form("/FXMLS/HR1/Modals/HR1_ApplicantSched.fxml").getParent());
+        md.open();
+        md.getF().getStage().setOnCloseRequest((event1) -> {
+            HR1_ApplicantSchedController.modalOpen = false;
+        });
+
     }
 
     public void ProceedToInit() {
@@ -225,31 +416,361 @@ public class HR1_ViewApplicantController implements Initializable {
 
         btnSubmitInit.getStyleClass().add("btn-primary");
 
-        btnSubmitInit.setOnMouseClicked(event -> {
-            LocalDate f = dt.getValue();
-            f.format(DateTimeFormatter.ISO_LOCAL_DATE);
-            if (applicant_schedules.insert(new Object[][]{
-                {"app_id", HR1_Applicant.app_id},
-                {"scheduled_date", f.toString()},
-                {"purpose", "Initial Interview"}
-            })) {
-                
-                applicant_pivot.update(new Object[][]{
-                    {"status", 1}
-                }).where(new Object[][]{
-                    {"app_id", "=", HR1_Applicant.app_id}
-                }).executeUpdate();
+        JFXDialog dialog = new JFXDialog(spane, layout, JFXDialog.DialogTransition.TOP);
 
-                // Helpers.EIS_Response.SuccessResponse("Success", "Applicant was successfully transfered to Initial Interview Stage");
+        btnSubmitInit.setOnMouseClicked(event -> {
+            if (!dt.getValue().isBefore(LocalDate.now())) {
+                LocalDate f = dt.getValue();
+                f.format(DateTimeFormatter.ISO_LOCAL_DATE);
+                if (applicant_schedules.insert(new Object[][]{
+                    {"app_id", HR1_Applicant.app_id},
+                    {"scheduled_date", f.toString()},
+                    {"purpose", "Initial Interview"}
+                })) {
+
+                    applicant_pivot.update(new Object[][]{
+                        {"status", 1}
+                    }).where(new Object[][]{
+                        {"app_id", "=", HR1_Applicant.app_id}
+                    }).executeUpdate();
+
+                    Helpers.EIS_Response.SuccessResponse("Success", "Applicant was successfully transfered to Initial Interview Stage");
+                    dialog.close();
+
+                }
+            } else {
+                Helpers.EIS_Response.ErrorResponse("Halt!", "You could not select date before the current date \n" + LocalDate.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
             }
+
         });
 
         layout.setBody(vbox);
         layout.setActions(btnSubmitInit);
 
-        JFXDialog dialog = new JFXDialog(spane, layout, JFXDialog.DialogTransition.TOP);
-
         dialog.show();
     }
 
+    @FXML
+    private void generateJobOffer(ActionEvent event) {
+        Modal md = Modal.getInstance(new Form("/FXMLS/HR1/Modals/HR1_JobOffer.fxml").getParent());
+        md.open();
+        md.getF().getStage().setOnCloseRequest(value -> {
+            if (!HR1_JobOfferController.dateExpire.equals("x")) {
+
+                if (applicant_schedules.insert(new Object[][]{
+                    {"app_id", HR1_Applicant.app_id},
+                    {"scheduled_date", HR1_JobOfferController.dateExpire},
+                    {"purpose", "Job Offer Expiration"}
+                })) {
+                    Helpers.EIS_Response.SuccessResponse("Job Offer Expiration is set", HR1_JobOfferController.dateExpire + " was set to applicant as job offer exipiration");
+                }
+            }
+        });
+    }
+
+    private void viewResults() {
+        Modal md = Modal.getInstance(new Form("/FXMLS/HR1/Modals/HR1_AppStages.fxml").getParent());
+        md.open();
+    }
+
+    public void DenyApplication() {
+
+        JFXDialogLayout layout = new JFXDialogLayout();
+        layout.setHeading(new Text("Are you sure you want to deny this application?"));
+
+        layout.setBody(new Text("Closing or Denying this applicant will automatically archived the application"));
+
+        JFXButton btn = new JFXButton("Execute");
+        JFXButton btncc = new JFXButton("Cancel");
+
+        btn.getStyleClass().add("btn-primary");
+        btncc.getStyleClass().add("btn-danger");
+
+        JFXDialog dialog = new JFXDialog(spane, layout, JFXDialog.DialogTransition.TOP);
+
+        btn.setOnMouseClicked(value -> {
+            if (applicant_pivot.update(new Object[][]{
+                {"status", 99}
+            }).where(new Object[][]{
+                {"app_id", "=", HR1_Applicant.app_id}
+            }).executeUpdate()) {
+                Helpers.EIS_Response.SuccessResponse("Success", "Closing the application complete");
+                dialog.close();
+                offerOtherJob();
+            }
+        });
+
+        btncc.setOnMouseClicked(value -> {
+            dialog.close();
+        });
+
+        layout.setActions(btn, new JFXButton(), btncc);
+        dialog.show();
+
+    }
+
+    public void DeniedApplication() {
+
+        JFXDialogLayout layout = new JFXDialogLayout();
+        layout.setHeading(new Text("Denied Job Offer"));
+
+        layout.setBody(new Text("You were about to archieve this application. Because the applicant deny the job offer. Press Execute to continue"));
+
+        JFXButton btn = new JFXButton("Execute");
+        JFXButton btncc = new JFXButton("Cancel");
+
+        btn.getStyleClass().add("btn-primary");
+        btncc.getStyleClass().add("btn-danger");
+
+        JFXDialog dialog = new JFXDialog(spane, layout, JFXDialog.DialogTransition.TOP);
+
+        btn.setOnMouseClicked(value -> {
+            if (applicant_pivot.update(new Object[][]{
+                {"status", 101}
+            }).where(new Object[][]{
+                {"app_id", "=", HR1_Applicant.app_id}
+            }).executeUpdate()) {
+                Helpers.EIS_Response.SuccessResponse("Success", "Closing the application complete, Due of denied job offer.");
+                dialog.close();
+            }
+        });
+
+        btncc.setOnMouseClicked(value -> {
+            dialog.close();
+        });
+
+        layout.setActions(btn, new JFXButton(), btncc);
+        dialog.show();
+
+    }
+
+    public void offerOtherJob() {
+
+        JFXDialogLayout layout = new JFXDialogLayout();
+        layout.setHeading(new Text("Do you want to offer an posted job?"));
+
+        ComboBox combo = new ComboBox();
+
+        JobPosting jp = new JobPosting();
+        jp.get().stream().forEach(action -> {
+            HashMap row = (HashMap) action;
+            combo.getItems().add(row.get("id").toString() + " - " + row.get("title").toString());
+        });
+
+        VBox vbox = new VBox(
+                new Text("As this applicantion was deny, Selecting a job below will transfer the application to other posted job?. "),
+                new Label(""),
+                combo
+        );
+
+        layout.setBody(vbox);
+
+        JFXButton btn = new JFXButton("Offer New Job");
+        JFXButton btncc = new JFXButton("Cancel");
+
+        btn.getStyleClass().add("btn-primary");
+        btncc.getStyleClass().add("btn-danger");
+
+        JFXDialog dialog = new JFXDialog(spane, layout, JFXDialog.DialogTransition.TOP);
+
+        btn.setOnMouseClicked(value -> {
+
+            hiring_stages_results.delete().where(new Object[][]{
+                {"app_id", "=", HR1_Applicant.app_id}
+            }).executeUpdate();
+
+            applicant_schedules.delete().where(new Object[][]{
+                {"app_id", "=", HR1_Applicant.app_id}
+            }).executeUpdate();
+
+            if (applicant_pivot.update(new Object[][]{
+                {"status", 0},
+                {"jobPosted_id", combo.getSelectionModel().getSelectedItem().toString().split(" - ")[0]}
+            }).where(new Object[][]{
+                {"app_id", "=", HR1_Applicant.app_id}
+            }).executeUpdate()) {
+                Helpers.EIS_Response.SuccessResponse("Success", "Applicant Successfully migrated to other job");
+                dialog.close();
+                ((Stage) ((Node) value.getSource()).getScene().getWindow()).close();
+            }
+
+            //TODO: Email the applicant if the applicant was transfered
+        });
+
+        btncc.setOnMouseClicked(value -> {
+            dialog.close();
+        });
+
+        layout.setActions(btn, new JFXButton(), btncc);
+        dialog.show();
+
+    }
+
+    public void AcceptedOffer() {
+
+        JFXDialogLayout layout = new JFXDialogLayout();
+        layout.setHeading(new Text("Job Offer Accepted"));
+
+        DatePicker dt = new DatePicker();
+
+        VBox vbox = new VBox(
+                new Label(""),
+                new Label("Transitioning applicant to Contract Signing, Set a date for Contract Signing"),
+                dt,
+                new Label("")
+        );
+
+        layout.setBody(vbox);
+
+        JFXButton btn = new JFXButton("Submit");
+        JFXButton btncc = new JFXButton("Cancel");
+
+        btn.getStyleClass().add("btn-primary");
+        btncc.getStyleClass().add("btn-danger");
+
+        JFXDialog dialog = new JFXDialog(spane, layout, JFXDialog.DialogTransition.TOP);
+
+        btn.setOnMouseClicked(value -> {
+
+            if (!dt.getValue().isBefore(LocalDate.now())) {
+                LocalDate f = dt.getValue();
+                f.format(DateTimeFormatter.ISO_LOCAL_DATE);
+                if (applicant_schedules.insert(new Object[][]{
+                    {"app_id", HR1_Applicant.app_id},
+                    {"scheduled_date", f.toString()},
+                    {"purpose", "Contract Signing"}
+                })) {
+
+                    applicant_pivot.update(new Object[][]{
+                        {"status", 6}
+                    }).where(new Object[][]{
+                        {"app_id", "=", HR1_Applicant.app_id}
+                    }).executeUpdate();
+
+                    Helpers.EIS_Response.SuccessResponse("Success", "Applicant was successfully transfered to Contract Signing Stage");
+                    dialog.close();
+
+                }
+            } else {
+                Helpers.EIS_Response.ErrorResponse("Halt!", "You could not select date before the current date \n" + LocalDate.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
+            }
+
+            //TODO: Email the applicant if the applicant was transfered
+        });
+
+        btncc.setOnMouseClicked(value -> {
+            dialog.close();
+        });
+
+        layout.setActions(btn, new JFXButton(), btncc);
+        dialog.show();
+
+    }
+
+    @FXML
+    private void btnOpenFile(ActionEvent event) {
+
+    }
+
+    Double salary = 0.00;
+
+    @FXML
+    private void btnSubmitHire(ActionEvent event) {
+        this.Hiring();
+    }
+
+    public void Hiring() {
+
+        //Insert First to Table Hr4
+        HR4_Employee emp = new HR4_Employee();
+        HR4_Employee profile = new HR4_Employee("profile");
+
+        Users u = new Users();
+        UserPermissions up = new UserPermissions();
+
+        HR1_JobOffers j = new HR1_JobOffers();
+
+        j.where(new Object[][]{
+            {"app_id", "=", HR1_Applicant.app_id}
+        }).get().stream().forEach(action -> {
+            salary = Double.parseDouble(((HashMap) action).get("salary").toString().replace(",", ""));
+        });
+
+        int emp_id = emp.insert(new Object[][]{
+            {"status_id", 1},
+            {"type_id", 5},
+            {"datehired", LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE)},
+            {"salary", salary}
+        }, true);
+
+        String EmpCode = "EMP181900" + emp_id;
+
+        int uid = u.insert(new Object[][]{
+            {"username", EmpCode},
+            {"password", Synapse.Crypt.Encrypt(EmpCode)}
+        }, true);
+        
+
+        if (uid != 0) {
+            up.insert(new Object[][]{
+                {"user_id", uid},
+                {"permission_id", 53}
+            });
+        }
+
+        emp.update(new Object[][]{
+            {"employee_code", EmpCode},
+            {"login_id", uid}
+        }).where(new Object[][]{
+            {"id", "=", emp_id}
+        }).executeUpdate();
+
+        int p_id = profile.InsertIntoSelect(
+                new Object[]{
+                    "firstname",
+                    "lastname",
+                    "middlename",
+                    "suffix_id",
+                    "date_of_birth",
+                    "place_of_birth",
+                    "gender",
+                    "email",
+                    "civil_status_id",
+                    "height",
+                    "weight",
+                    "contact_number"
+                }, "aerolink.tbl_hr1_applicants",
+                new Object[]{
+                    "firstname",
+                    "lastname",
+                    "middlename",
+                    "suffix_id",
+                    "date_of_birth",
+                    "place_of_birth",
+                    "gender",
+                    "email",
+                    "civil_status_id",
+                    "height",
+                    "weight",
+                    "contact_number"
+                }, new Object[][]{
+                    {"aerolink.tbl_hr1_applicants.id", "=", HR1_Applicant.app_id}
+                }, true);
+
+        profile.update(new Object[][]{
+            {"employee_code", "EMP181900" + emp_id}
+        }).where(new Object[][]{
+            {"id", "=", p_id}
+        }).executeUpdate();
+
+        applicant_pivot.update(new Object[][]{
+            {"status", 100}
+        }).where(new Object[][]{
+            {"app_id", "=", HR1_Applicant.app_id}
+        }).executeUpdate();
+
+        Helpers.EIS_Response.SuccessResponse("Success", "Applicant was successfully hired and make some task for proper welcome at New Hire On Board Module ");
+
+        //TODO : Send welcome message, thru email ..  send employment contract to server using FieTransfer
+    }
 }

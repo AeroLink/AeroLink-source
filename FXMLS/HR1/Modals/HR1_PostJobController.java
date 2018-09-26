@@ -15,6 +15,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.net.URL;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -96,6 +97,22 @@ public class HR1_PostJobController implements Initializable {
         Object[] cbo = {"Full Time", "Part Time"};
         cboStatus.getItems().addAll(cbo);
 
+        txtSalary.setOnKeyTyped(value -> {
+            System.err.println(value.getCharacter());
+            if (!Character.isDigit(value.getCharacter().charAt(0))) {
+                value.consume();
+            }
+        });
+        
+        txtSalary.setOnKeyReleased(value -> {
+            if (txtSalary.getText().isEmpty()) {
+                txtSalary.setText("0");
+            } else {
+
+                txtSalary.setText(NumberFormat.getInstance().format(Double.parseDouble(txtSalary.getText().replace(",", ""))));
+                txtSalary.end();
+            }
+        });
     }
 
     @FXML

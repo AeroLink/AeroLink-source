@@ -38,6 +38,19 @@ public class Helpers {
         return final_string;
     }
     
+    public static String combine(Object[] cols, String separator){
+        String final_string = "";
+        for(int i = 0; i < cols.length; i++){
+            if(i == (cols.length - 1)) {
+                final_string += cols[i];
+            }else{
+                final_string += cols[i] + separator + " ";
+            }
+        }
+        
+        return final_string;
+    }
+    
 
     
     public static String Prepared_combine(int length, String separator){

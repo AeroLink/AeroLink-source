@@ -271,6 +271,63 @@ public class Model {
 
         return false;
     }
+
+    public int InsertIntoSelect(Object[] colTable1, String table2, Object[] colTable2, Object[][] Wherevalues, Boolean returnID) {
+
+        String ff = "";
+
+        if (Session.INSTANCE.hasConnection()) {
+            try {
+                List values1 = new ArrayList<>();
+                List values2 = new ArrayList<>();
+
+                values1.addAll(Arrays.asList(colTable1));
+
+                values2.addAll(Arrays.asList(colTable2));
+
+                String WhereConstructor = "";
+                ArrayList<Object> WV = new ArrayList<>();
+
+                for (int i = 0; i < Wherevalues.length; i++) {
+
+                    if (Wherevalues[i].length < 3) {
+                        System.out.println(Response.ORM_ERR_01);
+                        break;
+                    }
+
+                    if (i == (Wherevalues.length - 1)) {
+                        WhereConstructor += Wherevalues[i][0] + " " + Wherevalues[i][1] + " ?";
+                    } else {
+                        WhereConstructor += Wherevalues[i][0] + " " + Wherevalues[i][1] + " ? AND ";
+                    }
+
+                    WV.add(Wherevalues[i][2]);
+                }
+
+                ff = "INSERT INTO " + this.global_table + "(" + Helpers.combine(values1.toArray(), ",") + ") SELECT " + Helpers.combine(values2.toArray(), ",") + " FROM " + table2 + " WHERE " + WhereConstructor;
+                PreparedStatement pstx;
+
+                pstx = Session.INSTANCE.getConnection().prepareStatement(ff, Statement.RETURN_GENERATED_KEYS);
+                for (int i = 1; i <= WV.size(); i++) {
+                    System.out.println(WV.get(i - 1));
+                    pstx.setObject(i, WV.get(i - 1));
+                }
+
+                Boolean success = pstx.executeUpdate() != 0;
+
+                return success ? (returnID ? Integer.parseInt(((HashMap) R2SL.convert(pstx.getGeneratedKeys()).get(0)).get("GENERATED_KEYS").toString()) : 1) : 0;
+
+            } catch (SQLException ex) {
+                Response.ErrorResponse();
+                ex.printStackTrace();
+                System.err.println("SQL Error -> " + ex.getMessage());
+                System.err.println(ff);
+            }
+
+        }
+
+        return 0;
+    }
     //end insertions
 
     public int insert(Object[][] vals, Boolean returnID) {

@@ -17,6 +17,7 @@ public class HR1_Applicant {
     public static String educAttain;
     public static String school;
     public static String email;
+     
     
     
     //pivot answers -> will get upon initialize method
@@ -25,4 +26,6 @@ public class HR1_Applicant {
     //pivot for stages
     public static String stage_id;
     
+    
+    public static String jobPosted_id;
 }

@@ -101,7 +101,7 @@ public class HR1_RecruitmentController implements Initializable {
         //Posting
         this.generatePostingTable();
         this.populatePostingTable();
-    
+
         tblPostingJobs.setContextMenu(this.contextPostingsJobs);
         menuPosting.setOnAction(event -> viewModalEditJob());
     }
@@ -173,7 +173,7 @@ public class HR1_RecruitmentController implements Initializable {
         postingDate.setCellValueFactory(param -> param.getValue().postingDate);
         publish_date.setCellValueFactory(param -> param.getValue().publish_on);
         expire_date.setCellValueFactory(param -> param.getValue().until);
-        
+
         tblPostingJobs.getColumns().addAll(job_title, status, salary, publish_date, expire_date, postingDate);
     }
 
@@ -211,7 +211,7 @@ public class HR1_RecruitmentController implements Initializable {
                         tblOpenJobs.setItems(observableList);
                         GlobalCount = DummyCount;
                     }
-                    
+
                     Thread.sleep(3000);
                 } catch (Exception ex) {
                     System.err.println("Exception -> " + ex.getMessage());
@@ -266,8 +266,8 @@ public class HR1_RecruitmentController implements Initializable {
                         tblPostingJobs.setItems(observablePosting);
                         jpCount = totalCount;
                     }
-                    
-                   Thread.sleep(3000);
+
+                    Thread.sleep(3000);
                 } catch (Exception ex) {
                     System.err.println("Exception -> " + ex.getMessage());
                 }
@@ -282,9 +282,9 @@ public class HR1_RecruitmentController implements Initializable {
             this.contextMenuJobs.show(tblOpenJobs, e.getX(), e.getY());
         }
     }
-    
-    public void PostingMouseEvent(MouseEvent e){
-        if(e.getButton() == MouseButton.SECONDARY) {
+
+    public void PostingMouseEvent(MouseEvent e) {
+        if (e.getButton() == MouseButton.SECONDARY) {
             this.contextPostingsJobs.show(tblPostingJobs, e.getX(), e.getY());
         }
     }
@@ -295,14 +295,18 @@ public class HR1_RecruitmentController implements Initializable {
     }
 
     public void viewModalPostJob() {
-        HR1_PostJobSelection.id = tblOpenJobs.getSelectionModel().getSelectedItem().id.getValue();
-        HR1_PostJobSelection.jobID = tblOpenJobs.getSelectionModel().getSelectedItem().job_id.getValue();
-        HR1_PostJobSelection.jobTitle = tblOpenJobs.getSelectionModel().getSelectedItem().job_title.getValue();
-        HR1_PostJobSelection.OpenPos = tblOpenJobs.getSelectionModel().getSelectedItem().job_open.getValue();
-        Modal md = Modal.getInstance(new Form("/FXMLS/HR1/Modals/HR1_PostJob.fxml").getParent());
-        md.open();
+        if (!tblOpenJobs.getSelectionModel().getSelectedItem().status.getValue().equals("Posted")) {
+            HR1_PostJobSelection.id = tblOpenJobs.getSelectionModel().getSelectedItem().id.getValue();
+            HR1_PostJobSelection.jobID = tblOpenJobs.getSelectionModel().getSelectedItem().job_id.getValue();
+            HR1_PostJobSelection.jobTitle = tblOpenJobs.getSelectionModel().getSelectedItem().job_title.getValue();
+            HR1_PostJobSelection.OpenPos = tblOpenJobs.getSelectionModel().getSelectedItem().job_open.getValue();
+            Modal md = Modal.getInstance(new Form("/FXMLS/HR1/Modals/HR1_PostJob.fxml").getParent());
+            md.open();
+        } else {
+            Helpers.EIS_Response.ErrorResponse("Halt!", "Job was already posted");
+        }
     }
-    
+
     public void viewModalEditJob() {
         TableModel_jPosted tb = tblPostingJobs.getSelectionModel().getSelectedItem();
         HR1_EditJobSelection.id = tb.id.getValue();
@@ -316,7 +320,6 @@ public class HR1_RecruitmentController implements Initializable {
         md.open();
     }
 
-    
     @FXML
     private void btnEditPost(ActionEvent event) {
         this.viewModalEditJob();

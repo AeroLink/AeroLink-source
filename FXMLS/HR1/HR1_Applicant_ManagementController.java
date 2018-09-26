@@ -61,6 +61,8 @@ public class HR1_Applicant_ManagementController implements Initializable {
     private ContextMenu contextMeuApp;
     @FXML
     private MenuItem menuItemView;
+    @FXML
+    private TableView<TableModel_Applicants> tblArchive;
 
     /**
      * Initializes the controller class.
@@ -70,8 +72,18 @@ public class HR1_Applicant_ManagementController implements Initializable {
         this.renderTable();
         this.PopulateTable();
         this.renderApplicants();
-
+        this.RenderArchive();
+        
         tblApplicantList.setContextMenu(contextMeuApp);
+
+        tblOpenJobs.setOnKeyReleased(value -> {
+            tblApplicantList.setDisable(false);
+            lbljobTitle.setText("Job Title : " + tblOpenJobs.getSelectionModel().getSelectedItem().job_title.getValue());
+            lblNumApp.setText("Number of applications : " + tblOpenJobs.getSelectionModel().getSelectedItem().applicants.getValue());
+            lblnumViews.setText("Number of views : " + tblOpenJobs.getSelectionModel().getSelectedItem().views.getValue());
+            populateApplicants(tblOpenJobs.getSelectionModel().getSelectedItem().id.getValue());
+
+        });
 
         tblApplicantList.setOnMouseClicked(value -> {
             if (!tblApplicantList.isDisabled() || !tblApplicantList.getItems().isEmpty()) {
@@ -81,15 +93,7 @@ public class HR1_Applicant_ManagementController implements Initializable {
 
                 if (value.getButton() == MouseButton.PRIMARY) {
                     if (value.getClickCount() == 2) {
-                        HR1_Applicant.app_id = tblApplicantList.getSelectionModel().getSelectedItem().id.getValue();
-                        HR1_Applicant.job_title = lbljobTitle.getText();
-                        HR1_Applicant.fullname = tblApplicantList.getSelectionModel().getSelectedItem().fullname.getValue();
-                        HR1_Applicant.school = tblApplicantList.getSelectionModel().getSelectedItem().prevSchool.getValue();
-                        HR1_Applicant.educAttain = tblApplicantList.getSelectionModel().getSelectedItem().educAttain.getValue();
-                        HR1_Applicant.email = tblApplicantList.getSelectionModel().getSelectedItem().email.getValue();
-                        HR1_Applicant.stage_id = tblApplicantList.getSelectionModel().getSelectedItem().status_id.getValue();
-                        Modal md = Modal.getInstance(new Form("/FXMLS/HR1/Modals/HR1_ViewApplicant.fxml").getParent());
-                        md.open();
+                        viewingApplicant();
                     }
                 }
             }
@@ -102,6 +106,25 @@ public class HR1_Applicant_ManagementController implements Initializable {
             lblnumViews.setText("Number of views : " + tblOpenJobs.getSelectionModel().getSelectedItem().views.getValue());
             populateApplicants(tblOpenJobs.getSelectionModel().getSelectedItem().id.getValue());
         });
+
+        menuItemView.setOnAction(value -> viewingApplicant());
+
+    }
+
+    public void viewingApplicant() {
+
+        HR1_Applicant.app_id = tblApplicantList.getSelectionModel().getSelectedItem().id.getValue();
+        HR1_Applicant.job_title = lbljobTitle.getText();
+        HR1_Applicant.fullname = tblApplicantList.getSelectionModel().getSelectedItem().fullname.getValue();
+        HR1_Applicant.school = tblApplicantList.getSelectionModel().getSelectedItem().prevSchool.getValue();
+        HR1_Applicant.educAttain = tblApplicantList.getSelectionModel().getSelectedItem().educAttain.getValue();
+        HR1_Applicant.email = tblApplicantList.getSelectionModel().getSelectedItem().email.getValue();
+        HR1_Applicant.stage_id = tblApplicantList.getSelectionModel().getSelectedItem().status_id.getValue();
+        HR1_Applicant.jobPosted_id = tblOpenJobs.getSelectionModel().getSelectedItem().id.getValue();
+
+        Modal md = Modal.getInstance(new Form("/FXMLS/HR1/Modals/HR1_ViewApplicant.fxml").getParent());
+        md.open();
+        md.getF().getStage().setOnCloseRequest(event -> this.renderApplicants());
 
     }
 
@@ -148,12 +171,13 @@ public class HR1_Applicant_ManagementController implements Initializable {
                             String postingDate = current.get("created_at").toString();
                             String views = current.get("views").toString();
 
-                            String applicants = String.valueOf(hr1PivotApp.where(new Object[][]{{"jobPosted_id", "=", current.get("id")}}).get().stream().count());
+                            String applicants = String.valueOf(hr1PivotApp.where(new Object[][]{{"jobPosted_id", "=", current.get("id")}, {"status", "<", 99}}).get().stream().count());
 
                             leftTable.add(new TableModel_PostedJob(id, job_title, postingDate, views, applicants));
 
                         });
 
+                        this.populateApplicantsArchive();
                         tblOpenJobs.setItems(leftTable);
                         GlobalCount = DummyCount;
                     }
@@ -188,7 +212,27 @@ public class HR1_Applicant_ManagementController implements Initializable {
         status.setCellValueFactory(value -> value.getValue().status);
 
         tblApplicantList.getColumns().addAll(applicantCode, fullname, email, educAttain, prevSchool, status);
+    }
 
+    public void RenderArchive() {
+        tblArchive.getItems().clear();
+        tblArchive.getColumns().removeAll(tblArchive.getColumns());
+
+        TableColumn<TableModel_Applicants, String> Arcfullname = new TableColumn<>("Full Name");
+        TableColumn<TableModel_Applicants, String> ArcapplicantCode = new TableColumn<>("Code");
+        TableColumn<TableModel_Applicants, String> ArceducAttain = new TableColumn<>("Education Attainment");
+        TableColumn<TableModel_Applicants, String> Arcemail = new TableColumn<>("Email");
+        TableColumn<TableModel_Applicants, String> ArcprevSchool = new TableColumn<>("Previous School");
+        TableColumn<TableModel_Applicants, String> Arcstatus = new TableColumn<>("Application Status");
+
+        Arcfullname.setCellValueFactory(value -> value.getValue().fullname);
+        ArcapplicantCode.setCellValueFactory(value -> value.getValue().applicant_code);
+        ArceducAttain.setCellValueFactory(value -> value.getValue().educAttain);
+        ArcprevSchool.setCellValueFactory(value -> value.getValue().prevSchool);
+        Arcemail.setCellValueFactory(value -> value.getValue().email);
+        Arcstatus.setCellValueFactory(value -> value.getValue().status);
+
+        tblArchive.getColumns().addAll(ArcapplicantCode, Arcfullname, Arcemail, ArceducAttain, ArcprevSchool, Arcstatus);
     }
 
     public String AppStatus(String stats) {
@@ -230,7 +274,8 @@ public class HR1_Applicant_ManagementController implements Initializable {
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr1_applicants", "id", "=", "app_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr1_suffix", "id", "=", "aerolink.tbl_hr1_applicants", "suffix_id", true)
                 .where(new Object[][]{
-            {"jobPosted_id", "=", jobid}
+            {"jobPosted_id", "=", jobid},
+            {"status", "<", 99}
         }).get().stream().forEach((row) -> {
             HashMap action = (HashMap) row;
             listApp.add(new TableModel_Applicants(
@@ -251,6 +296,37 @@ public class HR1_Applicant_ManagementController implements Initializable {
 
         tblApplicantList.getItems().clear();
         tblApplicantList.setItems(listApp);
+    }
+
+    public void populateApplicantsArchive() {
+
+        ObservableList<TableModel_Applicants> listApp = FXCollections.observableArrayList();
+
+        hr1PivotApp
+                .join(Model.JOIN.INNER, "aerolink.tbl_hr1_applicants", "id", "=", "app_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_hr1_suffix", "id", "=", "aerolink.tbl_hr1_applicants", "suffix_id", true)
+                .where(new Object[][]{
+            {"status", "=", 99}
+        }).get().stream().forEach((row) -> {
+            HashMap action = (HashMap) row;
+            listApp.add(new TableModel_Applicants(
+                    action.get("app_id").toString(),
+                    action.get("applicant_code").toString(),
+                    (action.get("lastname").toString() + ", "
+                    + action.get("firstname").toString() + " "
+                    + (action.get("suffix_name").toString().equals("None") ? "" : action.get("suffix_name").toString()) + " "
+                    + action.get("middlename").toString()),
+                    action.get("email").toString(),
+                    action.get("educAttain").toString(),
+                    action.get("prevSchool").toString(),
+                    "Denied",
+                    action.get("status").toString()
+            )
+            );
+        });
+
+        tblArchive.getItems().clear();
+        tblArchive.setItems(listApp);
     }
 
     @FXML

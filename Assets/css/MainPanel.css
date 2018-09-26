@@ -82,6 +82,14 @@ and open the template in the editor.
     -fx-text-fill: #34a853;
 }
 
+.menuButtonWorkflow {
+    -fx-background-color: #34a853;
+}
+
+.menuButtonWorkflow > .label {
+    -fx-text-fill: white;
+}
+
 .menu-button:hover,
 .menu-button:selected,
 .menu-button:showing{
@@ -143,4 +151,18 @@ and open the template in the editor.
     -fx-fill : white;
 }
 
+
+/* Sched Pane */
+
+.paneStatus-upcoming{
+    -fx-background-color:  #ffcc00;
+}
+
+.paneStatus-late{
+    -fx-background-color:  #EA4335;
+}
+
+.paneStatus-confirmed{
+    -fx-background-color:  #34A853;
+}
 

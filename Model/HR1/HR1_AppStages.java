@@ -14,5 +14,12 @@ public class HR1_AppStages extends Synapse.Model{
     public HR1_AppStages() {
         this.initTable("tbl_hr1_stages");
     }
+    
+    public HR1_AppStages(String trigger){
+        switch(trigger){
+            case "stage_results" : this.initTable("tbl_hr1_stageResults"); break;
+            default: break;
+        }
+    }
    
 }
