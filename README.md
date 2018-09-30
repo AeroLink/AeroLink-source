@@ -62,3 +62,19 @@ AeroLink - Freight Management System
   
 
 ```
+
+- Update
+```java
+
+   Model m = new Model();
+   
+   m.update(new Object[][]{
+       {"column_name0", "value0"},
+       {"column_name1", "value1"},
+       {"column_name2", "value2"},
+    }).where(new Object[][]{
+       {"column_name0", "=", "value0"}
+    }).executeUpdate();
+   
+
+```
