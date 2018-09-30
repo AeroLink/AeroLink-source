@@ -78,3 +78,14 @@ AeroLink - Freight Management System
    
 
 ```
+
+- Delete
+```java
+
+   Model m = new Model();
+   
+   m.delete().where(new Object[][]{
+       {"column_name0", "=", "value0"}
+    }).executeUpdate();
+   
+```
