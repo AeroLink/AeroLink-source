@@ -9,9 +9,11 @@ AeroLink - Freight Management System
 
    
    Model m = new Model();
-   
-   //Basic
+  
    List list = m.get();
+   
+   //Get certain columns
+   //list = m.get("column", "column", "column");
    
    for(Object obj : list) {
      HashMap row = (HashMap) obj;
@@ -21,13 +23,20 @@ AeroLink - Freight Management System
      
    }
    
-   //Advance
+   //Or you could do this
    m.get().stream().forEach(obj -> {
       HashMap row = (HashMap) obj;
       
       //getting the value thru accessing the column name in the hashmap
       //row.get("column_name").toString();
+   });
+   
+   //get Certain columns
+   m.get("columns", "columns").stream().forEach(obj -> {
+      HashMap row = (HashMap) obj;
       
+      //getting the value thru accessing the column name in the hashmap
+      //row.get("column_name").toString();
    });
    
 ```
