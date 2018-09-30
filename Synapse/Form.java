@@ -25,11 +25,14 @@ public class Form {
     private Stage stage = new Stage();
     private Parent parent;
     
+    private FXMLLoader loader;
+    
     public Form(String Path){
         this.parent = null;
         try {
 
-            this.parent = FXMLLoader.load(getClass().getResource(Path));
+            this.loader = new FXMLLoader();
+            this.parent = loader.load(getClass().getResource(Path));
     
         }catch (IOException e) {
             System.out.println(e.getMessage());
@@ -103,4 +106,10 @@ public class Form {
     public static void close(Node n) {
         ( (Stage) n.getScene().getWindow()).close();
     }
+
+    public FXMLLoader getLoader() {
+        return loader;
+    }
+    
+    
 }

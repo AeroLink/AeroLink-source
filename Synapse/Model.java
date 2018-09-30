@@ -22,8 +22,6 @@ import java.util.logging.Logger;
 public class Model {
 
     private String global_table = "";
-    //TODO : Update and Delete .. Joins and Relationships;
-    //TODO : Re illuminate - will fix redudancy later
     private String joinConstruct = "";
     private Boolean joined = false;
 
