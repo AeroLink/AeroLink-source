@@ -15,7 +15,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR1.HR1_New_Hire_On_BoardController">
    <children>
-      <JFXTabPane prefHeight="400.0" prefWidth="804.0">
+      <JFXTabPane prefHeight="400.0" prefWidth="804.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <tabs>
             <Tab id="tab" styleClass="tab-label" text="New Hire Information">
                <content>
@@ -25,7 +25,7 @@
                            <top>
                               <AnchorPane prefHeight="81.0" prefWidth="804.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <JFXTextField fx:id="txtSearch" focusColor="#34a853" labelFloat="true" layoutX="10.0" layoutY="27.0" maxWidth="187.0" minWidth="180.0" prefHeight="31.0" prefWidth="187.0" promptText="Search a Job" AnchorPane.leftAnchor="10.0" />
+                                    <JFXTextField fx:id="txtSearch" focusColor="#34a853" labelFloat="true" layoutX="10.0" layoutY="27.0" maxWidth="187.0" minWidth="180.0" prefHeight="31.0" prefWidth="187.0" promptText="Search a Employee" AnchorPane.leftAnchor="10.0" />
                                     <JFXButton fx:id="btnSearch" alignment="TOP_LEFT" buttonType="RAISED" graphicTextGap="10.0" layoutX="197.0" layoutY="30.0" prefHeight="25.0" prefWidth="81.0" styleClass="btn-primary" text="Search">
                                        <graphic>
                                           <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" />
@@ -47,9 +47,9 @@
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy>
                                        <contextMenu>
-                                          <ContextMenu fx:id="contextMenuJobs">
+                                          <ContextMenu fx:id="contextMenuEmployees">
                                              <items>
-                                                <MenuItem fx:id="menuPost" mnemonicParsing="false" text="Post this Job" />
+                                                <MenuItem fx:id="menuPost" mnemonicParsing="false" text="View Information" />
                                              </items>
                                           </ContextMenu>
                                        </contextMenu>

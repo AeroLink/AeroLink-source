@@ -12,7 +12,7 @@ import javafx.beans.property.StringProperty;
  *
  * @author Lei
  */
-public class TableModel_NewHire {
+public class TableModel_EmployeeList {
     
     public StringProperty empCode;
     public StringProperty name;
@@ -20,7 +20,7 @@ public class TableModel_NewHire {
     public StringProperty contact;
     public StringProperty job;
 
-    public TableModel_NewHire(String empCode, String name, String email, String contact, String job) {
+    public TableModel_EmployeeList(String empCode, String name, String email, String contact, String job) {
         this.empCode = new SimpleStringProperty(empCode);
         this.name = new SimpleStringProperty(name);
         this.email = new SimpleStringProperty(email);

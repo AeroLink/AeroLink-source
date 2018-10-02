@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="673.0" prefWidth="1030.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR1.Modals.HR1_viewNewHireController">
+   <children>
+      <StackPane fx:id="spane" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <top>
+                  <AnchorPane prefHeight="42.0" prefWidth="600.0" style="-fx-background-color: #34a853;" BorderPane.alignment="CENTER">
+                     <children>
+                        <FontAwesomeIconView fx:id="jobID" fill="WHITE" glyphName="EYE" layoutX="10.0" layoutY="31.428571701049805" size="25" text="" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                        <Label fx:id="lblAppFull" layoutX="43.0" layoutY="9.0" text="Lastname, Firstname Suffix. Middlename" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <MenuButton graphicTextGap="10.0" layoutX="640.0" layoutY="10.0" mnemonicParsing="false" styleClass="menuButton" text="Actions" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                           <items>
+                              <MenuItem fx:id="menuHiring" mnemonicParsing="false" text="Make this Employee Regular">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="STAR" styleClass="fontIcon" />
+                                 </graphic>
+                              </MenuItem>
+                              <MenuItem mnemonicParsing="false" text="  Send an email">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="ENVELOPE_ALT" styleClass="fontIcon" />
+                                 </graphic>
+                              </MenuItem>
+                              <SeparatorMenuItem mnemonicParsing="false" />
+                              <MenuItem fx:id="menuDeny" mnemonicParsing="false" text="Terminate this Trainee">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="CLOSE" styleClass="fontIcon" />
+                                 </graphic>
+                              </MenuItem>
+                           </items>
+                           <graphic>
+                              <FontAwesomeIconView fill="#34a853" glyphName="FLASH" styleClass="fontIcon" />
+                           </graphic>
+                        </MenuButton>
+                     </children>
+                  </AnchorPane>
+               </top>
+               <left>
+                  <AnchorPane BorderPane.alignment="CENTER">
+                     <children>
+                        <TitledPane fx:id="jobTitle" animated="false" collapsible="false" prefHeight="623.0" prefWidth="307.0" text="Job :" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="547.0" prefWidth="305.0" style="-fx-background-color: white;">
+                                 <children>
+                                    <Label layoutX="13.0" layoutY="75.0" text="Date of Birth :">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtDate" editable="false" layoutX="12.0" layoutY="95.0" prefHeight="25.0" prefWidth="274.0" />
+                                    <Label layoutX="13.0" layoutY="130.0" text="Place of Birth :">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtPlace" editable="false" layoutX="12.0" layoutY="149.0" prefHeight="25.0" prefWidth="274.0" />
+                                    <Label layoutX="13.0" layoutY="191.0" text="Gender :">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtGender" editable="false" layoutX="12.0" layoutY="210.0" prefHeight="25.0" prefWidth="123.0" />
+                                    <Label layoutX="144.0" layoutY="191.0" text="Civil Status :">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtCivilStatus" editable="false" layoutX="144.0" layoutY="210.0" prefHeight="25.0" prefWidth="140.0" />
+                                    <Label layoutX="14.0" layoutY="248.0" text="Email Address :">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtEmail" editable="false" layoutX="13.0" layoutY="267.0" prefHeight="25.0" prefWidth="274.0" />
+                                    <Label layoutX="15.0" layoutY="309.0" text="Height (Cm):">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtHeight" editable="false" layoutX="14.0" layoutY="328.0" prefHeight="25.0" prefWidth="123.0" />
+                                    <Label layoutX="146.0" layoutY="309.0" text="Weight (Kg) :">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtWeight" editable="false" layoutX="146.0" layoutY="328.0" prefHeight="25.0" prefWidth="140.0" />
+                                    <Label layoutX="16.0" layoutY="370.0" text="Contact Number :">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtContactNumber" editable="false" layoutX="15.0" layoutY="389.0" prefHeight="25.0" prefWidth="274.0" />
+                                    <JFXButton layoutX="20.6" layoutY="17.0" onAction="#btnDownloadCV" prefHeight="31.0" prefWidth="282.0" styleClass="btn-primary" text="View Probationary Contract" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="12.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </TitledPane>
+                     </children>
+                  </AnchorPane>
+               </left>
+               <center>
+                  <JFXTabPane BorderPane.alignment="CENTER">
+                     <tabs>
+                        <Tab id="tab" text="Onboarding Task List">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                          </content>
+                        </Tab>
+                     </tabs>
+                  </JFXTabPane>
+               </center>
+               <right>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <TitledPane animated="false" collapsible="false" layoutX="6.0" layoutY="10.0" prefHeight="320.0" prefWidth="180.0" style="-fx-background-color: white;" text="Employee Information" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="283.0" prefWidth="178.0">
+                                 <children>
+                                    <JFXButton fx:id="btn0" alignment="TOP_LEFT" layoutX="41.4" layoutY="10.0" styleClass="btn-primary" text="Personal Information" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" />
+                                    <JFXButton fx:id="btn3" alignment="TOP_LEFT" layoutX="26.0" layoutY="136.0" onAction="#viewTrainingSem" styleClass="btn-primary" text="Trainings and Seminars " wrapText="true" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" />
+                                    <JFXButton fx:id="btn6" alignment="TOP_LEFT" layoutX="13.0" layoutY="256.0" onAction="#viewAcademicAwards" styleClass="btn-primary" text="Academic Awards" wrapText="true" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" />
+                                    <JFXButton fx:id="btn5" alignment="TOP_LEFT" layoutX="13.0" layoutY="218.0" onAction="#viewCertification" styleClass="btn-primary" text="Certifications" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" />
+                                    <JFXButton fx:id="btn4" alignment="TOP_LEFT" layoutX="13.0" layoutY="176.0" onAction="#viewWorkExp" styleClass="btn-primary" text="Work Experience" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" />
+                                    <JFXButton fx:id="btn1" alignment="TOP_LEFT" layoutX="44.0" layoutY="51.0" onAction="#viewFamilyBackGround" styleClass="btn-primary" text="Family Background" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" />
+                                    <JFXButton fx:id="btn2" alignment="TOP_LEFT" layoutX="44.0" layoutY="95.0" onAction="#viewEducAttain" styleClass="btn-primary" text="Educational Attainment" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </TitledPane>
+                     </children>
+                  </AnchorPane>
+               </right>
+            </BorderPane>
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>
