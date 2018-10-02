@@ -607,7 +607,7 @@ public class HR2_Training_ManagementController implements Initializable {
         grid.add(new Label("Budget Cost:"), 0, 11);
         grid.add(budgetCost, 1, 11);
         grid.add(d, 1, 12);
-        trainingID.setVisible(true);
+        trainingID.setVisible(false);
 // Enable/Disable login button depending on whether a username was entered.
 
         // loginButton.setDisable(true);

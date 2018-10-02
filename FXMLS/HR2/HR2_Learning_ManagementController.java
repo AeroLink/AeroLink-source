@@ -10,6 +10,7 @@ import FXMLS.HR2.ClassFiles.HR2_Competency_ManagementClass;
 import FXMLS.HR2.ClassFiles.HR2_CoursesClass;
 import FXMLS.HR2.ClassFiles.HR2_EvaluationClass;
 import FXMLS.HR2.ClassFiles.HR2_JobsClass;
+import FXMLS.HR2.ClassFiles.Training_ManagementClass;
 import Model.HR2_Assessment;
 import Model.HR2_Competency_Management;
 import Model.HR2_Courses;
@@ -22,12 +23,14 @@ import Synapse.Database;
 import Synapse.DB.MYSQL;
 import Synapse.Form;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -37,16 +40,21 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Pair;
 import javax.swing.JOptionPane;
 
 /**
@@ -144,9 +152,70 @@ public class HR2_Learning_ManagementController implements Initializable {
         btn_delete.setOnAction(e -> DeleteCourse());
         //for assessmenet section
         btn_add_assessment.setOnAction(e -> {
-            Modal md = Modal.getInstance(new Form("/FXMLS/HR2/Modals/HR2_LM_Assessment.fxml").getParent());
-            md.open();
+            /*   Modal md = Modal.getInstance(new Form("/FXMLS/HR2/Modals/HR2_LM_Assessment.fxml").getParent());
+            md.open();*/
+
+            Dialog<Pair<String, String>> dialog = new Dialog<>();
+            dialog.setTitle("Add Assessment");
+
+            GridPane grid = new GridPane();
+            grid.setHgap(10);
+            grid.setVgap(10);
+            grid.setPadding(new Insets(20, 150, 10, 10));
+
+            JFXComboBox select_course = new JFXComboBox();
+            select_course.setPromptText("Select Course");
+            JFXTextArea question = new JFXTextArea();
+            question.setPromptText("Type your Question");
+            question.setStyle("-fx-text-fill: #0f0f0a; -fx-font-size: 16px; -fx-border-color: #999966");
+            question.setPrefHeight(100);
+            JFXTextField option1 = new JFXTextField();
+            option1.setPromptText("Option 1");
+            JFXTextField option2 = new JFXTextField();
+            option2.setPromptText("Option 2");
+            JFXTextField option3 = new JFXTextField();
+            option3.setPromptText("Option 3");
+            JFXTextField option4 = new JFXTextField();
+            option4.setPromptText("Option 4");
+            JFXCheckBox c1 = new JFXCheckBox("(*check if this is the correct answer)");
+            JFXCheckBox c2 = new JFXCheckBox("(*check if this is the correct answer)");
+            JFXCheckBox c3 = new JFXCheckBox("(*check if this is the correct answer)");
+            JFXCheckBox c4 = new JFXCheckBox("(*check if this is the correct answer)");
+            JFXButton save = new JFXButton("Save");
+            save.setStyle("-fx-text-fill: #fff; -fx-background-color: #00cc66; -fx-font-size: 15px; -fx-font-family: Lato-Medium;  ");
+            save.setCursor(javafx.scene.Cursor.HAND);
+            grid.add(select_course, 1, 0);
+            grid.add(question, 1, 1);
+            grid.add(option1, 1, 2);
+            grid.add(c1, 3, 2);
+            grid.add(option2, 1, 3);
+            grid.add(c2, 3, 3);
+            grid.add(option3, 1, 4);
+            grid.add(c3, 3, 4);
+            grid.add(option4, 1, 5);
+            grid.add(c4, 3, 5);
+            grid.add(save, 1, 6);
+            dialog.getDialogPane().setContent(grid);
+            
+            
+            HR2_Courses course = new HR2_Courses();
+
+            List c = course.get();
+
+            for (Object d : c) {
+                HashMap hm1 = (HashMap) d;
+                //RS
+                select_course.getItems().add(hm1.get("course_id") + " - " + hm1.get("course_title"));
+            }
+            Optional<Pair<String, String>> result = dialog.showAndWait();
+
+            result.ifPresent(usernamePassword -> {
+                System.out.println("Username=" + usernamePassword.getKey() + ", Password=" + usernamePassword.getValue());
+            });
+
         });
+        
+        
         tbl_course_data.setOnMouseClicked(e
                 -> {
             HR2_CoursesClass cmc = tbl_course_data.getSelectionModel().getSelectedItem();
@@ -221,7 +290,7 @@ public class HR2_Learning_ManagementController implements Initializable {
                         ));
 
             }
-            
+
             tbl_questions_data.setItems(assessmentclass);
         } catch (Exception e) {
             System.out.println(e);
