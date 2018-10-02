@@ -2,188 +2,162 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="843.0" prefWidth="773.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.HR2_Succession_PlanningController">
+<AnchorPane id="AnchorPane" prefHeight="705.0" prefWidth="1373.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.HR2_Succession_PlanningController">
    <children>
-      <TabPane prefHeight="854.0" prefWidth="773.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Organizational Chart">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+      <AnchorPane layoutX="-4.0" prefHeight="705.0" prefWidth="1371.0" style="-fx-background-color: #f5f5f0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-4.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane prefHeight="705.0" prefWidth="309.0" style="-fx-background-color: #fff; -fx-border-color: #ccccb3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1062.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <TableView fx:id="tbl_job_data" layoutX="19.0" layoutY="128.0" prefHeight="237.0" prefWidth="268.0">
+                    <columns>
+                      <TableColumn fx:id="col_job" minWidth="100.0" prefWidth="180.0" text="Job" />
+                      <TableColumn fx:id="col_job_position" prefWidth="100.0" text="Position" />
+                    </columns>
+                  </TableView>
+                  <TableView fx:id="tbl_skills" layoutX="19.0" layoutY="389.0" prefHeight="266.0" prefWidth="268.0">
+                    <columns>
+                      <TableColumn fx:id="col_skills" prefWidth="75.0" text="Skills" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <JFXTextField fx:id="txt_search_jobs_with_skills" labelFloat="true" layoutX="28.0" layoutY="67.0" maxWidth="278.0" minWidth="250.0" prefHeight="35.0" prefWidth="250.0" promptText="Search">
+                     <font>
+                        <Font name="Lato Medium" size="15.0" />
+                     </font>
+                  </JFXTextField>
+                  <Pane layoutY="1.0" prefHeight="36.0" prefWidth="301.0" style="-fx-background-color: #00cc66;">
                      <children>
-                        <Label layoutX="98.0" layoutY="76.0" prefHeight="121.0" prefWidth="525.0" text="Organizational Chart diito" />
-                        <Separator layoutX="9.0" layoutY="302.0" prefHeight="4.0" prefWidth="784.0" style="-fx-border-color: #000;" />
-                        <Label layoutX="29.0" layoutY="321.0" prefHeight="24.0" prefWidth="61.0" text="Details">
+                        <Label layoutX="83.0" layoutY="2.0" prefHeight="29.0" prefWidth="115.0" text="Job Vacancy" textFill="WHITE">
                            <font>
-                              <Font name="Lato Regular" size="18.0" />
+                              <Font name="Lato Black" size="19.0" />
                            </font>
                         </Label>
-                        <Separator layoutX="9.0" layoutY="430.0" prefHeight="0.0" prefWidth="791.0" style="-fx-border-color: #000;" />
-                        <Label layoutX="34.0" layoutY="449.0" prefHeight="24.0" prefWidth="106.0" text="Job Vacancy">
-                           <font>
-                              <Font name="Lato Regular" size="18.0" />
-                           </font>
-                        </Label>
-                        <ScrollPane layoutX="44.0" layoutY="486.0" prefHeight="239.0" prefWidth="659.0">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <TableView prefHeight="236.0" prefWidth="658.0">
-                                       <columns>
-                                          <TableColumn prefWidth="75.0" text="Job Vacancy" />
-                                          <TableColumn prefWidth="75.0" text="Vacancy Description" />
-                                          <TableColumn prefWidth="75.0" text="Skills Needed" />
-                                          <TableColumn prefWidth="75.0" text="Qualifications" />
-                                       </columns>
-                                       <columnResizePolicy>
-                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                       </columnResizePolicy>
-                                    </TableView>
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="List of Successors">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="663.0" prefWidth="754.0">
-                     <children>
-                        <JFXTextField fx:id="txt_search" layoutX="535.0" layoutY="45.0" maxWidth="725.0" minWidth="224.0" prefHeight="31.0" prefWidth="224.0" promptText="Search">
-                           <font>
-                              <Font name="Lato Regular" size="15.0" />
-                           </font>
-                        </JFXTextField>
-                        <Label layoutX="39.0" layoutY="88.0" prefHeight="30.0" prefWidth="77.0" text="Employee Id">
-                           <font>
-                              <Font name="Lato Regular" size="14.0" />
-                           </font>
-                        </Label>
-                        <JFXTextField fx:id="emp_id" layoutX="116.0" layoutY="88.0" />
-                        <Label layoutX="314.0" layoutY="88.0" prefHeight="30.0" prefWidth="124.0" text="Date of Retirement">
-                           <font>
-                              <Font name="Lato Regular" size="14.0" />
-                           </font>
-                        </Label>
-                        <ScrollPane layoutX="29.0" layoutY="219.0" prefHeight="200.0" prefWidth="503.0">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <TableView prefHeight="200.0" prefWidth="497.0">
-                                      <columns>
-                                        <TableColumn prefWidth="75.0" text="Employee Id" />
-                                        <TableColumn prefWidth="75.0" text="Date of Retirement" />
-                                      </columns>
-                                       <columnResizePolicy>
-                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                       </columnResizePolicy>
-                                    </TableView>
-                                 </children>
-                              </AnchorPane>
-                          </content>
-                        </ScrollPane>
-                        <Separator layoutX="211.0" layoutY="19.0" prefHeight="0.0" prefWidth="552.0" style="-fx-border-color: #000f;" />
-                        <Label layoutX="29.0" prefHeight="38.0" prefWidth="171.0" text="List of Employees">
-                           <font>
-                              <Font name="Lato Regular" size="22.0" />
-                           </font>
-                        </Label>
-                        <JFXButton fx:id="btn_new" layoutX="567.0" layoutY="221.0" prefHeight="28.0" prefWidth="167.0" style="-fx-background-color: #00b359;" text="New" textFill="WHITE">
-                           <font>
-                              <Font name="Lato Regular" size="14.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </JFXButton>
-                        <JFXButton fx:id="btn_edit" layoutX="568.0" layoutY="270.0" prefHeight="28.0" prefWidth="168.0" style="-fx-background-color: #00b359;" text="Edit" textFill="WHITE">
-                           <font>
-                              <Font name="Lato Regular" size="14.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </JFXButton>
-                        <JFXButton fx:id="btn_save" layoutX="568.0" layoutY="317.0" prefHeight="21.0" prefWidth="169.0" style="-fx-background-color: #00b359;" text="Save" textFill="WHITE">
-                           <font>
-                              <Font name="Lato Regular" size="14.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </JFXButton>
-                        <JFXButton fx:id="btn_update" layoutX="568.0" layoutY="361.0" prefHeight="28.0" prefWidth="168.0" style="-fx-background-color: #00b359;" text="Update" textFill="WHITE">
-                           <font>
-                              <Font name="Lato Regular" size="14.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </JFXButton>
-                        <JFXButton fx:id="btn_delete" layoutX="568.0" layoutY="407.0" prefHeight="28.0" prefWidth="168.0" style="-fx-background-color: #00b359;" text="Delete" textFill="WHITE">
-                           <font>
-                              <Font name="Lato Regular" size="14.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </JFXButton>
-                        <Separator layoutX="221.0" layoutY="482.0" prefHeight="4.0" prefWidth="541.0" style="-fx-border-color: #000f;" />
-                        <Label layoutX="36.0" layoutY="464.0" prefHeight="38.0" prefWidth="202.0" text="List of  Successors">
-                           <font>
-                              <Font name="Lato Regular" size="22.0" />
-                           </font>
-                        </Label>
-                        <JFXDatePicker fx:id="date_of_retirement" defaultColor="#4d4d4d" layoutX="447.0" layoutY="87.0" prefHeight="31.0" prefWidth="168.0" />
-                        <Label layoutX="39.0" layoutY="140.0" prefHeight="30.0" prefWidth="97.0" text="Is a successor?">
-                           <font>
-                              <Font name="Lato Regular" size="14.0" />
-                           </font>
-                        </Label>
-                        <JFXComboBox fx:id="combobox_successor" layoutX="136.0" layoutY="143.0" prefHeight="25.0" prefWidth="131.0" />
-                        <Label layoutX="314.0" layoutY="140.0" prefHeight="30.0" prefWidth="107.0" text="Successor Name">
-                           <font>
-                              <Font name="Lato Regular" size="14.0" />
-                           </font>
-                        </Label>
-                        <JFXTextField fx:id="txt_successor_name" layoutX="447.0" layoutY="140.0" maxWidth="134.0" minWidth="134.0" prefHeight="31.0" prefWidth="134.0" />
-                        <ScrollPane layoutX="29.0" layoutY="520.0" prefHeight="200.0" prefWidth="754.0">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <TableView prefHeight="200.0" prefWidth="746.0">
-                                       <columns>
-                                          <TableColumn prefWidth="75.0" text="id" />
-                                          <TableColumn prefWidth="75.0" text="Successor Name" />
-                                          <TableColumn prefWidth="75.0" text="Employee Name" />
-                                       </columns>
-                                       <columnResizePolicy>
-                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                       </columnResizePolicy>
-                                    </TableView>
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-        </tabs>
-      </TabPane>
+                     </children></Pane>
+               </children>
+            </Pane>
+            <Label layoutX="326.0" layoutY="14.0" text="Successors" textFill="#3d3d29">
+               <font>
+                  <Font name="Raleway Bold" size="20.0" />
+               </font>
+            </Label>
+            <Separator layoutX="323.0" layoutY="45.0" prefHeight="0.0" prefWidth="1030.0" style="-fx-background-color: #999966;" />
+            <Pane layoutX="336.0" layoutY="115.0" prefHeight="253.0" prefWidth="1017.0" style="-fx-background-color: #fff; -fx-border-color: #ccccb3;">
+               <children>
+                  <JFXComboBox layoutX="14.0" layoutY="15.0" prefHeight="25.0" prefWidth="331.0" promptText="Select Department" />
+                  <TableView fx:id="tbl_position_ihs" layoutX="14.0" layoutY="59.0" prefHeight="179.0" prefWidth="331.0">
+                    <columns>
+                      <TableColumn fx:id="col_ihs_position" prefWidth="75.0" text="Position" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <Separator layoutX="371.0" layoutY="11.0" orientation="VERTICAL" prefHeight="231.0" prefWidth="0.0" />
+                  <Label layoutX="401.0" layoutY="17.0" prefHeight="20.0" prefWidth="292.0" text="Employees by your selected Department">
+                     <font>
+                        <Font name="Lato Semibold" size="16.0" />
+                     </font>
+                  </Label>
+                  <TableView fx:id="tbl_ihs_empInfo" layoutX="401.0" layoutY="59.0" prefHeight="179.0" prefWidth="611.0">
+                    <columns>
+                      <TableColumn fx:id="col_ihs_emp_id" prefWidth="75.0" text="Emp_ID" />
+                      <TableColumn fx:id="col_ihs_name" prefWidth="300.0" text="Name" />
+                        <TableColumn fx:id="col_ihs_skills" prefWidth="100.0" text="Skills" />
+                        <TableColumn fx:id="col_ihs_position" prefWidth="200.0" text="Position" />
+                        <TableColumn fx:id="col_ihs_dept" prefWidth="200.0" text="Department" />
+                        <TableColumn fx:id="col_ihs_age" prefWidth="75.0" text="Age" />
+                        <TableColumn fx:id="col_ihs_address" prefWidth="300.0" text="Address" />
+                    </columns>
+                  </TableView>
+                  <JFXButton fx:id="btn_ihs" layoutX="925.0" layoutY="15.0" style="-fx-background-color: #00cc66;" text=" Refresh" textFill="WHITE">
+                     <font>
+                        <Font name="Lato Black" size="12.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" fontSmoothingType="LCD" glyphName="REFRESH" size="15.0" />
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+               </children>
+            </Pane>
+            <Label layoutX="336.0" layoutY="81.0" prefHeight="26.0" prefWidth="185.0" text="In-House Successors">
+               <font>
+                  <Font name="Raleway Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="337.0" layoutY="393.0" prefHeight="26.0" prefWidth="187.0" text="Out-House Successors">
+               <font>
+                  <Font name="Raleway Bold" size="17.0" />
+               </font>
+            </Label>
+            <Pane layoutX="335.0" layoutY="427.0" prefHeight="237.0" prefWidth="1018.0" style="-fx-background-color: #fff; -fx-border-color: #ccccb3;">
+               <children>
+                  <JFXComboBox layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="331.0" promptText="Select Department" />
+                  <TableView fx:id="tbl_positions_ohs" layoutX="14.0" layoutY="51.0" prefHeight="164.0" prefWidth="331.0">
+                     <columns>
+                        <TableColumn fx:id="col_ohs_position" prefWidth="75.0" text="Position" />
+                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <Separator layoutX="372.0" layoutY="18.0" orientation="VERTICAL" prefHeight="201.0" prefWidth="6.0" />
+                  <Label layoutX="401.0" layoutY="17.0" prefHeight="20.0" prefWidth="292.0" text="Applicants by your selected Department">
+                     <font>
+                        <Font name="Lato Semibold" size="16.0" />
+                     </font>
+                  </Label>
+                  <TableView fx:id="tbl_ohs_empInfo" layoutX="401.0" layoutY="51.0" prefHeight="164.0" prefWidth="611.0">
+                     <columns>
+                        <TableColumn fx:id="col_ohs_emp_id" prefWidth="75.0" text="Emp_ID" />
+                        <TableColumn fx:id="col_ohs_name" prefWidth="300.0" text="Name" />
+                        <TableColumn fx:id="col_ohs_skills" prefWidth="100.0" text="Skills" />
+                        <TableColumn fx:id="col_ohs_position" prefWidth="200.0" text="Position" />
+                        <TableColumn fx:id="col_ohs_dept" prefWidth="200.0" text="Department" />
+                        <TableColumn fx:id="col_ohs_age" prefWidth="75.0" text="Age" />
+                        <TableColumn fx:id="col_ohs_address" prefWidth="300.0" text="Address" />
+                     </columns>
+                  </TableView>
+                  <JFXButton fx:id="btn_ohs" layoutX="926.0" layoutY="15.0" style="-fx-background-color: #00cc66;" text=" Refresh" textFill="WHITE">
+                     <font>
+                        <Font name="Lato Black" size="12.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" fontSmoothingType="LCD" glyphName="REFRESH" size="15.0" />
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+               </children>
+            </Pane>
+            <JFXButton fx:id="btn_add_successor" layoutX="1135.0" layoutY="64.0" prefHeight="35.0" prefWidth="218.0" style="-fx-background-color: #00cc66;" text=" Add Competent Successor" textFill="WHITE">
+               <font>
+                  <Font name="Lato Black" size="15.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" fontSmoothingType="LCD" glyphName="PLUS" size="15" />
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

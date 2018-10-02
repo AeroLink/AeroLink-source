@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="616.0" prefWidth="426.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.HR2_LM_AssessmentController">
+   <children>
+      <ScrollPane prefHeight="616.0" prefWidth="425.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="647.0" prefWidth="425.0">
+               <children>
+                  <Pane prefHeight="35.0" prefWidth="423.0" style="-fx-background-color: #00cc66;">
+                     <children>
+                        <Label layoutX="14.0" layoutY="6.0" prefHeight="15.0" prefWidth="158.0" text="Add Assessment" textFill="WHITE">
+                           <font>
+                              <Font name="Lato Regular" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <JFXComboBox layoutX="25.0" layoutY="59.0" prefHeight="25.0" prefWidth="362.0" promptText="SELECT COURSE" />
+                  <JFXTextArea labelFloat="true" layoutX="25.0" layoutY="120.0" maxWidth="362.0" minWidth="362.0" prefHeight="112.0" prefWidth="362.0" promptText="TYPE THE QUESTION" style="-fx-border-color: #7a7575;" />
+                  <Pane fx:id="question_format" layoutX="26.0" layoutY="280.0" prefHeight="291.0" prefWidth="365.0">
+                     <children>
+                        <ScrollPane layoutY="-1.0" prefHeight="291.0" prefWidth="366.0">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="234.0" prefWidth="363.0">
+                                 <children>
+                                    <Pane fx:id="multiple_choice_pane" prefHeight="289.0" prefWidth="362.0">
+                                       <children>
+                                          <Pane layoutX="8.0" layoutY="36.0" prefHeight="39.0" prefWidth="332.0" style="-fx-background-color: #ebebe0; -fx-border-color: #a3a375;">
+                                             <children>
+                                                <CheckBox layoutX="14.0" layoutY="11.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="12.0" />
+                                                <TextField layoutX="44.0" layoutY="7.0" prefHeight="25.0" prefWidth="267.0" promptText="Type the Option" />
+                                             </children>
+                                          </Pane>
+                                          <Pane layoutX="8.0" layoutY="92.0" prefHeight="40.0" prefWidth="332.0" style="-fx-background-color: #ebebe0; -fx-border-color: #a3a375;">
+                                             <children>
+                                                <CheckBox layoutX="14.0" layoutY="11.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="12.0" />
+                                                <TextField layoutX="44.0" layoutY="7.0" prefHeight="25.0" prefWidth="267.0" promptText="Type the Option" />
+                                             </children>
+                                          </Pane>
+                                          <Pane layoutX="7.0" layoutY="148.0" prefHeight="40.0" prefWidth="333.0" style="-fx-background-color: #ebebe0; -fx-border-color: #a3a375;">
+                                             <children>
+                                                <CheckBox layoutX="14.0" layoutY="11.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="12.0" />
+                                                <TextField layoutX="44.0" layoutY="7.0" prefHeight="25.0" prefWidth="267.0" promptText="Type the Option" />
+                                             </children>
+                                          </Pane>
+                                          <Pane layoutX="7.0" layoutY="208.0" prefHeight="40.0" prefWidth="333.0" style="-fx-background-color: #ebebe0; -fx-border-color: #a3a375;">
+                                             <children>
+                                                <CheckBox layoutX="14.0" layoutY="11.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="12.0" />
+                                                <TextField layoutX="44.0" layoutY="7.0" prefHeight="25.0" prefWidth="267.0" promptText="Type the Option" />
+                                             </children>
+                                          </Pane>
+                                       </children>
+                                    </Pane>
+                                    <Pane fx:id="true_or_false_pane" prefHeight="288.0" prefWidth="362.0">
+                                       <children>
+                                          <Label layoutX="15.0" layoutY="6.0" text="CHOICES">
+                                             <font>
+                                                <Font name="Roboto Regular" size="13.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </Pane>
+                  <JFXButton layoutX="304.0" layoutY="593.0" prefHeight="25.0" prefWidth="87.0" style="-fx-background-color: #00cc66;" text="Save" textFill="WHITE">
+                     <font>
+                        <Font name="Roboto Regular" size="12.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

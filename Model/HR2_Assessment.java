@@ -14,6 +14,6 @@ public class HR2_Assessment extends Synapse.Model {
     public HR2_Assessment() {
         setColumns("question_id", "question_number", "question",
                  "choice_id", "course_id");
-        setTable("tbl_hr2_assessment");
+        this.initTable("tbl_hr2_assessment");
     }
 }

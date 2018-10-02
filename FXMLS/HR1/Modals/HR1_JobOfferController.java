@@ -111,8 +111,6 @@ public class HR1_JobOfferController implements Initializable {
                     listB.getItems().add(d);
                 }
 
-                dateExpire = txtExpiration.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE);
-
             });
         }
 
@@ -185,6 +183,7 @@ public class HR1_JobOfferController implements Initializable {
     public void ExportToPDF() {
         //TODO: Add File Transfer ! and Email 
         try {
+            dateExpire = txtExpiration.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE);
 
             finalListOfDR = "";
             finalListOfB = "";
@@ -247,9 +246,8 @@ public class HR1_JobOfferController implements Initializable {
                     {"filePath", " "}
                 });
 
-                dateExpire = txtExpiration.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE);
-
             } else {
+
                 jobOffers.update(new Object[][]{
                     {"start_date", txtStartDate.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE)},
                     {"offerexpiration", txtExpiration.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE)},

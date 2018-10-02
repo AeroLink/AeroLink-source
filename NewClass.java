@@ -9,6 +9,9 @@ import Synapse.DB.MYSQL;
 import Synapse.Database;
 import Synapse.Model;
 import Synapse.Session;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,31 +29,7 @@ public class NewClass {
     
     public static void main(String[] args){
         
-        //Declaring new Instance of Database
-        Database db =  Database.getInstance();
-        
-        Session.Database = DatabaseConfig.DATABASE;
-        Session.Ip = DatabaseConfig.IP;
-        Session.Password = DatabaseConfig.PASSWORD;
-        Session.Port = DatabaseConfig.PORT;
-        Session.User = DatabaseConfig.USER;
-        
-        db.DB_INIT(new MSSQL());
-        
-        //initialize DB Connection
-        db.startConnection();
-        //Please, Don't mess up > < ! .. 
-        //God Bless this Code ..
-        
-        UserPermissions up = new UserPermissions();
-
-        up.delete().where(new Object[][] {
-            {"id", "=", 3}
-        }).executeUpdate();
-        
-        //List list = up.get();
-        
-        //System.out.println(Arrays.asList(list));
+        //FXMLS.HR1.ClassFiles.HR1_GenerateEC.generateEC("Software Engineer", "PHP 15,000.00", LocalDate.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)), "Lecias, Ariel Jr. Calio", "Ma. Eden Ramoneda", "MIS Office");
 
         
     }

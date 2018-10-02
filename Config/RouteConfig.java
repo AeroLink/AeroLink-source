@@ -33,7 +33,7 @@ public class RouteConfig {
         {"learning_management", "/FXMLS/HR2/HR2_Learning_Management.fxml", "can_access_hr2_learning_management"},
         {"training_management", "/FXMLS/HR2/HR2_Training_Management.fxml", "can_access_hr2_training_management"},
         {"competency_management", "/FXMLS/HR2/HR2_Competency_Management.fxml", "can_access_hr2_competency_management"},
-        {"succession_planning", "/FXMLS/HR2/HR2_Succession_Planning.fxml", "can_access_hr1_socialrecog"},
+        {"succession_planning", "/FXMLS/HR2/HR2_Succession_Planning.fxml", "can_access_hr2_succession_planning"},
         //HR3
         {"hr3sns", "/FXMLS/HR3/HR3_Shift_and_Scheduling.fxml", "can_access_HR3_Shift_and_Scheduling"},
         {"hr3tna", "/FXMLS/HR3/HR3_Time_and_Attendance.fxml", "can_access_HR3_Time_and_Attendance"},

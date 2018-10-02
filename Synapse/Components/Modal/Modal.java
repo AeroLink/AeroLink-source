@@ -47,6 +47,10 @@ public class Modal {
     }
     
     
+    public Object getCnt(){
+        return this.f.getLoader().getController();
+    }
+    
 
     public Form getF() {
         return f;

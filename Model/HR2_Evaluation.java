@@ -16,6 +16,6 @@ public class HR2_Evaluation extends Synapse.Model{
     {
           setColumns("choice_id", "question_id","choice"
         ,"choice_description","ischecked");
-        setTable("tbl_hr2_evaluation");
+        this.initTable("tbl_hr2_evaluation");
     }
 }

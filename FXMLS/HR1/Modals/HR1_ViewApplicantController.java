@@ -6,11 +6,14 @@
 package FXMLS.HR1.Modals;
 
 import FXMLS.HR1.ClassFiles.HR1_Applicant;
+import FXMLS.HR1.ClassFiles.HR1_GenerateEC;
 import FXMLS.HR1.ClassFiles.TableModel_Schedules;
+import static FXMLS.HR1.Modals.HR1_JobOfferController.dateExpire;
 import Model.HR1.HR1_AppStages;
 import Model.HR1.HR1_Applicants;
 import Model.HR1.HR1_JobOffers;
 import Model.HR1.JobPosting;
+import Model.HR1.JobVacancy;
 import Model.HR4.HR4_Employee;
 import Model.UserPermissions;
 import Model.Users;
@@ -21,7 +24,10 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import java.awt.FileDialog;
+import java.io.File;
 import java.net.URL;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -53,6 +59,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -267,6 +274,7 @@ public class HR1_ViewApplicantController implements Initializable {
         }
 
         menuHiring.setOnAction(value -> this.Hiring());
+        menuEC.setOnAction(value -> this.ECGen());
     }
 
     public void OpeningStages(String id) {
@@ -386,6 +394,8 @@ public class HR1_ViewApplicantController implements Initializable {
 
     @FXML
     private void btnDownloadCV(ActionEvent event) {
+        Modal md = Modal.getInstance(new Form("/FXMLS/HR1/Modals/HR1_PdfView.fxml").getParent());
+        md.open();
     }
 
     @FXML
@@ -667,12 +677,21 @@ public class HR1_ViewApplicantController implements Initializable {
 
     }
 
+    public File file;
+
     @FXML
     private void btnOpenFile(ActionEvent event) {
+        FileChooser f = new FileChooser();
+        file = f.showOpenDialog(((Node) event.getSource()).getScene().getWindow());
+
+        txtpath.setText(file.getPath());
 
     }
 
     Double salary = 0.00;
+
+    String job_id = "";
+    int returnPositions = 0;
 
     @FXML
     private void btnSubmitHire(ActionEvent event) {
@@ -681,96 +700,150 @@ public class HR1_ViewApplicantController implements Initializable {
 
     public void Hiring() {
 
-        //Insert First to Table Hr4
-        HR4_Employee emp = new HR4_Employee();
-        HR4_Employee profile = new HR4_Employee("profile");
+        if (txtpath.getText() != null) {
+            //Insert First to Table Hr4
+            HR4_Employee emp = new HR4_Employee();
+            HR4_Employee profile = new HR4_Employee("profile");
 
-        Users u = new Users();
-        UserPermissions up = new UserPermissions();
+            Users u = new Users();
+            UserPermissions up = new UserPermissions();
 
-        HR1_JobOffers j = new HR1_JobOffers();
+            HR1_JobOffers j = new HR1_JobOffers();
 
-        j.where(new Object[][]{
-            {"app_id", "=", HR1_Applicant.app_id}
-        }).get().stream().forEach(action -> {
-            salary = Double.parseDouble(((HashMap) action).get("salary").toString().replace(",", ""));
-        });
-
-        int emp_id = emp.insert(new Object[][]{
-            {"status_id", 1},
-            {"type_id", 5},
-            {"datehired", LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE)},
-            {"salary", salary}
-        }, true);
-
-        String EmpCode = "EMP181900" + emp_id;
-
-        int uid = u.insert(new Object[][]{
-            {"username", EmpCode},
-            {"password", Synapse.Crypt.Encrypt(EmpCode)}
-        }, true);
-        
-
-        if (uid != 0) {
-            up.insert(new Object[][]{
-                {"user_id", uid},
-                {"permission_id", 53}
+            j.where(new Object[][]{
+                {"app_id", "=", HR1_Applicant.app_id}
+            }).get().stream().forEach(action -> {
+                salary = Double.parseDouble(((HashMap) action).get("salary").toString().replace(",", ""));
             });
+
+            int emp_id = emp.insert(new Object[][]{
+                {"status_id", 1},
+                {"type_id", 5},
+                {"datehired", LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE)},
+                {"salary", salary}
+            }, true);
+
+            String EmpCode = "EMP181900" + emp_id;
+
+            int uid = u.insert(new Object[][]{
+                {"username", EmpCode},
+                {"password", Synapse.Crypt.Encrypt(EmpCode)}
+            }, true);
+
+            if (uid != 0) {
+                up.insert(new Object[][]{
+                    {"user_id", uid},
+                    {"permission_id", 53}
+                });
+            }
+
+            emp.update(new Object[][]{
+                {"employee_code", EmpCode},
+                {"login_id", uid}
+            }).where(new Object[][]{
+                {"id", "=", emp_id}
+            }).executeUpdate();
+
+            int p_id = profile.InsertIntoSelect(
+                    new Object[]{
+                        "firstname",
+                        "lastname",
+                        "middlename",
+                        "suffix_id",
+                        "date_of_birth",
+                        "place_of_birth",
+                        "gender",
+                        "email",
+                        "civil_status_id",
+                        "height",
+                        "weight",
+                        "contact_number"
+                    }, "aerolink.tbl_hr1_applicants",
+                    new Object[]{
+                        "firstname",
+                        "lastname",
+                        "middlename",
+                        "suffix_id",
+                        "date_of_birth",
+                        "place_of_birth",
+                        "gender",
+                        "email",
+                        "civil_status_id",
+                        "height",
+                        "weight",
+                        "contact_number"
+                    }, new Object[][]{
+                        {"aerolink.tbl_hr1_applicants.id", "=", HR1_Applicant.app_id}
+                    }, true);
+
+            Helpers.FileTransfer.SendFile("127.0.0.1", file.getPath());
+
+            profile.update(new Object[][]{
+                {"employee_code", "EMP181900" + emp_id},
+                {"employement_contract", file.getName()}
+            }).where(new Object[][]{
+                {"id", "=", p_id}
+            }).executeUpdate();
+
+            applicant_pivot.update(new Object[][]{
+                {"status", 100}
+            }).where(new Object[][]{
+                {"app_id", "=", HR1_Applicant.app_id}
+            }).executeUpdate();
+
+            JobVacancy jv = new JobVacancy();
+            JobPosting jp = new JobPosting();
+            jp.where(new Object[][]{
+                {"id", "=", HR1_Applicant.jobPosted_id}
+            }).get().stream().forEach(action -> {
+                job_id = ((HashMap) action).get("jobPosted_id").toString();
+            });
+
+            jv.where(new Object[][]{
+                {"id", "=", job_id}
+            }).get().stream().forEach(action -> {
+                HashMap row = (HashMap) action;
+                returnPositions = (Integer.parseInt(row.get("jobOpen").toString()) - 1);
+
+            });
+
+            jv.update(new Object[][]{
+                {"jobOpen", returnPositions},
+                {"isPosted", (returnPositions == 0 ? 0 : 1)}
+            }).where(new Object[][]{
+                {"id", "=", job_id}
+            }).executeUpdate();
+
+            Helpers.EIS_Response.SuccessResponse("Success", "Applicant was successfully hired and make some task for proper welcome at New Hire On Board Module ");
+
+            //TODO : Send welcome message, thru email ..  send employment contract to server using FieTransfer
         }
 
-        emp.update(new Object[][]{
-            {"employee_code", EmpCode},
-            {"login_id", uid}
-        }).where(new Object[][]{
-            {"id", "=", emp_id}
-        }).executeUpdate();
+    }
 
-        int p_id = profile.InsertIntoSelect(
-                new Object[]{
-                    "firstname",
-                    "lastname",
-                    "middlename",
-                    "suffix_id",
-                    "date_of_birth",
-                    "place_of_birth",
-                    "gender",
-                    "email",
-                    "civil_status_id",
-                    "height",
-                    "weight",
-                    "contact_number"
-                }, "aerolink.tbl_hr1_applicants",
-                new Object[]{
-                    "firstname",
-                    "lastname",
-                    "middlename",
-                    "suffix_id",
-                    "date_of_birth",
-                    "place_of_birth",
-                    "gender",
-                    "email",
-                    "civil_status_id",
-                    "height",
-                    "weight",
-                    "contact_number"
-                }, new Object[][]{
-                    {"aerolink.tbl_hr1_applicants.id", "=", HR1_Applicant.app_id}
-                }, true);
+    String fileName = "";
 
-        profile.update(new Object[][]{
-            {"employee_code", "EMP181900" + emp_id}
-        }).where(new Object[][]{
-            {"id", "=", p_id}
-        }).executeUpdate();
+    public void ECGen() {
 
-        applicant_pivot.update(new Object[][]{
-            {"status", 100}
-        }).where(new Object[][]{
+        HR1_JobOffers jobOffers = new HR1_JobOffers();
+
+        jobOffers.where(new Object[][]{
             {"app_id", "=", HR1_Applicant.app_id}
-        }).executeUpdate();
+        }).get().stream().forEach(event -> {
+            HashMap row = (HashMap) event;
 
-        Helpers.EIS_Response.SuccessResponse("Success", "Applicant was successfully hired and make some task for proper welcome at New Hire On Board Module ");
+            fileName = HR1_GenerateEC.generateEC(
+                    HR1_Applicant.job_title,
+                    "PHP " + NumberFormat.getInstance().format(Double.parseDouble(row.get("salary").toString().replace(",", ""))),
+                    LocalDate.parse(row.get("start_date").toString()).format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)),
+                    HR1_Applicant.fullname,
+                    row.get("reportTo").toString(),
+                    row.get("location").toString(),
+                    "APPLICANT_" + HR1_Applicant.app_id);
 
-        //TODO : Send welcome message, thru email ..  send employment contract to server using FieTransfer
+        });
+
+        Helpers.EIS_Response.SuccessResponse("Success", "Employee Contract " + fileName + " Generated");
+
     }
 }

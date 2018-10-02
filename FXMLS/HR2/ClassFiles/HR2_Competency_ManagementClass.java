@@ -17,12 +17,13 @@ public class HR2_Competency_ManagementClass {
     public SimpleStringProperty Skill_ID;
     public SimpleStringProperty Skill;
     public SimpleStringProperty Skill_Description;
-    public static final AtomicInteger count = new AtomicInteger(0);
+    public SimpleStringProperty Jobs;
 
-    public HR2_Competency_ManagementClass(String Skill_ID, String Skill, String Skill_Description) {
+    public HR2_Competency_ManagementClass(String Skill_ID, String Skill, String Skill_Description, String select_jobs) {
         this.Skill_ID = new SimpleStringProperty(Skill_ID);
         this.Skill = new SimpleStringProperty(Skill);
         this.Skill_Description = new SimpleStringProperty(Skill_Description);
+        this.Jobs = new SimpleStringProperty(select_jobs);
 
     }
 }

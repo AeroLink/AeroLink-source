@@ -26,18 +26,47 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javax.swing.JOptionPane;
 import FXMLS.HR2.ClassFiles.Training_ManagementClass;
+import FXMLS.HR2.Modals.HR2_Edit_TrainingController;
+import FXMLS.HR4.ClassFiles.HR4_MIZ;
 import FXMLS.USM.Controllers.IUsers;
+import Synapse.Components.Modal.Modal;
+import Synapse.Form;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextArea;
+import static com.sun.corba.se.impl.util.Utility.printStackTrace;
+import java.awt.Cursor;
+import java.io.IOException;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableCell;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.Pair;
 
 /**
  * FXML Controller class
@@ -108,17 +137,12 @@ public class HR2_Training_ManagementController implements Initializable {
     private TableColumn<Training_ManagementClass, String> col_budget_cost;
 
     ObservableList<String> sdl = FXCollections.observableArrayList("Internal", "External");
-    @FXML
-    private TableColumn<Training_ManagementClass, Boolean> col_edit;
-    @FXML
-    private TableColumn<Training_ManagementClass, Boolean> col_delete;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
         txt_type_of_training.setItems(sdl);
         txt_type_of_training.setPromptText("Choose Type of Training");
-
         btn_new.setOnMouseClicked(e -> New());
         btn_save.setOnMouseClicked(e -> Save());
         DisableComponents();
@@ -144,34 +168,8 @@ public class HR2_Training_ManagementController implements Initializable {
         col_location.setCellValueFactory((TableColumn.CellDataFeatures<Training_ManagementClass, String> param) -> param.getValue().location);
         col_vehicle.setCellValueFactory((TableColumn.CellDataFeatures<Training_ManagementClass, String> param) -> param.getValue().vehicle);
         col_budget_cost.setCellValueFactory((TableColumn.CellDataFeatures<Training_ManagementClass, String> param) -> param.getValue().budget_cost);
-        col_edit.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Training_ManagementClass, Boolean>, ObservableValue<Boolean>>() {
-            @Override
-            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<Training_ManagementClass, Boolean> param) {
-                return new SimpleBooleanProperty(param.getValue() != null);
-            }
-        });
-
-        col_edit.setCellFactory(new Callback<TableColumn<Training_ManagementClass, Boolean>, TableCell<Training_ManagementClass, Boolean>>() {
-            @Override
-            public TableCell<Training_ManagementClass, Boolean> call(TableColumn<Training_ManagementClass, Boolean> param) {
-                return new Synapse.Components.HR2_Edit_Training<Training_ManagementClass>().create("Edit", FXMLS.HR2.Handlers.HR2_Edit_Training_Handler.triggerPermissionsModal);
-            }
-        });
-
-        col_delete.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Training_ManagementClass, Boolean>, ObservableValue<Boolean>>() {
-            @Override
-            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<Training_ManagementClass, Boolean> param) {
-                return new SimpleBooleanProperty(param.getValue() != null);
-            }
-        });
-
-        col_delete.setCellFactory(new Callback<TableColumn<Training_ManagementClass, Boolean>, TableCell<Training_ManagementClass, Boolean>>() {
-            @Override
-            public TableCell<Training_ManagementClass, Boolean> call(TableColumn<Training_ManagementClass, Boolean> param) {
-                return new Synapse.Components.HR2_Delete_Training<Training_ManagementClass>().create("Delete", FXMLS.HR2.Handlers.HR2_Delete_Training_Handler.triggerPermissionsModal);
-            }
-        });
-
+        AddButtonToTraining_ManagementTable();
+        DeleteButton();
     }
 
     private void loadData() {
@@ -185,6 +183,7 @@ public class HR2_Training_ManagementController implements Initializable {
             HashMap hm = (HashMap) d;
 
             hm.get("training_id");
+            hm.get("default_id");
             hm.get("job_position");
             hm.get("training_title");
             hm.get("training_description");
@@ -200,7 +199,7 @@ public class HR2_Training_ManagementController implements Initializable {
 
             dv.add(
                     new Training_ManagementClass(
-                            String.valueOf(hm.get("training_id")),
+                            String.valueOf(hm.get("default_id") + "" + hm.get("training_id")),
                             String.valueOf(hm.get("job_position")),
                             String.valueOf(hm.get("training_title")),
                             String.valueOf(hm.get("training_description")),
@@ -305,10 +304,12 @@ public class HR2_Training_ManagementController implements Initializable {
                 if (c instanceof JFXDatePicker) {
                     JFXDatePicker m2 = (JFXDatePicker) c;
                     m2.setDisable(false);
+                    m2.setValue(null);
                 }
                 if (c instanceof JFXComboBox) {
                     JFXComboBox m3 = (JFXComboBox) c;
                     m3.setDisable(false);
+                    m3.setValue(null);
                 }
 
             }
@@ -318,36 +319,300 @@ public class HR2_Training_ManagementController implements Initializable {
         }
     }
 
-    public void Save() {
+    @FXML
+    public void SearchTrainings() {
+
         HR2_Training_Management tm = new HR2_Training_Management();
 
         try {
 
-            String[][] tm_data
-                    = {
-                        {"job_position", txt_job_position.getText()},
-                        {"training_title", txt_training_title.getText()},
-                        {"training_description", txt_training_description.getText()},
-                        {"trainor", txt_trainor.getText()},
-                        {"start_date", txt_start_date.getValue().toString()},
-                        {"end_date", txt_end_date.getValue().toString()},
-                        {"start_time", txt_start_time.getText()},
-                        {"end_time", txt_end_time.getText()},
-                        {"type_of_training", txt_type_of_training.getSelectionModel().toString()},
-                        {"location", txt_location.getText()},
-                        {"vehicle", txt_vehicle.getText()},
-                        {"budget_cost", txt_budget_cost.getText()}
-                    };
+            HR2_Training_Management tm1 = tm;
+            List listTrainings;
+            if (txt_search_trainings.equals("")) {
+                listTrainings = tm1.get();
+            } else {
+                listTrainings = tm1.where(new Object[][]{
+                    {"job_position", "like", "%" + txt_search_trainings.getText() + "%"}
+                }).get();
 
-            tm.insert(tm_data);
-            loadData();
-            DisableComponents();
-            Alert saved = new Alert(Alert.AlertType.INFORMATION);
-            saved.setContentText("Saved");
-            saved.showAndWait();
+                //  {"job_id", "like", " (SELECT id from tbl_jobs WHERE id = 1)"}
+                training_management_data.getItems().clear();
+
+                ObservableList<Training_ManagementClass> trainings = FXCollections.observableArrayList();
+
+                for (Object d : listTrainings) {
+                    HashMap hm1 = (HashMap) d;
+                    //RS
+                    trainings.add(
+                            new Training_ManagementClass(
+                                    String.valueOf(hm1.get("default_id") + "" + hm1.get("training_id")),
+                                    String.valueOf(hm1.get("job_position")),
+                                    String.valueOf(hm1.get("training_title")),
+                                    String.valueOf(hm1.get("training_description")),
+                                    String.valueOf(hm1.get("trainor")),
+                                    String.valueOf(hm1.get("start_date")),
+                                    String.valueOf(hm1.get("end_date")),
+                                    String.valueOf(hm1.get("start_time")),
+                                    String.valueOf(hm1.get("end_time")),
+                                    String.valueOf(hm1.get("type_of_training")),
+                                    String.valueOf(hm1.get("location")),
+                                    String.valueOf(hm1.get("vehicle")),
+                                    String.valueOf(hm1.get("budget_cost"))
+                            ));
+
+                }
+                training_management_data.setItems(trainings);
+            }
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+            System.out.println(e);
         }
+
+    }
+
+    public void Save() {
+        HR2_Training_Management tm = new HR2_Training_Management();
+
+        if (txt_job_position.getText().isEmpty() || txt_training_title.getText().isEmpty()
+                || txt_training_description.getText().isEmpty() || txt_trainor.getText().isEmpty()
+                || txt_start_date.getValue().toString().isEmpty() || txt_end_date.getValue().toString().isEmpty()
+                || txt_start_time.getText().isEmpty() || txt_end_time.getText().isEmpty()
+                || txt_type_of_training.getValue().toString().isEmpty() || txt_location.getText().isEmpty()
+                || txt_vehicle.getText().isEmpty() || txt_budget_cost.getText().isEmpty()) {
+
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("One or More Fields are empty");
+            alert.showAndWait();
+        } else {
+            try {
+
+                String[][] tm_data
+                        = {
+                            {"default_id", "000"},
+                            {"job_position", txt_job_position.getText()},
+                            {"training_title", txt_training_title.getText()},
+                            {"training_description", txt_training_description.getText()},
+                            {"trainor", txt_trainor.getText()},
+                            {"start_date", txt_start_date.getValue().toString()},
+                            {"end_date", txt_end_date.getValue().toString()},
+                            {"start_time", txt_start_time.getText()},
+                            {"end_time", txt_end_time.getText()},
+                            {"type_of_training", txt_type_of_training.getValue().toString()},
+                            {"location", txt_location.getText()},
+                            {"vehicle", txt_vehicle.getText()},
+                            {"budget_cost", txt_budget_cost.getText()}
+                        };
+
+                tm.insert(tm_data);
+                loadData();
+                DisableComponents();
+                Alert saved = new Alert(Alert.AlertType.INFORMATION);
+                saved.setContentText("Saved");
+                saved.showAndWait();
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+
+    }
+
+    public void AddButtonToTraining_ManagementTable() {
+        TableColumn<Training_ManagementClass, Void> addButton = new TableColumn("Edit Action");
+
+        Callback<TableColumn<Training_ManagementClass, Void>, TableCell<Training_ManagementClass, Void>> cellFactory
+                = new Callback<TableColumn<Training_ManagementClass, Void>, TableCell<Training_ManagementClass, Void>>() {
+            @Override
+            public TableCell<Training_ManagementClass, Void> call(final TableColumn<Training_ManagementClass, Void> param) {
+
+                final TableCell<Training_ManagementClass, Void> cell = new TableCell<Training_ManagementClass, Void>() {
+                    private final Button btn = new Button("Edit");
+
+                    {
+                        try {
+                            btn.setOnAction(e
+                                    -> {
+                                viewTraining();
+                            });
+                            btn.setCursor(javafx.scene.Cursor.HAND);
+                        } catch (Exception ex) {
+                            System.out.println(ex);
+                            printStackTrace();
+                        }
+
+                    }
+
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+
+        };
+
+        addButton.setCellFactory(cellFactory);
+        training_management_data.getColumns().add(addButton);
+    }
+
+    public void DeleteButton() {
+
+        // Delete Button
+        TableColumn<Training_ManagementClass, Void> addButton1 = new TableColumn("Delete Action");
+
+        Callback<TableColumn<Training_ManagementClass, Void>, TableCell<Training_ManagementClass, Void>> cellFactory1
+                = new Callback<TableColumn<Training_ManagementClass, Void>, TableCell<Training_ManagementClass, Void>>() {
+            @Override
+            public TableCell<Training_ManagementClass, Void> call(final TableColumn<Training_ManagementClass, Void> param) {
+
+                final TableCell<Training_ManagementClass, Void> cell = new TableCell<Training_ManagementClass, Void>() {
+                    private final Button btn = new Button("Delete");
+
+                    {
+                        btn.setOnAction((ActionEvent event)
+                                -> {
+                            // Training_ManagementClass data = getTableView().getItems().get(getIndex());
+                            DeleteTraining();
+
+                        });
+                        btn.setCursor(javafx.scene.Cursor.HAND);
+                    }
+
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+
+        };
+
+        addButton1.setCellFactory(cellFactory1);
+        training_management_data.getColumns().add(addButton1);
+
+    }
+
+    public void viewTraining() {
+            Dialog<Pair<String, String>> dialog = new Dialog<>();
+                            dialog.setTitle("Update Information");
+
+                            // Set the button types.
+                            ButtonType loginButtonType = new ButtonType("Update", ButtonData.OK_DONE);
+                            dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
+                            
+                            Training_ManagementClass tmc =  training_management_data.getSelectionModel().getSelectedItem();
+                            GridPane grid = new GridPane();
+                            grid.setHgap(10);
+                            grid.setVgap(10);
+                            grid.setPadding(new Insets(20, 150, 10, 10));
+
+                            JFXTextField jobPosition = new JFXTextField(tmc.job_position.getValue());
+                            jobPosition.setPromptText("Job Position");
+                            JFXTextField trainingTitle = new JFXTextField(tmc.training_title.getValue());
+                            trainingTitle.setPromptText("Training Title");
+                            JFXTextField trainingDescription = new JFXTextField(tmc.training_description.getValue());
+                            trainingDescription.setPromptText("Training Description");
+                            JFXTextField trainor = new JFXTextField(tmc.trainor.getValue());
+                            trainor.setPromptText("Trainor");
+                            JFXDatePicker startDate = new JFXDatePicker(LocalDate.parse(tmc.start_date.getValue()));
+                            startDate.setPromptText("Start Date");
+                            JFXDatePicker endDate = new JFXDatePicker(LocalDate.parse(tmc.end_date.getValue()));
+                            endDate.setPromptText("End Date");
+                            JFXTextField startTime = new JFXTextField(tmc.start_time.getValue());
+                            startTime.setPromptText("Start Time");
+                            JFXTextField endTime = new JFXTextField(tmc.end_time.getValue());
+                            endTime.setPromptText("End Time");
+                            JFXComboBox type_ofTraining = new JFXComboBox();
+                            type_ofTraining.getItems().add(tmc.type_of_training.getValue());
+                            type_ofTraining.setPromptText("Type of Training");
+                            JFXTextField location = new JFXTextField(tmc.location.getValue());
+                            location.setPromptText("Location");
+                            JFXTextField vehicle = new JFXTextField(tmc.vehicle.getValue());
+                            vehicle.setPromptText("Vehicle");
+                            JFXTextField budgetCost = new JFXTextField(tmc.budget_cost.getValue());
+                            budgetCost.setPromptText("Budget Cost");
+                            
+                            grid.add(new Label("Job Position:"), 0, 0);
+                            grid.add(jobPosition, 1, 0);
+                            grid.add(new Label("Training Title:"), 0, 1);
+                            grid.add(trainingTitle, 1, 1);
+                            grid.add(new Label("Training Description:"), 0, 2);
+                            grid.add(trainingDescription, 1, 2);
+                            grid.add(new Label("Trainor:"), 0, 3);
+                            grid.add(trainor, 1, 3);
+                            grid.add(new Label("Start Date:"), 0, 4);
+                            grid.add(startDate, 1, 4);
+                            grid.add(new Label("End Date:"), 0, 5);
+                            grid.add(endDate, 1, 5);
+                            grid.add(new Label("Start Time:"), 0, 6);
+                            grid.add(startTime, 1, 6);
+                            grid.add(new Label("End Time:"), 0, 7);
+                            grid.add(endTime, 1, 7);
+                            grid.add(new Label("Type of Training:"), 0, 8);
+                            grid.add(type_ofTraining, 1, 8);
+                            grid.add(new Label("Location:"), 0, 9);
+                            grid.add(location, 1, 9);
+                            grid.add(new Label("Vehicle:"), 0, 10);
+                            grid.add(vehicle, 1, 10);
+                            grid.add(new Label("Budget Cost:"), 0, 11);
+                            grid.add(budgetCost, 1, 11);
+
+// Enable/Disable login button depending on whether a username was entered.
+                            Node loginButton = dialog.getDialogPane().lookupButton(loginButtonType);
+                           // loginButton.setDisable(true);
+
+// Do some validation (using the Java 8 lambda syntax).
+                          /*  username.textProperty().addListener((observable, oldValue, newValue) -> {
+                                loginButton.setDisable(newValue.trim().isEmpty());
+                            });*/
+
+                            dialog.getDialogPane().setContent(grid);
+
+// Request focus on the username field by default.
+                        //    Platform.runLater(() -> username.requestFocus());
+
+// Convert the result to a username-password-pair when the login button is clicked.
+                            dialog.setResultConverter(dialogButton -> {
+                                if (dialogButton == loginButtonType) {
+                                    return new Pair<>(jobPosition.getText(), trainingTitle.getText());
+                                }
+                                return null;
+                            });
+                            Optional<Pair<String, String>> result = dialog.showAndWait();
+
+                            result.ifPresent(usernamePassword -> {
+                                System.out.println("Username=" + usernamePassword.getKey() + ", Password=" + usernamePassword.getValue());
+                            });
+                          
+
+    }
+
+    public void DeleteTraining() {
+        Alert delete = new Alert(Alert.AlertType.CONFIRMATION);
+        delete.setContentText("Are you sure you want to delete this data?");
+        Optional<ButtonType> rs = delete.showAndWait();
+
+        System.out.println(rs.get());
+        if (rs.get() == ButtonType.OK) {
+            System.out.println(training_management_data.getSelectionModel().getSelectedItem().training_id.getValue());
+            HR2_Training_Management tm = new HR2_Training_Management();
+
+            tm.delete().where(new Object[][]{
+                {"training_id", "=", training_management_data.getSelectionModel().getSelectedItem().training_id.getValue()}
+            }).executeUpdate();
+            loadData();
+
+        }
+
     }
 }
