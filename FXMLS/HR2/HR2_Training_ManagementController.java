@@ -504,99 +504,127 @@ public class HR2_Training_ManagementController implements Initializable {
     }
 
     public void viewTraining() {
-            Dialog<Pair<String, String>> dialog = new Dialog<>();
-                            dialog.setTitle("Update Information");
+        Dialog<Pair<String, String>> dialog = new Dialog<>();
+        dialog.setTitle("Update Information");
 
-                            // Set the button types.
-                            ButtonType loginButtonType = new ButtonType("Update", ButtonData.OK_DONE);
-                            dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
-                            
-                            Training_ManagementClass tmc =  training_management_data.getSelectionModel().getSelectedItem();
-                            GridPane grid = new GridPane();
-                            grid.setHgap(10);
-                            grid.setVgap(10);
-                            grid.setPadding(new Insets(20, 150, 10, 10));
+        // Set the button types.
+        Training_ManagementClass tmc = training_management_data.getSelectionModel().getSelectedItem();
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 150, 10, 10));
 
-                            JFXTextField jobPosition = new JFXTextField(tmc.job_position.getValue());
-                            jobPosition.setPromptText("Job Position");
-                            JFXTextField trainingTitle = new JFXTextField(tmc.training_title.getValue());
-                            trainingTitle.setPromptText("Training Title");
-                            JFXTextArea trainingDescription = new JFXTextArea(tmc.training_description.getValue());
-                            trainingDescription.setPromptText("Training Description");
-                            trainingDescription.setStyle("-fx-text-fill: #0f0f0a; -fx-font-size: 16px; -fx-border-color: #999966");
-                            trainingDescription.setPrefHeight(100);
-                            JFXTextField trainor = new JFXTextField(tmc.trainor.getValue());
-                            trainor.setPromptText("Trainor");
-                            JFXDatePicker startDate = new JFXDatePicker(LocalDate.parse(tmc.start_date.getValue()));
-                            startDate.setPromptText("Start Date");
-                            JFXDatePicker endDate = new JFXDatePicker(LocalDate.parse(tmc.end_date.getValue()));
-                            endDate.setPromptText("End Date");
-                            JFXTextField startTime = new JFXTextField(tmc.start_time.getValue());
-                            startTime.setPromptText("Start Time");
-                            JFXTextField endTime = new JFXTextField(tmc.end_time.getValue());
-                            endTime.setPromptText("End Time");
-                            JFXComboBox type_ofTraining = new JFXComboBox();
-                            type_ofTraining.getItems().add(tmc.type_of_training.getValue());
-                            type_ofTraining.setPromptText("Type of Training");
-                            JFXTextField location = new JFXTextField(tmc.location.getValue());
-                            location.setPromptText("Location");
-                            JFXTextField vehicle = new JFXTextField(tmc.vehicle.getValue());
-                            vehicle.setPromptText("Vehicle");
-                            JFXTextField budgetCost = new JFXTextField(tmc.budget_cost.getValue());
-                            budgetCost.setPromptText("Budget Cost");
-                            
-                            grid.add(new Label("Job Position:"), 0, 0);
-                            grid.add(jobPosition, 1, 0);
-                            grid.add(new Label("Training Title:"), 0, 1);
-                            grid.add(trainingTitle, 1, 1);
-                            grid.add(new Label("Training Description:"), 0, 2);
-                            grid.add(trainingDescription, 1, 2);
-                            grid.add(new Label("Trainor:"), 0, 3);
-                            grid.add(trainor, 1, 3);
-                            grid.add(new Label("Start Date:"), 0, 4);
-                            grid.add(startDate, 1, 4);
-                            grid.add(new Label("End Date:"), 0, 5);
-                            grid.add(endDate, 1, 5);
-                            grid.add(new Label("Start Time:"), 0, 6);
-                            grid.add(startTime, 1, 6);
-                            grid.add(new Label("End Time:"), 0, 7);
-                            grid.add(endTime, 1, 7);
-                            grid.add(new Label("Type of Training:"), 0, 8);
-                            grid.add(type_ofTraining, 1, 8);
-                            grid.add(new Label("Location:"), 0, 9);
-                            grid.add(location, 1, 9);
-                            grid.add(new Label("Vehicle:"), 0, 10);
-                            grid.add(vehicle, 1, 10);
-                            grid.add(new Label("Budget Cost:"), 0, 11);
-                            grid.add(budgetCost, 1, 11);
+        JFXTextField trainingID = new JFXTextField(tmc.training_id.getValue());
+        trainingID.setPromptText("Training Id");
 
+        JFXTextField jobPosition = new JFXTextField(tmc.job_position.getValue());
+        jobPosition.setPromptText("Job Position");
+        JFXTextField trainingTitle = new JFXTextField(tmc.training_title.getValue());
+        trainingTitle.setPromptText("Training Title");
+        JFXTextArea trainingDescription = new JFXTextArea(tmc.training_description.getValue());
+        trainingDescription.setPromptText("Training Description");
+        trainingDescription.setStyle("-fx-text-fill: #0f0f0a; -fx-font-size: 16px; -fx-border-color: #999966");
+        trainingDescription.setPrefHeight(100);
+        JFXTextField trainor = new JFXTextField(tmc.trainor.getValue());
+        trainor.setPromptText("Trainor");
+        JFXDatePicker startDate = new JFXDatePicker(LocalDate.parse(tmc.start_date.getValue()));
+        startDate.setPromptText("Start Date");
+        JFXDatePicker endDate = new JFXDatePicker(LocalDate.parse(tmc.end_date.getValue()));
+        endDate.setPromptText("End Date");
+        JFXTextField startTime = new JFXTextField(tmc.start_time.getValue());
+        startTime.setPromptText("Start Time");
+        JFXTextField endTime = new JFXTextField(tmc.end_time.getValue());
+        endTime.setPromptText("End Time");
+        JFXComboBox type_ofTraining = new JFXComboBox();
+        type_ofTraining.getItems().add(tmc.type_of_training.getValue());
+        type_ofTraining.setPromptText("Type of Training");
+        JFXTextField location = new JFXTextField(tmc.location.getValue());
+        location.setPromptText("Location");
+        JFXTextField vehicle = new JFXTextField(tmc.vehicle.getValue());
+        vehicle.setPromptText("Vehicle");
+        JFXTextField budgetCost = new JFXTextField(tmc.budget_cost.getValue());
+        budgetCost.setPromptText("Budget Cost");
+        JFXButton d = new JFXButton("Update");
+        d.setOnAction(e
+                -> {
+            Alert update = new Alert(Alert.AlertType.CONFIRMATION);
+            update.setContentText("Are you sure you want to update this data?");
+            Optional<ButtonType> rs = update.showAndWait();
+
+            if (rs.get() == ButtonType.OK) {
+                //   System.out.println(tbl_Skills.getSelectionModel().getSelectedItem().Skill_ID.getValue());
+                HR2_Training_Management tm = new HR2_Training_Management();
+
+                Boolean a = tm.update(new Object[][]{
+                    {"job_position", jobPosition.getText()},
+                    {"training_title", trainingTitle.getText()},
+                    {"training_description", trainingDescription.getText()},
+                    {"trainor", trainor.getText()},
+                    {"start_date", startDate.getValue()},
+                    {"end_date", endDate.getValue()},
+                    {"start_time", startTime.getText()},
+                    {"end_time", endTime.getText()},
+                    {"type_of_training", type_ofTraining.getValue()},
+                    {"location", location.getText()},
+                    {"vehicle", vehicle.getText()},
+                    {"budget_cost", budgetCost.getText()}
+
+                }).where(new Object[][]{
+                    {"training_id", "=", trainingID.getText()}
+                }).executeUpdate();
+
+                System.out.println(a);
+
+                loadData();
+            }
+        });
+        d.setStyle("-fx-text-fill: #fff; -fx-background-color: #00cc66; -fx-font-size: 15px; -fx-font-family: Lato-Medium;  ");
+        d.setCursor(javafx.scene.Cursor.HAND);
+        grid.add(new Label("Training Code:"), 0, 0);
+        grid.add(trainingID, 1, 0);
+        grid.add(new Label("Job Position:"), 0, 0);
+        grid.add(jobPosition, 1, 0);
+        grid.add(new Label("Training Title:"), 0, 1);
+        grid.add(trainingTitle, 1, 1);
+        grid.add(new Label("Training Description:"), 0, 2);
+        grid.add(trainingDescription, 1, 2);
+        grid.add(new Label("Trainor:"), 0, 3);
+        grid.add(trainor, 1, 3);
+        grid.add(new Label("Start Date:"), 0, 4);
+        grid.add(startDate, 1, 4);
+        grid.add(new Label("End Date:"), 0, 5);
+        grid.add(endDate, 1, 5);
+        grid.add(new Label("Start Time:"), 0, 6);
+        grid.add(startTime, 1, 6);
+        grid.add(new Label("End Time:"), 0, 7);
+        grid.add(endTime, 1, 7);
+        grid.add(new Label("Type of Training:"), 0, 8);
+        grid.add(type_ofTraining, 1, 8);
+        grid.add(new Label("Location:"), 0, 9);
+        grid.add(location, 1, 9);
+        grid.add(new Label("Vehicle:"), 0, 10);
+        grid.add(vehicle, 1, 10);
+        grid.add(new Label("Budget Cost:"), 0, 11);
+        grid.add(budgetCost, 1, 11);
+        grid.add(d, 1, 12);
+        trainingID.setVisible(true);
 // Enable/Disable login button depending on whether a username was entered.
-                            Node loginButton = dialog.getDialogPane().lookupButton(loginButtonType);
-                           // loginButton.setDisable(true);
 
+        // loginButton.setDisable(true);
 // Do some validation (using the Java 8 lambda syntax).
-                          /*  username.textProperty().addListener((observable, oldValue, newValue) -> {
+        /*  username.textProperty().addListener((observable, oldValue, newValue) -> {
                                 loginButton.setDisable(newValue.trim().isEmpty());
                             });*/
-
-                            dialog.getDialogPane().setContent(grid);
+        dialog.getDialogPane().setContent(grid);
 
 // Request focus on the username field by default.
-                        //    Platform.runLater(() -> username.requestFocus());
-
+        //    Platform.runLater(() -> username.requestFocus());
 // Convert the result to a username-password-pair when the login button is clicked.
-                            dialog.setResultConverter(dialogButton -> {
-                                if (dialogButton == loginButtonType) {
-                                    return new Pair<>(jobPosition.getText(), trainingTitle.getText());
-                                }
-                                return null;
-                            });
-                            Optional<Pair<String, String>> result = dialog.showAndWait();
+        Optional<Pair<String, String>> result = dialog.showAndWait();
 
-                            result.ifPresent(usernamePassword -> {
-                                System.out.println("Username=" + usernamePassword.getKey() + ", Password=" + usernamePassword.getValue());
-                            });
-                          
+        result.ifPresent(usernamePassword -> {
+            System.out.println("Username=" + usernamePassword.getKey() + ", Password=" + usernamePassword.getValue());
+        });
 
     }
 
@@ -618,4 +646,5 @@ public class HR2_Training_ManagementController implements Initializable {
         }
 
     }
+
 }
