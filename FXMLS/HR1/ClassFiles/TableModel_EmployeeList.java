@@ -19,13 +19,15 @@ public class TableModel_EmployeeList {
     public StringProperty email;
     public StringProperty contact;
     public StringProperty job;
-
-    public TableModel_EmployeeList(String empCode, String name, String email, String contact, String job) {
+    public StringProperty status;
+    
+    public TableModel_EmployeeList(String empCode, String name, String email, String contact, String job, String status) {
         this.empCode = new SimpleStringProperty(empCode);
         this.name = new SimpleStringProperty(name);
         this.email = new SimpleStringProperty(email);
         this.contact = new SimpleStringProperty(contact);
         this.job = new SimpleStringProperty(job);
+        this.status = new SimpleStringProperty(status);
     }
     
     

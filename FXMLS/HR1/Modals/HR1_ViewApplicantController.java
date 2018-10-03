@@ -804,6 +804,7 @@ public class HR1_ViewApplicantController implements Initializable {
 
             JobVacancy jv = new JobVacancy();
             JobPosting jp = new JobPosting();
+
             jp.where(new Object[][]{
                 {"id", "=", HR1_Applicant.jobPosted_id}
             }).get().stream().forEach(action -> {
@@ -827,10 +828,16 @@ public class HR1_ViewApplicantController implements Initializable {
 
             jv.update(new Object[][]{
                 {"jobOpen", returnPositions},
-                {"isPosted", (returnPositions == 0 ? 0 : 1)}
+                {"isPosted", (returnPositions <= 0 ? 0 : 1)}
             }).where(new Object[][]{
                 {"id", "=", job_id}
             }).executeUpdate();
+
+            if (returnPositions <= 0) {
+                jp.delete().where(new Object[][]{
+                    {"id", "=", HR1_Applicant.jobPosted_id}
+                }).executeUpdate();
+            }
 
             Helpers.EIS_Response.SuccessResponse("Success", "Applicant was successfully hired and make some task for proper welcome at New Hire On Board Module ");
 

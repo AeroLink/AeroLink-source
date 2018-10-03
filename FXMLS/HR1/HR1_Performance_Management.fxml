@@ -2,7 +2,9 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -26,7 +28,14 @@
                            </font>
                         </Label>
                         <FontAwesomeIconView fill="#34a853" glyphName="COPY" layoutX="14.0" layoutY="32.0" size="22" />
-                        <ComboBox fx:id="cboDept" layoutX="418.0" layoutY="12.0" prefHeight="25.0" prefWidth="168.0" promptText="Select Department" AnchorPane.rightAnchor="10.0" />
+                        <ComboBox fx:id="cboDept" layoutX="418.0" layoutY="12.0" prefHeight="25.0" prefWidth="168.0" promptText="Select Department" AnchorPane.rightAnchor="10.0">
+                           <contextMenu>
+                              <ContextMenu fx:id="secondContext">
+                                <items>
+                                  <MenuItem fx:id="viewGrade" mnemonicParsing="false" text="View Evaluation" />
+                                </items>
+                              </ContextMenu>
+                           </contextMenu></ComboBox>
                      </children>
                   </AnchorPane>
                </top>
@@ -41,6 +50,13 @@
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
+                           <contextMenu>
+                              <ContextMenu fx:id="contextMenu">
+                                <items>
+                                  <MenuItem fx:id="viewX" mnemonicParsing="false" text="Evaluate this Employee" />
+                                </items>
+                              </ContextMenu>
+                           </contextMenu>
                         </TableView>
                      </children>
                   </AnchorPane>

@@ -84,6 +84,7 @@ public class HR1_New_Hire_On_BoardController implements Initializable {
         }).get().stream().forEach(row -> {
             HashMap action = (HashMap) row;
             HR1_NewHireClass.init(
+                    tblNewHire.getSelectionModel().getSelectedItem().name.getValue(),
                     tblNewHire.getSelectionModel().getSelectedItem().empCode.getValue(),
                     this.tblNewHire.getSelectionModel().getSelectedItem().job.getValue(),
                     action.get("date_of_birth").toString(),
@@ -91,11 +92,11 @@ public class HR1_New_Hire_On_BoardController implements Initializable {
                     action.get("gender").toString(),
                     action.get("civil_status").toString(),
                     action.get("email").toString(),
-                    action.get("height").toString(), 
-                    action.get("weight").toString(), 
+                    action.get("height").toString(),
+                    action.get("weight").toString(),
                     action.get("contact_number").toString());
         });
-        
+
         Modal md = Modal.getInstance(new Form("/FXMLS/HR1/Modals/HR1_viewNewHire.fxml").getParent());
         md.open();
     }

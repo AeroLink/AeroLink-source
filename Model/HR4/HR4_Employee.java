@@ -33,6 +33,18 @@ public class HR4_Employee extends Synapse.Model {
             case "job":
                 this.initTable("tbl_hr4_employee_jobs");
                 break;
+            case "WE":
+                this.initTable("tbl_hr4_employee_workExp");
+                break;
+            case "CE":
+                this.initTable("tbl_hr4_employee_certifications");
+                break;
+            case "AW":
+                this.initTable("tbl_hr4_employee_academicAwards");
+                break;
+            case "GVID":
+                this.initTable("tbl_hr4_employee_governmentIDs");
+                break;
             default:
                 break;
         }

@@ -12,6 +12,7 @@ package FXMLS.HR1.ClassFiles;
 public class HR1_NewHireClass {
     
     public static String jobtitle;
+    public static String name;
     public static String DateOfBirth;
     public static String PlaceOfBirth;
     public static String Gender;
@@ -23,7 +24,8 @@ public class HR1_NewHireClass {
     public static String employee_code;
 
     
-    public static void init(String vemployee_code, String vjobtitle, String vDateOfBirth, String vPlaceOfBirth, String vGender, String vCivilStatus, String  vEmail, String vHeight, String vWeight, String vContactNumber) {
+    public static void init(String vname, String vemployee_code, String vjobtitle, String vDateOfBirth, String vPlaceOfBirth, String vGender, String vCivilStatus, String  vEmail, String vHeight, String vWeight, String vContactNumber) {
+        name = vname;
         employee_code = vemployee_code;
         jobtitle = vjobtitle;
         DateOfBirth = vDateOfBirth;
