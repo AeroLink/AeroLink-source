@@ -8,7 +8,7 @@ package FXMLS.HR1.Modals;
 import FXMLS.HR1.ClassFiles.HR1_PostJobSelection;
 import Model.HR1.JobPosting;
 import Model.HR1.JobVacancy;
-import Model.HR2_Competency;
+import Model.HR2_CM_Pivot;
 import Model.HR4_Jobs;
 import Synapse.Model;
 import com.jfoenix.controls.JFXButton;
@@ -80,7 +80,7 @@ public class HR1_PostJobController implements Initializable {
 
         htmlText += "<h3>Competencies : </h3>  </br></br><ul>";
 
-        HR2_Competency competency = new HR2_Competency();
+        HR2_CM_Pivot competency = new HR2_CM_Pivot();
 
         competency.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "job_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr2_skillset", "skill_id", "=", "skill_id")
