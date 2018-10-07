@@ -17,13 +17,11 @@ public class HR2_CM_Skills_Class {
     public SimpleStringProperty Skill_ID;
     public SimpleStringProperty Skill;
     public SimpleStringProperty Skill_Description;
-    public SimpleStringProperty Jobs;
 
-    public HR2_CM_Skills_Class(String Skill_ID, String Skill, String Skill_Description, String select_jobs) {
+    public HR2_CM_Skills_Class(String Skill_ID, String Skill, String Skill_Description) {
         this.Skill_ID = new SimpleStringProperty(Skill_ID);
         this.Skill = new SimpleStringProperty(Skill);
         this.Skill_Description = new SimpleStringProperty(Skill_Description);
-        this.Jobs = new SimpleStringProperty(select_jobs);
 
     }
 }

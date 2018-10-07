@@ -29,7 +29,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </JFXButton>
-                        <JFXTextField fx:id="txt_search_job" focusColor="#0b101e" layoutX="14.0" layoutY="22.0" maxWidth="215.0" minWidth="215.0" onKeyReleased="#searchJob" prefHeight="31.0" prefWidth="215.0" promptText="Search  a Job" AnchorPane.leftAnchor="14.0">
+                        <JFXTextField fx:id="txt_search_job" focusColor="#0b101e" layoutX="14.0" layoutY="22.0" maxWidth="215.0" minWidth="215.0" prefHeight="31.0" prefWidth="215.0" promptText="Search  a Job" AnchorPane.leftAnchor="14.0">
                            <font>
                               <Font name="Lato Semibold" size="15.0" />
                            </font>

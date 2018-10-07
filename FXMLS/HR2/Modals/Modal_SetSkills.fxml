@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="472.0" prefWidth="431.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.Modal_SetSkillsController">
+   <children>
+      <AnchorPane prefHeight="42.0" prefWidth="387.0" AnchorPane.bottomAnchor="410.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane prefHeight="43.0" prefWidth="387.0" style="-fx-background-color: #00cc66;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label layoutX="128.0" layoutY="11.0" text="Set Competency Skill" textFill="WHITE">
+                     <font>
+                        <Font name="Lato Black" size="17.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+      <JFXComboBox fx:id="cbox_select_job" layoutX="50.0" layoutY="73.0" prefHeight="25.0" prefWidth="331.0" promptText="Select a Job">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXComboBox>
+      <JFXTextField fx:id="txt_skill" focusColor="#099036" labelFloat="true" layoutX="41.0" layoutY="126.0" maxWidth="352.0" minWidth="314.0" prefHeight="37.0" prefWidth="350.0" promptText="Skill">
+         <font>
+            <Font name="Roboto Medium" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextArea fx:id="txt_skill_desc" layoutX="50.0" layoutY="193.0" maxWidth="331.0" minWidth="310.0" prefHeight="130.0" prefWidth="331.0" style="-fx-border-color: #c2c2a3; -fx-border-width: 2px;" unFocusColor="#f5f2f2" />
+      <JFXButton fx:id="btn_save" layoutX="50.0" layoutY="352.0" prefHeight="37.0" prefWidth="331.0" styleClass="btn-primary" text=" Save">
+         <font>
+            <Font name="Lato Black" size="15.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIconView fill="WHITE" glyphName="SAVE" size="15.0" />
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+   </children>
+</AnchorPane>
