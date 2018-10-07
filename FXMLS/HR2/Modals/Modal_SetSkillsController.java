@@ -51,7 +51,7 @@ public class Modal_SetSkillsController implements Initializable {
         selectJobs();
         btn_save.setDisable(true);
         
-        validate();
+        txt_skill_desc.setOnKeyTyped(e -> validate());
     }
     public void validate()
     {
@@ -106,6 +106,7 @@ public class Modal_SetSkillsController implements Initializable {
                 Alert saved = new Alert(Alert.AlertType.INFORMATION);
                 saved.setContentText("Saved");
                 saved.showAndWait();
+                btn_save.setDisable(true);
 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
