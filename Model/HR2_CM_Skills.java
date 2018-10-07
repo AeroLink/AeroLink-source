@@ -14,9 +14,9 @@ import java.util.List;
  * 
  * @author Eden Ramoneda
  */
-public class HR2_Competency_Management extends Synapse.Model{
+public class HR2_CM_Skills extends Synapse.Model{
         
-         public HR2_Competency_Management()
+         public HR2_CM_Skills()
             {
                    setColumns("skill_id","skill","skill_description");
                     this.initTable("tbl_hr2_skillset");

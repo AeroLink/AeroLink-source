@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="586.0" prefWidth="673.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.HR2_Competency_ManagamentController">
+   <children>
+      <AnchorPane prefHeight="586.0" prefWidth="673.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <BorderPane prefHeight="586.0" prefWidth="673.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <top>
+                  <AnchorPane prefHeight="75.0" prefWidth="663.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <JFXButton fx:id="btn_set_skills" layoutX="558.0" layoutY="22.0" styleClass="btn-primary" text="Set Skills" AnchorPane.rightAnchor="14.0">
+                           <font>
+                              <Font name="Roboto Black" size="15.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="15.0" />
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                        <JFXTextField fx:id="txt_search_job" focusColor="#0b101e" layoutX="14.0" layoutY="22.0" maxWidth="215.0" minWidth="215.0" prefHeight="31.0" prefWidth="215.0" promptText="Search  a Job" AnchorPane.leftAnchor="14.0">
+                           <font>
+                              <Font name="Lato Semibold" size="15.0" />
+                           </font>
+                        </JFXTextField>
+                     </children>
+                  </AnchorPane>
+               </top>
+               <center>
+                  <AnchorPane prefHeight="489.0" prefWidth="653.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <TableView fx:id="tbl_jobs" layoutY="25.0" prefHeight="481.0" prefWidth="669.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="25.0">
+                          <columns>
+                            <TableColumn fx:id="col_job" prefWidth="200.0" text="Job" />
+                            <TableColumn fx:id="col_job_desc" prefWidth="455.0" text="Job Description" />
+                              <TableColumn fx:id="col_skills" prefWidth="200.0" text="Skills" />
+                              <TableColumn fx:id="col_skill_desc" prefWidth="455.0" text="Skills Description" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </center>
+            </BorderPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -23,6 +23,10 @@ public class Modal {
     private Form f;
     
     private Modal() {  }
+
+    public Modal(Form form) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     private static class Singleton{  
        private static final Modal mInstance = new Modal();

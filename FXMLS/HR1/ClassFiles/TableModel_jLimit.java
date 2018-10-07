@@ -29,6 +29,7 @@ public class TableModel_jLimit {
         this.status = new SimpleStringProperty(status);
         this.opened_date = new SimpleStringProperty(open_date);
     }
+
     
     
     
