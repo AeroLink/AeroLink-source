@@ -50,20 +50,22 @@ public class Modal_SetSkillsController implements Initializable {
         });
         selectJobs();
         btn_save.setDisable(true);
-        
+
         txt_skill_desc.setOnKeyTyped(e -> validate());
     }
-    public void validate()
-    {
-        if(!cbox_select_job.getValue().toString().isEmpty() && !txt_skill.getText().isEmpty() && !txt_skill_desc.getText().isEmpty())
-        {
-             btn_save.setDisable(false);
-        }
-        else
-        {
-             btn_save.setDisable(true);
+
+    public void validate() {
+        if (!cbox_select_job.getValue().toString().isEmpty() && !txt_skill.getText().isEmpty() && !txt_skill_desc.getText().isEmpty()) {
+
+            btn_save.setDisable(false);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Please fill out the required fields");
+            alert.showAndWait();
+            btn_save.setDisable(true);
         }
     }
+
     public void selectJobs() {
         HR4_Jobs jobs = new HR4_Jobs();
 
