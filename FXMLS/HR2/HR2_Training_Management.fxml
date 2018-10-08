@@ -1,11 +1,236 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1">
-    
+<AnchorPane id="AnchorPane" prefHeight="705.0" prefWidth="1373.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.HR2_Training_ManagementController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <JFXTabPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <tabs>
+                  <Tab id="tab" text="Set Training">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <center>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Pane layoutX="14.0" layoutY="14.0" prefHeight="512.0" prefWidth="645.0" style="-fx-border-color: #e0e0d1; -fx-border-width: 1.5px; -fx-background-color: #fff; -fx-border-radius: 5px;" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                                             <children>
+                                                <Label layoutX="13.0" layoutY="33.0" prefHeight="19.0" prefWidth="87.0" text="Job Position">
+                                                   <font>
+                                                      <Font name="Lato Medium" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <JFXComboBox fx:id="cbox_select_jobs" layoutX="13.0" layoutY="61.0" prefHeight="25.0" prefWidth="177.0" promptText="List of Job Positions" />
+                                                <Label layoutX="275.0" layoutY="33.0" prefHeight="19.0" prefWidth="98.0" text="Training_Title">
+                                                   <font>
+                                                      <Font name="Lato Medium" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <JFXTextField fx:id="txt_training_title" layoutX="266.0" layoutY="56.0" maxWidth="241.0" minWidth="135.0" prefHeight="35.0" prefWidth="241.0">
+                                                   <font>
+                                                      <Font name="Lato Medium" size="15.0" />
+                                                   </font>
+                                                </JFXTextField>
+                                                <Label layoutX="14.0" layoutY="115.0" prefHeight="19.0" prefWidth="146.0" text="Training Description">
+                                                   <font>
+                                                      <Font name="Lato Medium" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <JFXTextArea fx:id="txt_training_desc" layoutX="14.0" layoutY="147.0" maxWidth="487.0" minWidth="173.0" prefHeight="125.0" prefWidth="487.0" style="-fx-border-color: #e0e0d1; -fx-background-color: #fff; -fx-border-width: 1.3px;" unFocusColor="WHITE">
+                                                   <font>
+                                                      <Font name="Lato Medium" size="13.0" />
+                                                   </font>
+                                                </JFXTextArea>
+                                                <JFXComboBox fx:id="cbox_trainor" layoutX="14.0" layoutY="334.0" prefHeight="25.0" prefWidth="254.0" promptText="Choose Trainor " />
+                                                <Label layoutX="14.0" layoutY="306.0" prefHeight="19.0" prefWidth="58.0" text="Trainor">
+                                                   <font>
+                                                      <Font name="Lato Medium" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="14.0" layoutY="399.0" prefHeight="19.0" prefWidth="159.0" text="Start Date of Training">
+                                                   <font>
+                                                      <Font name="Lato Medium" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <JFXDatePicker fx:id="txt_start_date" layoutX="8.0" layoutY="428.0" prefHeight="31.0" prefWidth="231.0" promptText="From" />
+                                                <Label layoutX="290.0" layoutY="398.0" prefHeight="19.0" prefWidth="159.0" text="End Date of Training">
+                                                   <font>
+                                                      <Font name="Lato Medium" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <JFXDatePicker fx:id="txt_end_date" layoutX="284.0" layoutY="427.0" prefHeight="31.0" prefWidth="213.0" promptText="To" />
+                                                <Label layoutX="14.0" layoutY="491.0" prefHeight="19.0" prefWidth="149.0" text="Start Time of Training">
+                                                   <font>
+                                                      <Font name="Lato Medium" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <JFXTextField fx:id="txt_start_time" layoutX="8.0" layoutY="516.0" maxWidth="241.0" minWidth="125.0" prefHeight="35.0" prefWidth="125.0" promptText="From">
+                                                   <font>
+                                                      <Font name="Lato Medium" size="15.0" />
+                                                   </font>
+                                                </JFXTextField>
+                                                <JFXComboBox fx:id="cbox1_meridiem" layoutX="128.0" layoutY="519.0" prefHeight="25.0" prefWidth="98.0" promptText="Meridiem" />
+                                                <Label layoutX="293.0" layoutY="484.0" prefHeight="19.0" prefWidth="149.0" text="End Time of Training">
+                                                   <font>
+                                                      <Font name="Lato Medium" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <JFXTextField fx:id="txt_end_time" layoutX="290.0" layoutY="514.0" maxWidth="241.0" minWidth="125.0" prefHeight="35.0" prefWidth="125.0" promptText="To">
+                                                   <font>
+                                                      <Font name="Lato Medium" size="15.0" />
+                                                   </font>
+                                                </JFXTextField>
+                                                <JFXComboBox fx:id="cbox2_meridiem" layoutX="410.0" layoutY="517.0" prefHeight="25.0" prefWidth="98.0" promptText="Meridiem" />
+                                                <Separator layoutX="617.0" layoutY="19.0" orientation="VERTICAL" prefHeight="542.0" prefWidth="0.0" style="-fx-background-color: #e0e0d1;" />
+                                                <Label layoutX="659.0" layoutY="29.0" prefHeight="19.0" prefWidth="113.0" text="Type of Training">
+                                                   <font>
+                                                      <Font name="Lato Medium" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <JFXComboBox fx:id="cbox_select_type_of_training" layoutX="659.0" layoutY="57.0" prefHeight="25.0" prefWidth="177.0" promptText="Select Type of Training" />
+                                                <Label layoutX="948.0" layoutY="28.0" prefHeight="19.0" prefWidth="98.0" text="Location">
+                                                   <font>
+                                                      <Font name="Lato Medium" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <JFXTextField fx:id="txt_location" layoutX="939.0" layoutY="51.0" maxWidth="241.0" minWidth="135.0" prefHeight="35.0" prefWidth="241.0">
+                                                   <font>
+                                                      <Font name="Lato Medium" size="15.0" />
+                                                   </font>
+                                                </JFXTextField>
+                                                <Label layoutX="659.0" layoutY="134.0" prefHeight="19.0" prefWidth="53.0" text="Vehicle">
+                                                   <font>
+                                                      <Font name="Lato Medium" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <JFXComboBox fx:id="cbox_vehicle" layoutX="659.0" layoutY="162.0" prefHeight="25.0" prefWidth="177.0" promptText="Select Vehicle" />
+                                                <Label layoutX="948.0" layoutY="136.0" prefHeight="19.0" prefWidth="88.0" text="Budget Cost">
+                                                   <font>
+                                                      <Font name="Lato Medium" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <JFXTextField fx:id="txt_budget_cost" layoutX="939.0" layoutY="157.0" maxWidth="241.0" minWidth="135.0" prefHeight="35.0" prefWidth="241.0">
+                                                   <font>
+                                                      <Font name="Lato Medium" size="15.0" />
+                                                   </font>
+                                                </JFXTextField>
+                                                <Label layoutX="659.0" layoutY="237.0" prefHeight="19.0" prefWidth="162.0" text="Number of Participants">
+                                                   <font>
+                                                      <Font name="Lato Medium" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <JFXTextField fx:id="txt_no_of_participants" layoutX="652.0" layoutY="264.0" maxWidth="241.0" minWidth="81.0" prefHeight="35.0" prefWidth="81.0">
+                                                   <font>
+                                                      <Font name="Lato Medium" size="15.0" />
+                                                   </font>
+                                                </JFXTextField>
+                                                <JFXButton fx:id="btn_save" layoutX="1047.0" layoutY="502.0" prefHeight="35.0" prefWidth="116.0" styleClass="btn-primary" text=" Save">
+                                                   <font>
+                                                      <Font name="Lato Semibold" size="15.0" />
+                                                   </font>
+                                                   <graphic>
+                                                      <FontAwesomeIconView fill="WHITE" fontSmoothingType="LCD" glyphName="SAVE" size="15.0" />
+                                                   </graphic>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </JFXButton>
+                                                <JFXButton fx:id="btn_new" layoutX="909.0" layoutY="502.0" prefHeight="35.0" prefWidth="113.0" styleClass="btn-primary" text=" New">
+                                                   <font>
+                                                      <Font name="Lato Semibold" size="15.0" />
+                                                   </font>
+                                                   <graphic>
+                                                      <FontAwesomeIconView fill="WHITE" fontSmoothingType="LCD" glyphName="PLUS" size="15.0" />
+                                                   </graphic>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </JFXButton>
+                                             </children>
+                                          </Pane>
+                                       </children>
+                                    </AnchorPane>
+                                 </center>
+                              </BorderPane>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab id="tab" text="List of Trainings">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <center>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <TableView fx:id="tbl_trainings" layoutX="19.0" layoutY="14.0" prefHeight="540.0" prefWidth="1353.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="14.0">
+                                            <columns>
+                                              <TableColumn prefWidth="180.0" text="Job Position" />
+                                              <TableColumn prefWidth="180.0" text="Training Title" />
+                                                <TableColumn prefWidth="250.0" text="Training Description" />
+                                                <TableColumn prefWidth="180.0" text="Trainor" />
+                                                <TableColumn prefWidth="120.0" text="Start Date" />
+                                                <TableColumn prefWidth="120.0" text="End Date" />
+                                                <TableColumn prefWidth="120.0" text="Start Time" />
+                                                <TableColumn prefWidth="120.0" text="End Time" />
+                                                <TableColumn prefWidth="150.0" text="Type of Training" />
+                                                <TableColumn prefWidth="180.0" text="Location" />
+                                                <TableColumn prefWidth="180.0" text="Vehicle" />
+                                                <TableColumn prefWidth="160.0" text="Budget Cost" />
+                                                <TableColumn prefWidth="120.0" text="Number of Participants" />
+                                            </columns>
+                                          </TableView>
+                                       </children></AnchorPane>
+                                 </center>
+                                 <top>
+                                    <AnchorPane prefHeight="81.0" prefWidth="1373.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <JFXTextField fx:id="txt_search_training" focusColor="#4a4a4a" labelFloat="true" layoutX="25.0" layoutY="46.0" maxWidth="261.0" minWidth="242.0" prefHeight="31.0" prefWidth="261.0" promptText="Search">
+                                             <font>
+                                                <Font name="Lato Semibold" size="15.0" />
+                                             </font>
+                                          </JFXTextField>
+                                       </children>
+                                    </AnchorPane>
+                                 </top>
+                              </BorderPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                     <contextMenu>
+                        <ContextMenu>
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="View Details" />
+                              <MenuItem mnemonicParsing="false" text="Delete Training" />
+                          </items>
+                        </ContextMenu>
+                     </contextMenu>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
+         </children>
+      </AnchorPane>
+   </children>
 </AnchorPane>
