@@ -74,7 +74,8 @@ public class Modal_SetSkillsController implements Initializable {
         for (Object d : c) {
             HashMap hm1 = (HashMap) d;
             //RS
-            cbox_select_job.getItems().add(hm1.get("job_id") + " - " + hm1.get("title"));
+            String sjobs = (String) hm1.get("title");
+            cbox_select_job.getItems().add(sjobs);
         }
 
     }
@@ -82,39 +83,50 @@ public class Modal_SetSkillsController implements Initializable {
     public void Save() {
         HR2_CM_Skills skillset = new HR2_CM_Skills();
         HR2_CM_Pivot cm_pivot = new HR2_CM_Pivot();
+        HR4_Jobs jobs = new HR4_Jobs();
 
-        if (txt_skill.getText().isEmpty() || txt_skill_desc.getText().isEmpty() || cbox_select_job.getValue().toString().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("One or More Fields are empty");
-            alert.showAndWait();
+        List c = jobs.get();
 
-        } else {
-            try {
+        for (Object d : c) {
+            HashMap hm1 = (HashMap) d;
+            //RS
+            String sj = (String) hm1.get("title");
+            cbox_select_job.getItems().add(sj);
 
-                String[][] cm_data
-                        = {
-                            {"skill", txt_skill.getText()},
-                            {"skill_description", txt_skill_desc.getText()},};
+            if (txt_skill.getText().isEmpty() || txt_skill_desc.getText().isEmpty() || cbox_select_job.getValue().toString().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setContentText("One or More Fields are empty");
+                alert.showAndWait();
+                
 
-                int id = skillset.insert(cm_data, true);
-                Object[][] competency = {
-                    {"skill_id", id},
-                    {"job_id", cbox_select_job.getSelectionModel().getSelectedItem().toString().split(" - ")[0]}
-                };
+            } else {
+                try {
 
-                cm_pivot.insert(competency);
+                    String[][] cm_data
+                            = {
+                                {"skill", txt_skill.getText()},
+                                {"skill_description", txt_skill_desc.getText()},};
 
-                // new HR2_Competency_ManagementController().tbl_Skills.setItems((ObservableList<HR2_Competency_ManagementClass>) hr2hmc);
-                Alert saved = new Alert(Alert.AlertType.INFORMATION);
-                saved.setContentText("Saved");
-                saved.showAndWait();
-                btn_save.setDisable(true);
+                    int id = skillset.insert(cm_data, true);
+                    Object[][] competency = {
+                        {"skill_id", id},
+                        {"job_id", cbox_select_job.getSelectionModel().getSelectedItem().toString().split(sj)[0]}
+                    };
 
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e);
+                    cm_pivot.insert(competency);
+
+                    // new HR2_Competency_ManagementController().tbl_Skills.setItems((ObservableList<HR2_Competency_ManagementClass>) hr2hmc);
+                    Alert saved = new Alert(Alert.AlertType.INFORMATION);
+                    saved.setContentText("Saved");
+                    saved.showAndWait();
+                    btn_save.setDisable(true);
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
             }
-        }
 
+        }
     }
 
 }

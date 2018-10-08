@@ -143,7 +143,7 @@ public class HR2_Competency_ManagementController implements Initializable {
                         ));
                    System.out.println(hm1 + "\n");
             }
-         
+            
             tbl_jobs.setItems(skills);
 
         } catch (Exception e) {
