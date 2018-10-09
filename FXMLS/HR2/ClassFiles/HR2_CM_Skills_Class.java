@@ -13,11 +13,11 @@ import javafx.beans.property.SimpleStringProperty;
  *
  */
 public class HR2_CM_Skills_Class {
-
+    
     public SimpleStringProperty Skill_ID;
     public SimpleStringProperty Skill;
     public SimpleStringProperty Skill_Description;
-
+    
     public HR2_CM_Skills_Class(String Skill_ID, String Skill, String Skill_Description) {
         this.Skill_ID = new SimpleStringProperty(Skill_ID);
         this.Skill = new SimpleStringProperty(Skill);
