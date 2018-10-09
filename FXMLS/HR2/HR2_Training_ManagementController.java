@@ -116,14 +116,12 @@ public class HR2_Training_ManagementController implements Initializable {
     private JFXTextField txt_end_time;
 
     //for comboboxes
-    ObservableList<HR2_Training_InfoClass> obj = FXCollections.observableArrayList();
-
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        tbl_trainings.setItems(obj);
+
         btn_save.setDisable(true);
         btn_save.setOnAction(e -> Save());
         btn_new.setOnAction(e -> {
@@ -192,34 +190,37 @@ public class HR2_Training_ManagementController implements Initializable {
                         + "employees.lastname)as trainor", "start_date", "end_date", "start_time", "end_time", "t_type.type_of_training",
                         "location", "aerolink.tbl_hr2_training_info.vehicle_id as vehicle", "budget_cost", "number_of_participants");
         Data(training_data);
+
     }
 
     public void Data(List b) {
+        ObservableList<HR2_Training_InfoClass> obj = FXCollections.observableArrayList();
         obj.clear();
-        try
-        {
+        try {
             for (Object d : b) {
-            HashMap hm = (HashMap) d;
+                HashMap hm = (HashMap) d;
+                System.out.println(hm);
+                obj.add(
+                        new HR2_Training_InfoClass(
+                                String.valueOf(hm.get("training_id")),
+                                String.valueOf(hm.get("job_position")),
+                                String.valueOf(hm.get("training_title")),
+                                String.valueOf(hm.get("training_description")),
+                                String.valueOf(hm.get("trainor")),
+                                String.valueOf(hm.get("start_date")),
+                                String.valueOf(hm.get("end_date")),
+                                String.valueOf(hm.get("start_time")),
+                                String.valueOf(hm.get("end_time")),
+                                String.valueOf(hm.get("type_of_training")),
+                                String.valueOf(hm.get("location")),
+                                String.valueOf(hm.get("vehicle")),
+                                String.valueOf(hm.get("budget_cost")),
+                                String.valueOf(hm.get("number_of_participants"))
+                        ));
 
-            System.out.println(hm);
-            String training_id = String.valueOf(hm.get("training_id"));
-            String job_position = (String) hm.get("job_position");
-            String title = (String) hm.get("training_title");
-            String training_desc = (String) hm.get("training_description");
-            String trainor = (String) hm.get("trainor");
-            String start_date = (String) hm.get("start_date").toString();
-            String end_date = (String) hm.get("end_date").toString();
-            String start_time = (String) hm.get("start_time");
-            String end_time = (String) hm.get("end_time");
-            String type = (String) hm.get("type_of_training");
-            String loc = (String) hm.get("location");
-            String v = String.valueOf(hm.get("vehicle"));
-            String bc = String.valueOf(hm.get("budget_cost"));
-            String nop = String.valueOf(hm.get("number_of_participants"));
-            obj.add(new HR2_Training_InfoClass(training_id, job_position, title, training_desc, trainor, start_date, end_date, start_time, end_time, type, loc, v, bc, nop));
             }
-        }catch(Exception e)
-        {
+            tbl_trainings.setItems(obj);
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
