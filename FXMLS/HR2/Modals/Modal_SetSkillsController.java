@@ -51,7 +51,7 @@ public class Modal_SetSkillsController implements Initializable {
         selectJobs();
         btn_save.setDisable(true);
 
-        txt_skill_desc.setOnKeyTyped(e -> validate());
+        txt_skill_desc.setOnKeyReleased(e -> validate());
     }
 
     public void validate() {

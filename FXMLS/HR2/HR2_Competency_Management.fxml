@@ -18,7 +18,7 @@
                <top>
                   <AnchorPane prefHeight="75.0" prefWidth="663.0" BorderPane.alignment="CENTER">
                      <children>
-                        <JFXButton fx:id="btn_set_skills" layoutX="558.0" layoutY="22.0" styleClass="btn-primary" text="Set Skills" AnchorPane.rightAnchor="14.0">
+                        <JFXButton fx:id="btn_set_skills" buttonType="RAISED" layoutX="558.0" layoutY="22.0" styleClass="btn-primary" text="Set Skills" AnchorPane.rightAnchor="14.0">
                            <font>
                               <Font name="Roboto Black" size="15.0" />
                            </font>

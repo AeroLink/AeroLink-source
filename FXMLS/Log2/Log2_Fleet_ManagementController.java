@@ -5,9 +5,9 @@
  */
 package FXMLS.Log2;
 
-import FXMLS.HR2.ClassFiles.Training_ManagementClass;
+import FXMLS.HR2.ClassFiles.HR2_Training_InfoClass;
 import FXMLS.Log2.ClassFiles.Log2_Fleet_ManagementClass;
-import Model.HR2_Training_Management;
+import Model.HR2_Training_Info;
 import Model.Log2_Fleet_Management;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;

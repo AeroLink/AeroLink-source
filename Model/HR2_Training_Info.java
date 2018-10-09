@@ -10,13 +10,13 @@ package Model;
  * 
  * @author Eden Ramoneda
  */
-public class HR2_Training_Management extends Synapse.Model{
+public class HR2_Training_Info extends Synapse.Model{
         
-            public HR2_Training_Management()
+            public HR2_Training_Info()
             {
                    setColumns("training_id","job_position","training_title","training_description",
-                           "trainor","start_date","end_date","start_time","end_time",
-                           "type_of_training","location","vehicle","budget_cost");
-                    this.initTable("tbl_hr2_training");
+                           "employee_code","start_date","end_date","start_time","end_time",
+                           "type_of_training","location","vehicle","budget_cost","number_of_participants");
+                    this.initTable("tbl_hr2_training_info");
             }
 }

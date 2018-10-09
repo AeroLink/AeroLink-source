@@ -85,23 +85,11 @@
                                                       <Font name="Lato Medium" size="15.0" />
                                                    </font>
                                                 </Label>
-                                                <JFXTextField fx:id="txt_start_time" layoutX="8.0" layoutY="516.0" maxWidth="241.0" minWidth="125.0" prefHeight="35.0" prefWidth="125.0" promptText="From">
-                                                   <font>
-                                                      <Font name="Lato Medium" size="15.0" />
-                                                   </font>
-                                                </JFXTextField>
-                                                <JFXComboBox fx:id="cbox1_meridiem" layoutX="128.0" layoutY="519.0" prefHeight="25.0" prefWidth="98.0" promptText="Meridiem" />
                                                 <Label layoutX="293.0" layoutY="484.0" prefHeight="19.0" prefWidth="149.0" text="End Time of Training">
                                                    <font>
                                                       <Font name="Lato Medium" size="15.0" />
                                                    </font>
                                                 </Label>
-                                                <JFXTextField fx:id="txt_end_time" layoutX="290.0" layoutY="514.0" maxWidth="241.0" minWidth="125.0" prefHeight="35.0" prefWidth="125.0" promptText="To">
-                                                   <font>
-                                                      <Font name="Lato Medium" size="15.0" />
-                                                   </font>
-                                                </JFXTextField>
-                                                <JFXComboBox fx:id="cbox2_meridiem" layoutX="410.0" layoutY="517.0" prefHeight="25.0" prefWidth="98.0" promptText="Meridiem" />
                                                 <Separator layoutX="617.0" layoutY="19.0" orientation="VERTICAL" prefHeight="542.0" prefWidth="0.0" style="-fx-background-color: #e0e0d1;" />
                                                 <Label layoutX="659.0" layoutY="29.0" prefHeight="19.0" prefWidth="113.0" text="Type of Training">
                                                    <font>
@@ -145,7 +133,7 @@
                                                       <Font name="Lato Medium" size="15.0" />
                                                    </font>
                                                 </JFXTextField>
-                                                <JFXButton fx:id="btn_save" layoutX="1047.0" layoutY="502.0" prefHeight="35.0" prefWidth="116.0" styleClass="btn-primary" text=" Save">
+                                                <JFXButton fx:id="btn_save" buttonType="RAISED" layoutX="1047.0" layoutY="502.0" prefHeight="35.0" prefWidth="116.0" styleClass="btn-primary" text=" Save">
                                                    <font>
                                                       <Font name="Lato Semibold" size="15.0" />
                                                    </font>
@@ -156,7 +144,7 @@
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>
                                                 </JFXButton>
-                                                <JFXButton fx:id="btn_new" layoutX="909.0" layoutY="502.0" prefHeight="35.0" prefWidth="113.0" styleClass="btn-primary" text=" New">
+                                                <JFXButton fx:id="btn_new" buttonType="RAISED" layoutX="909.0" layoutY="502.0" prefHeight="35.0" prefWidth="113.0" styleClass="btn-primary" text=" New">
                                                    <font>
                                                       <Font name="Lato Semibold" size="15.0" />
                                                    </font>
@@ -167,6 +155,16 @@
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>
                                                 </JFXButton>
+                                                <JFXTextField fx:id="txt_start_time" layoutX="3.0" layoutY="510.0" maxWidth="241.0" minWidth="135.0" prefHeight="35.0" prefWidth="241.0" promptText="From">
+                                                   <font>
+                                                      <Font name="Lato Medium" size="15.0" />
+                                                   </font>
+                                                </JFXTextField>
+                                                <JFXTextField fx:id="txt_end_time" layoutX="281.0" layoutY="510.0" maxWidth="244.0" minWidth="135.0" prefHeight="35.0" prefWidth="214.0" promptText="To">
+                                                   <font>
+                                                      <Font name="Lato Medium" size="15.0" />
+                                                   </font>
+                                                </JFXTextField>
                                              </children>
                                           </Pane>
                                        </children>
@@ -185,21 +183,21 @@
                                  <center>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <TableView fx:id="tbl_trainings" layoutX="19.0" layoutY="14.0" prefHeight="540.0" prefWidth="1353.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="14.0">
+                                          <TableView fx:id="tbl_trainings" layoutX="19.0" layoutY="14.0" prefHeight="540.0" prefWidth="1353.0" style="-fx-border-color: #d6d6c2; -fx-border-width: 1.3px;" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="14.0">
                                             <columns>
-                                              <TableColumn prefWidth="180.0" text="Job Position" />
-                                              <TableColumn prefWidth="180.0" text="Training Title" />
-                                                <TableColumn prefWidth="250.0" text="Training Description" />
-                                                <TableColumn prefWidth="180.0" text="Trainor" />
-                                                <TableColumn prefWidth="120.0" text="Start Date" />
-                                                <TableColumn prefWidth="120.0" text="End Date" />
-                                                <TableColumn prefWidth="120.0" text="Start Time" />
-                                                <TableColumn prefWidth="120.0" text="End Time" />
-                                                <TableColumn prefWidth="150.0" text="Type of Training" />
-                                                <TableColumn prefWidth="180.0" text="Location" />
-                                                <TableColumn prefWidth="180.0" text="Vehicle" />
-                                                <TableColumn prefWidth="160.0" text="Budget Cost" />
-                                                <TableColumn prefWidth="120.0" text="Number of Participants" />
+                                              <TableColumn fx:id="col_job_position" prefWidth="180.0" text="Job Position" />
+                                              <TableColumn fx:id="col_training_title" prefWidth="180.0" text="Training Title" />
+                                                <TableColumn fx:id="col_training_desc" prefWidth="250.0" text="Training Description" />
+                                                <TableColumn fx:id="col_trainor" prefWidth="180.0" text="Trainor" />
+                                                <TableColumn fx:id="col_start_date" prefWidth="120.0" text="Start Date" />
+                                                <TableColumn fx:id="col_end_date" prefWidth="120.0" text="End Date" />
+                                                <TableColumn fx:id="col_start_time" prefWidth="120.0" text="Start Time" />
+                                                <TableColumn fx:id="col_end_time" prefWidth="120.0" text="End Time" />
+                                                <TableColumn fx:id="col_type_of_training" prefWidth="150.0" text="Type of Training" />
+                                                <TableColumn fx:id="col_location" prefWidth="180.0" text="Location" />
+                                                <TableColumn fx:id="col_vehicle" prefWidth="180.0" text="Vehicle" />
+                                                <TableColumn fx:id="col_budget_cost" prefWidth="160.0" text="Budget Cost" />
+                                                <TableColumn fx:id="col_number_of_participants" prefWidth="120.0" text="Number of Participants" />
                                             </columns>
                                           </TableView>
                                        </children></AnchorPane>
@@ -220,10 +218,10 @@
                         </AnchorPane>
                      </content>
                      <contextMenu>
-                        <ContextMenu>
+                        <ContextMenu fx:id="contextMenuTrainings">
                           <items>
-                            <MenuItem mnemonicParsing="false" text="View Details" />
-                              <MenuItem mnemonicParsing="false" text="Delete Training" />
+                            <MenuItem fx:id="contextmenu_item_view_details" mnemonicParsing="false" text="View Details" />
+                              <MenuItem fx:id="contextmenu_item_delete_trainings" mnemonicParsing="false" text="Delete Training" />
                           </items>
                         </ContextMenu>
                      </contextMenu>
