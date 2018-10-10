@@ -29,7 +29,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </JFXButton>
-                        <JFXTextField fx:id="txt_search_job" focusColor="#0b101e" layoutX="14.0" layoutY="22.0" maxWidth="215.0" minWidth="215.0" prefHeight="31.0" prefWidth="215.0" promptText="Search  a Job" AnchorPane.leftAnchor="14.0">
+                        <JFXTextField fx:id="txt_search_job" focusColor="#0b101e" labelFloat="true" layoutX="14.0" layoutY="36.0" maxWidth="215.0" minWidth="215.0" prefHeight="31.0" prefWidth="215.0" promptText="Search  a Job" AnchorPane.leftAnchor="14.0">
                            <font>
                               <Font name="Lato Semibold" size="15.0" />
                            </font>
@@ -40,7 +40,7 @@
                <center>
                   <AnchorPane prefHeight="489.0" prefWidth="653.0" BorderPane.alignment="CENTER">
                      <children>
-                        <TableView fx:id="tbl_jobs" layoutY="25.0" prefHeight="481.0" prefWidth="669.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="25.0">
+                        <TableView fx:id="tbl_jobs" layoutY="66.0" prefHeight="440.0" prefWidth="669.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="66.0">
                           <columns>
                             <TableColumn fx:id="col_job" editable="false" prefWidth="200.0" resizable="false" text="Job" />
                             <TableColumn fx:id="col_job_desc" editable="false" prefWidth="455.0" resizable="false" text="Job Description" />
@@ -48,6 +48,17 @@
                               <TableColumn fx:id="col_skill_desc" prefWidth="455.0" text="Skills Description" />
                           </columns>
                         </TableView>
+                        <JFXButton fx:id="btn_refresh" buttonType="RAISED" layoutX="14.0" layoutY="22.0" prefHeight="16.0" prefWidth="91.0" styleClass="btn-primary" text="Refresh">
+                           <font>
+                              <Font name="Roboto Black" size="14.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="REFRESH" />
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
                      </children>
                   </AnchorPane>
                </center>

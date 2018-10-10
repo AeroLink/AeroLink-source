@@ -26,6 +26,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import Synapse.Model;
+import Synapse.Session;
+import java.util.concurrent.CompletableFuture;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * FXML Controller class
@@ -39,7 +43,7 @@ public class HR2_Competency_ManagementController implements Initializable {
     @FXML
     private JFXTextField txt_search_job;
     @FXML
-    private TableView tbl_jobs;
+    public TableView tbl_jobs;
     @FXML
     private TableColumn<HR4_Jobs_Class, String> col_job;
     @FXML
@@ -48,6 +52,8 @@ public class HR2_Competency_ManagementController implements Initializable {
     private TableColumn<HR4_Jobs_Class, String> col_skills;
     @FXML
     private TableColumn<HR4_Jobs_Class, String> col_skill_desc;
+    @FXML
+    private JFXButton btn_refresh;
 
     /**
      * Initializes the controller class.
@@ -56,6 +62,7 @@ public class HR2_Competency_ManagementController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         loadJob();
         DisplayDataInTable();
+        btn_refresh.setOnAction(e -> loadJob());
         // diplaycols();
         btn_set_skills.setOnAction(e -> {
             Modal set_skill_modal = Modal.getInstance(new Form("/FXMLS/HR2/Modals/Modal_SetSkills.fxml").getParent());
@@ -63,18 +70,41 @@ public class HR2_Competency_ManagementController implements Initializable {
         });
     }
 
+    long DummyCount = 0;
+    long GlobalCount = 0;
+
     public void loadJob() {
 
         try {
 
-
             HR2_CM_Pivot cm_pivot = new HR2_CM_Pivot();
-            
-            List c = cm_pivot.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
-                    .join(Model.JOIN.INNER, "aerolink.tbl_hr2_skillset", "skill_id", "s", "=", "skill_id")
-                    .get("jobs.title", "jobs.description", "s.skill", "s.skill_description");
 
-            Data(c);
+            CompletableFuture.supplyAsync(() -> {
+                while (Session.CurrentRoute.equals("competency_management")) {
+                    cm_pivot.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(row -> {
+                        DummyCount = Long.parseLong(((HashMap) row).get("chk").toString());
+                    });
+
+                    if (DummyCount != GlobalCount) {
+
+                        List c = cm_pivot.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
+                                .join(Model.JOIN.INNER, "aerolink.tbl_hr2_skillset", "skill_id", "s", "=", "skill_id")
+                                .get("jobs.title", "jobs.description", "s.skill", "s.skill_description");
+
+                        Data(c);
+                        
+                        GlobalCount = DummyCount;
+                    }
+                    
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException ex) {
+                        //Logger.getLogger(HR2_Competency_ManagementController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
+                return 0;
+            }, Session.SessionThreads);
 
         } catch (Exception e) {
             System.out.println(e);
@@ -106,7 +136,6 @@ public class HR2_Competency_ManagementController implements Initializable {
             System.out.println(e);
         }
     }
-
 
     public void DisplayDataInTable() {
 

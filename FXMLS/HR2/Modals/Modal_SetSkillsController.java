@@ -5,6 +5,7 @@
  */
 package FXMLS.HR2.Modals;
 
+import FXMLS.HR2.HR2_Competency_ManagementController;
 import Model.HR2_CM_Pivot;
 import Model.HR2_CM_Skills;
 import Model.HR4_Jobs;
@@ -69,13 +70,21 @@ public class Modal_SetSkillsController implements Initializable {
     public void selectJobs() {
         HR4_Jobs jobs = new HR4_Jobs();
 
-        List c = jobs.get();
+        try {
+            List c = jobs.get();
+            //"concat(substring(title,0,2), job_id) as job_id, title"
+            for (Object d : c) {
+                HashMap hm1 = (HashMap) d;
+                //RS
+                String j_id = String.valueOf(hm1.get("job_id"));
+                String sjobs = (String) hm1.get("title");
 
-        for (Object d : c) {
-            HashMap hm1 = (HashMap) d;
-            //RS
-            String sjobs = (String) hm1.get("title");
-            cbox_select_job.getItems().add(sjobs);
+                cbox_select_job.getItems().add("J" + j_id + " - " + sjobs);
+
+            }
+        }catch(Exception e)
+        {
+            System.out.println(e);
         }
 
     }
@@ -85,48 +94,38 @@ public class Modal_SetSkillsController implements Initializable {
         HR2_CM_Pivot cm_pivot = new HR2_CM_Pivot();
         HR4_Jobs jobs = new HR4_Jobs();
 
-        List c = jobs.get();
+        if (txt_skill.getText().isEmpty() || txt_skill_desc.getText().isEmpty() || cbox_select_job.getValue().toString().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("One or More Fields are empty");
+            alert.showAndWait();
 
-        for (Object d : c) {
-            HashMap hm1 = (HashMap) d;
-            //RS
-            String sj = (String) hm1.get("title");
-            cbox_select_job.getItems().add(sj);
+        } else {
+            try {
 
-            if (txt_skill.getText().isEmpty() || txt_skill_desc.getText().isEmpty() || cbox_select_job.getValue().toString().isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setContentText("One or More Fields are empty");
-                alert.showAndWait();
-                
+                String[][] cm_data
+                        = {
+                            {"skill", txt_skill.getText()},
+                            {"skill_description", txt_skill_desc.getText()},};
 
-            } else {
-                try {
+                int id = skillset.insert(cm_data, true);
+                Object[][] competency = {
+                    {"skill_id", id},
+                    {"job_id", cbox_select_job.getSelectionModel().getSelectedItem().toString().substring(1).toString().split(" - ")[0]}
+                };
 
-                    String[][] cm_data
-                            = {
-                                {"skill", txt_skill.getText()},
-                                {"skill_description", txt_skill_desc.getText()},};
+                cm_pivot.insert(competency);
 
-                    int id = skillset.insert(cm_data, true);
-                    Object[][] competency = {
-                        {"skill_id", id},
-                        {"job_id", cbox_select_job.getSelectionModel().getSelectedItem().toString().split(sj)[0]}
-                    };
-
-                    cm_pivot.insert(competency);
-
-                    // new HR2_Competency_ManagementController().tbl_Skills.setItems((ObservableList<HR2_Competency_ManagementClass>) hr2hmc);
-                    Alert saved = new Alert(Alert.AlertType.INFORMATION);
-                    saved.setContentText("Saved");
-                    saved.showAndWait();
-                    btn_save.setDisable(true);
-
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, e);
-                }
+                // new HR2_Competency_ManagementController().tbl_Skills.setItems((ObservableList<HR2_Competency_ManagementClass>) hr2hmc);
+                Alert saved = new Alert(Alert.AlertType.INFORMATION);
+                saved.setContentText("Saved");
+                saved.showAndWait();
+                btn_save.setDisable(true);
+                HR2_Competency_ManagementController cm = new HR2_Competency_ManagementController();
+                cm.loadJob();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
             }
-
         }
-    }
 
+    }
 }

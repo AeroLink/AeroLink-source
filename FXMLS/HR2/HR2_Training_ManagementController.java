@@ -130,8 +130,8 @@ public class HR2_Training_ManagementController implements Initializable {
             txt_training_title.setDisable(false);
             txt_training_desc.setDisable(false);
             cbox_trainor.setDisable(false);
-            txt_start_time.setText("");
-            txt_end_time.setText("");
+            txt_start_time.setDisable(false);
+            txt_end_time.setDisable(false);
             txt_start_date.setDisable(false);
             txt_end_date.setDisable(false);
             txt_location.setDisable(false);
@@ -188,7 +188,7 @@ public class HR2_Training_ManagementController implements Initializable {
                 .join(Model.JOIN.INNER, "aerolink.tbl_log2_vehicle_status ", "vehicle_id", "v", "=", "vehicle_id")
                 .get("job_position", "training_title", "training_description", "CONCAT(employees.firstname, ' ' ,employees.middlename, ' ',\n"
                         + "employees.lastname)as trainor", "start_date", "end_date", "start_time", "end_time", "t_type.type_of_training",
-                        "location", "aerolink.tbl_hr2_training_info.vehicle_id as vehicle", "budget_cost", "number_of_participants");
+                        "location", "v.vehicle", "budget_cost", "number_of_participants");
         Data(training_data);
 
     }
@@ -259,7 +259,7 @@ public class HR2_Training_ManagementController implements Initializable {
         for (Object g : set_vehicles) {
             HashMap hm4 = (HashMap) g;
             //RS
-            cbox_vehicle.getItems().add(hm4.get("vehicle_id"));
+            cbox_vehicle.getItems().add(hm4.get("vehicle"));
         }
     }
 
