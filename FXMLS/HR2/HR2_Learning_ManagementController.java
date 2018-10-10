@@ -9,6 +9,8 @@ import FXMLS.HR2.ClassFiles.HR2_CoursesClass;
 import FXMLS.HR2.ClassFiles.HR2_Training_InfoClass;
 import Model.HR2_Courses;
 import Model.HR2_Training_Info;
+import Synapse.Components.Modal.Modal;
+import Synapse.Form;
 import Synapse.Model;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -100,13 +102,13 @@ public class HR2_Learning_ManagementController implements Initializable {
             public TableCell<HR2_CoursesClass, Void> call(final TableColumn<HR2_CoursesClass, Void> param) {
 
                 final TableCell<HR2_CoursesClass, Void> cell = new TableCell<HR2_CoursesClass, Void>() {
-                    private final Button btn = new Button("View Participants");
+                    private final Button btn = new Button("List of Questions");
 
                     {
                         try {
                             btn.setOnAction(e
                                     -> {
-                                loadData();
+                                ViewListOfQuestions();
                             });
                             btn.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
                             btn.setCursor(javafx.scene.Cursor.HAND);
@@ -132,5 +134,11 @@ public class HR2_Learning_ManagementController implements Initializable {
 
         addButton.setCellFactory(cellFactory);
         tbl_courses.getColumns().add(addButton);
+    }
+    
+    public void ViewListOfQuestions()
+    {
+        Modal lq = Modal.getInstance(new Form("/FXMLS/HR2/Modals/List_Of_Questions.fxml").getParent());
+        lq.open();
     }
 }
