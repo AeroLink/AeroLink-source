@@ -47,6 +47,9 @@
                               <TableColumn fx:id="col_skills" prefWidth="200.0" text="Skills" />
                               <TableColumn fx:id="col_skill_desc" prefWidth="455.0" text="Skills Description" />
                           </columns>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </TableView>
                         <JFXButton fx:id="btn_refresh" buttonType="RAISED" layoutX="14.0" layoutY="22.0" prefHeight="16.0" prefWidth="91.0" styleClass="btn-primary" text="Refresh">
                            <font>

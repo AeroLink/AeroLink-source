@@ -123,16 +123,6 @@
                                                       <Font name="Lato Medium" size="15.0" />
                                                    </font>
                                                 </JFXTextField>
-                                                <Label layoutX="659.0" layoutY="237.0" prefHeight="19.0" prefWidth="162.0" text="Number of Participants">
-                                                   <font>
-                                                      <Font name="Lato Medium" size="15.0" />
-                                                   </font>
-                                                </Label>
-                                                <JFXTextField fx:id="txt_no_of_participants" layoutX="652.0" layoutY="264.0" maxWidth="241.0" minWidth="81.0" prefHeight="35.0" prefWidth="81.0">
-                                                   <font>
-                                                      <Font name="Lato Medium" size="15.0" />
-                                                   </font>
-                                                </JFXTextField>
                                                 <JFXButton fx:id="btn_save" buttonType="RAISED" layoutX="1047.0" layoutY="502.0" prefHeight="35.0" prefWidth="116.0" styleClass="btn-primary" text=" Save">
                                                    <font>
                                                       <Font name="Lato Semibold" size="15.0" />
@@ -197,8 +187,10 @@
                                                 <TableColumn fx:id="col_location" prefWidth="180.0" text="Location" />
                                                 <TableColumn fx:id="col_vehicle" prefWidth="180.0" text="Vehicle" />
                                                 <TableColumn fx:id="col_budget_cost" prefWidth="160.0" text="Budget Cost" />
-                                                <TableColumn fx:id="col_number_of_participants" prefWidth="120.0" text="Number of Participants" />
                                             </columns>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </TableView>
                                        </children></AnchorPane>
                                  </center>

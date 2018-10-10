@@ -12,8 +12,7 @@ package Model;
 public class HR2_Courses extends Synapse.Model {
 
     public HR2_Courses() {
-        setColumns("course_id", "course_title", "course_description",
-                 "number_of_questions", "created_by");
+        setColumns("course_id", "course_title", "course_description","created_by");
         this.initTable("tbl_hr2_courses");
     }
 }

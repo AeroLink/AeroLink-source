@@ -40,6 +40,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import Synapse.Model;
 import java.sql.Date;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
+import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -68,8 +71,6 @@ public class HR2_Training_ManagementController implements Initializable {
     private JFXComboBox cbox_vehicle;
     @FXML
     private JFXTextField txt_budget_cost;
-    @FXML
-    private JFXTextField txt_no_of_participants;
     @FXML
     private JFXButton btn_save;
     @FXML
@@ -102,8 +103,6 @@ public class HR2_Training_ManagementController implements Initializable {
     private TableColumn<HR2_Training_InfoClass, String> col_vehicle;
     @FXML
     private TableColumn<HR2_Training_InfoClass, String> col_budget_cost;
-    @FXML
-    private TableColumn<HR2_Training_InfoClass, String> col_number_of_participants;
     @FXML
     private ContextMenu contextMenuTrainings;
     @FXML
@@ -138,7 +137,6 @@ public class HR2_Training_ManagementController implements Initializable {
             cbox_vehicle.setDisable(false);
             txt_budget_cost.setDisable(false);
             cbox_select_type_of_training.setDisable(false);
-            txt_no_of_participants.setDisable(false);
 
             cbox_select_jobs.setValue(null);
             txt_training_title.setText("");
@@ -152,10 +150,8 @@ public class HR2_Training_ManagementController implements Initializable {
             cbox_vehicle.setValue(null);
             txt_budget_cost.setText("");
             cbox_select_type_of_training.setValue(null);
-            txt_no_of_participants.setText("");
             btn_save.setDisable(true);
-        });
-        txt_no_of_participants.setOnKeyReleased(e -> validate());
+        });;
         loadDataInComboBoxes();
         DisplayDataInTable();
         loadData();
@@ -176,7 +172,46 @@ public class HR2_Training_ManagementController implements Initializable {
         col_location.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().location);
         col_vehicle.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().vehicle);
         col_budget_cost.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().budget_cost);
-        col_number_of_participants.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().number_of_participants);
+        TableColumn<HR2_Training_InfoClass, Void> addButton = new TableColumn("View Participants");
+
+        Callback<TableColumn<HR2_Training_InfoClass, Void>, TableCell<HR2_Training_InfoClass, Void>> cellFactory
+                = new Callback<TableColumn<HR2_Training_InfoClass, Void>, TableCell<HR2_Training_InfoClass, Void>>() {
+            @Override
+            public TableCell<HR2_Training_InfoClass, Void> call(final TableColumn<HR2_Training_InfoClass, Void> param) {
+
+                final TableCell<HR2_Training_InfoClass, Void> cell = new TableCell<HR2_Training_InfoClass, Void>() {
+                    private final Button btn = new Button("View Participants");
+
+                    {
+                        try {
+                            btn.setOnAction(e
+                                    -> {
+                                loadData();
+                            });
+                            btn.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
+                            btn.setCursor(javafx.scene.Cursor.HAND);
+                        } catch (Exception ex) {
+                            System.out.println(ex);
+                        }
+
+                    }
+
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+
+        };
+
+        addButton.setCellFactory(cellFactory);
+        tbl_trainings.getColumns().add(addButton);
     }
 
     public void loadData() {
@@ -214,8 +249,7 @@ public class HR2_Training_ManagementController implements Initializable {
                                 String.valueOf(hm.get("type_of_training")),
                                 String.valueOf(hm.get("location")),
                                 String.valueOf(hm.get("vehicle")),
-                                String.valueOf(hm.get("budget_cost")),
-                                String.valueOf(hm.get("number_of_participants"))
+                                String.valueOf(hm.get("budget_cost"))
                         ));
 
             }
@@ -278,8 +312,7 @@ public class HR2_Training_ManagementController implements Initializable {
             txt_location,
             cbox_vehicle,
             txt_budget_cost,
-            cbox_select_type_of_training,
-            txt_no_of_participants,};
+            cbox_select_type_of_training,};
         try {
             for (Node c : d) {
                 if (c instanceof JFXTextField) {
@@ -322,8 +355,7 @@ public class HR2_Training_ManagementController implements Initializable {
                 && !txt_start_date.getValue().toString().isEmpty() && !txt_end_date.getValue().toString().isEmpty()
                 && !txt_start_time.getText().isEmpty() && !txt_end_time.getText().isEmpty()
                 && !cbox_select_type_of_training.getValue().toString().isEmpty() && !txt_location.getText().isEmpty()
-                && !cbox_vehicle.getValue().toString().isEmpty() && !txt_budget_cost.getText().isEmpty()
-                && !txt_no_of_participants.getText().isEmpty()) {
+                && !cbox_vehicle.getValue().toString().isEmpty() && !txt_budget_cost.getText().isEmpty()) {
             btn_save.setDisable(false);
         } else {
             btn_save.setDisable(true);
@@ -351,8 +383,7 @@ public class HR2_Training_ManagementController implements Initializable {
                 || txt_start_time.getText().isEmpty()
                 || txt_end_time.getText().isEmpty()
                 || cbox_select_type_of_training.getValue().toString().isEmpty() || txt_location.getText().isEmpty()
-                || cbox_vehicle.getValue().toString().isEmpty() || txt_budget_cost.getText().toString().isEmpty()
-                || txt_no_of_participants.getText().isEmpty()) {
+                || cbox_vehicle.getValue().toString().isEmpty() || txt_budget_cost.getText().toString().isEmpty()) {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setContentText("One or more fields are empty");
             alert.showAndWait();
@@ -373,8 +404,7 @@ public class HR2_Training_ManagementController implements Initializable {
                             {"type_of_training", cbox_select_type_of_training.getValue().toString()},
                             {"location", txt_location.getText()},
                             {"vehicle", cbox_vehicle.getValue().toString()},
-                            {"budget_cost", txt_budget_cost.getText()},
-                            {"number_of_participants", txt_no_of_participants.getText()}
+                            {"budget_cost", txt_budget_cost.getText()}
                         };
 
                 tm.insert(tm_data);

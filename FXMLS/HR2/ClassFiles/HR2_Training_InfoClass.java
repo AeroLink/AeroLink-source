@@ -28,11 +28,10 @@ public class HR2_Training_InfoClass extends RecursiveTreeObject {
     public SimpleStringProperty location;
     public SimpleStringProperty vehicle;
     public SimpleStringProperty budget_cost;
-    public SimpleStringProperty number_of_participants;
     
     public HR2_Training_InfoClass(String training_id, String job_position, String training_title,
             String training_description, String trainor, String start_date, String end_date, String start_time, 
-            String end_time,String type_of_training, String location, String vehicle, String budget_cost,String number_of_participants) {
+            String end_time,String type_of_training, String location, String vehicle, String budget_cost) {
 
         this.training_id = new SimpleStringProperty(training_id);
         this.job_position = new SimpleStringProperty(job_position);
@@ -47,7 +46,6 @@ public class HR2_Training_InfoClass extends RecursiveTreeObject {
         this.location = new SimpleStringProperty(location);
         this.vehicle = new SimpleStringProperty(vehicle);
         this.budget_cost = new SimpleStringProperty(budget_cost);
-        this.number_of_participants = new SimpleStringProperty(number_of_participants);
     }
 
 }
