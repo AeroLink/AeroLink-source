@@ -78,6 +78,7 @@ public class HR2_Learning_ManagementController implements Initializable {
                 obj.add(
                         new HR2_CoursesClass(
                                 String.valueOf(hm.get("course_id")),
+                                String.valueOf(hm.get("job_id")),
                                 String.valueOf(hm.get("course_title")),
                                 String.valueOf(hm.get("course_description")),
                                 String.valueOf(hm.get("created_by"))));
