@@ -4,6 +4,8 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -51,7 +53,7 @@
                <center>
                   <AnchorPane prefHeight="489.0" prefWidth="653.0" BorderPane.alignment="CENTER">
                      <children>
-                        <TableView fx:id="tbl_jobs" layoutY="66.0" prefHeight="440.0" prefWidth="669.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="66.0">
+                        <TableView fx:id="tbl_jobs" layoutY="66.0" onMouseClicked="#viewRow" prefHeight="440.0" prefWidth="669.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="66.0">
                           <columns>
                             <TableColumn fx:id="col_job" editable="false" prefWidth="200.0" resizable="false" text="Job" />
                             <TableColumn fx:id="col_job_desc" editable="false" prefWidth="455.0" resizable="false" text="Job Description" />
@@ -61,6 +63,13 @@
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
+                           <contextMenu>
+                              <ContextMenu fx:id="contextmenu_skills">
+                                <items>
+                                  <MenuItem fx:id="contextmenu_item_modify" mnemonicParsing="false" text="Modify" />
+                                </items>
+                              </ContextMenu>
+                           </contextMenu>
                         </TableView>
                         <JFXButton fx:id="btn_refresh" buttonType="RAISED" layoutX="14.0" layoutY="22.0" prefHeight="16.0" prefWidth="91.0" styleClass="btn-primary" text="Refresh">
                            <font>

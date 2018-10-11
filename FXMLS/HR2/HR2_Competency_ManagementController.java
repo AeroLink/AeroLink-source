@@ -33,6 +33,10 @@ import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -59,9 +63,14 @@ public class HR2_Competency_ManagementController implements Initializable {
     private JFXButton btn_refresh;
     @FXML
     private JFXButton btn_job_vacancy;
-    
+
     long DummyCount = 0;
     long GlobalCount = 0;
+    @FXML
+    private ContextMenu contextmenu_skills;
+    @FXML
+    private MenuItem contextmenu_item_modify;
+
     /**
      * Initializes the controller class.
      */
@@ -77,6 +86,7 @@ public class HR2_Competency_ManagementController implements Initializable {
         });
 
         txt_search_job.setOnKeyReleased(e -> SearchJob());
+        contextmenu_skills.setOnAction(e->EditData());
     }
 
     public void loadJob() {
@@ -175,10 +185,23 @@ public class HR2_Competency_ManagementController implements Initializable {
     }
 
     public void EditData() {
-      // HR2_CM_Skills_Class_for_Modal.init_JClass(tbl_jobs.getSelectionModel().getSelectedItem().title.get());
-    
+        HR2_CM_Skills_Class_for_Modal.init_JClass(tbl_jobs.getSelectionModel().getSelectedItem().Title.get(),
+                tbl_jobs.getSelectionModel().getSelectedItem().Description.get(),
+                tbl_jobs.getSelectionModel().getSelectedItem().Skill.get(),
+                tbl_jobs.getSelectionModel().getSelectedItem().Skill_Description.get()
+                
+                );
 
-        Modal md = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_ViewJob.fxml").getParent());
+        Modal md = Modal.getInstance(new Form("/FXMLS/HR2/Modals/Modal_EditSkills.fxml").getParent());
         md.open();
+    }
+    
+    public void viewRow(MouseEvent event) {
+
+        if (event.getButton() == MouseButton.SECONDARY) {
+            contextmenu_skills.show(tbl_jobs, event.getX(), event.getSceneY());
+            
+        }
+
     }
 }

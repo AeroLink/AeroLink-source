@@ -37,7 +37,7 @@
          </font>
       </JFXTextField>
       <JFXTextArea fx:id="txt_skill_desc" layoutX="50.0" layoutY="193.0" maxWidth="331.0" minWidth="310.0" prefHeight="130.0" prefWidth="331.0" style="-fx-border-color: #c2c2a3; -fx-border-width: 2px;" unFocusColor="#f5f2f2" />
-      <JFXButton fx:id="btn_save" layoutX="50.0" layoutY="352.0" prefHeight="37.0" prefWidth="331.0" styleClass="btn-primary" text=" Save">
+      <JFXButton fx:id="btn_save" buttonType="RAISED" layoutX="50.0" layoutY="352.0" prefHeight="37.0" prefWidth="331.0" styleClass="btn-primary" text=" Save">
          <font>
             <Font name="Lato Black" size="15.0" />
          </font>
