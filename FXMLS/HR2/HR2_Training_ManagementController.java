@@ -156,6 +156,7 @@ public class HR2_Training_ManagementController implements Initializable {
         DisplayDataInTable();
         loadData();
         DisableComponents();
+        txt_budget_cost.setOnKeyReleased(e -> validate());
     }
 
     public void DisplayDataInTable() {
@@ -218,12 +219,12 @@ public class HR2_Training_ManagementController implements Initializable {
 
         HR2_Training_Info tm = new HR2_Training_Info();
 
-        List training_data = tm.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "employees", "=", "employee_code")
+        List training_data = tm.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "employees", "=", "id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr2_type_of_training ", "type_of_training_id", "t_type", "=", "type_of_training_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_log2_vehicle_status ", "vehicle_id", "v", "=", "vehicle_id")
                 .get("job_position", "training_title", "training_description", "CONCAT(employees.firstname, ' ' ,employees.middlename, ' ',\n"
                         + "employees.lastname)as trainor", "start_date", "end_date", "start_time", "end_time", "t_type.type_of_training",
-                        "location", "v.vehicle", "budget_cost", "number_of_participants");
+                        "location", "v.vehicle", "budget_cost");
         Data(training_data);
 
     }
@@ -264,6 +265,7 @@ public class HR2_Training_ManagementController implements Initializable {
         HR2_Temp_Employee_Profiles trainors = new HR2_Temp_Employee_Profiles();
         HR2_Type_of_Training type_of_training = new HR2_Type_of_Training();
         HR2_Temp_Vehicles vehicles = new HR2_Temp_Vehicles();
+        
         List c = jobs.get();
 
         for (Object d : c) {
@@ -277,7 +279,7 @@ public class HR2_Training_ManagementController implements Initializable {
         for (Object e : set_trainors) {
             HashMap hm2 = (HashMap) e;
             //RS
-            cbox_trainor.getItems().add(hm2.get("firstname") + " " + hm2.get("middlename") + " " + hm2.get("lastname"));
+            cbox_trainor.getItems().add("T" + hm2.get("id") + " - " + hm2.get("firstname") + " " + hm2.get("middlename") + " " + hm2.get("lastname"));
         }
 
         List set_type_of_training = type_of_training.get();
@@ -285,7 +287,7 @@ public class HR2_Training_ManagementController implements Initializable {
         for (Object f : set_type_of_training) {
             HashMap hm3 = (HashMap) f;
             //RS
-            cbox_select_type_of_training.getItems().add(hm3.get("type_of_training"));
+            cbox_select_type_of_training.getItems().add("TM" + hm3.get("type_of_training_id") + " - " + hm3.get("type_of_training"));
         }
 
         List set_vehicles = vehicles.get();
@@ -293,7 +295,7 @@ public class HR2_Training_ManagementController implements Initializable {
         for (Object g : set_vehicles) {
             HashMap hm4 = (HashMap) g;
             //RS
-            cbox_vehicle.getItems().add(hm4.get("vehicle"));
+            cbox_vehicle.getItems().add("V" + hm4.get("vehicle_id") + " - " + hm4.get("vehicle"));
         }
     }
 
@@ -396,14 +398,14 @@ public class HR2_Training_ManagementController implements Initializable {
                             {"job_position", cbox_select_jobs.getValue().toString()},
                             {"training_title", txt_training_title.getText()},
                             {"training_description", txt_training_desc.getText()},
-                            {"trainor", cbox_trainor.getValue().toString()},
+                            {"id", cbox_trainor.getSelectionModel().getSelectedItem().toString().substring(1).toString().split(" - ")[0]},
                             {"start_date", txt_start_date.getValue().toString()},
                             {"end_date", txt_end_date.getValue().toString()},
                             {"start_time", txt_start_time.getText()},
                             {"end_time", txt_end_time.getText()},
-                            {"type_of_training", cbox_select_type_of_training.getValue().toString()},
+                            {"type_of_training_id", cbox_select_type_of_training.getSelectionModel().getSelectedItem().toString().substring(2).toString().split(" - ")[0]},
                             {"location", txt_location.getText()},
-                            {"vehicle", cbox_vehicle.getValue().toString()},
+                            {"vehicle_id", cbox_vehicle.getSelectionModel().getSelectedItem().toString().substring(1).toString().split(" - ")[0]},
                             {"budget_cost", txt_budget_cost.getText()}
                         };
 

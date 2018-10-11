@@ -23,7 +23,7 @@
                               <Font name="Lato Semibold" size="15.0" />
                            </font>
                         </JFXTextField>
-                        <JFXButton fx:id="btn_add_course" buttonType="RAISED" layoutX="416.0" layoutY="42.0" styleClass="btn-primary" text="Add Course" AnchorPane.rightAnchor="143.0">
+                        <JFXButton fx:id="btn_add_course" buttonType="RAISED" layoutX="416.0" layoutY="42.0" onAction="#AddCourseModal" styleClass="btn-primary" text="Add Course" AnchorPane.rightAnchor="143.0">
                            <font>
                               <Font name="Roboto Black" size="15.0" />
                            </font>
@@ -34,7 +34,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </JFXButton>
-                        <JFXButton fx:id="btn_refresh" buttonType="RAISED" layoutX="545.0" layoutY="42.0" prefHeight="31.0" prefWidth="102.0" styleClass="btn-primary" text="Refresh" AnchorPane.rightAnchor="26.0">
+                        <JFXButton fx:id="btn_refresh" buttonType="RAISED" layoutX="545.0" layoutY="42.0" onAction="#loadData" prefHeight="31.0" prefWidth="102.0" styleClass="btn-primary" text="Refresh" AnchorPane.rightAnchor="26.0">
                            <font>
                               <Font name="Roboto Black" size="15.0" />
                            </font>

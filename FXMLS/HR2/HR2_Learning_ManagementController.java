@@ -7,17 +7,20 @@ package FXMLS.HR2;
 
 import FXMLS.HR2.ClassFiles.HR2_CoursesClass;
 import FXMLS.HR2.ClassFiles.HR2_Training_InfoClass;
+import Model.HR2_CM_Pivot;
 import Model.HR2_Courses;
 import Model.HR2_Training_Info;
 import Synapse.Components.Modal.Modal;
 import Synapse.Form;
 import Synapse.Model;
+import Synapse.Session;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.CompletableFuture;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -49,7 +52,9 @@ public class HR2_Learning_ManagementController implements Initializable {
     private TableColumn<HR2_CoursesClass, String> col_course_desc;
     @FXML
     private TableColumn<HR2_CoursesClass, String> col_created_by;
-
+    
+    long DummyCount = 0;
+    long GlobalCount = 0;
     /**
      * Initializes the controller class.
      */
@@ -57,13 +62,45 @@ public class HR2_Learning_ManagementController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         loadData();
         DisplayDataInJTable();
-    }    
+    }
+
+    @FXML
     public void loadData() {
 
-        HR2_Courses c = new HR2_Courses();
+        try {
 
-        List courses = c.get();
-        Data(courses);
+            HR2_Courses c = new HR2_Courses();
+
+            CompletableFuture.supplyAsync(() -> {
+                while (Session.CurrentRoute.equals("learning_management")) {
+                    c.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(row -> {
+                        DummyCount = Long.parseLong(((HashMap) row).get("chk").toString());
+                    });
+
+                    if (DummyCount != GlobalCount) {
+
+                        List courses = c.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
+                                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "emps", "=", "id")
+                                .get("j.title as course_title", "course_description",
+                                         "concat(emps.firstname, ' ',emps.middlename, ' ',emps.lastname)as Created_by");
+                        Data(courses);
+
+                        GlobalCount = DummyCount;
+                    }
+
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException ex) {
+                        //Logger.getLogger(HR2_Competency_ManagementController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
+                return 0;
+            }, Session.SessionThreads);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
     }
 
@@ -72,7 +109,7 @@ public class HR2_Learning_ManagementController implements Initializable {
         obj.clear();
         try {
             for (Object d : b) {
-                        
+
                 HashMap hm = (HashMap) d;
                 System.out.println(hm);
                 obj.add(
@@ -81,7 +118,7 @@ public class HR2_Learning_ManagementController implements Initializable {
                                 String.valueOf(hm.get("job_id")),
                                 String.valueOf(hm.get("course_title")),
                                 String.valueOf(hm.get("course_description")),
-                                String.valueOf(hm.get("created_by"))));
+                                String.valueOf(hm.get("Created_by"))));
 
             }
             tbl_courses.setItems(obj);
@@ -89,9 +126,8 @@ public class HR2_Learning_ManagementController implements Initializable {
             System.out.println(e);
         }
     }
-    
-    public void DisplayDataInJTable()
-    {
+
+    public void DisplayDataInJTable() {
         col_course_title.setCellValueFactory((TableColumn.CellDataFeatures<HR2_CoursesClass, String> param) -> param.getValue().course_title);
         col_course_desc.setCellValueFactory((TableColumn.CellDataFeatures<HR2_CoursesClass, String> param) -> param.getValue().course_description);
         col_created_by.setCellValueFactory((TableColumn.CellDataFeatures<HR2_CoursesClass, String> param) -> param.getValue().created_by);
@@ -136,10 +172,16 @@ public class HR2_Learning_ManagementController implements Initializable {
         addButton.setCellFactory(cellFactory);
         tbl_courses.getColumns().add(addButton);
     }
-    
-    public void ViewListOfQuestions()
-    {
+
+    public void ViewListOfQuestions() {
         Modal lq = Modal.getInstance(new Form("/FXMLS/HR2/Modals/List_Of_Questions.fxml").getParent());
         lq.open();
     }
+
+    @FXML
+    public void AddCourseModal() {
+        Modal lq = Modal.getInstance(new Form("/FXMLS/HR2/Modals/Add_Courses.fxml").getParent());
+        lq.open();
+    }
+
 }

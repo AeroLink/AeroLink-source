@@ -9,7 +9,6 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import Synapse.Form;
 import javafx.stage.StageStyle;
-
 /**63
  *
  * @author Lei

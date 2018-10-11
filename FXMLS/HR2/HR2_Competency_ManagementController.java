@@ -6,7 +6,9 @@
 package FXMLS.HR2;
 
 import FXMLS.HR2.ClassFiles.HR2_CM_Skills_Class;
+import FXMLS.HR2.ClassFiles.HR2_CM_Skills_Class_for_Modal;
 import FXMLS.HR2.ClassFiles.HR4_Jobs_Class;
+import FXMLS.HR4.ClassFiles.HR4_MIZ;
 import Model.HR2_CM_Pivot;
 import Model.HR2_CM_Skills;
 import Model.HR2_Jobs;
@@ -30,6 +32,7 @@ import Synapse.Session;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ObservableValue;
 
 /**
  * FXML Controller class
@@ -43,7 +46,7 @@ public class HR2_Competency_ManagementController implements Initializable {
     @FXML
     private JFXTextField txt_search_job;
     @FXML
-    public TableView tbl_jobs;
+    public TableView<HR4_Jobs_Class> tbl_jobs;
     @FXML
     private TableColumn<HR4_Jobs_Class, String> col_job;
     @FXML
@@ -54,7 +57,11 @@ public class HR2_Competency_ManagementController implements Initializable {
     private TableColumn<HR4_Jobs_Class, String> col_skill_desc;
     @FXML
     private JFXButton btn_refresh;
-
+    @FXML
+    private JFXButton btn_job_vacancy;
+    
+    long DummyCount = 0;
+    long GlobalCount = 0;
     /**
      * Initializes the controller class.
      */
@@ -68,10 +75,9 @@ public class HR2_Competency_ManagementController implements Initializable {
             Modal set_skill_modal = Modal.getInstance(new Form("/FXMLS/HR2/Modals/Modal_SetSkills.fxml").getParent());
             set_skill_modal.open();
         });
-    }
 
-    long DummyCount = 0;
-    long GlobalCount = 0;
+        txt_search_job.setOnKeyReleased(e -> SearchJob());
+    }
 
     public void loadJob() {
 
@@ -92,10 +98,10 @@ public class HR2_Competency_ManagementController implements Initializable {
                                 .get("jobs.title", "jobs.description", "s.skill", "s.skill_description");
 
                         Data(c);
-                        
+
                         GlobalCount = DummyCount;
                     }
-                    
+
                     try {
                         Thread.sleep(3000);
                     } catch (InterruptedException ex) {
@@ -146,10 +152,33 @@ public class HR2_Competency_ManagementController implements Initializable {
 
     }
 
-    private void diplaycols() {
-        col_skills.setVisible(false);
-        col_skill_desc.setVisible(false);
-        col_job_desc.setPrefWidth(1200);
+    @FXML
+    public void ViewJobVacancy() {
+        Modal m = Modal.getInstance(new Form("/FXMLS/HR2/Modals/ViewJobVacancy.fxml").getParent());
+        m.open();
     }
 
+    public void SearchJob() {
+        HR2_CM_Pivot cm_pivot = new HR2_CM_Pivot();
+        tbl_jobs.getItems().clear();
+        try {
+            List c = cm_pivot.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr2_skillset", "skill_id", "s", "=", "skill_id")
+                    .where(new Object[][]{{"jobs.title", "like", "%" + txt_search_job.getText() + "%"}})
+                    .get("jobs.title", "jobs.description", "s.skill", "s.skill_description");
+
+            Data(c);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void EditData() {
+      // HR2_CM_Skills_Class_for_Modal.init_JClass(tbl_jobs.getSelectionModel().getSelectedItem().title.get());
+    
+
+        Modal md = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_ViewJob.fxml").getParent());
+        md.open();
+    }
 }

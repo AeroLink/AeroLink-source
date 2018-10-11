@@ -60,9 +60,6 @@ public class Modal_SetSkillsController implements Initializable {
 
             btn_save.setDisable(false);
         } else {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("Please fill out the required fields");
-            alert.showAndWait();
             btn_save.setDisable(true);
         }
     }
