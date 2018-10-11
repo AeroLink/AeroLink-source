@@ -5,6 +5,8 @@
  */
 package FXMLS.HR2;
 
+import Synapse.Components.Modal.Modal;
+import Synapse.Form;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,4 +31,10 @@ public class HR2_Succession_PlanningController implements Initializable {
         // TODO
     }    
     
+    @FXML
+    public void jobVacancyModal()
+    {
+        Modal m = Modal.getInstance(new Form("/FXMLS/HR2/Modals/ViewJobVacancy.fxml").getParent());
+        m.open();
+    }
 }
