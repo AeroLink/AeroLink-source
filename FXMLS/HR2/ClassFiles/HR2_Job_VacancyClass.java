@@ -14,10 +14,11 @@ import javafx.beans.property.SimpleStringProperty;
 public class HR2_Job_VacancyClass {
 
     public SimpleStringProperty title;
-
-    public HR2_Job_VacancyClass(String title) {
+    public SimpleStringProperty department;
+    
+    public HR2_Job_VacancyClass(String title, String department) {
         this.title = new SimpleStringProperty(title);
-
+        this.department = new SimpleStringProperty(department);
     }
 
 }

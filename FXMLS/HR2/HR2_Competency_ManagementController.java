@@ -29,10 +29,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import Synapse.Model;
 import Synapse.Session;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseButton;
@@ -70,6 +73,8 @@ public class HR2_Competency_ManagementController implements Initializable {
     private ContextMenu contextmenu_skills;
     @FXML
     private MenuItem contextmenu_item_modify;
+    @FXML
+    private MenuItem contextmenu_item_delete;
 
     /**
      * Initializes the controller class.
@@ -86,7 +91,7 @@ public class HR2_Competency_ManagementController implements Initializable {
         });
 
         txt_search_job.setOnKeyReleased(e -> SearchJob());
-        contextmenu_skills.setOnAction(e->EditData());
+
     }
 
     public void loadJob() {
@@ -189,19 +194,39 @@ public class HR2_Competency_ManagementController implements Initializable {
                 tbl_jobs.getSelectionModel().getSelectedItem().Description.get(),
                 tbl_jobs.getSelectionModel().getSelectedItem().Skill.get(),
                 tbl_jobs.getSelectionModel().getSelectedItem().Skill_Description.get()
-                
-                );
+        );
 
         Modal md = Modal.getInstance(new Form("/FXMLS/HR2/Modals/Modal_EditSkills.fxml").getParent());
         md.open();
     }
-    
+
+    @FXML
     public void viewRow(MouseEvent event) {
 
         if (event.getButton() == MouseButton.SECONDARY) {
             contextmenu_skills.show(tbl_jobs, event.getX(), event.getSceneY());
-            
+            contextmenu_item_modify.setOnAction(e -> EditData());
+            contextmenu_item_delete.setOnAction(e -> DropData());
         }
 
     }
+    
+     public void DropData() {
+        Alert delete = new Alert(Alert.AlertType.CONFIRMATION);
+        delete.setContentText("Are you sure you want to drop this data?");
+        Optional<ButtonType> rs = delete.showAndWait();
+         System.out.println(tbl_jobs.getSelectionModel().getSelectedItem().Skill_id.getValue());
+        System.out.println(rs.get());
+        if (rs.get() == ButtonType.OK) {
+            HR2_CM_Pivot skills = new HR2_CM_Pivot();
+
+            skills.delete().where(new Object[][]{
+                {"skill_id", "=", tbl_jobs.getSelectionModel().getSelectedItem().Skill_id.getValue()}
+            }).executeUpdate();
+
+        }
+
+    }
+    
+    
 }

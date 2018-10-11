@@ -10,6 +10,7 @@ import FXMLS.HR2.ClassFiles.HR2_Training_InfoClass;
 import FXMLS.HR2.ClassFiles.HR4_Jobs_Class;
 import Model.HR2_Jobs;
 import Model.HR2_Training_Info;
+import Model.HR4_Departments;
 import Synapse.Model;
 import java.net.URL;
 import java.util.HashMap;
@@ -33,6 +34,8 @@ public class ViewJobVacancyController implements Initializable {
     private TableView<HR2_Job_VacancyClass> tbl_job_vacancy;
     @FXML
     private TableColumn<HR2_Job_VacancyClass, String> col_job_vacancy;
+    @FXML
+    private TableColumn<HR2_Job_VacancyClass, String> col_department;
 
     /**
      * Initializes the controller class.
@@ -48,8 +51,9 @@ public class ViewJobVacancyController implements Initializable {
         HR2_Jobs jv = new HR2_Jobs();
 
         List jv_data = jv.join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_limit", "job_id", "j_limit", "=", "job_id")
+                         .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id","dept","=", "dept_id")
                 .where(new Object[][]{{"j_limit.jobOpen", "!=", "0"}})
-                .get("title");
+                .get("title ,dept.dept_name as department");
         Data(jv_data);
 
     }
@@ -62,7 +66,8 @@ public class ViewJobVacancyController implements Initializable {
                 HashMap hm = (HashMap) d;
                 obj.add(
                         new HR2_Job_VacancyClass(
-                                String.valueOf(hm.get("title"))
+                                String.valueOf(hm.get("title")),
+                                String.valueOf(hm.get("department"))
                         ));
 
             }
@@ -75,6 +80,7 @@ public class ViewJobVacancyController implements Initializable {
      public void DisplayDataInTable() {
 
         col_job_vacancy.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Job_VacancyClass, String> param) -> param.getValue().title);
+        col_department.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Job_VacancyClass, String> param) -> param.getValue().department);
        
 
     }

@@ -14,7 +14,7 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class HR2_CM_Skills_Class_for_Modal {
     
-    public static String j_title,j_Desc,j_Skill,j_Skill_d;
+    public static String j_id,j_title,j_Desc,j_Skill,j_Skill_d;
     
     public static void init_JClass(String title, String description,String skill, String Skill_description) {
         j_title = title;

@@ -67,6 +67,7 @@
                               <ContextMenu fx:id="contextmenu_skills">
                                 <items>
                                   <MenuItem fx:id="contextmenu_item_modify" mnemonicParsing="false" text="Modify" />
+                                    <MenuItem fx:id="contextmenu_item_delete" mnemonicParsing="false" text="Drop" />
                                 </items>
                               </ContextMenu>
                            </contextMenu>

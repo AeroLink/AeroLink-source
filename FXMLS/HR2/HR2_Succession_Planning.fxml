@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="705.0" prefWidth="1373.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="FXMLS.HR2.HR2_Succession_PlanningController">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </center>
+         <top>
+            <AnchorPane prefHeight="106.0" prefWidth="1373.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton fx:id="btn_job_vacancy" buttonType="RAISED" layoutX="1180.0" layoutY="39.0" style="-fx-background-color: #00cc66;" styleClass="btn-primary" text=" Job Vacancy" textFill="WHITE">
+                     <font>
+                        <Font name="Lato Black" size="15.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" fontSmoothingType="LCD" size="15.0" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+         </top>
+      </BorderPane>
+   </children>
+</AnchorPane>

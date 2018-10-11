@@ -7,6 +7,8 @@ package FXMLS.HR2.Modals;
 
 import FXMLS.HR2.ClassFiles.HR2_CM_Skills_Class_for_Modal;
 import FXMLS.HR4.ClassFiles.HR4_MIZ;
+import Model.HR2_CM_Pivot;
+import Model.HR2_CM_Skills;
 import Model.HR4_Jobs;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -15,11 +17,14 @@ import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 /**
  * FXML Controller class
@@ -42,16 +47,16 @@ public class Modal_EditSkillsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         cbox_edit_select_job.getItems().add(HR2_CM_Skills_Class_for_Modal.j_title);
         cbox_edit_select_job.getSelectionModel().selectFirst();
         txt_edit_skill.setText(HR2_CM_Skills_Class_for_Modal.j_Skill);
         txt_edit_skill_desc.setText(HR2_CM_Skills_Class_for_Modal.j_Skill_d);
-        
+
         selectJobs();
-        
-    }    
-    
+
+    }
+
     public void selectJobs() {
         HR4_Jobs jobs = new HR4_Jobs();
 
@@ -67,10 +72,31 @@ public class Modal_EditSkillsController implements Initializable {
                 cbox_edit_select_job.getItems().add("J" + j_id + " - " + sjobs);
 
             }
-        }catch(Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(e);
         }
 
+    }
+
+    public void Update() {
+        Alert update = new Alert(Alert.AlertType.CONFIRMATION);
+        update.setContentText("Are you sure you want to update this data?");
+        Optional<ButtonType> rs = update.showAndWait();
+
+        if (rs.get() == ButtonType.OK) {
+            HR2_CM_Pivot skills_p = new HR2_CM_Pivot();
+            HR2_CM_Skills skills = new HR2_CM_Skills();
+            HR4_Jobs j = new HR4_Jobs();
+            
+            Boolean up = skills.update(new Object[][]{
+              /*  {"job_id", cbox_edit_select_job.getSelectionModel().getSelectedItem().toString().substring(1)
+                        .toString().split(" - ")[0]},*/
+                {"skill", txt_edit_skill.getText()},
+                {"skill_description", txt_edit_skill_desc.getText()}
+            }).where(new Object[][]{
+                {"job_id", "=", cbox_edit_select_job.idProperty().get()}
+            }).executeUpdate();
+
+        }
     }
 }
