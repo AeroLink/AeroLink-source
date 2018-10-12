@@ -44,14 +44,14 @@ public class ViewJobVacancyController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         loadData();
         DisplayDataInTable();
-    }    
-    
+    }
+
     public void loadData() {
 
         HR2_Jobs jv = new HR2_Jobs();
 
         List jv_data = jv.join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_limit", "job_id", "j_limit", "=", "job_id")
-                         .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id","dept","=", "dept_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "dept", "=", "dept_id")
                 .where(new Object[][]{{"j_limit.jobOpen", "!=", "0"}})
                 .get("title ,dept.dept_name as department");
         Data(jv_data);
@@ -76,12 +76,11 @@ public class ViewJobVacancyController implements Initializable {
             System.out.println(e);
         }
     }
-    
-     public void DisplayDataInTable() {
+
+    public void DisplayDataInTable() {
 
         col_job_vacancy.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Job_VacancyClass, String> param) -> param.getValue().title);
         col_department.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Job_VacancyClass, String> param) -> param.getValue().department);
-       
 
     }
 }

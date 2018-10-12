@@ -364,20 +364,6 @@ public class HR2_Training_ManagementController implements Initializable {
         }
     }
 
-    /*   private void viewTraining() {
-        HR2_Training_ManagementClass.HR2_Training_ManagementClass(tbl_trainings.getSelectionModel().getSelectedItem().job_position.get(),
-                tbl_trainings.getSelectionModel().getSelectedItem().training_title.get(),
-                tbl_trainings.getSelectionModel().getSelectedItem().training_description.get(),
-                tbl_trainings.getSelectionModel().getSelectedItem().trainor.get().toString(),
-                tbl_trainings.getSelectionModel().getSelectedItem().start_date.get().toString(),
-                tbl_trainings.getSelectionModel().getSelectedItem().end_date.get().toString(),
-                tbl_trainings.getSelectionModel().getSelectedItem().start_time.get(),
-                tbl_trainings.getSelectionModel().getSelectedItem().end_time.get()
-        );
-
-        Modal md = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_ViewJob.fxml").getParent());
-        md.open();
-    }*/
     public void Save() {
         if (cbox_select_jobs.getValue().toString().isEmpty() || txt_training_title.getText().isEmpty()
                 || txt_training_desc.getText().isEmpty() || cbox_trainor.getValue().toString().isEmpty()

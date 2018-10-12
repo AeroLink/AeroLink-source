@@ -166,11 +166,56 @@ public class HR2_Learning_ManagementController implements Initializable {
                 };
                 return cell;
             }
+            
+            
 
         };
 
         addButton.setCellFactory(cellFactory);
         tbl_courses.getColumns().add(addButton);
+        
+         TableColumn<HR2_CoursesClass, Void> addQuestion = new TableColumn("Add Questions");
+
+        Callback<TableColumn<HR2_CoursesClass, Void>, TableCell<HR2_CoursesClass, Void>> cellFactory1
+                = new Callback<TableColumn<HR2_CoursesClass, Void>, TableCell<HR2_CoursesClass, Void>>() {
+            @Override
+            public TableCell<HR2_CoursesClass, Void> call(final TableColumn<HR2_CoursesClass, Void> param) {
+
+                final TableCell<HR2_CoursesClass, Void> cell1 = new TableCell<HR2_CoursesClass, Void>() {
+                    private final Button btn1 = new Button("Add Question");
+
+                    {
+                        try {
+                            btn1.setOnAction(e
+                                    -> {
+                                ViewListOfQuestions();
+                            });
+                            btn1.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
+                            btn1.setCursor(javafx.scene.Cursor.HAND);
+                        } catch (Exception ex) {
+                            System.out.println(ex);
+                        }
+
+                    }
+
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn1);
+                        }
+                    }
+                };
+                return cell1;
+            }
+            
+            
+
+        };
+
+        addQuestion.setCellFactory(cellFactory1);
+        tbl_courses.getColumns().add(addQuestion);
     }
 
     public void ViewListOfQuestions() {
