@@ -9,40 +9,40 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="520.0" prefWidth="427.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.LM_AddQuestionsController">
+<AnchorPane id="AnchorPane" fx:id="AnchorPane1" prefHeight="520.0" prefWidth="427.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.LM_AddQuestionsController">
    <children>
       <Pane prefHeight="37.0" prefWidth="427.0" style="-fx-background-color: #00cc66;" />
-      <JFXTextArea fx:id="txt_add_question" focusColor="#2f2f2f" labelFloat="true" layoutX="25.0" layoutY="95.0" maxWidth="401.0" minWidth="380.0" prefHeight="118.0" prefWidth="380.0" promptText="Add Question" style="-fx-border-color: #c2c2a3;" unFocusColor="WHITE">
+      <JFXTextArea fx:id="txt_add_question" focusColor="#2f2f2f" labelFloat="true" layoutX="24.0" layoutY="80.0" maxWidth="401.0" minWidth="380.0" prefHeight="118.0" prefWidth="380.0" promptText="Add Question" style="-fx-border-color: #c2c2a3;" unFocusColor="WHITE">
          <font>
             <Font name="Lato Medium" size="15.0" />
          </font>
       </JFXTextArea>
-      <Label layoutX="25.0" layoutY="243.0" prefHeight="19.0" prefWidth="62.0" text="Choices">
+      <Label layoutX="30.0" layoutY="224.0" prefHeight="19.0" prefWidth="62.0" text="Choices">
          <font>
             <Font name="Lato Semibold" size="15.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txt_option1" labelFloat="true" layoutX="19.0" layoutY="288.0" maxWidth="328.0" minWidth="199.0" prefHeight="35.0" prefWidth="324.0" promptText="Option1">
+      <JFXTextField fx:id="txt_option1" labelFloat="true" layoutX="24.0" layoutY="269.0" maxWidth="328.0" minWidth="199.0" prefHeight="35.0" prefWidth="324.0" promptText="Option1">
          <font>
             <Font name="Lato Medium" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txt_option2" labelFloat="true" layoutX="19.0" layoutY="323.0" maxWidth="328.0" minWidth="199.0" prefHeight="35.0" prefWidth="324.0" promptText="Option2">
+      <JFXTextField fx:id="txt_option2" labelFloat="true" layoutX="24.0" layoutY="304.0" maxWidth="328.0" minWidth="199.0" prefHeight="35.0" prefWidth="324.0" promptText="Option2">
          <font>
             <Font name="Lato Medium" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txt_option3" labelFloat="true" layoutX="19.0" layoutY="358.0" maxWidth="328.0" minWidth="199.0" prefHeight="35.0" prefWidth="324.0" promptText="Option3">
+      <JFXTextField fx:id="txt_option3" labelFloat="true" layoutX="24.0" layoutY="339.0" maxWidth="328.0" minWidth="199.0" prefHeight="35.0" prefWidth="324.0" promptText="Option3">
          <font>
             <Font name="Lato Medium" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txt_option4" labelFloat="true" layoutX="19.0" layoutY="393.0" maxWidth="328.0" minWidth="199.0" prefHeight="35.0" prefWidth="324.0" promptText="Option4">
+      <JFXTextField fx:id="txt_option4" labelFloat="true" layoutX="24.0" layoutY="374.0" maxWidth="328.0" minWidth="199.0" prefHeight="35.0" prefWidth="324.0" promptText="Option4">
          <font>
             <Font name="Lato Medium" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXButton fx:id="browse1" layoutX="343.0" layoutY="288.0" prefHeight="28.0" prefWidth="62.0" style="-fx-background-color: #00cc66;" text="Browse" textFill="WHITE">
+      <JFXButton fx:id="browse1" layoutX="342.0" layoutY="276.0" onAction="#OpenFile" prefHeight="18.0" prefWidth="62.0" style="-fx-background-color: #00cc66;" text="Browse" textFill="WHITE">
          <font>
             <Font name="Lato Medium" size="12.0" />
          </font>
@@ -50,7 +50,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="browse2" layoutX="343.0" layoutY="327.0" prefHeight="28.0" prefWidth="62.0" style="-fx-background-color: #00cc66;" text="Browse" textFill="WHITE">
+      <JFXButton fx:id="browse2" layoutX="342.0" layoutY="310.0" onAction="#OpenFile" prefHeight="22.0" prefWidth="62.0" style="-fx-background-color: #00cc66;" text="Browse" textFill="WHITE">
          <font>
             <Font name="Lato Medium" size="12.0" />
          </font>
@@ -58,7 +58,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="browse3" layoutX="343.0" layoutY="362.0" prefHeight="28.0" prefWidth="62.0" style="-fx-background-color: #00cc66;" text="Browse" textFill="WHITE">
+      <JFXButton fx:id="browse3" layoutX="342.0" layoutY="346.0" onAction="#OpenFile" prefHeight="21.0" prefWidth="62.0" style="-fx-background-color: #00cc66;" text="Browse" textFill="WHITE">
          <font>
             <Font name="Lato Medium" size="12.0" />
          </font>
@@ -66,7 +66,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="browse4" layoutX="343.0" layoutY="397.0" prefHeight="28.0" prefWidth="62.0" style="-fx-background-color: #00cc66;" text="Browse" textFill="WHITE">
+      <JFXButton fx:id="browse4" layoutX="342.0" layoutY="381.0" onAction="#OpenFile" prefHeight="23.0" prefWidth="63.0" style="-fx-background-color: #00cc66;" text="Browse" textFill="WHITE">
          <font>
             <Font name="Lato Medium" size="12.0" />
          </font>
@@ -82,5 +82,20 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
+      <Label layoutX="164.0" layoutY="435.0" prefHeight="19.0" prefWidth="153.0" text="* if you want to upload image ">
+         <font>
+            <Font name="Lato Semibold Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="168.0" layoutY="454.0" prefHeight="19.0" prefWidth="183.0" text="just click &quot;Browse&quot; button otherwise">
+         <font>
+            <Font name="Lato Semibold Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="168.0" layoutY="473.0" prefHeight="19.0" prefWidth="112.0" text=" just type the option*">
+         <font>
+            <Font name="Lato Semibold Italic" size="12.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

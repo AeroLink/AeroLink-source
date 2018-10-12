@@ -14,8 +14,10 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -26,6 +28,7 @@ public class LM_AddQuestionsController implements Initializable {
 
     private FileChooser addImage;
     private File file;
+    private Stage stage;
     @FXML
     private JFXTextArea txt_add_question;
     @FXML
@@ -46,6 +49,8 @@ public class LM_AddQuestionsController implements Initializable {
     private JFXButton browse4;
     @FXML
     private JFXButton btn_add_question;
+    @FXML
+    private AnchorPane AnchorPane1;
 
     /**
      * Initializes the controller class.
@@ -53,7 +58,6 @@ public class LM_AddQuestionsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-     
         addImage = new FileChooser();
         addImage.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("All files", "* "),
@@ -61,6 +65,13 @@ public class LM_AddQuestionsController implements Initializable {
                 new FileChooser.ExtensionFilter("Text File", "*.txt", "*.jpg", "*.gif")
         );
 
+    }
+    
+    @FXML
+    public void OpenFile()
+    {
+        stage = (Stage) AnchorPane1.getScene().getWindow();
+        file = addImage.showOpenDialog(stage);
     }
 
 }
