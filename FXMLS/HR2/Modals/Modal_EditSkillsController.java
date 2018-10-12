@@ -54,7 +54,7 @@ public class Modal_EditSkillsController implements Initializable {
         txt_edit_skill_desc.setText(HR2_CM_Skills_Class_for_Modal.j_Skill_d);
 
         selectJobs();
-
+        
     }
 
     public void selectJobs() {

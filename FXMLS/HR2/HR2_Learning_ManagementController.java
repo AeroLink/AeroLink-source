@@ -188,7 +188,8 @@ public class HR2_Learning_ManagementController implements Initializable {
                         try {
                             btn1.setOnAction(e
                                     -> {
-                                ViewListOfQuestions();
+                                Modal md = Modal.getInstance(new Form("/FXMLS/HR2/Modals/LM_AddQuestions.fxml").getParent());
+                                md.open();
                             });
                             btn1.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
                             btn1.setCursor(javafx.scene.Cursor.HAND);
