@@ -11,6 +11,7 @@ import FXMLS.HR2.ClassFiles.HR2_Training_InfoClass;
 import FXMLS.HR2.ClassFiles.HR2_Type_of_TrainingClass;
 import FXMLS.HR2.ClassFiles.HR4_Temp_Employee_Profiles_Class;
 import FXMLS.HR4.ClassFiles.TableModel_Jobs;
+import Model.HR2_CM_Pivot;
 import Model.HR2_Temp_Employee_Profiles;
 import Model.HR2_Temp_Vehicles;
 import Model.HR2_Training_Info;
@@ -113,6 +114,40 @@ public class HR2_Training_ManagementController implements Initializable {
     private JFXTextField txt_start_time;
     @FXML
     private JFXTextField txt_end_time;
+    @FXML
+    private ContextMenu contextMenuTrainings1;
+    @FXML
+    private MenuItem contextmenu_item_view_details1;
+    @FXML
+    private MenuItem contextmenu_item_delete_trainings1;
+    @FXML
+    private JFXTextField txt_search_training1;
+    @FXML
+    private TableView<?> tbl_history_of_trainings;
+    @FXML
+    private TableColumn<?, ?> col_job_position1;
+    @FXML
+    private TableColumn<?, ?> col_training_title1;
+    @FXML
+    private TableColumn<?, ?> col_training_desc1;
+    @FXML
+    private TableColumn<?, ?> col_trainor1;
+    @FXML
+    private TableColumn<?, ?> col_start_date1;
+    @FXML
+    private TableColumn<?, ?> col_end_date1;
+    @FXML
+    private TableColumn<?, ?> col_start_time1;
+    @FXML
+    private TableColumn<?, ?> col_end_time1;
+    @FXML
+    private TableColumn<?, ?> col_type_of_training1;
+    @FXML
+    private TableColumn<?, ?> col_location1;
+    @FXML
+    private TableColumn<?, ?> col_vehicle1;
+    @FXML
+    private TableColumn<?, ?> col_budget_cost1;
 
     //for comboboxes
     /**
@@ -260,12 +295,30 @@ public class HR2_Training_ManagementController implements Initializable {
         }
     }
 
+    public void searchTraining() {
+        HR2_Training_Info tm = new HR2_Training_Info();
+        tbl_trainings.getItems().clear();
+        try {
+            List training_data1 = tm.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "employees", "=", "id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr2_type_of_training ", "type_of_training_id", "t_type", "=", "type_of_training_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_log2_vehicle_status ", "vehicle_id", "v", "=", "vehicle_id")
+                    .where(new Object[][]{{"job_position", "like", "%" + txt_search_training.getText() + "%"}})
+                    .get("job_position", "training_title", "training_description", "CONCAT(employees.firstname, ' ' ,employees.middlename, ' ',\n"
+                            + "employees.lastname)as trainor", "start_date", "end_date", "start_time", "end_time", "t_type.type_of_training",
+                            "location", "v.vehicle", "budget_cost");
+            Data(training_data1);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     public void loadDataInComboBoxes() {
         HR4_Jobs jobs = new HR4_Jobs();
         HR2_Temp_Employee_Profiles trainors = new HR2_Temp_Employee_Profiles();
         HR2_Type_of_Training type_of_training = new HR2_Type_of_Training();
         HR2_Temp_Vehicles vehicles = new HR2_Temp_Vehicles();
-        
+
         List c = jobs.get();
 
         for (Object d : c) {

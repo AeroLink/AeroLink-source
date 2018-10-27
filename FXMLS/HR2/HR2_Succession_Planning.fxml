@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.Cursor?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -18,7 +16,7 @@
          <center>
             <AnchorPane prefHeight="665.0" prefWidth="1373.0" BorderPane.alignment="CENTER">
                <children>
-                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="520.0" prefWidth="602.0" style="-fx-border-color: #ccccb3; -fx-border-width: 1px; -fx-background-color: #fff;">
+                  <Pane layoutX="730.0" layoutY="20.0" prefHeight="520.0" prefWidth="602.0" style="-fx-border-color: #ccccb3; -fx-border-width: 1px; -fx-background-color: #fff;">
                      <children>
                         <Label layoutX="219.0" layoutY="7.0" prefHeight="23.0" prefWidth="158.0" text="Organizational List" textFill="#434242">
                            <font>
@@ -37,24 +35,34 @@
                         </TableView>
                      </children>
                   </Pane>
+                  <Pane layoutX="60.0" layoutY="20.0" prefHeight="520.0" prefWidth="602.0" style="-fx-border-color: #ccccb3; -fx-border-width: 1px; -fx-background-color: #fff;">
+                     <children>
+                        <Label layoutX="259.0" layoutY="5.0" prefHeight="27.0" prefWidth="103.0" text="Job Vacancy" textFill="#434242">
+                           <font>
+                              <Font name="Lato Black" size="18.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="tbl_job_vacancy" layoutX="8.0" layoutY="96.0" prefHeight="411.0" prefWidth="583.0" style="-fx-border-color: #ccccb3;">
+                           <columns>
+                              <TableColumn fx:id="col_dept" prefWidth="75.0" text="Department" />
+                              <TableColumn fx:id="col_job" prefWidth="75.0" text="Job" />
+                              <TableColumn fx:id="col_qualifications" prefWidth="75.0" text="Skills" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <JFXTextField fx:id="txt_jv" labelFloat="true" layoutX="206.0" layoutY="55.0" maxWidth="215.0" minWidth="165.0" prefHeight="34.0" prefWidth="215.0" promptText="Search Job">
+                           <font>
+                              <Font name="Lato Regular" size="14.0" />
+                           </font>
+                        </JFXTextField>
+                     </children>
+                  </Pane>
                </children></AnchorPane>
          </center>
          <top>
-            <AnchorPane prefHeight="75.0" prefWidth="1373.0" BorderPane.alignment="CENTER">
-               <children>
-                  <JFXButton fx:id="btn_job_vacancy" buttonType="RAISED" layoutX="1206.0" layoutY="24.0" onAction="#jobVacancyModal" style="-fx-background-color: #00cc66;" styleClass="btn-primary" text=" Job Vacancy" textFill="WHITE">
-                     <font>
-                        <Font name="Lato Black" size="15.0" />
-                     </font>
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" fontSmoothingType="LCD" size="15.0" />
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </JFXButton>
-               </children>
-            </AnchorPane>
+            <AnchorPane prefHeight="75.0" prefWidth="1373.0" BorderPane.alignment="CENTER" />
          </top>
       </BorderPane>
    </children>

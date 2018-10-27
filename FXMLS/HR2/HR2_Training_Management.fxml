@@ -197,7 +197,7 @@
                                  <top>
                                     <AnchorPane prefHeight="81.0" prefWidth="1373.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <JFXTextField fx:id="txt_search_training" focusColor="#4a4a4a" labelFloat="true" layoutX="25.0" layoutY="46.0" maxWidth="261.0" minWidth="242.0" prefHeight="31.0" prefWidth="261.0" promptText="Search">
+                                          <JFXTextField fx:id="txt_search_training" focusColor="#4a4a4a" labelFloat="true" layoutX="25.0" layoutY="46.0" maxWidth="261.0" minWidth="242.0" onKeyReleased="#searchTraining" prefHeight="31.0" prefWidth="261.0" promptText="Search">
                                              <font>
                                                 <Font name="Lato Semibold" size="15.0" />
                                              </font>
@@ -215,6 +215,60 @@
                             <MenuItem fx:id="contextmenu_item_view_details" mnemonicParsing="false" text="View Details" />
                               <MenuItem fx:id="contextmenu_item_delete_trainings" mnemonicParsing="false" text="Delete Training" />
                           </items>
+                        </ContextMenu>
+                     </contextMenu>
+                  </Tab>
+                  <Tab id="tab" text="History of Trainings">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <center>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <TableView fx:id="tbl_history_of_trainings" layoutX="19.0" layoutY="14.0" prefHeight="540.0" prefWidth="1353.0" style="-fx-border-color: #d6d6c2; -fx-border-width: 1.3px;" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="14.0">
+                                             <columns>
+                                                <TableColumn fx:id="col_job_position1" prefWidth="180.0" text="Job Position" />
+                                                <TableColumn fx:id="col_training_title1" prefWidth="180.0" text="Training Title" />
+                                                <TableColumn fx:id="col_training_desc1" prefWidth="250.0" text="Training Description" />
+                                                <TableColumn fx:id="col_trainor1" prefWidth="180.0" text="Trainor" />
+                                                <TableColumn fx:id="col_start_date1" prefWidth="120.0" text="Start Date" />
+                                                <TableColumn fx:id="col_end_date1" prefWidth="120.0" text="End Date" />
+                                                <TableColumn fx:id="col_start_time1" prefWidth="120.0" text="Start Time" />
+                                                <TableColumn fx:id="col_end_time1" prefWidth="120.0" text="End Time" />
+                                                <TableColumn fx:id="col_type_of_training1" prefWidth="150.0" text="Type of Training" />
+                                                <TableColumn fx:id="col_location1" prefWidth="180.0" text="Location" />
+                                                <TableColumn fx:id="col_vehicle1" prefWidth="180.0" text="Vehicle" />
+                                                <TableColumn fx:id="col_budget_cost1" prefWidth="160.0" text="Budget Cost" />
+                                             </columns>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                 </center>
+                                 <top>
+                                    <AnchorPane prefHeight="81.0" prefWidth="1373.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <JFXTextField fx:id="txt_search_training1" focusColor="#4a4a4a" labelFloat="true" layoutX="25.0" layoutY="46.0" maxWidth="261.0" minWidth="242.0" prefHeight="31.0" prefWidth="261.0" promptText="Search">
+                                             <font>
+                                                <Font name="Lato Semibold" size="15.0" />
+                                             </font>
+                                          </JFXTextField>
+                                       </children>
+                                    </AnchorPane>
+                                 </top>
+                              </BorderPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                     <contextMenu>
+                        <ContextMenu fx:id="contextMenuTrainings1">
+                           <items>
+                              <MenuItem fx:id="contextmenu_item_view_details1" mnemonicParsing="false" text="View Details" />
+                              <MenuItem fx:id="contextmenu_item_delete_trainings1" mnemonicParsing="false" text="Delete Training" />
+                           </items>
                         </ContextMenu>
                      </contextMenu>
                   </Tab>

@@ -22,22 +22,22 @@
             <Font name="Lato Semibold" size="15.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txt_option1" labelFloat="true" layoutX="24.0" layoutY="269.0" maxWidth="328.0" minWidth="199.0" prefHeight="35.0" prefWidth="324.0" promptText="Option1">
+      <JFXTextField fx:id="txt_option1" focusColor="#424243" layoutX="24.0" layoutY="269.0" maxWidth="328.0" minWidth="199.0" prefHeight="35.0" prefWidth="324.0" promptText="Option1">
          <font>
             <Font name="Lato Medium" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txt_option2" labelFloat="true" layoutX="24.0" layoutY="304.0" maxWidth="328.0" minWidth="199.0" prefHeight="35.0" prefWidth="324.0" promptText="Option2">
+      <JFXTextField fx:id="txt_option2" focusColor="#424243" layoutX="24.0" layoutY="304.0" maxWidth="328.0" minWidth="199.0" prefHeight="35.0" prefWidth="324.0" promptText="Option2">
          <font>
             <Font name="Lato Medium" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txt_option3" labelFloat="true" layoutX="24.0" layoutY="339.0" maxWidth="328.0" minWidth="199.0" prefHeight="35.0" prefWidth="324.0" promptText="Option3">
+      <JFXTextField fx:id="txt_option3" focusColor="#424243" layoutX="24.0" layoutY="339.0" maxWidth="328.0" minWidth="199.0" prefHeight="35.0" prefWidth="324.0" promptText="Option3">
          <font>
             <Font name="Lato Medium" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txt_option4" labelFloat="true" layoutX="24.0" layoutY="374.0" maxWidth="328.0" minWidth="199.0" prefHeight="35.0" prefWidth="324.0" promptText="Option4">
+      <JFXTextField fx:id="txt_option4" focusColor="#424243" layoutX="24.0" layoutY="374.0" maxWidth="328.0" minWidth="199.0" prefHeight="35.0" prefWidth="324.0" promptText="Option4">
          <font>
             <Font name="Lato Medium" size="15.0" />
          </font>

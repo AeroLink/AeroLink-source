@@ -18,7 +18,7 @@
                <top>
                   <AnchorPane prefHeight="90.0" prefWidth="673.0" BorderPane.alignment="CENTER">
                      <children>
-                        <JFXTextField fx:id="txt_search_course" labelFloat="true" layoutX="14.0" layoutY="40.0" maxWidth="198.0" minWidth="198.0" prefHeight="31.0" prefWidth="198.0" promptText="Search Course" AnchorPane.leftAnchor="14.0">
+                        <JFXTextField fx:id="txt_search_course" labelFloat="true" layoutX="14.0" layoutY="40.0" maxWidth="198.0" minWidth="198.0" onKeyReleased="#searchCourses" prefHeight="31.0" prefWidth="198.0" promptText="Search Course" AnchorPane.leftAnchor="14.0">
                            <font>
                               <Font name="Lato Semibold" size="15.0" />
                            </font>
