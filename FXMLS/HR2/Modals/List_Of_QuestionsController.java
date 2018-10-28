@@ -75,8 +75,8 @@ public class List_Of_QuestionsController implements Initializable {
                         new HR2_AssessmentClass(
                                 String.valueOf(hm.get("question_id")),
                                 String.valueOf(hm.get("question"))));
-                           //     String.valueOf(hm.get("choice_id")),
-                          //     String.valueOf(hm.get("course_id"))));
+                //     String.valueOf(hm.get("choice_id")),
+                //     String.valueOf(hm.get("course_id"))));
 
             }
             tbl_questions.setItems(obj);
@@ -102,7 +102,7 @@ public class List_Of_QuestionsController implements Initializable {
                         try {
                             btn.setOnAction(e
                                     -> {
-                                
+
                                 ViewChoices();
                             });
                             btn.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
