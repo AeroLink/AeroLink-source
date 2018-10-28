@@ -57,7 +57,7 @@ public class List_Of_QuestionsController implements Initializable {
         HR2_Assessment q = new HR2_Assessment();
         List questions = q.join(Model.JOIN.INNER, "aerolink.tbl_hr2_courses", "course_id", "c", "=", "course_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "c", "job_id", true)
-                .where(new Object[][]{{"aerolink.tbl_hr4_jobs.title", "=" + lbl_course_title.getText()}})
+                .where(new Object[][]{{"aerolink.tbl_hr4_jobs.title", "=", lbl_course_title.getText()}})
                 .get("aerolink.tbl_hr2_assessment.question");
         Data(questions);
 

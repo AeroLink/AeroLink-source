@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package FXMLS;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 import Synapse.Form;
