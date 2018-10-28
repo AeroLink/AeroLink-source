@@ -236,6 +236,7 @@ public class HR2_Learning_ManagementController implements Initializable {
     }
 
     public void ViewListOfQuestions() {
+        HR2_LMClass_For_AddQuestion_Modal.initCourseTitle(tbl_courses.getSelectionModel().getSelectedItem().course_title.get());
         Modal lq = Modal.getInstance(new Form("/FXMLS/HR2/Modals/List_Of_Questions.fxml").getParent());
         lq.open();
     }

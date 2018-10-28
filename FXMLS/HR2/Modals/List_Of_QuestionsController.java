@@ -7,9 +7,11 @@ package FXMLS.HR2.Modals;
 
 import FXMLS.HR2.ClassFiles.HR2_AssessmentClass;
 import FXMLS.HR2.ClassFiles.HR2_CoursesClass;
+import FXMLS.HR2.ClassFiles.HR2_LMClass_For_AddQuestion_Modal;
 import Model.HR2_Assessment;
 import Model.HR2_Courses;
 import Synapse.Components.Modal.Modal;
+import Synapse.Model;
 import Synapse.Form;
 import java.net.URL;
 import java.util.HashMap;
@@ -20,6 +22,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -36,21 +39,26 @@ public class List_Of_QuestionsController implements Initializable {
     private TableView<HR2_AssessmentClass> tbl_questions;
     @FXML
     private TableColumn<HR2_AssessmentClass, String> col_questions;
+    @FXML
+    private Label lbl_course_title;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       loadData();
-       DisplayDataInJTable();
-    }   
-    
+
+        lbl_course_title.setText(HR2_LMClass_For_AddQuestion_Modal.lm_course_title);
+        loadData();
+        DisplayDataInJTable();
+    }
+
     public void loadData() {
-
-        HR2_Assessment q = new HR2_Assessment ();
-
-        List questions = q.get();
+        HR2_Assessment q = new HR2_Assessment();
+        List questions = q.join(Model.JOIN.INNER, "aerolink.tbl_hr2_courses", "course_id", "c", "=", "course_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "c", "job_id", true)
+                .where(new Object[][]{{"aerolink.tbl_hr4_jobs.title", "=" + lbl_course_title.getText()}})
+                .get("aerolink.tbl_hr2_assessment.question");
         Data(questions);
 
     }
@@ -60,15 +68,15 @@ public class List_Of_QuestionsController implements Initializable {
         obj.clear();
         try {
             for (Object d : b) {
-                        
+
                 HashMap hm = (HashMap) d;
                 System.out.println(hm);
                 obj.add(
                         new HR2_AssessmentClass(
                                 String.valueOf(hm.get("question_id")),
-                                String.valueOf(hm.get("question")),
-                                String.valueOf(hm.get("choice_id")),
-                                String.valueOf(hm.get("course_id"))));
+                                String.valueOf(hm.get("question"))));
+                           //     String.valueOf(hm.get("choice_id")),
+                          //     String.valueOf(hm.get("course_id"))));
 
             }
             tbl_questions.setItems(obj);
@@ -76,10 +84,9 @@ public class List_Of_QuestionsController implements Initializable {
             System.out.println(e);
         }
     }
-    
-    public void DisplayDataInJTable()
-    {
-     
+
+    public void DisplayDataInJTable() {
+
         col_questions.setCellValueFactory((TableColumn.CellDataFeatures<HR2_AssessmentClass, String> param) -> param.getValue().question);
         TableColumn<HR2_AssessmentClass, Void> addButton = new TableColumn("View Choices");
 
@@ -95,7 +102,7 @@ public class List_Of_QuestionsController implements Initializable {
                         try {
                             btn.setOnAction(e
                                     -> {
-                                
+
                                 ViewChoices();
                             });
                             btn.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
@@ -123,10 +130,9 @@ public class List_Of_QuestionsController implements Initializable {
         addButton.setCellFactory(cellFactory);
         tbl_questions.getColumns().add(addButton);
     }
-     public void ViewChoices()
-    {
+
+    public void ViewChoices() {
         Modal choices = Modal.getInstance(new Form("/FXMLS/HR2/Modals/HR2_View_Choices.fxml").getParent());
         choices.open();
     }
 }
-
