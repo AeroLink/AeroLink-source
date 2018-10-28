@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -67,26 +68,76 @@ public class LM_AddQuestionsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         ToggleGroup c = new ToggleGroup();
         rb1.setToggleGroup(c);
         rb2.setToggleGroup(c);
         rb3.setToggleGroup(c);
         rb4.setToggleGroup(c);
+
         addImage = new FileChooser();
         addImage.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("All files", "* "),
-                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.gif"),
-                new FileChooser.ExtensionFilter("Text File", "*.txt", "*.jpg", "*.gif")
+                new FileChooser.ExtensionFilter("All files", "*"),
+                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.gif", "*.jpeg"),
+                new FileChooser.ExtensionFilter("Text File", "*.txt")
         );
 
     }
-    
+
     @FXML
-    public void OpenFile()
-    {
+    public void OpenFile1() {
         stage = (Stage) AnchorPane1.getScene().getWindow();
         file = addImage.showOpenDialog(stage);
+        addImage.setInitialDirectory(new File("C:\\Users\\EdenRamoneda\\Documents\\NetBeansProjects\\Staging\\src\\FXMLS\\HR2\\Images"));
+        if (file != null) {
+            txt_option1.setText(file.getAbsolutePath());
+        } else {
+            Alert n = new Alert(Alert.AlertType.ERROR);
+            n.setContentText("File not valid! Please Select .png .jpg .gif .jpeg or .txt file");
+            n.showAndWait();
+        }
+    }
+
+    @FXML
+    public void OpenFile2() {
+        stage = (Stage) AnchorPane1.getScene().getWindow();
+        file = addImage.showOpenDialog(stage);
+        addImage.setInitialDirectory(new File("C:\\Users\\EdenRamoneda\\Documents\\NetBeansProjects\\Staging\\src\\FXMLS\\HR2\\Images"));
+        if (file != null) {
+            txt_option2.setText(file.getAbsolutePath());
+        } else {
+            Alert n = new Alert(Alert.AlertType.ERROR);
+            n.setContentText("File not valid! Please Select .png .jpg .gif .jpeg or .txt file");
+            n.showAndWait();
+        }
+    }
+
+    @FXML
+    public void OpenFile3() {
+        stage = (Stage) AnchorPane1.getScene().getWindow();
+        file = addImage.showOpenDialog(stage);
+        addImage.setInitialDirectory(new File("C:\\Users\\EdenRamoneda\\Documents\\NetBeansProjects\\Staging\\src\\FXMLS\\HR2\\Images"));
+        if (file != null) {
+            txt_option3.setText(file.getAbsolutePath());
+        } else {
+            Alert n = new Alert(Alert.AlertType.ERROR);
+            n.setContentText("File not valid! Please Select .png .jpg .gif .jpeg or .txt file");
+            n.showAndWait();
+        }
+    }
+
+    @FXML
+    public void OpenFile4() {
+        stage = (Stage) AnchorPane1.getScene().getWindow();
+        file = addImage.showOpenDialog(stage);
+        addImage.setInitialDirectory(new File("C:\\Users\\EdenRamoneda\\Documents\\NetBeansProjects\\Staging\\src\\FXMLS\\HR2\\Images"));
+        if (file != null) {
+            txt_option4.setText(file.getAbsolutePath());
+        } else {
+            Alert n = new Alert(Alert.AlertType.ERROR);
+            n.setContentText("File not valid! Please Select .png .jpg .gif .jpeg or .txt file");
+            n.showAndWait();
+        }
     }
 
 }
