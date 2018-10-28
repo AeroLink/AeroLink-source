@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.Cursor?>
@@ -9,9 +10,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="AnchorPane1" prefHeight="520.0" prefWidth="427.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.LM_AddQuestionsController">
+<AnchorPane id="AnchorPane" fx:id="AnchorPane1" prefHeight="520.0" prefWidth="359.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.LM_AddQuestionsController">
    <children>
-      <Pane prefHeight="37.0" prefWidth="427.0" style="-fx-background-color: #00cc66;" />
+      <Pane prefHeight="37.0" prefWidth="443.0" style="-fx-background-color: #00cc66;" />
       <JFXTextArea fx:id="txt_add_question" focusColor="#2f2f2f" labelFloat="true" layoutX="24.0" layoutY="80.0" maxWidth="401.0" minWidth="380.0" prefHeight="118.0" prefWidth="380.0" promptText="Add Question" style="-fx-border-color: #c2c2a3;" unFocusColor="WHITE">
          <font>
             <Font name="Lato Medium" size="15.0" />
@@ -22,26 +23,6 @@
             <Font name="Lato Semibold" size="15.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txt_option1" focusColor="#424243" layoutX="24.0" layoutY="269.0" maxWidth="328.0" minWidth="199.0" prefHeight="35.0" prefWidth="324.0" promptText="Option1">
-         <font>
-            <Font name="Lato Medium" size="15.0" />
-         </font>
-      </JFXTextField>
-      <JFXTextField fx:id="txt_option2" focusColor="#424243" layoutX="24.0" layoutY="304.0" maxWidth="328.0" minWidth="199.0" prefHeight="35.0" prefWidth="324.0" promptText="Option2">
-         <font>
-            <Font name="Lato Medium" size="15.0" />
-         </font>
-      </JFXTextField>
-      <JFXTextField fx:id="txt_option3" focusColor="#424243" layoutX="24.0" layoutY="339.0" maxWidth="328.0" minWidth="199.0" prefHeight="35.0" prefWidth="324.0" promptText="Option3">
-         <font>
-            <Font name="Lato Medium" size="15.0" />
-         </font>
-      </JFXTextField>
-      <JFXTextField fx:id="txt_option4" focusColor="#424243" layoutX="24.0" layoutY="374.0" maxWidth="328.0" minWidth="199.0" prefHeight="35.0" prefWidth="324.0" promptText="Option4">
-         <font>
-            <Font name="Lato Medium" size="15.0" />
-         </font>
-      </JFXTextField>
       <JFXButton fx:id="browse1" layoutX="342.0" layoutY="276.0" onAction="#OpenFile" prefHeight="18.0" prefWidth="62.0" style="-fx-background-color: #00cc66;" text="Browse" textFill="WHITE">
          <font>
             <Font name="Lato Medium" size="12.0" />
@@ -97,5 +78,37 @@
             <Font name="Lato Semibold Italic" size="12.0" />
          </font>
       </Label>
+      <JFXRadioButton fx:id="rb1" layoutX="4.0" layoutY="259.0" prefHeight="35.0" prefWidth="270.0" text="1">
+         <graphic>
+            <JFXTextField fx:id="txt_option1" focusColor="#424243" maxWidth="328.0" minWidth="199.0" prefHeight="35.0" prefWidth="211.0" promptText="Option1">
+               <font>
+                  <Font name="Lato Medium" size="15.0" />
+               </font>
+            </JFXTextField>
+         </graphic></JFXRadioButton>
+      <JFXRadioButton fx:id="rb2" layoutX="8.0" layoutY="292.0" prefHeight="37.0" prefWidth="435.0" text="2">
+         <graphic>
+            <JFXTextField fx:id="txt_option2" focusColor="#424243" maxWidth="328.0" minWidth="199.0" prefHeight="35.0" prefWidth="200.0" promptText="Option2">
+               <font>
+                  <Font name="Lato Medium" size="15.0" />
+               </font>
+            </JFXTextField>
+         </graphic></JFXRadioButton>
+      <JFXRadioButton fx:id="rb3" layoutX="14.0" layoutY="340.0" text="3">
+         <graphic>
+            <JFXTextField fx:id="txt_option3" focusColor="#424243" maxWidth="328.0" minWidth="192.0" prefHeight="35.0" prefWidth="192.0" promptText="Option3">
+               <font>
+                  <Font name="Lato Medium" size="15.0" />
+               </font>
+            </JFXTextField>
+         </graphic></JFXRadioButton>
+      <JFXRadioButton fx:id="rb4" layoutX="10.0" layoutY="375.0" prefHeight="35.0" prefWidth="261.0" text="4">
+         <graphic>
+            <JFXTextField fx:id="txt_option4" focusColor="#424243" maxWidth="328.0" minWidth="198.0" prefHeight="35.0" prefWidth="198.0" promptText="Option4">
+               <font>
+                  <Font name="Lato Medium" size="15.0" />
+               </font>
+            </JFXTextField>
+         </graphic></JFXRadioButton>
    </children>
 </AnchorPane>

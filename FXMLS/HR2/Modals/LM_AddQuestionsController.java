@@ -6,6 +6,7 @@
 package FXMLS.HR2.Modals;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.io.File;
@@ -14,6 +15,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
@@ -51,13 +53,26 @@ public class LM_AddQuestionsController implements Initializable {
     private JFXButton btn_add_question;
     @FXML
     private AnchorPane AnchorPane1;
+    @FXML
+    private JFXRadioButton rb1;
+    @FXML
+    private JFXRadioButton rb2;
+    @FXML
+    private JFXRadioButton rb3;
+    @FXML
+    private JFXRadioButton rb4;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        
+        ToggleGroup c = new ToggleGroup();
+        rb1.setToggleGroup(c);
+        rb2.setToggleGroup(c);
+        rb3.setToggleGroup(c);
+        rb4.setToggleGroup(c);
         addImage = new FileChooser();
         addImage.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("All files", "* "),
