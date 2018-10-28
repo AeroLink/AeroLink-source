@@ -102,7 +102,7 @@ public class List_Of_QuestionsController implements Initializable {
                         try {
                             btn.setOnAction(e
                                     -> {
-
+                                
                                 ViewChoices();
                             });
                             btn.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
@@ -132,6 +132,7 @@ public class List_Of_QuestionsController implements Initializable {
     }
 
     public void ViewChoices() {
+        HR2_LMClass_For_AddQuestion_Modal.initCourseQuestion(tbl_questions.getSelectionModel().getSelectedItem().question.get());
         Modal choices = Modal.getInstance(new Form("/FXMLS/HR2/Modals/HR2_View_Choices.fxml").getParent());
         choices.open();
     }

@@ -72,11 +72,11 @@ public class HR2_Succession_PlanningController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         selectDepartment();
         DisplayDataInJTable();
-        populateTableBySelectDept();
+        // populateTableBySelectDept();
         viewJobVacancy();
-        /*  cbox_department.getSelectionModel().selectedItemProperty().addListener(listener -> {
+        cbox_department.getSelectionModel().selectedItemProperty().addListener(listener -> {
             populateTableBySelectDept();
-        });*/
+        });
     }
 
     //Job Vacancy
@@ -85,10 +85,10 @@ public class HR2_Succession_PlanningController implements Initializable {
         List jv_data = jobs.join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_limit", "job_id", "j_limit", "=", "job_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "d", "=", "dept_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr2_competency_pivot", "job_id", "cp", "=", "job_id")
-                .join(Model.JOIN.INNER, "aerolink.tbl_hr2_skillset", "skill_id","=", "cp", "skill_id",true)
+                .join(Model.JOIN.INNER, "aerolink.tbl_hr2_skillset", "skill_id", "=", "cp", "skill_id", true)
                 .where(new Object[][]{{"j_limit.jobOpen", "!=", "0"}})
                 .get("d.dept_name as department,aerolink.tbl_hr4_jobs.title, aerolink.tbl_hr2_skillset.skill as skill");
-        JV(jv_data);        
+        JV(jv_data);
     }
 
     public void JV(List jv) {
@@ -149,8 +149,8 @@ public class HR2_Succession_PlanningController implements Initializable {
                             List sp = ej.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "emp",
                                     "=", "employee_code")
                                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
-                                    /*    .where(new Object[][]{{"jobs.dept_id", "=" + cbox_department.getSelectionModel()
-                            .getSelectedItem().toString().substring(4).toString().split(" - ")[0]}})*/
+                                    .where(new Object[][]{{"jobs.dept_id", "=", cbox_department.getSelectionModel()
+                                    .getSelectedItem().toString().substring(4).toString().split(" - ")[0]}})
                                     .get("jobs.title as position", "concat(emp.firstname, ' ',emp.middlename, ' ' ,emp.lastname)as employees");
                             Data(sp);
                         } catch (Exception e) {

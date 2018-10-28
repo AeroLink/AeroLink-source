@@ -14,9 +14,12 @@ import static FXMLS.HR2.ClassFiles.HR2_TM_Class_for_Modal.t_title;
  */
 public class HR2_LMClass_For_AddQuestion_Modal {
 
-    public static String lm_course_title;
+    public static String lm_course_title, question;
 
     public static void initCourseTitle(String ct) {
         lm_course_title = ct;
+    }
+     public static void initCourseQuestion(String q) {
+         question = q;
     }
 }
