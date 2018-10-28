@@ -5,6 +5,7 @@
  */
 package FXMLS.HR2.Modals;
 
+import FXMLS.HR2.ClassFiles.HR2_LMClass_For_AddQuestion_Modal;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextArea;
@@ -16,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -62,12 +64,16 @@ public class LM_AddQuestionsController implements Initializable {
     private JFXRadioButton rb3;
     @FXML
     private JFXRadioButton rb4;
+    @FXML
+    private Label lbl_course_title;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        lbl_course_title.setText(HR2_LMClass_For_AddQuestion_Modal.lm_course_title);
 
         ToggleGroup c = new ToggleGroup();
         rb1.setToggleGroup(c);

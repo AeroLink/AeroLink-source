@@ -52,7 +52,7 @@ public class Modal_EditSkillsController implements Initializable {
         cbox_edit_select_job.getSelectionModel().selectFirst();
         txt_edit_skill.setText(HR2_CM_Skills_Class_for_Modal.j_Skill);
         txt_edit_skill_desc.setText(HR2_CM_Skills_Class_for_Modal.j_Skill_d);
-
+        
         selectJobs();
         
     }

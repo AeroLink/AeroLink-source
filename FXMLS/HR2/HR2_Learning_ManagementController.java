@@ -6,6 +6,7 @@
 package FXMLS.HR2;
 
 import FXMLS.HR2.ClassFiles.HR2_CoursesClass;
+import FXMLS.HR2.ClassFiles.HR2_LMClass_For_AddQuestion_Modal;
 import FXMLS.HR2.ClassFiles.HR2_Training_InfoClass;
 import Model.HR2_CM_Pivot;
 import Model.HR2_Courses;
@@ -134,10 +135,10 @@ public class HR2_Learning_ManagementController implements Initializable {
         tbl_courses.getItems().clear();
         try {
             List courses = c.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
-                                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "emps", "=", "id")
-                                .where(new Object[][]{{"j.title", "like", "%" + txt_search_course.getText() + "%"}})
-                                .get("j.title as course_title", "course_description",
-                                        "concat(emps.firstname, ' ',emps.middlename, ' ',emps.lastname)as Created_by");
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "emps", "=", "id")
+                    .where(new Object[][]{{"j.title", "like", "%" + txt_search_course.getText() + "%"}})
+                    .get("j.title as course_title", "course_description",
+                            "concat(emps.firstname, ' ',emps.middlename, ' ',emps.lastname)as Created_by");
             Data(courses);
 
         } catch (Exception e) {
@@ -204,6 +205,7 @@ public class HR2_Learning_ManagementController implements Initializable {
                         try {
                             btn1.setOnAction(e
                                     -> {
+                                HR2_LMClass_For_AddQuestion_Modal.initCourseTitle(tbl_courses.getSelectionModel().getSelectedItem().course_title.get());
                                 Modal md = Modal.getInstance(new Form("/FXMLS/HR2/Modals/LM_AddQuestions.fxml").getParent());
                                 md.open();
                             });
