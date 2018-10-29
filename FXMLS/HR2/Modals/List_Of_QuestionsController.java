@@ -47,7 +47,6 @@ public class List_Of_QuestionsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         lbl_course_title.setText(HR2_LMClass_For_AddQuestion_Modal.lm_course_title);
         loadData();
         DisplayDataInJTable();

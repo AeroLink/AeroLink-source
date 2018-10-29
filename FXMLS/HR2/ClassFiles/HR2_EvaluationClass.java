@@ -14,15 +14,15 @@ import javafx.beans.property.SimpleStringProperty;
 public class HR2_EvaluationClass {
 
     public SimpleStringProperty choice_id;
-    public SimpleStringProperty question_id;
+    public SimpleStringProperty question;
     public SimpleStringProperty choice;
     public SimpleStringProperty choice_description;
     public SimpleStringProperty ischecked;
 
-    public HR2_EvaluationClass(String choice_id, String question_id, String choice,
+    public HR2_EvaluationClass(String choice_id, String question, String choice,
             String choice_description, String ischecked) {
         this.choice_id = new SimpleStringProperty(choice_id);
-        this.question_id = new SimpleStringProperty(question_id);
+        this.question = new SimpleStringProperty(question);
         this.choice = new SimpleStringProperty(choice);
         this.choice_description = new SimpleStringProperty(choice_description);
         this.ischecked = new SimpleStringProperty(ischecked);
