@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -9,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="627.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="627.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.SP_ViewEmployeeInfoController">
    <children>
       <Pane layoutY="-6.0" prefHeight="43.0" prefWidth="520.0" style="-fx-background-color: #00cc66;">
          <children>
@@ -25,7 +26,7 @@
             <Image url="@../../../../../../../Pictures/Camera%20Roll/18193720_253162231818255_689304748896763152_n.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="164.0" layoutY="66.0" prefHeight="30.0" prefWidth="336.0" text="Ma. Eden Mars Ramoneda" textAlignment="CENTER">
+      <Label fx:id="lbl_fullname" layoutX="164.0" layoutY="66.0" prefHeight="30.0" prefWidth="336.0" text="Lee Minho" textAlignment="CENTER">
          <font>
             <Font name="Raleway SemiBold" size="18.0" />
          </font>
@@ -40,12 +41,12 @@
             <Font name="Roboto Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_position" layoutX="251.0" layoutY="129.0" prefHeight="30.0" prefWidth="128.0" text="Position">
+      <Label fx:id="lbl_position" layoutX="251.0" layoutY="129.0" prefHeight="30.0" prefWidth="139.0" text="Position">
          <font>
             <Font name="Roboto Regular" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_department" layoutX="251.0" layoutY="159.0" prefHeight="30.0" prefWidth="128.0" text="Department">
+      <Label fx:id="lbl_department" layoutX="251.0" layoutY="159.0" prefHeight="30.0" prefWidth="139.0" text="Department">
          <font>
             <Font name="Roboto Regular" size="15.0" />
          </font>
@@ -55,7 +56,7 @@
             <Font name="Roboto Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_gender" layoutX="251.0" layoutY="99.0" prefHeight="30.0" prefWidth="89.0" text="Gender">
+      <Label fx:id="lbl_gender" layoutX="251.0" layoutY="99.0" prefHeight="30.0" prefWidth="139.0" text="Gender">
          <font>
             <Font name="Roboto Regular" size="15.0" />
          </font>
@@ -188,14 +189,17 @@
          <font>
             <Font name="Roboto Bold" size="15.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </JFXButton>
       <JFXComboBox fx:id="jfx_position" layoutX="337.0" layoutY="485.0" prefHeight="30.0" prefWidth="153.0" promptText="Select Position" />
-      <Label layoutX="388.0" layoutY="99.0" prefHeight="30.0" prefWidth="120.0" text="Employee Type:">
+      <Label layoutX="389.0" layoutY="99.0" prefHeight="30.0" prefWidth="46.0" text="Suffix:">
          <font>
             <Font name="Roboto Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_emptype" layoutX="390.0" layoutY="129.0" prefHeight="30.0" prefWidth="61.0" text="Gender">
+      <Label fx:id="lbl_suffix" layoutX="440.0" layoutY="99.0" prefHeight="30.0" prefWidth="38.0" text="None">
          <font>
             <Font name="Roboto Regular" size="15.0" />
          </font>

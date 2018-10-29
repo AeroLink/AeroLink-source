@@ -9,6 +9,7 @@ import FXMLS.HR2.ClassFiles.HR2_CoursesClass;
 import FXMLS.HR2.ClassFiles.HR2_JV_With_Skills_for_SP;
 import FXMLS.HR2.ClassFiles.HR2_Job_VacancyClass;
 import FXMLS.HR2.ClassFiles.HR2_Organizational_List;
+import FXMLS.HR2.ClassFiles.SP_Employee_Info_Modal;
 import Model.HR2_CM_Pivot;
 import Model.HR2_Courses;
 import Model.HR2_Temp_Employee_Jobs;
@@ -215,6 +216,10 @@ public class HR2_Succession_PlanningController implements Initializable {
                         try {
                             btn.setOnAction(e
                                     -> {
+                                SP_Employee_Info_Modal.init_EmpInfo(tbl_view_positions.getSelectionModel().getSelectedItem().Fullname.get(),
+                                        tbl_view_positions.getSelectionModel().getSelectedItem().Job_Title.get());
+                                Modal viewEmp = Modal.getInstance(new Form("/FXMLS/HR2/Modals/SP_ViewEmployeeInfo.fxml").getParent());
+                                viewEmp.open();
                             });
                             btn.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
                             btn.setCursor(javafx.scene.Cursor.HAND);
