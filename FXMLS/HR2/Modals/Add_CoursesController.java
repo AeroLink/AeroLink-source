@@ -101,7 +101,7 @@ public class Add_CoursesController implements Initializable {
                             {"course_description", txt_course_desc.getText()},
                             {"id", cbox_select_employees.getSelectionModel().getSelectedItem().toString().substring(3).toString().split(" - ")[0]}
                         };
-
+                //int id = model.insert(vals, true);
                 c.insert(cm_data);
                 Alert saved = new Alert(Alert.AlertType.INFORMATION);
                 saved.setContentText("Saved");

@@ -54,6 +54,8 @@ public class HR2_Learning_ManagementController implements Initializable {
     @FXML
     private TableColumn<HR2_CoursesClass, String> col_created_by;
 
+    TableColumn<HR2_CoursesClass, String> courses_idx = new TableColumn<>();
+    
     long DummyCount = 0;
     long GlobalCount = 0;
 
@@ -83,7 +85,7 @@ public class HR2_Learning_ManagementController implements Initializable {
 
                         List courses = c.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "emps", "=", "id")
-                                .get("j.title as course_title", "course_description",
+                                .get("course_id, j.title as course_title", "course_description",
                                         "concat(emps.firstname, ' ',emps.middlename, ' ',emps.lastname)as Created_by");
                         Data(courses);
 
@@ -113,7 +115,7 @@ public class HR2_Learning_ManagementController implements Initializable {
             for (Object d : b) {
 
                 HashMap hm = (HashMap) d;
-                System.out.println(hm);
+                System.out.println(String.valueOf(hm.get("course_id")));
                 obj.add(
                         new HR2_CoursesClass(
                                 String.valueOf(hm.get("course_id")),
@@ -137,7 +139,7 @@ public class HR2_Learning_ManagementController implements Initializable {
             List courses = c.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "emps", "=", "id")
                     .where(new Object[][]{{"j.title", "like", "%" + txt_search_course.getText() + "%"}})
-                    .get("j.title as course_title", "course_description",
+                    .get("course_id, j.title as course_title", "course_description",
                             "concat(emps.firstname, ' ',emps.middlename, ' ',emps.lastname)as Created_by");
             Data(courses);
 
@@ -147,6 +149,8 @@ public class HR2_Learning_ManagementController implements Initializable {
     }
 
     public void DisplayDataInJTable() {
+
+        courses_idx.setCellValueFactory(param -> param.getValue().course_id);
         col_course_title.setCellValueFactory((TableColumn.CellDataFeatures<HR2_CoursesClass, String> param) -> param.getValue().course_title);
         col_course_desc.setCellValueFactory((TableColumn.CellDataFeatures<HR2_CoursesClass, String> param) -> param.getValue().course_description);
         col_created_by.setCellValueFactory((TableColumn.CellDataFeatures<HR2_CoursesClass, String> param) -> param.getValue().created_by);
@@ -205,7 +209,10 @@ public class HR2_Learning_ManagementController implements Initializable {
                         try {
                             btn1.setOnAction(e
                                     -> {
-                                HR2_LMClass_For_AddQuestion_Modal.initCourseTitle(tbl_courses.getSelectionModel().getSelectedItem().course_title.get());
+                                System.err.println(tbl_courses.getSelectionModel().getSelectedItem().course_id.get());
+                                HR2_LMClass_For_AddQuestion_Modal.lm_id = tbl_courses.getSelectionModel().getSelectedItem().course_id.get();
+                                HR2_LMClass_For_AddQuestion_Modal.initCourseTitle(
+                                        tbl_courses.getSelectionModel().getSelectedItem().course_title.get());
                                 Modal md = Modal.getInstance(new Form("/FXMLS/HR2/Modals/LM_AddQuestions.fxml").getParent());
                                 md.open();
                             });
@@ -236,7 +243,8 @@ public class HR2_Learning_ManagementController implements Initializable {
     }
 
     public void ViewListOfQuestions() {
-        HR2_LMClass_For_AddQuestion_Modal.initCourseTitle(tbl_courses.getSelectionModel().getSelectedItem().course_title.get());
+        HR2_LMClass_For_AddQuestion_Modal.initCourseTitle(
+                tbl_courses.getSelectionModel().getSelectedItem().course_title.get());
         Modal lq = Modal.getInstance(new Form("/FXMLS/HR2/Modals/List_Of_Questions.fxml").getParent());
         lq.open();
     }

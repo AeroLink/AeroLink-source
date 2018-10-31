@@ -19,10 +19,10 @@ public class HR2_CoursesClass {
     public SimpleStringProperty course_description;
     public SimpleStringProperty created_by;
 
-    public HR2_CoursesClass(String course_id,String job_id, String course_title,String course_description,
+    public HR2_CoursesClass(String course_id, String job_id, String course_title,String course_description,
             String created_by) {
         this.course_id = new SimpleStringProperty(course_id);
-        this.course_id = new SimpleStringProperty(job_id);
+        this.job_id = new SimpleStringProperty(job_id);
         this.course_title = new SimpleStringProperty(course_title);
         this.course_description = new SimpleStringProperty(course_description);
         this.created_by = new SimpleStringProperty(created_by);

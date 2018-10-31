@@ -6,16 +6,22 @@
 package FXMLS.HR2.Modals;
 
 import FXMLS.HR2.ClassFiles.HR2_LMClass_For_AddQuestion_Modal;
+import Model.HR2_Assessment;
+import Model.HR2_Courses;
+import Model.HR2_Evaluation;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
@@ -66,6 +72,7 @@ public class LM_AddQuestionsController implements Initializable {
     private JFXRadioButton rb4;
     @FXML
     private Label lbl_course_title;
+    ToggleGroup c = new ToggleGroup();
 
     /**
      * Initializes the controller class.
@@ -74,8 +81,7 @@ public class LM_AddQuestionsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         lbl_course_title.setText(HR2_LMClass_For_AddQuestion_Modal.lm_course_title);
-
-        ToggleGroup c = new ToggleGroup();
+        btn_add_question.setOnAction(e -> AddQuestion());
         rb1.setToggleGroup(c);
         rb2.setToggleGroup(c);
         rb3.setToggleGroup(c);
@@ -88,6 +94,61 @@ public class LM_AddQuestionsController implements Initializable {
                 new FileChooser.ExtensionFilter("Text File", "*.txt")
         );
 
+    }
+
+    public void AddQuestion() {
+
+        Node[] co = {txt_option1, txt_option2, txt_option3, txt_option4};
+        JFXRadioButton[] rdo = {rb1, rb2, rb3, rb4};
+        HR2_Evaluation courses = new HR2_Evaluation();
+        String[] lm = {"a", "b", "c", "d"};
+        
+        JFXRadioButton rx = (JFXRadioButton) c.getSelectedToggle();
+        List id_list = new ArrayList<>();
+        int QuestID = 0;
+        
+        for (int i = 0; i < lm.length; i++) {
+            String[][] cm_data
+                    = {
+                        {"choice", lm[i]},
+                        {"choice_description", ((JFXTextField) co[i]).getText()},
+                        {"ischecked", (rdo[i].isSelected() ? "1" : "0")}
+                    };
+
+            
+            int al = courses.insert(cm_data,true);
+            id_list.add(al);
+            if(rdo[i].isSelected())
+            {
+                QuestID = new HR2_Assessment().insert(new String[][]{
+                    {"question", txt_add_question.getText()},
+                    {"course_id", HR2_LMClass_For_AddQuestion_Modal.lm_id},
+                    {"choice_id", String.valueOf(al)}
+                }, true);
+            }
+            System.err.println(String.valueOf( rdo[i].isSelected()));
+        }
+        
+        for(Object obj : id_list){
+            courses.update(new Object[][] {
+                {"question_id", QuestID}
+            }).where(new Object[][]{
+                {"choice_id", "=", obj}
+            }).executeUpdate();
+        }
+        
+        try {
+
+            //System.out.println(cm_data);
+            //  int id = model.insert(vals, true);
+            Alert saved = new Alert(Alert.AlertType.INFORMATION);
+            saved.setContentText("Saved");
+            saved.showAndWait();
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Error" + e);
+            alert.showAndWait();
+        }
     }
 
     @FXML
