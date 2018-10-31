@@ -34,6 +34,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.util.Callback;
 
 /**
@@ -43,12 +44,17 @@ import javafx.util.Callback;
  */
 public class HR2_View_ChoicesController implements Initializable {
 
+    
+    
     @FXML
     private TableView<HR2_EvaluationClass> tbl_choices;
-    @FXML
-    private TableColumn<HR2_EvaluationClass, String> col_choice;
-    @FXML
-    private TableColumn<HR2_EvaluationClass, String> col_choice_description;
+    
+    private TableColumn<HR2_EvaluationClass, Boolean> addButton = new TableColumn("Correct Answer");
+    
+    private TableColumn<HR2_EvaluationClass, String> col_choice = new TableColumn("Choice");
+    
+    private TableColumn<HR2_EvaluationClass, String> col_choice_description = new TableColumn("Choice Description");
+    
     @FXML
     private JFXTextArea txt_question;
     ToggleGroup d = new ToggleGroup();
@@ -76,7 +82,7 @@ public class HR2_View_ChoicesController implements Initializable {
         List choices = c.join(Model.JOIN.INNER, "aerolink.tbl_hr2_assessment", "question_id", "a", "=", "question_id")
                 .where(new Object[][]{{"a.question", "=", txt_question.getText()}})
                 .get("a.question,a.choice_id,aerolink.tbl_hr2_evaluation.choice,aerolink.tbl_hr2_evaluation.choice_description,aerolink.tbl_hr2_evaluation.ischecked");
-               // .get("a.question,a.choice_id,aerolink.tbl_hr2_evaluation.choice,aerolink.tbl_hr2_evaluation.choice_description,IIF (aerolink.tbl_hr2_evaluation.ischecked = 1, '", d.selectToggle(value).toString(), "'' )as ischecked");
+        // .get("a.question,a.choice_id,aerolink.tbl_hr2_evaluation.choice,aerolink.tbl_hr2_evaluation.choice_description,IIF (aerolink.tbl_hr2_evaluation.ischecked = 1, '", d.selectToggle(value).toString(), "'' )as ischecked");
         Data(choices);
 
     }
@@ -89,6 +95,9 @@ public class HR2_View_ChoicesController implements Initializable {
 
                 HashMap hm = (HashMap) d;
                 System.out.println(hm);
+                
+                HR2_LM_EditQuestion_for_Modal.choice_description.put(String.valueOf(hm.get("choice")), String.valueOf(hm.get("choice_description")));
+
                 obj.add(
                         new HR2_EvaluationClass(
                                 String.valueOf(hm.get("question")),
@@ -96,7 +105,8 @@ public class HR2_View_ChoicesController implements Initializable {
                                 String.valueOf(hm.get("choice")),
                                 String.valueOf(hm.get("choice_description")),
                                 String.valueOf(hm.get("ischecked"))));
-
+                
+            
             }
             tbl_choices.setItems(obj);
         } catch (Exception e) {
@@ -105,59 +115,51 @@ public class HR2_View_ChoicesController implements Initializable {
     }
 
     public void DisplayDataInJTable() {
-        TableColumn<HR2_EvaluationClass, Void> addButton = new TableColumn("Correct Answer");
 
-        Callback<TableColumn<HR2_EvaluationClass, Void>, TableCell<HR2_EvaluationClass, Void>> cellFactory
-                = new Callback<TableColumn<HR2_EvaluationClass, Void>, TableCell<HR2_EvaluationClass, Void>>() {
-            @Override
-            public TableCell<HR2_EvaluationClass, Void> call(final TableColumn<HR2_EvaluationClass, Void> param) {
-
-                final TableCell<HR2_EvaluationClass, Void> cell = new TableCell<HR2_EvaluationClass, Void>() {
-                    private final RadioButton rbtn = new RadioButton();
-
-                    {
-                        try {
-                            /*     HR2_Evaluation c = new HR2_Evaluation();
-                            List choices = c.join(Model.JOIN.INNER, "aerolink.tbl_hr2_assessment", "question_id", "a", "=", "question_id")
-                                    .where(new Object[][]{{"a.question", "=", txt_question.getText()}})
-                                    .get("a.question,a.choice_id,aerolink.tbl_hr2_evaluation.choice,aerolink.tbl_hr2_evaluation.choice_description,aerolink.tbl_hr2_evaluation.ischecked,IIF (e.ischecked = 1, '", rbtn.getText(), "'failed' )as ischecked");
-                            Data(choices);*/
-                            rbtn.setToggleGroup(d);
-                            rbtn.setCursor(javafx.scene.Cursor.HAND);
-                        } catch (Exception ex) {
-                            System.out.println(ex);
-                        }
-
-                    }
-
-                    public void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            setGraphic(rbtn);
-                        }
-                    }
-                };
-                return cell;
-            }
-
-        };
-
-        addButton.setCellFactory(cellFactory);
-        tbl_choices.getColumns().add(addButton);
         col_choice.setCellValueFactory(param -> param.getValue().choice);
         col_choice_description.setCellValueFactory(param -> param.getValue().choice_description);
 
+        addButton.setCellValueFactory(value -> value.getValue().ischecked);
+        addButton.setCellFactory(CheckBoxTableCell.forTableColumn(addButton));
+//        addButton.setCellFactory(new Callback<TableColumn<HR2_EvaluationClass, Boolean>, TableCell<HR2_EvaluationClass, Boolean>>() {
+//            @Override
+//            public TableCell<HR2_EvaluationClass, Boolean> call(TableColumn<HR2_EvaluationClass, Boolean> param) {
+//                final TableCell<HR2_EvaluationClass, Boolean> cell = new TableCell<HR2_EvaluationClass, Boolean>() {
+//                    private final RadioButton rbtn = new RadioButton();
+//
+//                    {
+//                        try {
+//                            rbtn.setToggleGroup(d);
+//                            System.out.println(param.getCellData(0));
+//                            rbtn.setCursor(javafx.scene.Cursor.HAND);
+//                        } catch (Exception ex) {
+//                            System.out.println(ex);
+//                        }
+//                    }
+//
+//                    public void updateItem(Boolean item, boolean empty) {
+//                        super.updateItem(item, empty);
+//                        if (empty) {
+//                            setGraphic(null);
+//                        } else {
+//                            setGraphic(rbtn);
+//                        }
+//                    }
+//
+//                };
+//                return cell;
+//            }
+//        });
+
+        tbl_choices.getColumns().addAll(addButton, col_choice, col_choice_description);
     }
-    
+
     @FXML
-    public void EditQuestionModal()
-    {
-         HR2_LM_EditQuestion_for_Modal.init_Question(lbl_c.getText(),
-                    txt_question.getText());
-            Modal updateQ = Modal.getInstance(new Form("/FXMLS/HR2/Modals/LM_EditQuestion.fxml").getParent());
-            updateQ.open();
+    public void EditQuestionModal() {
+        HR2_LM_EditQuestion_for_Modal.init_Question(lbl_c.getText(),
+                txt_question.getText());
+        Modal updateQ = Modal.getInstance(new Form("/FXMLS/HR2/Modals/LM_EditQuestion.fxml").getParent());
+        updateQ.open();
 
     }
 }

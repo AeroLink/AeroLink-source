@@ -5,6 +5,7 @@
  */
 package FXMLS.HR2.ClassFiles;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
@@ -17,7 +18,7 @@ public class HR2_EvaluationClass {
     public SimpleStringProperty question;
     public SimpleStringProperty choice;
     public SimpleStringProperty choice_description;
-    public SimpleStringProperty ischecked;
+    public SimpleBooleanProperty ischecked;
 
     public HR2_EvaluationClass(String choice_id, String question, String choice,
             String choice_description, String ischecked) {
@@ -25,6 +26,6 @@ public class HR2_EvaluationClass {
         this.question = new SimpleStringProperty(question);
         this.choice = new SimpleStringProperty(choice);
         this.choice_description = new SimpleStringProperty(choice_description);
-        this.ischecked = new SimpleStringProperty(ischecked);
+        this.ischecked = new SimpleBooleanProperty(ischecked.equals("1"));
     }
 }

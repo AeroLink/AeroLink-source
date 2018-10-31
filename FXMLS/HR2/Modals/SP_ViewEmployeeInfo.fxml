@@ -12,7 +12,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="627.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.SP_ViewEmployeeInfoController">
    <children>
-      <Pane layoutY="-6.0" prefHeight="43.0" prefWidth="520.0" style="-fx-background-color: #00cc66;">
+      <Pane layoutY="-6.0" prefHeight="43.0" prefWidth="520.0" style="-fx-background-color: #34A853;">
          <children>
             <Label layoutX="169.0" layoutY="11.0" prefHeight="30.0" prefWidth="182.0" text="Employee Details" textFill="WHITE">
                <font>
@@ -185,7 +185,7 @@
             </Label>
          </children>
       </Pane>
-      <JFXButton fx:id="btn_update_position" buttonType="RAISED" layoutX="342.0" layoutY="536.0" prefHeight="37.0" prefWidth="145.0" style="-fx-background-color: #00cc66;" text="Update Position" textFill="WHITE">
+      <JFXButton fx:id="btn_update_position" buttonType="RAISED" layoutX="342.0" layoutY="536.0" prefHeight="37.0" prefWidth="145.0" style="-fx-background-color: #34A853;" text="Update Position" textFill="WHITE">
          <font>
             <Font name="Roboto Bold" size="15.0" />
          </font>

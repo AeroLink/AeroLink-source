@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -63,9 +64,26 @@ public class LM_EditQuestionController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       lbl_course_title.setText(HR2_LM_EditQuestion_for_Modal.c);
-       txt_edit_question.setText(HR2_LM_EditQuestion_for_Modal.q);
-    }    
+        lbl_course_title.setText(HR2_LM_EditQuestion_for_Modal.c);
+        txt_edit_question.setText(HR2_LM_EditQuestion_for_Modal.q);
+
+        ToggleGroup c = new ToggleGroup();
+        edit_rb1.setToggleGroup(c);
+        edit_rb2.setToggleGroup(c);
+        edit_rb3.setToggleGroup(c);
+        edit_rb4.setToggleGroup(c);
+        edit_txt_option1.setText(String.valueOf(HR2_LM_EditQuestion_for_Modal.choice_description.get("a")));
+        edit_txt_option2.setText(String.valueOf(HR2_LM_EditQuestion_for_Modal.choice_description.get("b")));
+        edit_txt_option3.setText(String.valueOf(HR2_LM_EditQuestion_for_Modal.choice_description.get("c")));
+        edit_txt_option4.setText(String.valueOf(HR2_LM_EditQuestion_for_Modal.choice_description.get("d")));
+        
+        
+        if(HR2_LM_EditQuestion_for_Modal.choice_description.get("d") == null)
+        {
+            edit_txt_option4.setText("");
+        }
+
+    }
 
     @FXML
     private void OpenFile1(ActionEvent event) {
@@ -82,5 +100,5 @@ public class LM_EditQuestionController implements Initializable {
     @FXML
     private void OpenFile4(ActionEvent event) {
     }
-    
+
 }

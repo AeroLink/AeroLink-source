@@ -49,7 +49,11 @@ public class Model {
     public void initTable(String table) {
         this.global_table = (Session.provider.equals("mssql") ? Session.schema + "." : "") + table;
     }
-
+    
+    public void initTable(String table, Boolean virtual_table) {
+        this.global_table = virtual_table ? table : (Session.provider.equals("mssql") ? Session.schema + "." : "") + table;
+    }
+    
     public static void setColumns(String... vals) {
         cols = vals;
     }
@@ -489,6 +493,16 @@ public class Model {
 
         if (otherJoin) {
             this.joinConstruct += joinProc + " JOIN " + table2 + " ON " + table2 + "." + table2_key + " " + logical_operator + " " + table1 + "." + table1_key + " ";
+            this.joined = true;
+        }
+
+        return this;
+    }
+    
+    public Model join(JOIN joinProc, String table2, String table2_key, String table2_alias, String logical_operator, String table1, String table1_key, Boolean otherJoin) {
+
+        if (otherJoin) {
+            this.joinConstruct += joinProc + " JOIN " + table2 + " as " + table2_alias + " ON " + table2_alias + "." + table2_key + " " + logical_operator + " " + table1 + "." + table1_key + " ";
             this.joined = true;
         }
 

@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="520.0" prefWidth="436.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="FXMLS.HR2.Modals.LM_EditQuestionController">
+<AnchorPane id="AnchorPane" prefHeight="520.0" prefWidth="436.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.LM_EditQuestionController">
    <children>
       <AnchorPane id="AnchorPane" fx:id="AnchorPane1" prefHeight="520.0" prefWidth="359.0">
          <children>
@@ -64,7 +63,7 @@
             </Label>
             <JFXRadioButton fx:id="edit_rb1" layoutX="14.0" layoutY="259.0" prefHeight="35.0" prefWidth="343.0" text="1">
                <graphic>
-                  <JFXTextField fx:id="edit_txt_option1" focusColor="#424243" maxWidth="363.0" minWidth="199.0" prefHeight="35.0" prefWidth="289.0" promptText="Option1">
+                  <JFXTextField fx:id="edit_txt_option1" focusColor="#424243" maxWidth="363.0" minWidth="199.0" prefHeight="35.0" prefWidth="289.0">
                      <font>
                         <Font name="Lato Medium" size="15.0" />
                      </font>
@@ -73,7 +72,7 @@
             </JFXRadioButton>
             <JFXRadioButton fx:id="edit_rb2" layoutX="14.0" layoutY="292.0" prefHeight="37.0" prefWidth="426.0" text="2">
                <graphic>
-                  <JFXTextField fx:id="edit_txt_option2" focusColor="#424243" maxWidth="328.0" minWidth="199.0" prefHeight="35.0" prefWidth="290.0" promptText="Option2">
+                  <JFXTextField fx:id="edit_txt_option2" focusColor="#424243" maxWidth="328.0" minWidth="199.0" prefHeight="35.0" prefWidth="290.0">
                      <font>
                         <Font name="Lato Medium" size="15.0" />
                      </font>
@@ -82,7 +81,7 @@
             </JFXRadioButton>
             <JFXRadioButton fx:id="edit_rb3" layoutX="14.0" layoutY="329.0" text="3">
                <graphic>
-                  <JFXTextField fx:id="edit_txt_option3" focusColor="#424243" maxWidth="328.0" minWidth="192.0" prefHeight="35.0" prefWidth="289.0" promptText="Option3">
+                  <JFXTextField fx:id="edit_txt_option3" focusColor="#424243" maxWidth="328.0" minWidth="192.0" prefHeight="35.0" prefWidth="289.0">
                      <font>
                         <Font name="Lato Medium" size="15.0" />
                      </font>
@@ -91,7 +90,7 @@
             </JFXRadioButton>
             <JFXRadioButton fx:id="edit_rb4" layoutX="14.0" layoutY="364.0" prefHeight="35.0" prefWidth="330.0" text="4">
                <graphic>
-                  <JFXTextField fx:id="edit_txt_option4" focusColor="#424243" maxWidth="328.0" minWidth="198.0" prefHeight="35.0" prefWidth="289.0" promptText="Option4">
+                  <JFXTextField fx:id="edit_txt_option4" focusColor="#424243" maxWidth="328.0" minWidth="198.0" prefHeight="35.0" prefWidth="289.0">
                      <font>
                         <Font name="Lato Medium" size="15.0" />
                      </font>
