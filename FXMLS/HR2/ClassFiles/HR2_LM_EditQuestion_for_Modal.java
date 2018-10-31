@@ -13,15 +13,15 @@ import java.util.List;
  * @author EdenRamoneda
  */
 public class HR2_LM_EditQuestion_for_Modal {
-    
-    public static String c,q;
+
+    public static String c, q;
     public static HashMap choice_description = new HashMap();
-    
-    public static void init_Question(String course, String question /*String cd*/)
-    {
+    public static HashMap choiceChecked = new HashMap();
+
+    public static void init_Question(String course, String question /*String cd*/) {
         c = course;
         q = question;
-       // choice_description = cd;
+        // choice_description = cd;
     }
-    
+
 }

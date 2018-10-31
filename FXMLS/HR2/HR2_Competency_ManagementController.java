@@ -153,9 +153,12 @@ public class HR2_Competency_ManagementController implements Initializable {
             }
 
             tbl_jobs.setItems(hr4_jobs);
+            
         } catch (Exception e) {
             System.out.println(e);
         }
+        System.err.println(tbl_jobs.getItems().size());
+        tbl_jobs.getSelectionModel().selectFirst();
     }
 
     public void DisplayDataInTable() {

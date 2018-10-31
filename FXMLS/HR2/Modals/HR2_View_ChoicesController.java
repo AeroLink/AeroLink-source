@@ -95,10 +95,10 @@ public class HR2_View_ChoicesController implements Initializable {
 
                 HashMap hm = (HashMap) d;
                 System.out.println(hm);
-                
                 HR2_LM_EditQuestion_for_Modal.choice_description.put(String.valueOf(hm.get("choice")), String.valueOf(hm.get("choice_description")));
-
-                obj.add(
+                 HR2_LM_EditQuestion_for_Modal.choiceChecked.put(String.valueOf(hm.get("choice")), (Integer.parseInt(String.valueOf(hm.get("ischecked"))) == 1) );
+               
+                 obj.add(
                         new HR2_EvaluationClass(
                                 String.valueOf(hm.get("question")),
                                 String.valueOf(hm.get("choice_id")),
@@ -118,38 +118,8 @@ public class HR2_View_ChoicesController implements Initializable {
 
         col_choice.setCellValueFactory(param -> param.getValue().choice);
         col_choice_description.setCellValueFactory(param -> param.getValue().choice_description);
-
         addButton.setCellValueFactory(value -> value.getValue().ischecked);
         addButton.setCellFactory(CheckBoxTableCell.forTableColumn(addButton));
-//        addButton.setCellFactory(new Callback<TableColumn<HR2_EvaluationClass, Boolean>, TableCell<HR2_EvaluationClass, Boolean>>() {
-//            @Override
-//            public TableCell<HR2_EvaluationClass, Boolean> call(TableColumn<HR2_EvaluationClass, Boolean> param) {
-//                final TableCell<HR2_EvaluationClass, Boolean> cell = new TableCell<HR2_EvaluationClass, Boolean>() {
-//                    private final RadioButton rbtn = new RadioButton();
-//
-//                    {
-//                        try {
-//                            rbtn.setToggleGroup(d);
-//                            System.out.println(param.getCellData(0));
-//                            rbtn.setCursor(javafx.scene.Cursor.HAND);
-//                        } catch (Exception ex) {
-//                            System.out.println(ex);
-//                        }
-//                    }
-//
-//                    public void updateItem(Boolean item, boolean empty) {
-//                        super.updateItem(item, empty);
-//                        if (empty) {
-//                            setGraphic(null);
-//                        } else {
-//                            setGraphic(rbtn);
-//                        }
-//                    }
-//
-//                };
-//                return cell;
-//            }
-//        });
 
         tbl_choices.getColumns().addAll(addButton, col_choice, col_choice_description);
     }

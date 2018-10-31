@@ -66,7 +66,10 @@ public class LM_EditQuestionController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         lbl_course_title.setText(HR2_LM_EditQuestion_for_Modal.c);
         txt_edit_question.setText(HR2_LM_EditQuestion_for_Modal.q);
+        DisplayChoices();
+    }
 
+    public void DisplayChoices() {
         ToggleGroup c = new ToggleGroup();
         edit_rb1.setToggleGroup(c);
         edit_rb2.setToggleGroup(c);
@@ -76,10 +79,14 @@ public class LM_EditQuestionController implements Initializable {
         edit_txt_option2.setText(String.valueOf(HR2_LM_EditQuestion_for_Modal.choice_description.get("b")));
         edit_txt_option3.setText(String.valueOf(HR2_LM_EditQuestion_for_Modal.choice_description.get("c")));
         edit_txt_option4.setText(String.valueOf(HR2_LM_EditQuestion_for_Modal.choice_description.get("d")));
+        edit_rb1.setSelected( Boolean.valueOf(String.valueOf(HR2_LM_EditQuestion_for_Modal.choiceChecked.get("a"))));
+        edit_rb2.setSelected( Boolean.valueOf(String.valueOf(HR2_LM_EditQuestion_for_Modal.choiceChecked.get("b"))));
+        edit_rb3.setSelected( Boolean.valueOf(String.valueOf(HR2_LM_EditQuestion_for_Modal.choiceChecked.get("c"))));
+        edit_rb4.setSelected( Boolean.valueOf(String.valueOf(HR2_LM_EditQuestion_for_Modal.choiceChecked.get("d"))));
         
-        
-        if(HR2_LM_EditQuestion_for_Modal.choice_description.get("d") == null)
-        {
+        if (HR2_LM_EditQuestion_for_Modal.choice_description.get("c") == null) {
+            edit_txt_option3.setText("");
+        } else if (HR2_LM_EditQuestion_for_Modal.choice_description.get("d") == null) {
             edit_txt_option4.setText("");
         }
 
