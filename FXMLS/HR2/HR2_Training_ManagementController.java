@@ -85,25 +85,9 @@ public class HR2_Training_ManagementController implements Initializable {
     @FXML
     private TableColumn<HR2_Training_InfoClass, String> col_training_title;
     @FXML
-    private TableColumn<HR2_Training_InfoClass, String> col_training_desc;
-    @FXML
-    private TableColumn<HR2_Training_InfoClass, String> col_trainor;
-    @FXML
     private TableColumn<HR2_Training_InfoClass, String> col_start_date;
     @FXML
     private TableColumn<HR2_Training_InfoClass, String> col_end_date;
-    @FXML
-    private TableColumn<HR2_Training_InfoClass, String> col_start_time;
-    @FXML
-    private TableColumn<HR2_Training_InfoClass, String> col_end_time;
-    @FXML
-    private TableColumn<HR2_Training_InfoClass, String> col_type_of_training;
-    @FXML
-    private TableColumn<HR2_Training_InfoClass, String> col_location;
-    @FXML
-    private TableColumn<HR2_Training_InfoClass, String> col_vehicle;
-    @FXML
-    private TableColumn<HR2_Training_InfoClass, String> col_budget_cost;
     @FXML
     private ContextMenu contextMenuTrainings;
     @FXML
@@ -115,39 +99,15 @@ public class HR2_Training_ManagementController implements Initializable {
     @FXML
     private JFXTextField txt_end_time;
     @FXML
-    private ContextMenu contextMenuTrainings1;
-    @FXML
-    private MenuItem contextmenu_item_view_details1;
-    @FXML
-    private MenuItem contextmenu_item_delete_trainings1;
-    @FXML
-    private JFXTextField txt_search_training1;
-    @FXML
     private TableView<?> tbl_history_of_trainings;
     @FXML
-    private TableColumn<?, ?> col_job_position1;
+    private JFXTextField txt_search_historyTraining;
     @FXML
-    private TableColumn<?, ?> col_training_title1;
+    private TableColumn<?, ?> col_history_jp;
     @FXML
-    private TableColumn<?, ?> col_training_desc1;
+    private TableColumn<?, ?> col_history_sd;
     @FXML
-    private TableColumn<?, ?> col_trainor1;
-    @FXML
-    private TableColumn<?, ?> col_start_date1;
-    @FXML
-    private TableColumn<?, ?> col_end_date1;
-    @FXML
-    private TableColumn<?, ?> col_start_time1;
-    @FXML
-    private TableColumn<?, ?> col_end_time1;
-    @FXML
-    private TableColumn<?, ?> col_type_of_training1;
-    @FXML
-    private TableColumn<?, ?> col_location1;
-    @FXML
-    private TableColumn<?, ?> col_vehicle1;
-    @FXML
-    private TableColumn<?, ?> col_budget_cost1;
+    private TableColumn<?, ?> col_history_ed;
 
     //for comboboxes
     /**
@@ -197,17 +157,9 @@ public class HR2_Training_ManagementController implements Initializable {
     public void DisplayDataInTable() {
 
         col_job_position.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().job_position);
-        col_training_title.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().training_title);
-        col_training_desc.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().training_description);
-        col_trainor.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().trainor);
+        col_training_title.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().training_title);   
         col_start_date.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().start_date);
         col_end_date.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().end_date);
-        col_start_time.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().start_time);
-        col_end_time.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().end_time);
-        col_type_of_training.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().type_of_training);
-        col_location.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().location);
-        col_vehicle.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().vehicle);
-        col_budget_cost.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().budget_cost);
         TableColumn<HR2_Training_InfoClass, Void> addButton = new TableColumn("View Participants");
 
         Callback<TableColumn<HR2_Training_InfoClass, Void>, TableCell<HR2_Training_InfoClass, Void>> cellFactory
@@ -296,6 +248,7 @@ public class HR2_Training_ManagementController implements Initializable {
         }
     }
 
+    @FXML
     public void searchTraining() {
         HR2_Training_Info tm = new HR2_Training_Info();
         tbl_trainings.getItems().clear();
