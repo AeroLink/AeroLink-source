@@ -8,7 +8,6 @@ package FXMLS.HR2.Modals;
 import FXMLS.HR2.ClassFiles.HR2_JV_With_Skills_for_SP;
 import FXMLS.HR2.ClassFiles.SP_EmployeeInfo_in_Modal;
 import FXMLS.HR2.ClassFiles.SP_Employee_Info_Modal;
-import FXMLS.HR2.Database;
 import Model.HR2_Temp_Employee_Profiles;
 import Model.HR4_Jobs;
 import Model.VirtualTables.VT_HR2;

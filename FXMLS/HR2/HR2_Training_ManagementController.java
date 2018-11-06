@@ -222,7 +222,8 @@ public class HR2_Training_ManagementController implements Initializable {
                         try {
                             btn.setOnAction(e
                                     -> {
-                                loadData();
+                                Modal viewParticipants = Modal.getInstance(new Form("/FXMLS/HR2/Modals/TM_ViewParticipants.fxml").getParent());
+                                viewParticipants.open();
                             });
                             btn.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
                             btn.setCursor(javafx.scene.Cursor.HAND);
