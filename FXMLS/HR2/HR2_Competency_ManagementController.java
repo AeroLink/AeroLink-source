@@ -230,6 +230,7 @@ public class HR2_Competency_ManagementController implements Initializable {
         }
 
     }
+     
     
     
 }

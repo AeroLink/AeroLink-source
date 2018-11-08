@@ -55,7 +55,7 @@ public class HR2_Learning_ManagementController implements Initializable {
     private TableColumn<HR2_CoursesClass, String> col_created_by;
 
     TableColumn<HR2_CoursesClass, String> courses_idx = new TableColumn<>();
-    
+
     long DummyCount = 0;
     long GlobalCount = 0;
 
@@ -126,6 +126,7 @@ public class HR2_Learning_ManagementController implements Initializable {
 
             }
             tbl_courses.setItems(obj);
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -168,6 +169,7 @@ public class HR2_Learning_ManagementController implements Initializable {
                         try {
                             btn.setOnAction(e
                                     -> {
+                                tbl_courses.getSelectionModel().selectFirst();
                                 ViewListOfQuestions();
                             });
                             btn.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
@@ -209,6 +211,7 @@ public class HR2_Learning_ManagementController implements Initializable {
                         try {
                             btn1.setOnAction(e
                                     -> {
+                                tbl_courses.getSelectionModel().selectFirst();
                                 System.err.println(tbl_courses.getSelectionModel().getSelectedItem().course_id.get());
                                 HR2_LMClass_For_AddQuestion_Modal.lm_id = tbl_courses.getSelectionModel().getSelectedItem().course_id.get();
                                 HR2_LMClass_For_AddQuestion_Modal.initCourseTitle(

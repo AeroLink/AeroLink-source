@@ -41,8 +41,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import Synapse.Model;
 import java.sql.Date;
+import java.util.Optional;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 /**
@@ -157,7 +161,7 @@ public class HR2_Training_ManagementController implements Initializable {
     public void DisplayDataInTable() {
 
         col_job_position.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().job_position);
-        col_training_title.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().training_title);   
+        col_training_title.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().training_title);
         col_start_date.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().start_date);
         col_end_date.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().end_date);
         TableColumn<HR2_Training_InfoClass, Void> addButton = new TableColumn("View Participants");
@@ -174,6 +178,7 @@ public class HR2_Training_ManagementController implements Initializable {
                         try {
                             btn.setOnAction(e
                                     -> {
+                                tbl_trainings.getSelectionModel().selectFirst();
                                 Modal viewParticipants = Modal.getInstance(new Form("/FXMLS/HR2/Modals/TM_ViewParticipants.fxml").getParent());
                                 viewParticipants.open();
                             });
@@ -210,6 +215,7 @@ public class HR2_Training_ManagementController implements Initializable {
         List training_data = tm.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "employees", "=", "id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr2_type_of_training ", "type_of_training_id", "t_type", "=", "type_of_training_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_log2_vehicle_status ", "vehicle_id", "v", "=", "vehicle_id")
+                .where(new Object[][]{{"aerolink.tbl_hr2_training_info.status", "=", "1"}})
                 .get("job_position", "training_title", "training_description", "CONCAT(employees.firstname, ' ' ,employees.middlename, ' ',\n"
                         + "employees.lastname)as trainor", "start_date", "end_date", "start_time", "end_time", "t_type.type_of_training",
                         "location", "v.vehicle", "budget_cost");
@@ -229,20 +235,13 @@ public class HR2_Training_ManagementController implements Initializable {
                                 String.valueOf(hm.get("training_id")),
                                 String.valueOf(hm.get("job_position")),
                                 String.valueOf(hm.get("training_title")),
-                                String.valueOf(hm.get("training_description")),
-                                String.valueOf(hm.get("trainor")),
                                 String.valueOf(hm.get("start_date")),
-                                String.valueOf(hm.get("end_date")),
-                                String.valueOf(hm.get("start_time")),
-                                String.valueOf(hm.get("end_time")),
-                                String.valueOf(hm.get("type_of_training")),
-                                String.valueOf(hm.get("location")),
-                                String.valueOf(hm.get("vehicle")),
-                                String.valueOf(hm.get("budget_cost"))
+                                String.valueOf(hm.get("end_date"))
                         ));
 
             }
             tbl_trainings.setItems(obj);
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -399,7 +398,8 @@ public class HR2_Training_ManagementController implements Initializable {
                             {"type_of_training_id", cbox_select_type_of_training.getSelectionModel().getSelectedItem().toString().substring(2).toString().split(" - ")[0]},
                             {"location", txt_location.getText()},
                             {"vehicle_id", cbox_vehicle.getSelectionModel().getSelectedItem().toString().substring(1).toString().split(" - ")[0]},
-                            {"budget_cost", txt_budget_cost.getText()}
+                            {"budget_cost", txt_budget_cost.getText()},
+                            {"status", "1"}
                         };
 
                 tm.insert(tm_data);
@@ -413,6 +413,38 @@ public class HR2_Training_ManagementController implements Initializable {
                 alert.setContentText("Error" + e);
                 alert.showAndWait();
             }
+        }
+    }
+
+    @FXML
+    public void ContextMenuOnTable(MouseEvent event) {
+
+        if (event.getButton() == MouseButton.SECONDARY) {
+            contextMenuTrainings.show(tbl_trainings, event.getSceneX(), event.getY());
+            //   contextmenu_item_view_details.setOnAction(e -> EditData());
+            contextmenu_item_delete_trainings.setOnAction(e -> DropData());
+        }
+
+    }
+
+    public void DropData() {
+        Alert update = new Alert(Alert.AlertType.CONFIRMATION);
+        update.setContentText("Are you sure you want to drop this data?\n "
+                + "Note: The dropped data will be store to your history");
+        Optional<ButtonType> rs = update.showAndWait();
+
+        if (rs.get() == ButtonType.OK) {
+            //   System.out.println(tbl_Skills.getSelectionModel().getSelectedItem().Skill_ID.getValue());
+            HR2_Training_Info tm = new HR2_Training_Info();
+
+            Boolean a = tm.where(new Object[][]{
+                {"job_position", "=", tbl_trainings.getSelectionModel().getSelectedItem().job_position.get().toString()}
+            }).update(new Object[][]{
+                {"status", "0"}
+            }).executeUpdate();
+            System.out.println(a);
+
+            loadData();
         }
     }
 }
