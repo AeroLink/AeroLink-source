@@ -103,15 +103,15 @@ public class HR2_Training_ManagementController implements Initializable {
     @FXML
     private JFXTextField txt_end_time;
     @FXML
-    private TableView<?> tbl_history_of_trainings;
+    private TableView<HR2_Training_InfoClass> tbl_history_of_trainings;
     @FXML
     private JFXTextField txt_search_historyTraining;
     @FXML
-    private TableColumn<?, ?> col_history_jp;
+    private TableColumn<HR2_Training_InfoClass, String> col_history_jp;
     @FXML
-    private TableColumn<?, ?> col_history_sd;
+    private TableColumn<HR2_Training_InfoClass, String> col_history_sd;
     @FXML
-    private TableColumn<?, ?> col_history_ed;
+    private TableColumn<HR2_Training_InfoClass, String> col_history_ed;
 
     //for comboboxes
     /**
@@ -121,6 +121,7 @@ public class HR2_Training_ManagementController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         btn_save.setDisable(true);
+        loadHistoryOfTraining();
         btn_save.setOnAction(e -> Save());
         btn_new.setOnAction(e -> {
 
@@ -160,11 +161,16 @@ public class HR2_Training_ManagementController implements Initializable {
 
     public void DisplayDataInTable() {
 
+        col_history_jp.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().job_position);
+        col_history_sd.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().start_date);
+        col_history_ed.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().end_date);
+        historyTrainingButton();
+        
         col_job_position.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().job_position);
         col_training_title.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().training_title);
         col_start_date.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().start_date);
         col_end_date.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().end_date);
-        TableColumn<HR2_Training_InfoClass, Void> addButton = new TableColumn("View Participants");
+        TableColumn<HR2_Training_InfoClass, Void> addButton = new TableColumn("Action");
 
         Callback<TableColumn<HR2_Training_InfoClass, Void>, TableCell<HR2_Training_InfoClass, Void>> cellFactory
                 = new Callback<TableColumn<HR2_Training_InfoClass, Void>, TableCell<HR2_Training_InfoClass, Void>>() {
@@ -172,7 +178,7 @@ public class HR2_Training_ManagementController implements Initializable {
             public TableCell<HR2_Training_InfoClass, Void> call(final TableColumn<HR2_Training_InfoClass, Void> param) {
 
                 final TableCell<HR2_Training_InfoClass, Void> cell = new TableCell<HR2_Training_InfoClass, Void>() {
-                    private final Button btn = new Button("View Participants");
+                    private final Button btn = new Button("View");
 
                     {
                         try {
@@ -208,6 +214,52 @@ public class HR2_Training_ManagementController implements Initializable {
         tbl_trainings.getColumns().add(addButton);
     }
 
+    public void historyTrainingButton() {
+        TableColumn<HR2_Training_InfoClass, Void> addButton = new TableColumn("Action");
+
+        Callback<TableColumn<HR2_Training_InfoClass, Void>, TableCell<HR2_Training_InfoClass, Void>> cellFactory
+                = new Callback<TableColumn<HR2_Training_InfoClass, Void>, TableCell<HR2_Training_InfoClass, Void>>() {
+            @Override
+            public TableCell<HR2_Training_InfoClass, Void> call(final TableColumn<HR2_Training_InfoClass, Void> param) {
+
+                final TableCell<HR2_Training_InfoClass, Void> cell = new TableCell<HR2_Training_InfoClass, Void>() {
+                    private final Button btn = new Button("View");
+
+                    {
+                        try {
+                            btn.setOnAction(e
+                                    -> {
+                                tbl_trainings.getSelectionModel().selectFirst();
+                                Modal viewParticipants = Modal.getInstance(new Form("/FXMLS/HR2/Modals/TM_ViewParticipants.fxml").getParent());
+                                viewParticipants.open();
+                            });
+                            btn.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
+                            btn.setCursor(javafx.scene.Cursor.HAND);
+                        } catch (Exception ex) {
+                            System.out.println(ex);
+                        }
+
+                    }
+
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+
+        };
+
+        addButton.setCellFactory(cellFactory);
+        tbl_history_of_trainings.getColumns().add(addButton);
+
+    }
+
     public void loadData() {
 
         HR2_Training_Info tm = new HR2_Training_Info();
@@ -241,6 +293,46 @@ public class HR2_Training_ManagementController implements Initializable {
 
             }
             tbl_trainings.setItems(obj);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    //History of Training
+
+    public void loadHistoryOfTraining() {
+
+        HR2_Training_Info tm = new HR2_Training_Info();
+
+        List training_data = tm.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "employees", "=", "id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_hr2_type_of_training ", "type_of_training_id", "t_type", "=", "type_of_training_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_log2_vehicle_status ", "vehicle_id", "v", "=", "vehicle_id")
+                .where(new Object[][]{{"aerolink.tbl_hr2_training_info.status", "=", "0"}})
+                .get("job_position", "training_title", "training_description", "CONCAT(employees.firstname, ' ' ,employees.middlename, ' ',\n"
+                        + "employees.lastname)as trainor", "start_date", "end_date", "start_time", "end_time", "t_type.type_of_training",
+                        "location", "v.vehicle", "budget_cost");
+        ht(training_data);
+
+    }
+
+    public void ht(List ht) {
+        ObservableList<HR2_Training_InfoClass> obj = FXCollections.observableArrayList();
+        obj.clear();
+        try {
+            for (Object d : ht) {
+                HashMap hm = (HashMap) d;
+                System.out.println(hm);
+                obj.add(
+                        new HR2_Training_InfoClass(
+                                String.valueOf(hm.get("training_id")),
+                                String.valueOf(hm.get("job_position")),
+                                String.valueOf(hm.get("training_title")),
+                                String.valueOf(hm.get("start_date")),
+                                String.valueOf(hm.get("end_date"))
+                        ));
+
+            }
+            tbl_history_of_trainings.setItems(obj);
 
         } catch (Exception e) {
             System.out.println(e);
@@ -442,8 +534,12 @@ public class HR2_Training_ManagementController implements Initializable {
             }).update(new Object[][]{
                 {"status", "0"}
             }).executeUpdate();
+            Alert dropnotif = new Alert(Alert.AlertType.INFORMATION);
+            dropnotif.setContentText(tbl_trainings.getSelectionModel().getSelectedItem().job_position.get().toString() + " Droppped to History");
+            dropnotif.showAndWait();
+            
             System.out.println(a);
-
+            loadHistoryOfTraining();
             loadData();
         }
     }
