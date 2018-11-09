@@ -171,8 +171,6 @@ public class TM_ViewTrainingController implements Initializable {
             Alert dropnotif = new Alert(Alert.AlertType.INFORMATION);
             dropnotif.setContentText(cbox_edit_title.getSelectionModel().getSelectedItem().toString() + " Successfully Updated");
             dropnotif.showAndWait();
-
-            System.out.println(a);
             loadData();
         }
     }

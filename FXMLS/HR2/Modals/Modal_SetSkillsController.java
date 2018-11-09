@@ -102,7 +102,10 @@ public class Modal_SetSkillsController implements Initializable {
                 String[][] cm_data
                         = {
                             {"skill", txt_skill.getText()},
-                            {"skill_description", txt_skill_desc.getText()},};
+                            {"skill_description", txt_skill_desc.getText()},
+                            {"isDeleted", "0"},
+                        
+                        };
 
                 int id = skillset.insert(cm_data, true);
                 Object[][] competency = {

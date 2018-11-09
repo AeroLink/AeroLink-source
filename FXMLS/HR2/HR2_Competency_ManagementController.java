@@ -12,6 +12,7 @@ import FXMLS.HR4.ClassFiles.HR4_MIZ;
 import Model.HR2_CM_Pivot;
 import Model.HR2_CM_Skills;
 import Model.HR2_Jobs;
+import Model.HR2_Training_Info;
 import Model.HR4_Jobs;
 import Synapse.Components.Modal.Modal;
 import Synapse.Form;
@@ -110,6 +111,7 @@ public class HR2_Competency_ManagementController implements Initializable {
 
                         List c = cm_pivot.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr2_skillset", "skill_id", "s", "=", "skill_id")
+                                .where(new Object[][]{{"s.isDeleted", "=", "0"}})
                                 .get("jobs.title", "jobs.description", "s.skill", "s.skill_description");
 
                         Data(c);
@@ -153,7 +155,7 @@ public class HR2_Competency_ManagementController implements Initializable {
             }
 
             tbl_jobs.setItems(hr4_jobs);
-            
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -213,24 +215,24 @@ public class HR2_Competency_ManagementController implements Initializable {
         }
 
     }
-    
-     public void DropData() {
-        Alert delete = new Alert(Alert.AlertType.CONFIRMATION);
-        delete.setContentText("Are you sure you want to drop this data?");
-        Optional<ButtonType> rs = delete.showAndWait();
-         System.out.println(tbl_jobs.getSelectionModel().getSelectedItem().Skill_id.getValue());
-        System.out.println(rs.get());
+
+    public void DropData() {
+        Alert update = new Alert(Alert.AlertType.CONFIRMATION);
+        update.setContentText("Are you sure you want to update this data?");
+        Optional<ButtonType> rs = update.showAndWait();
+
         if (rs.get() == ButtonType.OK) {
-            HR2_CM_Pivot skills = new HR2_CM_Pivot();
+            //   System.out.println(tbl_Skills.getSelectionModel().getSelectedItem().Skill_ID.getValue());
+            HR2_CM_Skills s = new HR2_CM_Skills();
 
-            skills.delete().where(new Object[][]{
-                {"skill_id", "=", tbl_jobs.getSelectionModel().getSelectedItem().Skill_id.getValue()}
-            }).executeUpdate();
-
+            Boolean a = s.where(new Object[][]{
+                {"skill", "=", tbl_jobs.getSelectionModel().getSelectedItem().Skill.get()}
+            }).update(new Object[][]{
+                {"isDeleted", "1"},}).executeUpdate();
+            Alert dropnotif = new Alert(Alert.AlertType.INFORMATION);
+            dropnotif.setContentText(tbl_jobs.getSelectionModel().getSelectedItem().Skill.get() + " Successfully Dropped");
+            dropnotif.showAndWait();
+            loadJob();
         }
-
     }
-     
-    
-    
 }

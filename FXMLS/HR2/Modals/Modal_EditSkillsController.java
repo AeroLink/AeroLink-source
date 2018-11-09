@@ -5,6 +5,7 @@
  */
 package FXMLS.HR2.Modals;
 
+import FXMLS.HR2.ClassFiles.HR2_CM_Skills_Class;
 import FXMLS.HR2.ClassFiles.HR2_CM_Skills_Class_for_Modal;
 import FXMLS.HR4.ClassFiles.HR4_MIZ;
 import Model.HR2_CM_Pivot;
@@ -51,31 +52,8 @@ public class Modal_EditSkillsController implements Initializable {
         cbox_edit_select_job.getItems().add(HR2_CM_Skills_Class_for_Modal.j_title);
         cbox_edit_select_job.getSelectionModel().selectFirst();
         txt_edit_skill.setText(HR2_CM_Skills_Class_for_Modal.j_Skill);
-        txt_edit_skill_desc.setText(HR2_CM_Skills_Class_for_Modal.j_Skill_d);
+        txt_edit_skill_desc.setText(HR2_CM_Skills_Class_for_Modal.j_Skill_d);  
         
-        selectJobs();
-        
-    }
-
-    public void selectJobs() {
-        HR4_Jobs jobs = new HR4_Jobs();
-
-        try {
-            List c = jobs.get();
-            //"concat(substring(title,0,2), job_id) as job_id, title"
-            for (Object d : c) {
-                HashMap hm1 = (HashMap) d;
-                //RS
-                String j_id = String.valueOf(hm1.get("job_id"));
-                String sjobs = (String) hm1.get("title");
-
-                cbox_edit_select_job.getItems().add("J" + j_id + " - " + sjobs);
-
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
     }
 
     public void Update() {
@@ -84,18 +62,18 @@ public class Modal_EditSkillsController implements Initializable {
         Optional<ButtonType> rs = update.showAndWait();
 
         if (rs.get() == ButtonType.OK) {
-            HR2_CM_Pivot skills_p = new HR2_CM_Pivot();
             HR2_CM_Skills skills = new HR2_CM_Skills();
             HR4_Jobs j = new HR4_Jobs();
             
-            Boolean up = skills.update(new Object[][]{
-              /*  {"job_id", cbox_edit_select_job.getSelectionModel().getSelectedItem().toString().substring(1)
-                        .toString().split(" - ")[0]},*/
+            Boolean up = skills.where(new Object[][]{
+                {"skill", "=", txt_edit_skill.getText()}
+            }).update(new Object[][]{
                 {"skill", txt_edit_skill.getText()},
                 {"skill_description", txt_edit_skill_desc.getText()}
-            }).where(new Object[][]{
-                {"job_id", "=", cbox_edit_select_job.idProperty().get()}
             }).executeUpdate();
+               Alert dropnotif = new Alert(Alert.AlertType.INFORMATION);
+            dropnotif.setContentText("Skill Successfully Updated");
+            dropnotif.showAndWait();
 
         }
     }

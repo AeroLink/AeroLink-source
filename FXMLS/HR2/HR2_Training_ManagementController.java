@@ -522,7 +522,7 @@ public class HR2_Training_ManagementController implements Initializable {
         }
 
     }
-
+    //DROP DATA IN CURRENT TRAINING
     public void DropData() {
         Alert update = new Alert(Alert.AlertType.CONFIRMATION);
         update.setContentText("Are you sure you want to drop this data?\n "
@@ -534,12 +534,12 @@ public class HR2_Training_ManagementController implements Initializable {
             HR2_Training_Info tm = new HR2_Training_Info();
 
             Boolean a = tm.where(new Object[][]{
-                {"job_position", "=", tbl_trainings.getSelectionModel().getSelectedItem().job_position.get().toString()}
+                {"job_position", "=", tbl_trainings.getSelectionModel().getSelectedItem().job_position.get()}
             }).update(new Object[][]{
                 {"status", "0"}
             }).executeUpdate();
             Alert dropnotif = new Alert(Alert.AlertType.INFORMATION);
-            dropnotif.setContentText(tbl_trainings.getSelectionModel().getSelectedItem().job_position.get().toString() + " Droppped to History");
+            dropnotif.setContentText(tbl_trainings.getSelectionModel().getSelectedItem().job_position.get() + " Droppped to History");
             dropnotif.showAndWait();
 
             System.out.println(a);
