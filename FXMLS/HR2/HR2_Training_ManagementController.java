@@ -6,6 +6,7 @@
 package FXMLS.HR2;
 
 import FXMLS.HR2.ClassFiles.HR2_TM_Class_for_Modal;
+import FXMLS.HR2.ClassFiles.HR2_TM_ViewTrainingInfo_Modal;
 import FXMLS.HR2.ClassFiles.HR2_Temp_VehicleClass;
 import FXMLS.HR2.ClassFiles.HR2_Training_InfoClass;
 import FXMLS.HR2.ClassFiles.HR2_Type_of_TrainingClass;
@@ -95,8 +96,6 @@ public class HR2_Training_ManagementController implements Initializable {
     @FXML
     private ContextMenu contextMenuTrainings;
     @FXML
-    private MenuItem contextmenu_item_view_details;
-    @FXML
     private MenuItem contextmenu_item_delete_trainings;
     @FXML
     private JFXTextField txt_start_time;
@@ -165,7 +164,7 @@ public class HR2_Training_ManagementController implements Initializable {
         col_history_sd.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().start_date);
         col_history_ed.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().end_date);
         historyTrainingButton();
-        
+
         col_job_position.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().job_position);
         col_training_title.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().training_title);
         col_start_date.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().start_date);
@@ -184,8 +183,11 @@ public class HR2_Training_ManagementController implements Initializable {
                         try {
                             btn.setOnAction(e
                                     -> {
-                                tbl_trainings.getSelectionModel().selectFirst();
-                                Modal viewParticipants = Modal.getInstance(new Form("/FXMLS/HR2/Modals/TM_ViewParticipants.fxml").getParent());
+                                HR2_TM_ViewTrainingInfo_Modal.init_Question(tbl_trainings.getSelectionModel().getSelectedItem().job_position.get(),
+                                        tbl_trainings.getSelectionModel().getSelectedItem().training_title.get(),
+                                        tbl_trainings.getSelectionModel().getSelectedItem().start_date.get(),
+                                        tbl_trainings.getSelectionModel().getSelectedItem().end_date.get());
+                                Modal viewParticipants = Modal.getInstance(new Form("/FXMLS/HR2/Modals/TM_ViewTraining.fxml").getParent());
                                 viewParticipants.open();
                             });
                             btn.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
@@ -229,8 +231,11 @@ public class HR2_Training_ManagementController implements Initializable {
                         try {
                             btn.setOnAction(e
                                     -> {
-                                tbl_trainings.getSelectionModel().selectFirst();
-                                Modal viewParticipants = Modal.getInstance(new Form("/FXMLS/HR2/Modals/TM_ViewParticipants.fxml").getParent());
+                                HR2_TM_ViewTrainingInfo_Modal.init_Question(tbl_trainings.getSelectionModel().getSelectedItem().job_position.get(),
+                                        tbl_trainings.getSelectionModel().getSelectedItem().training_title.get(),
+                                        tbl_trainings.getSelectionModel().getSelectedItem().start_date.get(),
+                                        tbl_trainings.getSelectionModel().getSelectedItem().end_date.get());
+                                Modal viewParticipants = Modal.getInstance(new Form("/FXMLS/HR2/Modals/TM_ViewTraining.fxml").getParent());
                                 viewParticipants.open();
                             });
                             btn.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
@@ -513,7 +518,6 @@ public class HR2_Training_ManagementController implements Initializable {
 
         if (event.getButton() == MouseButton.SECONDARY) {
             contextMenuTrainings.show(tbl_trainings, event.getSceneX(), event.getY());
-            //   contextmenu_item_view_details.setOnAction(e -> EditData());
             contextmenu_item_delete_trainings.setOnAction(e -> DropData());
         }
 
@@ -537,7 +541,7 @@ public class HR2_Training_ManagementController implements Initializable {
             Alert dropnotif = new Alert(Alert.AlertType.INFORMATION);
             dropnotif.setContentText(tbl_trainings.getSelectionModel().getSelectedItem().job_position.get().toString() + " Droppped to History");
             dropnotif.showAndWait();
-            
+
             System.out.println(a);
             loadHistoryOfTraining();
             loadData();

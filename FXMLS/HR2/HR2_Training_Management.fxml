@@ -206,7 +206,6 @@
                                              <contextMenu>
                                                 <ContextMenu fx:id="contextMenuTrainings">
                                                   <items>
-                                                    <MenuItem fx:id="contextmenu_item_view_details" mnemonicParsing="false" text="View Details" />
                                                       <MenuItem fx:id="contextmenu_item_delete_trainings" mnemonicParsing="false" text="Drop Training" />
                                                   </items>
                                                 </ContextMenu>
