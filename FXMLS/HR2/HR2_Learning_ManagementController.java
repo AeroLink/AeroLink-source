@@ -9,6 +9,7 @@ import FXMLS.HR2.ClassFiles.HR2_CoursesClass;
 import FXMLS.HR2.ClassFiles.HR2_LMClass_For_AddQuestion_Modal;
 import FXMLS.HR2.ClassFiles.HR2_Training_InfoClass;
 import Model.HR2_CM_Pivot;
+import Model.HR2_CM_Skills;
 import Model.HR2_Courses;
 import Model.HR2_Training_Info;
 import Synapse.Components.Modal.Modal;
@@ -20,16 +21,23 @@ import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 /**
@@ -58,6 +66,12 @@ public class HR2_Learning_ManagementController implements Initializable {
 
     long DummyCount = 0;
     long GlobalCount = 0;
+    @FXML
+    private ContextMenu contextmenu_lm;
+    @FXML
+    private MenuItem c_item_modify;
+    @FXML
+    private MenuItem c_item_drop;
 
     /**
      * Initializes the controller class.
@@ -85,6 +99,7 @@ public class HR2_Learning_ManagementController implements Initializable {
 
                         List courses = c.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "emps", "=", "id")
+                                .where(new Object[][]{{"aerolink.tbl_hr2_courses.isDeleted","=","0"}})
                                 .get("course_id, j.title as course_title", "course_description",
                                         "concat(emps.firstname, ' ',emps.middlename, ' ',emps.lastname)as Created_by");
                         Data(courses);
@@ -258,4 +273,37 @@ public class HR2_Learning_ManagementController implements Initializable {
         lq.open();
     }
 
+    @FXML
+    public void viewRow(MouseEvent event) {
+
+        if (event.getButton() == MouseButton.SECONDARY) {
+            contextmenu_lm.show(tbl_courses, event.getX(), event.getSceneY());
+            c_item_modify.setOnAction(e -> OpenModalForEdit());
+            c_item_drop.setOnAction(e -> DropExam());
+        }
+
+    }
+
+    public void OpenModalForEdit() {
+
+    }
+
+    public void DropExam() {
+        Alert update = new Alert(Alert.AlertType.CONFIRMATION);
+        update.setContentText("Are you sure you want to drop this data?");
+        Optional<ButtonType> rs = update.showAndWait();
+
+        if (rs.get() == ButtonType.OK) {
+            HR2_Courses c = new HR2_Courses();
+
+            Boolean a = c.where(new Object[][]{
+                {"course_id", "=", tbl_courses.getSelectionModel().getSelectedItem().course_id.get()}
+            }).update(new Object[][]{
+                {"isDeleted", "1"},}).executeUpdate();
+            Alert dropnotif = new Alert(Alert.AlertType.INFORMATION);
+            dropnotif.setContentText(tbl_courses.getSelectionModel().getSelectedItem().course_title.get() + " Successfully Dropped");
+            dropnotif.showAndWait();
+            loadData();
+        }
+    }
 }

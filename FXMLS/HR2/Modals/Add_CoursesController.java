@@ -99,7 +99,8 @@ public class Add_CoursesController implements Initializable {
                         = {
                             {"job_id", cbox_select_job_position.getSelectionModel().getSelectedItem().toString().substring(1).toString().split(" - ")[0]},
                             {"course_description", txt_course_desc.getText()},
-                            {"id", cbox_select_employees.getSelectionModel().getSelectedItem().toString().substring(3).toString().split(" - ")[0]}
+                            {"id", cbox_select_employees.getSelectionModel().getSelectedItem().toString().substring(3).toString().split(" - ")[0]},
+                            {"isDeleted", "0"},
                         };
                 //int id = model.insert(vals, true);
                 c.insert(cm_data);

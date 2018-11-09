@@ -182,9 +182,11 @@ public class HR2_Competency_ManagementController implements Initializable {
         HR2_CM_Pivot cm_pivot = new HR2_CM_Pivot();
         tbl_jobs.getItems().clear();
         try {
+            
+            
             List c = cm_pivot.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr2_skillset", "skill_id", "s", "=", "skill_id")
-                    .where(new Object[][]{{"jobs.title", "like", "%" + txt_search_job.getText() + "%"}})
+                    .where(new Object[][]{{"jobs.title", "like", "%" + txt_search_job.getText() + "%" ,"AND","s.isDeleted","=" ,"0"}})
                     .get("jobs.title", "jobs.description", "s.skill", "s.skill_description");
 
             Data(c);
@@ -222,7 +224,6 @@ public class HR2_Competency_ManagementController implements Initializable {
         Optional<ButtonType> rs = update.showAndWait();
 
         if (rs.get() == ButtonType.OK) {
-            //   System.out.println(tbl_Skills.getSelectionModel().getSelectedItem().Skill_ID.getValue());
             HR2_CM_Skills s = new HR2_CM_Skills();
 
             Boolean a = s.where(new Object[][]{

@@ -104,13 +104,12 @@ public class Modal_SetSkillsController implements Initializable {
                             {"skill", txt_skill.getText()},
                             {"skill_description", txt_skill_desc.getText()},
                             {"isDeleted", "0"},
-                        
                         };
 
                 int id = skillset.insert(cm_data, true);
                 Object[][] competency = {
                     {"skill_id", id},
-                    {"job_id", cbox_select_job.getSelectionModel().getSelectedItem().toString().substring(1).toString().split(" - ")[0]}
+                    {"job_id", cbox_select_job.getSelectionModel().getSelectedItem().toString().substring(1).toString().split(" - ")[0]},
                 };
 
                 cm_pivot.insert(competency);
