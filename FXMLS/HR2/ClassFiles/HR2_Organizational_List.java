@@ -14,12 +14,14 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class HR2_Organizational_List {
     
-    public SimpleStringProperty Job_Title;
     public SimpleStringProperty Fullname;
+    public SimpleStringProperty Job_Title;
+    public SimpleStringProperty classification;
 
-    public HR2_Organizational_List(String Job_Title,String Fullname) {
+    public HR2_Organizational_List(String Job_Title,String Fullname, String Classification) {
         this.Job_Title = new SimpleStringProperty(Job_Title );
         this.Fullname = new SimpleStringProperty(Fullname);
+        this.classification = new SimpleStringProperty(Classification);
     }
 
 }

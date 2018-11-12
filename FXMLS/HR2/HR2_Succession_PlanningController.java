@@ -10,6 +10,7 @@ import FXMLS.HR2.ClassFiles.HR2_JV_With_Skills_for_SP;
 import FXMLS.HR2.ClassFiles.HR2_Job_VacancyClass;
 import FXMLS.HR2.ClassFiles.HR2_Organizational_List;
 import FXMLS.HR2.ClassFiles.SP_Employee_Info_Modal;
+import FXMLS.HR2.ClassFiles.SP_JV_with_Skills_Modal;
 import Model.HR2_CM_Pivot;
 import Model.HR2_Courses;
 import Model.HR2_Temp_Employee_Jobs;
@@ -23,6 +24,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -60,11 +62,11 @@ public class HR2_Succession_PlanningController implements Initializable {
     @FXML
     private TableColumn<HR2_JV_With_Skills_for_SP, String> col_job;
     @FXML
-    private TableColumn<HR2_JV_With_Skills_for_SP, String> col_qualifications;
-    @FXML
     private JFXTextField txt_jv;
     @FXML
     private TableColumn<HR2_JV_With_Skills_for_SP, String> col_dept;
+    @FXML
+    private TableColumn<HR2_Organizational_List, String> col_classification;
 
     /**
      * Initializes the controller class.
@@ -88,7 +90,7 @@ public class HR2_Succession_PlanningController implements Initializable {
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr2_competency_pivot", "job_id", "cp", "=", "job_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr2_skillset", "skill_id", "=", "cp", "skill_id", true)
                 .where(new Object[][]{{"j_limit.jobOpen", "!=", "0"}})
-                .get("d.dept_name as department,aerolink.tbl_hr4_jobs.title, aerolink.tbl_hr2_skillset.skill as skill");
+                .get("d.dept_name as department,aerolink.tbl_hr4_jobs.title");
         JV(jv_data);
     }
 
@@ -101,8 +103,7 @@ public class HR2_Succession_PlanningController implements Initializable {
                 obj.add(
                         new HR2_JV_With_Skills_for_SP(
                                 String.valueOf(hm.get("department")),
-                                String.valueOf(hm.get("title")),
-                                String.valueOf(hm.get("skill"))
+                                String.valueOf(hm.get("title"))
                         ));
 
             }
@@ -150,10 +151,13 @@ public class HR2_Succession_PlanningController implements Initializable {
                             List sp = ej.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "emp",
                                     "=", "employee_code")
                                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
+                                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_classifications", "id", "=", "jobs", "classification_id", true)
                                     .where(new Object[][]{{"jobs.dept_id", "=", cbox_department.getSelectionModel()
-                                    .getSelectedItem().toString().substring(4).toString().split(" - ")[0]}})
-                                    .get("jobs.title as position", "concat(emp.firstname, ' ',emp.middlename, ' ' ,emp.lastname)as employees");
+                                .getSelectedItem().toString().substring(4).toString().split(" - ")[0]}})
+                                    .get("jobs.title as position", "concat(emp.firstname, ' ',emp.middlename, ' ' ,emp.lastname)as employees",
+                                            "aerolink.tbl_hr4_job_classifications.class_name as Classification");
                             Data(sp);
+                            Collections.sort(sp);
                         } catch (Exception e) {
                             System.out.println(e);
                         }
@@ -187,7 +191,9 @@ public class HR2_Succession_PlanningController implements Initializable {
                 obj.add(
                         new HR2_Organizational_List(
                                 String.valueOf(hm.get("position")),
-                                String.valueOf(hm.get("employees"))));
+                                String.valueOf(hm.get("employees")),
+                                String.valueOf(hm.get("Classification"))
+                        ));
 
             }
             tbl_view_positions.setItems(obj);
@@ -199,7 +205,10 @@ public class HR2_Succession_PlanningController implements Initializable {
     public void DisplayDataInJTable() {
         col_dept.setCellValueFactory((TableColumn.CellDataFeatures<HR2_JV_With_Skills_for_SP, String> param) -> param.getValue().department);
         col_job.setCellValueFactory((TableColumn.CellDataFeatures<HR2_JV_With_Skills_for_SP, String> param) -> param.getValue().title);
-        col_qualifications.setCellValueFactory((TableColumn.CellDataFeatures<HR2_JV_With_Skills_for_SP, String> param) -> param.getValue().skills);
+        SkillsButton();
+
+        //Organizational List
+        col_classification.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Organizational_List, String> param) -> param.getValue().classification);
         col_positions.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Organizational_List, String> param) -> param.getValue().Job_Title);
         col_employees.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Organizational_List, String> param) -> param.getValue().Fullname);
         TableColumn<HR2_Organizational_List, Void> addButton = new TableColumn("View Employee Info");
@@ -247,4 +256,48 @@ public class HR2_Succession_PlanningController implements Initializable {
         tbl_view_positions.getColumns().add(addButton);
     }
 
+    public void SkillsButton() {
+        TableColumn<HR2_JV_With_Skills_for_SP, Void> addButton = new TableColumn("Action");
+
+        Callback<TableColumn<HR2_JV_With_Skills_for_SP, Void>, TableCell<HR2_JV_With_Skills_for_SP, Void>> cellFactory
+                = new Callback<TableColumn<HR2_JV_With_Skills_for_SP, Void>, TableCell<HR2_JV_With_Skills_for_SP, Void>>() {
+            @Override
+            public TableCell<HR2_JV_With_Skills_for_SP, Void> call(final TableColumn<HR2_JV_With_Skills_for_SP, Void> param) {
+
+                final TableCell<HR2_JV_With_Skills_for_SP, Void> cell = new TableCell<HR2_JV_With_Skills_for_SP, Void>() {
+                    private final Button btn = new Button("View Skills");
+
+                    {
+                        try {
+                            btn.setOnAction(e
+                                    -> {
+                                SP_JV_with_Skills_Modal.view_skill(tbl_job_vacancy.getSelectionModel().getSelectedItem().title.get());
+                                Modal viewEmp = Modal.getInstance(new Form("/FXMLS/HR2/Modals/SP_ViewSkills.fxml").getParent());
+                                viewEmp.open();
+                            });
+                            btn.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
+                            btn.setCursor(javafx.scene.Cursor.HAND);
+                        } catch (Exception ex) {
+                            System.out.println(ex);
+                        }
+
+                    }
+
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+
+        };
+
+        addButton.setCellFactory(cellFactory);
+        tbl_job_vacancy.getColumns().add(addButton);
+    }
 }

@@ -20,7 +20,7 @@
          <children>
             <Label layoutX="14.0" layoutY="8.0" text="Edit Course Title" textFill="WHITE">
                <font>
-                  <Font name="Roboto Medium" size="15.0" />
+                  <Font name="Lato Bold" size="15.0" />
                </font>
             </Label>
          </children>

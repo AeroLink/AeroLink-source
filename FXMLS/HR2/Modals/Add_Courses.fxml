@@ -16,7 +16,14 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></JFXComboBox>
-      <Pane prefHeight="36.0" prefWidth="398.0" style="-fx-background-color: #34A853;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Pane prefHeight="36.0" prefWidth="398.0" style="-fx-background-color: #34A853;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="11.0" layoutY="4.0" prefHeight="24.0" prefWidth="100.0" text="Add Course" textFill="WHITE">
+               <font>
+                  <Font name="Lato Bold" size="17.0" />
+               </font>
+            </Label>
+         </children></Pane>
       <JFXTextArea fx:id="txt_course_desc" focusColor="#2b2b2c" labelFloat="true" layoutX="33.0" layoutY="136.0" maxWidth="310.0" minWidth="310.0" prefHeight="109.0" prefWidth="310.0" promptText="Course Description" style="-fx-border-color: #d6d6c2; -fx-border-width: 1px;" unFocusColor="WHITE">
          <font>
             <Font name="Lato Medium" size="15.0" />

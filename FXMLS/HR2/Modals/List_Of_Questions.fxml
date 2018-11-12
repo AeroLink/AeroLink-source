@@ -19,12 +19,12 @@
                      <children>
                         <Label layoutX="14.0" layoutY="16.0" prefHeight="25.0" prefWidth="115.0" text="Course Title:">
                            <font>
-                              <Font name="Roboto Black" size="18.0" />
+                              <Font name="Lato Bold" size="17.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lbl_course_title" layoutX="129.0" layoutY="18.0" prefHeight="21.0" prefWidth="462.0" text="Label">
+                        <Label fx:id="lbl_course_title" layoutX="115.0" layoutY="18.0" prefHeight="21.0" prefWidth="462.0" text="Label" textFill="#34a853">
                            <font>
-                              <Font name="Roboto Medium" size="15.0" />
+                              <Font name="Lato Bold" size="17.0" />
                            </font>
                         </Label>
                      </children>

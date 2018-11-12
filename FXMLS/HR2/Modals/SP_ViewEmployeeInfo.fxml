@@ -41,12 +41,12 @@
             <Font name="Roboto Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_position" layoutX="251.0" layoutY="129.0" prefHeight="30.0" prefWidth="139.0" text="Position">
+      <Label fx:id="lbl_position" layoutX="251.0" layoutY="129.0" prefHeight="30.0" prefWidth="249.0" text="None">
          <font>
             <Font name="Roboto Regular" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_department" layoutX="251.0" layoutY="159.0" prefHeight="30.0" prefWidth="139.0" text="Department">
+      <Label fx:id="lbl_department" layoutX="251.0" layoutY="159.0" prefHeight="30.0" prefWidth="192.0" text="None">
          <font>
             <Font name="Roboto Regular" size="15.0" />
          </font>
@@ -56,7 +56,7 @@
             <Font name="Roboto Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_gender" layoutX="251.0" layoutY="99.0" prefHeight="30.0" prefWidth="139.0" text="Gender">
+      <Label fx:id="lbl_gender" layoutX="251.0" layoutY="99.0" prefHeight="30.0" prefWidth="139.0" text="None">
          <font>
             <Font name="Roboto Regular" size="15.0" />
          </font>
@@ -66,7 +66,7 @@
             <Font name="Roboto Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_civil_status" layoutX="14.0" layoutY="239.0" prefHeight="30.0" prefWidth="99.0" text="Civil Status">
+      <Label fx:id="lbl_civil_status" layoutX="14.0" layoutY="239.0" prefHeight="30.0" prefWidth="99.0" text="None">
          <font>
             <Font name="Roboto Regular" size="15.0" />
          </font>
@@ -76,7 +76,7 @@
             <Font name="Roboto Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_cn" layoutX="146.0" layoutY="239.0" prefHeight="30.0" prefWidth="120.0" text="09127228556">
+      <Label fx:id="lbl_cn" layoutX="146.0" layoutY="239.0" prefHeight="30.0" prefWidth="120.0" text="None">
          <font>
             <Font name="Roboto Regular" size="15.0" />
          </font>
@@ -86,7 +86,7 @@
             <Font name="Roboto Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_status" layoutX="301.0" layoutY="239.0" prefHeight="30.0" prefWidth="89.0" text="Status">
+      <Label fx:id="lbl_status" layoutX="301.0" layoutY="239.0" prefHeight="30.0" prefWidth="89.0" text="None">
          <font>
             <Font name="Roboto Regular" size="15.0" />
          </font>
@@ -96,7 +96,7 @@
             <Font name="Roboto Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_date_hired" layoutX="403.0" layoutY="239.0" prefHeight="30.0" prefWidth="110.0" text="Date Hired">
+      <Label fx:id="lbl_date_hired" layoutX="403.0" layoutY="239.0" prefHeight="30.0" prefWidth="110.0" text="None">
          <font>
             <Font name="Roboto Regular" size="15.0" />
          </font>
@@ -106,7 +106,7 @@
             <Font name="Roboto Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_productivity" layoutX="14.0" layoutY="314.0" prefHeight="30.0" prefWidth="89.0" text="p">
+      <Label fx:id="lbl_productivity" layoutX="14.0" layoutY="314.0" prefHeight="30.0" prefWidth="89.0" text="None">
          <font>
             <Font name="Roboto Regular" size="15.0" />
          </font>
@@ -116,7 +116,7 @@
             <Font name="Roboto Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_quality_of_work" layoutX="150.0" layoutY="314.0" prefHeight="30.0" prefWidth="89.0" text="p">
+      <Label fx:id="lbl_quality_of_work" layoutX="150.0" layoutY="314.0" prefHeight="30.0" prefWidth="89.0" text="None">
          <font>
             <Font name="Roboto Regular" size="15.0" />
          </font>
@@ -126,7 +126,7 @@
             <Font name="Roboto Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_initiative" layoutX="301.0" layoutY="314.0" prefHeight="30.0" prefWidth="61.0" text="p">
+      <Label fx:id="lbl_initiative" layoutX="301.0" layoutY="314.0" prefHeight="30.0" prefWidth="61.0" text="None">
          <font>
             <Font name="Roboto Regular" size="15.0" />
          </font>
@@ -136,7 +136,7 @@
             <Font name="Roboto Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_teamwork" layoutX="403.0" layoutY="314.0" prefHeight="30.0" prefWidth="61.0" text="p">
+      <Label fx:id="lbl_teamwork" layoutX="403.0" layoutY="314.0" prefHeight="30.0" prefWidth="61.0" text="None">
          <font>
             <Font name="Roboto Regular" size="15.0" />
          </font>
@@ -146,7 +146,7 @@
             <Font name="Roboto Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_problem_solving" layoutX="14.0" layoutY="393.0" prefHeight="30.0" prefWidth="61.0" text="p">
+      <Label fx:id="lbl_problem_solving" layoutX="14.0" layoutY="393.0" prefHeight="30.0" prefWidth="61.0" text="None">
          <font>
             <Font name="Roboto Regular" size="15.0" />
          </font>
@@ -156,7 +156,7 @@
             <Font name="Roboto Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_attendance" layoutX="149.0" layoutY="393.0" prefHeight="30.0" prefWidth="61.0" text="p">
+      <Label fx:id="lbl_attendance" layoutX="149.0" layoutY="393.0" prefHeight="30.0" prefWidth="61.0" text="None">
          <font>
             <Font name="Roboto Regular" size="15.0" />
          </font>
@@ -194,12 +194,12 @@
          </cursor>
       </JFXButton>
       <JFXComboBox fx:id="jfx_position" layoutX="337.0" layoutY="485.0" prefHeight="30.0" prefWidth="153.0" promptText="Select Position" />
-      <Label layoutX="389.0" layoutY="99.0" prefHeight="30.0" prefWidth="46.0" text="Suffix:">
+      <Label layoutX="408.0" layoutY="99.0" prefHeight="30.0" prefWidth="46.0" text="Suffix:">
          <font>
             <Font name="Roboto Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_suffix" layoutX="440.0" layoutY="99.0" prefHeight="30.0" prefWidth="38.0" text="None">
+      <Label fx:id="lbl_suffix" layoutX="459.0" layoutY="99.0" prefHeight="30.0" prefWidth="38.0" text="None">
          <font>
             <Font name="Roboto Regular" size="15.0" />
          </font>

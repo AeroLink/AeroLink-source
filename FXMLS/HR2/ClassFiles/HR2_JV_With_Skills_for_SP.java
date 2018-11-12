@@ -15,12 +15,10 @@ public class HR2_JV_With_Skills_for_SP {
 
     public SimpleStringProperty title;
     public SimpleStringProperty department;
-    public SimpleStringProperty skills;
 
-    public HR2_JV_With_Skills_for_SP(String department,String title, String skill) {
+    public HR2_JV_With_Skills_for_SP(String department,String title) {
         this.department = new SimpleStringProperty(department);
         this.title = new SimpleStringProperty(title);
-        this.skills = new SimpleStringProperty(skill);
     }
 
 }

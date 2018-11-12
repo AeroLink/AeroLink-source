@@ -197,7 +197,8 @@ public class List_Of_QuestionsController implements Initializable {
             Boolean a = c.where(new Object[][]{
                 {"question", "=", tbl_questions.getSelectionModel().getSelectedItem().question.get()}
             }).update(new Object[][]{
-                {"isDeleted", "1"},}).executeUpdate();
+                {"isDeleted", "1"},
+            }).executeUpdate();
             Alert dropnotif = new Alert(Alert.AlertType.INFORMATION);
             dropnotif.setContentText("Question Successfully Dropped");
             dropnotif.showAndWait();
