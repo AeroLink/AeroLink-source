@@ -25,6 +25,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
@@ -139,8 +141,6 @@ public class LM_AddQuestionsController implements Initializable {
         
         try {
 
-            //System.out.println(cm_data);
-            //  int id = model.insert(vals, true);
             Alert saved = new Alert(Alert.AlertType.INFORMATION);
             saved.setContentText("Saved");
             saved.showAndWait();

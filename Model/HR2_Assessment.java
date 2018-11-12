@@ -13,7 +13,7 @@ public class HR2_Assessment extends Synapse.Model {
 
     public HR2_Assessment() {
         setColumns("question_id", "question_number", "question",
-                 "choice_id", "course_id");
+                 "choice_id", "course_id","isDeleted");
         this.initTable("tbl_hr2_assessment");
     }
 }
