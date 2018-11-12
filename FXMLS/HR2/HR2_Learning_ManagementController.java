@@ -7,6 +7,7 @@ package FXMLS.HR2;
 
 import FXMLS.HR2.ClassFiles.HR2_CoursesClass;
 import FXMLS.HR2.ClassFiles.HR2_LMClass_For_AddQuestion_Modal;
+import FXMLS.HR2.ClassFiles.HR2_LM_ViewCourseModal;
 import FXMLS.HR2.ClassFiles.HR2_Training_InfoClass;
 import Model.HR2_CM_Pivot;
 import Model.HR2_CM_Skills;
@@ -285,7 +286,12 @@ public class HR2_Learning_ManagementController implements Initializable {
     }
 
     public void OpenModalForEdit() {
-
+            HR2_LM_ViewCourseModal.EditCourse(tbl_courses.getSelectionModel().getSelectedItem().course_title.get()
+                    ,tbl_courses.getSelectionModel().getSelectedItem().course_description.get(),
+                    tbl_courses.getSelectionModel().getSelectedItem().created_by.get());
+            Modal viewCourse = Modal.getInstance(new Form("/FXMLS/HR2/Modals/LM_ViewCourse.fxml").getParent());
+            viewCourse.open();
+            
     }
 
     public void DropExam() {

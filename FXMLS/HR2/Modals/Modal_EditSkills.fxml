@@ -12,7 +12,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="472.0" prefWidth="431.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.Modal_EditSkillsController">
    <children>
-      <Pane layoutX="6.0" prefHeight="44.0" prefWidth="431.0" style="-fx-background-color: #00cc66;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Pane layoutX="6.0" prefHeight="44.0" prefWidth="431.0" style="-fx-background-color: #34A853;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <JFXComboBox fx:id="cbox_edit_select_job" layoutX="50.0" layoutY="84.0" prefHeight="25.0" prefWidth="331.0" promptText="Select a Job">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -24,7 +24,7 @@
          </font>
       </JFXTextField>
       <JFXTextArea fx:id="txt_edit_skill_desc" layoutX="50.0" layoutY="203.0" maxWidth="331.0" minWidth="310.0" prefHeight="130.0" prefWidth="331.0" style="-fx-border-color: #c2c2a3; -fx-border-width: 2px;" unFocusColor="#f5f2f2" />
-      <JFXButton fx:id="btn_update" buttonType="RAISED" layoutX="50.0" layoutY="363.0" onAction="#Update" prefHeight="37.0" prefWidth="331.0" style="-fx-background-color: #00cc66;" styleClass="btn-primary" text=" Update" textFill="WHITE">
+      <JFXButton fx:id="btn_update" buttonType="RAISED" layoutX="50.0" layoutY="363.0" onAction="#Update" prefHeight="37.0" prefWidth="331.0" style="-fx-background-color: #34A853;" styleClass="btn-primary" text=" Update" textFill="WHITE">
          <font>
             <Font name="Lato Black" size="15.0" />
          </font>

@@ -16,10 +16,9 @@ public class HR2_TM_ViewTrainingInfo_Modal {
     //shared data when the button clicked in current trainings table 
     public static String tid, jp, t_title, sd, ed;
 
-    public static void init_Question(String job_position1, String training_title,
+    public static void init_Question(String job_position1,
             String sd_of_training, String ed_of_training) {
         jp = job_position1;
-        t_title = training_title;
         sd = sd_of_training;
         ed = ed_of_training;                                 
     }

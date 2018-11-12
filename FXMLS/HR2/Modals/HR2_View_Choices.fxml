@@ -27,7 +27,7 @@
          </font>
       </Label>
       <JFXTextArea fx:id="txt_question" disable="true" focusColor="#171717" layoutX="14.0" layoutY="77.0" maxWidth="422.0" minWidth="422.0" prefHeight="99.0" prefWidth="422.0" style="-fx-border-color: #1f1f14;" unFocusColor="WHITE" />
-      <JFXButton fx:id="btn_edit" buttonType="RAISED" layoutX="296.0" layoutY="420.0" onAction="#EditQuestionModal" prefHeight="32.0" prefWidth="111.0" style="-fx-background-color: #00b359;" text=" EDIT" textFill="WHITE">
+      <JFXButton fx:id="btn_edit" buttonType="RAISED" layoutX="296.0" layoutY="420.0" onAction="#EditQuestionModal" prefHeight="32.0" prefWidth="111.0" style="-fx-background-color: #34A853;" text=" EDIT" textFill="WHITE">
          <font>
             <Font name="Roboto Bold" size="15.0" />
          </font>

@@ -88,8 +88,6 @@ public class HR2_Training_ManagementController implements Initializable {
     @FXML
     private TableColumn<HR2_Training_InfoClass, String> col_job_position;
     @FXML
-    private TableColumn<HR2_Training_InfoClass, String> col_training_title;
-    @FXML
     private TableColumn<HR2_Training_InfoClass, String> col_start_date;
     @FXML
     private TableColumn<HR2_Training_InfoClass, String> col_end_date;
@@ -166,7 +164,6 @@ public class HR2_Training_ManagementController implements Initializable {
         historyTrainingButton();
 
         col_job_position.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().job_position);
-        col_training_title.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().training_title);
         col_start_date.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().start_date);
         col_end_date.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().end_date);
         TableColumn<HR2_Training_InfoClass, Void> addButton = new TableColumn("Action");
@@ -184,7 +181,6 @@ public class HR2_Training_ManagementController implements Initializable {
                             btn.setOnAction(e
                                     -> {
                                 HR2_TM_ViewTrainingInfo_Modal.init_Question(tbl_trainings.getSelectionModel().getSelectedItem().job_position.get(),
-                                        tbl_trainings.getSelectionModel().getSelectedItem().training_title.get(),
                                         tbl_trainings.getSelectionModel().getSelectedItem().start_date.get(),
                                         tbl_trainings.getSelectionModel().getSelectedItem().end_date.get());
                                 Modal viewParticipants = Modal.getInstance(new Form("/FXMLS/HR2/Modals/TM_ViewTraining.fxml").getParent());
@@ -231,10 +227,9 @@ public class HR2_Training_ManagementController implements Initializable {
                         try {
                             btn.setOnAction(e
                                     -> {
-                                HR2_TM_ViewTrainingInfo_Modal.init_Question(tbl_trainings.getSelectionModel().getSelectedItem().job_position.get(),
-                                        tbl_trainings.getSelectionModel().getSelectedItem().training_title.get(),
-                                        tbl_trainings.getSelectionModel().getSelectedItem().start_date.get(),
-                                        tbl_trainings.getSelectionModel().getSelectedItem().end_date.get());
+                                HR2_TM_ViewTrainingInfo_Modal.init_Question(tbl_history_of_trainings.getSelectionModel().getSelectedItem().job_position.get(),
+                                        tbl_history_of_trainings.getSelectionModel().getSelectedItem().start_date.get(),
+                                        tbl_history_of_trainings.getSelectionModel().getSelectedItem().end_date.get());
                                 Modal viewParticipants = Modal.getInstance(new Form("/FXMLS/HR2/Modals/TM_ViewTraining.fxml").getParent());
                                 viewParticipants.open();
                             });
@@ -279,6 +274,27 @@ public class HR2_Training_ManagementController implements Initializable {
         Data(training_data);
 
     }
+    
+    
+    @FXML
+    public void searchTraining() {
+        HR2_Training_Info tm = new HR2_Training_Info();
+        tbl_trainings.getItems().clear();
+        try {
+            List training_data1 = tm.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "employees", "=", "id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr2_type_of_training ", "type_of_training_id", "t_type", "=", "type_of_training_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_log2_vehicle_status ", "vehicle_id", "v", "=", "vehicle_id")
+                    .where(new Object[][]{{"job_position", "like", "%" + txt_search_training.getText() + "%","AND","aerolink.tbl_hr2_training_info.status", "=", "1"}})
+                    .get("job_position", "training_title", "training_description", "CONCAT(employees.firstname, ' ' ,employees.middlename, ' ',\n"
+                            + "employees.lastname)as trainor", "start_date", "end_date", "start_time", "end_time", "t_type.type_of_training",
+                            "location", "v.vehicle", "budget_cost");
+            Data(training_data1);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
 
     public void Data(List b) {
         ObservableList<HR2_Training_InfoClass> obj = FXCollections.observableArrayList();
@@ -343,16 +359,16 @@ public class HR2_Training_ManagementController implements Initializable {
             System.out.println(e);
         }
     }
-
+    
     @FXML
-    public void searchTraining() {
+     public void searchHistoryOfTraining() {
         HR2_Training_Info tm = new HR2_Training_Info();
-        tbl_trainings.getItems().clear();
+        tbl_history_of_trainings.getItems().clear();
         try {
             List training_data1 = tm.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "employees", "=", "id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr2_type_of_training ", "type_of_training_id", "t_type", "=", "type_of_training_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_log2_vehicle_status ", "vehicle_id", "v", "=", "vehicle_id")
-                    .where(new Object[][]{{"job_position", "like", "%" + txt_search_training.getText() + "%"}})
+                    .where(new Object[][]{{"job_position", "like", "%" + txt_search_historyTraining.getText() + "%","AND","aerolink.tbl_hr2_training_info.status", "=", "0"}})
                     .get("job_position", "training_title", "training_description", "CONCAT(employees.firstname, ' ' ,employees.middlename, ' ',\n"
                             + "employees.lastname)as trainor", "start_date", "end_date", "start_time", "end_time", "t_type.type_of_training",
                             "location", "v.vehicle", "budget_cost");

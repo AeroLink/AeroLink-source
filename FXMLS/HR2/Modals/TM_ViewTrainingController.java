@@ -77,7 +77,6 @@ public class TM_ViewTrainingController implements Initializable {
 
         cbox_edit_title.getItems().add(HR2_TM_ViewTrainingInfo_Modal.jp);
         cbox_edit_title.getSelectionModel().selectFirst();
-        txt_edit_training_title.setText(HR2_TM_ViewTrainingInfo_Modal.t_title);
         txt_edit_sd.setValue(LocalDate.parse(HR2_TM_ViewTrainingInfo_Modal.sd));
         txt_edit_ed.setValue(LocalDate.parse(HR2_TM_ViewTrainingInfo_Modal.ed));
         loadDataInComboBoxes();
@@ -123,7 +122,7 @@ public class TM_ViewTrainingController implements Initializable {
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr2_type_of_training ", "type_of_training_id", "t_type", "=", "type_of_training_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_log2_vehicle_status ", "vehicle_id", "v", "=", "vehicle_id")
                 .where(new Object[][]{{"aerolink.tbl_hr2_training_info.job_position", "=", cbox_edit_title.getValue().toString()}})
-                .get("training_description", "CONCAT('T', employees.id , ' - ',employees.firstname, ' ' ,employees.middlename, ' ',\n"
+                .get("training_title","training_description", "CONCAT('T', employees.id , ' - ',employees.firstname, ' ' ,employees.middlename, ' ',\n"
                         + "employees.lastname)as trainor", "start_time", "end_time", "CONCAT('TM',t_type.type_of_training_id,' - ',t_type.type_of_training) as type_of_training",
                         "location", "CONCAT('V',v.vehicle_id,' - ',v.vehicle) as vehicle", "budget_cost");
         Data(training_data);
@@ -132,6 +131,7 @@ public class TM_ViewTrainingController implements Initializable {
 
     public void Data(List b) {
         b.stream().forEach(row -> {
+            txt_edit_training_title.setText(((HashMap) row).get("training_title").toString());
             txt_edit_desc.setText(((HashMap) row).get("training_description").toString());
             cbox_edit_trainor.setValue(((HashMap) row).get("trainor").toString());
             txt_edit_st.setText(((HashMap) row).get("start_time").toString());
@@ -150,7 +150,6 @@ public class TM_ViewTrainingController implements Initializable {
         Optional<ButtonType> rs = update.showAndWait();
 
         if (rs.get() == ButtonType.OK) {
-            //   System.out.println(tbl_Skills.getSelectionModel().getSelectedItem().Skill_ID.getValue());
             HR2_Training_Info tm = new HR2_Training_Info();
 
             Boolean a = tm.where(new Object[][]{

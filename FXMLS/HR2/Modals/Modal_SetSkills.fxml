@@ -15,7 +15,7 @@
    <children>
       <AnchorPane prefHeight="42.0" prefWidth="387.0" AnchorPane.bottomAnchor="410.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Pane prefHeight="43.0" prefWidth="387.0" style="-fx-background-color: #00cc66;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Pane prefHeight="43.0" prefWidth="387.0" style="-fx-background-color: #34A853;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Label layoutX="128.0" layoutY="11.0" text="Set Competency Skill" textFill="WHITE">
                      <font>
