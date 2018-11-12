@@ -24,7 +24,10 @@
                               <Font name="Lato Black" size="18.0" />
                            </font>
                         </Label>
-                        <JFXComboBox fx:id="cbox_department" layoutX="164.0" layoutY="52.0" prefHeight="25.0" prefWidth="322.0" promptText="Select Department" />
+                        <JFXComboBox fx:id="cbox_department" layoutX="164.0" layoutY="52.0" prefHeight="25.0" prefWidth="322.0" promptText="Select Department">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></JFXComboBox>
                         <TableView fx:id="tbl_view_positions" layoutX="8.0" layoutY="96.0" prefHeight="373.0" prefWidth="650.0" style="-fx-border-color: #ccccb3;">
                           <columns>
                               <TableColumn fx:id="col_classification" prefWidth="75.0" text="Classification" />
@@ -79,12 +82,12 @@
                               <Font name="Raleway Italic" size="17.0" />
                            </font>
                         </Label>
-                        <Label layoutX="13.0" layoutY="516.0" prefHeight="32.0" prefWidth="473.0" text="* if you want to view the skills just click the &quot;View Skills&quot; button" textFill="#434242">
+                        <Label layoutX="13.0" layoutY="516.0" prefHeight="32.0" prefWidth="592.0" text="* if you want to view the skills on a certain job just click the &quot;View Skills&quot;" textFill="#434242">
                            <font>
                               <Font name="Raleway Italic" size="17.0" />
                            </font>
                         </Label>
-                        <Label layoutX="16.0" layoutY="537.0" prefHeight="32.0" prefWidth="167.0" text=" on a certain column*" textFill="#434242">
+                        <Label layoutX="16.0" layoutY="537.0" prefHeight="32.0" prefWidth="227.0" text="button on a certain row*" textFill="#434242">
                            <font>
                               <Font name="Raleway Italic" size="17.0" />
                            </font>

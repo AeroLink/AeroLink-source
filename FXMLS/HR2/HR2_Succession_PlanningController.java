@@ -25,6 +25,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -157,7 +158,6 @@ public class HR2_Succession_PlanningController implements Initializable {
                                     .get("jobs.title as position", "concat(emp.firstname, ' ',emp.middlename, ' ' ,emp.lastname)as employees",
                                             "aerolink.tbl_hr4_job_classifications.class_name as Classification");
                             Data(sp);
-                            Collections.sort(sp);
                         } catch (Exception e) {
                             System.out.println(e);
                         }
@@ -196,6 +196,13 @@ public class HR2_Succession_PlanningController implements Initializable {
                         ));
 
             }
+    /*       Collections.sort(b,new Comparator<HashMap<String, String>>() {
+                public int compare(HashMap<String, String> one, HashMap<String, String> two) {
+                    return one.get("site_name")
+                    .compareTo(two.get("site_name"));
+                }
+            }
+            );*/
             tbl_view_positions.setItems(obj);
         } catch (Exception e) {
             System.out.println(e);
