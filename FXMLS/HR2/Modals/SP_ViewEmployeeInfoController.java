@@ -9,6 +9,7 @@ import FXMLS.HR2.ClassFiles.HR2_JV_With_Skills_for_SP;
 import FXMLS.HR2.ClassFiles.SP_EmployeeInfo_in_Modal;
 import FXMLS.HR2.ClassFiles.SP_Employee_Info_Modal;
 import Model.HR2_Temp_Employee_Profiles;
+import Model.HR4_Classification;
 import Model.HR4_Jobs;
 import Model.VirtualTables.VT_HR2;
 import Synapse.Model;
@@ -87,7 +88,26 @@ public class SP_ViewEmployeeInfoController implements Initializable {
         lbl_fullname.setText(SP_Employee_Info_Modal.fullname);
         lbl_position.setText(SP_Employee_Info_Modal.title);
         populateLabels();
+        Classifications();
 
+    }
+
+    public void Classifications() {
+        HR4_Jobs jobs = new HR4_Jobs();
+
+        try {
+            List c = jobs.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "d", "=", "dept_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_classifications", "id", "c", "=", "classification_id")
+                    .where(new Object[][]{{"d.dept_name", "=",lbl_department.getText()}})
+                    .get();
+
+            for (Object d : c) {
+                HashMap hm1 = (HashMap) d;
+                jfx_position.getItems().add("J" + hm1.get("job_id") + " - " + hm1.get("title"));
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
     }
 
     public void populateLabels() {

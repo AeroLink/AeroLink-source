@@ -168,7 +168,7 @@
                   <Font name="Roboto Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="lbl_rating" layoutX="14.0" layoutY="30.0" prefHeight="30.0" prefWidth="61.0" text="p">
+            <Label fx:id="lbl_rating" layoutX="14.0" layoutY="30.0" prefHeight="30.0" prefWidth="61.0" text="None">
                <font>
                   <Font name="Roboto Regular" size="15.0" />
                </font>
@@ -178,14 +178,14 @@
                   <Font name="Roboto Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="lbl_remarks" layoutX="14.0" layoutY="90.0" prefHeight="30.0" prefWidth="61.0" text="p">
+            <Label fx:id="lbl_remarks" layoutX="14.0" layoutY="90.0" prefHeight="30.0" prefWidth="61.0" text="None">
                <font>
                   <Font name="Roboto Regular" size="15.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <JFXButton fx:id="btn_update_position" buttonType="RAISED" layoutX="342.0" layoutY="536.0" prefHeight="37.0" prefWidth="145.0" style="-fx-background-color: #34A853;" text="Update Position" textFill="WHITE">
+      <JFXButton fx:id="btn_update_position" buttonType="RAISED" layoutX="342.0" layoutY="536.0" prefHeight="37.0" prefWidth="145.0" style="-fx-background-color: #34A853;" text="Promote" textFill="WHITE">
          <font>
             <Font name="Roboto Bold" size="15.0" />
          </font>
@@ -193,7 +193,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXComboBox fx:id="jfx_position" layoutX="337.0" layoutY="485.0" prefHeight="30.0" prefWidth="153.0" promptText="Select Position" />
+      <JFXComboBox fx:id="jfx_position" layoutX="337.0" layoutY="485.0" prefHeight="30.0" prefWidth="153.0" promptText="Select Classification">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXComboBox>
       <Label layoutX="408.0" layoutY="99.0" prefHeight="30.0" prefWidth="46.0" text="Suffix:">
          <font>
             <Font name="Roboto Bold" size="15.0" />
