@@ -8,6 +8,8 @@ package FXMLS.HR2.Modals;
 import FXMLS.HR2.ClassFiles.HR2_JV_With_Skills_for_SP;
 import FXMLS.HR2.ClassFiles.SP_EmployeeInfo_in_Modal;
 import FXMLS.HR2.ClassFiles.SP_Employee_Info_Modal;
+import Model.HR2_Courses;
+import Model.HR2_Temp_Employee_Jobs;
 import Model.HR2_Temp_Employee_Profiles;
 import Model.HR4_Classification;
 import Model.HR4_Jobs;
@@ -23,6 +25,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +33,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 
 /**
@@ -79,6 +84,8 @@ public class SP_ViewEmployeeInfoController implements Initializable {
     private Label lbl_fullname;
 
     ObservableList<SP_EmployeeInfo_in_Modal> emp = FXCollections.observableArrayList();
+    @FXML
+    private Label lbl_employee_code;
 
     /**
      * Initializes the controller class.
@@ -98,7 +105,7 @@ public class SP_ViewEmployeeInfoController implements Initializable {
         try {
             List c = jobs.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "d", "=", "dept_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_classifications", "id", "c", "=", "classification_id")
-                    .where(new Object[][]{{"d.dept_name", "=",lbl_department.getText()}})
+                    .where(new Object[][]{{"d.dept_name", "=", lbl_department.getText()}})
                     .get();
 
             for (Object d : c) {
@@ -121,10 +128,11 @@ public class SP_ViewEmployeeInfoController implements Initializable {
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employeeTypes", "type_id", "=", "emps", "type_id", true)
                 .join(Model.JOIN.INNER, "temp_performace", "employee_code", "tp", "=", "e", "employee_code", true)
                 .where(new Object[][]{{"e.fullname", "like", "%" + lbl_fullname.getText() + "%"}})
-                .get("e.fullname,e.suffix_name,e.gender,aerolink.tbl_hr4_jobs.title,aerolink.tbl_hr4_department.dept_name,\n"
+                .get("ej.employee_code,e.fullname,e.suffix_name,e.gender,aerolink.tbl_hr4_jobs.title,aerolink.tbl_hr4_department.dept_name,\n"
                         + "cs.civil_status,e.contact_number,aerolink.tbl_hr4_employeeTypes.type_name,emps.datehired,tp.productivity,tp.qualityofwork,\n"
                         + "tp.Initiative,tp.teamwork,tp.problemsolving,tp.attendance");
         list.stream().forEach(row -> {
+            lbl_employee_code.setText(((HashMap) row).get("employee_code").toString());
             lbl_suffix.setText(((HashMap) row).get("suffix_name").toString());
             lbl_department.setText(((HashMap) row).get("dept_name").toString());
             lbl_gender.setText(((HashMap) row).get("gender").toString());
@@ -139,6 +147,27 @@ public class SP_ViewEmployeeInfoController implements Initializable {
             lbl_problem_solving.setText(((HashMap) row).get("problemsolving").toString());
             lbl_attendance.setText(((HashMap) row).get("attendance").toString());
         });
+    }
+
+    @FXML
+    public void UpdatePosition() {
+        Alert update = new Alert(Alert.AlertType.CONFIRMATION);
+        update.setContentText("Are you sure you want to promote " + lbl_fullname.getText() + " as " +
+                jfx_position.getSelectionModel().getSelectedItem().toString() + "?");
+        Optional<ButtonType> rs = update.showAndWait();
+
+        if (rs.get() == ButtonType.OK) {
+            HR2_Temp_Employee_Jobs e_jobs = new HR2_Temp_Employee_Jobs();
+
+            Boolean a = e_jobs.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "=", "employee_code")
+                    .where(new Object[][]{
+                {"employee_code", "=", lbl_employee_code.getText()}
+            }).update(new Object[][]{
+                {"aerolink.tbl_hr4_employee_jobs.job_id", jfx_position.getSelectionModel().getSelectedItem().toString().substring(1).toString().split(" - ")[0]}}).executeUpdate();
+            Alert dropnotif = new Alert(Alert.AlertType.INFORMATION);
+            dropnotif.setContentText(lbl_fullname.getText() + " Successfully Promoted ");
+            dropnotif.showAndWait();
+        }
     }
 
 }

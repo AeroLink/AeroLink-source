@@ -11,6 +11,7 @@ import FXMLS.HR4.ClassFiles.HR4_MIZ;
 import Model.HR2_CM_Pivot;
 import Model.HR2_CM_Skills;
 import Model.HR4_Jobs;
+import Synapse.Model;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
@@ -65,6 +66,8 @@ public class Modal_EditSkillsController implements Initializable {
             HR2_CM_Skills skills = new HR2_CM_Skills();
             HR4_Jobs j = new HR4_Jobs();
             
+        //    List sk = skills.get("skill_id","skill","skill_descrition");
+        
             Boolean up = skills.where(new Object[][]{
                 {"skill", "=", txt_edit_skill.getText()}
             }).update(new Object[][]{
