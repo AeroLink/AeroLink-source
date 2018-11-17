@@ -1,0 +1,91 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package FXMLS;
+
+import Helpers.LoadSubSystem;
+import Synapse.Components.Modal.Modal;
+import Synapse.Form;
+import Synapse.Route;
+import Synapse.Session;
+import static Views.MainDashController.dpp;
+import com.jfoenix.controls.JFXButton;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.control.MenuItem;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Ellipse;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
+
+/**
+ * FXML Controller class
+ *
+ * @author ARIELLECIAS
+ */
+public class CoreSideController implements Initializable {
+
+    @FXML
+    private ImageView userImage;
+
+    private final static Duration DEFAULT_TIME_ANIM = new Duration(200);
+    private static final double DEFAULT_WIDTH_NAV = 273;
+    public Boolean paneOpen = false;
+
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        
+        Rectangle clip = new Rectangle(userImage.getFitWidth() - 30, userImage.getFitHeight() - 1);
+        clip.setArcHeight(50);
+        clip.setArcWidth(50);
+        userImage.setClip(clip);
+
+        // snapshot the rounded image.
+        SnapshotParameters parameters = new SnapshotParameters();
+        parameters.setFill(Color.TRANSPARENT);
+        WritableImage image = userImage.snapshot(parameters, null);
+
+        // remove the rounding clip so that our effect can show through.
+        userImage.setClip(null);
+
+        // apply a shadow effect.
+        userImage.setEffect(new DropShadow(20, Color.BLACK));
+
+        // store the rounded image in the imageView.
+        userImage.setImage(image);
+        
+    }
+
+    @FXML
+    public void triggerButton(ActionEvent event) {
+
+        if (!Session.getPermissions().contains(Route.routePermission.get(((JFXButton) event.getSource()).getId()))) {
+            Modal md = Modal.getInstance(new Form("/FXMLS/Deny.fxml").getParent());
+            md.open();
+        } else {
+            Session.CurrentRoute = ((JFXButton) event.getSource()).getId();
+            LoadSubSystem loadSubSystem = new Helpers.LoadSubSystem(((JFXButton) event.getSource()).getId(), dpp);
+        }
+
+    }
+
+}

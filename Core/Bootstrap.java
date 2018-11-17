@@ -7,12 +7,8 @@ package Core;
  */
 
 import Config.*;
-import Synapse.Database;
 import Synapse.Form;
 import Synapse.Session;
-import Synapse.iDB;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.stage.StageStyle;
 
 /**

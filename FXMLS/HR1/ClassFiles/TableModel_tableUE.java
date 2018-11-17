@@ -12,23 +12,16 @@ import javafx.beans.property.StringProperty;
  *
  * @author RAVEN
  */
-public class TableModel_table2 {
-
+public class TableModel_tableUE {
     public StringProperty Department;
+    public StringProperty Employee_Code;
     public StringProperty Employee_Name;
     public StringProperty Ratings;
-    public StringProperty Award;
-    public StringProperty Reward;
-    public StringProperty Remarks;
-    public StringProperty Date_Posted;
-
-    public TableModel_table2(String Department, String Employee_Name, String Ratings, String Award, String Reward, String Remarks, String Date_Posted) {
+    
+    public TableModel_tableUE(String Department, String Employee_Code, String Employee_Name, String Ratings) {
         this.Department = new SimpleStringProperty(Department);
+        this.Employee_Code = new SimpleStringProperty(Employee_Code);
         this.Employee_Name = new SimpleStringProperty(Employee_Name);
         this.Ratings = new SimpleStringProperty(Ratings);
-        this.Award = new SimpleStringProperty(Award);
-        this.Reward = new SimpleStringProperty(Reward);
-        this.Remarks = new SimpleStringProperty(Remarks);
-        this.Date_Posted = new SimpleStringProperty(Date_Posted);
     }
 }

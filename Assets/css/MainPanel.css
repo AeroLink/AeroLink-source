@@ -33,8 +33,7 @@ and open the template in the editor.
 
 }
 
-
-
+.jfx-hamburger StackPane { -fx-background-color: #34A853; }
 
 #tab .tab-label{
     -fx-background-color: white;
@@ -59,23 +58,28 @@ and open the template in the editor.
     -fx-border-radius: 0;
 }
 
-.menu-bar {
-    -fx-background-color: #34A853;
-    -fx-font-size: 10pt;
 
+.menu-bar {
+    -fx-background-color: #212121;
+    -fx-font-size: 10pt;
+}
+
+.menu .context-menu .label {
+    -fx-text-fill:  white;
+    -fx-font-size: 11pt;
+}
+
+
+.menu .context-menu {
+    -fx-background-color: #212121;
 }
 
 .menu .label{    
     -fx-text-fill:  white;
 }
 
-
 .menu-button {
-    -fx-background-color: #34A853;
-}
-
-.menuButton {
-    -fx-background-color: white;
+    -fx-background-color: #212121;
 }
 
 .menuButton > .label {
@@ -93,7 +97,7 @@ and open the template in the editor.
 .menu-button:hover,
 .menu-button:selected,
 .menu-button:showing{
-    -fx-background-color: white;
+    -fx-background-color: #212121;
 }
 
 .menu-button:hover > .label,
@@ -108,21 +112,17 @@ and open the template in the editor.
     -fx-fill: #34A853;
 }
 
-.menu:hover .context-menu .label {
-    -fx-text-fill:  black;
-}
-
 .menu-item:hover,
 .menu-item:selected,
 .menu-item:showing{
-    -fx-background-color: #34A853;
-    -fx-text-fill: white !important;
+    -fx-background-color: #212121;
+    -fx-text-fill: #34A853 !important;
 }
 
 .menu-item:hover .fontIcon,
 .menu-item:selected .fontIcon,
 .menu-item:showing .fontIcon{
-    -fx-fill: white;
+    -fx-fill: #34A853;
 }
 
 

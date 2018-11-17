@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="513.0" prefWidth="273.0" style="-fx-background-color: #212121;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.CoreModsController">
+   <children>
+      <VBox prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Booking" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="#34a853" glyphName="BOOK" size="25" strokeType="INSIDE" />
+               </graphic>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXButton>
+            <AnchorPane prefHeight="10.0" prefWidth="273.0" />
+            <AnchorPane>
+               <children>
+                  <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Purchase Order Management" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <graphic>
+                        <FontAwesomeIconView fill="#34a853" glyphName="CLIPBOARD" size="25" strokeType="INSIDE" />
+                     </graphic>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="10.0" prefWidth="273.0" />
+            <AnchorPane>
+               <children>
+                  <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Consolidation/Deconsolidation" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <graphic>
+                        <FontAwesomeIconView fill="#34a853" glyphName="SHIELD" size="25" strokeType="INSIDE" />
+                     </graphic>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="10.0" prefWidth="273.0" />
+            <AnchorPane>
+               <children>
+                  <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Master &amp; House Bill of Lading" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <graphic>
+                        <FontAwesomeIconView fill="#34a853" glyphName="SHOPPING_BASKET" size="25" strokeType="INSIDE" />
+                     </graphic>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="10.0" prefWidth="273.0" />
+            <AnchorPane>
+               <children>
+                  <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Shipment Files" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <graphic>
+                        <FontAwesomeIconView fill="#34a853" glyphName="SHIP" size="25" strokeType="INSIDE" />
+                     </graphic>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="10.0" prefWidth="273.0" />
+            <AnchorPane>
+               <children>
+                  <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Service Network" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <graphic>
+                        <FontAwesomeIconView fill="#34a853" glyphName="COGS" size="25" strokeType="INSIDE" />
+                     </graphic>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="10.0" prefWidth="273.0" />
+            <AnchorPane>
+               <children>
+                  <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Service Provider" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <graphic>
+                        <FontAwesomeIconView fill="#34a853" glyphName="CUBES" size="25" strokeType="INSIDE" />
+                     </graphic>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="10.0" prefWidth="273.0" />
+            <AnchorPane>
+               <children>
+                  <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Customer Relationship Management" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <graphic>
+                        <FontAwesomeIconView fill="#34a853" glyphName="USER" size="25" strokeType="INSIDE" />
+                     </graphic>
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="10.0" prefWidth="273.0" />
+            <AnchorPane>
+               <children>
+                  <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Standard Operation Procedures" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <graphic>
+                        <FontAwesomeIconView fill="#34a853" glyphName="EXCHANGE" size="25" strokeType="INSIDE" />
+                     </graphic>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="10.0" prefWidth="273.0" />
+            <AnchorPane>
+               <children>
+                  <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Schedule and Rate" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <graphic>
+                        <FontAwesomeIconView fill="#34a853" glyphName="CALENDAR" size="25" strokeType="INSIDE" />
+                     </graphic>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

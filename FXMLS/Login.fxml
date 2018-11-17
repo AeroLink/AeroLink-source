@@ -4,47 +4,55 @@
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="652.0" prefWidth="600.0" style="-fx-background-color: #333;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.LoginController">
-   <children>
-      <ImageView fitHeight="652.0" fitWidth="600.0" layoutX="100.0" layoutY="167.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <image>
-            <Image url="@../Assets/building.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="151.0" fitWidth="149.0" layoutX="32.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Assets/300%20x%20300.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="204.0" layoutY="9.0" prefHeight="113.0" prefWidth="353.0" text="AeroLink" textFill="#2dbe60">
-         <font>
-            <Font size="91.0" />
-         </font>
-      </Label>
-      <Label layoutX="203.0" layoutY="111.0" text="FREIGHT MANAGEMENT SYSTEM" textFill="WHITE">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <JFXTextField fx:id="txtUsername" focusColor="#2dbe60" labelFloat="true" layoutX="157.0" layoutY="208.0" maxWidth="549.0" minWidth="286.0" prefHeight="35.0" prefWidth="286.0" promptText="Username" style="-fx-text-inner-color: white;">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </JFXTextField>
-      <JFXPasswordField fx:id="txtPassword" focusColor="#2dbe60" labelFloat="true" layoutX="157.0" layoutY="303.0" maxWidth="286.0" minWidth="286.0" prefHeight="45.0" prefWidth="286.0" promptText="Password" style="-fx-text-inner-color: white;">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </JFXPasswordField>
-      <JFXButton fx:id="btnSignIn" layoutX="167.0" layoutY="391.0" onAction="#login" prefHeight="30.0" prefWidth="269.0" style="-fx-background-color: #2dbe60;" text="SIGN IN" textFill="WHITE">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </JFXButton>
-   </children>
-</AnchorPane>
+
+<BorderPane prefHeight="589.0" prefWidth="360.0" style="-fx-border-color: #34a853;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.LoginController">
+   <top>
+      <AnchorPane prefHeight="7.0" prefWidth="530.0" style="-fx-background-color: #34A853;" BorderPane.alignment="CENTER" />
+   </top>
+   <center>
+      <AnchorPane prefHeight="580.0" prefWidth="470.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton fx:id="btnSignIn" alignment="CENTER" contentDisplay="CENTER" layoutX="220.0" layoutY="465.0" onAction="#login" prefHeight="50.0" prefWidth="272.0" style="-fx-background-color: #2dbe60;" text="SIGN IN" textFill="WHITE" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="63.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <graphic>
+                  <ProgressIndicator fx:id="btnLoader" prefHeight="23.0" prefWidth="28.0" style="-fx-accent: white;" visible="false" />
+               </graphic>
+            </JFXButton>
+            <JFXTextField fx:id="txtUsername" focusColor="#34a853" labelFloat="true" layoutX="50.0" layoutY="275.0" maxWidth="549.0" minWidth="286.0" prefHeight="35.0" prefWidth="286.0" promptText="Username" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXTextField>
+            <JFXPasswordField fx:id="txtPassword" focusColor="#34a853" labelFloat="true" layoutX="50.0" layoutY="357.0" maxWidth="286.0" minWidth="286.0" prefHeight="45.0" prefWidth="286.0" promptText="Password" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXPasswordField>
+            <ImageView fitHeight="122.0" fitWidth="121.0" layoutX="131.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Assets/300%20x%20300.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="20.0" layoutY="119.0" prefHeight="113.0" prefWidth="353.0" text="AeroLink" textFill="#2dbe60">
+               <font>
+                  <Font name="System Bold" size="58.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="79.0" layoutY="197.0" text="FREIGHT MANAGEMENT SYSTEM" textAlignment="CENTER">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

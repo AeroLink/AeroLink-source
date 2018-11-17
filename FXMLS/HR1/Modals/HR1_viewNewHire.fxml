@@ -163,29 +163,32 @@
                                           </AnchorPane>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                              <children>
-                                                <AnchorPane disable="true" minHeight="0.0" minWidth="0.0" prefHeight="373.0" prefWidth="228.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <AnchorPane fx:id="paneUpdate" disable="true" minHeight="0.0" minWidth="0.0" prefHeight="373.0" prefWidth="228.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <children>
-                                                      <TextField fx:id="txtTaskName1" layoutX="14.0" layoutY="60.0" prefHeight="25.0" prefWidth="223.0" />
+                                                      <TextField fx:id="txtTaskName1" editable="false" layoutX="14.0" layoutY="60.0" prefHeight="25.0" prefWidth="223.0" />
                                                       <Label layoutX="14.0" layoutY="40.0" text="Task Name" />
                                                       <Label layoutX="12.0" layoutY="96.0" text="Task Description" />
-                                                      <TextArea fx:id="txtTaskDesc1" layoutX="14.0" layoutY="113.0" prefHeight="89.0" prefWidth="224.0" wrapText="true" />
-                                                      <DatePicker fx:id="txtStartDate1" layoutX="16.0" layoutY="233.0" prefHeight="25.0" prefWidth="216.0" />
+                                                      <TextArea fx:id="txtTaskDesc1" editable="false" layoutX="14.0" layoutY="113.0" prefHeight="89.0" prefWidth="224.0" wrapText="true" />
+                                                      <DatePicker fx:id="txtStartDate1" editable="false" layoutX="16.0" layoutY="233.0" prefHeight="25.0" prefWidth="216.0" />
                                                       <Label layoutX="16.0" layoutY="214.0" text="Task Start Date" />
-                                                      <DatePicker fx:id="txtEndDate1" layoutX="16.0" layoutY="282.0" prefHeight="25.0" prefWidth="216.0" />
+                                                      <DatePicker fx:id="txtEndDate1" editable="false" layoutX="16.0" layoutY="282.0" prefHeight="25.0" prefWidth="216.0" />
                                                       <Label layoutX="16.0" layoutY="263.0" text="Task End Date" />
-                                                      <JFXButton fx:id="updateTaskYes" layoutX="22.0" layoutY="338.0" prefHeight="26.0" prefWidth="83.0" styleClass="btn-primary" text="Yes" />
-                                                      <Label fx:id="txtStatus" layoutX="16.0" layoutY="6.0" style="-fx-text-fill: white;" styleClass="paneStatus-confirmed" text="Update Task : [Completed]">
+                                                      <AnchorPane fx:id="paneButtons" layoutX="32.0" layoutY="315.0">
+                                                         <children>
+                                                            <JFXButton fx:id="updateTaskYes" layoutX="39.0" layoutY="24.0" prefHeight="26.0" prefWidth="103.0" styleClass="btn-primary" text="Yes" />
+                                                            <Label layoutX="23.0" text="Is the task was complete?">
+                                                               <font>
+                                                                  <Font name="System Bold" size="13.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                      </AnchorPane>
+                                                      <Label fx:id="txtStatus" layoutX="16.0" layoutY="6.0" style="-fx-text-fill: white;" styleClass="paneStatus-late" text="Update Task : [Pending]">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
                                                       </Label>
                                                       <Separator layoutX="16.0" layoutY="29.0" prefWidth="200.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
-                                                      <JFXButton fx:id="updateTaskNo" layoutX="142.0" layoutY="338.0" prefHeight="26.0" prefWidth="83.0" styleClass="btn-danger" text="No" />
-                                                      <Label layoutX="44.0" layoutY="314.0" text="Is the task was complete?">
-                                                         <font>
-                                                            <Font name="System Bold" size="13.0" />
-                                                         </font>
-                                                      </Label>
                                                    </children>
                                                 </AnchorPane>
                                              </children>

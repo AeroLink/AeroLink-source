@@ -38,6 +38,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -121,7 +122,9 @@ public class HR1_viewNewHireController implements Initializable {
     @FXML
     private Label txtStatus;
     @FXML
-    private JFXButton updateTaskNo;
+    private AnchorPane paneUpdate;
+    @FXML
+    private AnchorPane paneButtons;
 
     /**
      * Initializes the controller class.
@@ -143,6 +146,37 @@ public class HR1_viewNewHireController implements Initializable {
 
         this.generateTable();
         this.renderTable();
+
+        tblTaskList.setOnMouseClicked(value -> {
+            paneUpdate.setDisable(false);
+            txtStatus.setText("Update Task: [" + tblTaskList.getSelectionModel().getSelectedItem().status.getValue() + "]");
+            txtStatus.getStyleClass().removeAll();
+
+            if (tblTaskList.getSelectionModel().getSelectedItem().status.getValue().equals("Pending")) {
+                txtStatus.getStyleClass().add("paneStatus-late");
+                paneButtons.setVisible(true);
+            } else {
+                txtStatus.getStyleClass().add("paneStatus-confirmed");
+                paneButtons.setVisible(false);
+            }
+
+            txtTaskName1.setText(tblTaskList.getSelectionModel().getSelectedItem().taskname.getValue());
+            txtTaskDesc1.setText(tblTaskList.getSelectionModel().getSelectedItem().taskdesc.getValue());
+            txtStartDate1.setValue(LocalDate.parse(tblTaskList.getSelectionModel().getSelectedItem().startdate.getValue()));
+            txtEndDate1.setValue(LocalDate.parse(tblTaskList.getSelectionModel().getSelectedItem().enddate.getValue()));
+
+        });
+
+        updateTaskYes.setOnAction(value -> {
+            
+            tasks.update(new Object[][]{
+                {"status", 1}
+            }).where(new Object[][]{
+                {"id", "=", tblTaskList.getSelectionModel().getSelectedItem().task_id.getValue()}
+            }).executeUpdate();
+            
+            Helpers.EIS_Response.SuccessResponse("Success", "Task was successfully Completed");
+        });
     }
 
     public void generateTable() {
@@ -178,10 +212,10 @@ public class HR1_viewNewHireController implements Initializable {
                     row.get("id").toString(),
                     row.get("end_date").toString(),
                     row.get("start_date").toString(),
-                    row.get("status").toString().equals("0") ? "Pending" : "Completed" ));
-            
+                    row.get("status").toString().equals("0") ? "Pending" : "Completed"));
+
         });
-        
+
         tblTaskList.getItems().clear();
         tblTaskList.setItems(ob);
     }
@@ -330,7 +364,7 @@ public class HR1_viewNewHireController implements Initializable {
             {"start_date", txtStartDate.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE)},
             {"end_date", txtEndDate.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE)}
         });
-        
+
         Helpers.EIS_Response.SuccessResponse("Success", "New task was added to the employee");
         this.renderTable();
     }

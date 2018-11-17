@@ -1,0 +1,11 @@
+.rounded{
+    -fx-background-color: white, white;
+    -fx-background-radius: 50%;
+    -fx-background-insets: -1.4, 0;
+    -fx-border-radius: 15;
+    -fx-border-width: 2;
+    -fx-padding: 0;
+    -fx-font-size: 0;
+}
+
+

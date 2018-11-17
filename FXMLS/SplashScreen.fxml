@@ -1,45 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXProgressBar?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="406.0" prefWidth="530.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.SplashScreenController">
+<AnchorPane id="AnchorPane" prefHeight="212.0" prefWidth="530.0" style="-fx-border-color: #34A853;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.SplashScreenController">
    <children>
       <BorderPane prefHeight="406.0" prefWidth="543.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="7.0" prefWidth="530.0" style="-fx-background-color: #34A853;" BorderPane.alignment="CENTER" />
+         </top>
          <center>
-            <ImageView fitHeight="418.0" fitWidth="548.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-               <image>
-                  <Image url="@../Assets/splash.jpg" />
-               </image>
-            </ImageView>
-         </center>
-         <bottom>
-            <VBox prefHeight="34.0" prefWidth="548.0">
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <ProgressBar fx:id="LoadingBar" maxHeight="-Infinity" prefHeight="0.0" prefWidth="548.0" progress="0.0" style="-fx-accent: #2dbe60;" />
-                  <AnchorPane prefHeight="200.0" prefWidth="548.0">
-                     <children>
-                        <Label fx:id="loadingPercentage" text="0.00 %" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
-                           <font>
-                              <Font name="Continuum Medium" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="loadingStatus" text="Loading ..." AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="0.0">
-                           <font>
-                              <Font name="Continuum Medium" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/300%20x%20300.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="184.0" layoutY="4.0" text="AeroLink" textFill="#34a853">
+                     <font>
+                        <Font name="System Bold" size="74.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="183.0" layoutY="81.0" text="Freight Management System">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <JFXProgressBar fx:id="LoadingBar" layoutX="186.0" layoutY="136.0" prefHeight="8.0" prefWidth="312.0" progress="0.0" />
+                  <Label fx:id="loadingStatus" layoutX="185.0" layoutY="149.0" text="Loading ...">
+                     <font>
+                        <Font name="Continuum Medium" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="loadingPercentage" layoutX="462.0" layoutY="150.0" text="0.00 %">
+                     <font>
+                        <Font name="Continuum Medium" size="12.0" />
+                     </font>
+                  </Label>
                </children>
-            </VBox>
-         </bottom>
+            </AnchorPane>
+         </center>
       </BorderPane>
    </children>
 </AnchorPane>
