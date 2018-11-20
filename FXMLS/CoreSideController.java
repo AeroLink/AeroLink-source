@@ -12,6 +12,7 @@ import Synapse.Route;
 import Synapse.Session;
 import static Views.MainDashController.dpp;
 import com.jfoenix.controls.JFXButton;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.animation.Interpolator;
@@ -23,6 +24,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tab;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
@@ -47,13 +49,23 @@ public class CoreSideController implements Initializable {
     private final static Duration DEFAULT_TIME_ANIM = new Duration(200);
     private static final double DEFAULT_WIDTH_NAV = 273;
     public Boolean paneOpen = false;
+    @FXML
+    private Tab CORE;
+    @FXML
+    private Tab HR;
+    @FXML
+    private Tab LOG;
+    @FXML
+    private Tab ADMIN;
+    @FXML
+    private Tab FINANCE;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         Rectangle clip = new Rectangle(userImage.getFitWidth() - 30, userImage.getFitHeight() - 1);
         clip.setArcHeight(50);
         clip.setArcWidth(50);
@@ -72,7 +84,35 @@ public class CoreSideController implements Initializable {
 
         // store the rounded image in the imageView.
         userImage.setImage(image);
-        
+
+        if (!Session.getPermissions().contains("SysAdmin")) {
+            String[] mods = {"CORE", "ADMIN", "FINANCE", "LOG", "HR"};
+
+            for (String m : mods) {
+                if (!Session.getPermissions().contains(Session.ModularPermission.get(m))) {
+                    switch (m) {
+                        case "CORE":
+                            CORE.disableProperty().setValue(true);
+                            break;
+                        case "ADMIN":
+                            ADMIN.disableProperty().setValue(true);
+                            break;
+                        case "FINANCE":
+                            FINANCE.disableProperty().setValue(true);
+                            break;
+                        case "LOG":
+                            LOG.disableProperty().setValue(true);
+                            break;
+                        case "HR":
+                            HR.disableProperty().setValue(true);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+
     }
 
     @FXML

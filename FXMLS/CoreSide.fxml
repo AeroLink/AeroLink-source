@@ -41,7 +41,7 @@
             </Pane>
             <JFXTabPane prefHeight="533.0" prefWidth="273.0" side="LEFT" stylesheets="@../Assets/css/tabCSS.css" VBox.vgrow="ALWAYS">
                <tabs>
-                  <Tab id="tab" closable="false">
+                  <Tab id="tab" fx:id="CORE" closable="false">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -210,7 +210,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="PLANE" size="25" strokeType="INSIDE" styleClass="fontIcon" />
                      </graphic>
                   </Tab>
-                  <Tab id="tab" closable="false" styleClass="tab-pane">
+                  <Tab id="tab" fx:id="HR" closable="false" styleClass="tab-pane">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -509,7 +509,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="GROUP" size="25" strokeType="INSIDE" styleClass="fontIcon" />
                      </graphic>
                   </Tab>
-                  <Tab id="tab" closable="false">
+                  <Tab id="tab" fx:id="LOG" closable="false">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -533,7 +533,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="TRUCK" size="25" strokeType="INSIDE" styleClass="fontIcon" text="" />
                      </graphic>
                   </Tab>
-                  <Tab id="tab" closable="false">
+                  <Tab id="tab" fx:id="ADMIN" closable="false">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -557,7 +557,7 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="CUBE" size="25" strokeType="INSIDE" styleClass="fontIcon" />
                      </graphic>
                   </Tab>
-                  <Tab id="tab" closable="false">
+                  <Tab id="tab" fx:id="FINANCE" closable="false">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>

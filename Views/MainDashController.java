@@ -41,20 +41,13 @@ import javafx.util.Duration;
 public class MainDashController implements Initializable {
 
     public static BorderPane dpp;
-    
+
     @FXML
     public BorderPane DropPoint;
 
     private AnchorPane ACPaneRight;
 
     public Boolean paneOpen = false;
-
-    private Menu CORE;
-    private Menu HR;
-    private Menu LOG;
-    private Menu FINANCE;
-    private Menu ADMIN;
-
     @FXML
     private ContextMenu contextM;
     @FXML
@@ -89,33 +82,7 @@ public class MainDashController implements Initializable {
         Sidebar.setPrefHeight(primaryScreenBounds.getHeight() + 50);
         drawerAnimation();
         // TODO
-        if (!Session.getPermissions().contains("SysAdmin")) {
-            String[] mods = {"CORE", "ADMIN", "FINANCE", "LOG", "HR"};
-
-            for (String m : mods) {
-                if (!Session.getPermissions().contains(Session.ModularPermission.get(m))) {
-                    switch (m) {
-                        case "CORE":
-                            CORE.visibleProperty().setValue(false);
-                            break;
-                        case "ADMIN":
-                            ADMIN.visibleProperty().setValue(false);
-                            break;
-                        case "FINANCE":
-                            FINANCE.visibleProperty().setValue(false);
-                            break;
-                        case "LOG":
-                            LOG.visibleProperty().setValue(false);
-                            break;
-                        case "HR":
-                            HR.visibleProperty().setValue(false);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
-        } else {
+        if (Session.getPermissions().contains("SysAdmin")) {
             btnRight.setContextMenu(contextM);
             userManagement.setOnAction(event -> {
                 Session.CurrentRoute = "usmManageUsers";
@@ -126,20 +93,18 @@ public class MainDashController implements Initializable {
         acSide.setOnMouseClicked(value -> {
             triggerNav();
         });
-        
+
         Drawer.setOnMouseClicked(value -> {
             triggerNav();
         });
     }
-
-
 
     @FXML
     private void btnClose(ActionEvent event) {
         System.exit(0);
         
     }
-
+    
     public void triggerNav() {
         if (paneOpen) {
             paneOpen = false;
