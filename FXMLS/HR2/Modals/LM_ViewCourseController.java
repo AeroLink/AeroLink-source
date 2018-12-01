@@ -68,6 +68,8 @@ public class LM_ViewCourseController implements Initializable {
         }
     }
 
+    private String course_id;
+    
     public void loadDataInLabel() {
         HR2_Courses c = new HR2_Courses();
         List courses = c.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
@@ -78,7 +80,8 @@ public class LM_ViewCourseController implements Initializable {
 
         courses.stream().forEach(row -> {
             txt_c_description.setText(((HashMap) row).get("course_description").toString());
-            cbox_created_by.setValue(((HashMap) row).get("Created_by").toString());
+            cbox_created_by.setValue("EMP" + ((HashMap) row).get("Created_by").toString());
+            course_id = ((HashMap) row).get("course_id").toString();
         });
     }
 
@@ -92,10 +95,11 @@ public class LM_ViewCourseController implements Initializable {
             HR2_Courses c = new HR2_Courses();
 
             Boolean a = c.where(new Object[][]{
-                {"course_description", "=", txt_c_description.getText()}
+                {"course_id", "=", course_id}
             }).update(new Object[][]{
                 {"course_description", txt_c_description.getText()},
-                {"id", cbox_created_by.getSelectionModel().getSelectedItem().toString().substring(3).toString().split(" - ")[0]},}).executeUpdate();
+                {"id", cbox_created_by.getSelectionModel().getSelectedItem().toString().split(" - ")[0].substring(3)},
+            }).executeUpdate();
             Alert dropnotif = new Alert(Alert.AlertType.INFORMATION);
             dropnotif.setContentText(cbox_ct.getSelectionModel().getSelectedItem().toString() + " Successfully Updated");
             dropnotif.showAndWait();

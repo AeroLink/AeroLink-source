@@ -100,7 +100,7 @@ public class HR2_Learning_ManagementController implements Initializable {
 
                         List courses = c.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "emps", "=", "id")
-                                .where(new Object[][]{{"aerolink.tbl_hr2_courses.isDeleted","!=","1"}})
+                                .where(new Object[][]{{"aerolink.tbl_hr2_courses.isDeleted","<>","1"}})
                                 .get("course_id, j.title as course_title", "course_description",
                                         "concat(emps.firstname, ' ',emps.middlename, ' ',emps.lastname)as Created_by");
                         Data(courses);
@@ -155,8 +155,9 @@ public class HR2_Learning_ManagementController implements Initializable {
         try {
             List courses = c.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "emps", "=", "id")
-                    .where(new Object[][]{{"j.title", "like", "%" + txt_search_course.getText() + "%"
-                        ,"AND","aerolink.tbl_hr2_courses.isDeleted","!=","1"}})
+                    .where(new Object[][]{
+                        {"j.title", "like", "%" + txt_search_course.getText() + "%"},
+                        {"aerolink.tbl_hr2_courses.isDeleted","<>","1"}})
                     .get("course_id, j.title as course_title", "course_description",
                             "concat(emps.firstname, ' ',emps.middlename, ' ',emps.lastname)as Created_by");
             Data(courses);

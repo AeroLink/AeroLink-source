@@ -66,13 +66,13 @@ public class List_Of_QuestionsController implements Initializable {
         lbl_course_title.setText(HR2_LMClass_For_AddQuestion_Modal.lm_course_title);
         loadData();
         DisplayDataInJTable();
+        
     }
 
     public void loadData() {
 
         try {
             HR2_Assessment q = new HR2_Assessment();
-
             CompletableFuture.supplyAsync(() -> {
                 while (Session.CurrentRoute.equals("learning_management")) {
                     q.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(row -> {
@@ -142,7 +142,7 @@ public class List_Of_QuestionsController implements Initializable {
                         try {
                             btn.setOnAction(e
                                     -> {
-
+                                tbl_questions.getItems().get(getIndex());
                                 ViewChoices();
                             });
                             btn.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");

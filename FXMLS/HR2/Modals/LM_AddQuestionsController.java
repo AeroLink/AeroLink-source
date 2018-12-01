@@ -83,7 +83,6 @@ public class LM_AddQuestionsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         lbl_course_title.setText(HR2_LMClass_For_AddQuestion_Modal.lm_course_title);
-        btn_add_question.setOnAction(e -> AddQuestion());
         rb1.setToggleGroup(c);
         rb2.setToggleGroup(c);
         rb3.setToggleGroup(c);
@@ -98,55 +97,59 @@ public class LM_AddQuestionsController implements Initializable {
 
     }
 
+    @FXML
     public void AddQuestion() {
 
         Node[] co = {txt_option1, txt_option2, txt_option3, txt_option4};
         JFXRadioButton[] rdo = {rb1, rb2, rb3, rb4};
         HR2_Evaluation courses = new HR2_Evaluation();
         String[] lm = {"a", "b", "c", "d"};
-        
+
         JFXRadioButton rx = (JFXRadioButton) c.getSelectedToggle();
         List id_list = new ArrayList<>();
         int QuestID = 0;
-        
-        for (int i = 0; i < lm.length; i++) {
-            String[][] cm_data
-                    = {
-                        {"choice", lm[i]},
-                        {"choice_description", ((JFXTextField) co[i]).getText()},
-                        {"ischecked", (rdo[i].isSelected() ? "1" : "0")}
-                    };
-
-            
-            int al = courses.insert(cm_data,true);
-            id_list.add(al);
-            if(rdo[i].isSelected())
-            {
-                QuestID = new HR2_Assessment().insert(new String[][]{
-                    {"question", txt_add_question.getText()},
-                    {"course_id", HR2_LMClass_For_AddQuestion_Modal.lm_id},
-                    {"choice_id", String.valueOf(al)}
-                }, true);
-            }
-            System.err.println(String.valueOf( rdo[i].isSelected()));
-        }
-        
-        for(Object obj : id_list){
-            courses.update(new Object[][] {
-                {"question_id", QuestID}
-            }).where(new Object[][]{
-                {"choice_id", "=", obj}
-            }).executeUpdate();
-        }
-        
         try {
+            for (int i = 0; i < lm.length; i++) {
+                String[][] cm_data
+                        = {
+                            {"choice", lm[i]},
+                            {"choice_description", ((JFXTextField) co[i]).getText()},
+                            {"ischecked", (rdo[i].isSelected() ? "1" : "0")}
+                        };
 
-            Alert saved = new Alert(Alert.AlertType.INFORMATION);
-            saved.setContentText("Saved");
-            saved.showAndWait();
+                int al = courses.insert(cm_data, true);
+                id_list.add(al);
+                if (rdo[i].isSelected()) {
+                    QuestID = new HR2_Assessment().insert(new String[][]{
+                        {"question", txt_add_question.getText()},
+                        {"course_id", HR2_LMClass_For_AddQuestion_Modal.lm_id},
+                        {"choice_id", String.valueOf(al)}
+                    }, true);
+                }
+                System.err.println(String.valueOf(rdo[i].isSelected()));
+
+                for (Object obj : id_list) {
+                    courses.update(new Object[][]{
+                        {"question_id", QuestID}
+                    }).where(new Object[][]{
+                        {"choice_id", "=", obj}
+                    }).executeUpdate();
+                }
+
+                if (rdo[i].isSelected()) {
+
+                    Alert saved = new Alert(Alert.AlertType.INFORMATION);
+                    saved.setContentText("Question Added");
+                    saved.showAndWait();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setContentText("Please Select correct answer for this question");
+                    alert.showAndWait();
+                }
+            }
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("Error" + e);
+            alert.setContentText("ERROR" + e);
             alert.showAndWait();
         }
     }

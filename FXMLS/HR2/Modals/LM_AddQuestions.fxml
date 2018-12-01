@@ -35,7 +35,7 @@
             <Font name="Lato Semibold" size="15.0" />
          </font>
       </Label>
-      <JFXButton fx:id="btn_add_question" layoutX="25.0" layoutY="458.0" prefHeight="28.0" prefWidth="95.0" style="-fx-background-color: #34A853;" text="Add" textFill="WHITE">
+      <JFXButton fx:id="btn_add_question" layoutX="25.0" layoutY="458.0" onAction="#AddQuestion" prefHeight="28.0" prefWidth="95.0" style="-fx-background-color: #34A853;" text="Add" textFill="WHITE">
          <font>
             <Font name="Lato Medium" size="14.0" />
          </font>
