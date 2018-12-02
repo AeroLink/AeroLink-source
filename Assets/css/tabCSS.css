@@ -1,0 +1,38 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 13, 2018, 7:38:02 PM
+    Author     : BlackMoon
+*/
+
+.jfx-tab-pane .tab-selected-line { -fx-background-color: #75bc1b; -fx-pref-height: 0px; }
+ 
+#tab .tab-label{
+    -fx-background-color: #424242;
+    -fx-text-fill: white;
+}
+#tab .fontIcon{
+    -fx-fill: gray;
+    -fx-rotate: 90;
+}
+
+#tab:selected .tab-label{
+    -fx-background-color:  #34A853 ;
+    -fx-text-fill: white;
+}
+
+#tab:selected .fontIcon{
+    -fx-fill: white;
+}
+
+.tab-header-background {
+    -fx-background-color: #424242;
+}
+
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-radius: 0;
+}
+

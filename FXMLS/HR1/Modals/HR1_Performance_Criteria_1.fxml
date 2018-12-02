@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="673.0" prefWidth="1030.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR1.Modals.HR1_viewPerfCri">
+   <children>
+      <StackPane fx:id="spane" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <top>
+                  <AnchorPane prefHeight="42.0" prefWidth="600.0" style="-fx-background-color: #34a853;" BorderPane.alignment="CENTER">
+                     <children>
+                        <FontAwesomeIconView fx:id="jobID" fill="WHITE" glyphName="EYE" layoutX="10.0" layoutY="31.428571701049805" size="25" text="" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                        <Label fx:id="lblAppFull" layoutX="43.0" layoutY="9.0" text="Lastname, Firstname Suffix. Middlename" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </top>
+               <left>
+                  <AnchorPane BorderPane.alignment="CENTER">
+                     <children>
+                        <TitledPane fx:id="jobTitle" animated="false" collapsible="false" prefHeight="623.0" prefWidth="307.0" text="Job :" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="547.0" prefWidth="305.0" style="-fx-background-color: white;">
+                                 <children>
+                                    <Label layoutX="13.0" layoutY="13.0" text="Date of Birth :">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtDate" editable="false" layoutX="12.0" layoutY="33.0" prefHeight="25.0" prefWidth="274.0" />
+                                    <Label layoutX="13.0" layoutY="68.0" text="Place of Birth :">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtPlace" editable="false" layoutX="12.0" layoutY="87.0" prefHeight="25.0" prefWidth="274.0" />
+                                    <Label layoutX="13.0" layoutY="129.0" text="Gender :">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtGender" editable="false" layoutX="12.0" layoutY="148.0" prefHeight="25.0" prefWidth="273.0" />
+                                    <Label layoutX="14.0" layoutY="186.0" text="Email Address :">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtEmail" editable="false" layoutX="13.0" layoutY="205.0" prefHeight="25.0" prefWidth="274.0" />
+                                    <Label layoutX="15.0" layoutY="247.0" text="Height (Cm):">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtHeight" editable="false" layoutX="14.0" layoutY="266.0" prefHeight="25.0" prefWidth="123.0" />
+                                    <Label layoutX="146.0" layoutY="247.0" text="Weight (Kg) :">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtWeight" editable="false" layoutX="146.0" layoutY="266.0" prefHeight="25.0" prefWidth="140.0" />
+                                    <Label layoutX="16.0" layoutY="308.0" text="Contact Number :">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtContactNumber" editable="false" layoutX="15.0" layoutY="327.0" prefHeight="25.0" prefWidth="274.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </TitledPane>
+                     </children>
+                  </AnchorPane>
+               </left>
+               <center>
+                  <JFXTabPane BorderPane.alignment="CENTER">
+                     <tabs>
+                        <Tab id="tab" text="Evaluation">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="46.0" text="Productivity" textFill="#34a853" AnchorPane.leftAnchor="14.0">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="63.0" text="Effectivness in getting things done, In relation to time and cost requirements." AnchorPane.leftAnchor="14.0" />
+                                    <Label layoutX="14.0" layoutY="118.0" text="Quality of Work" textFill="#34a853" AnchorPane.leftAnchor="14.0">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="135.0" text="Adherance to an expected standard of result that is a part of a job or activity." AnchorPane.leftAnchor="14.0" />
+                                    <Label layoutX="14.0" layoutY="190.0" text="Initiative" textFill="#34a853" AnchorPane.leftAnchor="14.0">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="207.0" text="The ability to act without the help or insistence of others." AnchorPane.leftAnchor="14.0" />
+                                    <Label layoutX="14.0" layoutY="259.0" text="Team Work" textFill="#34a853" AnchorPane.leftAnchor="14.0">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="276.0" text="A cooperative effort by a  group or team to produce a desired result." AnchorPane.leftAnchor="14.0" />
+                                    <Label layoutX="14.0" layoutY="338.0" text="Problem Solving" textFill="#34a853" AnchorPane.leftAnchor="14.0">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="355.0" text="Process of finding a way to successfully resolve a difficult situationn or problem." AnchorPane.leftAnchor="14.0" />
+                                    <Label layoutX="14.0" layoutY="416.0" text="Attendance" textFill="#34a853" AnchorPane.leftAnchor="14.0">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="433.0" text="Able to track the Attendance of Employee." AnchorPane.leftAnchor="14.0" />
+                                    <JFXButton buttonType="RAISED" layoutX="23.0" layoutY="501.0" onAction="#btnSave" prefHeight="34.0" prefWidth="111.0" style="-fx-background-color: #34a853;" text="Save" textFill="#f8f8f8">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <ComboBox fx:id="cboProductivity" layoutX="14.0" layoutY="86.0" prefWidth="150.0" />
+                                    <ComboBox fx:id="cboQualityOfWork" layoutX="14.0" layoutY="157.0" prefWidth="150.0" />
+                                    <ComboBox fx:id="cboInitiative" layoutX="14.0" layoutY="229.0" prefWidth="150.0" />
+                                    <ComboBox fx:id="cboTeamWork" layoutX="14.0" layoutY="300.0" prefWidth="150.0" />
+                                    <ComboBox fx:id="cboProblemSolving" layoutX="14.0" layoutY="380.0" prefWidth="150.0" />
+                                    <ComboBox fx:id="cboAttendance" layoutX="14.0" layoutY="452.0" prefWidth="150.0" />
+                                 </children></AnchorPane>
+                          </content>
+                        </Tab>
+                     </tabs>
+                  </JFXTabPane>
+               </center>
+            </BorderPane>
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>

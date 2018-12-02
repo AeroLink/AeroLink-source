@@ -1,16 +1,330 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR1.HR1_Social_RecognitionController">
+<AnchorPane stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR1.HR1_Social_RecognitionController">
    <children>
-      <TableView layoutX="83.0" layoutY="54.0" prefHeight="272.0" prefWidth="580.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="118.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-      </TableView>
+      <StackPane prefHeight="720.0" prefWidth="1375.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <BorderPane>
+               <center>
+                  <JFXTabPane prefHeight="720.0" prefWidth="1375.0">
+                     <tabs>
+                        <Tab id="tab" style="-fx-background-color: #40d365;" text="Add New Award">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <BorderPane prefHeight="685.0" prefWidth="1375.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <center>
+                                          <AnchorPane prefHeight="631.0" prefWidth="895.0">
+                                             <children>
+                                                <TableView fx:id="tbl_award" layoutX="4.0" layoutY="36.0" prefHeight="265.0" prefWidth="855.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="36.0">
+                                                  <columns>
+                                                    <TableColumn prefWidth="75.0" text="Name" />
+                                                    <TableColumn prefWidth="75.0" text="Description" />
+                                                      <TableColumn prefWidth="75.0" text="Date Added" />
+                                                  </columns>
+                                                   <columnResizePolicy>
+                                                      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                   </columnResizePolicy>
+                                                </TableView>
+                                                <TableView fx:id="tbl_reward" layoutX="4.0" layoutY="353.0" prefHeight="263.0" prefWidth="858.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="353.0">
+                                                   <columns>
+                                                      <TableColumn prefWidth="75.0" text="Name" />
+                                                      <TableColumn prefWidth="75.0" text="Remarks" />
+                                                      <TableColumn prefWidth="75.0" text="Date Added" />
+                                                   </columns>
+                                                   <columnResizePolicy>
+                                                      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                   </columnResizePolicy>
+                                                </TableView>
+                                                <Label text="List of Award:" textFill="#34a853" AnchorPane.leftAnchor="10.0">
+                                                   <font>
+                                                      <Font size="24.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="10.0" layoutY="318.0" text="List of Reward:" textFill="#34a853" AnchorPane.leftAnchor="10.0">
+                                                   <font>
+                                                      <Font size="24.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                       </center>
+                                       <top>
+                                          <Pane prefHeight="54.0" prefWidth="950.0" style="-fx-background-color: #34a853;" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Label layoutX="13.0" layoutY="10.0" text="Add New Award Criteria" textFill="#f9fffa">
+                                                   <font>
+                                                      <Font size="24.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </Pane>
+                                       </top>
+                                       <left>
+                                          <AnchorPane prefHeight="631.0" prefWidth="530.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <JFXTextField fx:id="txtAwardname" layoutY="41.0" maxWidth="435.0" minWidth="281.0" prefHeight="36.0" prefWidth="424.0" promptText="Input Award Name Here:" unFocusColor="BLACK" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="176.0">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </JFXTextField>
+                                                <JFXTextField fx:id="txtAwarddes" layoutY="96.0" maxWidth="435.0" minWidth="283.0" prefHeight="36.0" prefWidth="422.0" promptText="Input Description and Qaulifications Here:" unFocusColor="BLACK" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="176.0">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </JFXTextField>
+                                                <JFXDatePicker fx:id="dateAdded" defaultColor="#34a853" editable="false" layoutY="153.0" prefHeight="32.0" prefWidth="417.0" promptText="Pick Date Here:" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="176.0" />
+                                                <JFXButton buttonType="RAISED" layoutX="39.0" layoutY="231.0" onAction="#btnSaveAward" prefHeight="36.0" prefWidth="115.0" style="-fx-background-color: #34a853;" text="Save" textAlignment="CENTER" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </JFXButton>
+                                                <JFXButton buttonType="RAISED" layoutX="225.0" layoutY="231.0" onAction="#btnawardclear" prefHeight="36.0" prefWidth="116.0" style="-fx-background-color: #f14a4a;" text="Clear" textAlignment="CENTER" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </JFXButton>
+                                                <JFXTextField fx:id="txtRewardname" layoutY="377.0" maxWidth="435.0" minWidth="281.0" prefHeight="36.0" prefWidth="281.0" promptText="Input Reward Here:" unFocusColor="BLACK" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="176.0">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </JFXTextField>
+                                                <JFXTextField fx:id="txtRemarks" layoutY="430.0" maxWidth="435.0" minWidth="283.0" prefHeight="36.0" prefWidth="283.0" promptText="Remarks:" unFocusColor="BLACK" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="176.0">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </JFXTextField>
+                                                <JFXDatePicker fx:id="dateadded" defaultColor="#34a853" editable="false" layoutY="490.0" prefHeight="32.0" prefWidth="276.0" promptText="Pick Date Here:" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="176.0" />
+                                                <JFXButton buttonType="RAISED" layoutX="39.0" layoutY="553.0" onAction="#btnSaveReward" prefHeight="36.0" prefWidth="115.0" style="-fx-background-color: #34a853;" text="Save" textAlignment="CENTER" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </JFXButton>
+                                                <JFXButton buttonType="RAISED" layoutX="225.0" layoutY="553.0" onAction="#btnrewardclear" prefHeight="36.0" prefWidth="116.0" style="-fx-background-color: #f14a4a;" text="Clear" textAlignment="CENTER" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </JFXButton>
+                                             </children>
+                                          </AnchorPane>
+                                       </left>
+                                    </BorderPane>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab id="tab" style="-fx-background-color: #40d365;" text="Merit/Demerit">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <BorderPane layoutX="-6.0" prefHeight="685.0" prefWidth="1375.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <top>
+                                          <Pane prefHeight="53.0" prefWidth="1386.0" style="-fx-background-color: #34a853;" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Label layoutX="348.0" layoutY="9.0" text="List of Awardee's:" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="24.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </Pane>
+                                       </top>
+                                       <left>
+                                          <AnchorPane prefHeight="632.0" prefWidth="337.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <JFXComboBox fx:id="awardcategory" layoutX="10.0" layoutY="373.0" prefHeight="34.0" prefWidth="300.0" promptText="Choose Award Category:" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+                                                <JFXTextField fx:id="Dept1" editable="false" layoutX="10.0" layoutY="156.0" maxWidth="307.0" minWidth="246.0" prefHeight="36.0" prefWidth="305.0" promptText="Department:" unFocusColor="BLACK" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </JFXTextField>
+                                                <JFXTextField fx:id="empid" editable="false" layoutX="10.0" layoutY="219.0" maxWidth="306.0" minWidth="246.0" prefHeight="36.0" prefWidth="306.0" promptText="Employee Id:" unFocusColor="BLACK" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </JFXTextField>
+                                                <JFXTextField fx:id="empname" editable="false" layoutX="10.0" layoutY="281.0" maxWidth="308.0" minWidth="246.0" prefHeight="36.0" prefWidth="306.0" promptText="Employee Name:" unFocusColor="BLACK" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </JFXTextField>
+                                                <JFXDatePicker fx:id="dateposted" defaultColor="#34a853" editable="false" layoutX="10.0" layoutY="538.0" prefHeight="32.0" prefWidth="300.0" promptText="Pick Date Before You Save:" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+                                                <JFXButton buttonType="RAISED" layoutX="10.0" layoutY="589.0" onAction="#btnUpdate" prefHeight="34.0" prefWidth="147.0" style="-fx-background-color: #34a853;" text="Save" textFill="#f8f8f8" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="180.0">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </JFXButton>
+                                                <JFXButton buttonType="RAISED" cancelButton="true" layoutX="189.0" layoutY="590.0" prefHeight="34.0" prefWidth="138.0" style="-fx-background-color: #f14a4a;" text="Cancel" textFill="WHITE" AnchorPane.leftAnchor="189.0" AnchorPane.rightAnchor="10.0">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </JFXButton>
+                                                <JFXComboBox fx:id="rewardcategory" layoutX="10.0" layoutY="438.0" prefHeight="34.0" prefWidth="301.0" promptText="Choose Reward:" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+                                                <JFXComboBox fx:id="Department1" layoutX="10.0" layoutY="9.0" prefHeight="34.0" prefWidth="305.0" promptText="Choose Department:" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="9.0" />
+                                                <JFXTextField fx:id="remarks" editable="false" layoutX="10.0" layoutY="497.0" maxWidth="308.0" minWidth="246.0" prefHeight="36.0" prefWidth="306.0" promptText="Remarks:" unFocusColor="BLACK" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </JFXTextField>
+                                                <JFXComboBox fx:id="Department11" layoutX="16.0" layoutY="53.0" prefHeight="34.0" prefWidth="305.0" promptText="Choose Criteria:" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+                                                <JFXTextField fx:id="empname1" editable="false" layoutX="10.0" layoutY="336.0" maxWidth="308.0" minWidth="246.0" prefHeight="36.0" prefWidth="306.0" promptText="Ratings:" unFocusColor="BLACK" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </JFXTextField>
+                                                <JFXButton buttonType="RAISED" layoutX="16.0" layoutY="96.0" onAction="#rendertable1" prefHeight="24.0" prefWidth="310.0" style="-fx-background-color: #34a853;" text="Search" textFill="#f8f8f8">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </JFXButton>
+                                             </children>
+                                          </AnchorPane>
+                                       </left>
+                                       <center>
+                                          <AnchorPane BorderPane.alignment="CENTER">
+                                             <children>
+                                                <TableView fx:id="table1" layoutY="4.0" prefHeight="295.0" prefWidth="506.0" AnchorPane.bottomAnchor="334.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="3.0">
+                                                   <columnResizePolicy>
+                                                      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                   </columnResizePolicy>
+                                                </TableView>
+                                                <TableView fx:id="table2" layoutX="14.0" layoutY="323.0" prefHeight="295.0" prefWidth="506.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                                   <columnResizePolicy>
+                                                      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                   </columnResizePolicy>
+                                                </TableView>
+                                             </children>
+                                          </AnchorPane>
+                                       </center>
+                                       <right>
+                                          <AnchorPane BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Label layoutX="10.0" layoutY="1.0" text="List of Unproductive Employees:" textFill="#34a853" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="1.0">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <TableView fx:id="tblUE" layoutX="1.0" layoutY="64.0" prefHeight="574.0" prefWidth="492.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="80.0">
+                                                   <columnResizePolicy>
+                                                      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                   </columnResizePolicy>
+                                                </TableView>
+                                                <AnchorPane layoutX="11.0" layoutY="34.0" prefHeight="34.0" prefWidth="306.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="196.0">
+                                                   <children>
+                                                      <JFXComboBox prefHeight="34.0" prefWidth="305.0" promptText="Choose Department:" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </right>
+                                    </BorderPane>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab id="tab" style="-fx-background-color: #40d365;" text="Promoted Employees">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <BorderPane layoutX="-6.0" prefHeight="685.0" prefWidth="1375.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <top>
+                                          <Pane prefHeight="53.0" prefWidth="1386.0" style="-fx-background-color: #34a853;" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Label layoutX="14.0" layoutY="9.0" text="List of Promoted Employees:" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="24.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </Pane>
+                                       </top>
+                                       <left>
+                                          <AnchorPane prefHeight="632.0" prefWidth="337.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <JFXTextField editable="false" layoutX="10.0" layoutY="8.0" maxWidth="307.0" minWidth="246.0" prefHeight="36.0" prefWidth="305.0" promptText="Department:" unFocusColor="BLACK" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </JFXTextField>
+                                                <JFXTextField editable="false" layoutX="10.0" layoutY="71.0" maxWidth="306.0" minWidth="246.0" prefHeight="36.0" prefWidth="306.0" promptText="Employee Id:" unFocusColor="BLACK" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </JFXTextField>
+                                                <JFXTextField editable="false" layoutX="10.0" layoutY="133.0" maxWidth="308.0" minWidth="246.0" prefHeight="36.0" prefWidth="306.0" promptText="Employee Name:" unFocusColor="BLACK" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </JFXTextField>
+                                                <JFXDatePicker defaultColor="#34a853" editable="false" layoutX="10.0" layoutY="394.0" prefHeight="32.0" prefWidth="300.0" promptText="Pick Date Before You Save:" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+                                                <JFXButton buttonType="RAISED" layoutX="10.0" layoutY="551.0" prefHeight="34.0" prefWidth="147.0" style="-fx-background-color: #34a853;" text="Save" textFill="#f8f8f8" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="180.0">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </JFXButton>
+                                                <JFXButton buttonType="RAISED" cancelButton="true" layoutX="189.0" layoutY="552.0" prefHeight="34.0" prefWidth="138.0" style="-fx-background-color: #f14a4a;" text="Cancel" textFill="WHITE" AnchorPane.leftAnchor="189.0" AnchorPane.rightAnchor="10.0">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </JFXButton>
+                                                <JFXComboBox layoutX="10.0" layoutY="259.0" prefHeight="34.0" prefWidth="301.0" promptText="Choose Reward:" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+                                                <JFXTextField editable="false" layoutX="10.0" layoutY="324.0" maxWidth="308.0" minWidth="246.0" prefHeight="36.0" prefWidth="306.0" promptText="Remarks:" unFocusColor="BLACK" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </JFXTextField>
+                                                <JFXTextField editable="false" layoutX="16.0" layoutY="198.0" maxWidth="308.0" minWidth="246.0" prefHeight="36.0" prefWidth="306.0" promptText="New Position:" unFocusColor="BLACK" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </JFXTextField>
+                                             </children>
+                                          </AnchorPane>
+                                       </left>
+                                       <center>
+                                          <AnchorPane BorderPane.alignment="CENTER">
+                                             <children>
+                                                <TableView layoutY="4.0" prefHeight="295.0" prefWidth="506.0" AnchorPane.bottomAnchor="334.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="3.0">
+                                                   <columnResizePolicy>
+                                                      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                   </columnResizePolicy>
+                                                </TableView>
+                                                <TableView layoutX="14.0" layoutY="323.0" prefHeight="295.0" prefWidth="506.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                                   <columnResizePolicy>
+                                                      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                   </columnResizePolicy>
+                                                </TableView>
+                                             </children>
+                                          </AnchorPane>
+                                       </center>
+                                       <right>
+                                          <AnchorPane BorderPane.alignment="CENTER" />
+                                       </right>
+                                    </BorderPane>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                     </tabs>
+                  </JFXTabPane>
+               </center>
+            </BorderPane>
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>

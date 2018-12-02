@@ -5,11 +5,13 @@
  */
 package Synapse.Components;
     
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
+import javafx.scene.input.MouseEvent;
 
 /**
  *
@@ -19,15 +21,16 @@ import javafx.scene.control.TableCell;
 public class ButtonInCell<rt extends RecursiveTreeObject> {
     
     
-    private EventHandler<ActionEvent> e;
+    private EventHandler<MouseEvent> e;
     
     private class btnCel extends TableCell<rt, Boolean> {
         
-        final Button btn;
+        final JFXButton btn;
         
         public btnCel(String btnName) {
-            this.btn = new Button(btnName);
-            this.btn.setOnAction(e);
+            this.btn = new JFXButton(btnName);
+            this.btn.setOnMouseClicked(e);
+            this.btn.getStyleClass().add("btnTable");
         }
         
         @Override
@@ -39,7 +42,7 @@ public class ButtonInCell<rt extends RecursiveTreeObject> {
         }
     }
     
-    public TableCell<rt, Boolean> create(String ButtonName, EventHandler<ActionEvent> e) {
+    public TableCell<rt, Boolean> create(String ButtonName, EventHandler<MouseEvent> e) {
         this.e = e;
         return new btnCel(ButtonName);
     }

@@ -1,0 +1,589 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="825.0" prefWidth="311.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.CoreSideController">
+   <center>
+      <VBox prefHeight="657.0" prefWidth="311.0" style="-fx-background-color: white;">
+         <children>
+            <Pane prefHeight="65.0" prefWidth="311.0" style="-fx-background-color: #34A853;">
+               <children>
+                  <Label fx:id="SessionUsername" layoutX="48.0" layoutY="19.0" prefHeight="28.0" prefWidth="221.0" text="Administrator" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="48.0" layoutY="44.0" prefHeight="15.0" prefWidth="220.0" text="Software Engineer" textFill="WHITE">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="userImage" fitHeight="35.0" fitWidth="63.0" layoutX="7.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Assets/img_avatar4.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <JFXTabPane prefHeight="533.0" prefWidth="273.0" side="LEFT" stylesheets="@../Assets/css/tabCSS.css" VBox.vgrow="ALWAYS">
+               <tabs>
+                  <Tab id="tab" fx:id="CORE" closable="false">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="533.0" prefWidth="233.0" style="-fx-background-color: white; -fx-border-color: #34A853; -fx-border-width: 0 0 0 1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <AnchorPane prefHeight="40.0" prefWidth="235.0" style="-fx-background-color: #34A853;">
+                                       <children>
+                                          <Label layoutX="6.0" layoutY="7.0" text="CORE MODULE" textFill="WHITE" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
+                                             <font>
+                                                <Font name="Segoe UI Semibold" size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="19.0" prefWidth="273.0">
+                                       <children>
+                                          <Label graphicTextGap="0.0" prefHeight="17.0" prefWidth="266.0" text="CORE I" textFill="GREY">
+                                             <padding>
+                                                <Insets left="5.0" top="5.0" />
+                                             </padding>
+                                          </Label>
+                                       </children></AnchorPane>
+                                    <AnchorPane>
+                                       <children>
+                                          <JFXButton id="core1_booking" alignment="BOTTOM_LEFT" graphicTextGap="10.0" layoutY="4.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Booking">
+                                             <graphic>
+                                                <FontAwesomeIconView fill="#34a853" glyphName="BOOK" size="25" strokeType="INSIDE" />
+                                             </graphic>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </JFXButton>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="10.0" prefWidth="273.0" />
+                                    <AnchorPane>
+                                       <children>
+                                          <JFXButton id="core1pom" alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Purchase Order Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <graphic>
+                                                <FontAwesomeIconView fill="#34a853" glyphName="CLIPBOARD" size="25" strokeType="INSIDE" />
+                                             </graphic>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </JFXButton>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="10.0" prefWidth="273.0" />
+                                    <AnchorPane>
+                                       <children>
+                                          <JFXButton id="core1consol" alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Consolidation/Deconsolidation" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <graphic>
+                                                <FontAwesomeIconView fill="#34a853" glyphName="SHIELD" size="25" strokeType="INSIDE" />
+                                             </graphic>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </JFXButton>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="10.0" prefWidth="273.0" />
+                                    <AnchorPane>
+                                       <children>
+                                          <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Master &amp; House Bill of Lading" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <graphic>
+                                                <FontAwesomeIconView fill="#34a853" glyphName="SHOPPING_BASKET" size="25" strokeType="INSIDE" />
+                                             </graphic>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </JFXButton>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="10.0" prefWidth="273.0" />
+                                    <AnchorPane>
+                                       <children>
+                                          <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Shipment Files" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <graphic>
+                                                <FontAwesomeIconView fill="#34a853" glyphName="SHIP" size="25" strokeType="INSIDE" />
+                                             </graphic>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </JFXButton>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="10.0" prefWidth="273.0">
+                                       <children>
+                                          <Label graphicTextGap="0.0" prefHeight="17.0" prefWidth="266.0" text="CORE II" textFill="GREY">
+                                             <padding>
+                                                <Insets left="5.0" top="5.0" />
+                                             </padding>
+                                          </Label>
+                                       </children></AnchorPane>
+                                    <AnchorPane>
+                                       <children>
+                                          <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Service Network" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <graphic>
+                                                <FontAwesomeIconView fill="#34a853" glyphName="COGS" size="25" strokeType="INSIDE" />
+                                             </graphic>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </JFXButton>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="10.0" prefWidth="273.0" />
+                                    <AnchorPane>
+                                       <children>
+                                          <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Service Provider" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <graphic>
+                                                <FontAwesomeIconView fill="#34a853" glyphName="CUBES" size="25" strokeType="INSIDE" />
+                                             </graphic>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </JFXButton>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="10.0" prefWidth="273.0" />
+                                    <AnchorPane>
+                                       <children>
+                                          <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Customer Relationship Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <graphic>
+                                                <FontAwesomeIconView fill="#34a853" glyphName="USER" size="25" strokeType="INSIDE" />
+                                             </graphic>
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font>
+                                          </JFXButton>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="10.0" prefWidth="273.0" />
+                                    <AnchorPane>
+                                       <children>
+                                          <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Standard Operation Procedures" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <graphic>
+                                                <FontAwesomeIconView fill="#34a853" glyphName="EXCHANGE" size="25" strokeType="INSIDE" />
+                                             </graphic>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </JFXButton>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="10.0" prefWidth="273.0" />
+                                    <AnchorPane>
+                                       <children>
+                                          <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Schedule and Rate" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <graphic>
+                                                <FontAwesomeIconView fill="#34a853" glyphName="CALENDAR" size="25" strokeType="INSIDE" />
+                                             </graphic>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </JFXButton>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                     <graphic />
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="PLANE" size="25" strokeType="INSIDE" styleClass="fontIcon" />
+                     </graphic>
+                  </Tab>
+                  <Tab id="tab" fx:id="HR" closable="false" styleClass="tab-pane">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <BorderPane prefHeight="607.0" prefWidth="273.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <top>
+                                    <AnchorPane prefHeight="40.0" prefWidth="235.0" style="-fx-background-color: #34A853;" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Label text="HR MODULE" textFill="WHITE" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
+                                             <font>
+                                                <Font name="Segoe UI Semibold" size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                 </top>
+                                 <center>
+                                    <ScrollPane hbarPolicy="NEVER" prefHeight="558.0" prefWidth="272.0" BorderPane.alignment="CENTER">
+                                       <content>
+                                          <VBox prefHeight="717.0" prefWidth="266.0">
+                                             <children>
+                                                <AnchorPane prefHeight="4.0" prefWidth="266.0">
+                                                   <children>
+                                                      <Label graphicTextGap="0.0" prefHeight="17.0" prefWidth="266.0" text="Human Resource I" textFill="GREY" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <padding>
+                                                            <Insets left="5.0" />
+                                                         </padding>
+                                                      </Label>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets top="5.0" />
+                                                   </padding></AnchorPane>
+                                                <AnchorPane>
+                                                   <children>
+                                                      <JFXButton id="hr1RCC" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Recruitment" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                         <graphic>
+                                                            <MaterialDesignIconView fill="#34a853" glyphName="ACCOUNT_PLUS" size="25" styleClass="fontIcon" />
+                                                         </graphic>
+                                                      </JFXButton>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="4.0" prefWidth="266.0" />
+                                                <AnchorPane>
+                                                   <children>
+                                                      <JFXButton id="applicant" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Applicant Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <graphic>
+                                                            <MaterialDesignIconView fill="#34a853" glyphName="ACCOUNT_CARD_DETAILS" size="25" strokeType="INSIDE" />
+                                                         </graphic>
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </JFXButton>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="4.0" prefWidth="266.0" />
+                                                <AnchorPane>
+                                                   <children>
+                                                      <JFXButton id="newHire" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="New Hire OnBoard" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <graphic>
+                                                            <MaterialDesignIconView fill="#34a853" glyphName="ACCOUNT" size="25" strokeType="INSIDE" />
+                                                         </graphic>
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </JFXButton>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="4.0" prefWidth="266.0" />
+                                                <AnchorPane>
+                                                   <children>
+                                                      <JFXButton id="performance" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Performance Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <graphic>
+                                                            <MaterialDesignIconView fill="#34a853" glyphName="ACCOUNT_CHECK" size="25" strokeType="INSIDE" />
+                                                         </graphic>
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </JFXButton>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="4.0" prefWidth="266.0" />
+                                                <AnchorPane>
+                                                   <children>
+                                                      <JFXButton id="social" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Social Recognition" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <graphic>
+                                                            <MaterialDesignIconView fill="#34a853" glyphName="CERTIFICATE" size="25" strokeType="INSIDE" />
+                                                         </graphic>
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </JFXButton>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="4.0" prefWidth="266.0">
+                                                   <children>
+                                                      <Label graphicTextGap="0.0" prefHeight="17.0" prefWidth="266.0" text="Human Resource II" textFill="GREY">
+                                                         <padding>
+                                                            <Insets left="5.0" top="5.0" />
+                                                         </padding>
+                                                      </Label>
+                                                   </children></AnchorPane>
+                                                <AnchorPane>
+                                                   <children>
+                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Learning Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <graphic>
+                                                            <MaterialDesignIconView fill="#34a853" glyphName="BOOK_OPEN_PAGE_VARIANT" size="25" strokeType="INSIDE" />
+                                                         </graphic>
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </JFXButton>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="4.0" prefWidth="266.0" />
+                                                <AnchorPane>
+                                                   <children>
+                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Training Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <graphic>
+                                                            <MaterialDesignIconView fill="#34a853" glyphName="SWORD" size="25" strokeType="INSIDE" />
+                                                         </graphic>
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </JFXButton>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="4.0" prefWidth="266.0" />
+                                                <AnchorPane>
+                                                   <children>
+                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Competency Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <graphic>
+                                                            <MaterialDesignIconView fill="#34a853" glyphName="CARDS_OUTLINE" size="25" strokeType="INSIDE" />
+                                                         </graphic>
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </JFXButton>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="4.0" prefWidth="266.0" />
+                                                <AnchorPane>
+                                                   <children>
+                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Succession Planning" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <graphic>
+                                                            <MaterialDesignIconView fill="#34a853" glyphName="ACCOUNT_STAR_VARIANT" size="25" strokeType="INSIDE" />
+                                                         </graphic>
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </JFXButton>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="4.0" prefWidth="266.0">
+                                                   <children>
+                                                      <Label graphicTextGap="0.0" prefHeight="17.0" prefWidth="266.0" text="Human Resource III" textFill="GREY">
+                                                         <padding>
+                                                            <Insets left="5.0" top="5.0" />
+                                                         </padding>
+                                                      </Label>
+                                                   </children></AnchorPane>
+                                                <AnchorPane>
+                                                   <children>
+                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Shift and Scheduling" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <graphic>
+                                                            <MaterialDesignIconView fill="#34a853" glyphName="CALENDAR_TEXT" size="25" strokeType="INSIDE" />
+                                                         </graphic>
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </JFXButton>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="4.0" prefWidth="266.0" />
+                                                <AnchorPane>
+                                                   <children>
+                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Time and Attendance" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <graphic>
+                                                            <MaterialDesignIconView fill="#34a853" glyphName="CALENDAR_CLOCK" size="25" strokeType="INSIDE" />
+                                                         </graphic>
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </JFXButton>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="4.0" prefWidth="266.0" />
+                                                <AnchorPane>
+                                                   <children>
+                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Claims and Reimbursement" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <graphic>
+                                                            <MaterialDesignIconView fill="#34a853" glyphName="CHART_TIMELINE" size="25" strokeType="INSIDE" />
+                                                         </graphic>
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </JFXButton>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="4.0" prefWidth="266.0" />
+                                                <AnchorPane>
+                                                   <children>
+                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Leave Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <graphic>
+                                                            <FontAwesomeIconView fill="#34a853" glyphName="CALENDAR" size="25" strokeType="INSIDE" />
+                                                         </graphic>
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </JFXButton>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="4.0" prefWidth="266.0" />
+                                                <AnchorPane>
+                                                   <children>
+                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Timesheet Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <graphic>
+                                                            <FontAwesomeIconView fill="#34a853" glyphName="CALENDAR" size="25" strokeType="INSIDE" />
+                                                         </graphic>
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </JFXButton>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="4.0" prefWidth="266.0">
+                                                   <children>
+                                                      <Label graphicTextGap="0.0" prefHeight="17.0" prefWidth="266.0" text="Human Resource IV" textFill="GREY">
+                                                         <padding>
+                                                            <Insets left="5.0" top="5.0" />
+                                                         </padding>
+                                                      </Label>
+                                                   </children></AnchorPane>
+                                                <AnchorPane>
+                                                   <children>
+                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Analytics" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <graphic>
+                                                            <FontAwesomeIconView fill="#34a853" glyphName="CALENDAR" size="25" strokeType="INSIDE" />
+                                                         </graphic>
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </JFXButton>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="4.0" prefWidth="266.0" />
+                                                <AnchorPane>
+                                                   <children>
+                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Core Human Capital Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <graphic>
+                                                            <MaterialDesignIconView fill="#34a853" glyphName="FILE_MULTIPLE" size="25" strokeType="INSIDE" />
+                                                         </graphic>
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </JFXButton>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="4.0" prefWidth="266.0" />
+                                                <AnchorPane>
+                                                   <children>
+                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Compensation Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <graphic>
+                                                            <FontAwesomeIconView fill="#34a853" glyphName="CALENDAR" size="25" strokeType="INSIDE" />
+                                                         </graphic>
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </JFXButton>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="4.0" prefWidth="266.0" />
+                                                <AnchorPane>
+                                                   <children>
+                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Payroll" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <graphic>
+                                                            <FontAwesomeIconView fill="#34a853" glyphName="CALENDAR" size="25" strokeType="INSIDE" />
+                                                         </graphic>
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </JFXButton>
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </VBox>
+                                       </content>
+                                    </ScrollPane>
+                                 </center>
+                              </BorderPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="GROUP" size="25" strokeType="INSIDE" styleClass="fontIcon" />
+                     </graphic>
+                  </Tab>
+                  <Tab id="tab" fx:id="LOG" closable="false">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox layoutX="-14.0" prefHeight="760.0" prefWidth="273.0" style="-fx-background-color: white; -fx-border-color: #34A853; -fx-border-width: 0 0 0 1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <AnchorPane prefHeight="40.0" prefWidth="235.0" style="-fx-background-color: #34A853;">
+                                       <children>
+                                          <Label text="LOGSITICS MODULE" textFill="WHITE" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
+                                             <font>
+                                                <Font name="Segoe UI Semibold" size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="TRUCK" size="25" strokeType="INSIDE" styleClass="fontIcon" text="" />
+                     </graphic>
+                  </Tab>
+                  <Tab id="tab" fx:id="ADMIN" closable="false">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="533.0" prefWidth="235.0" style="-fx-background-color: white; -fx-border-color: #34A853; -fx-border-width: 0 0 0 1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <AnchorPane prefHeight="40.0" prefWidth="235.0" style="-fx-background-color: #34A853;">
+                                       <children>
+                                          <Label text="ADMINISTRATIVE MODULE" textFill="WHITE" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
+                                             <font>
+                                                <Font name="Segoe UI Semibold" size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="CUBE" size="25" strokeType="INSIDE" styleClass="fontIcon" />
+                     </graphic>
+                  </Tab>
+                  <Tab id="tab" fx:id="FINANCE" closable="false">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="533.0" prefWidth="235.0" style="-fx-background-color: white; -fx-border-color: #34A853; -fx-border-width: 0 0 0 1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <AnchorPane prefHeight="40.0" prefWidth="235.0" style="-fx-background-color: #34A853;">
+                                       <children>
+                                          <Label text="FINANCIALS MODULE" textFill="WHITE" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
+                                             <font>
+                                                <Font name="Segoe UI Semibold" size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="MONEY" size="25" strokeType="INSIDE" styleClass="fontIcon" />
+                     </graphic>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

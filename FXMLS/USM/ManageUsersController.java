@@ -26,6 +26,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 /**
  * FXML Controller class
@@ -78,13 +79,10 @@ public class ManageUsersController implements Initializable {
         setPerms.setCellFactory(new Callback<TableColumn<IUsers, Boolean>, TableCell<IUsers, Boolean>>() {
             @Override
             public TableCell<IUsers, Boolean> call(TableColumn<IUsers, Boolean> param) {
-                return new Synapse.Components.ButtonInCell<IUsers>().create("Permissions", new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent e) {
-                        SetPermissionUSMController.UserID = Integer.parseInt(tblUsers.getSelectionModel().getSelectedItem().id.getValue());
-                        Modal md = Modal.getInstance(new Form("/FXMLS/USM/Controllers/SetPermissionUSM.fxml").getParent());
-                        md.open();
-                    }
+                return new Synapse.Components.ButtonInCell<IUsers>().create("Permissions", (MouseEvent e) -> {
+                    SetPermissionUSMController.UserID = Integer.parseInt(tblUsers.getSelectionModel().getSelectedItem().id.getValue());
+                    Modal md = Modal.getInstance(new Form("/FXMLS/USM/Controllers/SetPermissionUSM.fxml").getParent());
+                    md.open();
                 });
             }
         });

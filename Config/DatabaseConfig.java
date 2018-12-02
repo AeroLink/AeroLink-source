@@ -19,7 +19,7 @@ public class DatabaseConfig {
     public static String PORT = "1433";
     public static String DATABASE = "AeroLink";
     public static String USER = "sa";
-    public static String PASSWORD = "adminroot";
+    public static String PASSWORD = "root";
 
  
 }

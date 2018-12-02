@@ -20,54 +20,57 @@ import javafx.stage.Window;
  * @author Lei
  */
 public class Form {
-    
+
     private String p = "";
     private Stage stage = new Stage();
     private Parent parent;
-    
+
     private FXMLLoader loader;
-    
-    public Form(String Path){
+
+    public Form(String Path) {
         this.parent = null;
         try {
 
             this.loader = new FXMLLoader();
             this.parent = loader.load(getClass().getResource(Path));
-    
-        }catch (IOException e) {
+
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
-    
-    public Form() {}
 
-    
+    public Form() {
+    }
+
     public void setPath(String Path) {
         this.p = Path;
     }
-    
-    public String getPath(){
+
+    public String getPath() {
         return this.p;
     }
 
     public Parent getParent() {
         return this.parent;
     }
-    
-    
-    public void open(){
-        
+
+    public Object getCnt() {
+        return this.loader.getController();
+    }
+
+    public void open() {
+
         Scene s = new Scene(this.parent);
-        
+
         this.stage.initStyle(StageStyle.DECORATED);
         this.stage.setScene(s);
         this.stage.show();
     }
-    
-    public void open(StageStyle stageSytle){
-        
+
+    public void open(StageStyle stageSytle) {
+
         Scene s = new Scene(this.parent);
-        
+
         this.stage.initStyle(stageSytle);
         this.stage.setScene(s);
         this.stage.show();
@@ -76,40 +79,35 @@ public class Form {
     public Stage getStage() {
         return stage;
     }
-    
-    
-    
-    public void open(StageStyle stageSytle, Boolean isFullScreen){
-        
+
+    public void open(StageStyle stageSytle, Boolean isFullScreen) {
+
         Scene s = new Scene(this.parent);
-        
+
         if (isFullScreen) {
-           this.stage.setFullScreen(true);
-           this.stage.fullScreenExitKeyProperty().setValue(KeyCombination.NO_MATCH);
-           this.stage.setAlwaysOnTop(true);
+            this.stage.setFullScreen(true);
+            this.stage.fullScreenExitKeyProperty().setValue(KeyCombination.NO_MATCH);
+            this.stage.setAlwaysOnTop(true);
         }
-        
+
         this.stage.initStyle(stageSytle);
         this.stage.setScene(s);
         this.stage.show();
     }
-    
-    public static void close(Stage target){
+
+    public static void close(Stage target) {
         target.close();
     }
-    
-    public static void close(Window w){
-        ( (Stage) w ).close();
+
+    public static void close(Window w) {
+        ((Stage) w).close();
     }
-    
-    
+
     public static void close(Node n) {
-        ( (Stage) n.getScene().getWindow()).close();
+        ((Stage) n.getScene().getWindow()).close();
     }
 
     public FXMLLoader getLoader() {
         return loader;
     }
-    
-    
 }

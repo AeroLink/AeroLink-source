@@ -70,6 +70,7 @@ import javafx.stage.WindowEvent;
  */
 public class HR1_ViewApplicantController implements Initializable {
 
+    HR1_JobOffers j = new HR1_JobOffers();
     HR1_Applicants applicant = new HR1_Applicants();
     HR1_Applicants applicant_pivot = new HR1_Applicants(true);
     HR1_Applicants applicant_answers = new HR1_Applicants("pre_screening");
@@ -259,6 +260,15 @@ public class HR1_ViewApplicantController implements Initializable {
             }
 
             if (Integer.parseInt(StageID.getValue()) >= 5) {
+
+                if (j.where(new Object[][]{{"app_id", "=", HR1_Applicant.app_id}}).get().stream().count() == 0) {
+                    btnOfferAccepted.setVisible(false);
+                    btnOfferDeclined.setVisible(false);
+                } else {
+                    btnOfferAccepted.setVisible(true);
+                    btnOfferDeclined.setVisible(true);
+
+                }
                 paneRatings.setVisible(false);
                 jobOfferPane.setVisible(true);
                 menuJobOffer.setDisable(false);
@@ -692,7 +702,7 @@ public class HR1_ViewApplicantController implements Initializable {
 
     String job_id = "";
     int returnPositions = 0;
-
+    int real_jobID = 0;
     @FXML
     private void btnSubmitHire(ActionEvent event) {
         this.Hiring();
@@ -704,10 +714,9 @@ public class HR1_ViewApplicantController implements Initializable {
             //Insert First to Table Hr4
             HR4_Employee emp = new HR4_Employee();
             HR4_Employee profile = new HR4_Employee("profile");
-
+            HR4_Employee job = new HR4_Employee("job");
             Users u = new Users();
             UserPermissions up = new UserPermissions();
-
             HR1_JobOffers j = new HR1_JobOffers();
 
             j.where(new Object[][]{
@@ -778,6 +787,7 @@ public class HR1_ViewApplicantController implements Initializable {
 
             Helpers.FileTransfer.SendFile("127.0.0.1", file.getPath());
 
+            //profileUpdate
             profile.update(new Object[][]{
                 {"employee_code", "EMP181900" + emp_id},
                 {"employement_contract", file.getName()}
@@ -790,9 +800,9 @@ public class HR1_ViewApplicantController implements Initializable {
             }).where(new Object[][]{
                 {"app_id", "=", HR1_Applicant.app_id}
             }).executeUpdate();
-
             JobVacancy jv = new JobVacancy();
             JobPosting jp = new JobPosting();
+
             jp.where(new Object[][]{
                 {"id", "=", HR1_Applicant.jobPosted_id}
             }).get().stream().forEach(action -> {
@@ -804,15 +814,28 @@ public class HR1_ViewApplicantController implements Initializable {
             }).get().stream().forEach(action -> {
                 HashMap row = (HashMap) action;
                 returnPositions = (Integer.parseInt(row.get("jobOpen").toString()) - 1);
+                real_jobID = (Integer.parseInt(row.get("job_id").toString()));
 
+            });
+
+            //JobUpdate
+            job.insert(new Object[][]{
+                {"employee_code", "EMP181900" + emp_id},
+                {"job_id", real_jobID}
             });
 
             jv.update(new Object[][]{
                 {"jobOpen", returnPositions},
-                {"isPosted", (returnPositions == 0 ? 0 : 1)}
+                {"isPosted", (returnPositions <= 0 ? 0 : 1)}
             }).where(new Object[][]{
                 {"id", "=", job_id}
             }).executeUpdate();
+            
+            if (returnPositions <= 0) {
+                jp.delete().where(new Object[][]{
+                    {"id", "=", HR1_Applicant.jobPosted_id}
+                }).executeUpdate();
+            }
 
             Helpers.EIS_Response.SuccessResponse("Success", "Applicant was successfully hired and make some task for proper welcome at New Hire On Board Module ");
 

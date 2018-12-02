@@ -1,272 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXHamburger?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
-<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="DropPoint" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="442.0" prefWidth="649.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.MainDashController">
-   <top>
-      <VBox BorderPane.alignment="CENTER">
+<StackPane fx:id="spane" stylesheets="@../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.MainDashController">
+   <children>
+      <AnchorPane>
+          <children>
+              <BorderPane fx:id="DropPoint" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="442.0" prefWidth="649.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <top>
+                      <VBox BorderPane.alignment="CENTER">
+                          <children>
+                              <AnchorPane prefHeight="49.0" prefWidth="649.0" style="-fx-background-color: white;" stylesheets="@../Assets/css/MainPanel.css">
+                                  <children>
+                                      <Label layoutX="54.0" layoutY="7.0" prefHeight="28.0" prefWidth="84.0" text="AeroLink" textFill="#2dbe60" AnchorPane.bottomAnchor="13.0" AnchorPane.topAnchor="7.0">
+                                          <font>
+                                              <Font name="System Bold" size="19.0" />
+                                          </font>
+                                      </Label>
+                                      <Label layoutX="54.0" layoutY="27.0" text="Freight Management System" AnchorPane.bottomAnchor="7.0">
+                                          <font>
+                                              <Font size="10.0" />
+                                          </font>
+                                      </Label>
+                                      <JFXButton fx:id="closeBtn" layoutX="604.0" layoutY="15.0" onAction="#btnClose" prefHeight="26.0" prefWidth="28.0" style="-fx-background-color: #EA4335;" styleClass="btn-rounded" stylesheets="@../Assets/css/MainPanel.css" text=" " AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="15.0">
+                                          <graphic>
+                                              <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" wrappingWidth="1.4285717010498047" />
+                                          </graphic>
+                                      </JFXButton>
+                                      <JFXButton fx:id="btnRight" layoutX="563.0" layoutY="15.0" onMouseClicked="#pullRight" prefHeight="26.0" prefWidth="28.0" style="-fx-background-color: #34A853;" styleClass="btn-rounded" stylesheets="@../Assets/css/MainPanel.css" text=" " AnchorPane.rightAnchor="58.0" AnchorPane.topAnchor="15.0">
+                                          <graphic>
+                                              <FontAwesomeIconView fill="WHITE" glyphName="COG" wrappingWidth="1.4285717010498047" />
+                                          </graphic>
+                                          <contextMenu>
+                                              <ContextMenu fx:id="contextM">
+                                                  <items>
+                                                      <MenuItem fx:id="userManagement" mnemonicParsing="false" text="User Management" />
+                                                      <MenuItem fx:id="importAndExport" mnemonicParsing="false" text="Import and Export" />
+                                                  </items>
+                                              </ContextMenu>
+                                          </contextMenu>
+                                      </JFXButton>
+                              <JFXHamburger fx:id="Drawer" layoutX="14.0" layoutY="17.0" />
+                                  </children>
+                              </AnchorPane>
+                        <AnchorPane prefHeight="21.0" prefWidth="649.0" style="-fx-background-color: #34A853;" />
+                          </children>
+                      </VBox>
+                  </top>
+                  <center>
+         
+            </center>
+              </BorderPane>
+          </children>
+      </AnchorPane>
+      <Region fx:id="regionBlack" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgba(0, 0, 0, 0.5);" visible="false" />
+      <AnchorPane fx:id="acSide" prefHeight="200.0" prefWidth="200.0" visible="false">
          <children>
-            <AnchorPane prefHeight="39.0" prefWidth="985.0" style="-fx-background-color: #fff;">
-               <children>
-                  <Label layoutX="48.0" layoutY="6.0" prefHeight="28.0" prefWidth="84.0" text="AeroLink" textFill="#2dbe60" AnchorPane.bottomAnchor="14.0" AnchorPane.topAnchor="6.0">
-                     <font>
-                        <Font name="System Bold" size="19.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="48.0" layoutY="29.0" text="Freight Management System" AnchorPane.bottomAnchor="10.0">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Label>
-                  <JFXButton layoutX="604.0" layoutY="15.0" onAction="#btnClose" prefHeight="26.0" prefWidth="28.0" style="-fx-background-color: #EA4335;" styleClass="btn-rounded" stylesheets="@../Assets/css/MainPanel.css" text=" " AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="15.0">
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" wrappingWidth="1.4285717010498047" />
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="btnRight" layoutX="563.0" layoutY="15.0" onMouseClicked="#pullRight" prefHeight="26.0" prefWidth="28.0" style="-fx-background-color: #34A853;" styleClass="btn-rounded" stylesheets="@../Assets/css/MainPanel.css" text=" " AnchorPane.rightAnchor="58.0" AnchorPane.topAnchor="15.0">
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="COG" wrappingWidth="1.4285717010498047" />
-                     </graphic>
-                     <contextMenu>
-                        <ContextMenu fx:id="contextM">
-                          <items>
-                            <MenuItem fx:id="userManagement" mnemonicParsing="false" text="User Management" />
-                              <MenuItem fx:id="importAndExport" mnemonicParsing="false" text="Import and Export" />
-                          </items>
-                        </ContextMenu>
-                     </contextMenu>
-                  </JFXButton>
-                  <ImageView fitHeight="34.0" fitWidth="49.0" layoutX="7.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="10.0" AnchorPane.topAnchor="10.0">
-                     <image>
-                        <Image url="@../Assets/300%20x%20300.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-            <MenuBar stylesheets="@../Assets/css/MainPanel.css">
-              <menus>
-                <Menu id="CORE" fx:id="CORE" text="Core">
-                  <items>
-                        <MenuItem id="core1_booking" mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Booking">
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="BOOK" stroke="#03030330" strokeWidth="0.0" styleClass="fontIcon" />
-                           </graphic>
-                        </MenuItem>
-                        <MenuItem id="core1pom" mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Purchase Order Management">
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="CLIPBOARD" stroke="#03030330" strokeWidth="0.0" styleClass="fontIcon" />
-                           </graphic>
-                        </MenuItem>
-                        <MenuItem id="core1consol" mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Consolidation/Deconsolidation">
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="SHIELD" stroke="#03030330" strokeWidth="0.0" styleClass="fontIcon" />
-                           </graphic>
-                        </MenuItem>
-                        <MenuItem id="core1mawb" mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Master &amp; House Bill of Lading">
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="SHOPPING_BASKET" stroke="#03030330" strokeWidth="0.0" styleClass="fontIcon" />
-                           </graphic>
-                        </MenuItem>
-                        <MenuItem id="core1sf" mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Shipment Files">
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="SHIP" stroke="#03030330" strokeWidth="0.0" styleClass="fontIcon" />
-                           </graphic>
-                        </MenuItem>
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem id="core2SN" mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Service Network">
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="COGS" stroke="#03030330" strokeWidth="0.0" styleClass="fontIcon" />
-                           </graphic>
-                        </MenuItem>
-                        <MenuItem id="core2SN" mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Service Provider">
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="CUBES" stroke="#03030330" strokeWidth="0.0" styleClass="fontIcon" />
-                           </graphic>
-                        </MenuItem>
-                        <MenuItem id="core2SN" mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Customer Relationship Management">
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="HANDSHAKE_ALT" stroke="#03030330" strokeWidth="0.0" styleClass="fontIcon" />
-                           </graphic>
-                        </MenuItem>
-                        <MenuItem id="core2SN" mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Standard Operation Procedures">
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="EXCHANGE" stroke="#03030330" strokeWidth="0.0" styleClass="fontIcon" />
-                           </graphic>
-                        </MenuItem>
-                        <MenuItem id="core2SN" mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Schedule and Rate">
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="CALENDAR" stroke="#03030330" strokeWidth="0.0" styleClass="fontIcon" />
-                           </graphic>
-                        </MenuItem>
-                  </items>
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="PLANE" stroke="#03030330" strokeWidth="0.0" styleClass="fontIcon" />
-                     </graphic>
-                </Menu>
-                  <Menu id="HR" fx:id="HR" text="Human Resources">
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="GROUP" stroke="#03030330" strokeWidth="0.0" styleClass="fontIcon" />
-                     </graphic>
-                     <items>
-                        <Menu mnemonicParsing="false" styleClass="menu-v" text="HR 1">
-                           <items>
-                              <MenuItem id="hr1RCC" mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Recruitment">
-                                 <graphic>
-                                    <MaterialDesignIconView fill="WHITE" glyphName="ACCOUNT_PLUS" styleClass="fontIcon" />
-                                 </graphic>
-                              </MenuItem>
-                              <MenuItem id="applicant" mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Applicant Management">
-                                 <graphic>
-                                    <MaterialDesignIconView fill="WHITE" glyphName="ACCOUNT_CARD_DETAILS" styleClass="fontIcon" />
-                                 </graphic>
-                              </MenuItem>
-                              <MenuItem id="newHire" mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="New Hire OnBoard">
-                                 <graphic>
-                                    <MaterialDesignIconView fill="WHITE" glyphName="ACCOUNT_CHECK" styleClass="fontIcon" />
-                                 </graphic>
-                              </MenuItem>
-                              <MenuItem id="performance" mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Performance Management">
-                                 <graphic>
-                                    <MaterialDesignIconView fill="WHITE" glyphName="ACCOUNT_CHECK" styleClass="fontIcon" />
-                                 </graphic>
-                              </MenuItem>
-                              <MenuItem id="social" mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Social Recognition">
-                                 <graphic>
-                                    <MaterialDesignIconView fill="WHITE" glyphName="CERTIFICATE" styleClass="fontIcon" />
-                                 </graphic>
-                              </MenuItem>
-                           </items>
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="GROUP" stroke="#03030330" strokeWidth="0.0" styleClass="fontIcon" />
-                           </graphic>
-                        </Menu>
-                        <Menu mnemonicParsing="false" styleClass="menu-v" text="HR 2">
-                           <items>
-                              <MenuItem id="learning_management" mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Learning Management">
-                                 <graphic>
-                                    <MaterialDesignIconView fill="WHITE" glyphName="BOOK_OPEN_PAGE_VARIANT" styleClass="fontIcon" />
-                                 </graphic>
-                              </MenuItem>
-                              <MenuItem id="training_management" mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Training Management ">
-                                 <graphic>
-                                    <MaterialDesignIconView fill="WHITE" glyphName="SWORD" styleClass="fontIcon" />
-                                 </graphic>
-                              </MenuItem>
-                              <MenuItem id="competency_management" mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Competency Management">
-                                 <graphic>
-                                    <MaterialDesignIconView fill="WHITE" glyphName="CARDS_OUTLINE" styleClass="fontIcon" />
-                                 </graphic>
-                              </MenuItem>
-                              <MenuItem id="succession_planning" mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Succession Planning">
-                                 <graphic>
-                                    <MaterialDesignIconView fill="WHITE" glyphName="ACCOUNT_STAR_VARIANT" styleClass="fontIcon" />
-                                 </graphic>
-                              </MenuItem>
-                           </items>
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="GROUP" stroke="#03030330" strokeWidth="0.0" styleClass="fontIcon" />
-                           </graphic>
-                        </Menu>
-                        <Menu mnemonicParsing="false" styleClass="menu-v" text="HR 3">
-                           <items>
-                              <MenuItem id="hr3sns" mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Shift and Scheduling">
-                                 <graphic>
-                                    <MaterialDesignIconView fill="WHITE" glyphName="CALENDAR_TEXT" styleClass="fontIcon" />
-                                 </graphic>
-                              </MenuItem>
-                              <MenuItem id="hr3tna" mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Time and Attendance">
-                                 <graphic>
-                                    <MaterialDesignIconView fill="WHITE" glyphName="CALENDAR_CLOCK" styleClass="fontIcon" />
-                                 </graphic>
-                              </MenuItem>
-                              <MenuItem id="hr3cnr" mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Claims and Reimbursement">
-                                 <graphic>
-                                    <MaterialIconView glyphName="PAN_TOOL" styleClass="fontIcon" />
-                                 </graphic>
-                              </MenuItem>
-                              <MenuItem id="hr3lm" mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Leave Management">
-                                 <graphic>
-                                    <MaterialDesignIconView fill="WHITE" glyphName="FILE_MULTIPLE" styleClass="fontIcon" />
-                                 </graphic>
-                              </MenuItem>
-                              <MenuItem id="hr3tm" mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Timesheet Management">
-                                 <graphic>
-                                    <MaterialDesignIconView fill="WHITE" glyphName="CHART_TIMELINE" styleClass="fontIcon" />
-                                 </graphic>
-                              </MenuItem>
-                           </items>
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="GROUP" stroke="#03030330" strokeWidth="0.0" styleClass="fontIcon" />
-                           </graphic>
-                        </Menu>
-                        <Menu mnemonicParsing="false" styleClass="menu-v" text="HR 4">
-                           <items>
-                              <MenuItem id="hr4analytics" mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Analytics" />
-                              <MenuItem id="hr4payroll" mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Payroll" />
-                              <MenuItem id="hr4cnp" mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Compensation and Planning" />
-                              <MenuItem id="hr4chc" mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Core Human Capital Management" />
-                           </items>
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="GROUP" stroke="#03030330" strokeWidth="0.0" styleClass="fontIcon" />
-                           </graphic>
-                        </Menu>
-                     </items>
-                  </Menu>
-                  <Menu id="LOG" fx:id="LOG" text="Logistics">
-                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Warehouse Management" />
-                        <MenuItem mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Maintenance &amp; Overhaul" />
-                        <MenuItem mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Asset Management" />
-                        <MenuItem mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Procurement" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Audit Management" />
-                        <MenuItem mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Vendor Portal" />
-                        <MenuItem mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Fleet Management" />
-                        <MenuItem mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Vehice Reservation" />
-                        <MenuItem mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Document Tracking System" />
-                     </items>
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="TRUCK" stroke="#03030330" strokeWidth="0.0" styleClass="fontIcon" />
-                     </graphic>
-                  </Menu>
-                  <Menu id="FINANCE" fx:id="FINANCE" text="Financials">
-                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Collections" />
-                        <MenuItem mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Budget Management" />
-                        <MenuItem mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Disbursement" />
-                        <MenuItem mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="AP &amp; AR" />
-                        <MenuItem mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="General Ledger" />
-                     </items>
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="MONEY" stroke="#03030330" strokeWidth="0.0" styleClass="fontIcon" />
-                     </graphic>
-                  </Menu>
-                  <Menu id="ADMIN" fx:id="ADMIN" text="Administrative">
-                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#triggerButton" styleClass="nav-menu" text="Legal Management" />
-                     </items>
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="CUBE" stroke="#03030330" strokeWidth="0.0" styleClass="fontIcon" />
-                     </graphic>
-                  </Menu>
-              </menus>
-            </MenuBar>
+              <fx:include fx:id="Sidebar" source="CoreSide.fxml" />
          </children>
-      </VBox>
-   </top>
-</BorderPane>
+      </AnchorPane>
+   </children>
+</StackPane>
