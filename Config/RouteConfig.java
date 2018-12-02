@@ -14,9 +14,7 @@ public class RouteConfig {
 
     public static String[][] links = {
         {"Main", "/FXMLS/MainDash.fxml", "canAccessSystem"},
-        //coac
-        //{"id_coa", "/FXMLS/FINANCIALS/GENERAL_LEDGER/ChartOfAccounts.fxml"},
-
+        
         //FINANCIALS
         {"id_apr", "/FXMLS/FINANCIALS/FINANCIAL_APR.fxml", "can_access_hr1_socialrecog"},
         {"id_budget", "/FXMLS/FINANCIALS/FINANCIAL_BUDGET.fxml", "can_access_hr1_socialrecog"},

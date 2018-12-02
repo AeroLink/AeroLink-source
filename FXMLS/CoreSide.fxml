@@ -316,7 +316,7 @@
                                                    </children></AnchorPane>
                                                 <AnchorPane>
                                                    <children>
-                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Learning Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <JFXButton id="learning_management" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Learning Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <graphic>
                                                             <MaterialDesignIconView fill="#34a853" glyphName="BOOK_OPEN_PAGE_VARIANT" size="25" strokeType="INSIDE" />
                                                          </graphic>
@@ -329,7 +329,7 @@
                                                 <AnchorPane prefHeight="4.0" prefWidth="266.0" />
                                                 <AnchorPane>
                                                    <children>
-                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Training Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <JFXButton id="training_management" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Training Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <graphic>
                                                             <MaterialDesignIconView fill="#34a853" glyphName="SWORD" size="25" strokeType="INSIDE" />
                                                          </graphic>
@@ -342,7 +342,7 @@
                                                 <AnchorPane prefHeight="4.0" prefWidth="266.0" />
                                                 <AnchorPane>
                                                    <children>
-                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Competency Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <JFXButton id="competency_management" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Competency Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <graphic>
                                                             <MaterialDesignIconView fill="#34a853" glyphName="CARDS_OUTLINE" size="25" strokeType="INSIDE" />
                                                          </graphic>
@@ -355,7 +355,7 @@
                                                 <AnchorPane prefHeight="4.0" prefWidth="266.0" />
                                                 <AnchorPane>
                                                    <children>
-                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Succession Planning" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <JFXButton id="succession_planning" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Succession Planning" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <graphic>
                                                             <MaterialDesignIconView fill="#34a853" glyphName="ACCOUNT_STAR_VARIANT" size="25" strokeType="INSIDE" />
                                                          </graphic>
@@ -375,7 +375,7 @@
                                                    </children></AnchorPane>
                                                 <AnchorPane>
                                                    <children>
-                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Shift and Scheduling" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Shift and Scheduling" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <graphic>
                                                             <MaterialDesignIconView fill="#34a853" glyphName="CALENDAR_TEXT" size="25" strokeType="INSIDE" />
                                                          </graphic>
@@ -388,7 +388,7 @@
                                                 <AnchorPane prefHeight="4.0" prefWidth="266.0" />
                                                 <AnchorPane>
                                                    <children>
-                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Time and Attendance" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Time and Attendance" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <graphic>
                                                             <MaterialDesignIconView fill="#34a853" glyphName="CALENDAR_CLOCK" size="25" strokeType="INSIDE" />
                                                          </graphic>
@@ -401,7 +401,7 @@
                                                 <AnchorPane prefHeight="4.0" prefWidth="266.0" />
                                                 <AnchorPane>
                                                    <children>
-                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Claims and Reimbursement" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Claims and Reimbursement" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <graphic>
                                                             <MaterialDesignIconView fill="#34a853" glyphName="CHART_TIMELINE" size="25" strokeType="INSIDE" />
                                                          </graphic>
@@ -414,7 +414,7 @@
                                                 <AnchorPane prefHeight="4.0" prefWidth="266.0" />
                                                 <AnchorPane>
                                                    <children>
-                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Leave Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Leave Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <graphic>
                                                             <FontAwesomeIconView fill="#34a853" glyphName="CALENDAR" size="25" strokeType="INSIDE" />
                                                          </graphic>
@@ -427,7 +427,7 @@
                                                 <AnchorPane prefHeight="4.0" prefWidth="266.0" />
                                                 <AnchorPane>
                                                    <children>
-                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Timesheet Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Timesheet Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <graphic>
                                                             <FontAwesomeIconView fill="#34a853" glyphName="CALENDAR" size="25" strokeType="INSIDE" />
                                                          </graphic>
@@ -447,7 +447,7 @@
                                                    </children></AnchorPane>
                                                 <AnchorPane>
                                                    <children>
-                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Analytics" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Analytics" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <graphic>
                                                             <FontAwesomeIconView fill="#34a853" glyphName="CALENDAR" size="25" strokeType="INSIDE" />
                                                          </graphic>
@@ -460,7 +460,7 @@
                                                 <AnchorPane prefHeight="4.0" prefWidth="266.0" />
                                                 <AnchorPane>
                                                    <children>
-                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Core Human Capital Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Core Human Capital Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <graphic>
                                                             <MaterialDesignIconView fill="#34a853" glyphName="FILE_MULTIPLE" size="25" strokeType="INSIDE" />
                                                          </graphic>
@@ -473,7 +473,7 @@
                                                 <AnchorPane prefHeight="4.0" prefWidth="266.0" />
                                                 <AnchorPane>
                                                    <children>
-                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Compensation Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Compensation Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <graphic>
                                                             <FontAwesomeIconView fill="#34a853" glyphName="CALENDAR" size="25" strokeType="INSIDE" />
                                                          </graphic>
@@ -486,7 +486,7 @@
                                                 <AnchorPane prefHeight="4.0" prefWidth="266.0" />
                                                 <AnchorPane>
                                                    <children>
-                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Payroll" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Payroll" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <graphic>
                                                             <FontAwesomeIconView fill="#34a853" glyphName="CALENDAR" size="25" strokeType="INSIDE" />
                                                          </graphic>
