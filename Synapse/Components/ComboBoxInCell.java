@@ -10,6 +10,8 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.TableCell;
 import javafx.scene.input.MouseEvent;
 
@@ -18,18 +20,19 @@ import javafx.scene.input.MouseEvent;
  * @author Lei
  * @param <rt>
  */
-public class ButtonInCell<rt extends RecursiveTreeObject> {
+public class ComboBoxInCell<rt extends RecursiveTreeObject> {
     
     
-    private EventHandler<MouseEvent> e;
+    private ContextMenu contextMenu;
     
-    private class btnCel extends TableCell<rt, Boolean> {
+    private class comboboxCell extends TableCell<rt, Boolean> {
         
-        final JFXButton btn;
+        final ComboBox btn;
         
-        public btnCel(String btnName) {
-            this.btn = new JFXButton(btnName);
-            this.btn.setOnMouseClicked(e);
+        public comboboxCell(String name) {
+            this.btn = new ComboBox();
+            this.btn.setPromptText(name);
+            this.btn.setContextMenu(contextMenu);
             this.btn.getStyleClass().add("btnTable");
         }
         
@@ -42,9 +45,9 @@ public class ButtonInCell<rt extends RecursiveTreeObject> {
         }
     }
     
-    public TableCell<rt, Boolean> create(String ButtonName, EventHandler<MouseEvent> e) {
-        this.e = e;
-        return new btnCel(ButtonName);
+    public TableCell<rt, Boolean> create(String ButtonName, ContextMenu e) {
+        this.contextMenu = e;
+        return new comboboxCell(ButtonName);
     }
     
     

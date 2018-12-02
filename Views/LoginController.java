@@ -68,13 +68,17 @@ public class LoginController implements Initializable {
         btnLoader.setVisible(true);
         btnSignIn.setText("");
         if (loginController.doLogin(txtUsername.getText(), txtPassword.getText())) {
+            
             Helpers.AlertResponse alert = new Helpers.AlertResponse(Alert.AlertType.INFORMATION, "Congratulations", "Login Success", "Passing to Dashboard");
             alert.open();
 
+            Session.putIfNotExist("username", txtUsername.getText());
+            
             System.out.println(Arrays.asList(Session.getPermissions()));
 
             new Form(Route.routes.get("Main").toString()).open(StageStyle.UNDECORATED, true);
             Form.close(btnSignIn);
+            
         } else {
             Helpers.AlertResponse alert = new Helpers.AlertResponse(Alert.AlertType.ERROR, "Opps", "Login Failed", "Please check your credentials and login again");
             alert.open();

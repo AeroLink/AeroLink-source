@@ -129,17 +129,8 @@ and open the template in the editor.
 
 /* Table */
 
-.table-view {
-    -fx-background-color: transparent;
-}
-
 .table-column {
     -fx-alignment: CENTER;
-}
-
-.table-view:focused {
-
-    -fx-background-color: transparent;
 }
 
 .table-row-cell:selected{
@@ -147,8 +138,60 @@ and open the template in the editor.
     -fx-background-insets : 0, 0 0 1 0;
 }
 
-.table-row-cell:selected  .text  {
-    -fx-fill : white;
+.table-row-cell:selected .text{
+    -fx-fill: white;
+}
+
+.table-row-cell:selected .btnTable {
+    -fx-background-color: white;
+    -fx-text-fill: #34A853 !important;
+}
+
+.table-row-cell:selected .btnTable .text {
+    -fx-fill: #34A853;
+}
+
+.table-row-cell:selected .btnTable .fontIconTable {
+    -fx-fill: #34A853;
+}
+
+.table-row-cell .btnTable {
+    -fx-background-color: #34A853;
+    -fx-text-fill: white;
+}
+
+.table-row-cell .btnTable .text {
+    -fx-fill: white;
+}
+
+.table-row-cell .btnTable .fontIconTable {
+    -fx-fill: white;
+}
+
+.table-row-cell .btnTable .menu-item .text {
+    -fx-fill: black;
+}
+
+.table-row-cell .btnTable .menu-item .fontIconMenu {
+    -fx-fill: #34A853;
+}
+
+.table-row-cell .btnTable .menu-item:hover,
+.table-row-cell .btnTable .menu-item:selected,
+.table-row-cell .btnTable .menu-item:showing{
+    -fx-background-color: #34A853;
+}
+
+.table-row-cell .btnTable .menu-item:hover .text,
+.table-row-cell .btnTable .menu-item:selected .text,
+.table-row-cell .btnTable .menu-item:showing .text{
+    -fx-fill: white !important;
+}
+
+.table-row-cell .btnTable .menu-item:hover  .fontIconMenu,
+.table-row-cell .btnTable .menu-item:selected  .fontIconMenu,
+.table-row-cell .btnTable .menu-item:showing  .fontIconMenu{
+    -fx-fill: white !important;
 }
 
 

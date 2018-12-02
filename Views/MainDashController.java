@@ -90,6 +90,7 @@ public class MainDashController implements Initializable {
         System.out.println(primaryScreenBounds);
         Sidebar.setPrefHeight(primaryScreenBounds.getHeight() + 50);
         drawerAnimation();
+        
         // TODO
         if (Session.getPermissions().contains("SysAdmin")) {
             btnRight.setContextMenu(contextM);

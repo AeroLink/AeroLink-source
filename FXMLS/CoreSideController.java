@@ -18,6 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
@@ -49,6 +50,8 @@ public class CoreSideController implements Initializable {
     private Tab ADMIN;
     @FXML
     private Tab FINANCE;
+    @FXML
+    private Label SessionUsername;
 
     /**
      * Initializes the controller class.
@@ -56,6 +59,8 @@ public class CoreSideController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        SessionUsername.setText(Session.pull("username").toString());
+        
         Rectangle clip = new Rectangle(userImage.getFitWidth() - 30, userImage.getFitHeight() - 1);
         clip.setArcHeight(50);
         clip.setArcWidth(50);

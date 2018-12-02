@@ -7,9 +7,13 @@ package Synapse.Components;
     
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableCell;
 import javafx.scene.input.MouseEvent;
 
@@ -18,18 +22,16 @@ import javafx.scene.input.MouseEvent;
  * @author Lei
  * @param <rt>
  */
-public class ButtonInCell<rt extends RecursiveTreeObject> {
+public class MenuButtonCell<rt extends RecursiveTreeObject> {
     
-    
-    private EventHandler<MouseEvent> e;
-    
-    private class btnCel extends TableCell<rt, Boolean> {
+    private class menuButtonCel extends TableCell<rt, Boolean> {
         
-        final JFXButton btn;
+        final MenuButton btn;
         
-        public btnCel(String btnName) {
-            this.btn = new JFXButton(btnName);
-            this.btn.setOnMouseClicked(e);
+        public menuButtonCel(String btnName, MenuItem... items) {
+            FontAwesomeIconView f = new FontAwesomeIconView(FontAwesomeIcon.COGS);
+            f.getStyleClass().add("fontIconTable");
+            this.btn = new MenuButton(btnName, f, items);
             this.btn.getStyleClass().add("btnTable");
         }
         
@@ -42,9 +44,8 @@ public class ButtonInCell<rt extends RecursiveTreeObject> {
         }
     }
     
-    public TableCell<rt, Boolean> create(String ButtonName, EventHandler<MouseEvent> e) {
-        this.e = e;
-        return new btnCel(ButtonName);
+    public TableCell<rt, Boolean> create(String ButtonName, MenuItem... items) {
+        return new menuButtonCel(ButtonName, items);
     }
     
     

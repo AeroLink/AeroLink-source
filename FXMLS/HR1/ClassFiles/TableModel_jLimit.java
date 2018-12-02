@@ -5,6 +5,8 @@
  */
 package FXMLS.HR1.ClassFiles;
 
+import FXMLS.USM.Controllers.IUsers;
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -12,7 +14,7 @@ import javafx.beans.property.StringProperty;
  *
  * @author Lei
  */
-public class TableModel_jLimit {
+public class TableModel_jLimit extends RecursiveTreeObject<TableModel_jLimit>{
     
     public StringProperty id;
     public StringProperty job_id;
