@@ -267,7 +267,7 @@ public class HR2_Training_ManagementController implements Initializable {
         List training_data = tm.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "employees", "=", "id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr2_type_of_training ", "type_of_training_id", "t_type", "=", "type_of_training_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_log2_vehicle_status ", "vehicle_id", "v", "=", "vehicle_id")
-                .where(new Object[][]{{"aerolink.tbl_hr2_training_info.status", "=", "1"}})
+                .where(new Object[][]{{"aerolink.tbl_hr2_training_info.status", "<>", "0"}})
                 .get("job_position", "training_title", "training_description", "CONCAT(employees.firstname, ' ' ,employees.middlename, ' ',\n"
                         + "employees.lastname)as trainor", "start_date", "end_date", "start_time", "end_time", "t_type.type_of_training",
                         "location", "v.vehicle", "budget_cost");
@@ -284,7 +284,8 @@ public class HR2_Training_ManagementController implements Initializable {
             List training_data1 = tm.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "employees", "=", "id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr2_type_of_training ", "type_of_training_id", "t_type", "=", "type_of_training_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_log2_vehicle_status ", "vehicle_id", "v", "=", "vehicle_id")
-                    .where(new Object[][]{{"job_position", "like", "%" + txt_search_training.getText() + "%","AND","aerolink.tbl_hr2_training_info.status", "=", "1"}})
+                    .where(new Object[][]{{"job_position", "like", "%" + txt_search_training.getText() + "%"},
+                        {"aerolink.tbl_hr2_training_info.status", "<>", "0"}})
                     .get("job_position", "training_title", "training_description", "CONCAT(employees.firstname, ' ' ,employees.middlename, ' ',\n"
                             + "employees.lastname)as trainor", "start_date", "end_date", "start_time", "end_time", "t_type.type_of_training",
                             "location", "v.vehicle", "budget_cost");
@@ -359,7 +360,7 @@ public class HR2_Training_ManagementController implements Initializable {
             System.out.println(e);
         }
     }
-    
+    /*
     @FXML
      public void searchHistoryOfTraining() {
         HR2_Training_Info tm = new HR2_Training_Info();
@@ -368,7 +369,7 @@ public class HR2_Training_ManagementController implements Initializable {
             List training_data1 = tm.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "employees", "=", "id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr2_type_of_training ", "type_of_training_id", "t_type", "=", "type_of_training_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_log2_vehicle_status ", "vehicle_id", "v", "=", "vehicle_id")
-                    .where(new Object[][]{{"job_position", "like", "%" + txt_search_historyTraining.getText() + "%","AND","aerolink.tbl_hr2_training_info.status", "=", "0"}})
+                    .where(new Object[][]{{"job_position", "like", "%" + txt_search_historyTraining.getText() + "%","aerolink.tbl_hr2_training_info.status", "=", "0"}})
                     .get("job_position", "training_title", "training_description", "CONCAT(employees.firstname, ' ' ,employees.middlename, ' ',\n"
                             + "employees.lastname)as trainor", "start_date", "end_date", "start_time", "end_time", "t_type.type_of_training",
                             "location", "v.vehicle", "budget_cost");
@@ -378,7 +379,7 @@ public class HR2_Training_ManagementController implements Initializable {
             System.out.println(e);
         }
     }
-
+*/
     public void loadDataInComboBoxes() {
         HR4_Jobs jobs = new HR4_Jobs();
         HR2_Temp_Employee_Profiles trainors = new HR2_Temp_Employee_Profiles();

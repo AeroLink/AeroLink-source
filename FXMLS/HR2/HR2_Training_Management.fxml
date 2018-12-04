@@ -183,7 +183,7 @@
                                                       <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                                    </columnResizePolicy>
                                                 </TableView>
-                                                <JFXTextField fx:id="txt_search_historyTraining" focusColor="#4a4a4a" labelFloat="true" layoutX="576.0" layoutY="408.0" maxWidth="261.0" minWidth="195.0" onKeyReleased="#searchHistoryOfTraining" prefHeight="35.0" prefWidth="195.0" promptText="Search Job Position">
+                                                <JFXTextField fx:id="txt_search_historyTraining" focusColor="#4a4a4a" labelFloat="true" layoutX="576.0" layoutY="408.0" maxWidth="261.0" minWidth="195.0" prefHeight="35.0" prefWidth="195.0" promptText="Search Job Position">
                                                    <font>
                                                       <Font name="Lato Semibold" size="15.0" />
                                                    </font>

@@ -57,6 +57,7 @@ public class Modal_EditSkillsController implements Initializable {
         
     }
 
+    @FXML
     public void Update() {
         Alert update = new Alert(Alert.AlertType.CONFIRMATION);
         update.setContentText("Are you sure you want to update this data?");
