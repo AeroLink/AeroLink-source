@@ -69,7 +69,7 @@ public class Modal_EditSkillsController implements Initializable {
         //    List sk = skills.get("skill_id","skill","skill_descrition");
         
             Boolean up = skills.where(new Object[][]{
-                {"skill", "=", txt_edit_skill.getText()}
+                {"skill_id", "=", HR2_CM_Skills_Class_for_Modal.j_Skill_id}
             }).update(new Object[][]{
                 {"skill", txt_edit_skill.getText()},
                 {"skill_description", txt_edit_skill_desc.getText()}

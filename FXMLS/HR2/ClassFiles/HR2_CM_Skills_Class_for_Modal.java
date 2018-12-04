@@ -16,11 +16,12 @@ public class HR2_CM_Skills_Class_for_Modal {
     
     public static String j_id,j_title,j_Desc,j_Skill_id, j_Skill,j_Skill_d;
     
-    public static void init_JClass(String title, String description,String skill, String Skill_description) {
+    public static void init_JClass(String Skill_id, String title, String description,String skill, String Skill_description) {
         j_title = title;
         j_Desc = description;
         j_Skill = skill;
         j_Skill_d = Skill_description;
+        j_Skill_id = Skill_id;
     }
 
 }

@@ -396,10 +396,12 @@ public class Model {
                     System.out.println(Response.ORM_ERR_02);
                     break;
                 }
-
+                
                 if (i == (vals.length - 1)) {
                     columns += vals[i][0] + " = ?";
                     this.finalValues.add(vals[i][1]);
+
+                    System.err.println(vals[i][1]);
                 } else {
                     columns += vals[i][0] + " = ?,";
                     this.finalValues.add(vals[i][1]);
