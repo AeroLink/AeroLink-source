@@ -100,10 +100,11 @@ public class HR2_Competency_ManagementController implements Initializable {
         try {
 
             HR2_CM_Pivot cm_pivot = new HR2_CM_Pivot();
-
+            HR2_CM_Skills skills_tbl = new HR2_CM_Skills();
+            
             CompletableFuture.supplyAsync(() -> {
                 while (Session.CurrentRoute.equals("competency_management")) {
-                    cm_pivot.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(row -> {
+                    skills_tbl.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(row -> {
                         DummyCount = Long.parseLong(((HashMap) row).get("chk").toString());
                     });
 
@@ -229,13 +230,12 @@ public class HR2_Competency_ManagementController implements Initializable {
             HR2_CM_Skills s = new HR2_CM_Skills();
 
             Boolean a = s.where(new Object[][]{
-                {"skill", "=", tbl_jobs.getSelectionModel().getSelectedItem().Skill.get()}
+                {"skill_id", "=", tbl_jobs.getSelectionModel().getSelectedItem().Skill_id.get()}
             }).update(new Object[][]{
                 {"isDeleted", "1"},}).executeUpdate();
             Alert dropnotif = new Alert(Alert.AlertType.INFORMATION);
             dropnotif.setContentText(tbl_jobs.getSelectionModel().getSelectedItem().Skill.get() + " Successfully Dropped");
             dropnotif.showAndWait();
-            loadJob();
         }
     }
 }
