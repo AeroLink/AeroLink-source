@@ -30,6 +30,8 @@ import javafx.scene.control.ButtonType;
  */
 public class LM_ViewCourseController implements Initializable {
 
+    
+    private String course_id;
     @FXML
     private JFXComboBox cbox_ct;
     @FXML
@@ -38,7 +40,7 @@ public class LM_ViewCourseController implements Initializable {
     private JFXComboBox cbox_created_by;
     @FXML
     private JFXButton btn_update;
-
+    
     /**
      * Initializes the controller class.
      */
@@ -68,7 +70,6 @@ public class LM_ViewCourseController implements Initializable {
         }
     }
 
-    private String course_id;
     
     public void loadDataInLabel() {
         HR2_Courses c = new HR2_Courses();
