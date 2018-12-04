@@ -112,7 +112,7 @@ public class HR2_Competency_ManagementController implements Initializable {
 
                         List c = cm_pivot.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr2_skillset", "skill_id", "s", "=", "skill_id")
-                                .where(new Object[][]{{"s.isDeleted", "=", "0"}})
+                                .where(new Object[][]{{"s.isDeleted", "<>", "1"}})
                                 .get("jobs.title", "jobs.description", "s.skill", "s.skill_description", "s.skill_id");
 
                         Data(c);
@@ -187,7 +187,7 @@ public class HR2_Competency_ManagementController implements Initializable {
             
             List c = cm_pivot.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr2_skillset", "skill_id", "s", "=", "skill_id")
-                    .where(new Object[][]{{"jobs.title", "like", "%" + txt_search_job.getText() + "%" ,"AND","s.isDeleted","=" ,"0"}})
+                    .where(new Object[][]{{"jobs.title", "like", "%" + txt_search_job.getText() + "%"} ,{"s.isDeleted","<>" ,"1"}})
                     .get("jobs.title", "jobs.description","s.skill_id", "s.skill", "s.skill_description");
 
             Data(c);

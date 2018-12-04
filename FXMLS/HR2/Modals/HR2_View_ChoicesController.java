@@ -82,7 +82,6 @@ public class HR2_View_ChoicesController implements Initializable {
         List choices = c.join(Model.JOIN.INNER, "aerolink.tbl_hr2_assessment", "question_id", "a", "=", "question_id")
                 .where(new Object[][]{{"a.question", "=", txt_question.getText()}})
                 .get("a.question,a.choice_id,aerolink.tbl_hr2_evaluation.choice,aerolink.tbl_hr2_evaluation.choice_description,aerolink.tbl_hr2_evaluation.ischecked");
-        // .get("a.question,a.choice_id,aerolink.tbl_hr2_evaluation.choice,aerolink.tbl_hr2_evaluation.choice_description,IIF (aerolink.tbl_hr2_evaluation.ischecked = 1, '", d.selectToggle(value).toString(), "'' )as ischecked");
         Data(choices);
 
     }
