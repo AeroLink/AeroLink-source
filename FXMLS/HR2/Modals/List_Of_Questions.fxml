@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
@@ -9,7 +11,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="546.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.List_Of_QuestionsController">
+<AnchorPane id="AnchorPane" prefHeight="546.0" prefWidth="600.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.List_Of_QuestionsController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -27,6 +29,22 @@
                               <Font name="Lato Bold" size="17.0" />
                            </font>
                         </Label>
+                        <JFXButton fx:id="btn_import_csv" layoutX="463.0" layoutY="16.0" prefHeight="29.0" prefWidth="119.0" styleClass="btn-primary" text="Import Excel File">
+                           <font>
+                              <Font name="Roboto Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                        <JFXButton fx:id="btn_export_csv" layoutX="289.0" layoutY="14.0" onAction="#exportCSV" prefHeight="29.0" prefWidth="151.0" styleClass="btn-primary" text="Download Template">
+                           <font>
+                              <Font name="Roboto Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
                      </children>
                   </AnchorPane>
                </top>

@@ -6,7 +6,9 @@
 package FXMLS.HR2;
 
 import FXMLS.HR2.ClassFiles.HR2_CoursesClass;
+import FXMLS.HR2.ClassFiles.HR2_ExaminationClass;
 import FXMLS.HR2.ClassFiles.HR2_LMClass_For_AddQuestion_Modal;
+import FXMLS.HR2.ClassFiles.HR2_LM_CourseOutlineModal;
 import FXMLS.HR2.ClassFiles.HR2_LM_ViewCourseModal;
 import FXMLS.HR2.ClassFiles.HR2_Training_InfoClass;
 import Model.HR2_CM_Pivot;
@@ -58,10 +60,6 @@ public class HR2_Learning_ManagementController implements Initializable {
     private TableView<HR2_CoursesClass> tbl_courses;
     @FXML
     private TableColumn<HR2_CoursesClass, String> col_course_title;
-    @FXML
-    private TableColumn<HR2_CoursesClass, String> col_course_desc;
-    @FXML
-    private TableColumn<HR2_CoursesClass, String> col_created_by;
 
     TableColumn<HR2_CoursesClass, String> courses_idx = new TableColumn<>();
 
@@ -73,6 +71,12 @@ public class HR2_Learning_ManagementController implements Initializable {
     private MenuItem c_item_modify;
     @FXML
     private MenuItem c_item_drop;
+    @FXML
+    private TableView<HR2_ExaminationClass> tbl_exam;
+    @FXML
+    private TableColumn<HR2_ExaminationClass, String> col_exam_name;
+    @FXML
+    private TableColumn<HR2_ExaminationClass, String> col_exam_desc;
 
     /**
      * Initializes the controller class.
@@ -87,7 +91,7 @@ public class HR2_Learning_ManagementController implements Initializable {
     public void loadData() {
 
         try {
-
+            //tbl courses
             HR2_Courses c = new HR2_Courses();
 
             CompletableFuture.supplyAsync(() -> {
@@ -99,10 +103,8 @@ public class HR2_Learning_ManagementController implements Initializable {
                     if (DummyCount != GlobalCount) {
 
                         List courses = c.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
-                                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "emps", "=", "id")
-                                .where(new Object[][]{{"aerolink.tbl_hr2_courses.isDeleted","<>","1"}})
-                                .get("course_id, j.title as course_title", "course_description",
-                                        "concat(emps.firstname, ' ',emps.middlename, ' ',emps.lastname)as Created_by");
+                                .where(new Object[][]{{"aerolink.tbl_hr2_courses.isDeleted", "<>", "1"}})
+                                .get("aerolink.tbl_hr2_courses.course_id","j.title as job_title");
                         Data(courses);
 
                         GlobalCount = DummyCount;
@@ -121,7 +123,7 @@ public class HR2_Learning_ManagementController implements Initializable {
         } catch (Exception e) {
             System.out.println(e);
         }
-
+        
     }
 
     public void Data(List b) {
@@ -134,11 +136,8 @@ public class HR2_Learning_ManagementController implements Initializable {
                 System.out.println(String.valueOf(hm.get("course_id")));
                 obj.add(
                         new HR2_CoursesClass(
-                                String.valueOf(hm.get("course_id")),
-                                String.valueOf(hm.get("job_id")),
-                                String.valueOf(hm.get("course_title")),
-                                String.valueOf(hm.get("course_description")),
-                                String.valueOf(hm.get("Created_by"))));
+                                String.valueOf("course_id"),
+                                String.valueOf(hm.get("job_title"))));
 
             }
             tbl_courses.setItems(obj);
@@ -148,6 +147,29 @@ public class HR2_Learning_ManagementController implements Initializable {
         }
     }
 
+    /*   public void Data1(List b1) {
+        ObservableList<HR2_ExaminationClass> obj = FXCollections.observableArrayList();
+        obj.clear();
+        try {
+            for (Object d : b1) {
+
+                HashMap hm = (HashMap) d;
+                System.out.println(String.valueOf(hm.get("course_id")));
+                obj.add(
+                        new HR2_ExaminationClass(
+                                String.valueOf(hm.get("course_id")),
+                                String.valueOf(hm.get("job_id")),
+                                String.valueOf(hm.get("course_title")),
+                                String.valueOf(hm.get("course_description"))));
+
+            }
+            tbl_exam.setItems(obj);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+     */
     @FXML
     public void searchCourses() {
         HR2_Courses c = new HR2_Courses();
@@ -156,8 +178,8 @@ public class HR2_Learning_ManagementController implements Initializable {
             List courses = c.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "emps", "=", "id")
                     .where(new Object[][]{
-                        {"j.title", "like", "%" + txt_search_course.getText() + "%"},
-                        {"aerolink.tbl_hr2_courses.isDeleted","<>","1"}})
+                {"j.title", "like", "%" + txt_search_course.getText() + "%"},
+                {"aerolink.tbl_hr2_courses.isDeleted", "<>", "1"}})
                     .get("course_id, j.title as course_title", "course_description",
                             "concat(emps.firstname, ' ',emps.middlename, ' ',emps.lastname)as Created_by");
             Data(courses);
@@ -170,10 +192,8 @@ public class HR2_Learning_ManagementController implements Initializable {
     public void DisplayDataInJTable() {
 
         courses_idx.setCellValueFactory(param -> param.getValue().course_id);
-        col_course_title.setCellValueFactory((TableColumn.CellDataFeatures<HR2_CoursesClass, String> param) -> param.getValue().course_title);
-        col_course_desc.setCellValueFactory((TableColumn.CellDataFeatures<HR2_CoursesClass, String> param) -> param.getValue().course_description);
-        col_created_by.setCellValueFactory((TableColumn.CellDataFeatures<HR2_CoursesClass, String> param) -> param.getValue().created_by);
-        TableColumn<HR2_CoursesClass, Void> addButton = new TableColumn("View List of Questions");
+        col_course_title.setCellValueFactory((TableColumn.CellDataFeatures<HR2_CoursesClass, String> param) -> param.getValue().job_title);
+        TableColumn<HR2_CoursesClass, Void> addButton = new TableColumn("View Action");
 
         Callback<TableColumn<HR2_CoursesClass, Void>, TableCell<HR2_CoursesClass, Void>> cellFactory
                 = new Callback<TableColumn<HR2_CoursesClass, Void>, TableCell<HR2_CoursesClass, Void>>() {
@@ -181,13 +201,15 @@ public class HR2_Learning_ManagementController implements Initializable {
             public TableCell<HR2_CoursesClass, Void> call(final TableColumn<HR2_CoursesClass, Void> param) {
 
                 final TableCell<HR2_CoursesClass, Void> cell = new TableCell<HR2_CoursesClass, Void>() {
-                    private final Button btn = new Button("List of Questions");
+                    private final Button btn = new Button("Course Outline");
 
                     {
                         try {
                             btn.setOnAction(e
                                     -> {
-                                ViewListOfQuestions();
+                                HR2_LM_CourseOutlineModal.courseOutline(tbl_courses.getSelectionModel().getSelectedItem().job_title.get());
+                                Modal lq = Modal.getInstance(new Form("/FXMLS/HR2/Modals/LM_CourseOutline.fxml").getParent());
+                                lq.open();
                             });
                             btn.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
                             btn.setCursor(javafx.scene.Cursor.HAND);
@@ -214,7 +236,7 @@ public class HR2_Learning_ManagementController implements Initializable {
         addButton.setCellFactory(cellFactory);
         tbl_courses.getColumns().add(addButton);
 
-        TableColumn<HR2_CoursesClass, Void> addQuestion = new TableColumn("Add Questions");
+        /*  TableColumn<HR2_CoursesClass, Void> addQuestion = new TableColumn("Add Questions");
 
         Callback<TableColumn<HR2_CoursesClass, Void>, TableCell<HR2_CoursesClass, Void>> cellFactory1
                 = new Callback<TableColumn<HR2_CoursesClass, Void>, TableCell<HR2_CoursesClass, Void>>() {
@@ -257,14 +279,7 @@ public class HR2_Learning_ManagementController implements Initializable {
         };
 
         addQuestion.setCellFactory(cellFactory1);
-        tbl_courses.getColumns().add(addQuestion);
-    }
-
-    public void ViewListOfQuestions() {
-        HR2_LMClass_For_AddQuestion_Modal.initCourseTitle(
-                tbl_courses.getSelectionModel().getSelectedItem().course_title.get());
-        Modal lq = Modal.getInstance(new Form("/FXMLS/HR2/Modals/List_Of_Questions.fxml").getParent());
-        lq.open();
+        tbl_courses.getColumns().add(addQuestion);*/
     }
 
     @FXML
@@ -285,12 +300,10 @@ public class HR2_Learning_ManagementController implements Initializable {
     }
 
     public void OpenModalForEdit() {
-            HR2_LM_ViewCourseModal.EditCourse(tbl_courses.getSelectionModel().getSelectedItem().course_title.get()
-                    ,tbl_courses.getSelectionModel().getSelectedItem().course_description.get(),
-                    tbl_courses.getSelectionModel().getSelectedItem().created_by.get());
-            Modal viewCourse = Modal.getInstance(new Form("/FXMLS/HR2/Modals/LM_ViewCourse.fxml").getParent());
-            viewCourse.open();
-            
+        HR2_LM_ViewCourseModal.EditCourse(tbl_courses.getSelectionModel().getSelectedItem().job_title.get());
+        Modal viewCourse = Modal.getInstance(new Form("/FXMLS/HR2/Modals/LM_ViewCourse.fxml").getParent());
+        viewCourse.open();
+
     }
 
     public void DropExam() {
@@ -302,11 +315,11 @@ public class HR2_Learning_ManagementController implements Initializable {
             HR2_Courses c = new HR2_Courses();
 
             Boolean a = c.where(new Object[][]{
-                {"course_id", "=", tbl_courses.getSelectionModel().getSelectedItem().course_id.get()}
+                {"course_id", "=", tbl_courses.getSelectionModel().getSelectedItem().job_title.get()}
             }).update(new Object[][]{
                 {"isDeleted", "1"},}).executeUpdate();
             Alert dropnotif = new Alert(Alert.AlertType.INFORMATION);
-            dropnotif.setContentText(tbl_courses.getSelectionModel().getSelectedItem().course_title.get() + " Successfully Dropped");
+            dropnotif.setContentText(tbl_courses.getSelectionModel().getSelectedItem().job_title.get() + " Successfully Dropped");
             dropnotif.showAndWait();
             loadData();
         }

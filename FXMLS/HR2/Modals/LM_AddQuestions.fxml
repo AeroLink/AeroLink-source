@@ -90,7 +90,7 @@
                </font>
             </JFXTextField>
          </graphic></JFXRadioButton>
-      <JFXButton fx:id="browse1" layoutX="342.0" layoutY="259.0" onAction="#OpenFile1" prefHeight="28.0" prefWidth="62.0" style="-fx-background-color: #34A853;" text="Browse" textFill="WHITE">
+      <JFXButton fx:id="browse1" layoutX="334.0" layoutY="267.0" onAction="#OpenFile1" prefHeight="28.0" prefWidth="62.0" style="-fx-background-color: #34A853;" text="Browse" textFill="WHITE">
          <font>
             <Font name="Lato Medium" size="12.0" />
          </font>
@@ -98,7 +98,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="browse2" layoutX="342.0" layoutY="295.0" onAction="#OpenFile2" prefHeight="26.0" prefWidth="62.0" style="-fx-background-color: #34A853;" text="Browse" textFill="WHITE">
+      <JFXButton fx:id="browse2" layoutX="335.0" layoutY="304.0" onAction="#OpenFile2" prefHeight="26.0" prefWidth="62.0" style="-fx-background-color: #34A853;" text="Browse" textFill="WHITE">
          <font>
             <Font name="Lato Medium" size="12.0" />
          </font>
@@ -106,7 +106,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="browse3" layoutX="342.0" layoutY="329.0" onAction="#OpenFile3" prefHeight="28.0" prefWidth="62.0" style="-fx-background-color: #34A853;" text="Browse" textFill="WHITE">
+      <JFXButton fx:id="browse3" layoutX="334.0" layoutY="337.0" onAction="#OpenFile3" prefHeight="28.0" prefWidth="62.0" style="-fx-background-color: #34A853;" text="Browse" textFill="WHITE">
          <font>
             <Font name="Lato Medium" size="12.0" />
          </font>
@@ -114,7 +114,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="browse4" layoutX="342.0" layoutY="366.0" onAction="#OpenFile4" prefHeight="28.0" prefWidth="63.0" style="-fx-background-color: #34A853;" text="Browse" textFill="WHITE">
+      <JFXButton fx:id="browse4" layoutX="334.0" layoutY="374.0" onAction="#OpenFile4" prefHeight="28.0" prefWidth="63.0" style="-fx-background-color: #34A853;" text="Browse" textFill="WHITE">
          <font>
             <Font name="Lato Medium" size="12.0" />
          </font>

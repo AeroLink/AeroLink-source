@@ -13,12 +13,9 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class HR2_LM_ViewCourseModal {
 
-    public static String cid,jid,ct,cd,cb;
+    public static String jt;
     
-    public static void EditCourse(String course_title, String course_description,
-            String created_by){
-        ct = course_title;
-        cd = course_description;
-        cb = created_by;
+    public static void EditCourse(String title){
+        jt = title;
     }
 }

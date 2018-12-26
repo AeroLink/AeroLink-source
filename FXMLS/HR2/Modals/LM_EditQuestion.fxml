@@ -97,7 +97,7 @@
                   </JFXTextField>
                </graphic>
             </JFXRadioButton>
-            <JFXButton fx:id="edit_browse1" layoutX="342.0" layoutY="259.0" onAction="#OpenFile1" prefHeight="28.0" prefWidth="62.0" style="-fx-background-color: #34A853;" text="Browse" textFill="WHITE">
+            <JFXButton fx:id="edit_browse1" layoutX="331.0" layoutY="267.0" onAction="#OpenFile1" prefHeight="28.0" prefWidth="62.0" style="-fx-background-color: #34A853;" text="Browse" textFill="WHITE">
                <font>
                   <Font name="Lato Medium" size="12.0" />
                </font>
@@ -105,7 +105,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="edit_browse2" layoutX="342.0" layoutY="295.0" onAction="#OpenFile2" prefHeight="26.0" prefWidth="62.0" style="-fx-background-color: #34A853;" text="Browse" textFill="WHITE">
+            <JFXButton fx:id="edit_browse2" layoutX="332.0" layoutY="303.0" onAction="#OpenFile2" prefHeight="26.0" prefWidth="62.0" style="-fx-background-color: #34A853;" text="Browse" textFill="WHITE">
                <font>
                   <Font name="Lato Medium" size="12.0" />
                </font>
@@ -113,7 +113,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="edit_browse3" layoutX="342.0" layoutY="329.0" onAction="#OpenFile3" prefHeight="28.0" prefWidth="62.0" style="-fx-background-color: #34A853;" text="Browse" textFill="WHITE">
+            <JFXButton fx:id="edit_browse3" layoutX="333.0" layoutY="337.0" onAction="#OpenFile3" prefHeight="28.0" prefWidth="62.0" style="-fx-background-color: #34A853;" text="Browse" textFill="WHITE">
                <font>
                   <Font name="Lato Medium" size="12.0" />
                </font>
@@ -121,7 +121,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="edit_browse4" layoutX="342.0" layoutY="366.0" onAction="#OpenFile4" prefHeight="28.0" prefWidth="63.0" style="-fx-background-color: #34A853;" text="Browse" textFill="WHITE">
+            <JFXButton fx:id="edit_browse4" layoutX="333.0" layoutY="372.0" onAction="#OpenFile4" prefHeight="28.0" prefWidth="63.0" style="-fx-background-color: #34A853;" text="Browse" textFill="WHITE">
                <font>
                   <Font name="Lato Medium" size="12.0" />
                </font>

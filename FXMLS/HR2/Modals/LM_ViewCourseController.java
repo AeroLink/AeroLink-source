@@ -46,7 +46,7 @@ public class LM_ViewCourseController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        cbox_ct.getItems().add(HR2_LM_ViewCourseModal.ct);
+        cbox_ct.getItems().add(HR2_LM_ViewCourseModal.jt);
         cbox_ct.getSelectionModel().selectFirst();
         loadDataInLabel();
         loadDataInComboBoxes();
