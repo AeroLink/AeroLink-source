@@ -46,6 +46,8 @@ public class LM_CourseOutlineController implements Initializable {
 
     long DummyCount = 0;
     long GlobalCount = 0;
+    @FXML
+    private JFXButton btn_save;
 
     /**
      * Initializes the controller class.

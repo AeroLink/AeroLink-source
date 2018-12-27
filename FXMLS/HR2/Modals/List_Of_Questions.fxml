@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
@@ -19,7 +17,7 @@
                <top>
                   <AnchorPane prefHeight="49.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Label layoutX="14.0" layoutY="16.0" prefHeight="25.0" prefWidth="115.0" text="Course Title:">
+                        <Label layoutX="14.0" layoutY="16.0" prefHeight="25.0" prefWidth="98.0" text="Exam Name:">
                            <font>
                               <Font name="Lato Bold" size="17.0" />
                            </font>
@@ -29,22 +27,6 @@
                               <Font name="Lato Bold" size="17.0" />
                            </font>
                         </Label>
-                        <JFXButton fx:id="btn_import_csv" layoutX="463.0" layoutY="16.0" prefHeight="29.0" prefWidth="119.0" styleClass="btn-primary" text="Import Excel File">
-                           <font>
-                              <Font name="Roboto Bold" size="13.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </JFXButton>
-                        <JFXButton fx:id="btn_export_csv" layoutX="289.0" layoutY="14.0" onAction="#exportCSV" prefHeight="29.0" prefWidth="151.0" styleClass="btn-primary" text="Download Template">
-                           <font>
-                              <Font name="Roboto Bold" size="13.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </JFXButton>
                      </children>
                   </AnchorPane>
                </top>

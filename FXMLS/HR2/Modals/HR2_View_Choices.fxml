@@ -47,12 +47,12 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <Label layoutX="14.0" layoutY="14.0" prefHeight="22.0" prefWidth="95.0" text="Course Title:">
+      <Label layoutX="14.0" layoutY="14.0" prefHeight="22.0" prefWidth="95.0" text="Exam Name:">
          <font>
             <Font name="Lato Bold" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_c" layoutX="111.0" layoutY="14.0" prefHeight="21.0" prefWidth="311.0" text="Question:" textFill="#34a853">
+      <Label fx:id="lbl_c" layoutX="111.0" layoutY="14.0" prefHeight="21.0" prefWidth="311.0" text="Exam Name:" textFill="#34a853">
          <font>
             <Font name="Lato Bold" size="16.0" />
          </font>

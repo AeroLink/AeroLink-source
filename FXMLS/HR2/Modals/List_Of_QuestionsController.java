@@ -73,10 +73,6 @@ public class List_Of_QuestionsController implements Initializable {
 
     long DummyCount = 0;
     long GlobalCount = 0;
-    @FXML
-    private JFXButton btn_import_csv;
-    @FXML
-    private JFXButton btn_export_csv;
 
     //excel class
     private static Workbook wb;
@@ -93,7 +89,7 @@ public class List_Of_QuestionsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        lbl_course_title.setText(HR2_LMClass_For_AddQuestion_Modal.lm_course_title);
+        lbl_course_title.setText(HR2_LMClass_For_AddQuestion_Modal.exam_name);
         loadData();
         DisplayDataInJTable();
 
@@ -112,9 +108,9 @@ public class List_Of_QuestionsController implements Initializable {
 
                     if (DummyCount != GlobalCount) {
 
-                        List questions = q.join(Model.JOIN.INNER, "aerolink.tbl_hr2_courses", "course_id", "c", "=", "course_id")
-                                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "c", "job_id", true)
-                                .where(new Object[][]{{"aerolink.tbl_hr4_jobs.title", "=", lbl_course_title.getText()},
+                        List questions = q.join(Model.JOIN.INNER, "aerolink.tbl_hr2_examination", "exam_id", "e", "=", "exam_id")
+                            //    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "c", "job_id", true)
+                                .where(new Object[][]{{"e.exam_name", "=", lbl_course_title.getText()},
                         {"aerolink.tbl_hr2_assessment.isDeleted", "=", "0"}})
                                 .get("aerolink.tbl_hr2_assessment.question_id,aerolink.tbl_hr2_assessment.question");
                         Data(questions);
@@ -256,7 +252,6 @@ public class List_Of_QuestionsController implements Initializable {
 
     }
 
-    @FXML
     public void exportCSV() {
 
         try {

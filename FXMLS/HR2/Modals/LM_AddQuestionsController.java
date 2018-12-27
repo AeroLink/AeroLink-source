@@ -82,7 +82,7 @@ public class LM_AddQuestionsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        lbl_course_title.setText(HR2_LMClass_For_AddQuestion_Modal.lm_course_title);
+        lbl_course_title.setText(HR2_LMClass_For_AddQuestion_Modal.exam_name);
         rb1.setToggleGroup(c);
         rb2.setToggleGroup(c);
         rb3.setToggleGroup(c);
@@ -122,7 +122,7 @@ public class LM_AddQuestionsController implements Initializable {
                 if (rdo[i].isSelected()) {
                     QuestID = new HR2_Assessment().insert(new String[][]{
                         {"question", txt_add_question.getText()},
-                        {"course_id", HR2_LMClass_For_AddQuestion_Modal.lm_id},
+                        {"course_id", HR2_LMClass_For_AddQuestion_Modal.exam_id},
                         {"choice_id", String.valueOf(al)}
                     }, true);
                 }

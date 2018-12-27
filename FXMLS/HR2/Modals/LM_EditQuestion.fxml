@@ -16,7 +16,7 @@
          <children>
             <Pane prefHeight="37.0" prefWidth="443.0" style="-fx-background-color: #34A853;">
                <children>
-                  <Label layoutX="14.0" layoutY="3.0" prefHeight="28.0" prefWidth="95.0" text="Course Title:" textFill="WHITE">
+                  <Label layoutX="14.0" layoutY="3.0" prefHeight="28.0" prefWidth="95.0" text="Exam Name:" textFill="WHITE">
                      <font>
                         <Font name="Roboto Bold" size="16.0" />
                      </font>
@@ -28,7 +28,7 @@
                   </Label>
                </children>
             </Pane>
-            <JFXTextArea fx:id="txt_edit_question" focusColor="#2f2f2f" labelFloat="true" layoutX="24.0" layoutY="80.0" maxWidth="401.0" minWidth="380.0" prefHeight="118.0" prefWidth="380.0" promptText="Add Question" style="-fx-border-color: #c2c2a3;" unFocusColor="WHITE">
+            <JFXTextArea fx:id="txt_edit_question" focusColor="WHITE" layoutX="24.0" layoutY="80.0" maxWidth="401.0" minWidth="380.0" prefHeight="118.0" prefWidth="380.0" promptText="Edit Question" style="-fx-border-color: #c2c2a3;" unFocusColor="WHITE">
                <font>
                   <Font name="Lato Medium" size="15.0" />
                </font>
@@ -129,6 +129,11 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
+            <Label layoutX="24.0" layoutY="52.0" prefHeight="19.0" prefWidth="62.0" text="Question">
+               <font>
+                  <Font name="Lato Semibold" size="15.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>
