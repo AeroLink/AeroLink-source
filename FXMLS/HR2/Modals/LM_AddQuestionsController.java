@@ -86,7 +86,7 @@ public class LM_AddQuestionsController implements Initializable {
         addImage = new FileChooser();
         addImage.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.gif", "*.jpeg")
-            //    new FileChooser.ExtensionFilter("Text File", "*.txt")
+        //    new FileChooser.ExtensionFilter("Text File", "*.txt")
         );
 
     }
@@ -116,11 +116,11 @@ public class LM_AddQuestionsController implements Initializable {
                 if (rdo[i].isSelected()) {
                     QuestID = new HR2_Assessment().insert(new String[][]{
                         {"question", txt_add_question.getText()},
-                        {"course_id", HR2_LMClass_For_AddQuestion_Modal.exam_id},
+                        {"exam_id", HR2_LMClass_For_AddQuestion_Modal.exam_id},
                         {"choice_id", String.valueOf(al)}
                     }, true);
                 }
-                System.err.println(String.valueOf(rdo[i].isSelected()));
+           //     System.err.println(String.valueOf(rdo[i].isSelected()));
 
                 for (Object obj : id_list) {
                     courses.update(new Object[][]{
@@ -130,7 +130,11 @@ public class LM_AddQuestionsController implements Initializable {
                     }).executeUpdate();
                 }
 
-                if (rdo[i].isSelected()) {
+                Alert saved = new Alert(Alert.AlertType.INFORMATION);
+                saved.setContentText("Question Added");
+                saved.showAndWait();
+
+                /*  if (rdo[i].isSelected()) {
 
                     Alert saved = new Alert(Alert.AlertType.INFORMATION);
                     saved.setContentText("Question Added");
@@ -139,7 +143,7 @@ public class LM_AddQuestionsController implements Initializable {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setContentText("Please Select correct answer for this question");
                     alert.showAndWait();
-                }
+                }*/
             }
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.WARNING);

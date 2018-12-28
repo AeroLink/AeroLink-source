@@ -162,4 +162,28 @@ public class LM_CourseOutlineController implements Initializable {
     public void FilesTable() {
         col_file.setCellValueFactory((TableColumn.CellDataFeatures<HR2_LM_CourseOutlineModal, String> param) -> param.getValue().files);
     }
+
+    @FXML
+    public void Save() {
+
+        try {
+
+            HR2_CourseOutline co = new HR2_CourseOutline();
+            String[][] cm_data
+                    = {
+                        {"uploaded_file", txt_path.getText()},
+                        {"isDeleted", "0"},};
+            //int id = model.insert(vals, true);
+            btn_save.setDisable(false);
+            co.insert(cm_data);
+            Alert saved = new Alert(Alert.AlertType.INFORMATION);
+            saved.setContentText("Saved");
+            saved.showAndWait();
+            txt_path.setText("");
+            DisplayFilesInTable();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }
