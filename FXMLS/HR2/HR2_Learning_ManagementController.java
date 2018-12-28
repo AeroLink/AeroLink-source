@@ -8,8 +8,8 @@ package FXMLS.HR2;
 import FXMLS.HR2.ClassFiles.HR2_CoursesClass;
 import FXMLS.HR2.ClassFiles.HR2_ExaminationClass;
 import FXMLS.HR2.ClassFiles.HR2_LMClass_For_AddQuestion_Modal;
+import FXMLS.HR2.ClassFiles.HR2_LM_AddExamModalClass;
 import FXMLS.HR2.ClassFiles.HR2_LM_CourseOutlineModal;
-import FXMLS.HR2.ClassFiles.HR2_LM_ViewCourseModal;
 import Model.HR2_Courses;
 import Model.HR2_Examination;
 import Model.HR4_Jobs;
@@ -90,7 +90,10 @@ public class HR2_Learning_ManagementController implements Initializable {
             populateExam();
         });
         loadJobsInComboBox();
-
+        
+    /*    if(!cbox_job_title.getValue().toString().isEmpty()){
+            btn_add_job.setDisable(false);
+        }*/
     }
 
     public void loadJobsInComboBox() {
@@ -313,8 +316,11 @@ public class HR2_Learning_ManagementController implements Initializable {
                         try {
                             btn_add_exam.setOnAction(e
                                     -> {
-                                HR2_LM_CourseOutlineModal.courseOutline(tbl_courses.getSelectionModel().getSelectedItem().job_title.get());
-                                Modal lq = Modal.getInstance(new Form("/FXMLS/HR2/Modals/AddExam.fxml").getParent());
+                                HR2_LM_AddExamModalClass.AddExam(
+                                       // tbl_courses.getSelectionModel().getSelectedItem().course_id.get(),
+                                        tbl_courses.getSelectionModel().getSelectedItem().job_title.get()
+                                );
+                                Modal lq = Modal.getInstance(new Form("/FXMLS/HR2/Modals/LM_AddExam.fxml").getParent());
                                 lq.open();
                             });
                             btn_add_exam.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
@@ -487,7 +493,6 @@ public class HR2_Learning_ManagementController implements Initializable {
     }
 
     public void OpenModalForEdit() {
-        HR2_LM_ViewCourseModal.EditCourse(tbl_courses.getSelectionModel().getSelectedItem().job_title.get());
         Modal viewCourse = Modal.getInstance(new Form("/FXMLS/HR2/Modals/LM_ViewCourse.fxml").getParent());
         viewCourse.open();
 

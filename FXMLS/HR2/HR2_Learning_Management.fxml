@@ -74,7 +74,7 @@
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></JFXComboBox>
-                        <JFXButton fx:id="btn_add_job" buttonType="RAISED" disable="true" layoutX="302.0" layoutY="14.0" onAction="#addJob" prefHeight="31.0" prefWidth="102.0" styleClass="btn-primary" text="Save">
+                        <JFXButton fx:id="btn_add_job" buttonType="RAISED" layoutX="302.0" layoutY="14.0" onAction="#addJob" prefHeight="31.0" prefWidth="102.0" styleClass="btn-primary" text="Save">
                            <font>
                               <Font name="Roboto Black" size="15.0" />
                            </font>

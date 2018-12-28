@@ -13,6 +13,7 @@ import Synapse.Model;
 import Synapse.Session;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -22,9 +23,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -46,8 +51,14 @@ public class LM_CourseOutlineController implements Initializable {
 
     long DummyCount = 0;
     long GlobalCount = 0;
+    private FileChooser addPath;
+    private File file;
+    private Stage stage;
+
     @FXML
     private JFXButton btn_save;
+    @FXML
+    private AnchorPane AnchorPane1;
 
     /**
      * Initializes the controller class.
@@ -57,11 +68,41 @@ public class LM_CourseOutlineController implements Initializable {
         lbl_job_title.setText(HR2_LM_CourseOutlineModal.jid);
         DisplayFilesInTable();
         FilesTable();
+        btn_save.setDisable(true);
+
+        addPath = new FileChooser();
+        addPath.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("PDF File", "*.pdf")
+        );
+
+    }
+
+    @FXML
+    public void OpenFile1() {
+        stage = (Stage) AnchorPane1.getScene().getWindow();
+        file = addPath.showOpenDialog(stage);
+        addPath.setInitialDirectory(new File("C:\\Users\\EdenRamoneda\\Documents\\NetBeansProjects\\Staging\\src\\FXMLS\\HR2\\Files"));
+        if (file != null) {
+            txt_path.setText(file.getAbsolutePath());
+        } else {
+            Alert n = new Alert(Alert.AlertType.ERROR);
+            n.setContentText("File not valid! Please Select .PDF file");
+            n.showAndWait();
+        }
+    }
+
+    @FXML
+    public void validateTextField() {
+        if (!txt_path.getText().isEmpty()) {
+            btn_save.setDisable(false);
+        } else {
+            btn_save.setDisable(true);
+        }
     }
 
     public void DisplayFilesInTable() {
 
-           try {
+        try {
             //tbl courses
             HR2_Courses c = new HR2_Courses();
 
@@ -75,7 +116,7 @@ public class LM_CourseOutlineController implements Initializable {
 
                         List courses = c.join(Model.JOIN.INNER, "aerolink.tbl_hr2_course_outline", "course_id", "co", "=", "course_id")
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
-                                .where(new Object[][]{{"j.title", "=", lbl_job_title.getText()},{"aerolink.tbl_hr2_courses.isDeleted", "<>", "1"}})
+                                .where(new Object[][]{{"j.title", "=", lbl_job_title.getText()}, {"aerolink.tbl_hr2_courses.isDeleted", "<>", "1"}})
                                 .get("co.uploaded_file");
                         CourseOutline(courses);
 
@@ -95,7 +136,7 @@ public class LM_CourseOutlineController implements Initializable {
         } catch (Exception e) {
             System.out.println(e);
         }
-        
+
     }
 
     public void CourseOutline(List co) {
@@ -117,8 +158,8 @@ public class LM_CourseOutlineController implements Initializable {
         }
 
     }
-    
-    public void FilesTable(){
-          col_file.setCellValueFactory((TableColumn.CellDataFeatures<HR2_LM_CourseOutlineModal, String> param) -> param.getValue().files);
+
+    public void FilesTable() {
+        col_file.setCellValueFactory((TableColumn.CellDataFeatures<HR2_LM_CourseOutlineModal, String> param) -> param.getValue().files);
     }
 }

@@ -7,7 +7,6 @@ package FXMLS.HR2.Modals;
 
 import FXMLS.HR2.ClassFiles.HR2_LMClass_For_AddQuestion_Modal;
 import Model.HR2_Assessment;
-import Model.HR2_Courses;
 import Model.HR2_Evaluation;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
@@ -20,15 +19,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -90,9 +85,8 @@ public class LM_AddQuestionsController implements Initializable {
 
         addImage = new FileChooser();
         addImage.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("All files", "*"),
-                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.gif", "*.jpeg"),
-                new FileChooser.ExtensionFilter("Text File", "*.txt")
+                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.gif", "*.jpeg")
+            //    new FileChooser.ExtensionFilter("Text File", "*.txt")
         );
 
     }

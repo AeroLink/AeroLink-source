@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="488.0" prefWidth="366.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.LM_CourseOutlineController">
+<AnchorPane id="AnchorPane" fx:id="AnchorPane1" prefHeight="488.0" prefWidth="366.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.LM_CourseOutlineController">
    <children>
       <Label layoutX="151.0" layoutY="8.0" text="Job Title">
          <font>
@@ -26,7 +26,7 @@
             <Font name="Lato Regular" size="16.0" />
          </font>
       </Label>
-      <JFXButton fx:id="btn_browse" layoutX="293.0" layoutY="100.0" prefHeight="28.0" prefWidth="62.0" style="-fx-background-color: #34A853;" text="Browse" textFill="WHITE">
+      <JFXButton fx:id="btn_browse" layoutX="293.0" layoutY="100.0" onAction="#OpenFile1" prefHeight="28.0" prefWidth="62.0" style="-fx-background-color: #34A853;" text="Browse" textFill="WHITE">
          <font>
             <Font name="Lato Medium" size="12.0" />
          </font>
@@ -34,7 +34,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXTextField fx:id="txt_path" focusColor="WHITE" layoutX="15.0" layoutY="100.0" prefHeight="28.0" prefWidth="268.0" promptText="Path" style="-fx-background-color: #ebebe0;" unFocusColor="WHITE">
+      <JFXTextField fx:id="txt_path" focusColor="WHITE" layoutX="15.0" layoutY="100.0" onKeyReleased="#validateTextField" prefHeight="28.0" prefWidth="268.0" promptText="Path" style="-fx-background-color: #ebebe0;" unFocusColor="WHITE">
          <font>
             <Font name="Lato Regular" size="14.0" />
          </font>
@@ -47,7 +47,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <JFXButton fx:id="btn_save" disable="true" layoutX="14.0" layoutY="140.0" prefHeight="28.0" prefWidth="62.0" style="-fx-background-color: #34A853;" text="Save" textFill="WHITE">
+      <JFXButton fx:id="btn_save" layoutX="14.0" layoutY="140.0" prefHeight="28.0" prefWidth="62.0" style="-fx-background-color: #34A853;" text="Save" textFill="WHITE">
          <font>
             <Font name="Lato Medium" size="12.0" />
          </font>

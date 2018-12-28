@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="452.0" prefWidth="375.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.LM_AddExamController">
+   <children>
+      <Pane prefHeight="44.0" prefWidth="375.0" style="-fx-background-color: #34a853;">
+         <children>
+            <Label layoutX="11.0" layoutY="12.0" text="Job Title: " textFill="WHITE">
+               <font>
+                  <Font name="Roboto Bold" size="16.0" />
+               </font>
+            </Label>
+            <JFXComboBox fx:id="cbox_job_title" layoutX="82.0" layoutY="9.0" prefHeight="12.0" prefWidth="279.0" style="-fx-background-color: #fff;" />
+         </children>
+      </Pane>
+      <Label layoutX="15.0" layoutY="60.0" text="Exam Name" textFill="#4a4a4a">
+         <font>
+            <Font name="Roboto Bold" size="16.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txt_exam_name" focusColor="#4a4a4a" layoutX="15.0" layoutY="85.0" prefHeight="25.0" prefWidth="340.0" unFocusColor="#727272">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </JFXTextField>
+      <Label layoutX="15.0" layoutY="128.0" text="Exam Description" textFill="#4a4a4a">
+         <font>
+            <Font name="Roboto Bold" size="16.0" />
+         </font>
+      </Label>
+      <JFXTextArea fx:id="txt_exam_desc" focusColor="WHITE" layoutX="15.0" layoutY="153.0" prefHeight="128.0" prefWidth="340.0" style="-fx-border-color: #c2c2a3;" unFocusColor="WHITE">
+         <font>
+            <Font name="Lato Regular" size="14.0" />
+         </font>
+      </JFXTextArea>
+      <JFXComboBox fx:id="txt_created_by" layoutX="14.0" layoutY="322.0" prefHeight="25.0" prefWidth="340.0" promptText="Select Exam Creator" />
+      <Label layoutX="15.0" layoutY="298.0" text="Created By" textFill="#4a4a4a">
+         <font>
+            <Font name="Roboto Bold" size="16.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btn_save" layoutX="134.0" layoutY="387.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #34a853;" text="Save" textFill="WHITE">
+         <font>
+            <Font name="Roboto Bold" size="15.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
