@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="546.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.List_Of_QuestionsController">
+<AnchorPane id="AnchorPane" prefHeight="546.0" prefWidth="600.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.List_Of_QuestionsController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -17,7 +17,7 @@
                <top>
                   <AnchorPane prefHeight="49.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Label layoutX="14.0" layoutY="16.0" prefHeight="25.0" prefWidth="115.0" text="Course Title:">
+                        <Label layoutX="14.0" layoutY="16.0" prefHeight="25.0" prefWidth="98.0" text="Exam Name:">
                            <font>
                               <Font name="Lato Bold" size="17.0" />
                            </font>

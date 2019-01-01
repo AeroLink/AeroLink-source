@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.Cursor?>
@@ -12,7 +13,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="586.0" prefWidth="673.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.HR2_Learning_ManagementController">
+<AnchorPane id="AnchorPane" prefHeight="705.0" prefWidth="1373.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.HR2_Learning_ManagementController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -20,22 +21,11 @@
                <top>
                   <AnchorPane prefHeight="90.0" prefWidth="673.0" BorderPane.alignment="CENTER">
                      <children>
-                        <JFXTextField fx:id="txt_search_course" labelFloat="true" layoutX="14.0" layoutY="40.0" maxWidth="198.0" minWidth="198.0" onKeyReleased="#searchCourses" prefHeight="31.0" prefWidth="198.0" promptText="Search Course" AnchorPane.leftAnchor="14.0">
+                        <JFXTextField fx:id="txt_search_course" labelFloat="true" layoutX="14.0" layoutY="40.0" maxWidth="198.0" minWidth="198.0" onKeyReleased="#searchCourses" prefHeight="31.0" prefWidth="198.0" promptText="Search Job Title" AnchorPane.leftAnchor="14.0">
                            <font>
                               <Font name="Lato Semibold" size="15.0" />
                            </font>
                         </JFXTextField>
-                        <JFXButton fx:id="btn_add_course" buttonType="RAISED" layoutX="416.0" layoutY="42.0" onAction="#AddCourseModal" styleClass="btn-primary" text="Add Course" AnchorPane.rightAnchor="143.0">
-                           <font>
-                              <Font name="Roboto Black" size="15.0" />
-                           </font>
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" fontSmoothingType="LCD" glyphName="PLUS" size="15.0" />
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </JFXButton>
                         <JFXButton fx:id="btn_refresh" buttonType="RAISED" layoutX="545.0" layoutY="42.0" onAction="#loadData" prefHeight="31.0" prefWidth="102.0" styleClass="btn-primary" text="Refresh" AnchorPane.rightAnchor="26.0">
                            <font>
                               <Font name="Roboto Black" size="15.0" />
@@ -53,11 +43,9 @@
                <center>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <TableView fx:id="tbl_courses" layoutX="8.0" layoutY="3.0" onMouseClicked="#viewRow" prefHeight="483.0" prefWidth="653.0" style="-fx-border-color: #d6d6c2;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="3.0">
+                        <TableView fx:id="tbl_courses" layoutX="12.0" layoutY="60.0" onMouseClicked="#viewRow" prefHeight="492.0" prefWidth="505.0" style="-fx-border-color: #d6d6c2;" AnchorPane.bottomAnchor="63.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="856.0" AnchorPane.topAnchor="60.0">
                           <columns>
-                            <TableColumn fx:id="col_course_title" prefWidth="180.0" text="Course Title" />
-                            <TableColumn fx:id="col_course_desc" prefWidth="270.0" text="Course Description" />
-                              <TableColumn fx:id="col_created_by" prefWidth="200.0" text="Created by" />
+                            <TableColumn fx:id="col_course_title" prefWidth="180.0" text="Job Title" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -74,6 +62,26 @@
                               </ContextMenu>
                            </contextMenu>
                         </TableView>
+                        <TableView fx:id="tbl_exam" layoutX="538.0" layoutY="-3.0" prefHeight="616.0" prefWidth="824.0">
+                          <columns>
+                            <TableColumn fx:id="col_exam_name" prefWidth="75.0" text="Exam Name" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <JFXComboBox fx:id="cbox_job_title" layoutX="23.0" layoutY="11.0" prefHeight="32.0" prefWidth="269.0" promptText="Browse Job Title">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></JFXComboBox>
+                        <JFXButton fx:id="btn_add_job" buttonType="RAISED" layoutX="302.0" layoutY="14.0" onAction="#addJob" prefHeight="31.0" prefWidth="102.0" styleClass="btn-primary" text="Save">
+                           <font>
+                              <Font name="Roboto Black" size="15.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
                      </children>
                   </AnchorPane>
                </center>

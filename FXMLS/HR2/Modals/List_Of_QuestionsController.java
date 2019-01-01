@@ -14,12 +14,24 @@ import Synapse.Components.Modal.Modal;
 import Synapse.Model;
 import Synapse.Form;
 import Synapse.Session;
+import com.jfoenix.controls.JFXButton;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -27,6 +39,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+//import javafx.scene.control.Cell;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -36,6 +49,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  * FXML Controller class
@@ -58,15 +74,26 @@ public class List_Of_QuestionsController implements Initializable {
     long DummyCount = 0;
     long GlobalCount = 0;
 
+    //excel class
+    private static Workbook wb;
+    private static Sheet s;
+    private static FileInputStream fis;
+    private static FileOutputStream fos;
+    private static Row r;
+    private static Cell c;
+
+    private static String[] columns = {"Name", "Email", "Date Of Birth", "Salary"};
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        lbl_course_title.setText(HR2_LMClass_For_AddQuestion_Modal.lm_course_title);
+        lbl_course_title.setText(HR2_LMClass_For_AddQuestion_Modal.exam_name);
         loadData();
         DisplayDataInJTable();
-        
+
+        //For Excel File;
     }
 
     public void loadData() {
@@ -81,11 +108,11 @@ public class List_Of_QuestionsController implements Initializable {
 
                     if (DummyCount != GlobalCount) {
 
-                        List questions = q.join(Model.JOIN.INNER, "aerolink.tbl_hr2_courses", "course_id", "c", "=", "course_id")
-                                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "c", "job_id", true)
-                                .where(new Object[][]{{"aerolink.tbl_hr4_jobs.title", "=", lbl_course_title.getText(), "AND",
-                            "aerolink.tbl_hr2_assessment.isDeleted", "=", "0"}})
-                                .get("aerolink.tbl_hr2_assessment.question");
+                        List questions = q.join(Model.JOIN.INNER, "aerolink.tbl_hr2_examination", "exam_id", "e", "=", "exam_id")
+                                //    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "c", "job_id", true)
+                                .where(new Object[][]{{"e.exam_name", "=", lbl_course_title.getText()},
+                        {"aerolink.tbl_hr2_assessment.isDeleted", "=", "0"}})
+                                .get("aerolink.tbl_hr2_assessment.question_id,aerolink.tbl_hr2_assessment.question");
                         Data(questions);
 
                         GlobalCount = DummyCount;
@@ -100,9 +127,9 @@ public class List_Of_QuestionsController implements Initializable {
 
                 return 0;
             }, Session.SessionThreads);
-           } catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
-    }
+        }
     }
 
     public void Data(List b) {
@@ -197,12 +224,68 @@ public class List_Of_QuestionsController implements Initializable {
             Boolean a = c.where(new Object[][]{
                 {"question", "=", tbl_questions.getSelectionModel().getSelectedItem().question.get()}
             }).update(new Object[][]{
-                {"isDeleted", "1"},
-            }).executeUpdate();
+                {"isDeleted", "1"},}).executeUpdate();
             Alert dropnotif = new Alert(Alert.AlertType.INFORMATION);
             dropnotif.setContentText("Question Successfully Dropped");
             dropnotif.showAndWait();
             loadData();
+        }
+    }
+
+    public void importCSV() {
+
+        List<String> importCSV = new ArrayList<>();
+
+        try {
+            importCSV = Files.readAllLines(Paths.get("C:\\Users\\EdenRamoneda\\Desktop\\sample.csv"));
+            for (String ls : importCSV) {
+                ls = ls.replace("\'", "");
+
+                String[] r = ls.split(",");
+                for (String s : r) {
+                    System.out.print(s + " - ");
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(List_Of_QuestionsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void exportCSV() {
+
+        try {
+            /*   fis = new FileInputStream("./testdata.xlsx");
+            wb = WorkbookFactory.create(fis);
+            s = wb.getSheet("Sheet1");
+            int noOfRows = s.getLastRowNum();
+            System.out.println(noOfRows);
+            
+            r = s.createRow(1);
+            c = r.createCell(0);
+            c.setCellValue("CAV");
+            System.out.println(c.getStringCellValue());
+            fos = new FileOutputStream("./testdata.xlsx");
+            wb.write(fos);
+            fos.flush();
+            fos.close();
+            System.out.println("Done");*/
+
+            // Formatter f = new Formatter("C:\\Users\\EdenRamoneda\\Desktop\\template.xlsx");
+            /*   XSSFWorkbook workbook =pp new XSSFWorkbook();
+            XSSFSheet sheet = workbook.createSheet("Java Books");
+            fos = new FileOutputStream("C:\\\\Users\\\\EdenRamoneda\\\\Desktop\\\\ss.xlsx");
+            workbook.write(fos);
+            Alert n = new Alert(Alert.AlertType.INFORMATION);
+            n.setContentText("TEMPLATE DOWNLOADED! Go to your Desktop you will see the name template.xlsx");
+            n.showAndWait();*/
+            XSSFWorkbook w = new XSSFWorkbook();
+            FileOutputStream out = new FileOutputStream(new File("c:/demo.xlsx"));
+            XSSFSheet sp = w.createSheet("D");
+            w.write(out);
+            out.close();
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 }

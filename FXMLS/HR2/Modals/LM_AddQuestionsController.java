@@ -7,7 +7,6 @@ package FXMLS.HR2.Modals;
 
 import FXMLS.HR2.ClassFiles.HR2_LMClass_For_AddQuestion_Modal;
 import Model.HR2_Assessment;
-import Model.HR2_Courses;
 import Model.HR2_Evaluation;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
@@ -20,15 +19,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -82,7 +77,7 @@ public class LM_AddQuestionsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        lbl_course_title.setText(HR2_LMClass_For_AddQuestion_Modal.lm_course_title);
+        lbl_course_title.setText(HR2_LMClass_For_AddQuestion_Modal.exam_name);
         rb1.setToggleGroup(c);
         rb2.setToggleGroup(c);
         rb3.setToggleGroup(c);
@@ -90,9 +85,8 @@ public class LM_AddQuestionsController implements Initializable {
 
         addImage = new FileChooser();
         addImage.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("All files", "*"),
-                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.gif", "*.jpeg"),
-                new FileChooser.ExtensionFilter("Text File", "*.txt")
+                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.gif", "*.jpeg")
+        //    new FileChooser.ExtensionFilter("Text File", "*.txt")
         );
 
     }
@@ -122,11 +116,11 @@ public class LM_AddQuestionsController implements Initializable {
                 if (rdo[i].isSelected()) {
                     QuestID = new HR2_Assessment().insert(new String[][]{
                         {"question", txt_add_question.getText()},
-                        {"course_id", HR2_LMClass_For_AddQuestion_Modal.lm_id},
+                        {"exam_id", HR2_LMClass_For_AddQuestion_Modal.exam_id},
                         {"choice_id", String.valueOf(al)}
                     }, true);
                 }
-                System.err.println(String.valueOf(rdo[i].isSelected()));
+           //     System.err.println(String.valueOf(rdo[i].isSelected()));
 
                 for (Object obj : id_list) {
                     courses.update(new Object[][]{
@@ -136,7 +130,11 @@ public class LM_AddQuestionsController implements Initializable {
                     }).executeUpdate();
                 }
 
-                if (rdo[i].isSelected()) {
+                Alert saved = new Alert(Alert.AlertType.INFORMATION);
+                saved.setContentText("Question Added");
+                saved.showAndWait();
+
+                /*  if (rdo[i].isSelected()) {
 
                     Alert saved = new Alert(Alert.AlertType.INFORMATION);
                     saved.setContentText("Question Added");
@@ -145,7 +143,7 @@ public class LM_AddQuestionsController implements Initializable {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setContentText("Please Select correct answer for this question");
                     alert.showAndWait();
-                }
+                }*/
             }
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.WARNING);

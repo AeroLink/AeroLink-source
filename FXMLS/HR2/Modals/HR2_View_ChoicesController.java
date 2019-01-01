@@ -69,7 +69,7 @@ public class HR2_View_ChoicesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        lbl_c.setText(HR2_LMClass_For_AddQuestion_Modal.lm_course_title);
+        lbl_c.setText(HR2_LMClass_For_AddQuestion_Modal.exam_name);
         txt_question.setText(HR2_LMClass_For_AddQuestion_Modal.question);
         txt_question.setStyle("-fx-text-fill: #000; -fx-border-color: #1f1f14");
         loadData();
