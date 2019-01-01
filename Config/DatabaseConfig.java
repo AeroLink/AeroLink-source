@@ -15,11 +15,11 @@ public class DatabaseConfig {
 
     public static String PROVIDER = "mssql";
     public static String schema = "aerolink"; //will be change if you were using mssql
-    public static String IP = "127.0.0.1";//92.168.8.100
+    public static String IP = "127.0.0.1";
     public static String PORT = "1433";
     public static String DATABASE = "AeroLink";
     public static String USER = "sa";
-    public static String PASSWORD = "adminroot";
+    public static String PASSWORD = "root";
 
  
 }

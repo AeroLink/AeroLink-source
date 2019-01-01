@@ -20,6 +20,8 @@ public class HR2_CM_Skills extends Synapse.Model{
             {
                    setColumns("skill_id","skill","skill_description","isDeleted");
                     this.initTable("tbl_hr2_skillset");
+                    
+
             }
 
     public List where() {

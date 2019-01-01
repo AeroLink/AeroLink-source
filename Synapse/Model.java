@@ -42,6 +42,15 @@ public class Model {
     private PreparedStatement pst;
     private static String[] cols;
 
+    private Boolean allowPermission = false;
+    private String CurrentPermission = "canAccessSystem";
+    
+    private Model withPermission(String permission) {
+        allowPermission = true;
+        CurrentPermission = permission;
+        return this;
+    }
+    
     public static void setTable(String table) {
         Session.table = (Session.provider.equals("mssql") ? Session.schema + "." : "") + table;
     }
@@ -539,6 +548,8 @@ public class Model {
         this.finalQuery = "Select * From ";
         this.joinConstruct = "";
         this.joined = false;
+        this.allowPermission = false;
+        this.CurrentPermission = "canAccessSystem";
     }
 
 }

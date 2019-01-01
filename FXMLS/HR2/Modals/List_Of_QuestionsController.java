@@ -83,9 +83,9 @@ public class List_Of_QuestionsController implements Initializable {
 
                         List questions = q.join(Model.JOIN.INNER, "aerolink.tbl_hr2_courses", "course_id", "c", "=", "course_id")
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "c", "job_id", true)
-                                .where(new Object[][]{{"aerolink.tbl_hr4_jobs.title", "=", lbl_course_title.getText()},
-                                    {"aerolink.tbl_hr2_assessment.isDeleted", "=", "0"}})
-                                .get("aerolink.tbl_hr2_assessment.question_id,aerolink.tbl_hr2_assessment.question");
+                                .where(new Object[][]{{"aerolink.tbl_hr4_jobs.title", "=", lbl_course_title.getText(), "AND",
+                            "aerolink.tbl_hr2_assessment.isDeleted", "=", "0"}})
+                                .get("aerolink.tbl_hr2_assessment.question");
                         Data(questions);
 
                         GlobalCount = DummyCount;
@@ -195,7 +195,7 @@ public class List_Of_QuestionsController implements Initializable {
             HR2_Assessment c = new HR2_Assessment();
 
             Boolean a = c.where(new Object[][]{
-                {"question_id", "=", tbl_questions.getSelectionModel().getSelectedItem().question_id.get()}
+                {"question", "=", tbl_questions.getSelectionModel().getSelectedItem().question.get()}
             }).update(new Object[][]{
                 {"isDeleted", "1"},
             }).executeUpdate();

@@ -38,7 +38,7 @@ AeroLink - Freight Management System
       //getting the value thru accessing the column name in the hashmap
       //row.get("column_name").toString();
    });
-   
+ 
 ```
 
 - Insert

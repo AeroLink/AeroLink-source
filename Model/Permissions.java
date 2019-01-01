@@ -14,8 +14,9 @@ public class Permissions extends Synapse.Model{
     
     
     public Permissions(){
-        setColumns("id", "permissions");
         this.initTable("aerolink.tbl_permissions");
     }
+    
+    
     
 }

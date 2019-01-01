@@ -52,6 +52,19 @@
                                           </contextMenu>
                                       </JFXButton>
                               <JFXHamburger fx:id="Drawer" layoutX="14.0" layoutY="17.0" />
+                              <JFXButton fx:id="btnRx" layoutX="521.0" layoutY="15.0" onMouseClicked="#pullRight" prefHeight="26.0" prefWidth="28.0" style="-fx-background-color: #34A853;" styleClass="btn-rounded" stylesheets="@../Assets/css/MainPanel.css" text=" " AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="15.0">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="COMMENT" wrappingWidth="1.4285717010498047" />
+                                 </graphic>
+                                 <contextMenu>
+                                    <ContextMenu fx:id="contextM1">
+                                       <items>
+                                          <MenuItem fx:id="userManagement1" mnemonicParsing="false" text="User Management" />
+                                          <MenuItem fx:id="importAndExport1" mnemonicParsing="false" text="Import and Export" />
+                                       </items>
+                                    </ContextMenu>
+                                 </contextMenu>
+                              </JFXButton>
                                   </children>
                               </AnchorPane>
                         <AnchorPane prefHeight="21.0" prefWidth="649.0" style="-fx-background-color: #34A853;" />

@@ -22,7 +22,7 @@ public class R2SL {
     public static List convert(ResultSet rs){
         
         ArrayList list = new ArrayList();
-            
+        
         try {
         
             while(rs.next()){
@@ -34,7 +34,7 @@ public class R2SL {
                     list.add(row);
 
             }
-        
+            
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
