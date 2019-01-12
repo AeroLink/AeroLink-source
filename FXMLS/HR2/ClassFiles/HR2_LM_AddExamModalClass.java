@@ -14,10 +14,11 @@ import javafx.beans.property.SimpleStringProperty;
 public class HR2_LM_AddExamModalClass {
 
     public static String jid, jt;
+
     public SimpleStringProperty eid, ename, edesc, cb;
 
-    public static void AddExam(String job_title) {
-      //  jid = job_id;
+    public static void AddExam(String job_id, String job_title) {
+        jid = job_id;
         jt = job_title;
     }
 

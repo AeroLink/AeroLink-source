@@ -48,6 +48,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 
 /**
@@ -156,6 +157,18 @@ public class HR2_Training_ManagementController implements Initializable {
         txt_budget_cost.setOnKeyReleased(e -> validate());
     }
 
+    @FXML
+    public void NumbersOnly(javafx.scene.input.KeyEvent event) {
+        if (!event.getCharacter().matches("[0-9]")) {
+            event.consume();
+         /*   Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initStyle(StageStyle.UNDECORATED);
+            alert.setContentText("Accepts numbers only");
+            alert.showAndWait();*/
+        }
+
+    }
+
     public void DisplayDataInTable() {
 
         col_history_jp.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().job_position);
@@ -183,8 +196,8 @@ public class HR2_Training_ManagementController implements Initializable {
                                 HR2_TM_ViewTrainingInfo_Modal.init_Question(tbl_trainings.getSelectionModel().getSelectedItem().job_position.get(),
                                         tbl_trainings.getSelectionModel().getSelectedItem().start_date.get(),
                                         tbl_trainings.getSelectionModel().getSelectedItem().end_date.get());
-                                Modal viewParticipants = Modal.getInstance(new Form("/FXMLS/HR2/Modals/TM_ViewTraining.fxml").getParent());
-                                viewParticipants.open();
+                                Modal viewTraining = Modal.getInstance(new Form("/FXMLS/HR2/Modals/TM_ViewTraining.fxml").getParent());
+                                viewTraining.open();
                             });
                             btn.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
                             btn.setCursor(javafx.scene.Cursor.HAND);
@@ -267,15 +280,14 @@ public class HR2_Training_ManagementController implements Initializable {
         List training_data = tm.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "employees", "=", "id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr2_type_of_training ", "type_of_training_id", "t_type", "=", "type_of_training_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_log2_vehicle_status ", "vehicle_id", "v", "=", "vehicle_id")
-                .where(new Object[][]{{"aerolink.tbl_hr2_training_info.status", "=", "1"}})
+                .where(new Object[][]{{"aerolink.tbl_hr2_training_info.status", "<>", "0"}})
                 .get("job_position", "training_title", "training_description", "CONCAT(employees.firstname, ' ' ,employees.middlename, ' ',\n"
                         + "employees.lastname)as trainor", "start_date", "end_date", "start_time", "end_time", "t_type.type_of_training",
                         "location", "v.vehicle", "budget_cost");
         Data(training_data);
 
     }
-    
-    
+
     @FXML
     public void searchTraining() {
         HR2_Training_Info tm = new HR2_Training_Info();
@@ -284,7 +296,8 @@ public class HR2_Training_ManagementController implements Initializable {
             List training_data1 = tm.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "employees", "=", "id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr2_type_of_training ", "type_of_training_id", "t_type", "=", "type_of_training_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_log2_vehicle_status ", "vehicle_id", "v", "=", "vehicle_id")
-                    .where(new Object[][]{{"job_position", "like", "%" + txt_search_training.getText() + "%","AND","aerolink.tbl_hr2_training_info.status", "=", "1"}})
+                    .where(new Object[][]{{"job_position", "like", "%" + txt_search_training.getText() + "%"},
+            {"aerolink.tbl_hr2_training_info.status", "<>", "0"}})
                     .get("job_position", "training_title", "training_description", "CONCAT(employees.firstname, ' ' ,employees.middlename, ' ',\n"
                             + "employees.lastname)as trainor", "start_date", "end_date", "start_time", "end_time", "t_type.type_of_training",
                             "location", "v.vehicle", "budget_cost");
@@ -294,7 +307,6 @@ public class HR2_Training_ManagementController implements Initializable {
             System.out.println(e);
         }
     }
-
 
     public void Data(List b) {
         ObservableList<HR2_Training_InfoClass> obj = FXCollections.observableArrayList();
@@ -359,7 +371,8 @@ public class HR2_Training_ManagementController implements Initializable {
             System.out.println(e);
         }
     }
-    
+
+    /*
     @FXML
      public void searchHistoryOfTraining() {
         HR2_Training_Info tm = new HR2_Training_Info();
@@ -368,7 +381,7 @@ public class HR2_Training_ManagementController implements Initializable {
             List training_data1 = tm.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "employees", "=", "id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr2_type_of_training ", "type_of_training_id", "t_type", "=", "type_of_training_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_log2_vehicle_status ", "vehicle_id", "v", "=", "vehicle_id")
-                    .where(new Object[][]{{"job_position", "like", "%" + txt_search_historyTraining.getText() + "%","AND","aerolink.tbl_hr2_training_info.status", "=", "0"}})
+                    .where(new Object[][]{{"job_position", "like", "%" + txt_search_historyTraining.getText() + "%","aerolink.tbl_hr2_training_info.status", "=", "0"}})
                     .get("job_position", "training_title", "training_description", "CONCAT(employees.firstname, ' ' ,employees.middlename, ' ',\n"
                             + "employees.lastname)as trainor", "start_date", "end_date", "start_time", "end_time", "t_type.type_of_training",
                             "location", "v.vehicle", "budget_cost");
@@ -378,7 +391,7 @@ public class HR2_Training_ManagementController implements Initializable {
             System.out.println(e);
         }
     }
-
+     */
     public void loadDataInComboBoxes() {
         HR4_Jobs jobs = new HR4_Jobs();
         HR2_Temp_Employee_Profiles trainors = new HR2_Temp_Employee_Profiles();
@@ -470,6 +483,7 @@ public class HR2_Training_ManagementController implements Initializable {
         }
     }
 
+    @FXML
     public void validate() {
         if (!cbox_select_jobs.getValue().toString().isEmpty() && !txt_training_title.getText().isEmpty()
                 && !txt_training_desc.getText().isEmpty() && !cbox_trainor.getValue().toString().isEmpty()
@@ -538,6 +552,7 @@ public class HR2_Training_ManagementController implements Initializable {
         }
 
     }
+
     //DROP DATA IN CURRENT TRAINING
     public void DropData() {
         Alert update = new Alert(Alert.AlertType.CONFIRMATION);

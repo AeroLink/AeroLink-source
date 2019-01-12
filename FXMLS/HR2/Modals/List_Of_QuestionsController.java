@@ -80,7 +80,6 @@ public class List_Of_QuestionsController implements Initializable {
     private static FileInputStream fis;
     private static FileOutputStream fos;
     private static Row r;
-    private static Cell c;
 
     private static String[] columns = {"Name", "Email", "Date Of Birth", "Salary"};
 
@@ -89,7 +88,7 @@ public class List_Of_QuestionsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        lbl_course_title.setText(HR2_LMClass_For_AddQuestion_Modal.exam_name);
+        lbl_course_title.setText("EXAM00" + HR2_LMClass_For_AddQuestion_Modal.exam_id + " - " + HR2_LMClass_For_AddQuestion_Modal.exam_name);
         loadData();
         DisplayDataInJTable();
 
@@ -109,8 +108,8 @@ public class List_Of_QuestionsController implements Initializable {
                     if (DummyCount != GlobalCount) {
 
                         List questions = q.join(Model.JOIN.INNER, "aerolink.tbl_hr2_examination", "exam_id", "e", "=", "exam_id")
-                                //    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "c", "job_id", true)
-                                .where(new Object[][]{{"e.exam_name", "=", lbl_course_title.getText()},
+                            //    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "c", "job_id", true)
+                                .where(new Object[][]{{"e.exam_name", "=", HR2_LMClass_For_AddQuestion_Modal.exam_name},
                         {"aerolink.tbl_hr2_assessment.isDeleted", "=", "0"}})
                                 .get("aerolink.tbl_hr2_assessment.question_id,aerolink.tbl_hr2_assessment.question");
                         Data(questions);
@@ -222,7 +221,7 @@ public class List_Of_QuestionsController implements Initializable {
             HR2_Assessment c = new HR2_Assessment();
 
             Boolean a = c.where(new Object[][]{
-                {"question", "=", tbl_questions.getSelectionModel().getSelectedItem().question.get()}
+                {"question_id", "=", tbl_questions.getSelectionModel().getSelectedItem().question_id.get()}
             }).update(new Object[][]{
                 {"isDeleted", "1"},}).executeUpdate();
             Alert dropnotif = new Alert(Alert.AlertType.INFORMATION);
@@ -284,7 +283,7 @@ public class List_Of_QuestionsController implements Initializable {
             XSSFSheet sp = w.createSheet("D");
             w.write(out);
             out.close();
-        } catch (Exception e) {
+        }catch(Exception e){
             System.out.println(e);
         }
     }

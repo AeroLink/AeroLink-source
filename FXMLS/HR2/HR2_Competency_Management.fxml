@@ -5,6 +5,7 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -20,33 +21,11 @@
                <top>
                   <AnchorPane prefHeight="75.0" prefWidth="663.0" BorderPane.alignment="CENTER">
                      <children>
-                        <JFXButton fx:id="btn_set_skills" buttonType="RAISED" layoutX="558.0" layoutY="22.0" styleClass="btn-primary" text="Set Skills" AnchorPane.rightAnchor="14.0">
+                        <Label layoutX="14.0" layoutY="15.0" text="Competency Management">
                            <font>
-                              <Font name="Roboto Black" size="15.0" />
+                              <Font name="Lato Bold" size="22.0" />
                            </font>
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="15.0" />
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </JFXButton>
-                        <JFXTextField fx:id="txt_search_job" focusColor="#0b101e" labelFloat="true" layoutX="14.0" layoutY="36.0" maxWidth="215.0" minWidth="215.0" prefHeight="31.0" prefWidth="215.0" promptText="Search  a Job" AnchorPane.leftAnchor="14.0">
-                           <font>
-                              <Font name="Lato Semibold" size="15.0" />
-                           </font>
-                        </JFXTextField>
-                        <JFXButton fx:id="btn_job_vacancy" buttonType="RAISED" layoutX="414.0" layoutY="22.0" onAction="#ViewJobVacancy" styleClass="btn-primary" text="Job Vacancy" AnchorPane.rightAnchor="133.0">
-                           <font>
-                              <Font name="Roboto Black" size="15.0" />
-                           </font>
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" size="15.0" />
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </JFXButton>
+                        </Label>
                      </children>
                   </AnchorPane>
                </top>
@@ -72,12 +51,17 @@
                               </ContextMenu>
                            </contextMenu>
                         </TableView>
-                        <JFXButton fx:id="btn_refresh" buttonType="RAISED" layoutX="14.0" layoutY="22.0" prefHeight="16.0" prefWidth="91.0" styleClass="btn-primary" text="Refresh">
+                        <JFXTextField fx:id="txt_search_job" focusColor="#0b101e" labelFloat="true" layoutX="12.0" layoutY="-4.0" maxWidth="215.0" minWidth="215.0" prefHeight="31.0" prefWidth="215.0" promptText="Search  a Job" AnchorPane.leftAnchor="12.0">
                            <font>
-                              <Font name="Roboto Black" size="14.0" />
+                              <Font name="Lato Semibold" size="15.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXButton fx:id="btn_set_skills" buttonType="RAISED" layoutX="563.0" layoutY="-1.0" styleClass="btn-primary" text="Set Skills" AnchorPane.rightAnchor="9.0">
+                           <font>
+                              <Font name="Roboto Black" size="15.0" />
                            </font>
                            <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="REFRESH" />
+                              <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="15.0" />
                            </graphic>
                            <cursor>
                               <Cursor fx:constant="HAND" />

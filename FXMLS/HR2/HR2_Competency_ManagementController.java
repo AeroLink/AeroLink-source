@@ -63,10 +63,6 @@ public class HR2_Competency_ManagementController implements Initializable {
     private TableColumn<HR4_Jobs_Class, String> col_skills;
     @FXML
     private TableColumn<HR4_Jobs_Class, String> col_skill_desc;
-    @FXML
-    private JFXButton btn_refresh;
-    @FXML
-    private JFXButton btn_job_vacancy;
 
     long DummyCount = 0;
     long GlobalCount = 0;
@@ -84,7 +80,7 @@ public class HR2_Competency_ManagementController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         loadJob();
         DisplayDataInTable();
-        btn_refresh.setOnAction(e -> loadJob());
+   //     btn_refresh.setOnAction(e -> loadJob());
         // diplaycols();
         btn_set_skills.setOnAction(e -> {
             Modal set_skill_modal = Modal.getInstance(new Form("/FXMLS/HR2/Modals/Modal_SetSkills.fxml").getParent());
@@ -100,10 +96,11 @@ public class HR2_Competency_ManagementController implements Initializable {
         try {
 
             HR2_CM_Pivot cm_pivot = new HR2_CM_Pivot();
-
+            HR2_CM_Skills skills_tbl = new HR2_CM_Skills();
+            
             CompletableFuture.supplyAsync(() -> {
                 while (Session.CurrentRoute.equals("competency_management")) {
-                    cm_pivot.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(row -> {
+                    skills_tbl.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(row -> {
                         DummyCount = Long.parseLong(((HashMap) row).get("chk").toString());
                     });
 
@@ -111,7 +108,7 @@ public class HR2_Competency_ManagementController implements Initializable {
 
                         List c = cm_pivot.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr2_skillset", "skill_id", "s", "=", "skill_id")
-                                .where(new Object[][]{{"s.isDeleted", "=", "0"}})
+                                .where(new Object[][]{{"s.isDeleted", "<>", "1"}})
                                 .get("jobs.title", "jobs.description", "s.skill", "s.skill_description", "s.skill_id");
 
                         Data(c);
@@ -171,13 +168,6 @@ public class HR2_Competency_ManagementController implements Initializable {
         col_skill_desc.setCellValueFactory((TableColumn.CellDataFeatures<HR4_Jobs_Class, String> param) -> param.getValue().Skill_Description);
 
     }
-
-    @FXML
-    public void ViewJobVacancy() {
-        Modal m = Modal.getInstance(new Form("/FXMLS/HR2/Modals/ViewJobVacancy.fxml").getParent());
-        m.open();
-    }
-
     public void SearchJob() {
         HR2_CM_Pivot cm_pivot = new HR2_CM_Pivot();
         tbl_jobs.getItems().clear();
@@ -186,8 +176,8 @@ public class HR2_Competency_ManagementController implements Initializable {
             
             List c = cm_pivot.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr2_skillset", "skill_id", "s", "=", "skill_id")
-                    .where(new Object[][]{{"jobs.title", "like", "%" + txt_search_job.getText() + "%" ,"AND","s.isDeleted","=" ,"0"}})
-                    .get("jobs.title", "jobs.description", "s.skill", "s.skill_description");
+                    .where(new Object[][]{{"jobs.title", "like", "%" + txt_search_job.getText() + "%"} ,{"s.isDeleted","<>" ,"1"}})
+                    .get("jobs.title", "jobs.description","s.skill_id", "s.skill", "s.skill_description");
 
             Data(c);
 
@@ -229,13 +219,12 @@ public class HR2_Competency_ManagementController implements Initializable {
             HR2_CM_Skills s = new HR2_CM_Skills();
 
             Boolean a = s.where(new Object[][]{
-                {"skill", "=", tbl_jobs.getSelectionModel().getSelectedItem().Skill.get()}
+                {"skill_id", "=", tbl_jobs.getSelectionModel().getSelectedItem().Skill_id.get()}
             }).update(new Object[][]{
                 {"isDeleted", "1"},}).executeUpdate();
             Alert dropnotif = new Alert(Alert.AlertType.INFORMATION);
             dropnotif.setContentText(tbl_jobs.getSelectionModel().getSelectedItem().Skill.get() + " Successfully Dropped");
             dropnotif.showAndWait();
-            loadJob();
         }
     }
 }

@@ -8,11 +8,14 @@ package FXMLS.HR2.Modals;
 import FXMLS.HR2.ClassFiles.HR2_CM_Skills_Class_for_Modal;
 import FXMLS.HR2.ClassFiles.HR2_TM_ViewTrainingInfo_Modal;
 import FXMLS.HR2.ClassFiles.HR2_Training_InfoClass;
+import FXMLS.HR2.ClassFiles.TM_ViewParticipantsClass;
 import Model.HR2_Temp_Employee_Profiles;
 import Model.HR2_Temp_Vehicles;
 import Model.HR2_Training_Info;
 import Model.HR2_Type_of_Training;
 import Model.HR4_Jobs;
+import Synapse.Components.Modal.Modal;
+import Synapse.Form;
 import Synapse.Model;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -83,6 +86,13 @@ public class TM_ViewTrainingController implements Initializable {
         loadData();
     }
 
+    @FXML
+    public void viewParticipants() {
+        TM_ViewParticipantsClass.getJobPosition(cbox_edit_title.getSelectionModel().getSelectedItem().toString());
+        Modal viewParticipants = Modal.getInstance(new Form("/FXMLS/HR2/Modals/TM_ViewParticipants.fxml").getParent());
+        viewParticipants.open();
+    }
+
     public void loadDataInComboBoxes() {
 
         HR2_Temp_Employee_Profiles trainors = new HR2_Temp_Employee_Profiles();
@@ -122,7 +132,7 @@ public class TM_ViewTrainingController implements Initializable {
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr2_type_of_training ", "type_of_training_id", "t_type", "=", "type_of_training_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_log2_vehicle_status ", "vehicle_id", "v", "=", "vehicle_id")
                 .where(new Object[][]{{"aerolink.tbl_hr2_training_info.job_position", "=", cbox_edit_title.getValue().toString()}})
-                .get("training_title","training_description", "CONCAT('T', employees.id , ' - ',employees.firstname, ' ' ,employees.middlename, ' ',\n"
+                .get("training_title", "training_description", "CONCAT('T', employees.id , ' - ',employees.firstname, ' ' ,employees.middlename, ' ',\n"
                         + "employees.lastname)as trainor", "start_time", "end_time", "CONCAT('TM',t_type.type_of_training_id,' - ',t_type.type_of_training) as type_of_training",
                         "location", "CONCAT('V',v.vehicle_id,' - ',v.vehicle) as vehicle", "budget_cost");
         Data(training_data);

@@ -52,8 +52,6 @@ public class HR2_Learning_ManagementController implements Initializable {
     @FXML
     private JFXTextField txt_search_course;
     @FXML
-    private JFXButton btn_refresh;
-    @FXML
     private TableView<HR2_CoursesClass> tbl_courses;
     @FXML
     private TableColumn<HR2_CoursesClass, String> col_course_title;
@@ -90,8 +88,8 @@ public class HR2_Learning_ManagementController implements Initializable {
             populateExam();
         });
         loadJobsInComboBox();
-        
-    /*    if(!cbox_job_title.getValue().toString().isEmpty()){
+
+        /*    if(!cbox_job_title.getValue().toString().isEmpty()){
             btn_add_job.setDisable(false);
         }*/
     }
@@ -114,14 +112,18 @@ public class HR2_Learning_ManagementController implements Initializable {
         }
     }
 
-    @FXML
     public void loadData() {
 
         try {
             //tbl courses
             HR2_Courses c = new HR2_Courses();
+            
+                  List courses = c.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
+                                .where(new Object[][]{{"aerolink.tbl_hr2_courses.isDeleted", "<>", "1"}})
+                                .get("aerolink.tbl_hr2_courses.course_id", "j.title as job_title");
+                        Data(courses);
 
-            CompletableFuture.supplyAsync(() -> {
+           /* CompletableFuture.supplyAsync(() -> {
                 while (Session.CurrentRoute.equals("learning_management")) {
                     c.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(row -> {
                         DummyCount = Long.parseLong(((HashMap) row).get("chk").toString());
@@ -129,10 +131,7 @@ public class HR2_Learning_ManagementController implements Initializable {
 
                     if (DummyCount != GlobalCount) {
 
-                        List courses = c.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
-                                .where(new Object[][]{{"aerolink.tbl_hr2_courses.isDeleted", "<>", "1"}})
-                                .get("aerolink.tbl_hr2_courses.course_id", "j.title as job_title");
-                        Data(courses);
+                  
 
                         GlobalCount = DummyCount;
                     }
@@ -145,7 +144,7 @@ public class HR2_Learning_ManagementController implements Initializable {
                 }
 
                 return 0;
-            }, Session.SessionThreads);
+            }, Session.SessionThreads);*/
 
         } catch (Exception e) {
             System.out.println(e);
@@ -160,10 +159,10 @@ public class HR2_Learning_ManagementController implements Initializable {
             for (Object d : b) {
 
                 HashMap hm = (HashMap) d;
-                System.out.println(String.valueOf(hm.get("course_id")));
+                System.out.println("[Loading Course Data ID] : " + String.valueOf(hm.get("course_id")));
                 obj.add(
                         new HR2_CoursesClass(
-                                String.valueOf("course_id"),
+                                String.valueOf(hm.get("course_id")),
                                 String.valueOf(hm.get("job_title"))));
 
             }
@@ -192,7 +191,7 @@ public class HR2_Learning_ManagementController implements Initializable {
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "c", "job_id", true)
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "ep", "=", "id")
                                 .where(new Object[][]{{"aerolink.tbl_hr2_examination.isDeleted", "<>", "1"}})
-                                .get("aerolink.tbl_hr2_examination.exam_name", "aerolink.tbl_hr2_examination.exam_desc",
+                                .get("aerolink.tbl_hr2_examination.exam_id", "aerolink.tbl_hr2_examination.exam_name", "aerolink.tbl_hr2_examination.exam_desc",
                                         "CONCAT(ep.firstname,' ',ep.middlename,' ',ep.lastname)as Created_by");
                         Exam(e);
 
@@ -246,8 +245,7 @@ public class HR2_Learning_ManagementController implements Initializable {
                     .where(new Object[][]{
                 {"j.title", "like", "%" + txt_search_course.getText() + "%"},
                 {"aerolink.tbl_hr2_courses.isDeleted", "<>", "1"}
-            })
-                    .get("aerolink.tbl_hr2_courses.course_id", "j.title as job_title");
+            }).get("aerolink.tbl_hr2_courses.course_id", "j.title as job_title");
             Data(courses);
 
         } catch (Exception e) {
@@ -273,7 +271,9 @@ public class HR2_Learning_ManagementController implements Initializable {
                         try {
                             btn.setOnAction(e
                                     -> {
-                                HR2_LM_CourseOutlineModal.courseOutline(tbl_courses.getSelectionModel().getSelectedItem().job_title.get());
+                                HR2_LM_CourseOutlineModal.courseOutline(
+                                        tbl_courses.getSelectionModel().getSelectedItem().course_id.get(),
+                                        tbl_courses.getSelectionModel().getSelectedItem().job_title.get());
                                 Modal lq = Modal.getInstance(new Form("/FXMLS/HR2/Modals/LM_CourseOutline.fxml").getParent());
                                 lq.open();
                             });
@@ -317,8 +317,8 @@ public class HR2_Learning_ManagementController implements Initializable {
                             btn_add_exam.setOnAction(e
                                     -> {
                                 HR2_LM_AddExamModalClass.AddExam(
-                                       // tbl_courses.getSelectionModel().getSelectedItem().course_id.get(),
-                                        tbl_courses.getSelectionModel().getSelectedItem().job_title.get()
+                                        tbl_courses.getSelectionModel().getSelectedItem().course_id.getValue(),
+                                        tbl_courses.getSelectionModel().getSelectedItem().job_title.getValue()
                                 );
                                 Modal lq = Modal.getInstance(new Form("/FXMLS/HR2/Modals/LM_AddExam.fxml").getParent());
                                 lq.open();
@@ -367,6 +367,7 @@ public class HR2_Learning_ManagementController implements Initializable {
                             btn_q_list.setOnAction(e
                                     -> {
                                 HR2_LMClass_For_AddQuestion_Modal.initCourseTitle(
+                                        tbl_exam.getSelectionModel().getSelectedItem().exam_id.get(),
                                         tbl_exam.getSelectionModel().getSelectedItem().exam_name.get(),
                                         tbl_exam.getSelectionModel().getSelectedItem().exam_desc.get(),
                                         tbl_exam.getSelectionModel().getSelectedItem().id.get());
@@ -413,6 +414,7 @@ public class HR2_Learning_ManagementController implements Initializable {
                             btn_add_q.setOnAction(e
                                     -> {
                                 HR2_LMClass_For_AddQuestion_Modal.initCourseTitle(
+                                        tbl_exam.getSelectionModel().getSelectedItem().exam_id.get(),
                                         tbl_exam.getSelectionModel().getSelectedItem().exam_name.get(),
                                         tbl_exam.getSelectionModel().getSelectedItem().exam_desc.get(),
                                         tbl_exam.getSelectionModel().getSelectedItem().id.get());

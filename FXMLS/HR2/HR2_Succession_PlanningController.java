@@ -90,7 +90,7 @@ public class HR2_Succession_PlanningController implements Initializable {
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "d", "=", "dept_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr2_competency_pivot", "job_id", "cp", "=", "job_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr2_skillset", "skill_id", "=", "cp", "skill_id", true)
-                .where(new Object[][]{{"j_limit.jobOpen", "!=", "0"}})
+                .where(new Object[][]{{"j_limit.jobOpen", "!=", "0"},{"aerolink.tbl_hr2_skillset.isDeleted","<>" ,"1"}})
                 .get("d.dept_name as department,aerolink.tbl_hr4_jobs.title");
         JV(jv_data);
     }
@@ -124,7 +124,8 @@ public class HR2_Succession_PlanningController implements Initializable {
             for (Object d : c) {
                 HashMap hm1 = (HashMap) d;
                 //RS
-                cbox_department.getItems().add("DEPT" + hm1.get("id") + " - " + hm1.get("dept_name"));
+              //  cbox_department.getItems().add("DEPT" + hm1.get("id") + " - " + hm1.get("dept_name"));
+              cbox_department.getItems().add(hm1.get("dept_name"));
 
             }
         } catch (Exception e) {
@@ -138,46 +139,22 @@ public class HR2_Succession_PlanningController implements Initializable {
         try {
 
             HR2_Temp_Employee_Jobs ej = new HR2_Temp_Employee_Jobs();
-
-            CompletableFuture.supplyAsync(() -> {
-                while (Session.CurrentRoute.equals("succession_planning")) {
-                    ej.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(row -> {
-                        DummyCount = Long.parseLong(((HashMap) row).get("chk").toString());
-                    });
-
-                    if (DummyCount != GlobalCount) {
-
-                        try {
-
                             List sp = ej.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "emp",
                                     "=", "employee_code")
                                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
+                                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "=", "jobs", "dept_id",true)
                                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_classifications", "id", "=", "jobs", "classification_id", true)
-                                    .where(new Object[][]{{"jobs.dept_id", "=", cbox_department.getSelectionModel()
-                                .getSelectedItem().toString().substring(4).toString().split(" - ")[0]}})
+                                  /*  .where(new Object[][]{{"aerolink.tbl_hr4_department.dept_name", "=", cbox_department.getSelectionModel()
+                                .getSelectedItem().toString().substring(4).toString().split(" - ")[0]}})*/
+                                    .where(new Object[][]{{"aerolink.tbl_hr4_department.dept_name", "=", cbox_department.getSelectionModel()
+                                .getSelectedItem().toString()}})
                                     .get("jobs.title as position", "concat(emp.firstname, ' ',emp.middlename, ' ' ,emp.lastname)as employees",
                                             "aerolink.tbl_hr4_job_classifications.class_name as Classification");
                             Data(sp);
-                        } catch (Exception e) {
-                            System.out.println(e);
-                        }
-                        GlobalCount = DummyCount;
-                    }
-
-                    try {
-                        Thread.sleep(3000);
-                    } catch (InterruptedException ex) {
-                        //Logger.getLogger(HR2_Competency_ManagementController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-
-                return 0;
-            }, Session.SessionThreads);
-
-        } catch (Exception e) {
+                        } 
+        catch(Exception e){
             System.out.println(e);
         }
-
     }
 
     public void Data(List b) {

@@ -46,7 +46,7 @@ public class LM_AddExamController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        cbox_job_title.getItems().add(HR2_LM_AddExamModalClass.jt);
+        cbox_job_title.getItems().add("JOB00" + HR2_LM_AddExamModalClass.jid + " - " + HR2_LM_AddExamModalClass.jt);
         cbox_job_title.getSelectionModel().selectFirst();
         loadDataInComboBoxes();
     }
@@ -58,12 +58,7 @@ public class LM_AddExamController implements Initializable {
             List c = jobs.get();
 
             for (Object d : c) {    
-           /*     HashMap hm1 = (HashMap) d;
-                //RS
-                String j_id = String.valueOf(hm1.get("job_id"));
-                String sjobs = (String) hm1.get("title");
 
-                cbox_job_title.getItems().add("J" + j_id + " - " + sjobs);*/
 
                 List set_emp = employees.get();
 
@@ -78,6 +73,7 @@ public class LM_AddExamController implements Initializable {
         }
     }
 
+    @FXML
     public void Save() {
         if (txt_exam_name.getText().isEmpty() || txt_exam_desc.getText().isEmpty()
                 || txt_created_by.getValue().toString().isEmpty()) {
@@ -92,7 +88,7 @@ public class LM_AddExamController implements Initializable {
                         = {
                             {"exam_name", txt_exam_name.getText()},
                             {"exam_desc", txt_exam_desc.getText()},
-                            {"course_id", cbox_job_title.getSelectionModel().getSelectedItem().toString().substring(1).toString().split(" - ")[0]},
+                            {"course_id", cbox_job_title.getSelectionModel().getSelectedItem().toString().substring(5).toString().split(" - ")[0]},
                             {"id", txt_created_by.getSelectionModel().getSelectedItem().toString().substring(3).toString().split(" - ")[0]},
                             {"isDeleted", "0"},};
                 //int id = model.insert(vals, true);

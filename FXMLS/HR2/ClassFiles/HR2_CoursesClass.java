@@ -16,6 +16,7 @@ public class HR2_CoursesClass {
     public SimpleStringProperty course_id,job_title;
 
     public HR2_CoursesClass(String course_id,String job_title) {
+        this.course_id = new SimpleStringProperty(course_id);
         this.job_title = new SimpleStringProperty(job_title);
     }
 }

@@ -16,14 +16,16 @@ public class HR2_LM_CourseOutlineModal {
     public static String cid, jid;
     
     //for tbl_files
-    public SimpleStringProperty files;
+    public SimpleStringProperty cfiles, files;
 
-    public static void courseOutline(String job_id) {
+    public static void courseOutline(String course_id, String job_id) {
+        cid = course_id;
         jid = job_id;
     }
     
      //for tbl_files
-    public HR2_LM_CourseOutlineModal(String file) {
+    public HR2_LM_CourseOutlineModal(String c, String file) {
+        cfiles = new SimpleStringProperty(c);
         files = new SimpleStringProperty(file);
     }
 }

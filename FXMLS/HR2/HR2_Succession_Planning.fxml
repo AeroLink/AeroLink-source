@@ -101,7 +101,7 @@
                <children>
                   <Label layoutX="57.0" layoutY="14.0" prefHeight="32.0" prefWidth="242.0" text="Succession Planning" textFill="#434242">
                      <font>
-                        <Font name="Lato Black" size="25.0" />
+                        <Font name="Lato Bold" size="22.0" />
                      </font>
                   </Label>
                </children></AnchorPane>
