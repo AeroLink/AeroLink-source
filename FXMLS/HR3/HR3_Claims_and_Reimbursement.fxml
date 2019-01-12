@@ -1,76 +1,259 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="HR3_CR" prefHeight="720.0" prefWidth="1130.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <TabPane prefHeight="720.0" prefWidth="1130.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Reimbursement Request">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <JFXTabPane prefHeight="755.0" prefWidth="1375.0" stylesheets="@../../Assets/css/MainPanel.css">
+         <tabs>
+            <Tab id="tab" text="Reimbursement Request">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
                      <children>
-                        <TableView layoutX="5.0" layoutY="243.0" prefHeight="429.0" prefWidth="1120.0">
-                          <columns>
-                            <TableColumn prefWidth="83.0" text="Employee ID" />
-                              <TableColumn prefWidth="237.0" text="Employee Name" />
-                              <TableColumn prefWidth="129.0" text="Amount" />
-                              <TableColumn prefWidth="154.0" text="Receipt" />
-                              <TableColumn prefWidth="166.0" text="Date" />
-                            <TableColumn prefWidth="191.0" text="Approval" />
-                              <TableColumn prefWidth="159.0" text="Consent" />
-                          </columns>
-                        </TableView>
-                        <Label layoutX="424.0" layoutY="98.0" text="Import Receipt" />
-                        <Label layoutX="422.0" layoutY="132.0" text="Import Consent" />
-                        <Button layoutX="651.0" layoutY="167.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Save" />
-                        <TextField layoutX="28.0" layoutY="94.0" prefHeight="25.0" prefWidth="250.0" promptText="Employee " />
-                        <TextField layoutX="28.0" layoutY="128.0" prefHeight="25.0" prefWidth="250.0" promptText="Amount" />
-                        <TextField layoutX="28.0" layoutY="192.0" prefHeight="25.0" prefWidth="170.0" promptText="Search ID" />
-                        <TextField layoutX="525.0" layoutY="94.0" prefHeight="25.0" prefWidth="201.0" promptText="View" />
-                        <TextField layoutX="525.0" layoutY="128.0" prefHeight="25.0" prefWidth="201.0" promptText="View" />
-                        <Label text="Reimbursement Request" textFill="#1f0fff" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+                        <Label layoutX="25.0" layoutY="12.0" prefHeight="36.0" prefWidth="362.0" text="R e i m b u r s e m e n t  R e q u e s t">
                            <font>
-                              <Font size="28.0" />
+                              <Font name="Calibri" size="17.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="DEPARTMENT" focusColor="#4d4d4d" layoutX="177.0" layoutY="454.0" maxWidth="191.0" minWidth="118.0" prefHeight="37.0" prefWidth="184.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <effect>
+                              <Blend />
+                           </effect>
+                        </JFXTextField>
+                        <JFXTextField fx:id="PARTICULARS" focusColor="#4d4d4d" layoutX="590.0" layoutY="503.0" maxWidth="191.0" minWidth="118.0" prefHeight="37.0" prefWidth="184.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <effect>
+                              <Blend />
+                           </effect>
+                        </JFXTextField>
+                        <JFXTextField fx:id="TOTALAMOUNT" focusColor="#4d4d4d" layoutX="176.0" layoutY="500.0" maxWidth="191.0" minWidth="118.0" prefHeight="37.0" prefWidth="184.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <effect>
+                              <Blend />
+                           </effect>
+                        </JFXTextField>
+                        <JFXTextField fx:id="ORNO" focusColor="#4d4d4d" layoutX="176.0" layoutY="412.0" maxWidth="191.0" minWidth="118.0" prefHeight="37.0" prefWidth="184.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <effect>
+                              <Blend />
+                           </effect>
+                        </JFXTextField>
+                        <JFXTextField fx:id="EXPENSES" focusColor="#4d4d4d" layoutX="590.0" layoutY="454.0" maxWidth="191.0" minWidth="118.0" prefHeight="37.0" prefWidth="184.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <effect>
+                              <Blend />
+                           </effect>
+                        </JFXTextField>
+                        <JFXTextField fx:id="RECPHP" focusColor="#4d4d4d" layoutX="1105.0" layoutY="411.0" maxWidth="191.0" minWidth="118.0" prefHeight="37.0" prefWidth="184.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <effect>
+                              <Blend />
+                           </effect>
+                        </JFXTextField>
+                        <Label layoutX="81.0" layoutY="430.0" text="OR No.">
+                           <font>
+                              <Font name="Symbol" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="76.0" layoutY="476.0" text="Department :">
+                           <font>
+                              <Font name="Symbol" size="14.0" />
+                           </font>
+                        </Label>
+                        <JFXDatePicker fx:id="CMDDATE" layoutX="608.0" layoutY="413.0" prefHeight="32.0" prefWidth="180.0" />
+                        <Label layoutX="482.0" layoutY="431.0" text="Date :">
+                           <font>
+                              <Font name="Symbol" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="483.0" layoutY="529.0" text="Particulars :">
+                           <font>
+                              <Font name="Symbol" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="482.0" layoutY="478.0" text="Expenses :">
+                           <font>
+                              <Font name="Symbol" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="917.0" layoutY="431.0" text="Received Php :">
+                           <font>
+                              <Font name="Symbol" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="75.0" layoutY="527.0" text="Total Amount :">
+                           <font>
+                              <Font name="Symbol" size="14.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="TABLE" layoutX="67.0" layoutY="89.0" prefHeight="268.0" prefWidth="1230.0">
+                           <columns>
+                              <TableColumn prefWidth="78.00003051757812" text="OR_No." />
+                              <TableColumn prefWidth="86.00003051757812" text="Date" />
+                              <TableColumn prefWidth="86.0" text="Department" />
+                              <TableColumn prefWidth="126.0" text="Received_Php" />
+                              <TableColumn prefWidth="120.0" text="Expenses" />
+                              <TableColumn prefWidth="135.0" text="Total_Amount" />
+                              <TableColumn prefWidth="138.0" text="Particulars" />
+                              <TableColumn prefWidth="176.0" text="Cash_Returned/Reimbursed" />
+                              <TableColumn prefWidth="175.0" text="Total_Amount_Cleared_Php" />
+                              <TableColumn prefWidth="109.0" text="Status" />
+                           </columns>
+                           <effect>
+                              <Blend />
+                           </effect>
+                        </TableView>
+                        <Label layoutX="917.0" layoutY="479.0" text="Total Amount Cleared :">
+                           <font>
+                              <Font name="Symbol" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="917.0" layoutY="529.0" text="Cash Returned/Reimbursed :">
+                           <font>
+                              <Font name="Symbol" size="14.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="CLEARED" focusColor="#4d4d4d" layoutX="1105.0" layoutY="458.0" maxWidth="191.0" minWidth="118.0" prefHeight="37.0" prefWidth="184.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <effect>
+                              <Blend />
+                           </effect>
+                        </JFXTextField>
+                        <JFXTextField fx:id="CASH" focusColor="#4d4d4d" layoutX="1105.0" layoutY="509.0" maxWidth="191.0" minWidth="118.0" prefHeight="37.0" prefWidth="184.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <effect>
+                              <Blend />
+                           </effect>
+                        </JFXTextField>
+                        <ImageView fitHeight="114.0" fitWidth="108.0" layoutX="943.0" layoutY="579.0" pickOnBounds="true" preserveRatio="true" />
+                        <JFXButton fx:id="BUTTON" layoutX="1148.0" layoutY="567.0" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #00b359;" text="Send" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+          <Tab id="tab" text="Claim Reports">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
+                     <children>
+                        <TableView fx:id="TBL" layoutX="124.0" layoutY="42.0" prefHeight="248.0" prefWidth="1128.0">
+                           <columns>
+                              <TableColumn prefWidth="112.0" text="Employee Code" />
+                              <TableColumn minWidth="0.0" prefWidth="122.0" text="Date" />
+                              <TableColumn prefWidth="171.0" text="Payroll_Reference#" />
+                              <TableColumn prefWidth="196.0" text="Department" />
+                              <TableColumn prefWidth="193.0" text="Position" />
+                              <TableColumn prefWidth="181.0" text="Payroll_Type" />
+                              <TableColumn prefWidth="148.0" text="Status" />
+                           </columns>
+                        </TableView>
+                        <TableView fx:id="TABLEE" layoutX="10.0" layoutY="313.0" prefHeight="300.0" prefWidth="1353.0">
+                           <columns>
+                              <TableColumn prefWidth="116.99996948242188" text="Description" />
+                              <TableColumn prefWidth="111.99996948242188" text="Amount" />
+                              <TableColumn prefWidth="123.0" text="Total_Earnings" />
+                              <TableColumn prefWidth="116.0" text="Gross_Salary" />
+                              <TableColumn prefWidth="125.0" text="Details" />
+                              <TableColumn prefWidth="119.0" text="Value" />
+                              <TableColumn prefWidth="176.0" text="Description" />
+                              <TableColumn prefWidth="140.0" text="Amount" />
+                              <TableColumn prefWidth="113.0" text="Total_Deductions" />
+                              <TableColumn prefWidth="91.0" text="Gross_Salary" />
+                              <TableColumn prefWidth="120.0" text="Net_Amount" />
+                           </columns>
+                        </TableView>
+                        <Label layoutX="567.0" layoutY="9.0" prefHeight="36.0" prefWidth="241.0" text="C L A I M        D E T A I L S">
+                           <font>
+                              <Font name="Symbol" size="17.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </content>
+          </Tab>
+          <Tab id="tab" text="History">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
+                     <children>
+                        <TableView fx:id="TABLE1" layoutX="9.0" layoutY="57.0" prefHeight="281.0" prefWidth="1358.0">
+                           <columns>
+                              <TableColumn prefWidth="91.00003051757812" text="Emp. Code" />
+                              <TableColumn prefWidth="94.99996948242188" text="Date" />
+                              <TableColumn prefWidth="128.0" text="Payroll_Reference#" />
+                              <TableColumn prefWidth="164.0" text="Department" />
+                              <TableColumn prefWidth="146.0" text="Position" />
+                              <TableColumn prefWidth="238.0" text="Payroll_Type" />
+                              <TableColumn prefWidth="122.0" text="Total_Earnings" />
+                              <TableColumn prefWidth="116.0" text="Total_Deduction" />
+                              <TableColumn prefWidth="118.0" text="Net_Amount" />
+                              <TableColumn prefWidth="138.0" text="Status" />
+                           </columns>
+                           <effect>
+                              <Blend />
+                           </effect>
+                        </TableView>
+                        <Label layoutX="593.0" layoutY="14.0" text="C L A I M    H I S T O R Y">
+                           <font>
+                              <Font name="Symbol" size="17.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="TABLE2" layoutX="27.0" layoutY="399.0" prefHeight="298.0" prefWidth="1322.0">
+                           <columns>
+                              <TableColumn prefWidth="138.0" text="OR_No." />
+                              <TableColumn prefWidth="205.0" text="Department" />
+                              <TableColumn prefWidth="157.0" text="Expenses" />
+                              <TableColumn prefWidth="171.0" text="Date" />
+                              <TableColumn prefWidth="260.0" text="Particulars" />
+                              <TableColumn prefWidth="198.0" text="Total_Amount" />
+                              <TableColumn prefWidth="185.0" text="Status" />
+                           </columns>
+                        </TableView>
+                        <Label layoutX="491.0" layoutY="354.0" prefHeight="29.0" prefWidth="396.0" text="R E I M B U R S E M E N T   H I S T O R Y">
+                           <font>
+                              <Font name="Symbol" size="17.0" />
                            </font>
                         </Label>
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Claim Pending">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Label text="Claim Pending" textFill="#1f0fff" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
-                           <font>
-                              <Font size="28.0" />
-                           </font>
-                        </Label>
-                     </children></AnchorPane>
-            </content>
-          </Tab>
-            <Tab text="Claim History">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Label text="Claim History" textFill="#1f0fff" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
-                           <font>
-                              <Font size="28.0" />
-                           </font>
-                        </Label>
-                     </children></AnchorPane>
-              </content>
-            </Tab>
-        </tabs>
-      </TabPane>
-   </children>
-</AnchorPane>
+         </tabs>
+      </JFXTabPane>
+   </center>
+</BorderPane>

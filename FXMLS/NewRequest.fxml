@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.net.URL?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.HTMLEditor?>
+
+<AnchorPane id="AnchorPane" prefHeight="738.0" prefWidth="584.0" style="-fx-background-color: white;" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="FXMLS.NewRequestController">
+    <stylesheets>
+        <URL value="@/Assets/css/MainPanel.css" />
+    </stylesheets>
+   <children>
+      <AnchorPane layoutX="10.0" layoutY="15.0" prefHeight="267.0" prefWidth="560.0" style="-fx-border-color: black; -fx-border-radius: 2%; -fx-background-color: white;">
+         <children>
+            <Label layoutX="14.0" layoutY="-10.0" style="-fx-background-color: white;" text="RECIPIENT ">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="14.0" text="Choose Department :" />
+            <ComboBox fx:id="cboDept" layoutX="13.0" layoutY="36.0" prefHeight="25.0" prefWidth="429.0" promptText="Departments" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <RadioButton fx:id="rdoWholeDept" layoutX="14.0" layoutY="75.0" mnemonicParsing="false" text="Send to Whole Deparment" />
+            <RadioButton fx:id="rdoSpecificPerson" layoutX="187.0" layoutY="75.0" mnemonicParsing="false" text="Send to Specific Person" />
+            <TableView fx:id="tblPersons" disable="true" layoutX="16.0" layoutY="103.0" prefHeight="141.0" prefWidth="429.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="C1" />
+                <TableColumn prefWidth="75.0" text="C2" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="10.0" layoutY="305.0" prefHeight="371.0" prefWidth="560.0" style="-fx-border-color: black; -fx-border-radius: 2%; -fx-background-color: white;">
+         <children>
+            <Label layoutX="14.0" layoutY="-10.0" style="-fx-background-color: white;" text="CONTENT">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="15.0" layoutY="14.0" text="Request Title :" />
+            <TextField fx:id="txtTitle" layoutX="14.0" layoutY="34.0" prefHeight="25.0" prefWidth="524.0" />
+            <Label layoutX="17.0" layoutY="63.0" text="Request Message :" />
+            <HTMLEditor fx:id="txtMessage" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="17.0" layoutY="83.0" prefHeight="277.0" prefWidth="526.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="18.0" />
+         </children>
+      </AnchorPane>
+      <JFXButton fx:id="btnSend" contentDisplay="RIGHT" graphicTextGap="10.0" layoutX="425.0" layoutY="684.0" prefHeight="30.0" prefWidth="145.0" styleClass="btn-primary" stylesheets="@../Assets/css/MainPanel.css" text="Send Request">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIconView fill="WHITE" glyphName="PAPER_PLANE" />
+         </graphic>
+      </JFXButton>
+   </children>
+</AnchorPane>

@@ -8,11 +8,17 @@ package Controllers.USM;
 import static FXMLS.USM.Controllers.SetPermissionUSMController.UserID;
 import Model.UserPermissions;
 import Model.Users;
+import Synapse.Helpers;
+import Synapse.HttpClient;
+import Synapse.HttpClient.METHOD;
 import Synapse.Model;
+import Synapse.R2SL;
 import Synapse.Session;
 import Synapse.SessionPermission;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import org.json.JSONObject;
 
 /**
  *
@@ -20,35 +26,49 @@ import java.util.List;
  */
 public class loginController {
 
+    protected static JSONObject json = new JSONObject();
+
     public static Boolean doLogin(String u, String p) {
-        Users user = new Users();
 
-        List<HashMap> res = user.where(new Object[][]{
-            {"username", "=", u}
+        if (Session.isConnected) {
 
-        }).get("id", "username", "password");
+            HttpClient.post(METHOD.LOGIN, "{\"A1009\" : \"" + u + "\",\"B1009\" : \"" + p + "\", \"sestok\" : \"" + Session.sestoken + "\"}", (error, obj) -> {
+                if (error) {
+                    System.err.println("Error -> " + error);
+                }
+                json = obj;
+            });
 
-        UserPermissions up = new UserPermissions();
+            JSONObject list = new JSONObject(json.toString());
 
-        List listPermissions = up
-                .join(Model.JOIN.INNER, "aerolink.tbl_users", "id", "=", "user_id")
-                .join(Model.JOIN.INNER, "aerolink.tbl_permissions", "id", "=", "permission_id")
-                .where(new Object[][]{
-            {"user_id", "=", res.get(0).get("id").toString()}
-        }).get("aerolink.tbl_permissions.permission as UserPermission");
-        
-        
-        listPermissions.stream().forEach((row) -> {
-            HashMap crow = (HashMap) row;
-            Session.addPermission(String.valueOf(crow.get("UserPermission")));
-        });
-        
-        if (res.size() != 0) {
-            System.out.println();
-            if (Synapse.Crypt.Decrypt(res.get(0).get("password").toString()).equals(p)) {
+            HashMap hash = (HashMap) list.toMap();
+
+            if (Boolean.parseBoolean(String.valueOf(hash.get("success")))) {
+
+                //Changing Token
+                Session.token = String.valueOf(hash.get("token"));
+
+                //Getting Permissions
+                UserPermissions up = new UserPermissions();
+                
+                Session.putIfNotExist("user_id", hash.get("id").toString());
+                
+                List listPermissions = up
+                        .join(Model.JOIN.INNER, "aerolink.tbl_users", "id", "=", "user_id")
+                        .join(Model.JOIN.INNER, "aerolink.tbl_permissions", "id", "=", "permission_id")
+                        .where(new Object[][]{
+                    {"user_id", "=", hash.get("id").toString()}
+                }).get("aerolink.tbl_permissions.permission as UserPermission");
+
+                listPermissions.stream().forEach((row) -> {
+                    HashMap crow = (HashMap) row;
+                    Session.addPermission(String.valueOf(crow.get("UserPermission")));
+                });
                 return true;
             }
+
         }
+
         return false;
     }
 }

@@ -11,38 +11,96 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="607.0" prefWidth="893.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR1.HR1_Applicant_ManagementController">
    <children>
-      <JFXTabPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <tabs>
-            <Tab id="tab" styleClass="tab-label" text="Applicant Listing">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <BorderPane prefHeight="426.0" prefWidth="681.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <left>
-                              <BorderPane prefHeight="551.0" prefWidth="517.0">
+      <StackPane fx:id="spane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <JFXTabPane prefHeight="400.0" prefWidth="600.0">
+               <tabs>
+                  <Tab id="tab" styleClass="tab-label" text="Applicant Listing">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <BorderPane prefHeight="426.0" prefWidth="681.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <left>
+                                    <BorderPane prefHeight="551.0" prefWidth="517.0">
+                                       <center>
+                                          <TableView fx:id="tblOpenJobs" prefHeight="426.0" prefWidth="200.0">
+                                            <columns>
+                                              <TableColumn prefWidth="145.0" text="C1" />
+                                              <TableColumn prefWidth="87.0" text="C2" />
+                                                <TableColumn prefWidth="75.0" text="C2" />
+                                                <TableColumn prefWidth="75.0" text="C2" />
+                                            </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                          </TableView>
+                                       </center>
+                                    </BorderPane>
+                                 </left>
                                  <center>
-                                    <TableView fx:id="tblOpenJobs" prefHeight="426.0" prefWidth="200.0">
-                                      <columns>
-                                        <TableColumn prefWidth="145.0" text="C1" />
-                                        <TableColumn prefWidth="87.0" text="C2" />
-                                          <TableColumn prefWidth="75.0" text="C2" />
-                                          <TableColumn prefWidth="75.0" text="C2" />
-                                      </columns>
-                                       <columnResizePolicy>
-                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                       </columnResizePolicy>
-                                    </TableView>
+                                    <BorderPane>
+                                       <center>
+                                          <TableView fx:id="tblApplicantList" disable="true" prefHeight="426.0" prefWidth="481.0">
+                                            <columns>
+                                              <TableColumn prefWidth="75.0" text="C1" />
+                                              <TableColumn prefWidth="75.0" text="C2" />
+                                            </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                             <contextMenu>
+                                                <ContextMenu fx:id="contextMeuApp">
+                                                  <items>
+                                                    <MenuItem fx:id="menuItemView" mnemonicParsing="false" text="  View this Application">
+                                                         <graphic>
+                                                            <FontAwesomeIconView fill="#34a853" glyphName="EYE" />
+                                                         </graphic>
+                                                      </MenuItem>
+                                                  </items>
+                                                </ContextMenu>
+                                             </contextMenu>
+                                          </TableView>
+                                       </center>
+                                       <top>
+                                          <AnchorPane prefHeight="116.0" prefWidth="472.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Label fx:id="lbljobTitle" layoutX="14.0" layoutY="14.0" text="Job Title : Unselected" AnchorPane.leftAnchor="14.0">
+                                                   <font>
+                                                      <Font name="System Bold Italic" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lblNumApp" layoutX="14.0" layoutY="50.0" text="Number of applications : 0" />
+                                                <Label fx:id="lblnumViews" layoutX="14.0" layoutY="74.0" text="Number of views : 0" />
+                                                <JFXButton alignment="TOP_LEFT" graphicTextGap="6.0" layoutX="449.0" layoutY="15.0" onAction="#openWorkflowStages" prefHeight="25.0" prefWidth="153.0" styleClass="btn-primary" text="View Workflow Stages" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                                                   <graphic>
+                                                      <FontAwesomeIconView fill="WHITE" glyphName="COGS" />
+                                                   </graphic>
+                                                </JFXButton>
+                                             </children>
+                                          </AnchorPane>
+                                       </top>
+                                    </BorderPane>
                                  </center>
+                                 <top>
+                                    <AnchorPane prefHeight="21.0" prefWidth="1158.0" BorderPane.alignment="CENTER" />
+                                 </top>
                               </BorderPane>
-                           </left>
-                           <center>
-                              <BorderPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab id="tab" styleClass="tab-label" text="Applicant Archive">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <BorderPane prefHeight="572.0" prefWidth="1158.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <center>
-                                    <TableView fx:id="tblApplicantList" disable="true" prefHeight="426.0" prefWidth="481.0">
+                                    <TableView fx:id="tblArchive" prefHeight="517.0" prefWidth="893.0" BorderPane.alignment="CENTER">
                                       <columns>
                                         <TableColumn prefWidth="75.0" text="C1" />
                                         <TableColumn prefWidth="75.0" text="C2" />
@@ -50,72 +108,19 @@
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy>
-                                       <contextMenu>
-                                          <ContextMenu fx:id="contextMeuApp">
-                                            <items>
-                                              <MenuItem fx:id="menuItemView" mnemonicParsing="false" text="  View this Application">
-                                                   <graphic>
-                                                      <FontAwesomeIconView fill="#34a853" glyphName="EYE" />
-                                                   </graphic>
-                                                </MenuItem>
-                                            </items>
-                                          </ContextMenu>
-                                       </contextMenu>
                                     </TableView>
                                  </center>
                                  <top>
-                                    <AnchorPane prefHeight="116.0" prefWidth="472.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
-                                       <children>
-                                          <Label fx:id="lbljobTitle" layoutX="14.0" layoutY="14.0" text="Job Title : Unselected" AnchorPane.leftAnchor="14.0">
-                                             <font>
-                                                <Font name="System Bold Italic" size="18.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="lblNumApp" layoutX="14.0" layoutY="50.0" text="Number of applications : 0" />
-                                          <Label fx:id="lblnumViews" layoutX="14.0" layoutY="74.0" text="Number of views : 0" />
-                                          <JFXButton alignment="TOP_LEFT" graphicTextGap="6.0" layoutX="449.0" layoutY="15.0" onAction="#openWorkflowStages" prefHeight="25.0" prefWidth="153.0" styleClass="btn-primary" text="View Workflow Stages" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
-                                             <graphic>
-                                                <FontAwesomeIconView fill="WHITE" glyphName="COGS" />
-                                             </graphic>
-                                          </JFXButton>
-                                       </children>
-                                    </AnchorPane>
+                                    <AnchorPane prefHeight="59.0" prefWidth="893.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
                                  </top>
                               </BorderPane>
-                           </center>
-                           <top>
-                              <AnchorPane prefHeight="21.0" prefWidth="1158.0" BorderPane.alignment="CENTER" />
-                           </top>
-                        </BorderPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab id="tab" styleClass="tab-label" text="Applicant Archive">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <BorderPane prefHeight="572.0" prefWidth="1158.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <center>
-                              <TableView fx:id="tblArchive" prefHeight="517.0" prefWidth="893.0" BorderPane.alignment="CENTER">
-                                <columns>
-                                  <TableColumn prefWidth="75.0" text="C1" />
-                                  <TableColumn prefWidth="75.0" text="C2" />
-                                </columns>
-                                 <columnResizePolicy>
-                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                 </columnResizePolicy>
-                              </TableView>
-                           </center>
-                           <top>
-                              <AnchorPane prefHeight="59.0" prefWidth="893.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
-                           </top>
-                        </BorderPane>
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-         </tabs>
-      </JFXTabPane>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>

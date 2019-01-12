@@ -11,8 +11,6 @@ import FXMLS.HR1.ClassFiles.TableModel_jLimit;
 import FXMLS.HR1.ClassFiles.TableModel_jPosted;
 import Model.HR1.JobPosting;
 import Model.HR1.JobVacancy;
-import Synapse.Components.Modal.Modal;
-import Synapse.Form;
 import Synapse.Model;
 import Synapse.Session;
 import Synapse.SysDialog;
@@ -23,11 +21,9 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -35,14 +31,13 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -50,9 +45,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
 import javafx.util.Callback;
 
 /**
@@ -116,7 +109,7 @@ public class HR1_RecruitmentController implements Initializable {
         tblOpenJobs.setOnMouseClicked(e -> tableMouseEvent(e));
 
         menuPost.setOnAction(event -> {
-            this.viewModalPostJob();
+           this.viewModalPostJob(tblOpenJobs.getSelectionModel().getSelectedItem());
         });
 
         txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -187,14 +180,39 @@ public class HR1_RecruitmentController implements Initializable {
         btnAction.setCellFactory(new Callback<TableColumn<TableModel_jLimit, Boolean>, TableCell<TableModel_jLimit, Boolean>>() {
             @Override
             public TableCell<TableModel_jLimit, Boolean> call(TableColumn<TableModel_jLimit, Boolean> param) {
-                
-                MenuItem PostJob = new MenuItem("Post this Job");
-                FontAwesomeIconView f = new FontAwesomeIconView(FontAwesomeIcon.PAPER_PLANE_ALT);
-                f.getStyleClass().add("fontIconMenu");
-                PostJob.setGraphic(f);
-                PostJob.setOnAction(event -> viewModalPostJob());
-                
-                return new Synapse.Components.MenuButtonCell<TableModel_jLimit>().create("Actions", PostJob);
+
+                //return new Synapse.Components.MenuButtonCell<TableModel_jLimit>().create("Actions", PostJob);
+                return new TableCell<TableModel_jLimit, Boolean>() {
+
+                    FontAwesomeIconView f = new FontAwesomeIconView(FontAwesomeIcon.COGS);
+                    private final MenuButton btn = new MenuButton("Actions", f);
+
+                    {
+                        f.getStyleClass().add("fontIconTable");
+                        btn.getStyleClass().add("btnTable");
+
+                        MenuItem PostJob = new MenuItem("Post this Job");
+                        FontAwesomeIconView fx = new FontAwesomeIconView(FontAwesomeIcon.PAPER_PLANE_ALT);
+                        fx.getStyleClass().add("fontIconMenu");
+                        PostJob.setGraphic(fx);
+                        PostJob.setOnAction(event -> {
+                            TableModel_jLimit jLimit = (TableModel_jLimit) getTableRow().getItem();
+                            viewModalPostJob(jLimit);
+                        });
+
+                        btn.getItems().add(PostJob);
+
+                    }
+
+                    @Override
+                    protected void updateItem(Boolean t, boolean empty) {
+                        super.updateItem(t, empty);
+                        if (!empty) {
+                            setGraphic(btn);
+                        }
+                    }
+
+                };
             }
         });
 
@@ -343,15 +361,15 @@ public class HR1_RecruitmentController implements Initializable {
 
     @FXML
     private void btnPostAJob(ActionEvent event) {
-        this.viewModalPostJob();
+        this.viewModalPostJob(tblOpenJobs.getSelectionModel().getSelectedItem());
     }
 
-    public void viewModalPostJob() {
-        if (!tblOpenJobs.getSelectionModel().getSelectedItem().status.getValue().equals("Posted")) {
-            HR1_PostJobSelection.id = tblOpenJobs.getSelectionModel().getSelectedItem().id.getValue();
-            HR1_PostJobSelection.jobID = tblOpenJobs.getSelectionModel().getSelectedItem().job_id.getValue();
-            HR1_PostJobSelection.jobTitle = tblOpenJobs.getSelectionModel().getSelectedItem().job_title.getValue();
-            HR1_PostJobSelection.OpenPos = tblOpenJobs.getSelectionModel().getSelectedItem().job_open.getValue();
+    public void viewModalPostJob(TableModel_jLimit j) {
+        if (!j.status.getValue().equals("Posted")) {
+            HR1_PostJobSelection.id = j.id.getValue();
+            HR1_PostJobSelection.jobID = j.job_id.getValue();
+            HR1_PostJobSelection.jobTitle = j.job_title.getValue();
+            HR1_PostJobSelection.OpenPos = j.job_open.getValue();
 
             try {
                 AnchorPane spx = FXMLLoader.load(getClass().getResource("/FXMLS/HR1/Modals/HR1_PostJob.fxml"));
@@ -369,16 +387,25 @@ public class HR1_RecruitmentController implements Initializable {
     }
 
     public void viewModalEditJob() {
-        TableModel_jPosted tb = tblPostingJobs.getSelectionModel().getSelectedItem();
-        HR1_EditJobSelection.id = tb.id.getValue();
-        HR1_EditJobSelection.jPosted = tb.jPosted_id.getValue();
-        HR1_EditJobSelection.salary = tb.salary.getValue();
-        HR1_EditJobSelection.status = tb.status.getValue();
-        HR1_EditJobSelection.publish_on = tb.publish_on.getValue();
-        HR1_EditJobSelection.until = tb.until.getValue();
-        HR1_EditJobSelection.title = tb.job_title.getValue();
-        Modal md = Modal.getInstance(new Form("/FXMLS/HR1/Modals/HR1_EditPost.fxml").getParent());
-        md.open();
+        try {
+            TableModel_jPosted tb = tblPostingJobs.getSelectionModel().getSelectedItem();
+            HR1_EditJobSelection.id = tb.id.getValue();
+            HR1_EditJobSelection.jPosted = tb.jPosted_id.getValue();
+            HR1_EditJobSelection.salary = tb.salary.getValue();
+            HR1_EditJobSelection.status = tb.status.getValue();
+            HR1_EditJobSelection.publish_on = tb.publish_on.getValue();
+            HR1_EditJobSelection.until = tb.until.getValue();
+            HR1_EditJobSelection.title = tb.job_title.getValue();
+
+            AnchorPane spx = FXMLLoader.load(getClass().getResource("/FXMLS/HR1/Modals/HR1_EditPost.fxml"));
+            SysDialog dialog = new SysDialog();
+            dialog.showDialog(spane, JFXDialog.DialogTransition.BOTTOM, (Node) spx, new JFXButton(""));
+
+//        Modal md = Modal.getInstance(new Form("/FXMLS/HR1/Modals/HR1_EditPost.fxml").getParent());
+//        md.open();
+        } catch (IOException ex) {
+            Logger.getLogger(HR1_RecruitmentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML

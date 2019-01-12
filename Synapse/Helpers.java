@@ -44,7 +44,7 @@ public class Helpers {
             if(i == (cols.length - 1)) {
                 final_string += cols[i];
             }else{
-                final_string += cols[i] + separator + " ";
+                final_string += cols[i] + separator;
             }
         }
         

@@ -46,6 +46,7 @@ public class Modal {
         this.f = new Form("/Synapse/Components/Modal/Modal.fxml");
         this.f.getStage().initModality(Modality.APPLICATION_MODAL);
         this.f.open(StageStyle.UTILITY);
+        this.f.getStage().setAlwaysOnTop(false);
         this.f.getStage().resizableProperty().set(false);
         
     }

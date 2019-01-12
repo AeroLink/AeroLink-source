@@ -63,7 +63,8 @@ public class Session implements IModule {
     
     //Database
     public static iDB INSTANCE;
-
+    public static Boolean isConnected = false;
+    
     // static vars
     public static String Ip = "localhost";
     public static String Port = "3306";
@@ -72,6 +73,11 @@ public class Session implements IModule {
     public static String Password = "";
     public static String schema = "";
     public static String provider = "";
+    
+    //API
+    public static String HttpURL = "";
+    public static String token = "";
+    public static String sestoken = "";
     
     public static String[][] links;
     

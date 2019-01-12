@@ -124,7 +124,7 @@ public class HR1_PostJobController implements Initializable {
             int id = jp.insert(new Object[][]{
                 {"jobPosted_id", HR1_PostJobSelection.id},
                 {"title", lblJob.getText()},
-                {"description", txtDesc.getHtmlText()},
+                {"description", txtDesc.getHtmlText().replace("\"", "'")},
                 {"status", cboStatus.getSelectionModel().getSelectedItem().toString()},
                 {"salary", txtSalary.getText()},
                 {"publish_on", dtpPublish.getValue().toString()},

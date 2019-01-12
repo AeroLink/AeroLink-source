@@ -31,25 +31,23 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class HR3_Timesheet_ManagementController implements Initializable {
 
     @FXML
-    private TableView<TimeSheetTable> tbl_timesheet;
+    private TableView<?> tbl_timesheet;
     @FXML
-    private TableColumn<TimeSheetTable , String> tbl_ID;
+    private TableColumn<?,?> tbl_ID;
     @FXML
-    private TableColumn<TimeSheetTable , String> tbl_Emp_Name;
+    private TableColumn<?,?> tbl_Emp_Name;
     @FXML
-    private TableColumn<TimeSheetTable , String> tbl_Position;
+    private TableColumn<?,?> tbl_Position;
     @FXML
-    private TableColumn<TimeSheetTable , String> tbl_Depart;
+    private TableColumn<?,?> tbl_Date;
     @FXML
-    private TableColumn<TimeSheetTable , String> tbl_Date;
+    private TableColumn<?,?> tbl_Total;
     @FXML
-    private TableColumn<TimeSheetTable , String> tbl_Total;
+    private TableColumn<?,?> tbl_Absent;
     @FXML
-    private TableColumn<TimeSheetTable , String> tbl_Absent;
+    private TableColumn<?,?> tbl_undertime;
     @FXML
-    private TableColumn<TimeSheetTable , String> tbl_undertime;
-    @FXML
-    private TableColumn<TimeSheetTable , String> tbl_overtime;
+    private TableColumn<?,?> tbl_overtime;
     @FXML
     private JFXTextField txt_ID;
     @FXML
@@ -66,37 +64,31 @@ public class HR3_Timesheet_ManagementController implements Initializable {
     private JFXTextField txt_search;
     @FXML
     private Button btn_record;
+    @FXML
+    private TableView<?> tbl_dailyreport;
+    @FXML
+    private TableColumn<?, ?> tbl_id;
+    @FXML
+    private TableColumn<?, ?> tbl_date;
+    @FXML
+    private TableColumn<?, ?> tbl_timein;
+    @FXML
+    private TableColumn<?, ?> tbl_timeout;
+    @FXML
+    private TableColumn<?, ?> tbl_total;
+    @FXML
+    private TableColumn<?, ?> tbl_balance;
 
-    ObservableList<TimeSheetTable> oblist = FXCollections.observableArrayList();
+    
    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-         try{
-             Connection CONNECTION = DBConnector.getConnection();
-             ResultSet rs = CONNECTION.createStatement().executeQuery("Select * from tbl_hr3_timesheet");
-    
-             while (rs.next()){
-                 oblist.add(new TimeSheetTable(rs.getString("ID"),rs.getString("Emp_Name"),rs.getString("Position"),rs.getString("Department"),rs.getString("Date"),rs.getString("Total_Hours"),rs.getString("Absent"),rs.getString("Undertime"),rs.getString("Overtime")));
-             }
-            }catch(SQLException ex){
-                    Logger.getLogger(HR3_Timesheet_ManagementController.class.getName()).log(Level.SEVERE, null, ex);
-}
+    }
 
         
         
         
-      tbl_ID.setCellValueFactory(new PropertyValueFactory<>("ID"));
-      tbl_Emp_Name.setCellValueFactory(new PropertyValueFactory<>("Emp_Name"));
-      tbl_Position.setCellValueFactory(new PropertyValueFactory<>("Position"));
-      tbl_Depart.setCellValueFactory(new PropertyValueFactory<>("Department"));
-      tbl_Date.setCellValueFactory(new PropertyValueFactory<>("Date"));
-      tbl_Total.setCellValueFactory(new PropertyValueFactory<>("Total_Hours"));
-      tbl_Absent.setCellValueFactory(new PropertyValueFactory<>("Absent"));
-      tbl_undertime.setCellValueFactory(new PropertyValueFactory<>("Undertime"));
-      tbl_overtime.setCellValueFactory(new PropertyValueFactory<>("Overtime"));
-          
-    tbl_timesheet.setItems(oblist);
-    }    
+     
     
     
 }

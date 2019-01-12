@@ -8,7 +8,6 @@ package FXMLS.HR1;
 import FXMLS.HR1.ClassFiles.HR1_Applicant;
 import FXMLS.HR1.ClassFiles.TableModel_Applicants;
 import FXMLS.HR1.ClassFiles.TableModel_PostedJob;
-import FXMLS.HR1.Modals.HR1_ViewApplicantController;
 import Model.HR1.HR1_Applicants;
 import Model.HR1.JobPosting;
 import Synapse.Components.Modal.Modal;
@@ -74,7 +73,7 @@ public class HR1_Applicant_ManagementController implements Initializable {
         this.PopulateTable();
         this.renderApplicants();
         this.RenderArchive();
-        
+
         tblApplicantList.setContextMenu(contextMeuApp);
 
         tblOpenJobs.setOnKeyReleased(value -> {
@@ -126,7 +125,6 @@ public class HR1_Applicant_ManagementController implements Initializable {
         Modal md = Modal.getInstance(new Form("/FXMLS/HR1/Modals/HR1_ViewApplicant.fxml").getParent());
         md.open();
         md.getF().getStage().setOnCloseRequest(event -> this.renderApplicants());
-        
 
     }
 

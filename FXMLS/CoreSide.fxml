@@ -414,7 +414,7 @@
                                                 <AnchorPane prefHeight="4.0" prefWidth="266.0" />
                                                 <AnchorPane>
                                                    <children>
-                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Leave Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Leave Management" id="hr3lm" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <graphic>
                                                             <FontAwesomeIconView fill="#34a853" glyphName="CALENDAR" size="25" strokeType="INSIDE" />
                                                          </graphic>

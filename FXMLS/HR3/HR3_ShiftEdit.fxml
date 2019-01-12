@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="571.0" prefWidth="951.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="12.0" layoutY="14.0" prefHeight="539.0" prefWidth="927.0" style="-fx-background-color: #00b359;">
+         <children>
+            <Label layoutX="73.0" layoutY="50.0" text="Monday" textFill="WHITE">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <Label layoutX="73.0" layoutY="143.0" text="Tuesday" textFill="WHITE">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <Label layoutX="73.0" layoutY="234.0" text="Wednesday" textFill="WHITE">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <Label layoutX="73.0" layoutY="324.0" text="Thursday" textFill="WHITE">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <Label layoutX="73.0" layoutY="420.0" text="Friday" textFill="WHITE">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="csmin" layoutX="269.0" layoutY="52.0" prefHeight="30.0" prefWidth="186.0" promptText="Select Time-In" />
+            <ComboBox fx:id="cstin" layoutX="269.0" layoutY="147.0" prefHeight="30.0" prefWidth="186.0" promptText="Select Time-In" />
+            <ComboBox fx:id="cswin" layoutX="269.0" layoutY="238.0" prefHeight="30.0" prefWidth="186.0" promptText="Select Time-In" />
+            <ComboBox fx:id="csthin" layoutX="269.0" layoutY="328.0" prefHeight="30.0" prefWidth="186.0" promptText="Select Time-In" />
+            <ComboBox fx:id="csfin" layoutX="269.0" layoutY="424.0" prefHeight="30.0" prefWidth="186.0" promptText="Select Time-In" />
+            <ComboBox fx:id="csmout" layoutX="489.0" layoutY="52.0" prefHeight="30.0" prefWidth="186.0" promptText="Select Time-Out" />
+            <ComboBox fx:id="cstout" layoutX="489.0" layoutY="147.0" prefHeight="30.0" prefWidth="186.0" promptText="Select Time-Out" />
+            <ComboBox fx:id="cswout" layoutX="489.0" layoutY="238.0" prefHeight="30.0" prefWidth="186.0" promptText="Select Time-Out" />
+            <ComboBox fx:id="csthout" layoutX="489.0" layoutY="328.0" prefHeight="30.0" prefWidth="186.0" promptText="Select Time-Out" />
+            <ComboBox fx:id="csfout" layoutX="489.0" layoutY="424.0" prefHeight="30.0" prefWidth="186.0" promptText="Select Time-Out" />
+            <ComboBox fx:id="csmbt" layoutX="704.0" layoutY="52.0" prefHeight="30.0" prefWidth="186.0" promptText="Select Break-Time" />
+            <ComboBox fx:id="cstbt" layoutX="704.0" layoutY="147.0" prefHeight="30.0" prefWidth="186.0" promptText="Select Break-Time" />
+            <ComboBox fx:id="cswbt" layoutX="704.0" layoutY="238.0" prefHeight="30.0" prefWidth="186.0" promptText="Select Break-Time" />
+            <ComboBox fx:id="csthbt" layoutX="704.0" layoutY="328.0" prefHeight="30.0" prefWidth="186.0" promptText="Select Break-Time" />
+            <ComboBox fx:id="csfbt" layoutX="704.0" layoutY="424.0" prefHeight="30.0" prefWidth="186.0" promptText="Select Break-Time" />
+            <Label layoutX="342.0" layoutY="88.0" text="Time-In" textFill="WHITE" />
+            <Label layoutX="342.0" layoutY="181.0" text="Time-In" textFill="WHITE" />
+            <Label layoutX="342.0" layoutY="272.0" text="Time-In" textFill="WHITE" />
+            <Label layoutX="342.0" layoutY="362.0" text="Time-In" textFill="WHITE" />
+            <Label layoutX="342.0" layoutY="458.0" text="Time-In" textFill="WHITE" />
+            <Label layoutX="557.0" layoutY="88.0" text="Time-Out" textFill="WHITE" />
+            <Label layoutX="557.0" layoutY="181.0" text="Time-Out" textFill="WHITE" />
+            <Label layoutX="557.0" layoutY="272.0" text="Time-Out" textFill="WHITE" />
+            <Label layoutX="557.0" layoutY="362.0" text="Time-Out" textFill="WHITE" />
+            <Label layoutX="557.0" layoutY="458.0" text="Time-Out" textFill="WHITE" />
+            <Label layoutX="767.0" layoutY="88.0" text="Break-Time" textFill="RED" />
+            <Label layoutX="767.0" layoutY="181.0" text="Break-Time" textFill="RED" />
+            <Label layoutX="767.0" layoutY="272.0" text="Break-Time" textFill="RED" />
+            <Label layoutX="767.0" layoutY="362.0" text="Break-Time" textFill="RED" />
+            <Label layoutX="767.0" layoutY="458.0" text="Break-Time" textFill="RED" />
+            <Line endX="747.0" layoutX="143.0" layoutY="118.0" startX="-116.0" stroke="WHITE" />
+            <Line endX="747.0" layoutX="142.0" layoutY="208.0" startX="-116.0" stroke="WHITE" />
+            <Line endX="747.0" layoutX="139.0" layoutY="297.0" startX="-116.0" stroke="WHITE" />
+            <Line endX="747.0" layoutX="143.0" layoutY="391.0" startX="-116.0" stroke="WHITE" />
+            <Line endX="747.0" layoutX="143.0" layoutY="490.0" startX="-116.0" stroke="WHITE" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

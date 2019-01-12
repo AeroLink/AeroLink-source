@@ -91,13 +91,13 @@ public class HR1_EditJobController implements Initializable {
         cboStatus.getSelectionModel().select(HR1_EditJobSelection.status);
 
     }
- 
+
     @FXML
     private void submitPost(ActionEvent event) {
         JobPosting jp = new JobPosting();
 
         if (jp.update(new Object[][]{
-            {"description", txtDesc.getHtmlText()},
+            {"description", txtDesc.getHtmlText().replace("\"", "'").replace(",", ".")},
             {"status", cboStatus.getSelectionModel().getSelectedItem().toString()},
             {"salary", txtSalary.getText()},
             {"publish_on", dtpPublish.getValue().toString()},
@@ -108,28 +108,28 @@ public class HR1_EditJobController implements Initializable {
             Helpers.EIS_Response.SuccessResponse("Success", lblJob.getText() + " post was updated");
         }
 
-        ( (Stage) ( (Node) event.getSource() ).getScene().getWindow() ).close();
+        //( (Stage) ( (Node) event.getSource() ).getScene().getWindow() ).close();
     }
 
     @FXML
     private void closeJob(ActionEvent event) {
         JobPosting jp = new JobPosting();
 
-        jp.delete().where(new Object[][]{
+        jp.where(new Object[][]{
             {"id", "=", HR1_EditJobSelection.id}
-        }).executeUpdate();
+        }).delete().executeUpdate();
 
         HR4_JobLimits jL = new HR4_JobLimits();
 
-        jL.update(new Object[][]{
-            {"isPosted", 0}
-        }).where(new Object[][]{
+        jL.where(new Object[][]{
             {"id", "=", HR1_EditJobSelection.jPosted}
+        }).update(new Object[][]{
+            {"isPosted", 0}
         }).executeUpdate();
 
-        Helpers.EIS_Response.SuccessResponse("Success", "Job was successfully Posted");
-        
-        ( (Stage) ( (Node) event.getSource() ).getScene().getWindow() ).close();
+        Helpers.EIS_Response.SuccessResponse("Success", "Job was successfully Close and unposted");
+
+        //( (Stage) ( (Node) event.getSource() ).getScene().getWindow() ).close();
     }
 
 }

@@ -27,11 +27,7 @@ public class Bootstrap {
         
         Session.ModularPermission = ModularPermissionConfig.modules;
         
-        Session.Database = DatabaseConfig.DATABASE;
-        Session.Ip = DatabaseConfig.IP;
-        Session.Password = DatabaseConfig.PASSWORD;
-        Session.Port = DatabaseConfig.PORT;
-        Session.User = DatabaseConfig.USER;
+        Session.HttpURL = DatabaseConfig.HttpURL;
         Session.schema = DatabaseConfig.schema;
         Session.provider = DatabaseConfig.PROVIDER;
         

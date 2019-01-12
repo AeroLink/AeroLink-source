@@ -85,9 +85,10 @@ public class Form {
         Scene s = new Scene(this.parent);
 
         if (isFullScreen) {
-            this.stage.setFullScreen(true);
+            //this.stage.setFullScreen(true);
+            this.stage.setMaximized(true);
             this.stage.fullScreenExitKeyProperty().setValue(KeyCombination.NO_MATCH);
-            this.stage.setAlwaysOnTop(true);
+            this.stage.setAlwaysOnTop(false);
         }
 
         this.stage.initStyle(stageSytle);

@@ -33,6 +33,7 @@ public class MenuButtonCell<rt extends RecursiveTreeObject> {
             f.getStyleClass().add("fontIconTable");
             this.btn = new MenuButton(btnName, f, items);
             this.btn.getStyleClass().add("btnTable");
+            
         }
         
         @Override
