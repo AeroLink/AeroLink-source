@@ -84,9 +84,11 @@ public class HR2_Learning_ManagementController implements Initializable {
         DisplayDataInJTable();
         // populateExam();
         DisplayExamInTable();
-        tbl_courses.getSelectionModel().selectedItemProperty().addListener(listener -> {
+        tbl_courses.getSelectionModel().selectFirst();
+        tbl_courses.setOnMouseClicked(e-> {
             populateExam();
         });
+        
         loadJobsInComboBox();
 
         /*    if(!cbox_job_title.getValue().toString().isEmpty()){
@@ -117,13 +119,13 @@ public class HR2_Learning_ManagementController implements Initializable {
         try {
             //tbl courses
             HR2_Courses c = new HR2_Courses();
-            
-                  List courses = c.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
-                                .where(new Object[][]{{"aerolink.tbl_hr2_courses.isDeleted", "<>", "1"}})
-                                .get("aerolink.tbl_hr2_courses.course_id", "j.title as job_title");
-                        Data(courses);
 
-           /* CompletableFuture.supplyAsync(() -> {
+            List courses = c.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
+                    .where(new Object[][]{{"aerolink.tbl_hr2_courses.isDeleted", "<>", "1"}})
+                    .get("aerolink.tbl_hr2_courses.course_id", "j.title as job_title");
+            Data(courses);
+
+            /* CompletableFuture.supplyAsync(() -> {
                 while (Session.CurrentRoute.equals("learning_management")) {
                     c.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(row -> {
                         DummyCount = Long.parseLong(((HashMap) row).get("chk").toString());
@@ -145,7 +147,6 @@ public class HR2_Learning_ManagementController implements Initializable {
 
                 return 0;
             }, Session.SessionThreads);*/
-
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -179,34 +180,13 @@ public class HR2_Learning_ManagementController implements Initializable {
             //tbl courses
             HR2_Examination exam = new HR2_Examination();
 
-            CompletableFuture.supplyAsync(() -> {
-                while (Session.CurrentRoute.equals("learning_management")) {
-                    exam.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(row -> {
-                        DummyCount = Long.parseLong(((HashMap) row).get("chk").toString());
-                    });
-
-                    if (DummyCount != GlobalCount) {
-
-                        List e = exam.join(Model.JOIN.INNER, "aerolink.tbl_hr2_courses", "course_id", "c", "=", "course_id")
-                                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "c", "job_id", true)
-                                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "ep", "=", "id")
-                                .where(new Object[][]{{"aerolink.tbl_hr2_examination.isDeleted", "<>", "1"}})
-                                .get("aerolink.tbl_hr2_examination.exam_id", "aerolink.tbl_hr2_examination.exam_name", "aerolink.tbl_hr2_examination.exam_desc",
-                                        "CONCAT(ep.firstname,' ',ep.middlename,' ',ep.lastname)as Created_by");
-                        Exam(e);
-
-                        GlobalCount = DummyCount;
-                    }
-
-                    try {
-                        Thread.sleep(3000);
-                    } catch (InterruptedException ex) {
-                        //Logger.getLogger(HR2_Competency_ManagementController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-
-                return 0;
-            }, Session.SessionThreads);
+            List e = exam.join(Model.JOIN.INNER, "aerolink.tbl_hr2_courses", "course_id", "c", "=", "course_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "c", "job_id", true)
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "ep", "=", "id")
+                    .where(new Object[][]{{"c.course_id", "=", tbl_courses.getSelectionModel().getSelectedItem().course_id.getValue()}, {"aerolink.tbl_hr2_examination.isDeleted", "<>", "1"}})
+                    .get("aerolink.tbl_hr2_examination.exam_id", "aerolink.tbl_hr2_examination.exam_name", "aerolink.tbl_hr2_examination.exam_desc",
+                            "CONCAT(ep.firstname,' ',ep.middlename,' ',ep.lastname)as Created_by");
+            Exam(e);
 
         } catch (Exception e) {
             System.out.println(e);
@@ -271,9 +251,12 @@ public class HR2_Learning_ManagementController implements Initializable {
                         try {
                             btn.setOnAction(e
                                     -> {
+
+                                HR2_CoursesClass fc = (HR2_CoursesClass) getTableRow().getItem();
+
                                 HR2_LM_CourseOutlineModal.courseOutline(
-                                        tbl_courses.getSelectionModel().getSelectedItem().course_id.get(),
-                                        tbl_courses.getSelectionModel().getSelectedItem().job_title.get());
+                                        fc.course_id.getValue(),
+                                        fc.job_title.getValue());
                                 Modal lq = Modal.getInstance(new Form("/FXMLS/HR2/Modals/LM_CourseOutline.fxml").getParent());
                                 lq.open();
                             });

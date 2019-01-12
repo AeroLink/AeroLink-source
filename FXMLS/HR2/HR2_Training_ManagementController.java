@@ -281,7 +281,7 @@ public class HR2_Training_ManagementController implements Initializable {
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr2_type_of_training ", "type_of_training_id", "t_type", "=", "type_of_training_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_log2_vehicle_status ", "vehicle_id", "v", "=", "vehicle_id")
                 .where(new Object[][]{{"aerolink.tbl_hr2_training_info.status", "<>", "0"}})
-                .get("job_position", "training_title", "training_description", "CONCAT(employees.firstname, ' ' ,employees.middlename, ' ',\n"
+                .get("job_position", "training_title", "training_description", "CONCAT(employees.firstname, ' ' ,employees.middlename, ' ',"
                         + "employees.lastname)as trainor", "start_date", "end_date", "start_time", "end_time", "t_type.type_of_training",
                         "location", "v.vehicle", "budget_cost");
         Data(training_data);
@@ -298,7 +298,7 @@ public class HR2_Training_ManagementController implements Initializable {
                     .join(Model.JOIN.INNER, "aerolink.tbl_log2_vehicle_status ", "vehicle_id", "v", "=", "vehicle_id")
                     .where(new Object[][]{{"job_position", "like", "%" + txt_search_training.getText() + "%"},
             {"aerolink.tbl_hr2_training_info.status", "<>", "0"}})
-                    .get("job_position", "training_title", "training_description", "CONCAT(employees.firstname, ' ' ,employees.middlename, ' ',\n"
+                    .get("job_position", "training_title", "training_description", "CONCAT(employees.firstname, ' ' ,employees.middlename, ' ',"
                             + "employees.lastname)as trainor", "start_date", "end_date", "start_time", "end_time", "t_type.type_of_training",
                             "location", "v.vehicle", "budget_cost");
             Data(training_data1);
@@ -341,7 +341,7 @@ public class HR2_Training_ManagementController implements Initializable {
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr2_type_of_training ", "type_of_training_id", "t_type", "=", "type_of_training_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_log2_vehicle_status ", "vehicle_id", "v", "=", "vehicle_id")
                 .where(new Object[][]{{"aerolink.tbl_hr2_training_info.status", "=", "0"}})
-                .get("job_position", "training_title", "training_description", "CONCAT(employees.firstname, ' ' ,employees.middlename, ' ',\n"
+                .get("job_position", "training_title", "training_description", "CONCAT(employees.firstname, ' ' ,employees.middlename, ' ',"
                         + "employees.lastname)as trainor", "start_date", "end_date", "start_time", "end_time", "t_type.type_of_training",
                         "location", "v.vehicle", "budget_cost");
         ht(training_data);
