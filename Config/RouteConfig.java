@@ -13,6 +13,7 @@ package Config;
 public class RouteConfig {
 
     public static String[][] links = {
+        //test
         {"Main", "/FXMLS/MainDash.fxml", "canAccessSystem"},
         
         //FINANCIALS
