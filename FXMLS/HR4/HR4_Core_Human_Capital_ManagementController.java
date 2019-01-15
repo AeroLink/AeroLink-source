@@ -5,37 +5,61 @@
  */
 package FXMLS.HR4;
 
+import FXMLS.HR4.ClassFiles.HR4_EmpInfoClass;
+import FXMLS.HR4.Model.HR4_EmployeeInfo;
 import FXMLS.HR4.ClassFiles.HR4_MIZ;
 import FXMLS.HR4.ClassFiles.TableModel_Jobs;
+import FXMLS.HR4.Model.HR4_ClassificationModel;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import Model.HR4_Jobs;
+import FXMLS.HR4.Model.HR4_Jobs;
+import FXMLS.HR4.Model.HR4_Status;
 import Synapse.Components.Modal.Modal;
 import Synapse.Form;
 import Synapse.Model;
+import Synapse.Session;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
-import javafx.beans.value.ChangeListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -51,17 +75,26 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
 
     @FXML
     private ContextMenu contextMenuJobs;
-
     ObservableList<TableModel_Jobs> obj = FXCollections.observableArrayList();
+    ObservableList<HR4_EmpInfoClass> obj1 = FXCollections.observableArrayList();
     int Global_Count = 0;
-
     ExecutorService e = Executors.newFixedThreadPool(1);
-
     HR4_Jobs jobs = new HR4_Jobs();
+    HR4_EmployeeInfo emp = new HR4_EmployeeInfo();
+
     @FXML
-    private JFXTextField txtSearch;
+    private JFXButton btnNewDept;
     @FXML
-    private JFXButton btnSearch;
+    private JFXTextField Search_Job;
+    @FXML
+    private TableView<HR4_EmpInfoClass> tbl_chc;
+    @
+            FXML
+    private ComboBox statcb;
+    @FXML
+    private ComboBox ckasscb;
+    @FXML
+    private JFXTextField srch1;
 
     /**
      * Initializes the controller class.
@@ -69,22 +102,78 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO -> TRYING TO ENTER THE QUANTUM REALM (https://youtu.be/nN6VR92V70M)
-
-        obj.addListener((ListChangeListener.Change<? extends Object> c) -> {
-            tbl_jobs.setItems(obj);
+        //For Jobs
+        weabo();
+        weabo1();
+        statcb.getSelectionModel().selectedItemProperty().addListener(listener -> {
+            DummyCount = 0;
+            GlobalCount = 0;
+            
+        });
+        ckasscb.getSelectionModel().selectedItemProperty().addListener(listener -> {
+            DummyCount = 0;
+            GlobalCount = 0;
         });
 
         this.generateTable();
         this.populateTable();
+
+        tbl_jobs.setContextMenu(contextMenuJobs);
+        //SearchOfJob
+        obj.addListener((ListChangeListener.Change<? extends Object> c) -> {
+            tbl_jobs.setItems(obj);
+        });
         tbl_jobs.setContextMenu(contextMenuJobs);
 
-        txtSearch.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-            search();
+        Search_Job.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            SearchJOB();
         });
-        btnSearch.setOnMouseClicked(event -> search());
+        Search_Job.setOnMouseClicked(event -> SearchJOB());
+        ///////2ndobj
+        
+        obj1.addListener((ListChangeListener.Change<? extends Object> c) -> {
+            tbl_chc.setItems(obj1);
+        });
+        
+        srch1.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            Search();
+        });
+        srch1.setOnMouseClicked(event -> Search());
+
+        this.generateTable1();
+        this.populateTable1();
+
+    }
+    public void weabo1() {
+        HR4_ClassificationModel cc = new HR4_ClassificationModel();
+        try {
+            List bo2 = cc.get();
+            for (Object bo : bo2) {
+                HashMap ka = (HashMap) bo;
+                ckasscb.getItems().add(ka.get("class_name"));
+            }
+
+            ckasscb.getSelectionModel().selectFirst();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    public void weabo() {
+        HR4_Status st = new HR4_Status();
+        try {
+            List bo2 = st.get();
+            for (Object bo : bo2) {
+                HashMap ka = (HashMap) bo;
+                statcb.getItems().add(ka.get("status_name"));
+            }
+
+            statcb.getSelectionModel().selectFirst();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
-    public void search() {
+    public void SearchJOB() {
 
         tbl_jobs.getItems().clear();
         List rs = jobs
@@ -92,23 +181,41 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
                 .join(Model.JOIN.LEFT, "aerolink.tbl_hr4_job_classifications", "id", "tblC", "=", "classification_id")
                 .join(Model.JOIN.LEFT, "aerolink.tbl_hr4_job_designations", "id", "tblDD", "=", "designation_id")
                 .where(new Object[][]{
-            {"aerolink.tbl_hr4_jobs.title", "like", "%" + txtSearch.getText() + "%"}
+            {"aerolink.tbl_hr4_jobs.title", "like", "%" + Search_Job.getText() + "%"}
         })
-                .get("job_id",
+                .get(
                         "title",
                         "description",
-                        "CONCAT(tblD.id, ' - ', tblD.dept_name) as department",
-                        "CONCAT(tblC.id, ' - ', tblC.class_name) as classification",
-                        "CONCAT(tblDD.id, ' - ', tblDD.designation) as designation");
+                        "tblD.dept_name as department",
+                        "tblC.class_name as classification",
+                        "tblDD.designation as designation");
         this.AddJobToTable(rs);
+    }
+    
+    public void Search() {
+
+        tbl_chc.getItems().clear();
+        List rs = emp
+                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "tblDD", "=", "employee_code")
+                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_jobs", "employee_code", "tblD", "=", "employee_code")
+                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "tblD", "job_id", true)
+                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "=", "aerolink.tbl_hr4_jobs", "dept_id", true)
+                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employeeStatus", "status_id", "st", "=", "status_id")
+                .where(new Object[][]{{"tblDD.lastname", "like", "%" + srch1.getText() + "%"}
+        })  
+                .get(
+                        "tblD.employee_code",
+                        "CONCAT(tblDD.lastname,', ',tblDD.firstname,' ',tblDD.middlename,'.') as fnn",
+                        "aerolink.tbl_hr4_jobs.title as job_id",
+                        "aerolink.tbl_hr4_department.dept_name as dept_id",
+                        "st.status_name as status_id");
+        this.AddJobToTable1(rs);
     }
 
     public void generateTable() {
 
         tbl_jobs.getItems().clear();
         tbl_jobs.getColumns().removeAll(tbl_jobs.getColumns());
-
-        TableColumn<TableModel_Jobs, String> id = new TableColumn<>("ID");
         TableColumn<TableModel_Jobs, String> title = new TableColumn<>("Title");
         TableColumn<TableModel_Jobs, String> description = new TableColumn<>("Description");
         TableColumn<TableModel_Jobs, String> department = new TableColumn<>("Department");
@@ -116,7 +223,6 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         TableColumn<TableModel_Jobs, String> designation = new TableColumn<>("Designation");
 
         //<editor-fold defaultstate="collapsed" desc="Cell value factories">
-        id.setCellValueFactory((TableColumn.CellDataFeatures<TableModel_Jobs, String> param) -> param.getValue().id);
         title.setCellValueFactory((TableColumn.CellDataFeatures<TableModel_Jobs, String> param) -> param.getValue().title);
         description.setCellValueFactory((TableColumn.CellDataFeatures<TableModel_Jobs, String> param) -> param.getValue().description);
         department.setCellValueFactory((TableColumn.CellDataFeatures<TableModel_Jobs, String> param) -> param.getValue().department);
@@ -124,54 +230,50 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         designation.setCellValueFactory((TableColumn.CellDataFeatures<TableModel_Jobs, String> param) -> param.getValue().designation);
 
         //</editor-fold>
-        tbl_jobs.getColumns().addAll(id, title, description, department, classification, designation);
+        tbl_jobs.getColumns().addAll(title, description, department, classification, designation);
     }
 
     public void populateTable() {
-        Thread th = new Thread(new Task() {
-            @Override
-            protected Object call() throws Exception {
-                while (true) {
-                    CompletableFuture.supplyAsync(() -> {
-                        List list = jobs.get(("COUNT(*) as total"));
+        CompletableFuture.supplyAsync(() -> {
 
-                        return Integer.parseInt(((HashMap) list.get(0)).get("total").toString());
-                    }).thenApply((count) -> {
-                        List rs = new ArrayList<>();
-                        if (count != Global_Count) {
-                            rs = jobs
-                                    .join(Model.JOIN.LEFT, "aerolink.tbl_hr4_department", "id", "tblD", "=", "dept_id")
-                                    .join(Model.JOIN.LEFT, "aerolink.tbl_hr4_job_classifications", "id", "tblC", "=", "classification_id")
-                                    .join(Model.JOIN.LEFT, "aerolink.tbl_hr4_job_designations", "id", "tblDD", "=", "designation_id")
-                                    .get("job_id",
-                                            "title",
-                                            "description",
-                                            "CONCAT(tblD.id, ' - ', tblD.dept_name) as department",
-                                            "CONCAT(tblC.id, ' - ', tblC.class_name) as classification",
-                                            "CONCAT(tblDD.id, ' - ', tblDD.designation) as designation");
-                            Global_Count = count;
-                        }
-
-                        return rs;
-                    }).thenAccept((rs) -> {
-                        if (!rs.isEmpty()) {
-                            AddJobToTable(rs);
-                        }
+            while (Session.CurrentRoute.equals("hr4chc")) {
+                try {
+                    jobs.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
+                        DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
                     });
 
+                    if (DummyCount != GlobalCount) {
+
+                        tbl_jobs.getItems();
+                            List rs = jobs
+                                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "tblD", "=", "dept_id")
+                                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_classifications", "id", "tblC", "=", "classification_id")
+                                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_designations", "id", "tblDD", "=", "designation_id")
+                                    .where(new Object[][]{{"tblC.class_name", "=", ckasscb.getSelectionModel().getSelectedItem().toString()}})
+                                    .get(
+                                            "title",
+                                            "description",
+                                            "tblD.dept_name as department",
+                                            "tblC.class_name as classification",
+                                            "tblDD.designation as designation");
+                        AddJobToTable(rs);
+                        GlobalCount = DummyCount;
+                    }
+
                     Thread.sleep(3000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(HR4_Core_Human_Capital_ManagementController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        }
-        );
 
-        th.setDaemon(true);
-        th.start();
+            return 0;
+        }, Session.SessionThreads);
+
     }
 
     public void AddJobToTable(List rs) {
-
         obj.clear();
+        tbl_jobs.refresh();
 
         for (Object row : rs) {
             HashMap crow = (HashMap) row;
@@ -183,12 +285,130 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
             String designation = (String) crow.get("designation");
             obj.add(new TableModel_Jobs(id, department, title1, description, classification, designation));
         }
+        tbl_jobs.setItems(obj);
+    }
+
+    //2nd
+    public void generateTable1() {
+
+        tbl_chc.getItems().clear();
+        tbl_chc.getColumns().removeAll(tbl_chc.getColumns());
+        TableColumn<HR4_EmpInfoClass, String> employee_code = new TableColumn<>("EE/ER Code");
+        TableColumn<HR4_EmpInfoClass, String> fnn = new TableColumn<>("Fullname");
+        TableColumn<HR4_EmpInfoClass, String> job_id = new TableColumn<>("Position");
+        TableColumn<HR4_EmpInfoClass, String> dept_id = new TableColumn<>("Department");
+        TableColumn<HR4_EmpInfoClass, String> status_id = new TableColumn<>("Status");
+        TableColumn More = new TableColumn<>("More Options");
+
+        //<editor-fold defaultstate="collapsed" desc="Cell value factories">
+        employee_code.setCellValueFactory((TableColumn.CellDataFeatures<HR4_EmpInfoClass, String> param) -> param.getValue().employee_code);
+        fnn.setCellValueFactory((TableColumn.CellDataFeatures<HR4_EmpInfoClass, String> param) -> param.getValue().fnn);
+        job_id.setCellValueFactory((TableColumn.CellDataFeatures<HR4_EmpInfoClass, String> param) -> param.getValue().job_id);
+        dept_id.setCellValueFactory((TableColumn.CellDataFeatures<HR4_EmpInfoClass, String> param) -> param.getValue().dept_id);
+        status_id.setCellValueFactory((TableColumn.CellDataFeatures<HR4_EmpInfoClass, String> param) -> param.getValue().status_id);
+
+        More.setSortable(false);
+
+        More.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<HR4_EmpInfoClass, Boolean>, ObservableValue<Boolean>>() {
+            @Override
+            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<HR4_EmpInfoClass, Boolean> param) {
+                return new SimpleBooleanProperty(param.getValue() != null);
+            }
+        });
+
+        More.setCellFactory(new Callback<TableColumn<HR4_EmpInfoClass, Boolean>, TableCell<HR4_EmpInfoClass, Boolean>>() {
+            @Override
+            public TableCell<HR4_EmpInfoClass, Boolean> call(TableColumn<HR4_EmpInfoClass, Boolean> param) {
+                return new Synapse.Components.ButtonInCell<HR4_EmpInfoClass>().create("More", new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        System.err.println("a");
+                        Modal md = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_InfoCHC.fxml").getParent());
+                        md.open();
+                    }
+                });
+            }
+        });
+        //</editor-fold>
+        tbl_chc.getColumns().addAll(employee_code, fnn, job_id, dept_id, status_id, More);
+    }
+
+    long DummyCount = 0;
+    long GlobalCount = 0;
+
+    public void populateTable1() {
+        CompletableFuture.supplyAsync(() -> {
+
+            while (Session.CurrentRoute.equals("hr4chc")) {
+                try {
+                    emp.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
+                        DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
+                    });
+
+                    if (DummyCount != GlobalCount) {
+
+                        tbl_chc.getItems();
+                        List rs = emp
+                                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "tblDD", "=", "employee_code")
+                                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_jobs", "employee_code", "tblD", "=", "employee_code")
+                                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "tblD", "job_id", true)
+                                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "=", "aerolink.tbl_hr4_jobs", "dept_id", true)
+                                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employeeStatus", "status_id", "st", "=", "status_id")
+                                .where(new Object[][]{{"st.status_name", "=", statcb.getSelectionModel().getSelectedItem().toString()}
+                        })
+                                .get(
+                                        "tblD.employee_code",
+                                        "CONCAT(tblDD.lastname,', ',tblDD.firstname,' ',tblDD.middlename,'.') as fnn",
+                                        "aerolink.tbl_hr4_jobs.title as job_id",
+                                        "aerolink.tbl_hr4_department.dept_name as dept_id",
+                                        "st.status_name as status_id"
+                                );
+
+                        AddJobToTable1(rs);
+                        GlobalCount = DummyCount;
+                    }
+
+                    Thread.sleep(3000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(HR4_Core_Human_Capital_ManagementController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            return 0;
+        }, Session.SessionThreads);
+
+    }
+
+    public void AddJobToTable1(List rs) {
+        
+        obj1.clear();
+        tbl_chc.refresh();
+
+        for (Object row : rs) {
+            HashMap crow = (HashMap) row;
+            String employee_code = String.valueOf(crow.get("employee_code"));
+            String fnn = (String) crow.get("fnn");
+            String job_id = (String) crow.get("job_id");
+            String dept_id = (String) crow.get("dept_id");
+            String status_id = (String) crow.get("status_id");
+            obj1.add(new HR4_EmpInfoClass(employee_code, fnn, job_id, dept_id, status_id));
+        }
+
+        tbl_chc.setItems(obj1);
+
     }
 
     @FXML
     private void OpenModalNewJob(ActionEvent event) {
         Modal md = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_NewJob.fxml").getParent());
         md.open();
+
+    }
+
+    private void OpenModalInfo(ActionEvent event) {
+        Modal md11 = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_InfoCHC.fxml").getParent());
+        md11.open();
+
     }
 
     int click_count = 0;
@@ -204,8 +424,8 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
 
         Modal md = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_ViewJob.fxml").getParent());
         md.open();
-    }
 
+    }
     @FXML
     private void viewRow(MouseEvent event) {
         if (event.getButton() == MouseButton.PRIMARY) {
@@ -220,4 +440,29 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
 
     }
 
+    @FXML
+    private void OpenModalNewDept(ActionEvent event) {
+        Modal dd = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_NewDept.fxml").getParent());
+        dd.open();
+        
+    }
+
+    
+
+    /*@FXML
+    private void deletebtn(){
+    
+    try{
+    jobs.delete().where(new Object[][]{
+    
+        {"id", "=",()}
+    }).executeUpdate();
+    
+    }catch(Exception e){
+        e.printStackTrace();
+    }
+     
+        this.generateTable();
+        this.populateTable();
+    }*/
 }

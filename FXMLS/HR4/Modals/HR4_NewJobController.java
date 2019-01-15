@@ -9,7 +9,7 @@ import Model.HR4_Classification;
 import Model.HR4_Departments;
 import Model.HR4_Designation;
 import Model.HR4_JobLimits;
-import Model.HR4_Jobs;
+import FXMLS.HR4.Model.HR4_Jobs;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
@@ -93,7 +93,7 @@ public class HR4_NewJobController implements Initializable {
         
         jobLimit.insert(new Object[][] {
             {"job_id", job_id},
-            {"job_limit", 1}
+            {"job_limit", 10}
         });
         
         if(job_id != 0) {
@@ -102,6 +102,5 @@ public class HR4_NewJobController implements Initializable {
         
         
     }
-
 
 }
