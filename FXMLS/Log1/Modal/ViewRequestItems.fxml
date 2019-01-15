@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="526.0" prefWidth="947.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Log1.Modal.ViewRequestItemsController">
+   <children>
+      <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+               <children>
+                  <FontAwesomeIconView glyphName="BOOK" size="24" />
+                  <Label text="Item Rquests">
+                     <font>
+                        <Font name="System Bold" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox>
+               <children>
+                  <Separator prefWidth="1000.0" />
+               </children>
+            </HBox>
+            <SplitPane dividerPositions="0.15767195767195769" prefHeight="477.0" prefWidth="600.0">
+               <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <SplitPane dividerPositions="0.85" orientation="VERTICAL" prefHeight="475.0" prefWidth="142.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                 <children>
+                                    <VBox alignment="TOP_CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <VBox alignment="CENTER_LEFT" spacing="5.0" style="-fx-border-color: grey;">
+                                             <children>
+                                                <Label text="Actions">
+                                                   <VBox.margin>
+                                                      <Insets left="5.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <JFXButton fx:id="approveRequest_btn" onAction="#ApproveRequestAction" prefHeight="40.0" prefWidth="109.0" styleClass="btn-primary" text="Approve Request">
+                                                   <VBox.margin>
+                                                      <Insets left="15.0" />
+                                                   </VBox.margin>
+                                                </JFXButton>
+                                                <JFXButton fx:id="notifyRequestor_btn" prefHeight="40.0" prefWidth="109.0" styleClass="btn-primary" text="Notify Requestor">
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" left="15.0" />
+                                                   </VBox.margin>
+                                                </JFXButton>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="5.0" right="5.0" top="10.0" />
+                                             </VBox.margin>
+                                          </VBox>
+                                          <VBox alignment="CENTER_LEFT" layoutX="15.0" layoutY="20.0" spacing="5.0" style="-fx-border-color: grey;">
+                                             <children>
+                                                <Label text="Logs">
+                                                   <VBox.margin>
+                                                      <Insets left="5.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <JFXButton fx:id="itemRequestLogs_btn" prefHeight="40.0" prefWidth="109.0" styleClass="btn-primary" text="Activity logs">
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" left="15.0" />
+                                                   </VBox.margin>
+                                                </JFXButton>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="5.0" right="5.0" top="10.0" />
+                                             </VBox.margin>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                 <children>
+                                    <VBox alignment="CENTER" prefHeight="44.0" prefWidth="140.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <JFXButton fx:id="cancel_btn" prefHeight="40.0" prefWidth="109.0" styleClass="btn-primary" text="Cancel" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="477.0" prefWidth="600.0">
+                     <children>
+                        <VBox prefHeight="475.0" prefWidth="296.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <AnchorPane>
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="486.0" prefWidth="674.0">
+                                 <children>
+                                    <TableView fx:id="ItemRequests_tbl" layoutY="-27.0" prefHeight="437.0" prefWidth="674.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <columns>
+                                        <TableColumn fx:id="itemReq_col" prefWidth="75.0" text="Item Requested" />
+                                          <TableColumn fx:id="quantity_col" prefWidth="75.0" text="Quantity" />
+                                          <TableColumn fx:id="requestedBy_col" prefWidth="75.0" text="Requestor" />
+                                          <TableColumn fx:id="destination_col" prefWidth="75.0" text="Destination" />
+                                          <TableColumn fx:id="dateRequested_col" prefWidth="75.0" text="Date Requested" />
+                                          <TableColumn fx:id="status_col" prefWidth="75.0" text="Request Status" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </AnchorPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </items>
+            </SplitPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
