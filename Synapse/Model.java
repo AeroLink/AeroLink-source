@@ -8,6 +8,7 @@ package Synapse;
 import Synapse.HttpClient.METHOD;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -87,61 +88,76 @@ public class Model {
 
     public List get() {
 
-        if (Session.isConnected) {
+        this.finalQuery += this.global_table + " ";
+        try {
 
-            this.finalQuery += this.global_table + " ";
-            try {
-
-                if (this.joined) {
-                    this.finalQuery += this.joinConstruct;
-                    this.joined = false;
-                }
-
-                if (this.where) {
-                    this.finalQuery += "WHERE " + this.whereConstruct;
-
-                    if (!"".equals(this.groupBy)) {
-                        this.finalQuery += this.groupBy;
-                    }
-
-                    //this.Where_PrepareStatementSession(); // [Disbaled] 
-                } else {
-
-                    if (!"".equals(this.groupBy)) {
-                        this.finalQuery += this.groupBy;
-                    }
-                    //this.pst = Session.INSTANCE.getConnection().prepareStatement(this.finalQuery); // [Disbaled] 
-                }
-                Boolean refresh = false;
-
-                if (this.finalQuery.contains("CHECKSUM_AGG(BINARY_CHECKSUM(*))")) {
-                    refresh = true;
-                } else {
-                    refresh = false;
-                    System.out.println("[SQL QUERY] : -> " + this.finalQuery);
-                    if (this.where) {
-                        System.err.println("[Values] : -> " + Helpers.combine(this.whereValues.toArray(), ","));
-                    }
-                }
-
-                HttpClient.post("{\"A1009\" : \"" + this.finalQuery + "\""
-                        + (this.where ? ",\"B1009\" : \"" + Helpers.combine(this.whereValues.toArray(), ",") + "\"" : "") + ",\"refresher\" : " + refresh + " }", (error, obj) -> {
-                    if (error) {
-                        System.err.println("Error -> " + error);
-                    }
-                    json = obj;
-                });
-
-                if (!json.isEmpty()) {
-                    this.clear();
-                }
-
-                return R2SL.convert(json);
-            } catch (Exception ex) {
-                Response.ErrorResponse();
-                System.out.println("Exception Error -> " + ex.getMessage());
+            if (this.joined) {
+                this.finalQuery += this.joinConstruct;
+                this.joined = false;
             }
 
+            if (this.where) {
+                this.finalQuery += "WHERE " + this.whereConstruct;
+
+                if (!"".equals(this.groupBy)) {
+                    this.finalQuery += this.groupBy;
+                }
+
+                if (Session.offline) {
+                    this.Where_PrepareStatementSession();
+                }
+
+            } else {
+
+                if (!"".equals(this.groupBy)) {
+                    this.finalQuery += this.groupBy;
+                }
+
+                if (Session.offline) {
+                    this.pst = Session.INSTANCE.getConnection().prepareStatement(this.finalQuery); // [Disbaled] 
+                }
+            }
+            Boolean refresh = false;
+
+            if (this.finalQuery.contains("CHECKSUM_AGG(BINARY_CHECKSUM(*))")) {
+                refresh = true;
+            } else {
+                refresh = false;
+                System.out.println("[SQL QUERY] : -> " + this.finalQuery);
+                if (this.where) {
+                    System.err.println("[Values] : -> " + Helpers.combine(this.whereValues.toArray(), ","));
+                }
+            }
+
+            if (!Session.offline) {
+
+                if (Session.isConnected) {
+                    HttpClient.post("{\"A1009\" : \"" + this.finalQuery + "\""
+                            + (this.where ? ",\"B1009\" : \"" + Helpers.combine(this.whereValues.toArray(), ",") + "\"" : "") + ",\"refresher\" : " + refresh + " }", (error, obj) -> {
+                        if (error) {
+                            System.err.println("Error -> " + error);
+                        }
+                        json = obj;
+                    });
+
+                    if (!json.isEmpty()) {
+                        this.clear();
+                    }
+
+                    return R2SL.convert(json);
+                }
+
+            } else {
+
+                if (Session.INSTANCE.hasConnection()) {
+                    System.out.println(this.finalQuery);
+                    this.clear();
+                    return R2SL.convert(pst.executeQuery());
+                }
+            }
+        } catch (Exception ex) {
+            Response.ErrorResponse();
+            System.out.println("Exception Error -> " + ex.getMessage());
         }
 
         return null;
@@ -151,61 +167,74 @@ public class Model {
 
         this.finalQuery = "SELECT " + Helpers.combine(cols, ",") + " From " + this.global_table + " ";
 
-        if (Session.isConnected) {
+        try {
 
-            try {
-
-                if (this.joined) {
-                    this.finalQuery += this.joinConstruct;
-                    this.joined = false;
-                }
-
-                if (this.where) {
-                    this.finalQuery += "WHERE " + this.whereConstruct;
-
-                    if (!"".equals(this.groupBy)) {
-                        this.finalQuery += this.groupBy;
-                    }
-
-                    //this.Where_PrepareStatementSession(); // [Disabled] 
-                } else {
-                    if (!"".equals(this.groupBy)) {
-                        this.finalQuery += this.groupBy;
-                    }
-                    //this.pst = Session.INSTANCE.getConnection().prepareStatement(this.finalQuery); // [Disabled] 
-                }
-
-                Boolean refresh = false;
-
-                if (this.finalQuery.contains("CHECKSUM_AGG(BINARY_CHECKSUM(*))")) {
-                    refresh = true;
-                } else {
-                    System.out.println("[SQL QUERY] : -> " + this.finalQuery);
-                    if (this.where) {
-                        System.err.println("[Values] : -> " + Helpers.combine(this.whereValues.toArray(), ","));
-                    }
-                }
-
-                HttpClient.post("{\"A1009\" : \"" + this.finalQuery + "\""
-                        + (this.where ? ",\"B1009\" : \"" + Helpers.combine(this.whereValues.toArray(), ",") + "\"" : "") + ",\"refresher\" : " + refresh + " }", (error, obj) -> {
-                    if (error) {
-                        System.err.println("Error -> " + error);
-                    }
-                    json = obj;
-                });
-
-                if (!json.isEmpty()) {
-                    this.clear();
-                }
-
-                return R2SL.convert(json);
-
-            } catch (Exception ex) {
-
-                Response.ErrorResponse();
-                System.out.println("Exception Error -> " + ex.getMessage());
+            if (this.joined) {
+                this.finalQuery += this.joinConstruct;
+                this.joined = false;
             }
 
+            if (this.where) {
+                this.finalQuery += "WHERE " + this.whereConstruct;
+
+                if (!"".equals(this.groupBy)) {
+                    this.finalQuery += this.groupBy;
+                }
+
+                if (Session.offline) {
+                    this.Where_PrepareStatementSession();
+                }
+            } else {
+                if (!"".equals(this.groupBy)) {
+                    this.finalQuery += this.groupBy;
+                }
+
+                if (Session.offline) {
+                    this.pst = Session.INSTANCE.getConnection().prepareStatement(this.finalQuery); // [Disbaled] 
+                }
+
+            }
+
+            Boolean refresh = false;
+
+            if (this.finalQuery.contains("CHECKSUM_AGG(BINARY_CHECKSUM(*))")) {
+                refresh = true;
+            } else {
+                System.out.println("[SQL QUERY] : -> " + this.finalQuery);
+                if (this.where) {
+                    System.err.println("[Values] : -> " + Helpers.combine(this.whereValues.toArray(), ","));
+                }
+            }
+
+            if (!Session.offline) {
+                if (Session.isConnected) {
+                    HttpClient.post("{\"A1009\" : \"" + this.finalQuery + "\""
+                            + (this.where ? ",\"B1009\" : \"" + Helpers.combine(this.whereValues.toArray(), ",") + "\"" : "") + ",\"refresher\" : " + refresh + " }", (error, obj) -> {
+                        if (error) {
+                            System.err.println("Error -> " + error);
+                        }
+                        json = obj;
+                    });
+
+                    if (!json.isEmpty()) {
+                        this.clear();
+                    }
+
+                    return R2SL.convert(json);
+                }
+            } else {
+
+                System.out.println(this.finalQuery);
+                if (Session.INSTANCE.hasConnection()) {
+                    this.clear();
+                    return R2SL.convert(pst.executeQuery());
+                }
+
+            }
+        } catch (Exception ex) {
+
+            Response.ErrorResponse();
+            System.out.println("Exception Error -> " + ex.getMessage());
         }
 
         return null;
@@ -360,58 +389,75 @@ public class Model {
     }
 
     public Boolean insert(Object[][] vals) {
-        if (Session.isConnected) {
-            String columns = "";
-            List values = new ArrayList<>();
-            for (int i = 0; i < vals.length; i++) {
 
-                if (vals[i].length < 2) {
-                    System.out.println(Response.ORM_ERR_02);
-                    break;
-                }
+        String columns = "";
+        List values = new ArrayList<>();
+        for (int i = 0; i < vals.length; i++) {
 
-                if (i == (vals.length - 1)) {
-                    columns += vals[i][0];
-                } else {
-                    columns += vals[i][0] + ",";
-                }
-
-                values.add(vals[i][1]);
-
+            if (vals[i].length < 2) {
+                System.out.println(Response.ORM_ERR_02);
+                break;
             }
-            String query = "";
-            try {
 
-                query = "INSERT INTO " + this.global_table + "(" + columns + ") VALUES (" + Helpers.Prepared_combine(values.toArray().length, ",") + ")";
-                //this.pst = Session.INSTANCE.getConnection().prepareStatement(query);
-                Object[] sp = values.toArray();
-                System.out.println("[SQL QUERY] : -> " + query);
-                System.err.println("[Values] : -> " + Helpers.combine(sp, ","));
+            if (i == (vals.length - 1)) {
+                columns += vals[i][0];
+            } else {
+                columns += vals[i][0] + ",";
+            }
 
-                //return R2SL.convert(pst.executeQuery());
-                HttpClient.post(METHOD.INSERT, "{\"A1009\" : \"" + query + "\",\"B1009\" : \"" + Helpers.combine(sp, ",,") + "\" }", (error, obj) -> {
-                    if (error) {
-                        System.err.println("Error -> " + error);
+            values.add(vals[i][1]);
+
+        }
+        String query = "";
+        try {
+
+            query = "INSERT INTO " + this.global_table + "(" + columns + ") VALUES (" + Helpers.Prepared_combine(values.toArray().length, ",") + ")";
+
+            if (Session.offline) {
+                this.pst = Session.INSTANCE.getConnection().prepareStatement(query);
+            }
+
+            Object[] sp = values.toArray();
+            System.out.println("[SQL QUERY] : -> " + query);
+            System.err.println("[Values] : -> " + Helpers.combine(sp, ","));
+
+            if (Session.offline) {
+
+                if (Session.INSTANCE.hasConnection()) {
+                    for (int i = 1; i <= sp.length; i++) {
+                        this.pst.setObject(i, sp[i - 1]);
                     }
-                    json = obj;
-                });
 
-                JSONObject list = new JSONObject(String.valueOf(R2SL.convert_rt_obj(json)));
-
-                HashMap hash = (HashMap) list.toMap();
-
-                if (Boolean.parseBoolean(String.valueOf(hash.get("success")))) {
-                    return true;
-                } else {
-                    System.err.println(String.valueOf(hash.get("message")));
-                    return false;
+                    return this.pst.executeUpdate() != 0;
                 }
 
-            } catch (Exception ex) {
+            } else {
 
-                Response.ErrorResponse();
-                System.err.println("SQL Error -> " + ex.getMessage() + "\nSQL Query -> " + query + "\nSQL Values ->" + Arrays.asList(values));
+                if (Session.isConnected) {
+                    HttpClient.post(METHOD.INSERT, "{\"A1009\" : \"" + query + "\",\"B1009\" : \"" + Helpers.combine(sp, ",,") + "\" }", (error, obj) -> {
+                        if (error) {
+                            System.err.println("Error -> " + error);
+                        }
+                        json = obj;
+                    });
+
+                    JSONObject list = new JSONObject(String.valueOf(R2SL.convert_rt_obj(json)));
+
+                    HashMap hash = (HashMap) list.toMap();
+
+                    if (Boolean.parseBoolean(String.valueOf(hash.get("success")))) {
+                        return true;
+                    } else {
+                        System.err.println(String.valueOf(hash.get("message")));
+                        return false;
+                    }
+                }
             }
+
+        } catch (Exception ex) {
+
+            Response.ErrorResponse();
+            System.err.println("SQL Error -> " + ex.getMessage() + "\nSQL Query -> " + query + "\nSQL Values ->" + Arrays.asList(values));
         }
 
         return false;
@@ -421,66 +467,81 @@ public class Model {
 
         String query = "";
 
-        if (Session.isConnected) {
-            try {
-                List values1 = new ArrayList<>();
-                List values2 = new ArrayList<>();
+        try {
+            List values1 = new ArrayList<>();
+            List values2 = new ArrayList<>();
 
-                values1.addAll(Arrays.asList(colTable1));
+            values1.addAll(Arrays.asList(colTable1));
 
-                values2.addAll(Arrays.asList(colTable2));
+            values2.addAll(Arrays.asList(colTable2));
 
-                String WhereConstructor = "";
-                ArrayList<Object> WV = new ArrayList<>();
+            String WhereConstructor = "";
+            ArrayList<Object> WV = new ArrayList<>();
 
-                for (int i = 0; i < Wherevalues.length; i++) {
+            for (int i = 0; i < Wherevalues.length; i++) {
 
-                    if (Wherevalues[i].length < 3) {
-                        System.out.println(Response.ORM_ERR_01);
-                        break;
-                    }
-
-                    if (i == (Wherevalues.length - 1)) {
-                        WhereConstructor += Wherevalues[i][0] + " " + Wherevalues[i][1] + " ?";
-                    } else {
-                        WhereConstructor += Wherevalues[i][0] + " " + Wherevalues[i][1] + " ? AND ";
-                    }
-
-                    WV.add(Wherevalues[i][2]);
+                if (Wherevalues[i].length < 3) {
+                    System.out.println(Response.ORM_ERR_01);
+                    break;
                 }
 
-                query = "INSERT INTO " + this.global_table + "(" + Helpers.combine(values1.toArray(), ",") + ") SELECT " + Helpers.combine(values2.toArray(), ",") + " FROM " + table2 + " WHERE " + WhereConstructor;
-
-                //this.pst = returnID ? Session.INSTANCE.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS) : Session.INSTANCE.getConnection().prepareStatement(query);
-                Object[] sp = WV.toArray();
-                System.out.println("[SQL QUERY] : -> " + query);
-                System.err.println("[Values] : -> " + Helpers.combine(sp, ","));
-
-                //return R2SL.convert(pst.executeQuery());
-                HttpClient.post(METHOD.INSERT_RT_ID, "{\"A1009\" : \"" + query + "\",\"B1009\" : \"" + Helpers.combine(sp, ",,") + "\" }", (error, obj) -> {
-                    if (error) {
-                        System.err.println("Error -> " + error);
-                    }
-                    json = obj;
-                });
-
-                JSONObject list = new JSONObject(String.valueOf(R2SL.convert_rt_obj(json)));
-
-                HashMap hash = (HashMap) list.toMap();
-
-                if (Boolean.parseBoolean(String.valueOf(hash.get("success")))) {
-                    return returnID ? Integer.parseInt(String.valueOf(hash.get("value"))) : 0;
+                if (i == (Wherevalues.length - 1)) {
+                    WhereConstructor += Wherevalues[i][0] + " " + Wherevalues[i][1] + " ?";
                 } else {
-                    System.err.println(hash.get("message"));
-                    return 0;
+                    WhereConstructor += Wherevalues[i][0] + " " + Wherevalues[i][1] + " ? AND ";
                 }
 
-            } catch (Exception ex) {
-                Response.ErrorResponse();
-                ex.printStackTrace();
-                System.err.println("SQL Error -> " + ex.getMessage());
+                WV.add(Wherevalues[i][2]);
             }
 
+            query = "INSERT INTO " + this.global_table + "(" + Helpers.combine(values1.toArray(), ",") + ") SELECT " + Helpers.combine(values2.toArray(), ",") + " FROM " + table2 + " WHERE " + WhereConstructor;
+
+            if (Session.offline) {
+                if (Session.INSTANCE.hasConnection()) {
+                    PreparedStatement pstx;
+
+                    pstx = Session.INSTANCE.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+                    for (int i = 1; i <= WV.size(); i++) {
+                        System.out.println(WV.get(i - 1));
+                        pstx.setObject(i, WV.get(i - 1));
+                    }
+
+                    Boolean success = pstx.executeUpdate() != 0;
+
+                    return success ? (returnID ? Integer.parseInt(((HashMap) R2SL.convert(pstx.getGeneratedKeys()).get(0)).get("GENERATED_KEYS").toString()) : 1) : 0;
+                }
+            } else {
+
+                if (Session.isConnected) {
+                    Object[] sp = WV.toArray();
+                    System.out.println("[SQL QUERY] : -> " + query);
+                    System.err.println("[Values] : -> " + Helpers.combine(sp, ","));
+
+                    HttpClient.post(METHOD.INSERT_RT_ID, "{\"A1009\" : \"" + query + "\",\"B1009\" : \"" + Helpers.combine(sp, ",,") + "\" }", (error, obj) -> {
+                        if (error) {
+                            System.err.println("Error -> " + error);
+                        }
+                        json = obj;
+                    });
+
+                    JSONObject list = new JSONObject(String.valueOf(R2SL.convert_rt_obj(json)));
+
+                    HashMap hash = (HashMap) list.toMap();
+
+                    if (Boolean.parseBoolean(String.valueOf(hash.get("success")))) {
+                        return returnID ? Integer.parseInt(String.valueOf(hash.get("value"))) : 0;
+                    } else {
+                        System.err.println(hash.get("message"));
+                        return 0;
+                    }
+                }
+
+            }
+
+        } catch (Exception ex) {
+            Response.ErrorResponse();
+            ex.printStackTrace();
+            System.err.println("SQL Error -> " + ex.getMessage());
         }
 
         return 0;
@@ -513,28 +574,47 @@ public class Model {
 
                 query = "INSERT INTO " + this.global_table + "(" + columns + ") VALUES (" + Helpers.Prepared_combine(values.toArray().length, ",") + ")";
 
-                //this.pst = returnID ? Session.INSTANCE.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS) : Session.INSTANCE.getConnection().prepareStatement(query);
                 Object[] sp = values.toArray();
+
                 System.out.println("[SQL QUERY] : -> " + query);
                 System.err.println("[Values] : -> " + Helpers.combine(sp, ","));
 
-                //return R2SL.convert(pst.executeQuery());
-                HttpClient.post(METHOD.INSERT_RT_ID, "{\"A1009\" : \"" + query + "\",\"B1009\" : \"" + Helpers.combine(sp, ",,") + "\" }", (error, obj) -> {
-                    if (error) {
-                        System.err.println("Error -> " + error);
+                if (Session.offline) {
+
+                    if (Session.INSTANCE.hasConnection()) {
+                        this.pst = returnID ? Session.INSTANCE.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS) : Session.INSTANCE.getConnection().prepareStatement(query);
+
+                        for (int i = 1; i <= sp.length; i++) {
+                            this.pst.setObject(i, sp[i - 1]);
+                        }
+
+                        Boolean success = this.pst.executeUpdate() != 0;
+
+                        return success ? (returnID ? Integer.parseInt(((HashMap) R2SL.convert(this.pst.getGeneratedKeys()).get(0)).get("GENERATED_KEYS").toString()) : 1) : 0;
+
                     }
-                    json = obj;
-                });
-
-                JSONObject list = new JSONObject(String.valueOf(R2SL.convert_rt_obj(json)));
-
-                HashMap hash = (HashMap) list.toMap();
-
-                if (Boolean.parseBoolean(String.valueOf(hash.get("success")))) {
-                    return returnID ? Integer.parseInt(String.valueOf(hash.get("value"))) : 0;
                 } else {
-                    System.err.println(hash.get("message"));
-                    return 0;
+
+                    if (Session.isConnected) {
+                        HttpClient.post(METHOD.INSERT_RT_ID, "{\"A1009\" : \"" + query + "\",\"B1009\" : \"" + Helpers.combine(sp, ",,") + "\" }", (error, obj) -> {
+                            if (error) {
+                                System.err.println("Error -> " + error);
+                            }
+                            json = obj;
+                        });
+
+                        JSONObject list = new JSONObject(String.valueOf(R2SL.convert_rt_obj(json)));
+
+                        HashMap hash = (HashMap) list.toMap();
+
+                        if (Boolean.parseBoolean(String.valueOf(hash.get("success")))) {
+                            return returnID ? Integer.parseInt(String.valueOf(hash.get("value"))) : 0;
+                        } else {
+                            System.err.println(hash.get("message"));
+                            return 0;
+                        }
+                    }
+
                 }
 
             } catch (Exception ex) {
@@ -554,88 +634,104 @@ public class Model {
         this.finalQuery = "";
         this.finalValues = new ArrayList<Object>();
 
-        if (Session.isConnected) {
+        String columns = "";
 
-            String columns = "";
+        for (int i = 0; i < vals.length; i++) {
 
-            for (int i = 0; i < vals.length; i++) {
-
-                if (vals[i].length < 2) {
-                    System.out.println(Response.ORM_ERR_02);
-                    break;
-                }
-
-                if (i == (vals.length - 1)) {
-                    columns += vals[i][0] + " = ?";
-                    this.finalValues.add(vals[i][1]);
-
-                    System.err.println(vals[i][1]);
-                } else {
-                    columns += vals[i][0] + " = ?,";
-                    this.finalValues.add(vals[i][1]);
-                }
-
+            if (vals[i].length < 2) {
+                System.out.println(Response.ORM_ERR_02);
+                break;
             }
 
-            this.finalQuery = "UPDATE " + this.global_table + " SET " + columns;
-            System.out.println("[SQL QUERY] : -> " + this.finalQuery);
-            return this;
+            if (i == (vals.length - 1)) {
+                columns += vals[i][0] + " = ?";
+                this.finalValues.add(vals[i][1]);
+
+                System.err.println(vals[i][1]);
+            } else {
+                columns += vals[i][0] + " = ?,";
+                this.finalValues.add(vals[i][1]);
+            }
 
         }
 
-        return null;
+        this.finalQuery = "UPDATE " + this.global_table + " SET " + columns;
+        System.out.println("[SQL QUERY] : -> " + this.finalQuery);
+        return this;
+
     }
 
     public Model delete() {
 
-        if (Session.isConnected) {
+        this.finalQuery = "DELETE FROM " + this.global_table;
+        return this;
 
-            this.finalQuery = "DELETE FROM " + this.global_table;
-            return this;
-
-        }
-
-        return null;
     }
 
     public Boolean executeUpdate() {
 
+        String query = "";
         try {
 
             if (where) {
 
-                String query = this.finalQuery + " WHERE " + this.whereConstruct;
+                if (Session.offline) {
+                    this.pst = Session.INSTANCE.getConnection().prepareStatement(this.finalQuery + " WHERE " + this.whereConstruct);
+                } else {
+                    query = this.finalQuery + " WHERE " + this.whereConstruct;
+                }
 
                 if (this.finalValues != null) {
                     this.finalValues.addAll(this.whereValues);
-                } else {
-                    System.out.println(Arrays.asList(this.whereValues.toArray()));
                 }
 
-                System.err.println("[Values] : -> " + Helpers.combine(this.finalValues.toArray(), ","));
-
-                HttpClient.post(METHOD.UPDATE, "{\"A1009\" : \"" + query + "\",\"B1009\" : \"" + Helpers.combine(this.finalValues.toArray(), ",,") + "\" }", (error, obj) -> {
-                    if (error) {
-                        System.err.println("Error -> " + error);
+                System.out.println(Arrays.asList(this.finalValues.toArray()));
+                if (Session.offline) {
+                    System.out.println(Arrays.asList(this.finalValues.toArray()));
+                    for (int i = 1; i <= this.finalValues.size(); i++) {
+                        this.pst.setObject(i, this.finalValues.get(i - 1));
                     }
-                    json = obj;
-                });
+                } else {
 
+                    System.err.println("[Values] : -> " + Helpers.combine(this.finalValues.toArray(), ","));
+
+                    HttpClient.post(METHOD.UPDATE, "{\"A1009\" : \"" + query + "\",\"B1009\" : \"" + Helpers.combine(this.finalValues.toArray(), ",,") + "\" }", (error, obj) -> {
+                        if (error) {
+                            System.err.println("Error -> " + error);
+                        }
+                        json = obj;
+                    });
+
+                }
             }
 
-            JSONObject list = new JSONObject(String.valueOf(R2SL.convert_rt_obj(json)));
+            if (Session.offline) {
+                if (Session.INSTANCE.hasConnection()) {
+                    Boolean rt = this.pst.executeUpdate() != 0;
 
-            HashMap hash = (HashMap) list.toMap();
+                    this.finalQuery = "";
+                    this.finalValues = new ArrayList<Object>();
+                    this.clear();
 
-            this.finalQuery = "";
-            this.finalValues = new ArrayList<Object>();
-            this.clear();
-
-            if (Boolean.parseBoolean(String.valueOf(hash.get("success")))) {
-                return true;
+                    return rt;
+                }
             } else {
-                System.err.println(hash.get("message"));
-                return false;
+                if (Session.isConnected) {
+                    JSONObject list = new JSONObject(String.valueOf(R2SL.convert_rt_obj(json)));
+
+                    HashMap hash = (HashMap) list.toMap();
+
+                    this.finalQuery = "";
+                    this.finalValues = new ArrayList<Object>();
+                    this.clear();
+
+                    if (Boolean.parseBoolean(String.valueOf(hash.get("success")))) {
+                        return true;
+                    } else {
+                        System.err.println(hash.get("message"));
+                        return false;
+                    }
+                }
             }
 
         } catch (Exception ex) {
