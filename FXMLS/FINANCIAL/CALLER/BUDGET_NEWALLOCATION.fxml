@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="269.0" prefWidth="289.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.FINANCIAL.CALLER.BUDGET_NEWALLOCATIONController">
+   <children>
+      <Label layoutX="7.0" layoutY="4.0" text="New Allcoate" textFill="#34a853">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Separator layoutY="28.0" prefHeight="8.0" prefWidth="289.0" />
+      <JFXComboBox fx:id="ba_cmbo" layoutX="14.0" layoutY="45.0" prefHeight="46.0" prefWidth="261.0" promptText="Choose Department" />
+      <JFXTextField fx:id="ba_amount_txtfield" focusColor="#34a853" labelFloat="true" layoutX="14.0" layoutY="138.0" maxWidth="261.0" minWidth="261.0" prefHeight="46.0" prefWidth="261.0" promptText="Amount" unFocusColor="#34a853" />
+      <JFXButton fx:id="ba_insert_btn" layoutX="14.0" layoutY="230.0" prefHeight="25.0" prefWidth="261.0" style="-fx-background-color: #34a853;" text="Allocate" textFill="WHITE" />
+   </children>
+</AnchorPane>
