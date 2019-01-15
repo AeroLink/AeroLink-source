@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="847.0" prefWidth="985.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Log2.Log2_Vendor_PortalController">
-   <children>
-      <JFXButton fx:id="btnvendorportal" layoutX="448.0" layoutY="399.0" onMouseClicked="#btnlink" style="-fx-background-color: #3c6070;" text="Goto Website" />
-   </children>
-</AnchorPane>
+<AnchorPane id="AnchorPane" prefHeight="847.0" prefWidth="985.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Log2.Log2_Vendor_PortalController" />

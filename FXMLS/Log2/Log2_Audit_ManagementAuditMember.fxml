@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="FXMLS.Log2.Log2_Audit_ManagementAuditMemberController">
+   <children>
+      <Label alignment="CENTER" layoutX="-1.0" prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: #34a853;" text="Select Audit Member" textFill="WHITE" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <ScrollPane layoutX="-1.0" layoutY="35.0" prefHeight="312.0" prefWidth="600.0" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="35.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="420.0" prefWidth="531.0">
+               <children>
+                  <JFXCheckBox layoutX="105.0" layoutY="36.0" text="One" />
+                  <JFXCheckBox layoutX="105.0" layoutY="89.0" text="Two" />
+                  <JFXCheckBox layoutX="105.0" layoutY="142.0" text="Three" />
+                  <JFXCheckBox layoutX="105.0" layoutY="193.0" text="Four" />
+                  <JFXCheckBox layoutX="105.0" layoutY="247.0" text="Five" />
+                  <JFXCheckBox layoutX="105.0" layoutY="294.0" text="Six" />
+                  <JFXCheckBox layoutX="105.0" layoutY="340.0" text="Seven" />
+                  <JFXCheckBox layoutX="105.0" layoutY="389.0" text="Eight" />
+                  <JFXCheckBox layoutX="336.0" layoutY="36.0" text="Ten" />
+                  <JFXCheckBox layoutX="336.0" layoutY="89.0" text="Eleven" />
+                  <JFXCheckBox layoutX="336.0" layoutY="142.0" text="Twelve" />
+                  <JFXCheckBox layoutX="336.0" layoutY="193.0" text="Thirteen" />
+                  <JFXCheckBox layoutX="336.0" layoutY="247.0" text="Fourteen" />
+                  <JFXCheckBox layoutX="336.0" layoutY="294.0" text="Fifteen" />
+                  <JFXCheckBox layoutX="336.0" layoutY="340.0" text="Sixteen" />
+                  <JFXCheckBox layoutX="336.0" layoutY="381.0" text="Seventeen" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <JFXButton layoutX="541.0" layoutY="361.0" style="-fx-background-color: #34a853;" text="Done" textFill="WHITE" />
+   </children>
+</AnchorPane>

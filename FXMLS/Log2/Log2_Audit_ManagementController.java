@@ -5,9 +5,18 @@
  */
 package FXMLS.Log2;
 
+import com.jfoenix.controls.JFXButton;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -16,6 +25,11 @@ import javafx.fxml.Initializable;
  */
 public class Log2_Audit_ManagementController implements Initializable {
 
+    @FXML
+    private JFXButton btn_leadauditor;
+    @FXML
+    private JFXButton btn_auditmember;
+
     /**
      * Initializes the controller class.
      */
@@ -23,5 +37,41 @@ public class Log2_Audit_ManagementController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void btn_la(MouseEvent event) throws IOException {
+        
+         Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+
+        Parent parent = loader.load(getClass().getResource("Log2_Audit_Management_LeadAuditor.fxml"));
+
+        Scene scene = new Scene(parent);
+
+        stage.setFullScreen(false);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setScene(scene);
+
+        stage.show();
+        
+    }
+
+    @FXML
+    private void btn_am(MouseEvent event) throws IOException {
+        
+        
+         Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+
+        Parent parent = loader.load(getClass().getResource("Log2_Audit_ManagementAuditMember.fxml"));
+
+        Scene scene = new Scene(parent);
+
+        stage.setFullScreen(false);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setScene(scene);
+
+        stage.show();
+    }
     
 }

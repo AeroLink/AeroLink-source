@@ -1,36 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXBadge?>
-<?import com.jfoenix.controls.JFXColorPicker?>
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
-<?import com.jfoenix.controls.JFXDialog?>
-<?import com.jfoenix.controls.JFXDialogLayout?>
-<?import com.jfoenix.controls.JFXDrawer?>
-<?import com.jfoenix.controls.JFXDrawersStack?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<<<<<<< HEAD
-<AnchorPane id="AnchorPane" prefHeight="597.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="830.0" prefWidth="990.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Log2.Log2_Audit_ManagementController">
    <children>
-      <JFXBadge layoutX="103.0" layoutY="269.0" prefHeight="126.0" prefWidth="163.0" />
-      <JFXColorPicker layoutX="142.0" layoutY="30.0" />
-      <JFXComboBox layoutX="128.0" layoutY="85.0" prefHeight="25.0" prefWidth="109.0" />
-      <JFXDatePicker layoutX="155.0" layoutY="126.0" />
-      <JFXDialog prefHeight="70.0" prefWidth="109.0">
-         <children>
-            <JFXDialogLayout />
-         </children>
-      </JFXDialog>
-      <JFXDrawer layoutX="429.0" layoutY="29.0" prefHeight="95.0" prefWidth="109.0">
-         <children>
-            <JFXDrawersStack prefHeight="95.0" prefWidth="88.0" />
-         </children>
-      </JFXDrawer>
-=======
-<AnchorPane id="AnchorPane" prefHeight="847.0" prefWidth="985.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Log2.Log2_Audit_ManagementController">
-   <children>
-      <Label layoutX="499.0" layoutY="449.0" text="Audit Management" />
->>>>>>> 6b280e19310fa651afadf627a1a1e4773021d4bf
+      <JFXTabPane layoutX="-2.0" layoutY="2.0" prefHeight="847.0" prefWidth="985.0" stylesheets="@../../Assets/css/MainPanel.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <tabs>
+            <Tab id="tab" styleClass="tab-label" text="Planning &amp; Scheduling">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="3.0" prefHeight="64.0" prefWidth="965.0" style="-fx-background-color: #34a853;" text="Planning &amp; Scheduling" textFill="WHITE" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="-3.0">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="88.0" text="Audit Plan Code :">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="139.0" text="Purpose :">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="195.0" text="Scope :">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="249.0" text="Objective :">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="7.0" layoutY="349.0" text="Date :">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="7.0" layoutY="405.0" text="ISO Clause :">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="7.0" layoutY="463.0" text="Department :">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField layoutX="134.0" layoutY="81.0" />
+                        <JFXTextField layoutX="77.0" layoutY="132.0" />
+                        <JFXTextField layoutX="70.0" layoutY="188.0" />
+                        <JFXTextArea layoutX="79.0" layoutY="249.0" maxWidth="295.0" minWidth="295.0" prefHeight="77.0" prefWidth="295.0" />
+                        <JFXDatePicker defaultColor="#34a853" layoutX="59.0" layoutY="342.0" />
+                        <JFXComboBox layoutX="78.0" layoutY="401.0" prefHeight="25.0" prefWidth="113.0" />
+                        <JFXComboBox layoutX="89.0" layoutY="459.0" prefHeight="25.0" prefWidth="103.0" />
+                        <JFXButton fx:id="btn_leadauditor" layoutX="486.0" layoutY="86.0" onMouseClicked="#btn_la" style="-fx-background-color: #34a853;" text="Select Lead Auditor" textFill="WHITE" AnchorPane.rightAnchor="10.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btn_auditmember" layoutX="486.0" layoutY="135.0" onMouseClicked="#btn_am" style="-fx-background-color: #34a853;" text="Selcet Audit Member" textFill="WHITE" AnchorPane.rightAnchor="10.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton layoutX="486.0" layoutY="176.0" style="-fx-background-color: #34a853;" text="Select Area  Personnel" textFill="WHITE" AnchorPane.rightAnchor="10.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab id="tab" styleClass="tab-label" text="Untitled Tab">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../../Assets/css/MainPanel.css" />
+              </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
    </children>
 </AnchorPane>
