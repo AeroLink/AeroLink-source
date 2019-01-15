@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="585.0" prefWidth="323.0" stylesheets="@width2.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Administrative.Permit_BlacklistController">
+   <children>
+      <BorderPane layoutX="14.0" layoutY="7.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <JFXTabPane BorderPane.alignment="CENTER">
+               <tabs>
+                  <Tab text="Permit">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox layoutX="45.0" layoutY="72.0" prefHeight="390.0" prefWidth="234.0">
+                                 <children>
+                                    <TableView prefHeight="389.0" prefWidth="234.0">
+                                      <columns>
+                                        <TableColumn prefWidth="75.0" text="Permit ID" />
+                                        <TableColumn prefWidth="158.0" text="Permit Name" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                              <JFXButton fx:id="importpermit" layoutX="52.0" layoutY="502.0" onAction="#importp" prefHeight="33.0" prefWidth="105.0" style="-fx-background-color: #00b359;" text="IMPORT" textFill="WHITE">
+                                 <font>
+                                    <Font name="Aparajita" size="15.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton fx:id="edit1111" layoutX="166.0" layoutY="502.0" onAction="#update" prefHeight="33.0" prefWidth="105.0" style="-fx-background-color: red;" text="EXPORT" textFill="WHITE">
+                                 <font>
+                                    <Font name="Aparajita" size="15.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXTextField focusColor="BLACK" labelFloat="true" layoutX="38.0" layoutY="25.0" maxWidth="376.0" minWidth="158.0" prefHeight="36.0" prefWidth="158.0" promptText="Search:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </JFXTextField>
+                              <ListView fx:id="listpermit" layoutX="45.0" layoutY="465.0" prefHeight="28.0" prefWidth="235.0" />
+                           </children></AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab text="Black List">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="388.0" stylesheets="@width.css">
+                           <children>
+                              <TableView layoutX="32.0" layoutY="34.0" prefHeight="489.0" prefWidth="260.0">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" text="BL ID" />
+                                  <TableColumn prefWidth="106.0" text="Surname" />
+                                    <TableColumn prefWidth="77.0" text="Gender" />
+                                </columns>
+                              </TableView>
+                           </children></AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab text="201 Files">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
