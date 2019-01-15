@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="id_disbursement" prefHeight="713.0" prefWidth="993.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.FINANCIAL.FINANCIAL_DISBURSEMENTController">
+   <children>
+      <HBox prefHeight="26.0" prefWidth="993.0" style="-fx-background-color: #34a853;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Label prefHeight="26.0" prefWidth="166.0" text="   Disbursement" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <JFXTabPane layoutY="26.0" prefHeight="687.0" prefWidth="993.0" stylesheets="@../../Assets/css/tabpane.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="26.0">
+         <tabs>
+            <Tab text="Dibursement Request">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane layoutX="3.0" layoutY="3.0" prefHeight="26.0" prefWidth="524.0" style="-fx-background-color: #34a853;" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="466.0">
+                           <children>
+                              <Label layoutX="7.0" layoutY="2.0" text="Request" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <JFXButton layoutX="429.0" layoutY="35.0" prefHeight="25.0" prefWidth="97.0" style="-fx-background-color: #34a853;" text="History" textFill="WHITE" AnchorPane.rightAnchor="467.0" />
+                        <TableView fx:id="dr_tbl" layoutX="3.0" layoutY="65.0" prefHeight="570.0" prefWidth="525.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="465.0" AnchorPane.topAnchor="65.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <Separator layoutX="530.0" orientation="VERTICAL" prefHeight="642.0" prefWidth="7.0" AnchorPane.rightAnchor="456.0" />
+                        <AnchorPane layoutX="537.0" layoutY="3.0" prefHeight="632.0" prefWidth="451.0" style="-fx-border-color: #34a853;" AnchorPane.bottomAnchor="4.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="3.0">
+                           <children>
+                              <AnchorPane layoutX="4.0" layoutY="3.0" prefHeight="26.0" prefWidth="442.0" style="-fx-background-color: #34a853;">
+                                 <children>
+                                    <Label layoutX="5.0" layoutY="3.0" text="Create Voucher" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <DatePicker fx:id="drequest" disable="true" layoutX="14.0" layoutY="44.0" prefHeight="44.0" prefWidth="223.0" promptText="Date Request" />
+                              <JFXTextField fx:id="dept_txt" disable="true" focusColor="#34a853" layoutX="14.0" layoutY="102.0" maxWidth="426.0" minWidth="426.0" prefHeight="51.0" prefWidth="426.0" promptText="Department" unFocusColor="#34a853" />
+                              <JFXTextField fx:id="amnt_txt" disable="true" focusColor="#34a853" layoutX="14.0" layoutY="169.0" maxWidth="426.0" minWidth="426.0" prefHeight="51.0" prefWidth="426.0" promptText="Amount" unFocusColor="#34a853" />
+                              <Label disable="true" layoutX="23.0" layoutY="239.0" prefHeight="49.0" prefWidth="57.0" text="Name:" textFill="#34a853">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="stat_lbl" disable="true" layoutX="111.0" layoutY="255.0" prefHeight="17.0" prefWidth="150.0" text="None" />
+                              <JFXComboBox fx:id="vt_cmbobx" layoutX="22.0" layoutY="297.0" prefHeight="48.0" prefWidth="415.0" promptText="Voucher Type" />
+                              <JFXTextField fx:id="clmnt_txt" focusColor="#34a853" layoutX="17.0" layoutY="370.0" maxWidth="426.0" minWidth="416.0" prefHeight="51.0" prefWidth="416.0" promptText="Claimant" unFocusColor="#34a853" />
+                              <JFXTextField fx:id="org_txt" focusColor="#34a853" layoutX="17.0" layoutY="437.0" maxWidth="426.0" minWidth="416.0" prefHeight="51.0" prefWidth="416.0" promptText="Organization" unFocusColor="#34a853" />
+                              <DatePicker fx:id="drelease" layoutX="25.0" layoutY="510.0" prefHeight="42.0" prefWidth="202.0" promptText="Date Release" />
+                              <JFXButton fx:id="save_voucher_btn" layoutX="22.0" layoutY="580.0" prefHeight="38.0" prefWidth="206.0" style="-fx-background-color: #34a853;" text="Disburse Voucher" textFill="WHITE" AnchorPane.leftAnchor="22.0" />
+                              <JFXButton layoutX="244.0" layoutY="580.0" prefHeight="38.0" prefWidth="184.0" style="-fx-background-color: #34a853;" text="Post to Journal" textFill="WHITE" AnchorPane.rightAnchor="23.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Disbursement Voucher Record">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="dvr_tbl" layoutX="3.0" layoutY="71.0" prefHeight="564.0" prefWidth="987.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="71.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <JFXTextField fx:id="SearchDVR" focusColor="#34a853" labelFloat="true" layoutX="49.0" layoutY="22.0" maxWidth="302.0" minWidth="302.0" prefHeight="31.0" prefWidth="302.0" promptText="Search by Name" unFocusColor="#34a853" />
+                        <AnchorPane layoutX="14.0" layoutY="25.0" prefHeight="26.0" prefWidth="35.0" style="-fx-background-color: #34a853;">
+                           <children>
+                              <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="5.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../Assets/icons8_Search_30px.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                        <Separator layoutY="61.0" prefHeight="6.0" prefWidth="993.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                        <JFXComboBox fx:id="cmbobxDvr" layoutX="357.0" layoutY="23.0" onAction="#cbxdvr" prefHeight="25.0" prefWidth="194.0" promptText="Choose Type" />
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Reports">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <DatePicker layoutX="14.0" layoutY="14.0" prefHeight="38.0" prefWidth="174.0" promptText="From" />
+                        <DatePicker layoutX="201.0" layoutY="14.0" prefHeight="38.0" prefWidth="174.0" promptText="To" />
+                        <JFXButton layoutX="396.0" layoutY="21.0" prefHeight="25.0" prefWidth="87.0" style="-fx-background-color: #34a853;" text="Go" textFill="WHITE" />
+                        <Separator layoutX="1.0" layoutY="63.0" prefHeight="0.0" prefWidth="993.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" />
+                        <TableView layoutX="5.0" layoutY="76.0" prefHeight="560.0" prefWidth="983.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="76.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+   </children>
+</AnchorPane>

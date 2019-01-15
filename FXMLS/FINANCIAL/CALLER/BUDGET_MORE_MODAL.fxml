@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="479.0" prefWidth="323.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.FINANCIAL.CALLER.BUDGET_MORE_MODALController">
+   <children>
+      <AnchorPane layoutY="3.0" prefHeight="29.0" prefWidth="604.0" style="-fx-background-color: #34a853;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Label layoutX="5.0" layoutY="3.0" text="More Details" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Separator layoutX="-3.0" layoutY="35.0" prefHeight="3.0" prefWidth="604.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="3.0" />
+      <Label layoutX="14.0" layoutY="49.0" text="Department:" />
+      <Label layoutX="13.0" layoutY="91.0" text="Date Request:" />
+      <Label layoutX="14.0" layoutY="133.0" text="Priority Level:" />
+      <Label layoutX="13.0" layoutY="173.0" text="Amount:" />
+      <Label layoutX="11.0" layoutY="213.0" text="Requestor:" />
+      <Label layoutX="11.0" layoutY="249.0" text="Status:" textFill="#34a853" />
+      <Label layoutX="11.0" layoutY="281.0" text="Description:" />
+      <JFXTextArea fx:id="description_txtarea" editable="false" focusColor="#34a853" layoutX="11.0" layoutY="306.0" maxWidth="300.0" minWidth="128.0" prefHeight="82.0" prefWidth="300.0" promptText="None" unFocusColor="#34a853" />
+      <Label fx:id="department_lbl" layoutX="105.0" layoutY="49.0" text="None">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="daterequest_lbl" layoutX="105.0" layoutY="89.0" text="None">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="prioritylvl" layoutX="105.0" layoutY="133.0" text="None">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="amount_lbl" layoutX="105.0" layoutY="173.0" text="None">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="requestor_lbl" layoutX="105.0" layoutY="213.0" text="None">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="status_lbl" layoutX="105.0" layoutY="249.0" text="None">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <JFXButton fx:id="approved_btn" layoutX="10.0" layoutY="413.0" prefHeight="25.0" prefWidth="125.0" style="-fx-background-color: #34a853;" text="Approved" textFill="WHITE" />
+      <JFXButton fx:id="send_dis_btn" disable="true" layoutX="160.0" layoutY="413.0" prefHeight="25.0" prefWidth="143.0" style="-fx-background-color: #34a853;" text="Send to Dibursement" textFill="WHITE" />
+      <JFXButton fx:id="delay_btn" disable="true" layoutX="10.0" layoutY="443.0" prefHeight="25.0" prefWidth="125.0" style="-fx-background-color: #34a853;" text="Delay" textFill="WHITE" />
+      <Label fx:id="label_id" layoutX="60.0" layoutY="249.0" prefHeight="17.0" prefWidth="31.0" visible="false" />
+   </children>
+</AnchorPane>
