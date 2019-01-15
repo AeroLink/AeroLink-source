@@ -49,6 +49,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
@@ -108,7 +109,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         statcb.getSelectionModel().selectedItemProperty().addListener(listener -> {
             DummyCount = 0;
             GlobalCount = 0;
-            
+
         });
         ckasscb.getSelectionModel().selectedItemProperty().addListener(listener -> {
             DummyCount = 0;
@@ -130,11 +131,11 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         });
         Search_Job.setOnMouseClicked(event -> SearchJOB());
         ///////2ndobj
-        
+
         obj1.addListener((ListChangeListener.Change<? extends Object> c) -> {
             tbl_chc.setItems(obj1);
         });
-        
+
         srch1.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
             Search();
         });
@@ -144,6 +145,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         this.populateTable1();
 
     }
+
     public void weabo1() {
         HR4_ClassificationModel cc = new HR4_ClassificationModel();
         try {
@@ -158,6 +160,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
             System.out.println(e);
         }
     }
+
     public void weabo() {
         HR4_Status st = new HR4_Status();
         try {
@@ -191,7 +194,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
                         "tblDD.designation as designation");
         this.AddJobToTable(rs);
     }
-    
+
     public void Search() {
 
         tbl_chc.getItems().clear();
@@ -202,7 +205,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "=", "aerolink.tbl_hr4_jobs", "dept_id", true)
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employeeStatus", "status_id", "st", "=", "status_id")
                 .where(new Object[][]{{"tblDD.lastname", "like", "%" + srch1.getText() + "%"}
-        })  
+        })
                 .get(
                         "tblD.employee_code",
                         "CONCAT(tblDD.lastname,', ',tblDD.firstname,' ',tblDD.middlename,'.') as fnn",
@@ -245,17 +248,17 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
                     if (DummyCount != GlobalCount) {
 
                         tbl_jobs.getItems();
-                            List rs = jobs
-                                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "tblD", "=", "dept_id")
-                                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_classifications", "id", "tblC", "=", "classification_id")
-                                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_designations", "id", "tblDD", "=", "designation_id")
-                                    .where(new Object[][]{{"tblC.class_name", "=", ckasscb.getSelectionModel().getSelectedItem().toString()}})
-                                    .get(
-                                            "title",
-                                            "description",
-                                            "tblD.dept_name as department",
-                                            "tblC.class_name as classification",
-                                            "tblDD.designation as designation");
+                        List rs = jobs
+                                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "tblD", "=", "dept_id")
+                                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_classifications", "id", "tblC", "=", "classification_id")
+                                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_designations", "id", "tblDD", "=", "designation_id")
+                                .where(new Object[][]{{"tblC.class_name", "=", ckasscb.getSelectionModel().getSelectedItem().toString()}})
+                                .get(
+                                        "title",
+                                        "description",
+                                        "tblD.dept_name as department",
+                                        "tblC.class_name as classification",
+                                        "tblDD.designation as designation");
                         AddJobToTable(rs);
                         GlobalCount = DummyCount;
                     }
@@ -319,19 +322,85 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         More.setCellFactory(new Callback<TableColumn<HR4_EmpInfoClass, Boolean>, TableCell<HR4_EmpInfoClass, Boolean>>() {
             @Override
             public TableCell<HR4_EmpInfoClass, Boolean> call(TableColumn<HR4_EmpInfoClass, Boolean> param) {
-                return new Synapse.Components.ButtonInCell<HR4_EmpInfoClass>().create("More", new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        System.err.println("a");
-                        Modal md = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_InfoCHC.fxml").getParent());
-                        md.open();
+                return new TableCell<HR4_EmpInfoClass, Boolean>() {
+                    private final Button btnMore = new Button("More");
+
+                    {
+                        btnMore.setOnAction(value -> {
+                            Modal md = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_InfoCHC.fxml").getParent());
+                            md.open();
+                        });
                     }
-                });
+
+                    public void updateItem(Boolean item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btnMore);
+                        }
+                    }
+                };
             }
+
         });
         //</editor-fold>
-        tbl_chc.getColumns().addAll(employee_code, fnn, job_id, dept_id, status_id, More);
+        tbl_chc.getColumns()
+                .addAll(employee_code, fnn, job_id, dept_id, status_id, More);
     }
+    /*
+    
+    System.err.println("a");
+                        Modal md = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_InfoCHC.fxml").getParent());
+                        md.open();
+    
+    TableColumn<HR2_ExaminationClass, Void> listOfQuestions = new TableColumn("List of Questions");
+
+        Callback<TableColumn<HR2_ExaminationClass, Void>, TableCell<HR2_ExaminationClass, Void>> cellFactory
+                = new Callback<TableColumn<HR2_ExaminationClass, Void>, TableCell<HR2_ExaminationClass, Void>>() {
+            @Override
+            public TableCell<HR2_ExaminationClass, Void> call(final TableColumn<HR2_ExaminationClass, Void> param) {
+
+                final TableCell<HR2_ExaminationClass, Void> cell = new TableCell<HR2_ExaminationClass, Void>() {
+                    private final Button btn_q_list = new Button("List of Questions");
+
+                    {
+                        try {
+                            btn_q_list.setOnAction(e
+                                    -> {
+                                HR2_LMClass_For_AddQuestion_Modal.initCourseTitle(
+                                        tbl_exam.getSelectionModel().getSelectedItem().exam_id.get(),
+                                        tbl_exam.getSelectionModel().getSelectedItem().exam_name.get(),
+                                        tbl_exam.getSelectionModel().getSelectedItem().exam_desc.get(),
+                                        tbl_exam.getSelectionModel().getSelectedItem().id.get());
+                                Modal md = Modal.getInstance(new Form("/FXMLS/HR2/Modals/List_Of_Questions.fxml").getParent());
+                                md.open();
+                            });
+                            btn_q_list.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
+                            btn_q_list.setCursor(javafx.scene.Cursor.HAND);
+                        } catch (Exception ex) {
+                            System.out.println(ex);
+                        }
+
+                    }
+
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn_q_list);
+                        }
+                    }
+                };
+                return cell;
+            }
+
+        };
+
+        listOfQuestions.setCellFactory(cellFactory);
+        tbl_exam.getColumns().add(listOfQuestions);
+     */
 
     long DummyCount = 0;
     long GlobalCount = 0;
@@ -369,8 +438,10 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
                     }
 
                     Thread.sleep(3000);
+
                 } catch (InterruptedException ex) {
-                    Logger.getLogger(HR4_Core_Human_Capital_ManagementController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(HR4_Core_Human_Capital_ManagementController.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
@@ -380,7 +451,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
     }
 
     public void AddJobToTable1(List rs) {
-        
+
         obj1.clear();
         tbl_chc.refresh();
 
@@ -426,6 +497,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         md.open();
 
     }
+
     @FXML
     private void viewRow(MouseEvent event) {
         if (event.getButton() == MouseButton.PRIMARY) {
@@ -444,10 +516,8 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
     private void OpenModalNewDept(ActionEvent event) {
         Modal dd = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_NewDept.fxml").getParent());
         dd.open();
-        
-    }
 
-    
+    }
 
     /*@FXML
     private void deletebtn(){
