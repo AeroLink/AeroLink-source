@@ -26,9 +26,9 @@
             </Label>
          </children>
       </HBox>
-      <JFXTabPane layoutY="27.0" prefHeight="685.0" prefWidth="993.0" stylesheets="@../../Assets/css/tabpane.css" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
+      <JFXTabPane layoutY="27.0" prefHeight="685.0" prefWidth="993.0" stylesheets="@../../Assets/css/tabCSS.css" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
          <tabs>
-            <Tab text="Chart of Accounts">
+            <Tab style="-fx-background-color: #34a853;" text="Chart of Accounts">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -64,7 +64,7 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <JFXTextField layoutX="14.0" layoutY="14.0" maxWidth="276.0" minWidth="276.0" prefHeight="37.0" prefWidth="276.0" promptText="Search" />
+                        <JFXTextField layoutX="14.0" layoutY="26.0" maxWidth="276.0" minWidth="276.0" prefHeight="37.0" prefWidth="276.0" promptText="Search" />
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -72,7 +72,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="6.0" layoutY="93.0" prefHeight="539.0" prefWidth="494.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="493.0" AnchorPane.topAnchor="93.0">
+                        <TableView layoutX="6.0" layoutY="40.0" prefHeight="605.0" prefWidth="403.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="584.0" AnchorPane.topAnchor="40.0">
                           <columns>
                             <TableColumn prefWidth="75.0" text="C1" />
                             <TableColumn prefWidth="75.0" text="C2" />
@@ -81,35 +81,59 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <AnchorPane layoutX="512.0" layoutY="5.0" prefHeight="627.0" prefWidth="477.0" style="-fx-border-color: #34a853;" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="5.0">
+                        <AnchorPane layoutX="512.0" layoutY="3.0" prefHeight="642.0" prefWidth="574.0" style="-fx-border-color: #34a853;" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="3.0">
                            <children>
-                              <AnchorPane layoutX="3.0" layoutY="3.0" prefHeight="26.0" prefWidth="471.0" style="-fx-background-color: #34a853;">
+                              <AnchorPane layoutX="4.0" layoutY="3.0" prefHeight="26.0" prefWidth="569.0" style="-fx-background-color: #34a853;" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="2.0">
                                  <children>
-                                    <Label layoutX="6.0" layoutY="-1.0" prefHeight="26.0" prefWidth="102.0" text="Journal Entry" textFill="WHITE">
+                                    <Label layoutX="6.0" layoutY="-1.0" prefHeight="26.0" prefWidth="173.0" text="Journal Entry" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </AnchorPane>
-                              <DatePicker layoutX="25.0" layoutY="51.0" prefHeight="42.0" prefWidth="280.0" promptText="Date" AnchorPane.leftAnchor="25.0" />
-                              <JFXTextField focusColor="#34a853" labelFloat="true" layoutX="73.0" layoutY="293.0" maxWidth="320.0" minWidth="149.0" prefHeight="41.0" prefWidth="191.0" promptText="Debit" unFocusColor="#34a853" />
-                              <Label layoutX="18.0" layoutY="364.0" text="Total">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                              </Label>
-                              <JFXComboBox layoutX="25.0" layoutY="118.0" prefHeight="46.0" prefWidth="427.0" promptText="Account Title" />
-                              <Label layoutX="165.0" layoutY="366.0" text="0" />
-                              <Label layoutX="360.0" layoutY="366.0" text="0" />
-                              <JFXTextField focusColor="#34a853" labelFloat="true" layoutX="268.0" layoutY="293.0" maxWidth="320.0" minWidth="149.0" prefHeight="41.0" prefWidth="191.0" promptText="Credit" unFocusColor="#34a853" />
-                              <JFXTextArea focusColor="#34a853" layoutX="24.0" layoutY="193.0" maxWidth="444.0" minWidth="430.0" prefHeight="70.0" prefWidth="430.0" promptText="Description" unFocusColor="#34a853" />
+                              <DatePicker layoutX="27.0" layoutY="57.0" prefHeight="42.0" prefWidth="246.0" promptText="Date" AnchorPane.leftAnchor="27.0" />
+                              <JFXTextField focusColor="#34a853" labelFloat="true" layoutX="27.0" layoutY="151.0" maxWidth="320.0" minWidth="149.0" prefHeight="41.0" prefWidth="254.0" promptText="Debit" unFocusColor="#34a853" />
+                              <JFXTextField focusColor="#34a853" labelFloat="true" layoutX="295.0" layoutY="150.0" maxWidth="320.0" minWidth="149.0" prefHeight="41.0" prefWidth="265.0" promptText="Credit" unFocusColor="#34a853" />
+                              <JFXButton layoutX="329.0" layoutY="204.0" prefHeight="26.0" prefWidth="110.0" style="-fx-background-color: #34a853;" text="Save" textFill="WHITE" />
+                              <TableView layoutX="5.0" layoutY="278.0" prefHeight="309.0" prefWidth="566.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" text="C1" />
+                                  <TableColumn prefWidth="75.0" text="C2" />
+                                </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                              <AnchorPane layoutX="6.0" layoutY="587.0" prefHeight="50.0" prefWidth="563.0" style="-fx-border-color: #34a853;" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="6.0">
+                                 <children>
+                                    <Label layoutX="15.0" layoutY="14.0" text="Total:">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="383.0" layoutY="17.0" text="0" />
+                                    <Label layoutX="480.0" layoutY="17.0" text="0" />
+                                 </children>
+                              </AnchorPane>
+                              <Separator layoutX="10.0" layoutY="241.0" prefHeight="0.0" prefWidth="550.0" />
+                              <AnchorPane layoutX="3.0" layoutY="244.0" prefHeight="26.0" prefWidth="568.0" style="-fx-background-color: #34a853;">
+                                 <children>
+                                    <Label layoutX="6.0" layoutY="-1.0" prefHeight="26.0" prefWidth="173.0" text="General Journal Record" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <JFXTextArea layoutX="298.0" layoutY="44.0" maxWidth="287.0" minWidth="254.0" prefHeight="68.0" prefWidth="262.0" promptText="Description" />
+                              <JFXButton layoutX="450.0" layoutY="204.0" prefHeight="26.0" prefWidth="110.0" style="-fx-background-color: #34a853;" text="Post to Ledger" textFill="WHITE" />
                            </children>
                         </AnchorPane>
-                        <Separator layoutX="504.0" orientation="VERTICAL" prefHeight="645.0" prefWidth="6.0" AnchorPane.bottomAnchor="-7.0" AnchorPane.rightAnchor="483.0" AnchorPane.topAnchor="0.0" />
-                        <AnchorPane layoutX="7.0" layoutY="5.0" prefHeight="26.0" prefWidth="493.0" style="-fx-background-color: #34a853;" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="493.0">
+                        <Separator layoutX="410.0" layoutY="-3.0" orientation="VERTICAL" prefHeight="645.0" prefWidth="6.0" AnchorPane.bottomAnchor="-4.0" AnchorPane.rightAnchor="577.0" AnchorPane.topAnchor="-3.0" />
+                        <AnchorPane layoutX="7.0" layoutY="5.0" prefHeight="26.0" prefWidth="403.0" style="-fx-background-color: #34a853;" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="583.0">
                            <children>
-                              <Label layoutX="6.0" layoutY="-1.0" prefHeight="26.0" prefWidth="172.0" text="Journalizing" textFill="WHITE">
+                              <Label layoutX="6.0" layoutY="-1.0" prefHeight="26.0" prefWidth="172.0" text="List of Transaction" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
