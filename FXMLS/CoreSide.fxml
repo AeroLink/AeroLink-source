@@ -747,7 +747,7 @@
                                                 
                                                 <AnchorPane>	
                                                     <children>	
-                                                        <JFXButton id="id_apr" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Collection Management " AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">	
+                                                        <JFXButton id="id_apr" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Accounts Payable &amp; Receveible" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">	
                                                             <font>	
                                                                 <Font size="14.0" />	
                                                             </font>	
@@ -771,7 +771,7 @@
                                                 </AnchorPane>	
                                                 <AnchorPane layoutX="11.0" layoutY="86.0">	
                                                     <children>	
-                                                        <JFXButton id="id_collection" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Disbursement" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">	
+                                                        <JFXButton id="id_collection" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Collection Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">	
                                                             <font>	
                                                                 <Font size="14.0" />	
                                                             </font>	
@@ -783,7 +783,7 @@
                                                 </AnchorPane>	
                                                 <AnchorPane layoutX="11.0" layoutY="122.0">	
                                                     <children>	
-                                                        <JFXButton id="id_disbursement" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Accounts Payable &amp; Receivable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">	
+                                                        <JFXButton id="id_disbursement" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Disbursement" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">	
                                                             <font>	
                                                                 <Font size="14.0" />	
                                                             </font>	
