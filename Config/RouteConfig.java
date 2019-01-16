@@ -43,6 +43,11 @@ public class RouteConfig {
         {"hr4payroll", "/FXMLS/HR4/HR4_Payroll.fxml", "can_access_hr1_socialrecog"},
         {"hr4cnp", "/FXMLS/HR4/HR4_Compensation_and_Planning.fxml", "can_access_hr1_socialrecog"},
         {"hr4chc", "/FXMLS/HR4/HR4_Core_Human_Capital_Management.fxml", "can_access_hr4_corehumancapital"},
+        //Logistic1
+        {"log1AM", "/FXMLS/Log1/AssetManagement.fxml", "can_access_log1_AssetManagement"},
+        {"log1Proc", "/FXMLS/Log1/Procurement.fxml", "can_access_log1_Procurement"},
+        {"log1WM", "/FXMLS/Log1/WarehouseManagement.fxml", "can_access_log1_Warehousing"},
+        {"log1MRO", "/FXMLS/Log1/MaintenanceRepairOH.fxml", "can_access_log1_MaintenanceRepairOverhaul"},
         //Logistic2
         {"log2vp", "/FXMLS/Log2/Log2_Vendor_Portal.fxml", "can_access_hr1_socialrecog"},
         {"log2am", "/FXMLS/Log2/Log2_Audit_Management.fxml", "can_access_hr1_socialrecog"},
