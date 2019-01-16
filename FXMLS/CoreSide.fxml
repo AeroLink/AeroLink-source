@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="825.0" prefWidth="311.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.CoreSideController">
+<BorderPane prefHeight="825.0" prefWidth="311.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.CoreSideController">
     <center>
         <VBox prefHeight="657.0" prefWidth="311.0" style="-fx-background-color: white;">
             <children>
@@ -140,7 +140,7 @@
                                                 </AnchorPane>
                                                 <AnchorPane>
                                                     <children>
-                                                        <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Service Network" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <JFXButton id="core2SN" alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Service Network" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <graphic>
                                                                 <FontAwesomeIconView fill="#34a853" glyphName="COGS" size="25" strokeType="INSIDE" />
                                                             </graphic>
@@ -153,7 +153,7 @@
                                                 <AnchorPane prefHeight="10.0" prefWidth="273.0" />
                                                 <AnchorPane>
                                                     <children>
-                                                        <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Service Provider" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <JFXButton id="core2SP" alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Service Provider" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <graphic>
                                                                 <FontAwesomeIconView fill="#34a853" glyphName="CUBES" size="25" strokeType="INSIDE" />
                                                             </graphic>
@@ -166,7 +166,7 @@
                                                 <AnchorPane prefHeight="10.0" prefWidth="273.0" />
                                                 <AnchorPane>
                                                     <children>
-                                                        <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Customer Relationship Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <JFXButton id="core2SR" alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Customer Relationship Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <graphic>
                                                                 <FontAwesomeIconView fill="#34a853" glyphName="USER" size="25" strokeType="INSIDE" />
                                                             </graphic>
@@ -179,7 +179,7 @@
                                                 <AnchorPane prefHeight="10.0" prefWidth="273.0" />
                                                 <AnchorPane>
                                                     <children>
-                                                        <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Standard Operation Procedures" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <JFXButton id="core2SOP" alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Standard Operation Procedures" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <graphic>
                                                                 <FontAwesomeIconView fill="#34a853" glyphName="EXCHANGE" size="25" strokeType="INSIDE" />
                                                             </graphic>
@@ -192,7 +192,7 @@
                                                 <AnchorPane prefHeight="10.0" prefWidth="273.0" />
                                                 <AnchorPane>
                                                     <children>
-                                                        <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Schedule and Rate" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <JFXButton id="core2CRM" alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Schedule and Rate" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <graphic>
                                                                 <FontAwesomeIconView fill="#34a853" glyphName="CALENDAR" size="25" strokeType="INSIDE" />
                                                             </graphic>
@@ -744,6 +744,66 @@
                                                         </Label>
                                                     </children>
                                                 </AnchorPane>
+                                    <AnchorPane>
+                                       <children>
+                                          <JFXButton id="id_apr" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Legal Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                             <graphic>
+                                                <FontAwesomeIconView fill="#34a853" glyphName="MONEY" size="25" styleClass="fontIcon" />
+                                             </graphic>
+                                          </JFXButton>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="11.0" layoutY="50.0">
+                                       <children>
+                                          <JFXButton id="id_budget" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Legal Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                             <graphic>
+                                                <FontAwesomeIconView fill="#34a853" glyphName="MONEY" size="25" styleClass="fontIcon" />
+                                             </graphic>
+                                          </JFXButton>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="11.0" layoutY="86.0">
+                                       <children>
+                                          <JFXButton id="id_collection" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Legal Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                             <graphic>
+                                                <FontAwesomeIconView fill="#34a853" glyphName="MONEY" size="25" styleClass="fontIcon" />
+                                             </graphic>
+                                          </JFXButton>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="11.0" layoutY="122.0">
+                                       <children>
+                                          <JFXButton id="id_disbursement" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Legal Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                             <graphic>
+                                                <FontAwesomeIconView fill="#34a853" glyphName="MONEY" size="25" styleClass="fontIcon" />
+                                             </graphic>
+                                          </JFXButton>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="11.0" layoutY="50.0">
+                                       <children>
+                                          <JFXButton id="id_gl" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Legal Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                             <graphic>
+                                                <FontAwesomeIconView fill="#34a853" glyphName="MONEY" size="25" styleClass="fontIcon" />
+                                             </graphic>
+                                          </JFXButton>
+                                       </children>
+                                    </AnchorPane>
                                             </children>
                                         </VBox>
                                     </children>

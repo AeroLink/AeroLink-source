@@ -20,7 +20,7 @@ public class DatabaseConfig {
 
     //if offline mode
     public static Boolean offline = true;
-    public static String IP = "127.0.0.1"; //NS558185\AEROLINKSQL
+    public static String IP = "192.168.100.34"; //NS558185\AEROLINKSQL
     public static String PORT = "1444";
     public static String DATABASE = "AeroLink";
     public static String USER = "4205";
