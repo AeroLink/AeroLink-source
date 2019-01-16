@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTimePicker?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="622.0" prefWidth="458.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Administrative.Facility_Reservation_infoController">
+   <children>
+      <ImageView fx:id="facilityimage2" fitHeight="183.0" fitWidth="187.0" layoutX="26.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+      <JFXTextField fx:id="facilityidentity" editable="false" focusColor="BLACK" labelFloat="true" layoutX="27.0" layoutY="36.0" prefHeight="37.0" prefWidth="185.0" promptText="Facility ID:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="facilityn" editable="false" focusColor="BLACK" labelFloat="true" layoutX="233.0" layoutY="36.0" prefHeight="37.0" prefWidth="199.0" promptText="Facility Name:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="rby" editable="false" focusColor="BLACK" labelFloat="true" layoutX="233.0" layoutY="99.0" prefHeight="37.0" prefWidth="199.0" promptText="Reserved By:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="ppose" editable="false" focusColor="BLACK" labelFloat="true" layoutX="233.0" layoutY="165.0" prefHeight="37.0" prefWidth="199.0" promptText="Purpose:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="stat" editable="false" focusColor="BLACK" labelFloat="true" layoutX="233.0" layoutY="495.0" prefHeight="37.0" prefWidth="199.0" promptText="Status:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </JFXTextField>
+      <JFXDatePicker fx:id="sdate" defaultColor="#00b256" editable="false" layoutX="233.0" layoutY="234.0" prefHeight="39.0" prefWidth="199.0" promptText="Start Date" />
+      <JFXDatePicker fx:id="edate" defaultColor="#00b256" editable="false" layoutX="233.0" layoutY="298.0" prefHeight="39.0" prefWidth="199.0" promptText="End Date" />
+      <JFXTimePicker fx:id="stime" defaultColor="#00b256" disable="true" layoutX="233.0" layoutY="369.0" prefHeight="34.0" prefWidth="199.0" promptText="Start Time" />
+      <JFXTimePicker fx:id="etime" defaultColor="#00b256" disable="true" layoutX="233.0" layoutY="437.0" prefHeight="34.0" prefWidth="199.0" promptText="End Time" />
+      <JFXTextField fx:id="cap" editable="false" focusColor="BLACK" labelFloat="true" layoutX="27.0" layoutY="299.0" prefHeight="37.0" prefWidth="185.0" promptText="Capacity:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="loc" focusColor="BLACK" labelFloat="true" layoutX="27.0" layoutY="368.0" prefHeight="37.0" prefWidth="185.0" promptText="Location:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </JFXTextField>
+      <JFXButton fx:id="btncancel" layoutX="20.0" layoutY="564.0" onAction="#cancelrequest" prefHeight="33.0" prefWidth="136.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="CANCEL REQUEST" textFill="WHITE">
+         <font>
+            <Font name="Aparajita" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btndone" layoutX="333.0" layoutY="564.0" onAction="#close" prefHeight="33.0" prefWidth="99.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="DONE" textFill="WHITE">
+         <font>
+            <Font name="Aparajita" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXTextField fx:id="foriddisplay" focusColor="BLACK" labelFloat="true" layoutX="20.0" layoutY="436.0" opacity="0.0" prefHeight="37.0" prefWidth="199.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </JFXTextField>
+      <JFXButton fx:id="updatebtn" layoutX="219.0" layoutY="564.0" onAction="#updateinfo" prefHeight="33.0" prefWidth="99.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="UPDATE" textFill="WHITE">
+         <font>
+            <Font name="Aparajita" size="15.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

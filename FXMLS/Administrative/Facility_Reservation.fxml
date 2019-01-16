@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTimePicker?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="925.0" prefWidth="1260.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Administrative.Facility_ReservationController">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <JFXTabPane stylesheets="@admintheme.css" BorderPane.alignment="CENTER">
+               <tabs>
+                  <Tab text="Facility Reservation">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <JFXTextField fx:id="reservedby" focusColor="BLACK" labelFloat="true" layoutX="492.0" layoutY="543.0" maxWidth="376.0" minWidth="282.0" prefHeight="36.0" prefWidth="282.0" promptText="Reserved By:">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXTextField>
+                              <JFXDatePicker fx:id="startdate" defaultColor="#00b359" editable="false" layoutX="491.0" layoutY="212.0" prefHeight="44.0" prefWidth="293.0" promptText="Start Date" />
+                              <JFXComboBox fx:id="urgencybox" layoutX="592.0" layoutY="635.0" prefHeight="25.0" prefWidth="186.0" />
+                              <Label layoutX="489.0" layoutY="635.0" prefHeight="31.0" prefWidth="105.0" text="Urgency Level:">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <JFXButton fx:id="edit" layoutX="142.0" layoutY="699.0" onAction="#saveFR" prefHeight="33.0" prefWidth="95.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="SUBMIT" textFill="WHITE">
+                                 <font>
+                                    <Font name="Aparajita" size="15.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton fx:id="edit1" layoutX="247.0" layoutY="699.0" prefHeight="33.0" prefWidth="95.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="CANCEL" textFill="WHITE">
+                                 <font>
+                                    <Font name="Aparajita" size="15.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXDatePicker fx:id="enddate" defaultColor="#00b256" editable="false" layoutX="491.0" layoutY="300.0" prefHeight="39.0" prefWidth="294.0" promptText="End Date" />
+                              <JFXComboBox fx:id="facilitybox" layoutX="200.0" layoutY="147.0" onAction="#facilityreservationselect" prefHeight="25.0" prefWidth="169.0" />
+                              <Label layoutX="108.0" layoutY="142.0" prefHeight="34.0" prefWidth="79.0" text="Facility:">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <JFXTimePicker fx:id="starttime" defaultColor="#00b256" layoutX="491.0" layoutY="391.0" prefHeight="34.0" prefWidth="294.0" promptText="Start Time" />
+                              <JFXTimePicker fx:id="endtime" defaultColor="#00b256" layoutX="491.0" layoutY="469.0" prefHeight="40.0" prefWidth="294.0" promptText="End Time" />
+                              <ImageView fx:id="frreservationiview" fitHeight="340.0" fitWidth="405.0" layoutX="49.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true" />
+                              <JFXTextField fx:id="locationfield1" editable="false" focusColor="BLACK" labelFloat="true" layoutX="106.0" layoutY="537.0" maxWidth="271.0" minWidth="166.0" prefHeight="43.0" prefWidth="271.0" promptText="Location:" unFocusColor="BLACK">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXTextField>
+                              <JFXTextField fx:id="capacityfield1" editable="false" focusColor="BLACK" labelFloat="true" layoutX="108.0" layoutY="623.0" maxWidth="277.0" minWidth="186.0" prefHeight="43.0" prefWidth="277.0" promptText="Capacity:" unFocusColor="BLACK">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXTextField>
+                              <JFXComboBox fx:id="purposebox" layoutX="584.0" layoutY="148.0" prefHeight="25.0" prefWidth="194.0" />
+                              <Label layoutX="492.0" layoutY="143.0" prefHeight="34.0" prefWidth="79.0" text="Purpose:">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="facilityidtxt" layoutX="108.0" layoutY="89.0" opacity="0.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Reservation Log">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label layoutX="51.0" layoutY="91.0" prefHeight="29.0" prefWidth="81.0" text="January" AnchorPane.leftAnchor="51.0">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="51.0" layoutY="156.0" prefHeight="29.0" prefWidth="81.0" text="February" AnchorPane.leftAnchor="51.0">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="51.0" layoutY="220.0" prefHeight="29.0" prefWidth="81.0" text="March" AnchorPane.leftAnchor="51.0">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="51.0" layoutY="282.0" prefHeight="29.0" prefWidth="81.0" text="April" AnchorPane.leftAnchor="51.0">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="51.0" layoutY="351.0" prefHeight="29.0" prefWidth="81.0" text="May" AnchorPane.leftAnchor="51.0">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="51.0" layoutY="419.0" prefHeight="29.0" prefWidth="81.0" text="June" AnchorPane.leftAnchor="51.0">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="51.0" layoutY="486.0" prefHeight="29.0" prefWidth="81.0" text="July">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="51.0" layoutY="551.0" prefHeight="29.0" prefWidth="81.0" text="August">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="51.0" layoutY="615.0" prefHeight="29.0" prefWidth="81.0" text="September">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="51.0" layoutY="677.0" prefHeight="29.0" prefWidth="81.0" text="October">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="51.0" layoutY="746.0" prefHeight="29.0" prefWidth="81.0" text="November">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="51.0" layoutY="814.0" prefHeight="29.0" prefWidth="81.0" text="December">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <JFXButton fx:id="frapproved" layoutX="1137.0" layoutY="426.0" onAction="#FRapproved" prefHeight="33.0" prefWidth="95.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="APPROVED" textFill="WHITE">
+                                 <font>
+                                    <Font name="Aparajita" size="15.0" />
+                                 </font>
+                              </JFXButton>
+                              <TableView fx:id="tablefr" layoutX="159.0" layoutY="96.0" prefHeight="335.0" prefWidth="1070.0" AnchorPane.topAnchor="86.0">
+                                <columns>
+                                    <TableColumn fx:id="FRreservationid" prefWidth="152.0" text="Reservation_ID" />
+                                  <TableColumn fx:id="cfacility" prefWidth="152.0" text="Facility" />
+                                  <TableColumn fx:id="cpurpose" prefWidth="152.0" text="Purpose" />
+                                    <TableColumn fx:id="cstartdate" prefWidth="152.0" text="Start Date" />
+                                    <TableColumn fx:id="cstarttime" prefWidth="152.0" text="Start Time" />
+                                    <TableColumn fx:id="crby" prefWidth="152.0" text="Reserved By" />
+                                    <TableColumn fx:id="cstatus" prefWidth="152.0" text="Status" />
+                                </columns>
+                              </TableView>
+                              <JFXTextField fx:id="frid" editable="false" layoutX="482.0" layoutY="21.0" opacity="0.0" />
+                              <TableView fx:id="tablefrapproved" layoutX="159.0" layoutY="477.0" prefHeight="335.0" prefWidth="1070.0">
+                                 <columns>
+                                    <TableColumn fx:id="FRreservationid1" prefWidth="152.0" text="Reservation_ID" />
+                                    <TableColumn fx:id="cfacility1" prefWidth="152.0" text="Facility" />
+                                    <TableColumn fx:id="cpurpose1" prefWidth="152.0" text="Purpose" />
+                                    <TableColumn fx:id="cstartdate1" prefWidth="152.0" text="Start Date" />
+                                    <TableColumn fx:id="cstarttime1" prefWidth="152.0" text="Start Time" />
+                                    <TableColumn fx:id="crby1" prefWidth="152.0" text="Reserved By" />
+                                    <TableColumn fx:id="cstatus1" prefWidth="152.0" text="Status" />
+                                 </columns>
+                              </TableView>
+                              <Label layoutX="169.0" layoutY="58.0" opacity="0.6" prefHeight="21.0" prefWidth="209.0" text="Pending Request" textFill="#686161">
+                                 <font>
+                                    <Font name="Arial" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="169.0" layoutY="446.0" opacity="0.6" prefHeight="21.0" prefWidth="209.0" text="Reservation History" textFill="#686161">
+                                 <font>
+                                    <Font name="Arial" size="18.0" />
+                                 </font>
+                              </Label>
+                              <CheckBox fx:id="chk1" layoutX="22.0" layoutY="97.0" mnemonicParsing="false" onAction="#tblhistory" />
+                              <CheckBox fx:id="chk2" layoutX="22.0" layoutY="162.0" mnemonicParsing="false" onAction="#tblhistory" />
+                              <CheckBox fx:id="chk3" layoutX="22.0" layoutY="226.0" mnemonicParsing="false" onAction="#tblhistory" />
+                              <CheckBox fx:id="chk4" layoutX="22.0" layoutY="288.0" mnemonicParsing="false" onAction="#tblhistory" />
+                              <CheckBox fx:id="chk5" layoutX="22.0" layoutY="357.0" mnemonicParsing="false" onAction="#tblhistory" />
+                              <CheckBox fx:id="chk6" layoutX="22.0" layoutY="425.0" mnemonicParsing="false" onAction="#tblhistory" />
+                              <CheckBox fx:id="chk7" layoutX="22.0" layoutY="492.0" mnemonicParsing="false" onAction="#tblhistory" />
+                              <CheckBox fx:id="chk8" layoutX="22.0" layoutY="557.0" mnemonicParsing="false" onAction="#tblhistory" />
+                              <CheckBox fx:id="chk9" layoutX="22.0" layoutY="621.0" mnemonicParsing="false" onAction="#tblhistory" />
+                              <CheckBox fx:id="chk10" layoutX="22.0" layoutY="683.0" mnemonicParsing="false" onAction="#tblhistory" />
+                              <CheckBox fx:id="chk11" layoutX="22.0" layoutY="752.0" mnemonicParsing="false" onAction="#tblhistory" />
+                              <CheckBox fx:id="chk12" layoutX="22.0" layoutY="820.0" mnemonicParsing="false" onAction="#tblhistory" />
+                              <JFXTextField fx:id="fordisplaytxt" layoutX="995.0" layoutY="444.0" opacity="0.0" />
+                              <JFXButton fx:id="viewbtn" layoutX="1130.0" layoutY="821.0" onAction="#view" prefHeight="33.0" prefWidth="95.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="VIEW" textFill="WHITE">
+                                 <font>
+                                    <Font name="Aparajita" size="15.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton fx:id="refreshbtn" layoutX="1026.0" layoutY="821.0" onAction="#loaddataFRapproved" prefHeight="33.0" prefWidth="95.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="REFRESH" textFill="WHITE">
+                                 <font>
+                                    <Font name="Aparajita" size="15.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Facility Manager">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label layoutX="114.0" layoutY="194.0" text="Facility:">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <JFXComboBox fx:id="Fmanagerbox" layoutX="189.0" layoutY="194.0" onAction="#facilityselection" prefHeight="25.0" prefWidth="174.0" />
+                              <JFXTextField fx:id="locationfield" editable="false" focusColor="BLACK" labelFloat="true" layoutX="114.0" layoutY="283.0" maxWidth="270.0" minWidth="239.0" prefHeight="43.0" prefWidth="270.0" promptText="Location:" unFocusColor="BLACK">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </JFXTextField>
+                              <JFXTextField fx:id="capacityfield" editable="false" focusColor="BLACK" labelFloat="true" layoutX="114.0" layoutY="381.0" maxWidth="268.0" minWidth="239.0" prefHeight="43.0" prefWidth="268.0" promptText="Capacity:" unFocusColor="BLACK">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </JFXTextField>
+                              <JFXButton fx:id="edit2" layoutX="114.0" layoutY="456.0" prefHeight="40.0" prefWidth="270.0" style="-fx-background-color: #00b359;" text="IMPORT" textFill="WHITE">
+                                 <font>
+                                    <Font name="Aparajita" size="18.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton fx:id="frbuttonen" layoutX="114.0" layoutY="527.0" onAction="#updateen" prefHeight="39.0" prefWidth="269.0" style="-fx-background-color: #00b359;" text="ENABLE" textFill="WHITE">
+                                 <font>
+                                    <Font name="Aparajita" size="18.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton fx:id="frbuttonds" layoutX="114.0" layoutY="592.0" onAction="#updateds" prefHeight="42.0" prefWidth="269.0" style="-fx-background-color: #00b359;" text="DISABLE" textFill="WHITE">
+                                 <font>
+                                    <Font name="Aparajita" size="18.0" />
+                                 </font>
+                              </JFXButton>
+                              <ImageView fx:id="frimageview" fitHeight="570.0" fitWidth="564.0" layoutX="499.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
