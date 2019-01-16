@@ -1,8 +1,14 @@
-package FXMLS.Log1.Modal;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package FXMLS.Log1.Warehouse.Modal;
 
-import FXMLS.Log1.ClassFiles.Log1_fullInventoryList;
+import FXMLS.Log1.ClassFiles.Log1_ItemRequestsClassfiles;
 import FXMLS.Log1.util.AlertMaker;
 import Model.Log1.Log1_WarehouseActivityLogModel;
+import Model.Log1.Log1_WarehouseRequestItemModel;
 import Model.Log1.Log1_WarehouseItemsModel;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
@@ -13,11 +19,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class StockOutWHController implements Initializable {
+/**
+ * FXML Controller class
+ *
+ * @author Crenz
+ */
+public class ApproveWarehouseRequestController implements Initializable {
 
+    @FXML
+    private Label minusx_txt;
     @FXML
     private Label itemDescript_txt;
     @FXML
@@ -35,32 +47,53 @@ public class StockOutWHController implements Initializable {
     @FXML
     private JFXTextField ItemID_txt;
     @FXML
-    private Button Takeout_btn;
+    private Label ItemRequested_txt;
     @FXML
-    private TextField minusx_txt;
+    private Label Requestor_txt;
+    @FXML
+    private Label Destination_txt;
+    @FXML
+    private Label DateRequested_txt;
+    @FXML
+    private Button Approve_btn;
+    @FXML
+    private Label RequestID_txt;
     @FXML
     private JFXTextField showInMainWindow_txt;
 
-    
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Takeout_btn.setOnMouseClicked(e -> StockOut());
+        // TODO
+        Approve_btn.setOnAction(e ->StockOut());
     }    
 
-    public void inflateUI(Log1_fullInventoryList selectedForAddStock) {
-        itemDescript_txt.setText(selectedForAddStock.getItemDescription());
-        stock_txt.setText(selectedForAddStock.getStockQuantity());
-        status_txt.setText(selectedForAddStock.getStatus());
-        itemLoc_txt.setText(selectedForAddStock.getItemLocation());
-        CriticalQuantity_txt.setText(selectedForAddStock.getCriticalQuantity());
-        ItemID_txt.setText(selectedForAddStock.getItemID());
+    @FXML
+    private void exit(ActionEvent event) {
+        Stage stage = (Stage) ItemID_txt.getScene().getWindow();
+        stage.close();
     }
+    
+    public void inflateUI(Log1_ItemRequestsClassfiles selectedForApproval) {
+        RequestID_txt.setText(selectedForApproval.getRequestOnWarehouseID());
+        ItemRequested_txt.setText(selectedForApproval.getItemDescription());
+        Requestor_txt.setText(selectedForApproval.getRequestedBy());
+        Destination_txt.setText(selectedForApproval.getDestination());
+        DateRequested_txt.setText(selectedForApproval.getDateItemRequested());
+        minusx_txt.setText(selectedForApproval.getQuantityRequested());
+        
+        itemDescript_txt.setText(selectedForApproval.getItemDescription());
+        stock_txt.setText(selectedForApproval.getStockQuantity());
+        status_txt.setText(selectedForApproval.getStatus());
+        itemLoc_txt.setText(selectedForApproval.getItemLocation());
+        CriticalQuantity_txt.setText(selectedForApproval.getCriticalQuantity());
+        ItemID_txt.setText(selectedForApproval.getItemID());
+    }
+    
     public void StockOut(){
-        String input = minusx_txt.getText();
         
-        Boolean flag = input.isEmpty();
-        
-        if(!flag){
             int x=Integer.parseInt(stock_txt.getText());
             int y=Integer.parseInt(minusx_txt.getText());
             
@@ -78,19 +111,25 @@ public class StockOutWHController implements Initializable {
         
         Log1_WarehouseActivityLogModel coa = new Log1_WarehouseActivityLogModel();
         Log1_WarehouseItemsModel coa1 = new Log1_WarehouseItemsModel();
-        try{coa.insert(new String [][]{
+        Log1_WarehouseRequestItemModel coa2 = new Log1_WarehouseRequestItemModel();
+        coa.insert(new String [][]{
             {"ActivityItemName",itemDescript_txt.getText()},
             {"ActivityUser", "rb"},
-            {"ActivityAction", Takeout_btn.getText()},
+            {"ActivityAction", "Take out"},
             {"ActivityValueAddedOrRemoved", minusx_txt.getText()}
             });
-            if(coa1.update(new Object[][]{ 
+        try{coa1.update(new Object[][]{ 
                 {"ItemDescription",itemDescript_txt.getText()},
                 {"StockQuantity",StockQuantityPlusEnterAmount_txt.getText()},
                 {"Status",secretStatus_txt.getText()},
                 {"ShowInMainWindow", showInMainWindow_txt.getText()}
             }).where(new Object[][]{
                 {"ItemID","=",ItemID_txt.getText()}
+            }).executeUpdate();
+            if(coa2.update(new Object [][]{
+                {"RequestStatus", "Approved"}
+            }).where(new Object[][]{
+                {"RequestOnWarehouseID", "=", RequestID_txt.getText()}
             }).executeUpdate()){
                 AlertMaker.showSimpleAlert(null,"Operation Success!");
                 minusx_txt.setText("");
@@ -103,27 +142,5 @@ public class StockOutWHController implements Initializable {
         }catch(Exception e){
             e.printStackTrace();
         }
-            
-        }else{
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("please enter a value");
-            alert.showAndWait();
-            return;
-        }
-        
-        itemDescript_txt.setText("");
-        stock_txt.setText("");
-        status_txt.setText("");
-        itemLoc_txt.setText("");
-        CriticalQuantity_txt.setText("");
-        ItemID_txt.setText("");
-    }    
-
-    @FXML
-    private void exit(ActionEvent event) {
-        Stage stage = (Stage) ItemID_txt.getScene().getWindow();
-        stage.close();
     }
-    
 }

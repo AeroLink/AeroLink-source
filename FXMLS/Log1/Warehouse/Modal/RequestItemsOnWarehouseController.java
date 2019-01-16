@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FXMLS.Log1.Modal;
+package FXMLS.Log1.Warehouse.Modal;
 
 import FXMLS.Log1.ClassFiles.Log1_fullInventoryList;
 import FXMLS.Log1.util.AlertMaker;
