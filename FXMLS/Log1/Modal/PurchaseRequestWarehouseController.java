@@ -7,8 +7,8 @@ package FXMLS.Log1.Modal;
 
 import FXMLS.Log1.ClassFiles.Log1_fullInventoryList;
 import FXMLS.Log1.util.AlertMaker;
-import Model.Log1.Log1_ProcurementRequestModel;
-import Model.Log1.Log1_WarehouseItems;
+import Model.Log1.Log1_ProcurementPurchaseRequestModel;
+import Model.Log1.Log1_WarehouseItemsModel;
 import Synapse.Session;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
@@ -130,7 +130,7 @@ public class PurchaseRequestWarehouseController implements Initializable {
     }
     
 //    public void fetchItemData(){ 
-//        Log1_WarehouseItems searchItem = new Log1_WarehouseItems();
+//        Log1_WarehouseItemsModel searchItem = new Log1_WarehouseItemsModel();
 //        CompletableFuture.supplyAsync(() -> {
 //            
 //            while (Session.CurrentRoute.equals("log1WM")) {
@@ -175,7 +175,7 @@ public class PurchaseRequestWarehouseController implements Initializable {
     
     public void fetchItemData(){
         ObservableList<Log1_fullInventoryList> items = FXCollections.observableArrayList();
-        Log1_WarehouseItems searchItem = new Log1_WarehouseItems();
+        Log1_WarehouseItemsModel searchItem = new Log1_WarehouseItemsModel();
         
         CompletableFuture.supplyAsync(() -> {
 
@@ -236,7 +236,7 @@ public class PurchaseRequestWarehouseController implements Initializable {
                 || quantity.isEmpty()|| date.isEmpty();
         
         
-        Log1_ProcurementRequestModel coa = new Log1_ProcurementRequestModel();
+        Log1_ProcurementPurchaseRequestModel coa = new Log1_ProcurementPurchaseRequestModel();
         if(!flag){
             try{
                 String[][] coa_table ={
@@ -252,7 +252,7 @@ public class PurchaseRequestWarehouseController implements Initializable {
                 {"RequestStatus","for Approval"}};
                     if(coa.insert(coa_table)){
                         AlertMaker.showSimpleAlert("Success", "Request to procure "+ itemDescription_txt.getText() +" has been sent");
-                        Log1_WarehouseItems wh = new Log1_WarehouseItems();
+                        Log1_WarehouseItemsModel wh = new Log1_WarehouseItemsModel();
                         wh.where(new Object[][]{
                             {"ItemID", "=", itemID_txt.getText()}
                         }).update(new Object[][]{

@@ -9,8 +9,7 @@ import FXMLS.Log1.ClassFiles.Log1_AssetBuildingClassfiles;
 import FXMLS.Log1.util.AlertMaker;
 import FXMLS.Log1.util.Log1Util;
 import Model.Log1.Log1_AssetBuildingModel;
-import Model.Log1.Log1_BuildingTypeModel;
-import Model.Log1.Log1_equipmentTypeModel;
+import Model.Log1.Log1_AssetDesiredBuildingTypeModel;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.HashMap;
@@ -155,7 +154,7 @@ public class AddBuildingController implements Initializable {
     }
     
     public void loadBuildingToCombox(){
-        Log1_BuildingTypeModel bt = new Log1_BuildingTypeModel();
+        Log1_AssetDesiredBuildingTypeModel bt = new Log1_AssetDesiredBuildingTypeModel();
         List BuildingType = bt.get();
 
         BuildingType.stream().forEach(row -> {
