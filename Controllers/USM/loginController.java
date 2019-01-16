@@ -30,43 +30,73 @@ public class loginController {
 
     public static Boolean doLogin(String u, String p) {
 
-        if (Session.isConnected) {
+        if (!Session.offline) {
+            if (Session.isConnected) {
 
-            HttpClient.post(METHOD.LOGIN, "{\"A1009\" : \"" + u + "\",\"B1009\" : \"" + p + "\", \"sestok\" : \"" + Session.sestoken + "\"}", (error, obj) -> {
-                if (error) {
-                    System.err.println("Error -> " + error);
+                HttpClient.post(METHOD.LOGIN, "{\"A1009\" : \"" + u + "\",\"B1009\" : \"" + p + "\", \"sestok\" : \"" + Session.sestoken + "\"}", (error, obj) -> {
+                    if (error) {
+                        System.err.println("Error -> " + error);
+                    }
+                    json = obj;
+                });
+
+                JSONObject list = new JSONObject(json.toString());
+
+                HashMap hash = (HashMap) list.toMap();
+
+                if (Boolean.parseBoolean(String.valueOf(hash.get("success")))) {
+
+                    //Changing Token
+                    Session.token = String.valueOf(hash.get("token"));
+
+                    //Getting Permissions
+                    UserPermissions up = new UserPermissions();
+
+                    Session.putIfNotExist("user_id", hash.get("id").toString());
+
+                    List listPermissions = up
+                            .join(Model.JOIN.INNER, "aerolink.tbl_users", "id", "=", "user_id")
+                            .join(Model.JOIN.INNER, "aerolink.tbl_permissions", "id", "=", "permission_id")
+                            .where(new Object[][]{
+                        {"user_id", "=", hash.get("id").toString()}
+                    }).get("aerolink.tbl_permissions.permission as UserPermission");
+
+                    listPermissions.stream().forEach((row) -> {
+                        HashMap crow = (HashMap) row;
+                        Session.addPermission(String.valueOf(crow.get("UserPermission")));
+                    });
+                    return true;
                 }
-                json = obj;
+
+            }
+        } else {
+            Users user = new Users();
+
+            List<HashMap> res = user.where(new Object[][]{
+                {"username", "=", u}
+
+            }).get("id", "username", "password");
+
+            UserPermissions up = new UserPermissions();
+
+            List listPermissions = up
+                    .join(Model.JOIN.INNER, "aerolink.tbl_users", "id", "=", "user_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_permissions", "id", "=", "permission_id")
+                    .where(new Object[][]{
+                {"user_id", "=", res.get(0).get("id").toString()}
+            }).get("aerolink.tbl_permissions.permission as UserPermission");
+
+            listPermissions.stream().forEach((row) -> {
+                HashMap crow = (HashMap) row;
+                Session.addPermission(String.valueOf(crow.get("UserPermission")));
             });
 
-            JSONObject list = new JSONObject(json.toString());
-
-            HashMap hash = (HashMap) list.toMap();
-
-            if (Boolean.parseBoolean(String.valueOf(hash.get("success")))) {
-
-                //Changing Token
-                Session.token = String.valueOf(hash.get("token"));
-
-                //Getting Permissions
-                UserPermissions up = new UserPermissions();
-                
-                Session.putIfNotExist("user_id", hash.get("id").toString());
-                
-                List listPermissions = up
-                        .join(Model.JOIN.INNER, "aerolink.tbl_users", "id", "=", "user_id")
-                        .join(Model.JOIN.INNER, "aerolink.tbl_permissions", "id", "=", "permission_id")
-                        .where(new Object[][]{
-                    {"user_id", "=", hash.get("id").toString()}
-                }).get("aerolink.tbl_permissions.permission as UserPermission");
-
-                listPermissions.stream().forEach((row) -> {
-                    HashMap crow = (HashMap) row;
-                    Session.addPermission(String.valueOf(crow.get("UserPermission")));
-                });
-                return true;
+            if (res.size() != 0) {
+                System.out.println();
+                if (Synapse.Crypt.Decrypt(res.get(0).get("password").toString()).equals(p)) {
+                    return true;
+                }
             }
-
         }
 
         return false;

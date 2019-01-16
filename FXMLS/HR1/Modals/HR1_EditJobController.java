@@ -96,6 +96,7 @@ public class HR1_EditJobController implements Initializable {
     private void submitPost(ActionEvent event) {
         JobPosting jp = new JobPosting();
 
+        System.err.println(HR1_EditJobSelection.id);
         if (jp.update(new Object[][]{
             {"description", txtDesc.getHtmlText().replace("\"", "'").replace(",", ".")},
             {"status", cboStatus.getSelectionModel().getSelectedItem().toString()},
