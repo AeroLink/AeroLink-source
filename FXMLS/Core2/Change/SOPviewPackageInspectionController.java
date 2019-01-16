@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FXMLS.Core2;
+package FXMLS.Core2.Change;
 
 import FXMLS.Core2.ClassFiles.SOPTable_package_inspect;
-import Model.Core2.CORE1_Customer_Details;
+import Model.Core2.CORE1_Customer_Details1;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
@@ -32,7 +32,7 @@ import javafx.scene.layout.AnchorPane;
  *
  * @author JPEG
  */
-public class StandardOperationalProcedureController implements Initializable {
+public class SOPviewPackageInspectionController implements Initializable {
 
     /* DECLARATION START */
     int Global_Count = 0;
@@ -41,10 +41,9 @@ public class StandardOperationalProcedureController implements Initializable {
     private AnchorPane SOProotPane;
     @FXML
     private TableView<SOPTable_package_inspect> tblPackage;
+
     ObservableList<SOPTable_package_inspect> spi = FXCollections.observableArrayList();
-    CORE1_Customer_Details con = new CORE1_Customer_Details();
-    @FXML
-    private JFXButton btnUpdate;
+    CORE1_Customer_Details1 con = new CORE1_Customer_Details1();
 
     /**
      * Initializes the controller class.
@@ -136,6 +135,12 @@ public class StandardOperationalProcedureController implements Initializable {
     @FXML
     private void prohibited(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/SOPviewProhibited.fxml"));
+        SOProotPane.getChildren().setAll(pane);
+    }
+
+    @FXML
+    private void OriginalpackInspect(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/StandardOperationalProcedure.fxml"));
         SOProotPane.getChildren().setAll(pane);
     }
 

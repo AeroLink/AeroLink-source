@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="SOProotPane" prefHeight="693.0" prefWidth="1370.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Core2.Change.SOPviewPackageInspectionController">
+   <children>
+      <SplitPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <items>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="tblPackage" layoutY="48.0" prefHeight="580.0" prefWidth="887.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+                     <columns>
+                        <TableColumn prefWidth="451.0" text="ITEM BRANDS" />
+                        <TableColumn prefWidth="342.0" text="REQUIRED DOCUMENTS" />
+                        <TableColumn prefWidth="338.0" text="PACKAGING" />
+                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <AnchorPane prefHeight="40.0" prefWidth="1370.0" styleClass="card" stylesheets="@../../../Assets/css/card.css">
+                     <children>
+                        <Label layoutX="503.0" layoutY="-1.0" prefHeight="41.0" prefWidth="399.0" text="STANDARD OPERATIONAL PROCEDURE" textFill="#34a853" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0">
+                           <font>
+                              <Font name="Arial Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <JFXButton buttonType="RAISED" layoutX="1220.0" layoutY="7.0" onAction="#packInspect" prefHeight="31.0" prefWidth="215.0" style="-fx-background-color: #34a853;" text="INSPECTION GUIDELINES" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="20" />
+                           </graphic>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton buttonType="RAISED" layoutX="937.0" layoutY="5.0" onAction="#manageguidelines" prefHeight="31.0" prefWidth="199.0" style="-fx-background-color: #34a853;" text="MANAGE GUIDELINES" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="CUBES" size="20" />
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton buttonType="RAISED" layoutX="727.0" layoutY="5.0" onAction="#prohibited" prefHeight="31.0" prefWidth="199.0" style="-fx-background-color: #34a853;" text="PROHIBITED ITEMS" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="SHIELD" size="20" />
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton buttonType="RAISED" layoutX="517.0" layoutY="5.0" onAction="#OriginalpackInspect" prefHeight="31.0" prefWidth="199.0" style="-fx-background-color: #34a853;" text="PACKAGE INSPECTION" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="EYE" size="20" />
+                           </graphic>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
+                  <JFXButton buttonType="RAISED" layoutX="1213.0" layoutY="640.0" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ee0c0c;" text="Delete" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="ERASER" size="20" />
+                     </graphic>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" layoutX="1097.0" layoutY="640.0" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ffa500;" text="Update" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="UPDATE" size="20" />
+                     </graphic>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" layoutX="981.0" layoutY="640.0" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #34a853;" text="Add" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="20" />
+                     </graphic>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

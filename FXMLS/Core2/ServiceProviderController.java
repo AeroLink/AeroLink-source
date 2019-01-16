@@ -5,53 +5,70 @@
  */
 package FXMLS.Core2;
 
-import FXMLS.Core2.icons.icon;
-import Model.C2_Serviceprovider;
+import FXMLS.Core2.ClassFiles.SPTable_LoadNA;
+import FXMLS.Core2.Modals.SPviewSPDetailsController;
+import Model.Core2.CORE2_ProvRegistration;
+import Synapse.Components.Modal.Modal;
+import Synapse.Form;
+import Synapse.Model;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
  *
- * @author jpeg
+ * @author JPEG
  */
 public class ServiceProviderController implements Initializable {
 
-    @FXML private JFXTextField pcompany;
-    @FXML private JFXTextField pcontact;
-    @FXML private JFXTextField pemail;
-    @FXML private JFXTextField pusername;
-    @FXML private JFXCheckBox pdoor;
-    @FXML private JFXCheckBox ppickup;
-    @FXML private JFXCheckBox pexpress;
-    @FXML private JFXTextField pcountry;
-    @FXML private JFXTextField pregion;
-    @FXML private JFXTextField pother;
-    @FXML private JFXTextField phousenumber;
-    @FXML private JFXTextField pstreet;
-    @FXML private JFXTextField pbarangay;
-    @FXML private JFXTextField pcity;
-    @FXML private JFXTextField pprovince;
-    @FXML private JFXTextField pzip;
-    @FXML private JFXPasswordField ppassword;
-    @FXML private JFXButton padd;
-    @FXML private JFXButton btn_registered;
+    /* DECLARATION START */
+    int Global_Count = 0;
+    /* DECLARATION END */
+    // dito lalabas yung another scene na tinatawag 
+    private AnchorPane rootPane;
+    @FXML
+    private AnchorPane SNrootPane;
+    @FXML
+    private JFXButton SPviewR;
+    @FXML
+    private JFXButton SPviewR1;
+    @FXML
+    private TextField searchP;
+
+    ObservableList<SPTable_LoadNA> sptbl = FXCollections.observableArrayList();
+    CORE2_ProvRegistration cONEcd = new CORE2_ProvRegistration();
+    @FXML
+    private TableView<SPTable_LoadNA> tblOpenDetails;
+    @FXML
+    private ContextMenu contextMenu;
+    @FXML
+    private MenuItem menuVD;
+    @FXML
+    private MenuItem menuVO;
 
     /**
      * Initializes the controller class.
@@ -59,91 +76,161 @@ public class ServiceProviderController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        padd.setOnMouseClicked(e -> Save());
-    }    
- 
-    // INSERT QUERY
-    public void Save(){
-      C2_Serviceprovider sp = new C2_Serviceprovider();
-      // ginawa ko to para mag popup yung else sa loob ng try
-      String company = pcompany.getText();
-      String contact = pcontact.getText();
-      String email = pemail.getText();
-      String username = pusername.getText();
-      String door = pdoor.getText();
-      String pickup = ppickup.getText();
-      String express = pexpress.getText();
-      String location = pcountry.getText();
-      String region = pregion.getText();
-      String other = pother.getText();
-      String housenumber = phousenumber.getText();
-      String street = pstreet.getText();
-      String barangay = pbarangay.getText();
-      String city = pcity.getText();
-      String province = pprovince.getText();
-      String zip = pzip.getText();
-      String password = ppassword.getText();
-      
-        try{
-            String[][] sp_data = {
-                {"company_name" , pcompany.getText()},
-                {"contact_number" , pcontact.getText()},
-                {"house_number" , phousenumber.getText()},
-                {"street" , pstreet.getText()},
-                {"barangay" , pbarangay.getText()},
-                {"city_monicipality" , pcity.getText()},
-                {"zipcode" , pzip.getText()},
-                {"email" , pemail.getText()},
-                {"username" , pusername.getText()},
-                {"password" , ppassword.getText()},
-                {"doortodoor" , pdoor.getText()},
-                {"pickup" , ppickup.getText()},
-                {"express" , pexpress.getText()},
-                {"other" , pother.getText()},
-                {"region" , pregion.getText()},
-                {"country" , pcountry.getText()} 
-            }; 
-                // Data Save kapag kumpleto yung nilagay sa mga JFXTextField
-                if(sp.insert(sp_data)){
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setHeaderText(null);
-                    alert.setContentText("Data Saved");
-                    alert.showAndWait();
-                }else{
-                    // Not Inserted kapag hindi kumpleto oh walang nilagay sa mga JFXTextField
-                    if((company.isEmpty() || contact.isEmpty() || email.isEmpty() 
-                        || username.isEmpty() || location.isEmpty() || region.isEmpty() 
-                        || other.isEmpty() || housenumber.isEmpty() || street.isEmpty() 
-                        || barangay.isEmpty() || city.isEmpty() || province.isEmpty()
-                        || zip.isEmpty() || password.isEmpty())){
-                            Alert alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setHeaderText(null);
-                            alert.setContentText("Not Inserted");
-                            alert.showAndWait();
-              }
+        sptbl.addListener((ListChangeListener.Change<? extends Object> c) -> {
+            tblOpenDetails.setItems(sptbl);
+        });
+
+        this.GenerateTC();
+        this.populateTable();
+
+        searchP.setOnKeyTyped(e -> searchProvider());
+    }
+
+    public void GenerateTC() {
+        tblOpenDetails.getItems().clear();
+        tblOpenDetails.getColumns().removeAll(tblOpenDetails.getColumns());
+
+        TableColumn<SPTable_LoadNA, String> name = new TableColumn<>("PROVIDER NAME");
+        TableColumn<SPTable_LoadNA, String> address = new TableColumn<>("PROVIDER ADDRESS");
+        TableColumn<SPTable_LoadNA, String> contact = new TableColumn<>("CONTACT");
+        TableColumn<SPTable_LoadNA, String> country = new TableColumn<>("COUNTRY");
+        name.setCellValueFactory((param) -> param.getValue().provider_name);
+        address.setCellValueFactory((param) -> param.getValue().provider_address);
+        contact.setCellValueFactory((param) -> param.getValue().provider_contact);
+        country.setCellValueFactory((param) -> param.getValue().country);
+        tblOpenDetails.getColumns().addAll(name, address, contact, country);
+    }
+
+    public void populateTable() {
+        Thread th = new Thread(new Task() {
+            @Override
+            protected Object call() throws Exception {
+                while (true) {
+                    CompletableFuture.supplyAsync(() -> {
+                        List list = cONEcd.get(("COUNT(*) as total"));
+                        return Integer.parseInt(((HashMap) list.get(0)).get("total").toString());
+                    }).thenApply((count) -> {
+                        List rs = new ArrayList<>();
+                        if (count != Global_Count) {
+                            rs = cONEcd
+                                    //.join(Model.JOIN.LEFT, "aerolink.tbl_core1_customer_details", "customer_id", "cid", "=", "customer_id")
+                                    //.join(Model.JOIN.LEFT, "aerolink.tbl_core1_package_details", "customer_id1", "pid", "=", "customer_id")
+                                    .get("provider_name",
+                                            "provider_address",
+                                            "provider_contact",
+                                            "country");
+                            Global_Count = count;
+                        }
+                        return rs;
+                    }).thenAccept((rs) -> {
+                        if (!rs.isEmpty()) {
+                            AddTable(rs);
+                        }
+                    });
+                    Thread.sleep(3000);
+                }
             }
-                
-        }catch(Exception e){
-            e.printStackTrace();
+        });
+        th.setDaemon(true);
+        th.start();
+    }
+    // need sya para lumabas yung result sa tableview ez LAWGIC
+
+    public void AddTable(List rs) {
+        sptbl.clear();
+
+        for (Object row : rs) {
+            HashMap drow = (HashMap) row;
+            String provider_name = (String) drow.get("provider_name");
+            String provider_address = (String) drow.get("provider_address");
+            String provider_contact = (String) drow.get("provider_contact");
+            String country = (String) drow.get("country");
+
+            sptbl.add(new SPTable_LoadNA(provider_name, provider_address,provider_contact, country));
         }
     }
 
+    //ito yung pag call ng another scene pero hindi magiging modal 
     @FXML
-    private void listprovider(ActionEvent event) {
-        loadWindow("/FXMLS/Core2/crm/SPtbList.fxml","List of Providers");
+    private void viewR(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/SPviewReport.fxml"));
+        SNrootPane.getChildren().setAll(pane);
     }
-    
-        void loadWindow(String loc, String title){
+
+    @FXML
+    private void viewR1(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/SPviewRegistration.fxml"));
+        SNrootPane.getChildren().setAll(pane);
+    }
+
+    @FXML
+    public void spModal() {
+        // sya yung ginamit pang tawag ng data via controller
+        FXMLS.Core2.Modals.SPviewSPDetailsController.pname = tblOpenDetails.getSelectionModel().getSelectedItem().provider_name.getValue();
+        FXMLS.Core2.Modals.SPviewSPDetailsController.paddress = tblOpenDetails.getSelectionModel().getSelectedItem().provider_address.getValue();
+        
+        Modal md = Modal.getInstance(new Form("/FXMLS/Core2/Modals/SPviewSPDetails.fxml").getParent());
+        md.open();
+        md.getF().getStage().setOnCloseRequest(action -> {
+            FXMLS.Core2.Modals.SPviewSPDetailsController.modalOpen = false;
+        });
+    }
+
+    @FXML
+    public void ordercountModal() {
+        Modal md = Modal.getInstance(new Form("/FXMLS/Core2/Modals/SPviewOrder.fxml").getParent());
+        md.open();
+        md.getF().getStage().setOnCloseRequest(action -> {
+            FXMLS.Core2.Modals.SPviewOrderController.modalOpen = false;
+        });
+    }
+
+    // search
+    public void searchProvider() {
+        CORE2_ProvRegistration rgs = new CORE2_ProvRegistration();
+
+        String SearchText = searchP.getText().equals("") ? "[a-z]" : searchP.getText();
+
         try {
-            Parent parent = FXMLLoader.load(getClass().getResource(loc));
-            Stage stage = new Stage(StageStyle.DECORATED);
-            stage.setTitle(title);
-            stage.setScene(new Scene(parent));
-            stage.show();
-            icon.setStageIcon(stage);
-        } catch (IOException ex) {
-            Logger.getLogger(CustomerRelationshipManagementController.class.getName()).log(Level.SEVERE, null, ex);
+
+            List listreq = rgs.where(new Object[][]{
+                {"provider_name", "Like", "%" + SearchText + "%"}
+            }).get();
+
+            searchRequestor(listreq);
+
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
-    
+
+    private void searchRequestor(List requestor) {
+
+        tblOpenDetails.getItems().clear();
+
+        ObservableList<SPTable_LoadNA> sptbl = FXCollections.observableArrayList();
+
+        try {
+
+            for (Object d : requestor) {
+                HashMap hm = (HashMap) d;   //exquisite casting
+                hm.get("provider_name");
+                hm.get("provider_address");
+                hm.get("provider_contact");
+                hm.get("country");
+
+                sptbl.add(new SPTable_LoadNA(
+                        String.valueOf(hm.get("provider_name")),
+                        String.valueOf(hm.get("provider_address")),
+                        String.valueOf(hm.get("provider_contact")),
+                        String.valueOf(hm.get("country"))
+                ));
+                tblOpenDetails.setItems(sptbl);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
 }

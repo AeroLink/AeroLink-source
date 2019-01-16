@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="SNrootPane1" prefHeight="693.0" prefWidth="1370.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Core2.Change.SNviewMonitoringController">
+   <children>
+      <SplitPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <items>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <TableView layoutY="97.0" prefHeight="569.0" prefWidth="1150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <columns>
+                        <TableColumn prefWidth="592.9999694824219" text="PACKAGE NO." />
+                        <TableColumn prefWidth="432.0" text="STATUS" />
+                        <TableColumn prefWidth="75.0" text="BRANCH LOCATION" />
+                        <TableColumn prefWidth="75.0" text="AIRLINE" />
+                        <TableColumn prefWidth="75.0" text="SERVICE PROVIDER" />
+                        <TableColumn prefWidth="75.0" text="SERVICE" />
+                        <TableColumn prefWidth="75.0" text="SHIPMENT DATE" />
+                        <TableColumn prefWidth="75.0" text="DELIVERY DATE" />
+                        <TableColumn prefWidth="75.0" text="ORIGIN" />
+                        <TableColumn prefWidth="75.0" text="DESTINATION" />
+                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                     <contextMenu>
+                        <ContextMenu fx:id="contextMenu">
+                          <items>
+                            <MenuItem fx:id="menuVP" mnemonicParsing="false" onAction="#pacnoModal" text="View Package" />
+                              <MenuItem fx:id="menuVA" mnemonicParsing="false" onAction="#airlineModal" text="View Airline" />
+                          </items>
+                        </ContextMenu>
+                     </contextMenu>
+                  </TableView>
+                  <AnchorPane prefHeight="40.0" prefWidth="1370.0" styleClass="card" stylesheets="@../../../Assets/css/card.css" AnchorPane.bottomAnchor="650.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label layoutX="585.0" prefHeight="40.0" prefWidth="207.0" text=" SERVICE NETWORK" textFill="#34a853" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="586.0" AnchorPane.rightAnchor="575.0" AnchorPane.topAnchor="0.0">
+                           <font>
+                              <Font name="Arial Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <JFXButton fx:id="SNback2" layoutX="10.0" layoutY="5.0" onAction="#back2" prefHeight="30.0" style="-fx-background-color: #34a853;" text="Back" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="BACKWARD" size="20" />
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
+                  <ComboBox layoutX="14.0" layoutY="122.0" prefHeight="30.0" prefWidth="200.0" promptText="STATUS" />
+                  <ComboBox layoutX="14.0" layoutY="163.0" prefHeight="30.0" prefWidth="200.0" promptText="BRANCH" />
+                  <ComboBox layoutX="14.0" layoutY="204.0" prefHeight="30.0" prefWidth="200.0" promptText="SERVICE" />
+                  <ComboBox layoutX="14.0" layoutY="245.0" prefHeight="30.0" prefWidth="200.0" promptText="ORIGIN" />
+                  <ComboBox layoutX="14.0" layoutY="287.0" prefHeight="30.0" prefWidth="200.0" promptText="DESTINATION" />
+                  <ComboBox layoutX="14.0" layoutY="327.0" prefHeight="30.0" prefWidth="200.0" promptText="PROVIDER" />
+                  <JFXDatePicker defaultColor="#34a853" layoutX="14.0" layoutY="371.0" prefHeight="30.0" prefWidth="200.0" promptText="SHIPMENT DATE" />
+                  <JFXDatePicker defaultColor="#34a853" layoutX="14.0" layoutY="409.0" prefHeight="30.0" prefWidth="200.0" promptText="DELIVERY DATE" />
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

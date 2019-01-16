@@ -5,152 +5,164 @@
  */
 package FXMLS.Core2;
 
-import FXMLS.Core2.Controllers.ServiceNetworkTableController;
-import Model.C2_Servicenetwork;
+import Model.Core2.CORE2_barangay;
+import Model.Core2.CORE2_province;
+import Model.Core2.CORE2_region;
+import Model.Core2.CORE2_type;
+import Model.Core2.CORE2_zip;
+import Synapse.Components.Modal.Modal;
+import Synapse.Form;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXCheckBox;
+import java.io.IOException;
 import java.net.URL;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
  *
- * @author jpeg
+ * @author JPEG
  */
 public class ServiceNetworkController implements Initializable {
 
-    @FXML private JFXTextField bcode;
-    @FXML private JFXTextField blocation;
-    @FXML private JFXTextField baddress;
-    @FXML private JFXTextField bemail;
-    @FXML private JFXTextField bcontact;
-    @FXML private JFXTextField bmanager;
-    @FXML private JFXButton badd;
-    
-    //FOR SELECT DATA IN tbl_core2_add_branch
-    ObservableList<ServiceNetworkTableController> list = FXCollections.observableArrayList();
-    @FXML private TableView<ServiceNetworkTableController> tableView;
-    @FXML private TableColumn<ServiceNetworkTableController, String> codeCol;
-    @FXML private TableColumn<ServiceNetworkTableController, String> locationCol;
-    @FXML private TableColumn<ServiceNetworkTableController, String> addressCol;
-    @FXML private TableColumn<ServiceNetworkTableController, String> emailCol;
-    @FXML private TableColumn<ServiceNetworkTableController, String> contactCol;
-    @FXML private TableColumn<ServiceNetworkTableController, String> managerCol;
+//    ObservableList<String> regionList = FXCollections.observableArrayList("Region 1", "Region 2");
+//    ObservableList<String> R1 = FXCollections.observableArrayList("Ilocos Norte", "Ilocos Sur", "La Union", "Pangasinan");
+//    ObservableList<String> R2 = FXCollections.observableArrayList("Batanes", "Cagayan", "Isabela", "Nueva Vizcaya", "Quirino");
 
+    CORE2_type type = new CORE2_type();
+//    CORE2_region region = new CORE2_region();
+//    CORE2_province province = new CORE2_province();
+//    CORE2_barangay barangay = new CORE2_barangay();
+//    CORE2_zip zip = new CORE2_zip();
 
-    /**
-     * Initializes the controller class.
-     */
+    @FXML
+    private AnchorPane SNrootPane;
+    @FXML
+    private JFXButton SNviewN;
+    @FXML
+    private JFXButton SNviewM;
+    @FXML
+    private JFXButton SNviewR;
+    @FXML
+    private JFXButton SNviewI;
+    @FXML
+    private ComboBox cbmType;
+    @FXML
+    private ComboBox cbmDriver;
+    @FXML
+    private JFXButton submit;
+    @FXML
+    private TextField txtEmail;
+    @FXML
+    private TextField txtTnumber;
+    @FXML
+    private TextField txtMnumber;
+    @FXML
+    private TextField txtBaddress;
+    @FXML
+    private TextField txtS1;
+    @FXML
+    private TextField txtS3;
+    @FXML
+    private TextField txtS2;
+    @FXML
+    private ComboBox<?> cbmIcharge;
+    @FXML
+    private TableView<?> tVcharge;
+    @FXML
+    private TableView<?> tVdriver;
+    @FXML
+    private TextField txtRegion;
+    @FXML
+    private TextField txtBarangay;
+    @FXML
+    private TextField txtProvince;
+    @FXML
+    private TextField txtZipcode;
+    @FXML
+    private TextField txtEMPID1;
+    @FXML
+    private TextField txtEMPID2;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //initCol();
-        badd.setOnMouseClicked(e -> Save());
-        DisplayData();
-        loadData();
-        
-    }  
-    // fxid and 
-    private void DisplayData(){
-        codeCol.setCellValueFactory(new PropertyValueFactory<>("branch_code"));
-        locationCol.setCellValueFactory(new PropertyValueFactory<>("branch_location"));
-        addressCol.setCellValueFactory(new PropertyValueFactory<>("branch_address"));
-        emailCol.setCellValueFactory(new PropertyValueFactory<>("branch_email"));
-        contactCol.setCellValueFactory(new PropertyValueFactory<>("branch_contact"));
-        managerCol.setCellValueFactory(new PropertyValueFactory<>("branch_manager"));                                        
+        //combobox kapag pipili ka kung philippines or singapore
+        type.get().stream().forEach(action -> {
+            HashMap row = (HashMap) action;
+            cbmType.getItems().add(row.get("country").toString());
+        });
+
+//        region.get().stream().forEach(action -> {
+//            HashMap row = (HashMap) action;
+//            cbmRegion.getItems().add(row.get("region_name").toString());
+//        });
+//
+//        province.get().stream().forEach(action -> {
+//            HashMap row = (HashMap) action;
+//            cbmProvince.getItems().add(row.get("province_name").toString());
+//        });
+
+//        cbmRegion.setValue("Region 1");
+//        cbmRegion.setItems(regionList);
+//
+//        cbmProvince.setValue("Ilocos Norte");
+//        cbmProvince.setItems(R1);
+//
+//        zip.get().stream().forEach(action -> {
+//            HashMap row = (HashMap) action;
+//            cbmZip.getItems().add(row.get("zipcode").toString());
+//        });
+//
+//        barangay.get().stream().forEach(action -> {
+//            HashMap row = (HashMap) action;
+//            cbmBarangay.getItems().add(row.get("barangay_name").toString());
+//        });
     }
-    // SELECT QUERY
-    private void loadData(){
-        C2_Servicenetwork sv = new C2_Servicenetwork();
-        ObservableList<ServiceNetworkTableController> svtl = FXCollections.observableArrayList();
-        List b = sv.get();
-            
-            for(Object d : b){
-                HashMap hm = (HashMap) d;
-                
-                hm.get("branch_code");
-                hm.get("branch_location");
-                hm.get("branch_address");
-                hm.get("branch_email");
-                hm.get("branch_contact");
-                hm.get("branch_manager");
-                
-               svtl.add(
-               new ServiceNetworkTableController(
-                   String.valueOf(hm.get("branch_code")),
-                   String.valueOf(hm.get("branch_location")),
-                   String.valueOf(hm.get("branch_address")),
-                   String.valueOf(hm.get("branch_email")),
-                   String.valueOf(hm.get("branch_contact")),
-                   String.valueOf(hm.get("branch_manager"))
-                 ) );   
-            }
-            tableView.setItems(svtl);          
+
+//    @FXML
+//    private void provinceChange() {
+//        if (cbmRegion.getValue().equals("Region 1")) {
+//            cbmProvince.setValue("Ilocos Norte");
+//            cbmProvince.setItems(R1);
+//        }else{
+//            cbmProvince.setValue("Batanes");
+//            cbmProvince.setItems(R2);
+//        }
+//    }
+
+    @FXML
+    public void viewN() throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/SNviewBranch.fxml"));
+        SNrootPane.getChildren().setAll(pane);
     }
-    // INSERT QUERY
-    public void Save(){
-      C2_Servicenetwork sv = new C2_Servicenetwork();
-      // ginawa ko to para mag popup yung else sa loob ng try
-      String code = bcode.getText();
-      String location = blocation.getText();
-      String address = baddress.getText();
-      String email = bemail.getText();
-      String contact = bcontact.getText();
-      String manager = bmanager.getText();
-      
-        try{
-            String[][] sn_data = {
-                {"branch_code" , bcode.getText()},
-                {"branch_location" , blocation.getText()},
-                {"branch_address" , baddress.getText()},
-                {"branch_email" , bemail.getText()},
-                {"branch_contact" , bcontact.getText()},
-                {"branch_manager" , bmanager.getText()}
-            }; 
-                // Data Save kapag kumpleto yung nilagay sa mga JFXTextField
-                if(sv.insert(sn_data)){
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setHeaderText(null);
-                    alert.setContentText("Data Saved");
-                    alert.showAndWait();
-                    
-                    bcode.setText("");
-                    blocation.setText("");
-                    baddress.setText("");
-                    bemail.setText("");
-                    bcontact.setText("");
-                    bmanager.setText("");
-                }else{
-                    // Not Inserted kapag hindi kumpleto oh walang nilagay sa mga JFXTextField
-                    if((code.isEmpty() || location.isEmpty() || address.isEmpty() || email.isEmpty() || contact.isEmpty() || manager.isEmpty())){
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setHeaderText(null);
-                        alert.setContentText("Not Inserted");
-                        alert.showAndWait();
-              }
-            } 
-                
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        // para sa realty update ng data
-        DisplayData();
-        loadData();
+
+    @FXML
+    private void viewM(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/SNviewMonitoring.fxml"));
+        SNrootPane.getChildren().setAll(pane);
     }
+
+    @FXML
+    private void viewR(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/SNviewReport.fxml"));
+        SNrootPane.getChildren().setAll(pane);
+    }
+
+    @FXML
+    private void viewI(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/SNviewInternationalBranch.fxml"));
+        SNrootPane.getChildren().setAll(pane);
+    }
+
 }

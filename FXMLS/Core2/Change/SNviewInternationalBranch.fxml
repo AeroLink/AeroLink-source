@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="SNrootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="693.0" prefWidth="1370.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Core2.Change.SNviewInternationalBranchController">
+   <children>
+      <SplitPane prefHeight="693.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <items>
+            <AnchorPane prefHeight="650.0" prefWidth="1368.0">
+               <children>
+                  <AnchorPane layoutY="1.0" prefHeight="40.0" prefWidth="1370.0" styleClass="card" stylesheets="@../../../Assets/css/card.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label layoutX="586.0" layoutY="-1.0" prefHeight="40.0" prefWidth="207.0" text=" SERVICE NETWORK" textFill="#34a853" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="586.0" AnchorPane.rightAnchor="575.0" AnchorPane.topAnchor="0.0">
+                           <font>
+                              <Font name="Arial Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <JFXButton fx:id="SNviewN" buttonType="RAISED" ellipsisString="" layoutX="1036.0" layoutY="5.0" onAction="#viewN" prefHeight="30.0" prefWidth="150.0" ripplerFill="WHITE" style="-fx-background-color: #34a853;" text="View Branches" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="EYE" size="20" />
+                           </graphic>
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="SNviewM" buttonType="RAISED" ellipsisString="" layoutX="864.0" layoutY="5.0" onAction="#viewM" prefHeight="30.0" prefWidth="150.0" ripplerFill="WHITE" style="-fx-background-color: #34a853;" text="Monitor Package" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="DESKTOP" size="20" />
+                           </graphic>
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="SNviewR" buttonType="RAISED" ellipsisString="" layoutX="1204.0" layoutY="5.0" onAction="#viewR" prefHeight="30.0" prefWidth="150.0" ripplerFill="WHITE" style="-fx-background-color: #34a853;" text="Reports" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="BOOK" size="20" />
+                           </graphic>
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="SNviewL" buttonType="RAISED" ellipsisString="" layoutX="103.0" layoutY="5.0" onAction="#viewL" prefHeight="30.0" prefWidth="150.0" ripplerFill="WHITE" style="-fx-background-color: #34a853;" text="Local" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="5.0">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="FLAG" size="20" />
+                           </graphic>
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <FontAwesomeIconView fill="#34a853" glyphName="GLOBE" layoutX="35.0" layoutY="26.0" size="30" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="5.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="10.0" layoutY="97.0" prefHeight="135.0" prefWidth="1358.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <Label prefHeight="30.0" prefWidth="270.0" text="BRANCH INFORMATION">
+                           <font>
+                              <Font name="Arial Black" size="20.0" />
+                           </font>
+                        </Label>
+                        <ComboBox editable="true" layoutX="4.0" layoutY="46.0" prefHeight="30.0" prefWidth="200.0" promptText="REGION" />
+                        <ComboBox editable="true" layoutX="226.0" layoutY="46.0" prefHeight="30.0" prefWidth="200.0" promptText="CITY" />
+                        <ComboBox editable="true" layoutX="445.0" layoutY="46.0" prefHeight="30.0" prefWidth="200.0" promptText="BARANGAY" />
+                        <ComboBox editable="true" layoutX="664.0" layoutY="46.0" prefHeight="30.0" prefWidth="200.0" promptText="ZIP CODE" />
+                        <JFXTextField focusColor="#34a853" labelFloat="true" layoutX="874.0" layoutY="37.0" maxWidth="482.0" minWidth="200.0" prefHeight="37.0" prefWidth="352.0" promptText="PRESENT ADDRESS" unFocusColor="#34a853">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField focusColor="#34a853" labelFloat="true" layoutX="874.0" layoutY="94.0" maxWidth="482.0" minWidth="200.0" prefHeight="37.0" prefWidth="352.0" promptText="PERMANENT ADDRESS" unFocusColor="#34a853">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField focusColor="#34a853" labelFloat="true" layoutX="4.0" layoutY="100.0" maxWidth="284.0" minWidth="200.0" prefHeight="30.0" prefWidth="284.0" promptText="EMAIL @gmail.com" unFocusColor="#34a853">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField focusColor="#34a853" labelFloat="true" layoutX="292.0" layoutY="100.0" maxWidth="284.0" minWidth="200.0" prefHeight="30.0" prefWidth="284.0" promptText="MOBILE NUMBER" unFocusColor="#34a853">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField focusColor="#34a853" labelFloat="true" layoutX="581.0" layoutY="100.0" maxWidth="284.0" minWidth="200.0" prefHeight="30.0" prefWidth="284.0" promptText="TELEPHONE NUMBER" unFocusColor="#34a853">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXTextField>
+                        <Label layoutX="1225.0" prefHeight="30.0" prefWidth="123.0" text="SERVICES">
+                           <font>
+                              <Font name="Arial Black" size="20.0" />
+                           </font>
+                        </Label>
+                        <GridPane layoutX="1237.0" layoutY="32.0" prefHeight="100.0" prefWidth="100.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="24.0" minHeight="10.0" prefHeight="17.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <JFXCheckBox prefHeight="30.0" prefWidth="106.0" text="EXPRESS" unCheckedColor="#34a853">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </JFXCheckBox>
+                              <JFXCheckBox prefHeight="41.0" prefWidth="104.0" text="DOOR TO&#10;  DOOR" unCheckedColor="#34a853" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </JFXCheckBox>
+                              <JFXCheckBox prefHeight="30.0" prefWidth="103.0" text="PICK UP" unCheckedColor="#34a853" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </JFXCheckBox>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="5.0" layoutY="232.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <Label prefHeight="30.0" prefWidth="270.0" text="PERSONNEL ASSIGN">
+                           <font>
+                              <Font name="Arial Black" size="20.0" />
+                           </font>
+                        </Label>
+                        <ComboBox editable="true" layoutX="4.0" layoutY="47.0" prefHeight="30.0" prefWidth="200.0" promptText="FULL NAME" />
+                        <TableView layoutX="228.0" layoutY="44.0" prefHeight="150.0" prefWidth="1130.0" stylesheets="@../../../Assets/css/MainPanel.css">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="POSITION" />
+                              <TableColumn prefWidth="75.0" text="BIRTHDAY" />
+                              <TableColumn prefWidth="75.0" text="GENDER" />
+                              <TableColumn prefWidth="75.0" text="MOBILE NUMBER" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="5.0" layoutY="428.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <Label prefHeight="30.0" prefWidth="258.0" text="TRANSPORT SERVICE">
+                           <font>
+                              <Font name="Arial Black" size="20.0" />
+                           </font>
+                        </Label>
+                        <ComboBox editable="true" layoutX="4.0" layoutY="47.0" prefHeight="30.0" prefWidth="200.0" promptText="VEHICLE TYPE" />
+                        <TableView layoutX="228.0" layoutY="47.0" prefHeight="150.0" prefWidth="1130.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="PLATE NUMBER" />
+                              <TableColumn prefWidth="75.0" text="ROUTE">
+                                 <columns>
+                                    <TableColumn prefWidth="75.0" text="FROM" />
+                                    <TableColumn prefWidth="75.0" text="TO" />
+                                 </columns>
+                              </TableColumn>
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+                  <JFXButton buttonType="RAISED" layoutX="1204.0" layoutY="634.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #34a853;" text="Submit" textFill="WHITE" AnchorPane.rightAnchor="14.0">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="SEND" size="20" />
+                     </graphic>
+                  </JFXButton>
+                  <ComboBox fx:id="cbmType" layoutX="21.0" layoutY="54.0" prefHeight="30.0" prefWidth="200.0" promptText="Select Country" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="55.0" />
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

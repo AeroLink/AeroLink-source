@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Core2.Modals.CRMviewComplaintsReplyController">
+   <children>
+      <StackPane fx:id="sp" layoutY="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <BorderPane prefHeight="400.0" prefWidth="600.0">
+               <top>
+                  <AnchorPane prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: #34A853;" BorderPane.alignment="CENTER">
+                     <children>
+                        <FontAwesomeIconView fill="WHITE" glyphName="BELL" layoutX="6.0" layoutY="38.0" size="40" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
+                        <Label layoutX="50.0" layoutY="10.0" prefHeight="41.0" prefWidth="370.0" text="COMPLAINTS ID" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="5.0">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <JFXButton buttonType="RAISED" layoutX="525.0" layoutY="10.0" style="-fx-background-color: white;" text="Forward To Admin" textFill="#34a853" AnchorPane.rightAnchor="10.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIconView fill="#34a853" glyphName="FORWARD" size="20" />
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
+               </top>
+               <center>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <TextArea layoutX="23.0" layoutY="28.0" prefHeight="130.0" prefWidth="580.0" text="QUESTION NG MGA CUSTOMER HINDI SYA EDITABLE" wrapText="true" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TextArea>
+                        <TextArea layoutX="10.0" layoutY="158.0" prefHeight="80.0" prefWidth="578.0" promptText="ANSWER" text="SAGOT MO SA MGA TANONG NG MGA COMPLAINTS" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TextArea>
+                        <JFXButton buttonType="RAISED" layoutX="436.0" layoutY="257.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #34A853;" text="Submit" textFill="WHITE" AnchorPane.rightAnchor="10.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="SEND" size="20" />
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
+               </center>
+            </BorderPane>
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>
