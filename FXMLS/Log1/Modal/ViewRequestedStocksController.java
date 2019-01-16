@@ -6,7 +6,7 @@
 package FXMLS.Log1.Modal;
 
 import FXMLS.Log1.ClassFiles.Log1_ProcRequestsClassFile;
-import Model.Log1.Log1_ProcurementRequestModel;
+import Model.Log1.Log1_ProcurementPurchaseRequestModel;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -46,7 +46,7 @@ public class ViewRequestedStocksController implements Initializable {
     }    
     
     public void loadProcurementRequestData(){
-        Log1_ProcurementRequestModel pr = new Log1_ProcurementRequestModel();
+        Log1_ProcurementPurchaseRequestModel pr = new Log1_ProcurementPurchaseRequestModel();
         ObservableList<Log1_ProcRequestsClassFile> ProcRequests = FXCollections.observableArrayList();
           
         List b = pr.get();

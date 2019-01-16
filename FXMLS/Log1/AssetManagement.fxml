@@ -2,177 +2,268 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="693.0" prefWidth="1370.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Log1.AssetManagementController">
    <children>
-      <JFXTabPane prefHeight="693.0" prefWidth="1370.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <tabs>
-            <Tab id="tab" text="Asset Management">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-              </content>
-               <content>
-                  <AnchorPane>
-                     <children>
-                        <SplitPane dividerPositions="0.1301169590643275" prefHeight="656.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <items>
-                              <AnchorPane>
-                                 <children>
-                                    <VBox>
+      <VBox prefHeight="693.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="5.0" styleClass="btn-primary">
+               <children>
+                  <FontAwesomeIconView glyphName="MONEY" size="22">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </FontAwesomeIconView>
+                  <Label text="Asset Management" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="21.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <JFXTabPane prefHeight="693.0" prefWidth="1100.0">
+               <tabs>
+                  <Tab id="tab" text="Buildings">
+                     <content>
+                        <AnchorPane>
+                           <children>
+                              <BorderPane layoutX="10.0" layoutY="5.0" prefHeight="615.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <left>
+                                    <VBox alignment="TOP_CENTER" spacing="5.0">
                                        <children>
-                                          <VBox layoutX="20.0" layoutY="150.0" prefHeight="116.0" prefWidth="155.0" spacing="5.0" style="-fx-border-color: grey;">
-                                             <children>
-                                                <Label text="View">
-                                                   <VBox.margin>
-                                                      <Insets left="3.0" />
-                                                   </VBox.margin>
-                                                </Label>
-                                                <VBox spacing="5.0">
-                                                   <children>
-                                                      <JFXButton onAction="#ViewCalendar" prefHeight="40.0" prefWidth="135.0" styleClass="btn-primary" text="Calendar">
-                                                         <VBox.margin>
-                                                            <Insets />
-                                                         </VBox.margin>
-                                                      </JFXButton>
-                                                   </children>
-                                                   <VBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </VBox.margin>
-                                                </VBox>
-                                                <VBox alignment="CENTER_LEFT" spacing="5.0">
-                                                   <children>
-                                                      <JFXButton layoutX="10.0" layoutY="10.0" onAction="#ViewDashboard" prefHeight="40.0" prefWidth="135.0" styleClass="btn-primary" text="Logs" />
-                                                   </children>
-                                                   <VBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </VBox.margin>
-                                                </VBox>
-                                             </children>
-                                             <VBox.margin>
-                                                <Insets left="10.0" right="10.0" top="10.0" />
-                                             </VBox.margin>
-                                          </VBox>
-                                          <VBox prefHeight="120.0" prefWidth="155.0" spacing="5.0" style="-fx-border-color: grey;">
-                                             <children>
-                                                <Label text="Facilities">
-                                                   <VBox.margin>
-                                                      <Insets left="3.0" />
-                                                   </VBox.margin>
-                                                </Label>
-                                                <VBox spacing="5.0">
-                                                   <children>
-                                                      <JFXButton onAction="#ViewBuildingTableAction" prefHeight="40.0" prefWidth="135.0" styleClass="btn-primary" text="Buildings">
-                                                         <VBox.margin>
-                                                            <Insets />
-                                                         </VBox.margin>
-                                                      </JFXButton>
-                                                   </children>
-                                                   <VBox.margin>
-                                                      <Insets bottom="5.0" left="10.0" />
-                                                   </VBox.margin>
-                                                </VBox>
-                                                <VBox alignment="CENTER_LEFT" spacing="5.0">
-                                                   <children>
-                                                      <JFXButton onAction="#ViewEquipmentTableAction" prefHeight="40.0" prefWidth="135.0" styleClass="btn-primary" text="Heavy Equipment">
-                                                         <VBox.margin>
-                                                            <Insets />
-                                                         </VBox.margin>
-                                                      </JFXButton>
-                                                   </children>
-                                                   <VBox.margin>
-                                                      <Insets bottom="5.0" left="10.0" />
-                                                   </VBox.margin>
-                                                </VBox>
-                                             </children>
-                                             <VBox.margin>
-                                                <Insets left="10.0" right="10.0" top="10.0" />
-                                             </VBox.margin>
-                                          </VBox>
-                                          <VBox layoutX="20.0" layoutY="20.0" prefHeight="123.0" prefWidth="155.0" spacing="5.0" style="-fx-border-color: grey;">
-                                             <children>
-                                                <Label text="Vehicle">
-                                                   <VBox.margin>
-                                                      <Insets left="3.0" />
-                                                   </VBox.margin>
-                                                </Label>
-                                                <VBox spacing="5.0">
-                                                   <children>
-                                                      <JFXButton onAction="#ViewCompanyVehicles" prefHeight="40.0" prefWidth="135.0" styleClass="btn-primary" text="Company Vehicles">
-                                                         <VBox.margin>
-                                                            <Insets />
-                                                         </VBox.margin>
-                                                      </JFXButton>
-                                                      <JFXButton layoutX="10.0" layoutY="10.0" onAction="#ViewCompanyVehicles" prefHeight="40.0" prefWidth="135.0" styleClass="btn-primary" text="Deliver Vehicles" />
-                                                   </children>
-                                                   <VBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </VBox.margin>
-                                                </VBox>
-                                                <VBox alignment="CENTER_LEFT" spacing="5.0">
-                                                   <VBox.margin>
-                                                      <Insets bottom="5.0" left="10.0" />
-                                                   </VBox.margin>
-                                                </VBox>
-                                             </children>
-                                             <VBox.margin>
-                                                <Insets left="10.0" right="10.0" top="10.0" />
-                                             </VBox.margin>
-                                          </VBox>
-                                          <VBox layoutX="20.0" layoutY="329.0" prefHeight="78.0" prefWidth="155.0" spacing="5.0" style="-fx-border-color: grey;">
-                                             <children>
-                                                <Label text="Others">
-                                                   <VBox.margin>
-                                                      <Insets left="3.0" />
-                                                   </VBox.margin>
-                                                </Label>
-                                                <VBox spacing="5.0">
-                                                   <children>
-                                                      <JFXButton onAction="#ViewCompanyVehicles" prefHeight="40.0" prefWidth="135.0" styleClass="btn-primary" text="Scraps">
-                                                         <VBox.margin>
-                                                            <Insets />
-                                                         </VBox.margin>
-                                                      </JFXButton>
-                                                   </children>
-                                                   <VBox.margin>
-                                                      <Insets bottom="5.0" left="10.0" />
-                                                   </VBox.margin>
-                                                </VBox>
-                                                <VBox alignment="CENTER_LEFT" spacing="5.0">
-                                                   <VBox.margin>
-                                                      <Insets bottom="5.0" left="10.0" />
-                                                   </VBox.margin>
-                                                </VBox>
-                                             </children>
-                                             <VBox.margin>
-                                                <Insets left="10.0" right="10.0" top="10.0" />
-                                             </VBox.margin>
-                                          </VBox>
+                                          <JFXButton prefHeight="31.0" prefWidth="145.0" styleClass="btn-primary" text="Reservation" />
+                                          <JFXButton layoutX="17.0" layoutY="10.0" prefHeight="31.0" prefWidth="145.0" styleClass="btn-primary" text="Request Maintenance" />
+                                          <JFXButton layoutX="17.0" layoutY="41.0" prefHeight="31.0" prefWidth="145.0" styleClass="btn-primary" text="Liquidation" />
+                                          <JFXButton layoutX="27.0" layoutY="82.0" prefHeight="31.0" prefWidth="145.0" styleClass="btn-primary" text="Report" />
+                                          <JFXButton prefHeight="31.0" prefWidth="145.0" styleClass="btn-primary" text="Sale" />
                                        </children>
+                                       <BorderPane.margin>
+                                          <Insets left="10.0" right="10.0" top="5.0" />
+                                       </BorderPane.margin>
                                     </VBox>
-                                 </children>
-                              </AnchorPane>
-                              <VBox>
-                                 <children>
-                                    <AnchorPane prefHeight="653.0" prefWidth="993.0">
+                                 </left>
+                                 <center>
+                                    <TableView fx:id="building_tbl" prefHeight="575.0" prefWidth="1206.0" BorderPane.alignment="CENTER">
+                                       <columns>
+                                          <TableColumn fx:id="buildingName_col" prefWidth="75.0" text="Building" />
+                                          <TableColumn fx:id="buildingAddress_col" prefWidth="75.0" text="Address" />
+                                          <TableColumn fx:id="buildingContact_col" prefWidth="75.0" text="Contact" />
+                                          <TableColumn fx:id="buildingType_col" prefWidth="75.0" text="Status" />
+                                          <TableColumn fx:id="buildingStatus_col" prefWidth="75.0" text="Status" />
+                                       </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                 </center>
+                                 <top>
+                                    <BorderPane BorderPane.alignment="CENTER">
+                                       <left>
+                                          <TextField prefHeight="30.0" prefWidth="152.0" promptText="SEARCH" BorderPane.alignment="CENTER" />
+                                       </left>
+                                       <right>
+                                          <HBox alignment="CENTER_RIGHT" spacing="7.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <JFXButton onAction="#AddBuildingAction" prefHeight="30.0" prefWidth="100.0" styleClass="btn-primary" text="Add" textAlignment="CENTER">
+                                                   <graphic>
+                                                      <FontAwesomeIconView glyphName="PLUS" size="15" styleClass="glyph-icon" />
+                                                   </graphic>
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </JFXButton>
+                                                <JFXButton layoutX="10.0" layoutY="10.0" onAction="#updateBuildingAction" prefHeight="30.0" prefWidth="100.0" styleClass="btn-primary" text="Update">
+                                                   <graphic>
+                                                      <FontAwesomeIconView glyphName="EDIT" size="15" styleClass="glyph-icon" />
+                                                   </graphic>
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </JFXButton>
+                                             </children>
+                                          </HBox>
+                                       </right>
+                                       <BorderPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+                                       </BorderPane.margin>
+                                    </BorderPane>
+                                 </top>
+                              </BorderPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab id="tab" text="Equiment">
+                     <content>
+                        <AnchorPane>
+                           <children>
+                              <BorderPane layoutX="10.0" layoutY="5.0" prefHeight="615.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <top>
+                                    <BorderPane prefHeight="35.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
+                                       <right>
+                                          <HBox alignment="CENTER_RIGHT" spacing="7.0" BorderPane.alignment="CENTER_LEFT">
+                                             <children>
+                                                <JFXButton onAction="#addEquipActon" prefHeight="30.0" prefWidth="100.0" styleClass="btn-primary" text="Add" textAlignment="CENTER">
+                                                   <graphic>
+                                                      <FontAwesomeIconView glyphName="PLUS" size="15" styleClass="glyph-icon" />
+                                                   </graphic>
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </JFXButton>
+                                                <JFXButton layoutX="10.0" layoutY="10.0" onAction="#editEquipAction" prefHeight="30.0" prefWidth="100.0" styleClass="btn-primary" text="Update">
+                                                   <graphic>
+                                                      <FontAwesomeIconView glyphName="EDIT" size="15" styleClass="glyph-icon" />
+                                                   </graphic>
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </JFXButton>
+                                             </children>
+                                          </HBox>
+                                       </right>
+                                       <left>
+                                          <HBox alignment="CENTER_LEFT" prefWidth="165.0">
+                                             <children>
+                                                <TextField prefHeight="30.0" prefWidth="152.0" promptText="SEARCH" />
+                                             </children>
+                                          </HBox>
+                                       </left>
+                                       <BorderPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+                                       </BorderPane.margin>
+                                    </BorderPane>
+                                 </top>
+                                 <center>
+                                    <TableView fx:id="equip_tbl" prefHeight="575.0" prefWidth="1126.0" BorderPane.alignment="CENTER">
+                                       <columns>
+                                          <TableColumn fx:id="equipment_col" prefWidth="75.0" text="Equipment" />
+                                          <TableColumn fx:id="equipmentType_col" prefWidth="75.0" text="Type" />
+                                          <TableColumn fx:id="equipmentBuilding_col" prefWidth="75.0" text="Building" />
+                                          <TableColumn fx:id="equipmentlocation_col" prefWidth="75.0" text="Location" />
+                                          <TableColumn fx:id="EWarrantydate_col" prefWidth="75.0" text="Warranty Date" />
+                                          <TableColumn fx:id="equipmentPrice_col" prefWidth="75.0" text="Price" />
+                                       </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                 </center>
+                                 <left>
+                                    <VBox alignment="TOP_CENTER" spacing="5.0" BorderPane.alignment="CENTER">
                                        <children>
-                                        <AnchorPane fx:id="AssetMngtPane" prefHeight="0.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <JFXButton layoutX="17.0" layoutY="10.0" prefHeight="31.0" prefWidth="145.0" styleClass="btn-primary" text="Request Maintenance" />
+                                          <JFXButton layoutX="17.0" layoutY="41.0" prefHeight="31.0" prefWidth="145.0" styleClass="btn-primary" text="Liquidation" />
+                                          <JFXButton layoutX="27.0" layoutY="46.0" prefHeight="31.0" prefWidth="145.0" styleClass="btn-primary" text="Report" />
+                                          <JFXButton prefHeight="31.0" prefWidth="145.0" styleClass="btn-primary" text="Dispose" />
                                        </children>
-                                    </AnchorPane>
-                                 </children>
-                              </VBox>
-                          </items>
-                        </SplitPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-        </tabs>
-      </JFXTabPane>
+                                       <BorderPane.margin>
+                                          <Insets left="5.0" right="10.0" top="5.0" />
+                                       </BorderPane.margin>
+                                    </VBox>
+                                 </left>
+                              </BorderPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab id="tab" text="Vehicles">
+                     <content>
+                        <AnchorPane>
+                           <children>
+                              <BorderPane layoutX="10.0" layoutY="5.0" prefHeight="615.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <top>
+                                    <BorderPane prefHeight="35.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
+                                       <right>
+                                          <HBox alignment="CENTER_RIGHT" spacing="7.0" BorderPane.alignment="CENTER_LEFT">
+                                             <children>
+                                                <JFXButton onAction="#addEquipActon" prefHeight="30.0" prefWidth="100.0" styleClass="btn-primary" text="Add" textAlignment="CENTER">
+                                                   <graphic>
+                                                      <FontAwesomeIconView glyphName="PLUS" size="15" styleClass="glyph-icon" />
+                                                   </graphic>
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </JFXButton>
+                                                <JFXButton layoutX="10.0" layoutY="10.0" onAction="#editEquipAction" prefHeight="30.0" prefWidth="100.0" styleClass="btn-primary" text="Update">
+                                                   <graphic>
+                                                      <FontAwesomeIconView glyphName="EDIT" size="15" styleClass="glyph-icon" />
+                                                   </graphic>
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </JFXButton>
+                                             </children>
+                                          </HBox>
+                                       </right>
+                                       <left>
+                                          <HBox alignment="CENTER_LEFT" prefWidth="165.0">
+                                             <children>
+                                                <TextField prefHeight="30.0" prefWidth="152.0" promptText="SEARCH" />
+                                             </children>
+                                          </HBox>
+                                       </left>
+                                       <BorderPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+                                       </BorderPane.margin>
+                                    </BorderPane>
+                                 </top>
+                                 <center>
+                                    <TableView fx:id="vehicle_tbl" prefHeight="547.0" prefWidth="1050.0" BorderPane.alignment="CENTER">
+                                       <columns>
+                                          <TableColumn fx:id="vehicle_col" prefWidth="75.0" text="Vehicle " />
+                                          <TableColumn fx:id="Vehicletype_col" prefWidth="75.0" text="Type" />
+                                          <TableColumn fx:id="model_col" prefWidth="75.0" text="Model" />
+                                          <TableColumn fx:id="VehiclePrice_col" prefWidth="75.0" text="Price" />
+                                          <TableColumn fx:id="vbuilding_col" prefWidth="75.0" text="Building" />
+                                          <TableColumn fx:id="vlocation_col" prefWidth="75.0" text="Location" />
+                                          <TableColumn fx:id="vstatus_col" prefWidth="75.0" text="Status" />
+                                       </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                 </center>
+                                 <left>
+                                    <VBox alignment="TOP_CENTER" spacing="5.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <JFXButton prefHeight="31.0" prefWidth="145.0" styleClass="btn-primary" text="Reserve Vehicle" />
+                                          <JFXButton layoutX="17.0" layoutY="10.0" prefHeight="31.0" prefWidth="145.0" styleClass="btn-primary" text="Request Maintenance" />
+                                          <JFXButton layoutX="17.0" layoutY="82.0" prefHeight="31.0" prefWidth="145.0" styleClass="btn-primary" text="Liquidation" />
+                                          <JFXButton layoutX="17.0" layoutY="41.0" prefHeight="31.0" prefWidth="145.0" styleClass="btn-primary" text="Report" />
+                                          <JFXButton layoutX="17.0" layoutY="118.0" prefHeight="31.0" prefWidth="145.0" styleClass="btn-primary" text="Sale" />
+                                       </children>
+                                       <BorderPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
+                                       </BorderPane.margin>
+                                    </VBox>
+                                 </left>
+                              </BorderPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

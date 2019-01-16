@@ -7,9 +7,9 @@ package FXMLS.Log1.Modal;
 
 import FXMLS.Log1.ClassFiles.Log1_ItemRequestsClassfiles;
 import FXMLS.Log1.util.AlertMaker;
-import Model.Log1.Log1_ActivityLogforWarehouseModel;
-import Model.Log1.Log1_ItemRequestModel;
-import Model.Log1.Log1_WarehouseItems;
+import Model.Log1.Log1_WarehouseActivityLogModel;
+import Model.Log1.Log1_WarehouseRequestItemModel;
+import Model.Log1.Log1_WarehouseItemsModel;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -109,9 +109,9 @@ public class ApproveWarehouseRequestController implements Initializable {
                 showInMainWindow_txt.setText("yes");
             }
         
-        Log1_ActivityLogforWarehouseModel coa = new Log1_ActivityLogforWarehouseModel();
-        Log1_WarehouseItems coa1 = new Log1_WarehouseItems();
-        Log1_ItemRequestModel coa2 = new Log1_ItemRequestModel();
+        Log1_WarehouseActivityLogModel coa = new Log1_WarehouseActivityLogModel();
+        Log1_WarehouseItemsModel coa1 = new Log1_WarehouseItemsModel();
+        Log1_WarehouseRequestItemModel coa2 = new Log1_WarehouseRequestItemModel();
         coa.insert(new String [][]{
             {"ActivityItemName",itemDescript_txt.getText()},
             {"ActivityUser", "rb"},

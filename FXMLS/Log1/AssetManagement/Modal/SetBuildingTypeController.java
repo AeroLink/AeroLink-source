@@ -6,8 +6,8 @@
 package FXMLS.Log1.AssetManagement.Modal;
 
 import FXMLS.Log1.util.AlertMaker;
-import Model.Log1.Log1_BuildingTypeModel;
-import Model.Log1.Log1_equipmentTypeModel;
+import Model.Log1.Log1_AssetDesiredBuildingTypeModel;
+import Model.Log1.Log1_AssetDesiredEquipmentTypeModel;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -53,7 +53,7 @@ public class SetBuildingTypeController implements Initializable {
             AlertMaker.showErrorMessage("Invalid Input", "Please fill up all details");
             return;
         }
-        Log1_BuildingTypeModel coa = new Log1_BuildingTypeModel();
+        Log1_AssetDesiredBuildingTypeModel coa = new Log1_AssetDesiredBuildingTypeModel();
         try{String [][] coa_table ={
             {"DesiredBuildingType",desiredBuildingType.getText()}};
             if(coa.insert(coa_table)){

@@ -8,7 +8,7 @@ package FXMLS.Log1;
 import FXMLS.Log1.ClassFiles.Log1_ProcRequestsClassFile;
 import FXMLS.Log1.ClassFiles.Log1_SupplierClassfiles;
 import FXMLS.Log1.util.AlertMaker;
-import Model.Log1.Log1_ProcurementRequestModel;
+import Model.Log1.Log1_ProcurementPurchaseRequestModel;
 import Model.Log1.Log1_SupplierModel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -80,6 +80,8 @@ public class ProcurementController implements Initializable {
     private TableColumn<Log1_SupplierClassfiles, String> contact_col;
     @FXML
     private TableColumn<Log1_SupplierClassfiles, String> Representative_col;
+    @FXML
+    private JFXButton addRequest111;
 
     /**
      * Initializes the controller class.
@@ -125,7 +127,7 @@ public class ProcurementController implements Initializable {
     }    
     
     public void searchy() {
-        Log1_ProcurementRequestModel searchRequest = new Log1_ProcurementRequestModel(); 
+        Log1_ProcurementPurchaseRequestModel searchRequest = new Log1_ProcurementPurchaseRequestModel(); 
             try{
             List list_coa = searchRequest.where(new Object[][]{
             {"RequestID", "like", "%" + ProcSearch_txt.getText() + "%"}
@@ -156,7 +158,7 @@ public class ProcurementController implements Initializable {
             } 
         }
     public void loadProcurementRequestData(){
-         Log1_ProcurementRequestModel coa = new Log1_ProcurementRequestModel();
+         Log1_ProcurementPurchaseRequestModel coa = new Log1_ProcurementPurchaseRequestModel();
          ObservableList<Log1_ProcRequestsClassFile> ProcRequests = FXCollections.observableArrayList();
           
             List b = coa.get();
@@ -226,7 +228,4 @@ public class ProcurementController implements Initializable {
     private void addRequest(ActionEvent event) {
     }
 
-    @FXML
-    private void updateRequest(ActionEvent event) {
-    }
 }

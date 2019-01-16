@@ -1,7 +1,7 @@
 package FXMLS.Log1.Modal;
 
 import FXMLS.Log1.ClassFiles.ActivityLogforWHclassfiles;
-import Model.Log1.Log1_ActivityLogforWarehouseModel;
+import Model.Log1.Log1_WarehouseActivityLogModel;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +36,7 @@ public class WarehouseActivityLogController implements Initializable {
         refreshData();
     }    
     public void loadData(){
-         Log1_ActivityLogforWarehouseModel coa = new Log1_ActivityLogforWarehouseModel();
+         Log1_WarehouseActivityLogModel coa = new Log1_WarehouseActivityLogModel();
          ObservableList<ActivityLogforWHclassfiles> ItemsXD = FXCollections.observableArrayList();
           
             List b = coa.get();
