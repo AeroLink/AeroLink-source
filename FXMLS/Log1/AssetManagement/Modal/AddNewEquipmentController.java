@@ -10,7 +10,7 @@ import FXMLS.Log1.util.AlertMaker;
 import FXMLS.Log1.util.Log1Util;
 import Model.Log1.Log1_AssetBuildingModel;
 import Model.Log1.Log1_AssetEquipmentModel;
-import Model.Log1.Log1_equipmentTypeModel;
+import Model.Log1.Log1_AssetDesiredEquipmentTypeModel;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.HashMap;
@@ -172,7 +172,7 @@ public class AddNewEquipmentController implements Initializable {
     }
     
     public void loadItemTypeToCombox(){
-        Log1_equipmentTypeModel it = new Log1_equipmentTypeModel();
+        Log1_AssetDesiredEquipmentTypeModel it = new Log1_AssetDesiredEquipmentTypeModel();
         List itemType = it.get();
 
         itemType.stream().forEach(row -> {

@@ -9,9 +9,9 @@ package Model.Log1;
  *
  * @author Crenz
  */
-public class Log1_itemTypeWHModel extends Synapse.Model {
-    public Log1_itemTypeWHModel(){
-        setColumns("DesiredItemType");
-        this.initTable("tbl_log1_itemTypeWH");
+public class Log1_ProcurementPurchaseRequestModel extends Synapse.Model {
+    public Log1_ProcurementPurchaseRequestModel(){
+        this.initTable("tbl_log1_ProcurementPurchaseRequest");
+    
     }
 }

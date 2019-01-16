@@ -6,7 +6,7 @@ import FXMLS.Log1.Modal.AddStockWHController;
 import FXMLS.Log1.Modal.StockOutWHController;
 import FXMLS.Log1.util.AlertMaker;
 import FXMLS.Log1.util.Log1Util;
-import Model.Log1.Log1_WarehouseItems;
+import Model.Log1.Log1_WarehouseItemsModel;
 import Synapse.Model;
 import Synapse.Session;
 import com.jfoenix.controls.JFXTextField;
@@ -73,7 +73,7 @@ public class WarehouseManagementController implements Initializable {
     //search functionality
     
     public void searchItem() {
-        Log1_WarehouseItems searchItem = new Log1_WarehouseItems(); 
+        Log1_WarehouseItemsModel searchItem = new Log1_WarehouseItemsModel(); 
       //  List b = coa.join(Model.JOIN.INNER, "aerolink.tbl_log_suppliers", "SupplierID", "=", "SupplierID").get();
 
             try{
@@ -110,7 +110,7 @@ public class WarehouseManagementController implements Initializable {
     
     //fetching data
     public void callWarehouseItems(){
-         Log1_WarehouseItems coa = new Log1_WarehouseItems();
+         Log1_WarehouseItemsModel coa = new Log1_WarehouseItemsModel();
          ObservableList<Log1_fullInventoryList> ItemsXD = FXCollections.observableArrayList();
           
 //        CompletableFuture.supplyAsync(() -> {
