@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="SProotPane" prefHeight="693.0" prefWidth="1370.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Core2.Change.SPviewRegistrationController">
+   <children>
+      <SplitPane prefHeight="693.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <AnchorPane prefHeight="40.0" prefWidth="1370.0" styleClass="card" stylesheets="@../../../Assets/css/card.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label layoutX="586.0" layoutY="-1.0" prefHeight="40.0" prefWidth="207.0" text=" SERVICE PROVIDER" textFill="#34a853" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="585.0" AnchorPane.topAnchor="0.0">
+                           <font>
+                              <Font name="Arial Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <JFXButton fx:id="SPviewR" buttonType="RAISED" layoutX="1197.0" layoutY="5.0" onAction="#viewR" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #34a853;" text="Report" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="BOOK" size="20" />
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="SPviewM" buttonType="RAISED" layoutX="1027.0" layoutY="5.0" onAction="#viewM" prefHeight="30.0" prefWidth="170.0" style="-fx-background-color: #34a853;" text="Monitoring/Forwarding" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="TV" size="20" />
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="SPback1" buttonType="RAISED" layoutX="14.0" layoutY="8.0" onAction="#back1" prefHeight="30.0" style="-fx-background-color: #34a853;" text="Back" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="BACKWARD" size="20" />
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="30.0" layoutY="130.0" prefHeight="387.0" prefWidth="636.0" AnchorPane.leftAnchor="30.0">
+                     <children>
+                        <Label text="PROVIDER INFORMATION">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="proname" focusColor="#34a853" labelFloat="true" layoutX="16.0" layoutY="58.0" maxWidth="679.0" minWidth="620.0" prefHeight="37.0" prefWidth="620.0" promptText="PROVIDER NAME" unFocusColor="#34a853">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField fx:id="proaddress" focusColor="#34a853" labelFloat="true" layoutX="16.0" layoutY="111.0" maxWidth="679.0" minWidth="620.0" prefHeight="37.0" prefWidth="620.0" promptText="PROVIDER ADDRESS" unFocusColor="#34a853">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField fx:id="proemail" focusColor="#34a853" labelFloat="true" layoutX="16.0" layoutY="163.0" maxWidth="679.0" minWidth="620.0" prefHeight="37.0" prefWidth="620.0" promptText="EMAIL" unFocusColor="#34a853">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField fx:id="prowebsite" focusColor="#34a853" labelFloat="true" layoutX="16.0" layoutY="216.0" maxWidth="679.0" minWidth="620.0" prefHeight="37.0" prefWidth="620.0" promptText="WEBSITE" unFocusColor="#34a853">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField fx:id="procp" focusColor="#34a853" labelFloat="true" layoutX="16.0" layoutY="269.0" maxWidth="679.0" minWidth="620.0" prefHeight="37.0" prefWidth="620.0" promptText="MOBILE NUMBER" unFocusColor="#34a853">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField fx:id="protel" focusColor="#34a853" labelFloat="true" layoutX="16.0" layoutY="322.0" maxWidth="679.0" minWidth="620.0" prefHeight="37.0" prefWidth="620.0" promptText="TELEPHONE NUMBER" unFocusColor="#34a853">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXTextField>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="702.0" layoutY="130.0" prefHeight="200.0" prefWidth="636.0" AnchorPane.rightAnchor="30.0">
+                     <children>
+                        <Label text="PERSONNEL INFORMATION">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="fn" focusColor="#34a853" labelFloat="true" layoutX="14.0" layoutY="58.0" maxWidth="679.0" minWidth="199.0" prefHeight="37.0" prefWidth="199.0" promptText="FIRST NAME" unFocusColor="#34a853">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField fx:id="position" focusColor="#34a853" labelFloat="true" layoutX="14.0" layoutY="111.0" maxWidth="679.0" minWidth="620.0" prefHeight="37.0" prefWidth="620.0" promptText="POSITION" unFocusColor="#34a853">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField fx:id="peremail" focusColor="#34a853" labelFloat="true" layoutX="14.0" layoutY="161.0" maxWidth="679.0" minWidth="620.0" prefHeight="37.0" prefWidth="620.0" promptText="EMAIL" unFocusColor="#34a853">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField fx:id="mn" focusColor="#34a853" labelFloat="true" layoutX="226.0" layoutY="58.0" maxWidth="679.0" minWidth="199.0" prefHeight="37.0" prefWidth="199.0" promptText="MIDDLE NAME" unFocusColor="#34a853">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField fx:id="ln" focusColor="#34a853" labelFloat="true" layoutX="435.0" layoutY="58.0" maxWidth="679.0" minWidth="190.0" prefHeight="37.0" prefWidth="199.0" promptText="LAST NAME" unFocusColor="#34a853">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXTextField>
+                     </children>
+                  </AnchorPane>
+                  <JFXButton fx:id="submit" buttonType="RAISED" layoutX="1188.0" layoutY="545.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #34a853;" text="Submit" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="SEND" size="20" />
+                     </graphic>
+                  </JFXButton>
+                  <AnchorPane layoutX="702.0" layoutY="341.0" prefHeight="152.0" prefWidth="636.0" AnchorPane.leftAnchor="702.0">
+                     <children>
+                        <Label text="PROVIDER SERVICES">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <JFXCheckBox checkedColor="#34a853" layoutX="26.0" layoutY="60.0" text="PICK UP" unCheckedColor="#34a853">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXCheckBox>
+                        <JFXCheckBox checkedColor="#34a853" layoutX="26.0" layoutY="92.0" text="DOOR" unCheckedColor="#34a853">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXCheckBox>
+                        <JFXCheckBox checkedColor="#34a853" layoutX="26.0" layoutY="121.0" text="EXPRESS" unCheckedColor="#34a853">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXCheckBox>
+                        <JFXTextField focusColor="#34a853" labelFloat="true" layoutX="141.0" layoutY="113.0" maxWidth="493.0" minWidth="164.0" prefHeight="37.0" prefWidth="493.0" promptText="OTHER SERVICES" unFocusColor="#34a853">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXTextField>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

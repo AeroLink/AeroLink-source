@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="SProotPane" prefHeight="693.0" prefWidth="1370.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Core2.Change.SPviewReportController">
+   <children>
+      <SplitPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <items>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <AnchorPane prefHeight="40.0" prefWidth="1370.0" styleClass="card" stylesheets="@../../../Assets/css/card.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label layoutX="585.0" prefHeight="40.0" prefWidth="207.0" text=" SERVICE PROVIDER" textFill="#34a853" AnchorPane.leftAnchor="586.0" AnchorPane.topAnchor="0.0">
+                           <font>
+                              <Font name="Arial Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <JFXButton fx:id="SPback" layoutX="10.0" layoutY="5.0" prefHeight="30.0" style="-fx-background-color: #34a853;" text="Back" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="BACKWARD" size="20" />
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
