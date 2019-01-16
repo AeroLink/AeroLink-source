@@ -1,0 +1,6 @@
+.card{
+    -fx-background-color: white;
+    -fx-border-radius: 4.0px;
+    -fx-background-radius: 4.0px;
+    -fx-effect: dropshadow(gaussian,rgb(0.0,0.0,0.0,0.15),6.0,0.7,0.0,1.5);
+}
