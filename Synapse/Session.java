@@ -74,6 +74,8 @@ public class Session implements IModule {
     public static String schema = "";
     public static String provider = "";
     
+    public static Boolean offline = false;
+    
     //API
     public static String HttpURL = "";
     public static String token = "";

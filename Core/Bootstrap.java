@@ -5,7 +5,6 @@ package Core;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import Config.*;
 import Synapse.Form;
 import Synapse.Session;
@@ -16,24 +15,33 @@ import javafx.stage.StageStyle;
  * @author Lei
  */
 public class Bootstrap {
-    
-    public static void build(){
-        
+
+    public static void build() {
+
         //Building routes
-        Session.links =  RouteConfig.links;
+        Session.links = RouteConfig.links;
         //Building Database Configs
-        
+
         ModularPermissionConfig.initModuleConfig();
-        
+
         Session.ModularPermission = ModularPermissionConfig.modules;
-        
+
         Session.HttpURL = DatabaseConfig.HttpURL;
         Session.schema = DatabaseConfig.schema;
         Session.provider = DatabaseConfig.PROVIDER;
-        
+
+        //if offline
+        if (DatabaseConfig.offline) {
+            Session.Database = DatabaseConfig.DATABASE;
+            Session.Ip = DatabaseConfig.IP;
+            Session.Password = DatabaseConfig.PASSWORD;
+            Session.Port = DatabaseConfig.PORT;
+            Session.User = DatabaseConfig.USER;
+            Session.offline = DatabaseConfig.offline;
+        }
+
         //Start app
         new Form("/FXMLS/SplashScreen.fxml").open(StageStyle.UNDECORATED);
-        
-        
+
     }
 }
