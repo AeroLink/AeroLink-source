@@ -15,13 +15,12 @@ public class RouteConfig {
     public static String[][] links = {
         //test
         {"Main", "/FXMLS/MainDash.fxml", "canAccessSystem"},
-        
         //FINANCIALS
-        {"id_apr", "/FXMLS/FINANCIALS/FINANCIAL_APR.fxml", "can_access_hr1_socialrecog"},
-        {"id_budget", "/FXMLS/FINANCIALS/FINANCIAL_BUDGET.fxml", "can_access_hr1_socialrecog"},
-        {"id_collection", "/FXMLS/FINANCIALS/FINANCIAL_COLLECTION.fxml", "can_access_hr1_socialrecog"},
-        {"id_disbursement", "/FXMLS/FINANCIALS/FINANCIAL_DISBURSEMENT.fxml", "can_access_hr1_socialrecog"},
-        {"id_gl", "/FXMLS/FINANCIALS/FINANCIAL_GENERAL_LEDGER.fxml", "can_access_hr1_socialrecog"},
+        {"id_apr", "/FXMLS/FINANCIAL/FINANCIAL_AP_AR.fxml", "can_access_apar_management"},
+        {"id_budget", "/FXMLS/FINANCIAL/FINANCIAL_BUDGET_MANAGEMENT.fxml", "can_access_budget_management"},
+        {"id_collection", "/FXMLS/FINANCIAL/FINANCIAL_COLLECTION.fxml", "can_access_collection_management"},
+        {"id_disbursement", "/FXMLS/FINANCIAL/FINANCIAL_DISBURSEMENT.fxml", "can_access_disbursement_management"},
+        {"id_gl", "/FXMLS/FINANCIAL/FINANCIAL_GENERAL_LEDGER.fxml", "can_access_general_ledger"},
         //HR1
         {"hr1RCC", "/FXMLS/HR1/HR1_Recruitment.fxml", "can_access_hr1_recruitment"},
         {"applicant", "/FXMLS/HR1/HR1_Applicant_Management.fxml", "can_access_hr1_appManagement"},
@@ -51,11 +50,11 @@ public class RouteConfig {
         {"log2fm", "/FXMLS/Log2/Log2_Fleet_Management.fxml", "can_access_hr1_socialrecog"},
         {"log2vr", "/FXMLS/Log2/Log2_Vehicle_Reservation.fxml", "can_access_hr1_socialrecog"},
         //Core2    
-        {"core2SN", "/FXMLS/Core2/ServiceNetwork.fxml", "can_access_hr1_socialrecog"},
-        {"core2SP", "/FXMLS/Core2/ServiceProvider.fxml", "can_access_hr1_socialrecog"},
-        {"core2SR", "/FXMLS/Core2/ScheduleRates.fxml", "can_access_hr1_socialrecog"},
-        {"core2SOP", "/FXMLS/Core2/StandardOperationalProcedure.fxml", "can_access_hr1_socialrecog"},
-        {"core2CRM", "/FXML/Core2/CustomerRelationshipManagement.fxml", "can_access_hr1_socialrecog"},
+        {"core2SN", "/FXMLS/Core2/ServiceNetwork.fxml", "can_access_core2_serviceNetwork"},
+        {"core2SP", "/FXMLS/Core2/ServiceProvider.fxml", "can_access_core2_serviceProvider"},
+        {"core2SR", "/FXMLS/Core2/ScheduleRates.fxml", "can_access_core2_scheduleRates"},
+        {"core2SOP", "/FXMLS/Core2/StandardOperationalProcedure.fxml", "can_access_core2_sop"},
+        {"core2CRM", "/FXMLS/Core2/CustomerRelationshipManagement.fxml", "can_access_core2_crm"},
         //Core1   
         {"core1_booking", "/FXMLS/core1/Core1_booking.fxml", "can_access_hr1_socialrecog"},
         {"core1pom", "/FXMLS/core1/Core1_pom.fxml", "can_access_hr1_socialrecog"},
@@ -66,7 +65,7 @@ public class RouteConfig {
         {"usmManageUsers", "/FXMLS/USM/ManageUsers.fxml", "can_access_hr1_socialrecog"},
         //Requisitions
         {"requisitions", "/FXMLS/Requisition.fxml", "canAccessSystem"}
-    
+
     };
 
 }
