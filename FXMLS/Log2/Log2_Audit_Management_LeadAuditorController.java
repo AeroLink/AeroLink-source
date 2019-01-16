@@ -5,11 +5,8 @@
  */
 package FXMLS.Log2;
 
+import Model.Log2_Fleet_Management;
 import com.jfoenix.controls.JFXButton;
-import java.awt.Desktop;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -21,8 +18,10 @@ import javafx.scene.input.MouseEvent;
  *
  * @author Randelle
  */
-public class Log2_Vendor_PortalController implements Initializable {
+public class Log2_Audit_Management_LeadAuditorController implements Initializable {
 
+    @FXML
+    private JFXButton Close;
 
     /**
      * Initializes the controller class.
@@ -32,18 +31,10 @@ public class Log2_Vendor_PortalController implements Initializable {
         // TODO
     }    
 
-    private void btnlink(MouseEvent event) {
-           Desktop browser = Desktop.getDesktop();
-        
-        try{
-            browser.browse(new URI ("http://localhost/Forms/loginadmin.php"));
-            }
-        
-              catch(IOException err){
-        
+    @FXML
+    private void btn_close(MouseEvent event) {
+      
+   
     }
-              catch(URISyntaxException err){
-        }    
-    }   
-        
+    
 }

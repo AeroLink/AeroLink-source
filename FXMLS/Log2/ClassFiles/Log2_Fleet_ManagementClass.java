@@ -11,42 +11,117 @@ import javafx.beans.property.SimpleStringProperty;
  *
  * @author Randelle
  */
-public class Log2_Fleet_ManagementClass {
+public class Log2_Fleet_ManagementClass extends Synapse.Model {
+   
     
-      private SimpleStringProperty transaction_no;
-        private SimpleStringProperty item_type; 
-         private SimpleStringProperty personnel_in_charge;
-        private SimpleStringProperty date_recieved; 
-         
-         
-        public Log2_Fleet_ManagementClass(String transaction_no,String item_type,String personnel_in_charge, String date_recieved)
-         {
-             this.transaction_no = new SimpleStringProperty(transaction_no);
-             this.item_type = new SimpleStringProperty(item_type);
-             this.personnel_in_charge = new SimpleStringProperty(personnel_in_charge);
-             this.date_recieved = new SimpleStringProperty(date_recieved);
-             
-         }
+    
+    //pro
+    public SimpleStringProperty pvehicleno;
+    public SimpleStringProperty ptypeofvehicle;
+    public SimpleStringProperty pdestination;
+    public SimpleStringProperty ptime;
+    public SimpleStringProperty pstatus;
+    
+    
+    //proin
+    public SimpleStringProperty proinvehicleno;
+    public SimpleStringProperty prointypeofvehicle;
+    public SimpleStringProperty proinitemname;
+    public SimpleStringProperty proindestination;
+    public SimpleStringProperty prointime;
+    public SimpleStringProperty proinremarks;
+
+   
+  
+  
+    
+      //pro
+      public Log2_Fleet_ManagementClass(String pvehicleno,String ptypeofvehicle,String pdestination,String ptime,String pstatus){ 
+       this.pvehicleno = new SimpleStringProperty(pvehicleno);
+       this.ptypeofvehicle = new SimpleStringProperty(ptypeofvehicle);
+       this.pdestination = new SimpleStringProperty(pdestination);
+       this.ptime = new SimpleStringProperty(ptime);
+       this.pstatus = new SimpleStringProperty(pstatus);
         
-                    
-             public String getTransaction_no()
+       }
+      
+      //proin
+      public Log2_Fleet_ManagementClass(String proinvehicleno,String prointypeofvehicle,String proinitemname,String proindestination,String prointime,
+                                          String proinremarks){ 
+       this.proinvehicleno = new SimpleStringProperty(proinvehicleno);
+       this.prointypeofvehicle = new SimpleStringProperty(prointypeofvehicle);
+       this.proinitemname = new SimpleStringProperty(proinitemname);
+       this.proindestination = new SimpleStringProperty(proindestination);
+       this.prointime = new SimpleStringProperty(prointime);
+       this.proinremarks = new SimpleStringProperty(proinremarks); 
+       }
+
+   
+             
+             
+             //pro
+             
+             public String getPvehicleno()
              {
-                 return transaction_no.get();
+                 return pvehicleno.get();
              }
              
-             public String getItem_type()
+              public String getPtypeofvehicle()
              {
-                 return item_type.get();
+                 return ptypeofvehicle.get();
              }
-             
-             public String getPersonnel_in_charge()
+              
+               public String getPdestination()
              {
-                 return personnel_in_charge.get();
+                 return pdestination.get();
              }
-             
-             public String getDate_recieved()
+               
+                public String getPtime()
              {
-                 return date_recieved.get();
+                 return ptime.get();
              }
+                
+                 public String getPstatus()
+             {
+                 return pstatus.get();
+             }
+                 
+          //proin
+                public String getProinvehicleno()
+             {
+                 return proinvehicleno.get();
+             }
+                
+                public String getProintypeofvehicle()
+             {
+                 return prointypeofvehicle.get();
+             }
+                
+                public String getProinitemname()
+             {
+                 return proinitemname.get();
+             }
+                
+                public String getProindestination()
+             {
+                 return proindestination.get();
+             }
+                
+                public String getProintime()
+             {
+                 return prointime.get();
+             }
+                
+                public String getProinremarks()
+             {
+                 return proinremarks.get();
+             }
+                 
+                 
+                 
+                 
+                 
+                 
              
-}
+             
+    }
