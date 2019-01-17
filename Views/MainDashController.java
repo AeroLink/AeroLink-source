@@ -43,6 +43,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 /**
@@ -143,7 +144,8 @@ public class MainDashController implements Initializable {
         btnCancel.getStyleClass().add("btn-danger");
 
         btnSubmitInit.setOnMouseClicked(value -> {
-            System.exit(0);
+            Synapse.Form frm = new Synapse.Form("/FXMLS/Login.fxml");
+            frm.open(StageStyle.UNDECORATED, false);
         });
 
         btnCancel.setOnMouseClicked(value -> {

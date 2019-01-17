@@ -549,80 +549,78 @@ public class Model {
     //end insertions
 
     public int insert(Object[][] vals, Boolean returnID) {
-        if (Session.isConnected) {
-            String columns = "";
-            List values = new ArrayList<>();
-            for (int i = 0; i < vals.length; i++) {
+        String columns = "";
+        List values = new ArrayList<>();
+        for (int i = 0; i < vals.length; i++) {
 
-                if (vals[i].length < 2) {
-                    System.out.println(Response.ORM_ERR_02);
-                    break;
+            if (vals[i].length < 2) {
+                System.out.println(Response.ORM_ERR_02);
+                break;
+            }
+
+            if (i == (vals.length - 1)) {
+                columns += vals[i][0];
+            } else {
+                columns += vals[i][0] + ",";
+            }
+
+            values.add(vals[i][1]);
+
+        }
+
+        String query = "";
+        try {
+
+            query = "INSERT INTO " + this.global_table + "(" + columns + ") VALUES (" + Helpers.Prepared_combine(values.toArray().length, ",") + ")";
+
+            Object[] sp = values.toArray();
+
+            System.out.println("[SQL QUERY] : -> " + query);
+            System.err.println("[Values] : -> " + Helpers.combine(sp, ","));
+
+            if (Session.offline) {
+
+                if (Session.INSTANCE.hasConnection()) {
+                    this.pst = returnID ? Session.INSTANCE.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS) : Session.INSTANCE.getConnection().prepareStatement(query);
+
+                    for (int i = 1; i <= sp.length; i++) {
+                        this.pst.setObject(i, sp[i - 1]);
+                    }
+
+                    Boolean success = this.pst.executeUpdate() != 0;
+
+                    return success ? (returnID ? Integer.parseInt(((HashMap) R2SL.convert(this.pst.getGeneratedKeys()).get(0)).get("GENERATED_KEYS").toString()) : 1) : 0;
+
                 }
+            } else {
 
-                if (i == (vals.length - 1)) {
-                    columns += vals[i][0];
-                } else {
-                    columns += vals[i][0] + ",";
+                if (Session.isConnected) {
+                    HttpClient.post(METHOD.INSERT_RT_ID, "{\"A1009\" : \"" + query + "\",\"B1009\" : \"" + Helpers.combine(sp, ",,") + "\" }", (error, obj) -> {
+                        if (error) {
+                            System.err.println("Error -> " + error);
+                        }
+                        json = obj;
+                    });
+
+                    JSONObject list = new JSONObject(String.valueOf(R2SL.convert_rt_obj(json)));
+
+                    HashMap hash = (HashMap) list.toMap();
+
+                    if (Boolean.parseBoolean(String.valueOf(hash.get("success")))) {
+                        return returnID ? Integer.parseInt(String.valueOf(hash.get("value"))) : 0;
+                    } else {
+                        System.err.println(hash.get("message"));
+                        return 0;
+                    }
                 }
-
-                values.add(vals[i][1]);
 
             }
 
-            String query = "";
-            try {
-
-                query = "INSERT INTO " + this.global_table + "(" + columns + ") VALUES (" + Helpers.Prepared_combine(values.toArray().length, ",") + ")";
-
-                Object[] sp = values.toArray();
-
-                System.out.println("[SQL QUERY] : -> " + query);
-                System.err.println("[Values] : -> " + Helpers.combine(sp, ","));
-
-                if (Session.offline) {
-
-                    if (Session.INSTANCE.hasConnection()) {
-                        this.pst = returnID ? Session.INSTANCE.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS) : Session.INSTANCE.getConnection().prepareStatement(query);
-
-                        for (int i = 1; i <= sp.length; i++) {
-                            this.pst.setObject(i, sp[i - 1]);
-                        }
-
-                        Boolean success = this.pst.executeUpdate() != 0;
-
-                        return success ? (returnID ? Integer.parseInt(((HashMap) R2SL.convert(this.pst.getGeneratedKeys()).get(0)).get("GENERATED_KEYS").toString()) : 1) : 0;
-
-                    }
-                } else {
-
-                    if (Session.isConnected) {
-                        HttpClient.post(METHOD.INSERT_RT_ID, "{\"A1009\" : \"" + query + "\",\"B1009\" : \"" + Helpers.combine(sp, ",,") + "\" }", (error, obj) -> {
-                            if (error) {
-                                System.err.println("Error -> " + error);
-                            }
-                            json = obj;
-                        });
-
-                        JSONObject list = new JSONObject(String.valueOf(R2SL.convert_rt_obj(json)));
-
-                        HashMap hash = (HashMap) list.toMap();
-
-                        if (Boolean.parseBoolean(String.valueOf(hash.get("success")))) {
-                            return returnID ? Integer.parseInt(String.valueOf(hash.get("value"))) : 0;
-                        } else {
-                            System.err.println(hash.get("message"));
-                            return 0;
-                        }
-                    }
-
-                }
-
-            } catch (Exception ex) {
-                Response.ErrorResponse();
-                ex.printStackTrace();
-                System.err.println("SQL Error -> " + ex.getMessage());
-                System.err.println(query);
-            }
+        } catch (Exception ex) {
+            Response.ErrorResponse();
+            ex.printStackTrace();
+            System.err.println("SQL Error -> " + ex.getMessage());
+            System.err.println(query);
         }
 
         return 0;
