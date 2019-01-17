@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FXMLS.Log1.Modal;
+package FXMLS.Log1.Warehouse.Modal;
 
 import FXMLS.Log1.util.AlertMaker;
-import Model.Log1.Log1_WarehouseDesiredItemTypeModel;
+import Model.Log1.Log1_WarehouseDesiredItemUnitModel;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,46 +21,45 @@ import javafx.stage.Stage;
  *
  * @author Crenz
  */
-public class ItemTypeController implements Initializable {
+public class ItemUnitController implements Initializable {
 
     @FXML
-    private TextField desiredItemType_txt;
+    private TextField desiredItemUnit_txt;
     @FXML
-    private JFXButton addItemType_btn;
+    private JFXButton addItemUnit_btn;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        addItemUnit_btn.setOnMouseClicked(e -> saveItemUnit());
         // TODO
-        addItemType_btn.setOnMouseClicked(e -> saveItemType());
     }    
-    public void saveItemType(){
-        String desiredType = desiredItemType_txt.getText();
+    public void saveItemUnit(){
+        String desiredUnit = desiredItemUnit_txt.getText();
         
-        Boolean flag = desiredType.isEmpty();
+        Boolean flag = desiredUnit.isEmpty();
         if(flag){
             AlertMaker.showErrorMessage("Invalid Input", "Please fill up all details");
             return;
         }
-        Log1_WarehouseDesiredItemTypeModel coa = new Log1_WarehouseDesiredItemTypeModel();
+        Log1_WarehouseDesiredItemUnitModel coa = new Log1_WarehouseDesiredItemUnitModel();
         try{String [][] coa_table ={
-            {"DesiredItemType",desiredItemType_txt.getText()}};
+            {"DesiredItemUnit",desiredItemUnit_txt.getText()}};
             if(coa.insert(coa_table)){
-                AlertMaker.showSimpleAlert("Saved", ""+ desiredItemType_txt.getText()+" added to List of Item Types");
-                desiredItemType_txt.setText("");
+                AlertMaker.showSimpleAlert("Saved", ""+ desiredItemUnit_txt.getText() +" has been added to Item's Units ");
+                desiredItemUnit_txt.setText("");
                 return;
             }
         }catch(Exception e){
             e.printStackTrace();
-        }
-        
-    }
+        } 
+    }    
 
     @FXML
     private void cancel(ActionEvent event) {
-        Stage stage = (Stage) desiredItemType_txt.getScene().getWindow();
+        Stage stage = (Stage) desiredItemUnit_txt.getScene().getWindow();
         stage.close();
     }
 }

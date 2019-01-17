@@ -1,5 +1,5 @@
 
-package FXMLS.Log1.Modal;
+package FXMLS.Log1.Warehouse.Modal;
 
 import FXMLS.Log1.ClassFiles.Log1_SupplierClassfiles;
 import FXMLS.Log1.ClassFiles.Log1_fullInventoryList;
@@ -269,13 +269,13 @@ public class AddItemOnWarehouseController implements Initializable {
 
     @FXML
     private void showSetUnit(ActionEvent event) {
-        Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Modal/ItemUnit.fxml"),
+        Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/ItemUnit.fxml"),
                  "Set Item Unit", null);
     }
 
     @FXML
     private void showSetType(ActionEvent event) {
-        Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Modal/ItemType.fxml"),
+        Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/ItemType.fxml"),
                  "Set Item Type", null);
     }
 }

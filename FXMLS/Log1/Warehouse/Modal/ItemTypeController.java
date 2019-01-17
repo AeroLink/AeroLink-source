@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FXMLS.Log1.Modal;
+package FXMLS.Log1.Warehouse.Modal;
 
 import FXMLS.Log1.util.AlertMaker;
-import Model.Log1.Log1_WarehouseDesiredItemUnitModel;
+import Model.Log1.Log1_WarehouseDesiredItemTypeModel;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,45 +21,46 @@ import javafx.stage.Stage;
  *
  * @author Crenz
  */
-public class ItemUnitController implements Initializable {
+public class ItemTypeController implements Initializable {
 
     @FXML
-    private TextField desiredItemUnit_txt;
+    private TextField desiredItemType_txt;
     @FXML
-    private JFXButton addItemUnit_btn;
+    private JFXButton addItemType_btn;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        addItemUnit_btn.setOnMouseClicked(e -> saveItemUnit());
         // TODO
+        addItemType_btn.setOnMouseClicked(e -> saveItemType());
     }    
-    public void saveItemUnit(){
-        String desiredUnit = desiredItemUnit_txt.getText();
+    public void saveItemType(){
+        String desiredType = desiredItemType_txt.getText();
         
-        Boolean flag = desiredUnit.isEmpty();
+        Boolean flag = desiredType.isEmpty();
         if(flag){
             AlertMaker.showErrorMessage("Invalid Input", "Please fill up all details");
             return;
         }
-        Log1_WarehouseDesiredItemUnitModel coa = new Log1_WarehouseDesiredItemUnitModel();
+        Log1_WarehouseDesiredItemTypeModel coa = new Log1_WarehouseDesiredItemTypeModel();
         try{String [][] coa_table ={
-            {"DesiredItemUnit",desiredItemUnit_txt.getText()}};
+            {"DesiredItemType",desiredItemType_txt.getText()}};
             if(coa.insert(coa_table)){
-                AlertMaker.showSimpleAlert("Saved", ""+ desiredItemUnit_txt.getText() +" has been added to Item's Units ");
-                desiredItemUnit_txt.setText("");
+                AlertMaker.showSimpleAlert("Saved", ""+ desiredItemType_txt.getText()+" added to List of Item Types");
+                desiredItemType_txt.setText("");
                 return;
             }
         }catch(Exception e){
             e.printStackTrace();
-        } 
-    }    
+        }
+        
+    }
 
     @FXML
     private void cancel(ActionEvent event) {
-        Stage stage = (Stage) desiredItemUnit_txt.getScene().getWindow();
+        Stage stage = (Stage) desiredItemType_txt.getScene().getWindow();
         stage.close();
     }
 }
