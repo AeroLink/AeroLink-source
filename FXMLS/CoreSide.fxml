@@ -744,6 +744,67 @@
                                                         </Label>
                                                     </children>
                                                 </AnchorPane>
+                                                
+                                                <AnchorPane>	
+                                                    <children>	
+                                                        <JFXButton id="id_apr" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Legal Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">	
+                                                            <font>	
+                                                                <Font size="14.0" />	
+                                                            </font>	
+                                                            <graphic>	
+                                                                <FontAwesomeIconView fill="#34a853" glyphName="MONEY" size="25" styleClass="fontIcon" />	
+                                                            </graphic>	
+                                                        </JFXButton>	
+                                                    </children>	
+                                                </AnchorPane>	
+                                                <AnchorPane layoutX="11.0" layoutY="50.0">	
+                                                    <children>	
+                                                        <JFXButton id="id_budget" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Legal Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">	
+                                                            <font>	
+                                                                <Font size="14.0" />	
+                                                            </font>	
+                                                            <graphic>	
+                                                                <FontAwesomeIconView fill="#34a853" glyphName="MONEY" size="25" styleClass="fontIcon" />	
+                                                            </graphic>	
+                                                        </JFXButton>	
+                                                    </children>	
+                                                </AnchorPane>	
+                                                <AnchorPane layoutX="11.0" layoutY="86.0">	
+                                                    <children>	
+                                                        <JFXButton id="id_collection" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Legal Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">	
+                                                            <font>	
+                                                                <Font size="14.0" />	
+                                                            </font>	
+                                                            <graphic>	
+                                                                <FontAwesomeIconView fill="#34a853" glyphName="MONEY" size="25" styleClass="fontIcon" />	
+                                                            </graphic>	
+                                                        </JFXButton>	
+                                                    </children>	
+                                                </AnchorPane>	
+                                                <AnchorPane layoutX="11.0" layoutY="122.0">	
+                                                    <children>	
+                                                        <JFXButton id="id_disbursement" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Legal Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">	
+                                                            <font>	
+                                                                <Font size="14.0" />	
+                                                            </font>	
+                                                            <graphic>	
+                                                                <FontAwesomeIconView fill="#34a853" glyphName="MONEY" size="25" styleClass="fontIcon" />	
+                                                            </graphic>	
+                                                        </JFXButton>	
+                                                    </children>	
+                                                </AnchorPane>	
+                                                <AnchorPane layoutX="11.0" layoutY="50.0">	
+                                                    <children>	
+                                                        <JFXButton id="id_gl" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Legal Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">	
+                                                            <font>	
+                                                                <Font size="14.0" />	
+                                                            </font>	
+                                                            <graphic>	
+                                                                <FontAwesomeIconView fill="#34a853" glyphName="MONEY" size="25" styleClass="fontIcon" />	
+                                                            </graphic>	
+                                                        </JFXButton>	
+                                                    </children>	
+                                                </AnchorPane>
                                             </children>
                                         </VBox>
                                     </children>
