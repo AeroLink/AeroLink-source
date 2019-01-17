@@ -82,6 +82,8 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
     ExecutorService e = Executors.newFixedThreadPool(1);
     HR4_Jobs jobs = new HR4_Jobs();
     HR4_EmployeeInfo emp = new HR4_EmployeeInfo();
+    Boolean searchStatus = false;
+    
 
     @FXML
     private JFXButton btnNewDept;
@@ -89,8 +91,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
     private JFXTextField Search_Job;
     @FXML
     private TableView<HR4_EmpInfoClass> tbl_chc;
-    @
-            FXML
+    @FXML
     private ComboBox statcb;
     @FXML
     private ComboBox ckasscb;
@@ -127,9 +128,11 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         tbl_jobs.setContextMenu(contextMenuJobs);
 
         Search_Job.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-            SearchJOB();
+            if (!Search_Job.getText().equals("")) {
+                searchStatus = true;
+                SearchJOB();
+            }
         });
-        Search_Job.setOnMouseClicked(event -> SearchJOB());
         ///////2ndobj
 
         obj1.addListener((ListChangeListener.Change<? extends Object> c) -> {
@@ -245,9 +248,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
                         DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
                     });
 
-                    if (DummyCount != GlobalCount) {
-
-                        tbl_jobs.getItems();
+                    if ((DummyCount != GlobalCount) && !searchStatus ) {
                         List rs = jobs
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "tblD", "=", "dept_id")
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_classifications", "id", "tblC", "=", "classification_id")
