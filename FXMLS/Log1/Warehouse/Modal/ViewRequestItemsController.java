@@ -6,7 +6,6 @@
 package FXMLS.Log1.Warehouse.Modal;
 
 import FXMLS.Log1.ClassFiles.Log1_ItemRequestsClassfiles;
-import FXMLS.Log1.WarehouseManagementController;
 import FXMLS.Log1.util.AlertMaker;
 import Model.Log1.Log1_WarehouseRequestItemModel;
 import com.jfoenix.controls.JFXButton;
@@ -66,6 +65,8 @@ public class ViewRequestItemsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        //Changes 
+        //Changes 345
         // TODO
         callItemRequestsData();
         displayRequestData();
