@@ -28,9 +28,14 @@ public class Model {
     private Boolean joined = false;
 
     private String groupBy = "";
+    private String orderBy = "";
 
     public enum JOIN {
         INNER, LEFT, RIGHT
+    }
+
+    public enum Sort {
+        ASC, DESC
     }
 
     private String whereConstruct = "";
@@ -99,6 +104,10 @@ public class Model {
             if (this.where) {
                 this.finalQuery += "WHERE " + this.whereConstruct;
 
+                if (!"".equals(this.orderBy)) {
+                    this.finalQuery += this.orderBy;
+                }
+
                 if (!"".equals(this.groupBy)) {
                     this.finalQuery += this.groupBy;
                 }
@@ -108,6 +117,10 @@ public class Model {
                 }
 
             } else {
+
+                if (!"".equals(this.orderBy)) {
+                    this.finalQuery += this.orderBy;
+                }
 
                 if (!"".equals(this.groupBy)) {
                     this.finalQuery += this.groupBy;
@@ -177,6 +190,10 @@ public class Model {
             if (this.where) {
                 this.finalQuery += "WHERE " + this.whereConstruct;
 
+                if (!"".equals(this.orderBy)) {
+                    this.finalQuery += this.orderBy;
+                }
+
                 if (!"".equals(this.groupBy)) {
                     this.finalQuery += this.groupBy;
                 }
@@ -185,6 +202,11 @@ public class Model {
                     this.Where_PrepareStatementSession();
                 }
             } else {
+                
+                if (!"".equals(this.orderBy)) {
+                    this.finalQuery += this.orderBy;
+                }
+
                 if (!"".equals(this.groupBy)) {
                     this.finalQuery += this.groupBy;
                 }
@@ -799,6 +821,19 @@ public class Model {
     public Model groupBy(String column) {
 
         this.groupBy += " GROUP BY " + column;
+        return this;
+    }
+
+    /**
+     *
+     * Usage : Model.orderBy(column).get();
+     *
+     * @param column
+     * @param sort
+     * @return
+     */
+    public Model orderBy(String column, Sort sort) {
+        this.orderBy += " ORDER BY " + column + " " + sort;
         return this;
     }
 
