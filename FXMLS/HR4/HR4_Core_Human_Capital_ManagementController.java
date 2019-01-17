@@ -83,7 +83,6 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
     HR4_Jobs jobs = new HR4_Jobs();
     HR4_EmployeeInfo emp = new HR4_EmployeeInfo();
     Boolean searchStatus = false;
-    
 
     @FXML
     private JFXButton btnNewDept;
@@ -107,14 +106,15 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         //For Jobs
         weabo();
         weabo1();
-        statcb.getSelectionModel().selectedItemProperty().addListener(listener -> {
-            DummyCount = 0;
-            GlobalCount = 0;
 
-        });
-        ckasscb.getSelectionModel().selectedItemProperty().addListener(listener -> {
-            DummyCount = 0;
+        statcb.getSelectionModel().selectedItemProperty().addListener(listener -> {
             GlobalCount = 0;
+            DummyCount = 0;
+        });
+
+        ckasscb.getSelectionModel().selectedItemProperty().addListener(listener -> {
+            GlobalCount2 = 0;
+            DummyCount2 = 0;
         });
 
         this.generateTable();
@@ -122,10 +122,6 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
 
         tbl_jobs.setContextMenu(contextMenuJobs);
         //SearchOfJob
-        obj.addListener((ListChangeListener.Change<? extends Object> c) -> {
-            tbl_jobs.setItems(obj);
-        });
-        tbl_jobs.setContextMenu(contextMenuJobs);
 
         Search_Job.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
             if (!Search_Job.getText().equals("")) {
@@ -248,13 +244,14 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
                         DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
                     });
 
-                    if ((DummyCount != GlobalCount) && !searchStatus ) {
+                    if ((DummyCount != GlobalCount) && !searchStatus) {
                         List rs = jobs
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "tblD", "=", "dept_id")
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_classifications", "id", "tblC", "=", "classification_id")
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_designations", "id", "tblDD", "=", "designation_id")
                                 .where(new Object[][]{{"tblC.class_name", "=", ckasscb.getSelectionModel().getSelectedItem().toString()}})
                                 .get(
+                                        "job_id",
                                         "title",
                                         "description",
                                         "tblD.dept_name as department",
@@ -277,8 +274,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
 
     public void AddJobToTable(List rs) {
         obj.clear();
-        tbl_jobs.refresh();
-
+        tbl_jobs.getItems().clear();
         for (Object row : rs) {
             HashMap crow = (HashMap) row;
             String id = String.valueOf(crow.get("job_id"));
@@ -406,16 +402,25 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
     long DummyCount = 0;
     long GlobalCount = 0;
 
+    long DummyCountCombo = 0;
+    long GlobalCountCombo = 0;
+
+    long DummyCountCombo2 = 0;
+    long GlobalCountCombo2 = 0;
+
+    long DummyCount2 = 0;
+    long GlobalCount2 = 0;
+
     public void populateTable1() {
         CompletableFuture.supplyAsync(() -> {
 
             while (Session.CurrentRoute.equals("hr4chc")) {
                 try {
                     emp.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
-                        DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
+                        DummyCount2 = Long.parseLong(((HashMap) e).get("chk").toString());
                     });
 
-                    if (DummyCount != GlobalCount) {
+                    if (DummyCount2 != GlobalCount2) {
 
                         tbl_chc.getItems();
                         List rs = emp
@@ -435,7 +440,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
                                 );
 
                         AddJobToTable1(rs);
-                        GlobalCount = DummyCount;
+                        GlobalCount2 = DummyCount2;
                     }
 
                     Thread.sleep(3000);
@@ -487,12 +492,13 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
     int current_row = 0;
 
     public void viewJob() {
-        HR4_MIZ.init_viewJob(tbl_jobs.getSelectionModel().getSelectedItem().id.get(),
-                tbl_jobs.getSelectionModel().getSelectedItem().title.get(),
-                tbl_jobs.getSelectionModel().getSelectedItem().description.get(),
-                tbl_jobs.getSelectionModel().getSelectedItem().department.get(),
-                tbl_jobs.getSelectionModel().getSelectedItem().designation.get(),
-                tbl_jobs.getSelectionModel().getSelectedItem().classification.get());
+        System.out.println("jobID : " + tbl_jobs.getSelectionModel().getSelectedItem().id.getValue());
+        HR4_MIZ.init_viewJob(tbl_jobs.getSelectionModel().getSelectedItem().id.getValue(),
+                tbl_jobs.getSelectionModel().getSelectedItem().title.getValue(),
+                tbl_jobs.getSelectionModel().getSelectedItem().description.getValue(),
+                tbl_jobs.getSelectionModel().getSelectedItem().department.getValue(),
+                tbl_jobs.getSelectionModel().getSelectedItem().designation.getValue(),
+                tbl_jobs.getSelectionModel().getSelectedItem().classification.getValue());
 
         Modal md = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_ViewJob.fxml").getParent());
         md.open();
