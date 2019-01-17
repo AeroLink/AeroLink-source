@@ -61,6 +61,8 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         this.generateSalaryGrade();
         this.populateSalaryGrade();
+        this.generateTable();
+        this.populateTable();
     
     }
     public void weabo1() {
@@ -121,7 +123,7 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
 
                     if (DummyCount != GlobalCount) {
 
-                        tri_tbl.getItems().removeAll(obj);
+                        tri_tbl.getItems();
                             List rs = sssmodel
                                     .get(
                                             "CONCAT(rocmin,' - ',rocmax) as roc",
@@ -151,6 +153,7 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
 
     public void AddJobToTable(List rs) {
         obj.clear();
+        tri_tbl.refresh();
 
         for (Object row : rs) {
             HashMap crow = (HashMap) row;
