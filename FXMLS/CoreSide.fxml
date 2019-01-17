@@ -582,7 +582,7 @@
                                                 <AnchorPane prefHeight="10.0" prefWidth="273.0" />
                                                 <AnchorPane>
                                                     <children>
-                                                        <JFXButton id="log1MRO" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Maintenance Repair Overhaul" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <JFXButton id="log1MRO" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Maintenance Repair Overhaul " AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <graphic>
                                                                 <FontAwesomeIconView fill="#34a853" glyphName="WRENCH" size="25" strokeType="INSIDE" />
                                                             </graphic>
