@@ -24,12 +24,15 @@
          <children>
             <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <HBox alignment="CENTER_LEFT" spacing="7.0">
+                  <HBox alignment="CENTER_LEFT" spacing="2.0">
                      <children>
-                        <FontAwesomeIconView glyphName="HOME" size="20" />
+                        <FontAwesomeIconView glyphName="HOME" size="25">
+                           <HBox.margin>
+                              <Insets left="5.0" top="10.0" />
+                           </HBox.margin></FontAwesomeIconView>
                         <Label text="Warehouse Management">
                            <HBox.margin>
-                              <Insets />
+                              <Insets top="10.0" />
                            </HBox.margin>
                            <font>
                               <Font name="System Bold" size="21.0" />
@@ -37,7 +40,7 @@
                         </Label>
                      </children>
                      <VBox.margin>
-                        <Insets left="10.0" top="5.0" />
+                        <Insets />
                      </VBox.margin>
                   </HBox>
                   <VBox>

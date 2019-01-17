@@ -5,11 +5,11 @@ import FXMLS.Log1.ClassFiles.Log1_SupplierClassfiles;
 import FXMLS.Log1.ClassFiles.Log1_fullInventoryList;
 import FXMLS.Log1.util.AlertMaker;
 import FXMLS.Log1.util.Log1Util;
-import Model.Log1.Log1_ActivityLogforWarehouseModel;
+import Model.Log1.Log1_WarehouseActivityLogModel;
 import Model.Log1.Log1_SupplierModel;
-import Model.Log1.Log1_WarehouseItems;
-import Model.Log1.Log1_itemTypeWHModel;
-import Model.Log1.Log1_itemUnitWHModel;
+import Model.Log1.Log1_WarehouseItemsModel;
+import Model.Log1.Log1_WarehouseDesiredItemTypeModel;
+import Model.Log1.Log1_WarehouseDesiredItemUnitModel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
@@ -126,7 +126,7 @@ public class AddItemOnWarehouseController implements Initializable {
     }
     
     public void loadItemUnitToCombox(){
-        Log1_itemUnitWHModel iu = new Log1_itemUnitWHModel();
+        Log1_WarehouseDesiredItemUnitModel iu = new Log1_WarehouseDesiredItemUnitModel();
         List itemUnit = iu.get();
 
         itemUnit.stream().forEach(row -> {
@@ -136,7 +136,7 @@ public class AddItemOnWarehouseController implements Initializable {
         });
     }
     public void loadItemTypeToCombox(){
-        Log1_itemTypeWHModel it = new Log1_itemTypeWHModel();
+        Log1_WarehouseDesiredItemTypeModel it = new Log1_WarehouseDesiredItemTypeModel();
         List itemUnit = it.get();
 
         itemUnit.stream().forEach(row -> {
@@ -169,8 +169,8 @@ public class AddItemOnWarehouseController implements Initializable {
             useUpdateMethod();
             return;
         }
-        Log1_ActivityLogforWarehouseModel coa2 = new Log1_ActivityLogforWarehouseModel();
-        Log1_WarehouseItems coa = new Log1_WarehouseItems();
+        Log1_WarehouseActivityLogModel coa2 = new Log1_WarehouseActivityLogModel();
+        Log1_WarehouseItemsModel coa = new Log1_WarehouseItemsModel();
         if(!flag){
             try{
                 String[][] coa_table ={
@@ -236,7 +236,7 @@ public class AddItemOnWarehouseController implements Initializable {
     }
     
     private void useUpdateMethod() {
-        Log1_WarehouseItems wh = new Log1_WarehouseItems();
+        Log1_WarehouseItemsModel wh = new Log1_WarehouseItemsModel();
             try{
                 if(wh.update(new Object[][]{ 
                     {"ItemDescription",itemDescription_txt.getText()},

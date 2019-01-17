@@ -9,8 +9,8 @@ package Model.Log1;
  *
  * @author Crenz
  */
-public class Log1_ItemRequestModel extends Synapse.Model {
-    public Log1_ItemRequestModel(){
-        this.initTable("tbl_log1_ItemRequest");
+public class Log1_WarehouseDesiredItemTypeModel extends Synapse.Model {
+    public Log1_WarehouseDesiredItemTypeModel(){
+        this.initTable("tbl_log1_WarehouseDesiredItemType");
     }
 }

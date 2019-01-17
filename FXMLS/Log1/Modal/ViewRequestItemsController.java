@@ -8,7 +8,7 @@ package FXMLS.Log1.Modal;
 import FXMLS.Log1.ClassFiles.Log1_ItemRequestsClassfiles;
 import FXMLS.Log1.WarehouseManagementController;
 import FXMLS.Log1.util.AlertMaker;
-import Model.Log1.Log1_ItemRequestModel;
+import Model.Log1.Log1_WarehouseRequestItemModel;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.HashMap;
@@ -78,7 +78,7 @@ public class ViewRequestItemsController implements Initializable {
     }
 
     public void callItemRequestsData(){
-         Log1_ItemRequestModel ir = new Log1_ItemRequestModel();
+         Log1_WarehouseRequestItemModel ir = new Log1_WarehouseRequestItemModel();
          ObservableList<Log1_ItemRequestsClassfiles> requests = FXCollections.observableArrayList();
           
             List b = ir.join(Model.JOIN.INNER,"aerolink.tbl_log1_ItemWH", "ItemID", "=", "ItemID").where(new Object[][]{

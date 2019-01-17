@@ -7,8 +7,8 @@ package FXMLS.Log1.Modal;
 
 import FXMLS.Log1.ClassFiles.Log1_fullInventoryList;
 import FXMLS.Log1.util.AlertMaker;
-import Model.Log1.Log1_ItemRequestModel;
-import Model.Log1.Log1_WarehouseItems;
+import Model.Log1.Log1_WarehouseRequestItemModel;
+import Model.Log1.Log1_WarehouseItemsModel;
 import Synapse.Model;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
@@ -83,7 +83,7 @@ public class RequestItemsOnWarehouseController implements Initializable {
             AlertMaker.showErrorMessage("Invalid Input", "Please fill up all details");
             return;
         }
-        Log1_ItemRequestModel coa = new Log1_ItemRequestModel();
+        Log1_WarehouseRequestItemModel coa = new Log1_WarehouseRequestItemModel();
         try{String [][] coa_table ={
             {"ItemID", itemID_txt.getText()},
             {"QuantityRequested", quantity_txt.getText()},
@@ -116,7 +116,7 @@ public class RequestItemsOnWarehouseController implements Initializable {
     }
     
     public void callWarehouseItems(){
-         Log1_WarehouseItems coa = new Log1_WarehouseItems();
+         Log1_WarehouseItemsModel coa = new Log1_WarehouseItemsModel();
          ObservableList<Log1_fullInventoryList> ItemsXD = FXCollections.observableArrayList();
           
             List b = coa.join

@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="825.0" prefWidth="311.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.CoreSideController">
+<BorderPane prefHeight="825.0" prefWidth="311.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.CoreSideController">
     <center>
         <VBox prefHeight="657.0" prefWidth="311.0" style="-fx-background-color: white;">
             <children>
@@ -545,7 +545,7 @@
                                                     <children>
                                                         <JFXButton id="log1AM" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Asset Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <graphic>
-                                                                <FontAwesomeIconView fill="#34a853" glyphName="USER" size="25" strokeType="INSIDE" />
+                                                                <FontAwesomeIconView fill="#34a853" glyphName="MONEY" size="25" strokeType="INSIDE" />
                                                             </graphic>
                                                             <font>
                                                                 <Font size="13.0" />
@@ -558,7 +558,7 @@
                                                     <children>
                                                         <JFXButton id="log1Proc" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Procurement" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <graphic>
-                                                                <FontAwesomeIconView fill="#34a853" glyphName="USER" size="25" strokeType="INSIDE" />
+                                                                <FontAwesomeIconView fill="#34a853" glyphName="SHOPPING_CART" size="25" strokeType="INSIDE" />
                                                             </graphic>
                                                             <font>
                                                                 <Font size="13.0" />
@@ -571,7 +571,7 @@
                                                     <children>
                                                         <JFXButton id="log1WM" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Warehouse Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <graphic>
-                                                                <FontAwesomeIconView fill="#34a853" glyphName="USER" size="25" strokeType="INSIDE" />
+                                                                <FontAwesomeIconView fill="#34a853" glyphName="HOME" size="25" strokeType="INSIDE" />
                                                             </graphic>
                                                             <font>
                                                                 <Font size="13.0" />
@@ -584,7 +584,7 @@
                                                     <children>
                                                         <JFXButton id="log1MRO" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Maintenance Repair Overhaul" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <graphic>
-                                                                <FontAwesomeIconView fill="#34a853" glyphName="USER" size="25" strokeType="INSIDE" />
+                                                                <FontAwesomeIconView fill="#34a853" glyphName="WRENCH" size="25" strokeType="INSIDE" />
                                                             </graphic>
                                                             <font>
                                                                 <Font size="13.0" />

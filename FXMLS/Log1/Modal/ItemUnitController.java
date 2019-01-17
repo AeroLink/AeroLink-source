@@ -6,7 +6,7 @@
 package FXMLS.Log1.Modal;
 
 import FXMLS.Log1.util.AlertMaker;
-import Model.Log1.Log1_itemUnitWHModel;
+import Model.Log1.Log1_WarehouseDesiredItemUnitModel;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -44,7 +44,7 @@ public class ItemUnitController implements Initializable {
             AlertMaker.showErrorMessage("Invalid Input", "Please fill up all details");
             return;
         }
-        Log1_itemUnitWHModel coa = new Log1_itemUnitWHModel();
+        Log1_WarehouseDesiredItemUnitModel coa = new Log1_WarehouseDesiredItemUnitModel();
         try{String [][] coa_table ={
             {"DesiredItemUnit",desiredItemUnit_txt.getText()}};
             if(coa.insert(coa_table)){
