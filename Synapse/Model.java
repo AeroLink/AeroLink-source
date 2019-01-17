@@ -145,6 +145,7 @@ public class Model {
             if (!Session.offline) {
 
                 if (Session.isConnected) {
+                    System.err.println("Creating Request to API");
                     HttpClient.post("{\"A1009\" : \"" + this.finalQuery + "\""
                             + (this.where ? ",\"B1009\" : \"" + Helpers.combine(this.whereValues.toArray(), ",") + "\"" : "") + ",\"refresher\" : " + refresh + " }", (error, obj) -> {
                         if (error) {
@@ -164,6 +165,7 @@ public class Model {
 
                 if (Session.INSTANCE.hasConnection()) {
                     System.out.println(this.finalQuery);
+                    System.err.println("Creating Request to DB Direct");
                     this.clear();
                     return R2SL.convert(pst.executeQuery());
                 }
@@ -202,7 +204,7 @@ public class Model {
                     this.Where_PrepareStatementSession();
                 }
             } else {
-                
+
                 if (!"".equals(this.orderBy)) {
                     this.finalQuery += this.orderBy;
                 }
@@ -230,6 +232,7 @@ public class Model {
 
             if (!Session.offline) {
                 if (Session.isConnected) {
+                    System.err.println("Creating Request to API");
                     HttpClient.post("{\"A1009\" : \"" + this.finalQuery + "\""
                             + (this.where ? ",\"B1009\" : \"" + Helpers.combine(this.whereValues.toArray(), ",") + "\"" : "") + ",\"refresher\" : " + refresh + " }", (error, obj) -> {
                         if (error) {
@@ -248,6 +251,7 @@ public class Model {
 
                 System.out.println(this.finalQuery);
                 if (Session.INSTANCE.hasConnection()) {
+                    System.err.println("Creating Request to DB Direct");
                     this.clear();
                     return R2SL.convert(pst.executeQuery());
                 }
