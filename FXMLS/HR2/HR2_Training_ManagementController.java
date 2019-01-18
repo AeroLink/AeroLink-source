@@ -161,7 +161,7 @@ public class HR2_Training_ManagementController implements Initializable {
     public void NumbersOnly(javafx.scene.input.KeyEvent event) {
         if (!event.getCharacter().matches("[0-9]")) {
             event.consume();
-         /*   Alert alert = new Alert(Alert.AlertType.ERROR);
+            /*   Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initStyle(StageStyle.UNDECORATED);
             alert.setContentText("Accepts numbers only");
             alert.showAndWait();*/
@@ -279,11 +279,11 @@ public class HR2_Training_ManagementController implements Initializable {
 
         List training_data = tm.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "employees", "=", "id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr2_type_of_training ", "type_of_training_id", "t_type", "=", "type_of_training_id")
-                .join(Model.JOIN.INNER, "aerolink.tbl_log2_vehicle_status ", "vehicle_id", "v", "=", "vehicle_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_log1_AssetVehicles ", "VehicleID", "v", "=", "vehicle_id")
                 .where(new Object[][]{{"aerolink.tbl_hr2_training_info.status", "<>", "0"}})
                 .get("job_position", "training_title", "training_description", "CONCAT(employees.firstname, ' ' ,employees.middlename, ' ',"
                         + "employees.lastname)as trainor", "start_date", "end_date", "start_time", "end_time", "t_type.type_of_training",
-                        "location", "v.vehicle", "budget_cost");
+                        "location", "v.VehicleModel", "budget_cost");
         Data(training_data);
 
     }
@@ -295,12 +295,12 @@ public class HR2_Training_ManagementController implements Initializable {
         try {
             List training_data1 = tm.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "employees", "=", "id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr2_type_of_training ", "type_of_training_id", "t_type", "=", "type_of_training_id")
-                    .join(Model.JOIN.INNER, "aerolink.tbl_log2_vehicle_status ", "vehicle_id", "v", "=", "vehicle_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_log1_AssetVehicles ", "vehicle_id", "v", "=", "VehicleID")
                     .where(new Object[][]{{"job_position", "like", "%" + txt_search_training.getText() + "%"},
             {"aerolink.tbl_hr2_training_info.status", "<>", "0"}})
                     .get("job_position", "training_title", "training_description", "CONCAT(employees.firstname, ' ' ,employees.middlename, ' ',"
                             + "employees.lastname)as trainor", "start_date", "end_date", "start_time", "end_time", "t_type.type_of_training",
-                            "location", "v.vehicle", "budget_cost");
+                            "location", "v.VehicleModel", "budget_cost");
             Data(training_data1);
 
         } catch (Exception e) {
@@ -339,11 +339,11 @@ public class HR2_Training_ManagementController implements Initializable {
 
         List training_data = tm.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "employees", "=", "id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr2_type_of_training ", "type_of_training_id", "t_type", "=", "type_of_training_id")
-                .join(Model.JOIN.INNER, "aerolink.tbl_log2_vehicle_status ", "vehicle_id", "v", "=", "vehicle_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_log1_AssetVehicles ", "VehicleID", "v", "=", "vehicle_id")
                 .where(new Object[][]{{"aerolink.tbl_hr2_training_info.status", "=", "0"}})
                 .get("job_position", "training_title", "training_description", "CONCAT(employees.firstname, ' ' ,employees.middlename, ' ',"
                         + "employees.lastname)as trainor", "start_date", "end_date", "start_time", "end_time", "t_type.type_of_training",
-                        "location", "v.vehicle", "budget_cost");
+                        "location", "v.VehicleModel", "budget_cost");
         ht(training_data);
 
     }
@@ -427,7 +427,7 @@ public class HR2_Training_ManagementController implements Initializable {
         for (Object g : set_vehicles) {
             HashMap hm4 = (HashMap) g;
             //RS
-            cbox_vehicle.getItems().add("V" + hm4.get("vehicle_id") + " - " + hm4.get("vehicle"));
+            cbox_vehicle.getItems().add("V" + hm4.get("VehicleID") + " - " + hm4.get("VehicleModel"));
         }
     }
 
