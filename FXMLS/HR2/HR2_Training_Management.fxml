@@ -96,7 +96,7 @@
                                                    </font>
                                                 </Label>
                                                 <JFXComboBox fx:id="cbox_select_type_of_training" disable="true" layoutX="8.0" layoutY="464.0" prefHeight="25.0" prefWidth="177.0" promptText="Select Type of Training" />
-                                                <Label layoutX="286.0" layoutY="439.0" prefHeight="19.0" prefWidth="98.0" text="Location">
+                                                <Label layoutX="286.0" layoutY="439.0" prefHeight="19.0" prefWidth="44.0" text="Venue">
                                                    <font>
                                                       <Font name="Lato Medium" size="15.0" />
                                                    </font>
