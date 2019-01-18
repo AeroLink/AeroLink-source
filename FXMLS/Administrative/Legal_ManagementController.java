@@ -5,19 +5,21 @@
  */
 package FXMLS.Administrative;
 
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDrawer;
-import com.jfoenix.controls.JFXHamburger;
-import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTextField;
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 
 /**
  * FXML Controller class
@@ -27,40 +29,56 @@ import javafx.scene.input.MouseEvent;
 public class Legal_ManagementController implements Initializable {
 
     @FXML
-    private TableView<?> request_table;
+    private TableView<?> appointmenttable;
     @FXML
-    private TableColumn<?, ?> request_id;
+    private TableColumn<?, ?> appointmentid;
     @FXML
-    private TableColumn<?, ?> requestor_id;
+    private TableColumn<?, ?> appointmentname;
     @FXML
-    private TableColumn<?, ?> datei;
+    private TableColumn<?, ?> appointmenttime;
     @FXML
-    private TableColumn<?, ?> datee;
+    private TableColumn<?, ?> appointmentdate;
     @FXML
-    private JFXListView<?> reqfilepath;
+    private TableColumn<?, ?> appointmentptm;
     @FXML
-    private ToggleGroup gender;
+    private JFXTextField schedfn;
     @FXML
-    private JFXComboBox<?> casecategory;
+    private JFXDatePicker scheddate;
     @FXML
-    private JFXHamburger hamburger;
+    private JFXDatePicker scheddate1;
     @FXML
-    private JFXDrawer drawer;
-
+    private JFXButton schedsave;
+    @FXML
+    private JFXButton schedsave1;
+    @FXML
+    private JFXTextField schedfn1;
+    @FXML
+    private JFXButton schedsave2;
+    @FXML
+    private JFXButton randg;
+    @FXML
+    private StackPane stackpane;
+     AlertBox ab = new AlertBox();
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        AlertBox.tooltip("Rules and Regulations", randg);
     }    
 
-    @FXML
-    private void update(ActionEvent event) {
-    }
+   public void loadcomplainfxml() throws IOException{
+       ab.fxmlloader("Admin_Complains.fxml", stackpane);
+   }
+   
+   public void loadschedulingfxml() throws IOException{
+      ab.fxmlloader("Admin_Scheduling.fxml", stackpane);
+   }
+   
+   public void laodblacklistfxml() throws IOException{
+      ab.fxmlloader("Admin_Blacklist.fxml", stackpane);
+   }
 
-    @FXML
-    private void open(MouseEvent event) {
-    }
+   
     
 }
