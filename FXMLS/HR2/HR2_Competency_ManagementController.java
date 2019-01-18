@@ -110,7 +110,7 @@ public class HR2_Competency_ManagementController implements Initializable {
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr2_skillset", "skill_id", "s", "=", "skill_id")
                                 .where(new Object[][]{{"s.isDeleted", "<>", "1"}})
                                 .orderBy("jobs.title", Model.Sort.ASC)
-                                .get("jobs.title", "jobs.description", "s.skill", "s.skill_description", "s.skill_id");
+                                .get("jobs.title, jobs.description, s.skill, s.skill_description , s.skill_id");
                      
 
                         Data(c);

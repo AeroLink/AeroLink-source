@@ -142,6 +142,7 @@ public class HR2_Succession_PlanningController implements Initializable {
                                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_classifications", "id", "=", "jobs", "classification_id", true)
                                     .where(new Object[][]{{"aerolink.tbl_hr4_department.dept_name", "=", cbox_department.getSelectionModel()
                                 .getSelectedItem().toString()}})
+                                    .orderBy("aerolink.tbl_hr4_job_classifications.class_name", Model.Sort.ASC)
                                     .get("jobs.title as position", "concat(emp.firstname, ' ',emp.middlename, ' ' ,emp.lastname)as employees",
                                             "aerolink.tbl_hr4_job_classifications.class_name as Classification");
                             Data(sp);
