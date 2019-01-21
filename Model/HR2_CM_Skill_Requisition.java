@@ -13,7 +13,7 @@ public class HR2_CM_Skill_Requisition extends Synapse.Model{
     
        public HR2_CM_Skill_Requisition() {
         setColumns("sr_id", "job_id", "reason",
-                 "requested_by", "date_requested","req_status_id");
+                 "requested_by", "date_requested","req_status_id","isDeleted");
         this.initTable("tbl_hr2_skill_requisition");
     }
 }

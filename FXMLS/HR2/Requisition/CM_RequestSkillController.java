@@ -69,7 +69,7 @@ public class CM_RequestSkillController implements Initializable {
 
             try {
                 String[][] skill_req = {
-                    {"job_id", "=", cbox_job_position.getSelectionModel().getSelectedItem().toString().substring(1).split(" - ")[0]},
+                    {"job_id", cbox_job_position.getSelectionModel().getSelectedItem().toString().substring(1).split(" - ")[0]},
                     {"reason", txt_reason.getText()}
                 };
                 rs.insert(skill_req);
