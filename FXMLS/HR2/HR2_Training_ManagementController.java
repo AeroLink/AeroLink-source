@@ -41,6 +41,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import Synapse.Model;
+import com.jfoenix.controls.JFXTimePicker;
 import java.sql.Date;
 import java.util.Optional;
 import javafx.scene.control.Button;
@@ -97,9 +98,9 @@ public class HR2_Training_ManagementController implements Initializable {
     @FXML
     private MenuItem contextmenu_item_delete_trainings;
     @FXML
-    private JFXTextField txt_start_time;
+    private JFXTimePicker txt_start_time;
     @FXML
-    private JFXTextField txt_end_time;
+    private JFXTimePicker txt_end_time;
     @FXML
     private TableView<HR2_Training_InfoClass> tbl_history_of_trainings;
     @FXML
@@ -140,8 +141,8 @@ public class HR2_Training_ManagementController implements Initializable {
             txt_training_title.setText("");
             txt_training_desc.setText("");
             cbox_trainor.setValue(null);
-            txt_start_time.setText("");
-            txt_end_time.setText("");
+            txt_start_time.setValue(null);
+            txt_end_time.setValue(null);
             txt_start_date.setValue(null);
             txt_end_date.setValue(null);
             txt_location.setText("");
@@ -488,7 +489,7 @@ public class HR2_Training_ManagementController implements Initializable {
         if (!cbox_select_jobs.getValue().toString().isEmpty() && !txt_training_title.getText().isEmpty()
                 && !txt_training_desc.getText().isEmpty() && !cbox_trainor.getValue().toString().isEmpty()
                 && !txt_start_date.getValue().toString().isEmpty() && !txt_end_date.getValue().toString().isEmpty()
-                && !txt_start_time.getText().isEmpty() && !txt_end_time.getText().isEmpty()
+                && !txt_start_time.getValue().toString().isEmpty() && !txt_end_time.getValue().toString().isEmpty()
                 && !cbox_select_type_of_training.getValue().toString().isEmpty() && !txt_location.getText().isEmpty()
                 && !cbox_vehicle.getValue().toString().isEmpty() && !txt_budget_cost.getText().isEmpty()) {
             btn_save.setDisable(false);
@@ -501,8 +502,8 @@ public class HR2_Training_ManagementController implements Initializable {
         if (cbox_select_jobs.getValue().toString().isEmpty() || txt_training_title.getText().isEmpty()
                 || txt_training_desc.getText().isEmpty() || cbox_trainor.getValue().toString().isEmpty()
                 || txt_start_date.getValue().toString().isEmpty() || txt_end_date.getValue().toString().isEmpty()
-                || txt_start_time.getText().isEmpty()
-                || txt_end_time.getText().isEmpty()
+                || txt_start_time.getValue().toString().isEmpty()
+                || txt_end_time.getValue().toString().isEmpty()
                 || cbox_select_type_of_training.getValue().toString().isEmpty() || txt_location.getText().isEmpty()
                 || cbox_vehicle.getValue().toString().isEmpty() || txt_budget_cost.getText().toString().isEmpty()) {
             Alert alert = new Alert(AlertType.WARNING);
@@ -520,8 +521,8 @@ public class HR2_Training_ManagementController implements Initializable {
                             {"id", cbox_trainor.getSelectionModel().getSelectedItem().toString().substring(1).toString().split(" - ")[0]},
                             {"start_date", txt_start_date.getValue().toString()},
                             {"end_date", txt_end_date.getValue().toString()},
-                            {"start_time", txt_start_time.getText()},
-                            {"end_time", txt_end_time.getText()},
+                            {"start_time", txt_start_time.getValue().toString()},
+                            {"end_time", txt_end_time.getValue().toString()},
                             {"type_of_training_id", cbox_select_type_of_training.getSelectionModel().getSelectedItem().toString().substring(2).toString().split(" - ")[0]},
                             {"location", txt_location.getText()},
                             {"vehicle_id", cbox_vehicle.getSelectionModel().getSelectedItem().toString().substring(1).toString().split(" - ")[0]},

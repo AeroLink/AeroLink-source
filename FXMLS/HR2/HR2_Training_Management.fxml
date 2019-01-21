@@ -6,6 +6,7 @@
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTimePicker?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.ContextMenu?>
@@ -144,16 +145,6 @@
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>
                                                 </JFXButton>
-                                                <JFXTextField fx:id="txt_start_time" disable="true" layoutX="8.0" layoutY="397.0" maxWidth="241.0" minWidth="135.0" prefHeight="35.0" prefWidth="234.0" promptText="From">
-                                                   <font>
-                                                      <Font name="Lato Medium" size="15.0" />
-                                                   </font>
-                                                </JFXTextField>
-                                                <JFXTextField fx:id="txt_end_time" disable="true" layoutX="279.0" layoutY="397.0" maxWidth="244.0" minWidth="135.0" prefHeight="35.0" prefWidth="233.0" promptText="To">
-                                                   <font>
-                                                      <Font name="Lato Medium" size="15.0" />
-                                                   </font>
-                                                </JFXTextField>
                                                 <Label layoutX="576.0" layoutY="19.0" prefHeight="28.0" prefWidth="164.0" text="Current Trainings">
                                                    <font>
                                                       <Font name="Roboto Medium" size="20.0" />
@@ -188,6 +179,8 @@
                                                       <Font name="Lato Semibold" size="15.0" />
                                                    </font>
                                                 </JFXTextField>
+                                                <JFXTimePicker fx:id="txt_start_time" disable="true" layoutX="11.0" layoutY="406.0" prefHeight="25.0" prefWidth="226.0" />
+                                                <JFXTimePicker fx:id="txt_end_time" disable="true" layoutX="284.0" layoutY="403.0" prefHeight="25.0" prefWidth="226.0" />
                                              </children>
                                           </Pane>
                                           <TableView fx:id="tbl_trainings" layoutX="591.0" layoutY="94.0" onMouseClicked="#ContextMenuOnTable" prefHeight="242.0" prefWidth="747.0" style="-fx-border-color: #d6d6c2; -fx-border-width: 1.3px;" AnchorPane.bottomAnchor="332.0" AnchorPane.leftAnchor="591.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="94.0">
