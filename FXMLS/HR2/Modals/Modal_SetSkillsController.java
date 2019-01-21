@@ -109,7 +109,7 @@ public class Modal_SetSkillsController implements Initializable {
                 int id = skillset.insert(cm_data, true);
                 Object[][] competency = {
                     {"skill_id", id},
-                    {"job_id", cbox_select_job.getSelectionModel().getSelectedItem().toString().substring(1).toString().split(" - ")[0]},
+                    {"job_id", cbox_select_job.getSelectionModel().getSelectedItem().toString().substring(1).split(" - ")[0]},
                 };
 
                 cm_pivot.insert(competency);

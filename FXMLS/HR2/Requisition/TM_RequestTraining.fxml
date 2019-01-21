@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="547.0" prefWidth="376.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="FXMLS.HR2.Requisition.TM_RequestTrainingController">
+<AnchorPane id="AnchorPane" prefHeight="579.0" prefWidth="376.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Requisition.TM_RequestTrainingController">
    <children>
       <Label layoutX="14.0" layoutY="14.0" prefHeight="23.0" prefWidth="172.0" text="Training Requisition">
          <font>
@@ -49,5 +50,43 @@
          </font>
       </Label>
       <JFXTextField layoutX="186.0" layoutY="273.0" prefHeight="25.0" prefWidth="161.0" />
+      <Label layoutX="16.0" layoutY="316.0" text="Total Hours for Training Completion: ">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </Label>
+      <JFXTextField layoutX="267.0" layoutY="307.0" prefHeight="25.0" prefWidth="79.0" />
+      <Label layoutX="17.0" layoutY="349.0" text="Target Days for Training Completion ">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="15.0" layoutY="417.0" text="Reason">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </Label>
+      <JFXTextArea focusColor="WHITE" layoutX="15.0" layoutY="440.0" prefHeight="84.0" prefWidth="331.0" style="-fx-border-color: #000;" unFocusColor="WHITE">
+         <font>
+            <Font name="Lato Regular" size="14.0" />
+         </font>
+      </JFXTextArea>
+      <Label layoutX="19.0" layoutY="382.0" text="From: ">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </Label>
+      <JFXDatePicker layoutX="67.0" layoutY="372.0" prefHeight="25.0" prefWidth="117.0" />
+      <Label layoutX="184.0" layoutY="381.0" text="To: ">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </Label>
+      <JFXDatePicker layoutX="215.0" layoutY="371.0" prefHeight="25.0" prefWidth="134.0" />
+      <JFXButton layoutX="281.0" layoutY="540.0" styleClass="btn-primary" text="Submit">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

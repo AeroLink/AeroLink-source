@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="272.0" prefWidth="372.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="FXMLS.HR2.Requisition.CM_RequestSkillController">
+<AnchorPane id="AnchorPane" prefHeight="272.0" prefWidth="372.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Requisition.CM_RequestSkillController">
    <children>
       <Label layoutX="7.0" layoutY="5.0" text="Skill Requisition">
          <font>
@@ -31,7 +30,7 @@
             <Font name="Lato Regular" size="14.0" />
          </font>
       </JFXTextArea>
-      <JFXButton fx:id="btn_submit" layoutX="133.0" layoutY="220.0" prefHeight="34.0" prefWidth="104.0" styleClass="btn-primary" text="SUBMIT">
+      <JFXButton fx:id="btn_submit" layoutX="133.0" layoutY="220.0" onAction="#SubmitRequest" prefHeight="34.0" prefWidth="104.0" styleClass="btn-primary" text="SUBMIT">
          <font>
             <Font name="Lato Regular" size="14.0" />
          </font>
