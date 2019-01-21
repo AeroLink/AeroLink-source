@@ -26,7 +26,7 @@
          </font>
       </Label>
       <JFXTextArea fx:id="txt_reason" focusColor="WHITE" layoutX="15.0" layoutY="118.0" prefHeight="90.0" prefWidth="325.0" style="-fx-border-color: #000;" unFocusColor="WHITE" />
-      <JFXButton fx:id="btn_submit" layoutX="124.0" layoutY="225.0" prefHeight="35.0" prefWidth="113.0" styleClass="btn-primary" text="Submit">
+      <JFXButton fx:id="btn_submit" layoutX="124.0" layoutY="225.0" onAction="#SubmitRequest" prefHeight="35.0" prefWidth="113.0" styleClass="btn-primary" text="Submit">
          <font>
             <Font name="Lato Regular" size="15.0" />
          </font>
