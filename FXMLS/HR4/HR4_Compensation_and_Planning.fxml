@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
@@ -15,7 +16,7 @@
    <children>
       <JFXTabPane layoutX="341.0" layoutY="169.0" prefHeight="620.0" prefWidth="1163.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <tabs>
-            <Tab id="tab" styleClass="tab-label" text="Salary Grade">
+            <Tab id="tab" styleClass="tab-label" text="Salary Management">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -50,7 +51,7 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab id="tab" styleClass="tab-label" text="Loans">
+            <Tab id="tab" styleClass="tab-label" text="Salary Adjustment">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -59,6 +60,8 @@
                               <AnchorPane prefHeight="59.0" prefWidth="1163.0" BorderPane.alignment="CENTER">
                                  <children>
                                     <ComboBox fx:id="loans_cbx" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="265.0" />
+                                    <Button layoutX="954.0" layoutY="25.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="195.0" styleClass="btn-primary" text="Edit Salary Adjustment" />
+                                    <FontAwesomeIconView fill="WHITE" glyphName="EDIT" layoutX="973.0" layoutY="44.0" size="14" />
                                  </children></AnchorPane>
                            </top>
                            <center>

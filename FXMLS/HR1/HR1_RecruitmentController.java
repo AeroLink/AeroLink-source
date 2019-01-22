@@ -109,7 +109,7 @@ public class HR1_RecruitmentController implements Initializable {
         tblOpenJobs.setOnMouseClicked(e -> tableMouseEvent(e));
 
         menuPost.setOnAction(event -> {
-           this.viewModalPostJob(tblOpenJobs.getSelectionModel().getSelectedItem());
+            this.viewModalPostJob(tblOpenJobs.getSelectionModel().getSelectedItem());
         });
 
         txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -130,7 +130,8 @@ public class HR1_RecruitmentController implements Initializable {
         if (txtSearch.textProperty().getValue().isEmpty()) {
             populateTable();
         } else {
-            tblOpenJobs.getItems().clear();
+            tblOpenJobs.getItems().removeAll(tblOpenJobs.getItems());
+            generateTable();
 
             jobVacancy
                     .join(Model.JOIN.INNER,
@@ -257,8 +258,8 @@ public class HR1_RecruitmentController implements Initializable {
                     });
                     if (GlobalCount != DummyCount) {
 
-                        tblOpenJobs.getItems().clear();
-
+                        observableList.clear();
+                        
                         jobVacancy
                                 .join(Model.JOIN.INNER,
                                         "aerolink.tbl_hr4_jobs", "job_id", "=", "job_id")
@@ -278,6 +279,7 @@ public class HR1_RecruitmentController implements Initializable {
                                     observableList.add(new TableModel_jLimit(id, job_id, job_open, job_title, status, OpenDate));
                                 });
 
+                        tblOpenJobs.getItems().removeAll(tblOpenJobs.getItems());
                         tblOpenJobs.setItems(observableList);
                         GlobalCount = DummyCount;
                     }
