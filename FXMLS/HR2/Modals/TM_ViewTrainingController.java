@@ -120,7 +120,7 @@ public class TM_ViewTrainingController implements Initializable {
         for (Object g : set_vehicles) {
             HashMap hm4 = (HashMap) g;
             //RS
-            cbox_edit_v.getItems().add("V" + hm4.get("vehicle_id") + " - " + hm4.get("vehicle"));
+            cbox_edit_v.getItems().add("V" + hm4.get("VehicleID") + " - " + hm4.get("VehicleModel"));
         }
     }
 
@@ -130,11 +130,11 @@ public class TM_ViewTrainingController implements Initializable {
 
         List training_data = tm.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "employees", "=", "id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr2_type_of_training ", "type_of_training_id", "t_type", "=", "type_of_training_id")
-                .join(Model.JOIN.INNER, "aerolink.tbl_log2_vehicle_status ", "vehicle_id", "v", "=", "vehicle_id")
+                 .join(Model.JOIN.INNER, "aerolink.tbl_log1_AssetVehicles ", "vehicle_id", "v", "=", "VehicleID")
                 .where(new Object[][]{{"aerolink.tbl_hr2_training_info.job_position", "=", cbox_edit_title.getValue().toString()}})
-                .get("training_title", "training_description", "CONCAT('T', employees.id , ' - ',employees.firstname, ' ' ,employees.middlename, ' ',\n"
+                .get("training_title", "training_description", "CONCAT('T', employees.id , ' - ',employees.firstname, ' ' ,employees.middlename, ' ',"
                         + "employees.lastname)as trainor", "start_time", "end_time", "CONCAT('TM',t_type.type_of_training_id,' - ',t_type.type_of_training) as type_of_training",
-                        "location", "CONCAT('V',v.vehicle_id,' - ',v.vehicle) as vehicle", "budget_cost");
+                        "location","CONCAT('V',v.VehicleID,' - ',v.VehicleModel) as vehicle", "budget_cost");
         Data(training_data);
 
     }
