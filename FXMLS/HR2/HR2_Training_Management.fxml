@@ -1,23 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXBadge?>
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.HR2_Training_ManagementController">
    <children>
-      <JFXTabPane layoutX="-4.0" layoutY="-1.0" prefHeight="400.0" prefWidth="608.0">
+      <JFXTabPane layoutX="-4.0" layoutY="-1.0" prefHeight="400.0" prefWidth="608.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <tabs>
             <Tab id="tab" text="Training Details">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="7.0" layoutY="9.0" text="Training Management">
+                           <font>
+                              <Font name="Lato Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <TableView layoutX="-4.0" layoutY="81.0" prefHeight="276.0" prefWidth="600.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="-4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="81.0">
+                          <columns>
+                            <TableColumn prefWidth="293.0" text="Job Position" />
+                            <TableColumn prefWidth="297.0" text="Training Title" />
+                              <TableColumn prefWidth="297.0" text="Training Description" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <JFXButton layoutX="492.0" layoutY="42.0" styleClass="btn-primary" text="Add Training" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="42.0">
+                           <font>
+                              <Font name="Lato Regular" size="14.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
               </content>
             </Tab>
             <Tab id="tab" text="Training Requests">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tbl_training_req" layoutX="7.0" layoutY="54.0" prefHeight="310.0" prefWidth="594.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="54.0">
+                          <columns>
+                            <TableColumn fx:id="col_req_dept" prefWidth="75.0" text="Department" />
+                            <TableColumn fx:id="col_req_jp" prefWidth="75.0" text="Job Position" />
+                              <TableColumn fx:id="col_req_date_req" prefWidth="75.0" text="Date  Requested" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </children></AnchorPane>
                </content>
+               <graphic>
+                  <JFXBadge prefWidth="16.0" />
+               </graphic>
             </Tab>
          </tabs>
       </JFXTabPane>
