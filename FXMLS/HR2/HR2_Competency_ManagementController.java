@@ -5,6 +5,7 @@
  */
 package FXMLS.HR2;
 
+import FXMLS.HR2.ClassFiles.CM_SkillReq_ModalClass;
 import FXMLS.HR2.ClassFiles.CM_Skill_RequisitionClass;
 import FXMLS.HR2.ClassFiles.HR2_CM_Skills_Class;
 import FXMLS.HR2.ClassFiles.HR2_CM_Skills_Class_for_Modal;
@@ -17,7 +18,9 @@ import Model.HR2_CM_Pivot;
 import Model.HR2_CM_Skill_Requisition;
 import Model.HR2_CM_Skills;
 import Model.HR2_Jobs;
+import Model.HR2_RequestStatus;
 import Model.HR2_Training_Info;
+import Model.HR4_Departments;
 import Model.HR4_Jobs;
 import Synapse.Components.Modal.Modal;
 import Synapse.Form;
@@ -108,8 +111,38 @@ public class HR2_Competency_ManagementController implements Initializable {
             Modal set_skill_modal = Modal.getInstance(new Form("/FXMLS/HR2/Modals/Modal_SetSkills.fxml").getParent());
             set_skill_modal.open();
         });
-
+        cbox_filter_dept.getSelectionModel().selectedItemProperty().addListener(listener -> {
+            displaySkillReq();
+        });
+        cbox_filter_status.getSelectionModel().selectedItemProperty().addListener(listener -> {
+            displaySkillReq();
+        });
         txt_search_job.setOnKeyReleased(e -> SearchJob());
+        DataInCB();
+
+    }
+
+    public void DataInCB() {
+        HR4_Departments dept = new HR4_Departments();
+        HR2_RequestStatus rs = new HR2_RequestStatus();
+        try {
+            List c = dept.get();
+            for (Object d : c) {
+                HashMap hm1 = (HashMap) d;
+                //RS
+                //  cbox_department.getItems().add("DEPT" + hm1.get("id") + " - " + hm1.get("dept_name"));
+                cbox_filter_dept.getItems().add(hm1.get("dept_name"));
+            }
+
+            List c1 = rs.get();
+            for (Object d2 : c1) {
+                HashMap hm2 = (HashMap) d2;
+                cbox_filter_status.getItems().add(hm2.get("req_status"));
+
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
     }
 
@@ -151,21 +184,6 @@ public class HR2_Competency_ManagementController implements Initializable {
 
         } catch (Exception e) {
             System.out.println(e);
-        }
-        try {
-            HR2_CM_Skill_Requisition skill_req = new HR2_CM_Skill_Requisition();
-            List sr = skill_req.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
-                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "dept", "=", "dept_id")
-                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "ep", "=", "requested_by")
-                    .join(Model.JOIN.INNER, "aerolink.tbl_hr2_request_status", "req_status_id", "rs", "=", "req_status_id")
-                    .where(new Object[][]{{"aerolink.tbl_hr2_skill_requisition.isDeleted", "<>", "1"}})
-                    .orderBy("aerolink.tbl_hr2_skill_requisition.date_requested", Model.Sort.ASC)
-                    .get("aerolink.tbl_hr2_skill_requisition.sr_id,dept.dept_name, jobs.title, rs.req_status");
-
-            Req_Skill_Data(sr);
-
-        } catch (Exception req_skill) {
-            System.out.println(req_skill);
         }
     }
 
@@ -214,6 +232,31 @@ public class HR2_Competency_ManagementController implements Initializable {
         tbl_jobs.getSelectionModel().selectFirst();
     }
 
+    //For TBL_Requisition
+    public void displaySkillReq() {
+        try {
+            HR2_CM_Skill_Requisition skill_req = new HR2_CM_Skill_Requisition();
+            List sr = skill_req.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "dept", "=", "dept_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "ep", "=", "requested_by")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr2_request_status", "req_status_id", "rs", "=", "req_status_id")
+                    .where(new Object[][]{
+                {"dept.dept_name", "=", cbox_filter_dept.getSelectionModel()
+                    .getSelectedItem().toString()},
+                {"rs.req_status", "=", cbox_filter_status.getSelectionModel()
+                    .getSelectedItem().toString()},
+                {"aerolink.tbl_hr2_skill_requisition.isDeleted", "<>", "1"}})
+                    .orderBy("aerolink.tbl_hr2_skill_requisition.date_requested", Model.Sort.ASC)
+                    .get("aerolink.tbl_hr2_skill_requisition.sr_id,dept.dept_name, jobs.title, rs.req_status_id, rs.req_status");
+
+            Req_Skill_Data(sr);
+
+        } catch (Exception req_skill) {
+            System.out.println(req_skill);
+        }
+
+    }
+
     public void Req_Skill_Data(List rsd) {
         ObservableList<CM_Skill_RequisitionClass> s_req = FXCollections.observableArrayList();
         s_req.clear();
@@ -227,6 +270,7 @@ public class HR2_Competency_ManagementController implements Initializable {
                                 String.valueOf(hm1.get("sr_id")),
                                 String.valueOf(hm1.get("dept_name")),
                                 String.valueOf(hm1.get("title")),
+                                String.valueOf(hm1.get("req_status_id")),
                                 String.valueOf(hm1.get("req_status"))
                         ));
             }
@@ -264,6 +308,17 @@ public class HR2_Competency_ManagementController implements Initializable {
                         try {
                             btn.setOnAction(e
                                     -> {
+                                CM_Skill_RequisitionClass s_reqs = (CM_Skill_RequisitionClass) getTableRow().getItem();
+
+                                CM_SkillReq_ModalClass.initSkillReq(
+                                        s_reqs.sr_id.getValue(),
+                                        s_reqs.dept_name.getValue(),
+                                        s_reqs.title.getValue(),
+                                        s_reqs.req_status_id.getValue(),
+                                        s_reqs.req_status.getValue());
+
+                                Modal md = Modal.getInstance(new Form("/FXMLS/HR2/Modals/CM_Skill_Req_Details.fxml").getParent());
+                                md.open();
 
                             });
                             btn.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");

@@ -77,6 +77,7 @@ public class HR2_Succession_PlanningController implements Initializable {
         selectDepartment();
         DisplayDataInJTable();
         viewJobVacancy();
+        populateTableBySelectDept();
         cbox_department.getSelectionModel().selectedItemProperty().addListener(listener -> {
             populateTableBySelectDept();
         });
