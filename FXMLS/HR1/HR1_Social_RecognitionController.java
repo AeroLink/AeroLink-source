@@ -68,7 +68,7 @@ public class HR1_Social_RecognitionController implements Initializable {
     @FXML
     private JFXDatePicker dateadded;
     @FXML
-    private JFXComboBox<?> awardcategory;
+    private JFXComboBox awardcategory;
     @FXML
     private JFXTextField Dept1;
     @FXML
@@ -162,6 +162,7 @@ public class HR1_Social_RecognitionController implements Initializable {
         table2.getColumns().removeAll(table2.getColumns());
 
         TableColumn<TableModel_table2, String> Department1 = new TableColumn<>("Department");
+        TableColumn<TableModel_table2, String> Employee_Code1 = new TableColumn<>("Employee_code");
         TableColumn<TableModel_table2, String> Employee_Name1 = new TableColumn<>("Employee_Name");
         TableColumn<TableModel_table2, String> Ratings1 = new TableColumn<>("Ratings");
         TableColumn<TableModel_table2, String> Award1 = new TableColumn<>("Employee_Award");
@@ -177,7 +178,7 @@ public class HR1_Social_RecognitionController implements Initializable {
         Remarks1.setCellValueFactory(value -> value.getValue().Remarks);
         Date_Posted1.setCellValueFactory(value -> value.getValue().Date_Posted);
 
-        table2.getColumns().addAll(Department1, Employee_Name1, Ratings1, Award1, Reward1, Remarks1, Date_Posted1);
+        table2.getColumns().addAll(Department1,Employee_Code1, Employee_Name1, Ratings1, Award1, Reward1, Remarks1, Date_Posted1);
 
         tblUE.getColumns().removeAll(tblUE.getColumns());
         
