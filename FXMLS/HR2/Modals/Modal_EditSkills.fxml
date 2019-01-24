@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="472.0" prefWidth="431.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.Modal_EditSkillsController">
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="431.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.Modal_EditSkillsController">
    <children>
       <Pane layoutX="6.0" prefHeight="44.0" prefWidth="431.0" style="-fx-background-color: #34A853;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -21,18 +21,21 @@
                </font>
             </Label>
          </children></Pane>
-      <JFXComboBox fx:id="cbox_edit_select_job" disable="true" layoutX="50.0" layoutY="84.0" prefHeight="25.0" prefWidth="331.0" promptText="Select a Job">
+      <JFXComboBox fx:id="cbox_edit_select_job" disable="true" layoutX="50.0" layoutY="59.0" prefHeight="24.0" prefWidth="331.0" promptText="Select a Job">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXComboBox>
-      <JFXTextField fx:id="txt_edit_skill" focusColor="#099036" labelFloat="true" layoutX="51.0" layoutY="138.0" maxWidth="352.0" minWidth="314.0" prefHeight="37.0" prefWidth="331.0" promptText="Skill">
+      <JFXTextField fx:id="txt_edit_skill" focusColor="#099036" labelFloat="true" layoutX="51.0" layoutY="296.0" maxWidth="352.0" minWidth="314.0" prefHeight="37.0" prefWidth="331.0" promptText="Skill">
          <font>
             <Font name="Roboto Medium" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextArea fx:id="txt_edit_skill_desc" layoutX="50.0" layoutY="203.0" maxWidth="331.0" minWidth="310.0" prefHeight="130.0" prefWidth="331.0" style="-fx-border-color: #c2c2a3; -fx-border-width: 2px;" unFocusColor="#f5f2f2" />
-      <JFXButton fx:id="btn_update" buttonType="RAISED" layoutX="50.0" layoutY="363.0" onAction="#Update" prefHeight="37.0" prefWidth="331.0" style="-fx-background-color: #34A853;" styleClass="btn-primary" text=" Update" textFill="WHITE">
+      <JFXTextArea fx:id="txt_edit_skill_desc" focusColor="WHITE" layoutX="50.0" layoutY="358.0" maxWidth="331.0" minWidth="310.0" prefHeight="97.0" prefWidth="331.0" promptText="Optional" style="-fx-border-color: #c2c2a3; -fx-border-width: 2px;" unFocusColor="#f5f2f2">
+         <font>
+            <Font name="Lato Regular" size="12.0" />
+         </font></JFXTextArea>
+      <JFXButton fx:id="btn_update" buttonType="RAISED" layoutX="50.0" layoutY="480.0" onAction="#Update" prefHeight="37.0" prefWidth="331.0" style="-fx-background-color: #34A853;" styleClass="btn-primary" text=" Update" textFill="WHITE">
          <font>
             <Font name="Lato Black" size="15.0" />
          </font>
@@ -43,5 +46,11 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
+      <JFXTextArea fx:id="txt_job_desc" disable="true" layoutX="50.0" layoutY="125.0" maxWidth="331.0" minWidth="310.0" prefHeight="137.0" prefWidth="331.0" style="-fx-border-color: #c2c2a3; -fx-border-width: 2px;" unFocusColor="#f5f2f2" />
+      <Label layoutX="51.0" layoutY="100.0" text="Job Description">
+         <font>
+            <Font name="Lato Regular" size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
