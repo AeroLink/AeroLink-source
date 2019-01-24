@@ -42,6 +42,24 @@ public class HR2_Training_ManagementController implements Initializable {
     private TableColumn<HR2_TrainingReq_Class, String> col_req_jp;
     @FXML
     private TableColumn<HR2_TrainingReq_Class, String> col_req_date_req;
+    @FXML
+    private TableView<HR2_TrainingReq_Class> tbl_training_mngmt;
+    @FXML
+    private TableColumn<HR2_TrainingReq_Class, String> col_tm_dept;
+    @FXML
+    private TableColumn<HR2_TrainingReq_Class, String> col_tm_jp;
+    @FXML
+    private TableColumn<HR2_TrainingReq_Class, String> col_tm_p;
+    @FXML
+    private TableColumn<HR2_TrainingReq_Class, String> col_tm_th;
+    @FXML
+    private TableColumn<HR2_TrainingReq_Class, String> col_tm_from;
+    @FXML
+    private TableColumn<HR2_TrainingReq_Class, String> col_tm_to;
+    @FXML
+    private TableColumn<HR2_TrainingReq_Class, String> col_tm_pn_process;
+    @FXML
+    private TableColumn<HR2_TrainingReq_Class, String> col_req_status;
 
     /**
      * Initializes the controller class.
@@ -50,8 +68,66 @@ public class HR2_Training_ManagementController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         loadTrainingRequests();
         ForColumns();
+        loadTrainingMngmt();
     }
 
+    //for training mngmt.
+    public void loadTrainingMngmt() {
+
+        try {
+            HR2_TM_Training_Requisition tr = new HR2_TM_Training_Requisition();
+            List training_req = tr.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "dept", "=", "dept_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr2_request_status", "req_status_id", "rs", "=", "req_status_id")
+                    .where(new Object[][]{
+                        {"rs.req_status_id", "<>", "2"}, 
+                        {"rs.req_status_id", "<>", "3"}, 
+                        {"aerolink.tbl_hr2_training_requisition.isDeleted", "<>", "1"}})
+                    .orderBy("aerolink.tbl_hr2_training_requisition.date_requested", Model.Sort.ASC)
+                    .get("tr_id,dept.dept_name,j.title,training_title,no_of_participants,total_hours, from_day, to_day, rs.req_status");
+
+            DisplayTrainingM(training_req);
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
+    }
+
+    public void DisplayTrainingM(List m) {
+        ObservableList<HR2_TrainingReq_Class> t_requests = FXCollections.observableArrayList();
+        t_requests.clear();
+        try {
+
+            for (Object d : m) {
+                HashMap hm1 = (HashMap) d;
+
+                t_requests.add(
+                        new HR2_TrainingReq_Class(
+                                String.valueOf(hm1.get("tr_id")),
+                                String.valueOf(hm1.get("dept_name")),
+                                String.valueOf(hm1.get("title")),
+                                String.valueOf(hm1.get("training_title")),
+                                String.valueOf(hm1.get("no_of_participants")),
+                                String.valueOf(hm1.get("total_hours")),
+                                String.valueOf(hm1.get("from_day")),
+                                String.valueOf(hm1.get("to_day")),
+                                String.valueOf(hm1.get("reason")),
+                                String.valueOf(hm1.get("req_status")),
+                                String.valueOf(hm1.get("requested_by")),
+                                String.valueOf(hm1.get("date_requested"))
+                        ));
+            }
+
+            tbl_training_mngmt.setItems(t_requests);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        System.err.println(tbl_training_mngmt.getItems().size());
+        tbl_training_mngmt.getSelectionModel().selectFirst();
+    }
+
+    //for tbl_training_req
     public void loadTrainingRequests() {
 
         try {
@@ -60,12 +136,16 @@ public class HR2_Training_ManagementController implements Initializable {
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr2_request_status", "req_status_id", "rs", "=", "req_status_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "ep", "=", "requested_by")
-                    .where(new Object[][]{{"aerolink.tbl_hr2_training_requisition.isDeleted", "<>", "1"}})
-                    .orderBy("j.title", Model.Sort.ASC)
+                    .where(new Object[][]{
+                        {"rs.req_status_id", "<>", "4"},
+                        {"rs.req_status_id", "<>", "1"},
+                        {"aerolink.tbl_hr2_training_requisition.isDeleted", "<>", "1"}
+                    })
+                    .orderBy("aerolink.tbl_hr2_training_requisition.date_requested", Model.Sort.ASC)
                     .get("aerolink.tbl_hr2_training_requisition.tr_id,dept.dept_name, j.title, aerolink.tbl_hr2_training_requisition.training_title,aerolink.tbl_hr2_training_requisition.no_of_participants,"
                             + "aerolink.tbl_hr2_training_requisition.total_hours,aerolink.tbl_hr2_training_requisition.from_day, "
                             + "aerolink.tbl_hr2_training_requisition.to_day, aerolink.tbl_hr2_training_requisition.reason,rs.req_status,concat(ep.firstname, ' ',ep.middlename, ' ',ep.lastname) as requested_by,"
-                            + "aerolink.tbl_hr2_training_requisition.date_requested");
+                            + "aerolink.tbl_hr2_training_requisition.date_requested,rs.req_status");
 
             DisplayTrainingReq(training_req);
         } catch (Exception e) {
@@ -109,9 +189,19 @@ public class HR2_Training_ManagementController implements Initializable {
     }
 
     public void ForColumns() {
+        //for tbl_mngmt
+        col_tm_dept.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().dept_name);
+        col_tm_jp.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().dept_name);
+        col_tm_p.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().no_of_participants);
+        col_tm_th.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().total_hours);
+        col_tm_from.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().from_day);
+        col_tm_to.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().to_day);
+        col_tm_pn_process.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().request_status);
+        //for tbl_req
         col_req_dept.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().dept_name);
         col_req_jp.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().title);
         col_req_date_req.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().date_requested);
+        col_req_status.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().request_status);
         TableColumn<HR2_TrainingReq_Class, Void> MB = new TableColumn("Action");
 
         Callback<TableColumn<HR2_TrainingReq_Class, Void>, TableCell<HR2_TrainingReq_Class, Void>> cellFactory

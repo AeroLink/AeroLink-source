@@ -46,7 +46,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXTextArea fx:id="txt_job_desc" disable="true" layoutX="50.0" layoutY="125.0" maxWidth="331.0" minWidth="310.0" prefHeight="137.0" prefWidth="331.0" style="-fx-border-color: #c2c2a3; -fx-border-width: 2px;" unFocusColor="#f5f2f2" />
+      <JFXTextArea fx:id="txt_job_desc" disable="true" editable="false" focusColor="#171717" layoutX="50.0" layoutY="125.0" maxWidth="331.0" minWidth="310.0" prefHeight="137.0" prefWidth="331.0" promptText="ddd" style="-fx-border-color: #c2c2a3; -fx-border-width: 2px;" unFocusColor="#f5f2f2">
+         <font>
+            <Font name="Lato Regular" size="15.0" />
+         </font></JFXTextArea>
       <Label layoutX="51.0" layoutY="100.0" text="Job Description">
          <font>
             <Font name="Lato Regular" size="14.0" />
