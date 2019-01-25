@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="441.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Core2.Modals.SNviewCodeController">
+<AnchorPane id="AnchorPane" prefHeight="556.0" prefWidth="477.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Core2.Modals.SNviewCodeController">
    <children>
       <BorderPane prefHeight="500.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <AnchorPane prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: #34A853;" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="51.0" prefWidth="618.0" style="-fx-background-color: #34A853;" BorderPane.alignment="CENTER">
                <children>
                   <FontAwesomeIconView fill="WHITE" glyphName="BUILDING" layoutX="6.0" layoutY="38.0" size="40" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
-                  <Label layoutX="50.0" layoutY="10.0" prefHeight="41.0" prefWidth="290.0" text="BRANCH INFORMATION" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+                  <Label layoutX="50.0" layoutY="10.0" prefHeight="41.0" prefWidth="290.0" text="BRANCH INFORMATION" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="5.0">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -23,62 +26,86 @@
                </children>
             </AnchorPane>
          </top>
-         <bottom>
-            <AnchorPane prefHeight="50.0" prefWidth="350.0" BorderPane.alignment="CENTER">
-               <children>
-                  <JFXButton buttonType="RAISED" layoutX="241.0" layoutY="9.0" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #34A853;" text="Save" textFill="WHITE" AnchorPane.rightAnchor="10.0" />
-                  <JFXButton buttonType="RAISED" layoutX="122.0" layoutY="9.0" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #34A853;" text="Edit" textFill="WHITE" AnchorPane.rightAnchor="150.0" />
-               </children>
-            </AnchorPane>
-         </bottom>
          <center>
-            <AnchorPane prefHeight="380.0" prefWidth="350.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="481.0" prefWidth="627.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXTextField editable="false" focusColor="#34a853" layoutX="11.0" layoutY="47.0" maxWidth="327.0" minWidth="250.0" prefHeight="31.0" prefWidth="327.0" text="Region" unFocusColor="#34a853" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </JFXTextField>
-                  <JFXTextField editable="false" focusColor="#34a853" layoutX="12.0" layoutY="88.0" maxWidth="327.0" minWidth="250.0" prefHeight="31.0" prefWidth="327.0" text="Province" unFocusColor="#34a853" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </JFXTextField>
-                  <JFXTextField editable="false" focusColor="#34a853" layoutX="12.0" layoutY="129.0" maxWidth="327.0" minWidth="171.0" prefHeight="37.0" prefWidth="171.0" text="Barangay" unFocusColor="#34a853" AnchorPane.leftAnchor="10.0">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </JFXTextField>
-                  <JFXTextField editable="false" focusColor="#34a853" layoutX="168.0" layoutY="129.0" maxWidth="327.0" minWidth="171.0" prefHeight="37.0" prefWidth="171.0" text="Zip Code" unFocusColor="#34a853" AnchorPane.rightAnchor="10.0">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </JFXTextField>
-                  <JFXTextField editable="false" focusColor="#34a853" layoutX="12.0" layoutY="171.0" maxWidth="327.0" minWidth="250.0" prefHeight="31.0" prefWidth="327.0" text="Branch Address" unFocusColor="#34a853" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </JFXTextField>
-                  <JFXTextField editable="false" focusColor="#34a853" layoutX="10.0" layoutY="217.0" maxWidth="327.0" minWidth="250.0" prefHeight="31.0" prefWidth="327.0" text="Email" unFocusColor="#34a853" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </JFXTextField>
-                  <JFXTextField editable="false" focusColor="#34a853" layoutX="10.0" layoutY="259.0" maxWidth="327.0" minWidth="250.0" prefHeight="31.0" prefWidth="327.0" text="Mobile Number" unFocusColor="#34a853" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </JFXTextField>
-                  <Label layoutX="12.0" layoutY="12.0" text="Code" textFill="#34a853" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+                  <Label fx:id="lblCode" layoutX="20.0" layoutY="26.0" text="Code" textFill="#34a853" underline="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="26.0">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <JFXTextField editable="false" focusColor="#34a853" layoutX="10.0" layoutY="301.0" maxWidth="327.0" minWidth="250.0" prefHeight="31.0" prefWidth="327.0" text="Telephone Number" unFocusColor="#34a853" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                  <GridPane layoutX="30.0" layoutY="104.0" prefHeight="367.0" prefWidth="417.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <JFXTextField fx:id="lblRegion" editable="false" focusColor="#34a853" maxWidth="419.0" minWidth="250.0" prefHeight="31.0" prefWidth="419.0" text="Region" unFocusColor="#34a853">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField fx:id="lblProvince" editable="false" focusColor="#34a853" maxWidth="418.0" minWidth="250.0" prefHeight="31.0" prefWidth="418.0" text="Province" unFocusColor="#34a853" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField fx:id="lblZip" editable="false" focusColor="#34a853" maxWidth="420.0" minWidth="82.0" prefHeight="37.0" prefWidth="420.0" text="Zip Code" unFocusColor="#34a853" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField fx:id="lblBarangay" editable="false" focusColor="#34a853" maxWidth="419.0" minWidth="171.0" prefHeight="37.0" prefWidth="419.0" text="Barangay" unFocusColor="#34a853" GridPane.rowIndex="3">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField fx:id="lblAddress" editable="false" focusColor="#34a853" maxWidth="421.0" minWidth="250.0" prefHeight="31.0" prefWidth="421.0" text="Branch Address" unFocusColor="#34a853" GridPane.rowIndex="4">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField fx:id="lblEmail" editable="false" focusColor="#34a853" maxWidth="420.0" minWidth="250.0" prefHeight="31.0" prefWidth="420.0" text="Email" unFocusColor="#34a853" GridPane.rowIndex="5">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField fx:id="lblNumber" editable="false" focusColor="#34a853" maxWidth="417.0" minWidth="250.0" prefHeight="31.0" prefWidth="417.0" text="Mobile Number" unFocusColor="#34a853" GridPane.rowIndex="6">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField fx:id="lblFn" editable="false" focusColor="#34a853" labelFloat="true" maxWidth="420.0" minWidth="250.0" prefHeight="31.0" prefWidth="420.0" text="Full Name" unFocusColor="#34a853" GridPane.rowIndex="7">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXTextField>
+                     </children>
+                  </GridPane>
+                  <JFXCheckBox fx:id="cbEx" layoutX="29.0" layoutY="70.0" prefHeight="30.0" prefWidth="105.0" selected="true">
                      <font>
                         <Font size="15.0" />
                      </font>
-                  </JFXTextField>
+                  </JFXCheckBox>
+                  <JFXCheckBox fx:id="cbPu" layoutX="181.0" layoutY="70.0" prefHeight="30.0" prefWidth="105.0" selected="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXCheckBox>
+                  <JFXCheckBox fx:id="cbDtd" layoutX="317.0" layoutY="70.0" prefHeight="30.0" prefWidth="129.0" selected="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXCheckBox>
                </children>
             </AnchorPane>
          </center>

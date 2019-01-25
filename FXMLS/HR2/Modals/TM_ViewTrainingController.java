@@ -22,6 +22,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXTimePicker;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -43,22 +44,11 @@ import javafx.scene.control.Label;
  */
 public class TM_ViewTrainingController implements Initializable {
 
-    @FXML
     private JFXTextField txt_edit_training_title;
     @FXML
     private JFXComboBox cbox_edit_trainor;
     @FXML
-    private JFXDatePicker txt_edit_sd;
-    @FXML
-    private JFXDatePicker txt_edit_ed;
-    @FXML
-    private JFXTextField txt_edit_st;
-    @FXML
-    private JFXTextField txt_edit_et;
-    @FXML
     private JFXComboBox cbox_edit_type;
-    @FXML
-    private JFXTextField txt_edit_loc;
     @FXML
     private JFXComboBox cbox_edit_v;
     @FXML
@@ -66,11 +56,35 @@ public class TM_ViewTrainingController implements Initializable {
     @FXML
     private JFXComboBox cbox_edit_title;
     @FXML
-    private JFXTextArea txt_edit_desc;
-    @FXML
     private JFXButton btn_view_participants;
     @FXML
-    private JFXButton btn_update;
+    private JFXComboBox cbox_edit_dept;
+    @FXML
+    private JFXTextField txt_date_requested;
+    @FXML
+    private JFXDatePicker txt_from_day;
+    @FXML
+    private JFXDatePicker txt_to_day;
+    @FXML
+    private JFXButton btn_submit;
+    @FXML
+    private JFXTextField txt_training_title;
+    @FXML
+    private JFXTextField txt_hrs;
+    @FXML
+    private JFXTextArea txt_reason;
+    @FXML
+    private JFXTextField txt_req_by;
+    @FXML
+    private JFXTimePicker txt_from_time;
+    @FXML
+    private JFXTimePicker txt_to_time;
+    @FXML
+    private JFXComboBox cbox_edit_venue;
+    @FXML
+    private JFXTextField txt_participants;
+    @FXML
+    private JFXComboBox cbox_edit_status;
 
     /**
      * Initializes the controller class.
@@ -78,12 +92,16 @@ public class TM_ViewTrainingController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        cbox_edit_title.getItems().add(HR2_TM_ViewTrainingInfo_Modal.jp);
-        cbox_edit_title.getSelectionModel().selectFirst();
-        txt_edit_sd.setValue(LocalDate.parse(HR2_TM_ViewTrainingInfo_Modal.sd));
-        txt_edit_ed.setValue(LocalDate.parse(HR2_TM_ViewTrainingInfo_Modal.ed));
+        cbox_edit_title.getItems().add(HR2_TM_ViewTrainingInfo_Modal.job_position);
+        cbox_edit_title.getSelectionModel().selectFirst();        
+        txt_from_day.setValue(LocalDate.parse(HR2_TM_ViewTrainingInfo_Modal.from_day));
+        txt_to_day.setValue(LocalDate.parse(HR2_TM_ViewTrainingInfo_Modal.to_day));
+        txt_participants.setText(HR2_TM_ViewTrainingInfo_Modal.participants);
+        txt_hrs.setText(HR2_TM_ViewTrainingInfo_Modal.total_hours);
+        cbox_edit_status.getItems().add("S00" + HR2_TM_ViewTrainingInfo_Modal.status_id + " - " + HR2_TM_ViewTrainingInfo_Modal.status);
+        cbox_edit_status.getSelectionModel().selectFirst();  
         loadDataInComboBoxes();
-        loadData();
+        // loadData();
     }
 
     @FXML
@@ -120,21 +138,21 @@ public class TM_ViewTrainingController implements Initializable {
         for (Object g : set_vehicles) {
             HashMap hm4 = (HashMap) g;
             //RS
-            cbox_edit_v.getItems().add("V" + hm4.get("vehicle_id") + " - " + hm4.get("vehicle"));
+            cbox_edit_v.getItems().add("V" + hm4.get("VehicleID") + " - " + hm4.get("VehicleModel"));
         }
     }
 
-    public void loadData() {
+    /*   public void loadData() {
 
         HR2_Training_Info tm = new HR2_Training_Info();
 
         List training_data = tm.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "employees", "=", "id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr2_type_of_training ", "type_of_training_id", "t_type", "=", "type_of_training_id")
-                .join(Model.JOIN.INNER, "aerolink.tbl_log2_vehicle_status ", "vehicle_id", "v", "=", "vehicle_id")
+                 .join(Model.JOIN.INNER, "aerolink.tbl_log1_AssetVehicles ", "vehicle_id", "v", "=", "VehicleID")
                 .where(new Object[][]{{"aerolink.tbl_hr2_training_info.job_position", "=", cbox_edit_title.getValue().toString()}})
-                .get("training_title", "training_description", "CONCAT('T', employees.id , ' - ',employees.firstname, ' ' ,employees.middlename, ' ',\n"
+                .get("training_title", "training_description", "CONCAT('T', employees.id , ' - ',employees.firstname, ' ' ,employees.middlename, ' ',"
                         + "employees.lastname)as trainor", "start_time", "end_time", "CONCAT('TM',t_type.type_of_training_id,' - ',t_type.type_of_training) as type_of_training",
-                        "location", "CONCAT('V',v.vehicle_id,' - ',v.vehicle) as vehicle", "budget_cost");
+                        "location","CONCAT('V',v.VehicleID,' - ',v.VehicleModel) as vehicle", "budget_cost");
         Data(training_data);
 
     }
@@ -151,14 +169,13 @@ public class TM_ViewTrainingController implements Initializable {
             cbox_edit_v.setValue(((HashMap) row).get("vehicle").toString());
             txt_edit_budget.setText(((HashMap) row).get("budget_cost").toString());
         });
-    }
-
+    }*/
     @FXML
     public void UpdateData() {
         Alert update = new Alert(Alert.AlertType.CONFIRMATION);
         update.setContentText("Are you sure you want to update this data?");
         Optional<ButtonType> rs = update.showAndWait();
-
+        /*
         if (rs.get() == ButtonType.OK) {
             HR2_Training_Info tm = new HR2_Training_Info();
 
@@ -166,7 +183,6 @@ public class TM_ViewTrainingController implements Initializable {
                 {"job_position", "=", cbox_edit_title.getValue().toString()}
             }).update(new Object[][]{
                 {"training_title", txt_edit_training_title.getText()},
-                {"training_description", txt_edit_desc.getText()},
                 {"id", cbox_edit_trainor.getSelectionModel().getSelectedItem().toString().substring(1).toString().split(" - ")[0]},
                 {"start_date", txt_edit_sd.getValue().toString()},
                 {"end_date", txt_edit_ed.getValue().toString()},
@@ -180,7 +196,7 @@ public class TM_ViewTrainingController implements Initializable {
             Alert dropnotif = new Alert(Alert.AlertType.INFORMATION);
             dropnotif.setContentText(cbox_edit_title.getSelectionModel().getSelectedItem().toString() + " Successfully Updated");
             dropnotif.showAndWait();
-            loadData();
-        }
+            //loadData();
+        }*/
     }
 }

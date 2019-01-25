@@ -13,8 +13,7 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class Log2_Document_TrackingClass {
 
-    private SimpleStringProperty registeredid;
-    private SimpleStringProperty documentid;
+  
     private SimpleStringProperty subject;
     private SimpleStringProperty purpose;
     private SimpleStringProperty referenceno;
@@ -23,11 +22,10 @@ public class Log2_Document_TrackingClass {
     private SimpleStringProperty daterequest;
     private SimpleStringProperty datereleased;
 
-    public Log2_Document_TrackingClass(String registeredid, String documentid, String subject, String purpose, String referenceno,
+    public Log2_Document_TrackingClass(String subject, String purpose, String referenceno,
             String department, String requestor, String daterequest, String datereleased) {
         // Status
-        this.registeredid = new SimpleStringProperty(registeredid);
-        this.documentid = new SimpleStringProperty(documentid);
+       
         this.subject = new SimpleStringProperty(subject);
         this.purpose = new SimpleStringProperty(purpose);
         this.referenceno = new SimpleStringProperty(referenceno);
@@ -38,13 +36,6 @@ public class Log2_Document_TrackingClass {
 
     }
 
-    public String getRegisteredid() {
-        return registeredid.get();
-    }
-
-    public String getDocumentid() {
-        return documentid.get();
-    }
 
     public String getSubject() {
         return subject.get();

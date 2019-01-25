@@ -126,10 +126,10 @@ public class SP_ViewEmployeeInfoController implements Initializable {
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "=", "aerolink.tbl_hr4_jobs", "dept_id", true)
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employees", "employee_code", "emps", "=", "e", "employee_code", true)
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employeeTypes", "type_id", "=", "emps", "type_id", true)
-                .join(Model.JOIN.INNER, "temp_performace", "employee_code", "tp", "=", "e", "employee_code", true)
+                .join(Model.JOIN.INNER, "aerolink.tbl_hr1_perfGrading", "employee_code", "tp", "=", "e", "employee_code", true)
                 .where(new Object[][]{{"e.fullname", "like", "%" + lbl_fullname.getText() + "%"}})
-                .get("ej.employee_code,e.fullname,e.suffix_name,e.gender,aerolink.tbl_hr4_jobs.title,aerolink.tbl_hr4_department.dept_name,\n"
-                        + "cs.civil_status,e.contact_number,aerolink.tbl_hr4_employeeTypes.type_name,emps.datehired,tp.productivity,tp.qualityofwork,\n"
+                .get("ej.employee_code,e.fullname,e.suffix_name,e.gender,aerolink.tbl_hr4_jobs.title,aerolink.tbl_hr4_department.dept_name,"
+                        + "cs.civil_status,e.contact_number,aerolink.tbl_hr4_employeeTypes.type_name,emps.datehired,tp.productivity,tp.qualityofwork,"
                         + "tp.Initiative,tp.teamwork,tp.problemsolving,tp.attendance");
         list.stream().forEach(row -> {
             lbl_employee_code.setText(((HashMap) row).get("employee_code").toString());

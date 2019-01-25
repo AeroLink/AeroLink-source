@@ -21,33 +21,25 @@
                <children>
                   <AnchorPane prefHeight="40.0" prefWidth="1370.0" styleClass="card" stylesheets="@../../../Assets/css/card.css">
                      <children>
-                        <Label layoutX="14.0" prefHeight="41.0" prefWidth="429.0" text="CUSTOMER RELATIONSHIP MANAGEMENT" textFill="#34a853" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0">
+                        <Label layoutX="14.0" prefHeight="41.0" prefWidth="283.0" text="CUSTOMERS COMPLAINTS" textFill="#34a853" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0">
                            <font>
                               <Font name="Arial Bold" size="20.0" />
                            </font>
                         </Label>
-                        <JFXButton buttonType="RAISED" ellipsisString="" layoutX="1046.0" layoutY="5.0" onAction="#viewComplaints" prefHeight="30.0" prefWidth="150.0" ripplerFill="WHITE" style="-fx-background-color: #34a853;" text="COMPLAINS" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0">
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="EYE" size="20" />
-                           </graphic>
-                           <font>
-                              <Font name="Arial" size="15.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton buttonType="RAISED" ellipsisString="" layoutX="881.0" layoutY="5.0" onAction="#viewMonitoring" prefHeight="30.0" prefWidth="150.0" ripplerFill="WHITE" style="-fx-background-color: #34a853;" text="MONITORING" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0">
+                        <JFXButton buttonType="RAISED" ellipsisString="" layoutX="1009.0" layoutY="5.0" onAction="#viewMonitoring" prefHeight="30.0" prefWidth="170.0" ripplerFill="WHITE" style="-fx-background-color: #34a853;" text="MONITORING" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0">
                            <graphic>
                               <FontAwesomeIconView fill="WHITE" glyphName="DESKTOP" size="20" />
                            </graphic>
                            <font>
-                              <Font name="Arial" size="15.0" />
+                              <Font name="Arial" size="12.0" />
                            </font>
                         </JFXButton>
-                        <JFXButton buttonType="RAISED" ellipsisString="" layoutX="1204.0" layoutY="5.0" onAction="#viewReports" prefHeight="30.0" prefWidth="150.0" ripplerFill="WHITE" style="-fx-background-color: #34a853;" text="REPORTS" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+                        <JFXButton buttonType="RAISED" ellipsisString="" layoutX="1204.0" layoutY="5.0" onAction="#viewReports" prefHeight="30.0" prefWidth="170.0" ripplerFill="WHITE" style="-fx-background-color: #34a853;" text="REPORT" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
                            <graphic>
                               <FontAwesomeIconView fill="WHITE" glyphName="BOOK" size="20" />
                            </graphic>
                            <font>
-                              <Font name="Arial" size="15.0" />
+                              <Font name="Arial" size="12.0" />
                            </font>
                         </JFXButton>
                      </children>

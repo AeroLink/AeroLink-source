@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="SNrootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1370.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Core2.ServiceProviderController">
+<AnchorPane id="AnchorPane" fx:id="SProotPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1370.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Core2.ServiceProviderController">
    <children>
       <SplitPane prefHeight="693.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
@@ -19,19 +19,14 @@
                <children>
                   <AnchorPane layoutY="1.0" prefHeight="40.0" prefWidth="1370.0" styleClass="card" stylesheets="@../../Assets/css/card.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Label layoutX="586.0" layoutY="-1.0" prefHeight="40.0" prefWidth="207.0" text=" SERVICE PROVIDER" textFill="#34a853" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0">
+                        <Label layoutX="586.0" layoutY="-1.0" prefHeight="40.0" prefWidth="305.0" text="MONITORING &amp; FORWARDING" textFill="#34a853" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0">
                            <font>
                               <Font name="Arial Bold" size="20.0" />
                            </font>
                         </Label>
-                        <JFXButton fx:id="SPviewR" buttonType="RAISED" layoutX="1197.0" layoutY="5.0" onAction="#viewR" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #34a853;" text="Report" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+                        <JFXButton fx:id="SPviewR" buttonType="RAISED" layoutX="1197.0" layoutY="5.0" onAction="#viewR" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #34a853;" text="REPORT" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
                            <graphic>
                               <FontAwesomeIconView fill="WHITE" glyphName="BOOK" size="20" />
-                           </graphic>
-                        </JFXButton>
-                        <JFXButton fx:id="SPviewR1" buttonType="RAISED" layoutX="1047.0" layoutY="5.0" onAction="#viewR1" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #34a853;" text="Registration" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0">
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="STAR" size="20" />
                            </graphic>
                         </JFXButton>
                      </children>

@@ -5,8 +5,6 @@
  */
 package FXMLS.HR2.ClassFiles;
 
-import static FXMLS.HR2.ClassFiles.HR2_TM_Class_for_Modal.jp;
-import static FXMLS.HR2.ClassFiles.HR2_TM_Class_for_Modal.t_title;
 
 /**
  *

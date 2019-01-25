@@ -33,55 +33,51 @@
                                     </Label>
                                  </children>
                               </AnchorPane>
-                              <Label layoutX="37.0" layoutY="71.0" text="Document ID :">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                              </Label>
-                              <JFXTextField layoutX="173.0" layoutY="62.0" maxWidth="269.0" minWidth="124.0" prefHeight="45.0" prefWidth="124.0">
+                              <Label layoutX="27.0" layoutY="173.0" text="Type of Document :">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
-                              </JFXTextField>
-                              <Label layoutX="34.0" layoutY="162.0" text="Type of Document :">
+                              </Label>
+                              <Label layoutX="27.0" layoutY="219.0" text="Purpose :">
                                  <font>
-                                    <Font name="System Bold" size="18.0" />
+                                    <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="34.0" layoutY="208.0" text="Purpose :">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                              </Label>
-                              <JFXTextArea layoutX="135.0" layoutY="203.0" maxWidth="312.0" minWidth="185.0" prefHeight="49.0" prefWidth="185.0">
+                              <JFXTextArea layoutX="204.0" layoutY="219.0" maxWidth="312.0" minWidth="185.0" prefHeight="52.0" prefWidth="213.0">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </JFXTextArea>
-                              <Label layoutX="37.0" layoutY="115.0" text="Subject:">
+                              <Label layoutX="30.0" layoutY="126.0" text="Reference no. :">
                                  <font>
-                                    <Font name="System Bold" size="18.0" />
+                                    <Font size="18.0" />
                                  </font>
                               </Label>
-                              <JFXTextField layoutX="118.0" layoutY="113.0" />
-                              <Label layoutX="503.0" layoutY="71.0" text="Request Date :">
+                              <JFXTextField layoutX="204.0" layoutY="124.0" prefHeight="25.0" prefWidth="211.0" />
+                              <Label layoutX="511.0" layoutY="131.0" text="Request Date :">
                                  <font>
-                                    <Font name="System Bold" size="18.0" />
+                                    <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="504.0" layoutY="115.0" text="Department :">
+                              <Label layoutX="511.0" layoutY="81.0" text="Department :">
                                  <font>
-                                    <Font name="System Bold" size="18.0" />
+                                    <Font size="18.0" />
                                  </font>
                               </Label>
-                              <JFXDatePicker defaultColor="#34a853" layoutX="640.0" layoutY="69.0" prefHeight="31.0" prefWidth="156.0" />
-                              <JFXComboBox fx:id="combo_dept" layoutX="660.0" layoutY="111.0" prefHeight="25.0" prefWidth="166.0" />
-                              <Button alignment="CENTER" layoutX="425.0" layoutY="335.0" mnemonicParsing="false" prefHeight="41.0" style="-fx-background-color: #34a853;" text="Submit Request" textAlignment="CENTER" textFill="WHITE">
+                              <JFXDatePicker defaultColor="#34a853" layoutX="661.0" layoutY="129.0" prefHeight="31.0" prefWidth="197.0" />
+                              <JFXComboBox fx:id="combo_dept" layoutX="657.0" layoutY="77.0" prefHeight="25.0" prefWidth="193.0" />
+                              <Button fx:id="btnsubmitrequest" alignment="CENTER" layoutX="425.0" layoutY="335.0" mnemonicParsing="false" onMouseClicked="#submitrequest" prefHeight="41.0" style="-fx-background-color: #34a853;" text="Submit Request" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Button>
-                              <JFXComboBox fx:id="combo_typeofdocument" layoutX="211.0" layoutY="163.0" prefHeight="25.0" prefWidth="209.0" />
+                              <JFXComboBox fx:id="combo_typeofdocument" layoutX="204.0" layoutY="174.0" prefHeight="25.0" prefWidth="209.0" />
+                              <Label layoutX="30.0" layoutY="77.0" text="Subject :">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXComboBox layoutX="201.0" layoutY="78.0" prefHeight="25.0" prefWidth="216.0" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -105,8 +101,6 @@
                               </AnchorPane>
                               <TableView fx:id="tbl_monitoring" layoutY="64.0" prefHeight="308.0" prefWidth="985.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0">
                                 <columns>
-                                  <TableColumn fx:id="registeredid" prefWidth="75.0" text="Registerd ID" />
-                                  <TableColumn fx:id="documentid" prefWidth="75.0" text="Document ID" />
                                     <TableColumn fx:id="subject" prefWidth="75.0" text="Subject" />
                                     <TableColumn fx:id="purpose" prefWidth="75.0" text="Purpose" />
                                     <TableColumn fx:id="referenceno" prefWidth="75.0" text="Reference no" />
@@ -119,7 +113,7 @@
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                               </TableView>
-                              <JFXButton fx:id="deleterows" layoutX="371.0" layoutY="573.0" onMouseClicked="#deleterowact" style="-fx-background-color: green;" text="Delete Row" />
+                              <JFXButton fx:id="deleterows" layoutX="453.0" layoutY="489.0" onMouseClicked="#deleterowact" style="-fx-background-color: green;" text="Delete Row" textFill="WHITE" />
                            </children>
                         </AnchorPane>
                      </children></AnchorPane>

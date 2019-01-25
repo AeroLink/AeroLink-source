@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane fx:id="spane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Log2.am.modals.Log2_Audit_Management_LeadAuditorController">
+   <children>
+      <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <StackPane prefHeight="150.0" prefWidth="200.0" />
+            <Label alignment="CENTER" layoutX="-1.0" layoutY="-2.0" prefHeight="50.0" prefWidth="600.0" style="-fx-background-color: #34a853;" text="Select Lead Auditor" textFill="WHITE" />
+            <JFXButton fx:id="Close" layoutX="562.0" layoutY="14.0" onMouseClicked="#btn_close" prefHeight="25.0" prefWidth="27.0" style="-fx-background-color: #EA4335;" styleClass="btn-rounded" stylesheets="@../../../../Assets/css/MainPanel.css" text="." textFill="#ea4335" />
+            <ScrollPane layoutX="1.0" layoutY="48.0" prefHeight="352.0" prefWidth="600.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="459.0" prefWidth="530.0">
+                     <children>
+                        <JFXRadioButton layoutX="75.0" layoutY="38.0" text="One" />
+                        <JFXRadioButton layoutX="75.0" layoutY="87.0" text="Two" />
+                        <JFXRadioButton layoutX="75.0" layoutY="136.0" text="Three" />
+                        <JFXRadioButton layoutX="75.0" layoutY="187.0" text="Four" />
+                        <JFXRadioButton layoutX="75.0" layoutY="239.0" text="Five" />
+                        <JFXRadioButton layoutX="75.0" layoutY="287.0" text="Six" />
+                        <JFXRadioButton layoutX="75.0" layoutY="333.0" text="Seven" />
+                        <JFXRadioButton layoutX="280.0" layoutY="38.0" text="Eight" />
+                        <JFXRadioButton layoutX="280.0" layoutY="87.0" text="Nine" />
+                        <JFXRadioButton layoutX="280.0" layoutY="136.0" text="Ten" />
+                        <JFXRadioButton layoutX="280.0" layoutY="187.0" text="Eleven" />
+                        <JFXRadioButton layoutX="280.0" layoutY="239.0" text="Twelve" />
+                        <JFXRadioButton layoutX="280.0" layoutY="287.0" text="Thirteen" />
+                        <JFXRadioButton layoutX="280.0" layoutY="333.0" text="Fourteen" />
+                        <JFXRadioButton layoutX="75.0" layoutY="377.0" text="Fifteen" />
+                        <JFXRadioButton layoutX="280.0" layoutY="377.0" text="Sixteen" />
+                        <JFXButton layoutX="181.0" layoutY="420.0" prefHeight="25.0" prefWidth="53.0" style="-fx-background-color: #34a853;" text="Select" textFill="WHITE" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+            <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" layoutX="570.0" layoutY="31.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

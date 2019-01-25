@@ -150,6 +150,7 @@ public class MainDashController implements Initializable {
             // do what you have to do
             stage.close();
             
+            Session.getPermissions().clear();
             Synapse.Form frm = new Synapse.Form("/FXMLS/Login.fxml");
             frm.open(StageStyle.UNDECORATED, false);
         });

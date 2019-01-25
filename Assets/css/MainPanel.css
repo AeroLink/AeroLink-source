@@ -9,7 +9,10 @@ and open the template in the editor.
     Author     : ARIELLECIAS
 */
 
-
+.titled-pane
+{
+-fx-background-color:  #34a853;
+}
 
 .btn-rounded{
     -fx-background-color: white, white;
@@ -182,6 +185,11 @@ and open the template in the editor.
     -fx-background-color: #34A853;
     -fx-text-fill: white;
 }
+/*gawa kung CSS JPX*/
+/*.table-view .table-cell{
+    -fx-font-weight:bold;
+    -fx-font-size:25px;
+}*/
 
 .table-row-cell .btnTable .text {
     -fx-fill: white;

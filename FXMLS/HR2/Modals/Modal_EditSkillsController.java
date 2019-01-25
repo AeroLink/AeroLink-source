@@ -43,6 +43,8 @@ public class Modal_EditSkillsController implements Initializable {
     private JFXTextArea txt_edit_skill_desc;
     @FXML
     private JFXButton btn_update;
+    @FXML
+    private JFXTextArea txt_job_desc;
 
     /**
      * Initializes the controller class.
@@ -52,6 +54,7 @@ public class Modal_EditSkillsController implements Initializable {
 
         cbox_edit_select_job.getItems().add(HR2_CM_Skills_Class_for_Modal.j_title);
         cbox_edit_select_job.getSelectionModel().selectFirst();
+        txt_job_desc.setText(HR2_CM_Skills_Class_for_Modal.j_Desc);
         txt_edit_skill.setText(HR2_CM_Skills_Class_for_Modal.j_Skill);
         txt_edit_skill_desc.setText(HR2_CM_Skills_Class_for_Modal.j_Skill_d);  
         

@@ -5,15 +5,16 @@
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTimePicker?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="462.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.TM_ViewTrainingController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="710.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.TM_ViewTrainingController">
    <children>
-      <Pane prefHeight="45.0" prefWidth="462.0" style="-fx-background-color: #34A853;">
+      <Pane prefHeight="45.0" prefWidth="727.0" style="-fx-background-color: #34A853;">
          <children>
             <Label layoutX="7.0" layoutY="13.0" text="Job Position:" textFill="WHITE">
                <font>
@@ -21,113 +22,164 @@
                </font>
             </Label>
             <JFXComboBox fx:id="cbox_edit_title" layoutX="110.0" layoutY="10.0" prefHeight="25.0" prefWidth="171.0" promptText="Job Positions" style="-fx-background-color: #fff;" />
-            <JFXButton fx:id="btn_view_participants" layoutX="314.0" layoutY="7.0" onAction="#viewParticipants" prefHeight="28.0" prefWidth="141.0" style="-fx-background-color: #00e673;" text="View Participants" textFill="WHITE">
+            <Label layoutX="370.0" layoutY="13.0" text="Department:" textFill="WHITE">
                <font>
-                  <Font name="Roboto Black" size="15.0" />
+                  <Font name="Roboto Black" size="16.0" />
                </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
+            </Label>
+            <JFXComboBox fx:id="cbox_edit_dept" layoutX="468.0" layoutY="10.0" prefHeight="25.0" prefWidth="171.0" promptText="Department" style="-fx-background-color: #fff;" />
          </children>
       </Pane>
-      <Label layoutX="16.0" layoutY="55.0" text="Training Title:" textFill="#545454">
+      <Label layoutX="16.0" layoutY="62.0" text="Date Requested:" textFill="#545454">
          <font>
             <Font name="Roboto Medium" size="16.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txt_edit_training_title" focusColor="#838383" layoutX="19.0" layoutY="83.0" maxWidth="443.0" minWidth="411.0" prefHeight="25.0" prefWidth="413.0" unFocusColor="#aeaeae">
+      <JFXTextField fx:id="txt_date_requested" disable="true" editable="false" focusColor="#838383" layoutX="151.0" layoutY="55.0" maxWidth="443.0" minWidth="113.0" prefHeight="25.0" prefWidth="119.0" unFocusColor="#aeaeae">
          <font>
             <Font name="Roboto Medium" size="12.0" />
          </font>
       </JFXTextField>
-      <Label layoutX="16.0" layoutY="113.0" text="Training Description:" textFill="#545454">
+      <Label layoutX="362.0" layoutY="104.0" text="Trainor" textFill="#545454">
          <font>
             <Font name="Roboto Medium" size="16.0" />
          </font>
       </Label>
-      <JFXTextArea fx:id="txt_edit_desc" focusColor="WHITE" layoutX="19.0" layoutY="142.0" maxWidth="434.0" minWidth="413.0" prefHeight="82.0" prefWidth="413.0" style="-fx-border-color: #a3a375;" unFocusColor="WHITE">
-         <font>
-            <Font name="Roboto Regular" size="14.0" />
-         </font>
-      </JFXTextArea>
-      <Label layoutX="16.0" layoutY="232.0" text="Trainor:" textFill="#545454">
+      <JFXComboBox fx:id="cbox_edit_trainor" layoutX="365.0" layoutY="129.0" prefHeight="25.0" prefWidth="307.0" promptText="Select Trainor" />
+      <JFXDatePicker fx:id="txt_from_day" defaultColor="#34a853" disable="true" editable="false" layoutX="76.0" layoutY="313.0" prefHeight="25.0" prefWidth="107.0" />
+      <JFXDatePicker fx:id="txt_to_day" defaultColor="#34a853" disable="true" editable="false" layoutX="223.0" layoutY="308.0" prefHeight="31.0" prefWidth="119.0" />
+      <Label layoutX="362.0" layoutY="173.0" text="End Time of Training" textFill="#545454">
          <font>
             <Font name="Roboto Medium" size="16.0" />
          </font>
       </Label>
-      <JFXComboBox fx:id="cbox_edit_trainor" layoutX="19.0" layoutY="254.0" prefHeight="25.0" prefWidth="413.0" promptText="Select Trainor" />
-      <Label layoutX="16.0" layoutY="289.0" text="Start Date of Training:" textFill="#545454">
+      <Label layoutX="361.0" layoutY="255.0" text="Type of Training" textFill="#545454">
          <font>
             <Font name="Roboto Medium" size="16.0" />
          </font>
       </Label>
-      <JFXDatePicker fx:id="txt_edit_sd" layoutX="12.0" layoutY="313.0" />
-      <Label layoutX="261.0" layoutY="287.0" text="End Date of Training:" textFill="#545454">
+      <JFXComboBox fx:id="cbox_edit_type" layoutX="360.0" layoutY="281.0" prefHeight="25.0" prefWidth="161.0" promptText="Type of Trainings" />
+      <Label layoutX="559.0" layoutY="258.0" text="Venue" textFill="#545454">
          <font>
             <Font name="Roboto Medium" size="16.0" />
          </font>
       </Label>
-      <JFXDatePicker fx:id="txt_edit_ed" layoutX="257.0" layoutY="312.0" prefHeight="31.0" prefWidth="185.0" />
-      <Label layoutX="16.0" layoutY="349.0" text="Start Time of Training:" textFill="#545454">
+      <Label layoutX="364.0" layoutY="331.0" text="Vehicle" textFill="#545454">
          <font>
             <Font name="Roboto Medium" size="16.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txt_edit_st" focusColor="#838383" layoutX="10.0" layoutY="374.0" maxWidth="443.0" minWidth="168.0" prefHeight="25.0" prefWidth="168.0" unFocusColor="#aeaeae">
+      <JFXComboBox fx:id="cbox_edit_v" layoutX="363.0" layoutY="353.0" prefHeight="25.0" prefWidth="161.0" promptText="Select Vehicles" />
+      <Label layoutX="558.0" layoutY="331.0" text="Budget Cost" textFill="#545454">
+         <font>
+            <Font name="Roboto Medium" size="16.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txt_edit_budget" focusColor="#838383" layoutX="558.0" layoutY="353.0" maxWidth="443.0" minWidth="154.0" prefHeight="25.0" prefWidth="154.0" unFocusColor="#aeaeae">
          <font>
             <Font name="Roboto Medium" size="12.0" />
          </font>
       </JFXTextField>
-      <Label layoutX="260.0" layoutY="350.0" text="End Time of Training:" textFill="#545454">
+      <JFXButton fx:id="btn_submit" layoutX="564.0" layoutY="527.0" onAction="#UpdateData" prefHeight="31.0" prefWidth="141.0" style="-fx-background-color: #34A853;" text="Submit" textFill="WHITE">
          <font>
-            <Font name="Roboto Medium" size="16.0" />
-         </font>
-      </Label>
-      <JFXTextField fx:id="txt_edit_et" focusColor="#838383" layoutX="254.0" layoutY="375.0" maxWidth="443.0" minWidth="181.0" prefHeight="25.0" prefWidth="181.0" unFocusColor="#aeaeae">
-         <font>
-            <Font name="Roboto Medium" size="12.0" />
-         </font>
-      </JFXTextField>
-      <Label layoutX="15.0" layoutY="410.0" text="Type of Training:" textFill="#545454">
-         <font>
-            <Font name="Roboto Medium" size="16.0" />
-         </font>
-      </Label>
-      <JFXComboBox fx:id="cbox_edit_type" layoutX="18.0" layoutY="434.0" prefHeight="25.0" prefWidth="161.0" promptText="Type of Trainings" />
-      <Label layoutX="260.0" layoutY="406.0" text="Location:" textFill="#545454">
-         <font>
-            <Font name="Roboto Medium" size="16.0" />
-         </font>
-      </Label>
-      <JFXTextField fx:id="txt_edit_loc" focusColor="#838383" layoutX="253.0" layoutY="432.0" maxWidth="443.0" minWidth="181.0" prefHeight="25.0" prefWidth="181.0" unFocusColor="#aeaeae">
-         <font>
-            <Font name="Roboto Medium" size="12.0" />
-         </font>
-      </JFXTextField>
-      <Label layoutX="14.0" layoutY="467.0" text="Vehicle:" textFill="#545454">
-         <font>
-            <Font name="Roboto Medium" size="16.0" />
-         </font>
-      </Label>
-      <JFXComboBox fx:id="cbox_edit_v" layoutX="17.0" layoutY="491.0" prefHeight="25.0" prefWidth="161.0" promptText="Select Vehicles" />
-      <Label layoutX="260.0" layoutY="464.0" text="Budget Cost:" textFill="#545454">
-         <font>
-            <Font name="Roboto Medium" size="16.0" />
-         </font>
-      </Label>
-      <JFXTextField fx:id="txt_edit_budget" focusColor="#838383" layoutX="253.0" layoutY="491.0" maxWidth="443.0" minWidth="181.0" prefHeight="25.0" prefWidth="181.0" unFocusColor="#aeaeae">
-         <font>
-            <Font name="Roboto Medium" size="12.0" />
-         </font>
-      </JFXTextField>
-      <JFXButton fx:id="btn_update" layoutX="314.0" layoutY="539.0" onAction="#UpdateData" prefHeight="31.0" prefWidth="107.0" style="-fx-background-color: #34A853;" text="Update" textFill="WHITE">
-         <font>
-            <Font name="Roboto Black" size="15.0" />
+            <Font name="Roboto Medium" size="15.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
+      <Label layoutX="17.0" layoutY="107.0" text="Training Title" textFill="#545454">
+         <font>
+            <Font name="Roboto Medium" size="16.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txt_training_title" disable="true" focusColor="#838383" layoutX="16.0" layoutY="129.0" maxWidth="443.0" minWidth="113.0" prefHeight="25.0" prefWidth="257.0" unFocusColor="#aeaeae">
+         <font>
+            <Font name="Roboto Medium" size="12.0" />
+         </font>
+      </JFXTextField>
+      <Label layoutX="22.0" layoutY="219.0" text="Total Hours Completion" textFill="#545454">
+         <font>
+            <Font name="Roboto Medium" size="16.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txt_hrs" disable="true" editable="false" focusColor="#838383" layoutX="21.0" layoutY="241.0" maxWidth="443.0" minWidth="58.0" prefHeight="25.0" prefWidth="58.0" unFocusColor="#aeaeae">
+         <font>
+            <Font name="Roboto Medium" size="12.0" />
+         </font>
+      </JFXTextField>
+      <Label layoutX="87.0" layoutY="250.0" text="hrs." textFill="#545454">
+         <font>
+            <Font name="Roboto Italic" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="22.0" layoutY="286.0" text="Total Days Completion" textFill="#545454">
+         <font>
+            <Font name="Roboto Medium" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="32.0" layoutY="319.0" text="From: " textFill="#545454">
+         <font>
+            <Font name="Roboto Italic" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="194.0" layoutY="317.0" text="To: " textFill="#545454">
+         <font>
+            <Font name="Roboto Italic" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="18.0" layoutY="363.0" text="Reason" textFill="#545454">
+         <font>
+            <Font name="Roboto Medium" size="16.0" />
+         </font>
+      </Label>
+      <JFXTextArea fx:id="txt_reason" disable="true" editable="false" focusColor="WHITE" layoutX="19.0" layoutY="386.0" prefHeight="134.0" prefWidth="307.0" style="-fx-border-color: #2e2e2e;" unFocusColor="WHITE" />
+      <Label layoutX="18.0" layoutY="526.0" text="Requested by" textFill="#545454">
+         <font>
+            <Font name="Roboto Medium" size="16.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txt_req_by" disable="true" focusColor="#838383" layoutX="21.0" layoutY="551.0" maxWidth="443.0" minWidth="113.0" prefHeight="25.0" prefWidth="257.0" unFocusColor="#aeaeae">
+         <font>
+            <Font name="Roboto Medium" size="12.0" />
+         </font>
+      </JFXTextField>
+      <Label layoutX="377.0" layoutY="207.0" text="From: " textFill="#545454">
+         <font>
+            <Font name="Roboto Italic" size="15.0" />
+         </font>
+      </Label>
+      <JFXTimePicker fx:id="txt_from_time" layoutX="421.0" layoutY="202.0" prefHeight="25.0" prefWidth="107.0" />
+      <Label layoutX="535.0" layoutY="207.0" text="To: " textFill="#545454">
+         <font>
+            <Font name="Roboto Italic" size="15.0" />
+         </font>
+      </Label>
+      <JFXTimePicker fx:id="txt_to_time" layoutX="567.0" layoutY="202.0" prefHeight="25.0" prefWidth="119.0" />
+      <JFXButton fx:id="btn_view_participants" layoutX="565.0" layoutY="479.0" onAction="#viewParticipants" prefHeight="28.0" prefWidth="141.0" style="-fx-background-color: #34A853;" text="View Participants" textFill="WHITE">
+         <font>
+            <Font name="Roboto Medium" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXComboBox fx:id="cbox_edit_venue" layoutX="558.0" layoutY="283.0" prefHeight="25.0" prefWidth="154.0" promptText="Select Venue" />
+      <Label layoutX="21.0" layoutY="179.0" text="Participants" textFill="#545454">
+         <font>
+            <Font name="Roboto Medium" size="16.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txt_participants" disable="true" focusColor="#838383" layoutX="120.0" layoutY="176.0" maxWidth="443.0" minWidth="113.0" prefHeight="25.0" prefWidth="154.0" unFocusColor="#aeaeae">
+         <font>
+            <Font name="Roboto Medium" size="12.0" />
+         </font>
+      </JFXTextField>
+      <Label layoutX="439.0" layoutY="423.0" text="Status" textFill="#545454">
+         <font>
+            <Font name="Roboto Medium" size="16.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="cbox_edit_status" layoutX="498.0" layoutY="418.0" prefHeight="25.0" prefWidth="161.0" promptText="Select Status" />
    </children>
 </AnchorPane>
