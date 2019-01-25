@@ -55,6 +55,8 @@ public class FINANCIAL_AP_ARController implements Initializable {
     private TableView<AR_classfile> ar_tbl;
     
     
+     double total = 0;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -71,7 +73,43 @@ public class FINANCIAL_AP_ARController implements Initializable {
     
     
     
-    double total = 0;
+   public void Loadtable_Ar(){
+       CompletableFuture.supplyAsync(() -> {
+
+            while (Session.CurrentRoute.equals("id_apr")) {
+                
+                try {
+                    fbr.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
+                        DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
+                    });
+
+                    if (DummyCount != GlobalCount) {
+
+                            ap_tbl.getItems();
+                            List b = fbr.where("dr_status","=","Pending").get();
+                           
+                            request(b);
+                            total_label.setText(String.valueOf(fbr.where("dr_status","=","Pending").get("sum(dr_amount)")));
+                    // total_label.setText(String.valueOf(fbr.where("dr_status","=","Pending").get("sum(dr_amount)")));
+                             
+                     {
+                       
+                         
+                    }
+                    ap_tbl.setItems(brc);
+                        GlobalCount = DummyCount;
+                    }
+                    Thread.sleep(3000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(FINANCIAL_BUDGET_MANAGEMENTController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            return 0;
+        }, Session.SessionThreads);
+       
+       
+   }
   
     public void AddtableColumn_AR(){
         ar_tbl.getItems().clear();
