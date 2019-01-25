@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="318.0" prefWidth="372.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.FINANCIAL.CALLER.BUDGET_REQUESTController">
+   <children>
+      <AnchorPane layoutY="1.0" prefHeight="21.0" prefWidth="372.0" style="-fx-background-color: #34a853;">
+         <children>
+            <Label layoutX="3.0" prefHeight="21.0" prefWidth="130.0" text="Budget Request" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <JFXTextField fx:id="requestor" focusColor="#34a853" labelFloat="true" layoutX="12.0" layoutY="226.0" maxWidth="149.0" minWidth="149.0" prefHeight="38.0" prefWidth="149.0" promptText="Name of Requestor" unFocusColor="#34a853" />
+      <JFXTextArea fx:id="description" focusColor="#34a853" labelFloat="true" layoutX="15.0" layoutY="140.0" maxWidth="353.0" minWidth="313.0" prefHeight="58.0" prefWidth="343.0" promptText="Description" unFocusColor="#34a853" />
+      <JFXComboBox fx:id="priority_level" layoutX="15.0" layoutY="89.0" prefHeight="31.0" prefWidth="165.0" promptText="Choose Priority Level" />
+      <JFXTextField fx:id="amount" focusColor="#34a853" labelFloat="true" layoutX="199.0" layoutY="226.0" maxWidth="149.0" minWidth="149.0" prefHeight="38.0" prefWidth="149.0" promptText="Amount" unFocusColor="#34a853" />
+      <JFXComboBox fx:id="department" layoutX="15.0" layoutY="34.0" prefHeight="31.0" prefWidth="343.0" promptText="Choose Department" />
+      <JFXButton fx:id="submit_btn" layoutX="260.0" layoutY="279.0" prefHeight="21.0" prefWidth="82.0" style="-fx-background-color: #34a853;" text="Submit" textFill="WHITE" />
+   </children>
+</AnchorPane>
