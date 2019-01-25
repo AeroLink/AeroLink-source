@@ -6,6 +6,7 @@ import Synapse.Database;
 import Synapse.STORED_PROC;
 import Synapse.Session;
 import Synapse.iDB;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
@@ -25,6 +26,7 @@ public class NewClass {
 
     public static void main(String[] args) {
 
+        
         Session.schema = DatabaseConfig.schema;
         Session.provider = DatabaseConfig.PROVIDER;
 
@@ -35,10 +37,8 @@ public class NewClass {
         Session.User = DatabaseConfig.USER;
         Session.offline = true;
         
-        List list = STORED_PROC.executeCall("getEmployee", new Object[][]{
-            {"EMP_CODE", "EMP1819001028"}
-        });
-
+        List list = STORED_PROC.executeCall("getAllEmployees");
+        
         System.err.println(Arrays.asList(list.toArray()));
     }
 
