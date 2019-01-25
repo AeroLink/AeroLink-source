@@ -47,24 +47,18 @@ public class TM_ViewTrainingController implements Initializable {
     private JFXTextField txt_edit_training_title;
     @FXML
     private JFXComboBox cbox_edit_trainor;
-    private JFXDatePicker txt_edit_sd;
-    private JFXDatePicker txt_edit_ed;
-    private JFXTextField txt_edit_st;
-    private JFXTextField txt_edit_et;
     @FXML
     private JFXComboBox cbox_edit_type;
-    private JFXTextField txt_edit_loc;
     @FXML
     private JFXComboBox cbox_edit_v;
     @FXML
     private JFXTextField txt_edit_budget;
     @FXML
     private JFXComboBox cbox_edit_title;
-    private JFXTextArea txt_edit_desc;
     @FXML
     private JFXButton btn_view_participants;
     @FXML
-    private JFXComboBox<?> cbox_edit_dept;
+    private JFXComboBox cbox_edit_dept;
     @FXML
     private JFXTextField txt_date_requested;
     @FXML
@@ -86,7 +80,11 @@ public class TM_ViewTrainingController implements Initializable {
     @FXML
     private JFXTimePicker txt_to_time;
     @FXML
-    private JFXComboBox<?> cbox_edit_venue;
+    private JFXComboBox cbox_edit_venue;
+    @FXML
+    private JFXTextField txt_participants;
+    @FXML
+    private JFXComboBox cbox_edit_status;
 
     /**
      * Initializes the controller class.
@@ -94,12 +92,16 @@ public class TM_ViewTrainingController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        cbox_edit_title.getItems().add(HR2_TM_ViewTrainingInfo_Modal.jp);
-        cbox_edit_title.getSelectionModel().selectFirst();
-        txt_edit_sd.setValue(LocalDate.parse(HR2_TM_ViewTrainingInfo_Modal.sd));
-        txt_edit_ed.setValue(LocalDate.parse(HR2_TM_ViewTrainingInfo_Modal.ed));
+        cbox_edit_title.getItems().add(HR2_TM_ViewTrainingInfo_Modal.job_position);
+        cbox_edit_title.getSelectionModel().selectFirst();        
+        txt_from_day.setValue(LocalDate.parse(HR2_TM_ViewTrainingInfo_Modal.from_day));
+        txt_to_day.setValue(LocalDate.parse(HR2_TM_ViewTrainingInfo_Modal.to_day));
+        txt_participants.setText(HR2_TM_ViewTrainingInfo_Modal.participants);
+        txt_hrs.setText(HR2_TM_ViewTrainingInfo_Modal.total_hours);
+        cbox_edit_status.getItems().add("S00" + HR2_TM_ViewTrainingInfo_Modal.status_id + " - " + HR2_TM_ViewTrainingInfo_Modal.status);
+        cbox_edit_status.getSelectionModel().selectFirst();  
         loadDataInComboBoxes();
-        loadData();
+        // loadData();
     }
 
     @FXML
@@ -140,7 +142,7 @@ public class TM_ViewTrainingController implements Initializable {
         }
     }
 
-    public void loadData() {
+    /*   public void loadData() {
 
         HR2_Training_Info tm = new HR2_Training_Info();
 
@@ -167,14 +169,13 @@ public class TM_ViewTrainingController implements Initializable {
             cbox_edit_v.setValue(((HashMap) row).get("vehicle").toString());
             txt_edit_budget.setText(((HashMap) row).get("budget_cost").toString());
         });
-    }
-
+    }*/
     @FXML
     public void UpdateData() {
         Alert update = new Alert(Alert.AlertType.CONFIRMATION);
         update.setContentText("Are you sure you want to update this data?");
         Optional<ButtonType> rs = update.showAndWait();
-
+        /*
         if (rs.get() == ButtonType.OK) {
             HR2_Training_Info tm = new HR2_Training_Info();
 
@@ -182,7 +183,6 @@ public class TM_ViewTrainingController implements Initializable {
                 {"job_position", "=", cbox_edit_title.getValue().toString()}
             }).update(new Object[][]{
                 {"training_title", txt_edit_training_title.getText()},
-                {"training_description", txt_edit_desc.getText()},
                 {"id", cbox_edit_trainor.getSelectionModel().getSelectedItem().toString().substring(1).toString().split(" - ")[0]},
                 {"start_date", txt_edit_sd.getValue().toString()},
                 {"end_date", txt_edit_ed.getValue().toString()},
@@ -196,7 +196,7 @@ public class TM_ViewTrainingController implements Initializable {
             Alert dropnotif = new Alert(Alert.AlertType.INFORMATION);
             dropnotif.setContentText(cbox_edit_title.getSelectionModel().getSelectedItem().toString() + " Successfully Updated");
             dropnotif.showAndWait();
-            loadData();
-        }
+            //loadData();
+        }*/
     }
 }

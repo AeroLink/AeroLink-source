@@ -5,8 +5,11 @@
  */
 package FXMLS.HR2;
 
+import FXMLS.HR2.ClassFiles.CM_SkillReq_ModalClass;
+import FXMLS.HR2.ClassFiles.CM_Skill_RequisitionClass;
 import FXMLS.HR2.ClassFiles.HR2_CoursesClass;
 import FXMLS.HR2.ClassFiles.HR2_LM_CourseOutlineModal;
+import FXMLS.HR2.ClassFiles.HR2_TM_ViewTrainingInfo_Modal;
 import FXMLS.HR2.ClassFiles.HR2_TrainingReq_Class;
 import FXMLS.HR2.ClassFiles.HR4_Jobs_Class;
 import Model.HR2_TM_Training_Requisition;
@@ -110,11 +113,11 @@ public class HR2_Training_ManagementController implements Initializable {
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr2_request_status", "req_status_id", "rs", "=", "req_status_id")
                     .where(new Object[][]{
-                        {"rs.req_status_id", "<>", "2"}, 
-                        {"rs.req_status_id", "<>", "3"}, 
-                        {"aerolink.tbl_hr2_training_requisition.isDeleted", "<>", "1"}})
+                {"rs.req_status_id", "<>", "2"},
+                {"rs.req_status_id", "<>", "3"},
+                {"aerolink.tbl_hr2_training_requisition.isDeleted", "<>", "1"}})
                     .orderBy("aerolink.tbl_hr2_training_requisition.date_requested", Model.Sort.ASC)
-                    .get("tr_id,dept.dept_name,j.title,training_title,no_of_participants,total_hours, from_day, to_day, rs.req_status");
+                    .get("tr_id,dept.dept_name,j.title,training_title,no_of_participants,total_hours, from_day, to_day, rs.req_status_id, rs.req_status");
 
             DisplayTrainingM(training_req);
         } catch (Exception e) {
@@ -142,6 +145,7 @@ public class HR2_Training_ManagementController implements Initializable {
                                 String.valueOf(hm1.get("from_day")),
                                 String.valueOf(hm1.get("to_day")),
                                 String.valueOf(hm1.get("reason")),
+                                String.valueOf(hm1.get("req_status_id")),
                                 String.valueOf(hm1.get("req_status")),
                                 String.valueOf(hm1.get("requested_by")),
                                 String.valueOf(hm1.get("date_requested"))
@@ -167,10 +171,10 @@ public class HR2_Training_ManagementController implements Initializable {
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr2_request_status", "req_status_id", "rs", "=", "req_status_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "ep", "=", "requested_by")
                     .where(new Object[][]{
-                        {"rs.req_status_id", "<>", "4"},
-                        {"rs.req_status_id", "<>", "1"},
-                        {"aerolink.tbl_hr2_training_requisition.isDeleted", "<>", "1"}
-                    })
+                {"rs.req_status_id", "<>", "4"},
+                {"rs.req_status_id", "<>", "1"},
+                {"aerolink.tbl_hr2_training_requisition.isDeleted", "<>", "1"}
+            })
                     .orderBy("aerolink.tbl_hr2_training_requisition.date_requested", Model.Sort.ASC)
                     .get("aerolink.tbl_hr2_training_requisition.tr_id,dept.dept_name, j.title, aerolink.tbl_hr2_training_requisition.training_title,aerolink.tbl_hr2_training_requisition.no_of_participants,"
                             + "aerolink.tbl_hr2_training_requisition.total_hours,aerolink.tbl_hr2_training_requisition.from_day, "
@@ -203,6 +207,7 @@ public class HR2_Training_ManagementController implements Initializable {
                                 String.valueOf(hm1.get("from_day")),
                                 String.valueOf(hm1.get("to_day")),
                                 String.valueOf(hm1.get("reason")),
+                                String.valueOf(hm1.get("req_status_id")),
                                 String.valueOf(hm1.get("req_status")),
                                 String.valueOf(hm1.get("requested_by")),
                                 String.valueOf(hm1.get("date_requested"))
@@ -276,20 +281,32 @@ public class HR2_Training_ManagementController implements Initializable {
         MB.setCellFactory(cellFactory);
         tbl_training_req.getColumns().add(MB);
     }
-    
+
     @FXML
-     public void ContextMenu(MouseEvent event) {
+    public void ContextMenu(MouseEvent event) {
 
         if (event.getButton() == MouseButton.SECONDARY) {
             CMenu.show(tbl_training_mngmt, event.getX(), event.getSceneY());
-            MI_more.setOnAction(e -> 
-            {
-                    Modal moreDetails = Modal.getInstance(new Form("").getParent());
-                    moreDetails.open();
+            MI_more.setOnAction(e
+                    -> {
+
+                HR2_TM_ViewTrainingInfo_Modal.init_Trainings(
+                        tbl_training_mngmt.getSelectionModel().getSelectedItem().tr_id.getValue(),
+                        tbl_training_mngmt.getSelectionModel().getSelectedItem().dept_name.getValue(),
+                        tbl_training_mngmt.getSelectionModel().getSelectedItem().title.getValue(),
+                        tbl_training_mngmt.getSelectionModel().getSelectedItem().no_of_participants.getValue(),
+                        tbl_training_mngmt.getSelectionModel().getSelectedItem().total_hours.getValue(),
+                        tbl_training_mngmt.getSelectionModel().getSelectedItem().from_day.getValue(),
+                        tbl_training_mngmt.getSelectionModel().getSelectedItem().to_day.getValue(),
+                          tbl_training_mngmt.getSelectionModel().getSelectedItem().request_status_id.getValue(),
+                        tbl_training_mngmt.getSelectionModel().getSelectedItem().request_status.getValue()
+                        );
+                Modal moreDetails = Modal.getInstance(new Form("/FXMLS/HR2/Modals/TM_ViewTraining.fxml").getParent());
+                moreDetails.open();
             }
             );
             MI_archive.setOnAction(e -> {
-                
+
             });
         }
 
