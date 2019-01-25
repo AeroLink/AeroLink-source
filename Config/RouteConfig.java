@@ -46,7 +46,7 @@ public class RouteConfig {
         //Logistic1
         {"log1AM", "/FXMLS/Log1/AssetManagement.fxml", "can_access_log1_AssetManagement"},
         {"log1Proc", "/FXMLS/Log1/Procurement.fxml", "can_access_log1_Procurement"},
-        {"log1WM", "/FXMLS/Log1/WarehouseManagement.fxml", "can_access_log1_Warehousing"},
+        {"log1WM", "/FXMLS/Log1/WarehouseManagement.fxml", "can_access_log1_WarehouseManagement"},
         {"log1MRO", "/FXMLS/Log1/MaintenanceRepairOH.fxml", "can_access_log1_MaintenanceRepairOverhaul"},
         //Logistic2
         {"log2vp", "/FXMLS/Log2/Log2_Vendor_Portal.fxml", "can_access_hr1_socialrecog"},

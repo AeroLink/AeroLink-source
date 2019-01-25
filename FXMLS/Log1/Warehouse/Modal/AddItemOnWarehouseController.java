@@ -60,10 +60,6 @@ public class AddItemOnWarehouseController implements Initializable {
     @FXML
     private JFXTextField itemID_txt;
     @FXML
-    private JFXTextField desiredItemUnit_txt;
-    @FXML
-    private JFXButton addItemUnit_btn;
-    @FXML
     private TableView<Log1_SupplierClassfiles> Supplier_tbl;
     @FXML
     private TableColumn<Log1_SupplierClassfiles, String> name_col;
@@ -75,10 +71,7 @@ public class AddItemOnWarehouseController implements Initializable {
     private TableColumn<Log1_SupplierClassfiles, String> representative_col;
     @FXML
     private Label supp_id;
-    @FXML
     private JFXTextField desiredItemType_txt;
-    @FXML
-    private JFXButton addItemType_btn;
     @FXML
     private Label supplierName;
 
@@ -145,7 +138,6 @@ public class AddItemOnWarehouseController implements Initializable {
             itemType_combox.getItems().add(String.valueOf(hash.get("DesiredItemType")));
         });
     }
-    
     
 
     @FXML

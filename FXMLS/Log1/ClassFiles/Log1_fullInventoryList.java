@@ -7,6 +7,7 @@ public class Log1_fullInventoryList{
 
     
     public SimpleStringProperty itemID;
+    public SimpleStringProperty supplierID;
     public SimpleStringProperty supplierName;
     public SimpleStringProperty itemDescription;
     public SimpleStringProperty itemType;
@@ -22,6 +23,7 @@ public class Log1_fullInventoryList{
 
     public Log1_fullInventoryList(
             String itemID,
+            String supplierID,
             String supplierName,
             String itemDescription,
             String itemType,
@@ -35,6 +37,7 @@ public class Log1_fullInventoryList{
         ) 
     {
         this.itemID = new SimpleStringProperty(itemID);
+        this.supplierID = new SimpleStringProperty(supplierID);
         this.supplierName = new SimpleStringProperty(supplierName);
         this.itemDescription = new SimpleStringProperty(itemDescription);
         this.itemType = new SimpleStringProperty(itemType);
@@ -45,6 +48,12 @@ public class Log1_fullInventoryList{
         this.criticalQuantity = new SimpleStringProperty(criticalQuantity);
         this.disposalDate = new SimpleStringProperty(disposalDate);
         this.status = new SimpleStringProperty(status);
+    }
+
+    
+
+    public String getSupplierID() {
+        return supplierID.get();
     }
 
     public String getSupplierName() {

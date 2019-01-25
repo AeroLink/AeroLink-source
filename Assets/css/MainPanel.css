@@ -23,10 +23,8 @@ and open the template in the editor.
     -fx-padding: 0;
     -fx-font-size: 0;
 }
-.glyph-icon-rb
-{
-    -fx-fill: white;
-}
+ 
+
 
 .btn-primary{
     -fx-background-color: #34A853;
