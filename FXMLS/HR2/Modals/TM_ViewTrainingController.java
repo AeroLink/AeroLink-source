@@ -22,6 +22,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXTimePicker;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -43,21 +44,15 @@ import javafx.scene.control.Label;
  */
 public class TM_ViewTrainingController implements Initializable {
 
-    @FXML
     private JFXTextField txt_edit_training_title;
     @FXML
     private JFXComboBox cbox_edit_trainor;
-    @FXML
     private JFXDatePicker txt_edit_sd;
-    @FXML
     private JFXDatePicker txt_edit_ed;
-    @FXML
     private JFXTextField txt_edit_st;
-    @FXML
     private JFXTextField txt_edit_et;
     @FXML
     private JFXComboBox cbox_edit_type;
-    @FXML
     private JFXTextField txt_edit_loc;
     @FXML
     private JFXComboBox cbox_edit_v;
@@ -65,12 +60,33 @@ public class TM_ViewTrainingController implements Initializable {
     private JFXTextField txt_edit_budget;
     @FXML
     private JFXComboBox cbox_edit_title;
-    @FXML
     private JFXTextArea txt_edit_desc;
     @FXML
     private JFXButton btn_view_participants;
     @FXML
-    private JFXButton btn_update;
+    private JFXComboBox<?> cbox_edit_dept;
+    @FXML
+    private JFXTextField txt_date_requested;
+    @FXML
+    private JFXDatePicker txt_from_day;
+    @FXML
+    private JFXDatePicker txt_to_day;
+    @FXML
+    private JFXButton btn_submit;
+    @FXML
+    private JFXTextField txt_training_title;
+    @FXML
+    private JFXTextField txt_hrs;
+    @FXML
+    private JFXTextArea txt_reason;
+    @FXML
+    private JFXTextField txt_req_by;
+    @FXML
+    private JFXTimePicker txt_from_time;
+    @FXML
+    private JFXTimePicker txt_to_time;
+    @FXML
+    private JFXComboBox<?> cbox_edit_venue;
 
     /**
      * Initializes the controller class.
