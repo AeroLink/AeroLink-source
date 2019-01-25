@@ -5,26 +5,17 @@
  */
 package FXMLS.HR2;
 
-import FXMLS.HR2.ClassFiles.HR2_TM_Class_for_Modal;
+import FXMLS.HR2.ClassFiles.CM_SkillReq_ModalClass;
+import FXMLS.HR2.ClassFiles.CM_Skill_RequisitionClass;
+import FXMLS.HR2.ClassFiles.HR2_CoursesClass;
+import FXMLS.HR2.ClassFiles.HR2_LM_CourseOutlineModal;
 import FXMLS.HR2.ClassFiles.HR2_TM_ViewTrainingInfo_Modal;
-import FXMLS.HR2.ClassFiles.HR2_Temp_VehicleClass;
-import FXMLS.HR2.ClassFiles.HR2_Training_InfoClass;
-import FXMLS.HR2.ClassFiles.HR2_Type_of_TrainingClass;
-import FXMLS.HR2.ClassFiles.HR4_Temp_Employee_Profiles_Class;
-import FXMLS.HR4.ClassFiles.TableModel_Jobs;
-import Model.HR2_CM_Pivot;
-import Model.HR2_Temp_Employee_Profiles;
-import Model.HR2_Temp_Vehicles;
-import Model.HR2_Training_Info;
-import Model.HR2_Type_of_Training;
-import Model.HR4_Jobs;
+import FXMLS.HR2.ClassFiles.HR2_TrainingReq_Class;
+import FXMLS.HR2.ClassFiles.HR4_Jobs_Class;
+import Model.HR2_TM_Training_Requisition;
 import Synapse.Components.Modal.Modal;
 import Synapse.Form;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXTextField;
+import Synapse.Model;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -33,174 +24,240 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import Synapse.Model;
-import java.sql.Date;
-import java.util.Optional;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableCell;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.StageStyle;
 import javafx.util.Callback;
 
 /**
  * FXML Controller class
  *
- * @author Eden Ramoneda
+ * @author EdenRamoneda
  */
 public class HR2_Training_ManagementController implements Initializable {
 
     @FXML
-    private JFXComboBox cbox_select_jobs;
+    private TableView<HR2_TrainingReq_Class> tbl_training_req;
     @FXML
-    private JFXTextField txt_training_title;
+    private TableColumn<HR2_TrainingReq_Class, String> col_req_dept;
     @FXML
-    private JFXTextArea txt_training_desc;
+    private TableColumn<HR2_TrainingReq_Class, String> col_req_jp;
     @FXML
-    private JFXComboBox cbox_trainor;
+    private TableColumn<HR2_TrainingReq_Class, String> col_req_date_req;
     @FXML
-    private JFXDatePicker txt_start_date;
+    private TableView<HR2_TrainingReq_Class> tbl_training_mngmt;
     @FXML
-    private JFXDatePicker txt_end_date;
+    private TableColumn<HR2_TrainingReq_Class, String> col_tm_dept;
     @FXML
-    private JFXComboBox cbox_select_type_of_training;
+    private TableColumn<HR2_TrainingReq_Class, String> col_tm_jp;
     @FXML
-    private JFXTextField txt_location;
+    private TableColumn<HR2_TrainingReq_Class, String> col_tm_p;
     @FXML
-    private JFXComboBox cbox_vehicle;
+    private TableColumn<HR2_TrainingReq_Class, String> col_tm_th;
     @FXML
-    private JFXTextField txt_budget_cost;
+    private TableColumn<HR2_TrainingReq_Class, String> col_tm_from;
     @FXML
-    private JFXButton btn_save;
+    private TableColumn<HR2_TrainingReq_Class, String> col_tm_to;
     @FXML
-    private JFXButton btn_new;
+    private TableColumn<HR2_TrainingReq_Class, String> col_tm_pn_process;
     @FXML
-    private JFXTextField txt_search_training;
+    private TableColumn<HR2_TrainingReq_Class, String> col_req_status;
     @FXML
-    private TableView<HR2_Training_InfoClass> tbl_trainings;
+    private ContextMenu CMenu;
     @FXML
-    private TableColumn<HR2_Training_InfoClass, String> col_job_position;
+    private MenuItem MI_more;
     @FXML
-    private TableColumn<HR2_Training_InfoClass, String> col_start_date;
+    private MenuItem MI_archive;
     @FXML
-    private TableColumn<HR2_Training_InfoClass, String> col_end_date;
+    private TableView<?> tbl_training_req1;
     @FXML
-    private ContextMenu contextMenuTrainings;
+    private TableColumn<?, ?> col_req_dept1;
     @FXML
-    private MenuItem contextmenu_item_delete_trainings;
+    private TableColumn<?, ?> col_req_jp1;
     @FXML
-    private JFXTextField txt_start_time;
+    private TableColumn<?, ?> col_req_date_req1;
     @FXML
-    private JFXTextField txt_end_time;
+    private TableColumn<?, ?> col_req_status1;
     @FXML
-    private TableView<HR2_Training_InfoClass> tbl_history_of_trainings;
+    private TableView<?> tbl_training_req11;
     @FXML
-    private JFXTextField txt_search_historyTraining;
+    private TableColumn<?, ?> col_req_dept11;
     @FXML
-    private TableColumn<HR2_Training_InfoClass, String> col_history_jp;
+    private TableColumn<?, ?> col_req_jp11;
     @FXML
-    private TableColumn<HR2_Training_InfoClass, String> col_history_sd;
+    private TableColumn<?, ?> col_req_date_req11;
     @FXML
-    private TableColumn<HR2_Training_InfoClass, String> col_history_ed;
+    private TableColumn<?, ?> col_req_status11;
 
-    //for comboboxes
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-        btn_save.setDisable(true);
-        loadHistoryOfTraining();
-        btn_save.setOnAction(e -> Save());
-        btn_new.setOnAction(e -> {
-
-            cbox_select_jobs.setDisable(false);
-            txt_training_title.setDisable(false);
-            txt_training_desc.setDisable(false);
-            cbox_trainor.setDisable(false);
-            txt_start_time.setDisable(false);
-            txt_end_time.setDisable(false);
-            txt_start_date.setDisable(false);
-            txt_end_date.setDisable(false);
-            txt_location.setDisable(false);
-            cbox_vehicle.setDisable(false);
-            txt_budget_cost.setDisable(false);
-            cbox_select_type_of_training.setDisable(false);
-
-            cbox_select_jobs.setValue(null);
-            txt_training_title.setText("");
-            txt_training_desc.setText("");
-            cbox_trainor.setValue(null);
-            txt_start_time.setText("");
-            txt_end_time.setText("");
-            txt_start_date.setValue(null);
-            txt_end_date.setValue(null);
-            txt_location.setText("");
-            cbox_vehicle.setValue(null);
-            txt_budget_cost.setText("");
-            cbox_select_type_of_training.setValue(null);
-            btn_save.setDisable(true);
-        });;
-        loadDataInComboBoxes();
-        DisplayDataInTable();
-        loadData();
-        DisableComponents();
-        txt_budget_cost.setOnKeyReleased(e -> validate());
+        loadTrainingRequests();
+        ForColumns();
+        loadTrainingMngmt();
     }
 
-    @FXML
-    public void NumbersOnly(javafx.scene.input.KeyEvent event) {
-        if (!event.getCharacter().matches("[0-9]")) {
-            event.consume();
-         /*   Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initStyle(StageStyle.UNDECORATED);
-            alert.setContentText("Accepts numbers only");
-            alert.showAndWait();*/
+    //for training mngmt.
+    public void loadTrainingMngmt() {
+
+        try {
+            HR2_TM_Training_Requisition tr = new HR2_TM_Training_Requisition();
+            List training_req = tr.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "dept", "=", "dept_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr2_request_status", "req_status_id", "rs", "=", "req_status_id")
+                    .where(new Object[][]{
+                {"rs.req_status_id", "<>", "2"},
+                {"rs.req_status_id", "<>", "3"},
+                {"aerolink.tbl_hr2_training_requisition.isDeleted", "<>", "1"}})
+                    .orderBy("aerolink.tbl_hr2_training_requisition.date_requested", Model.Sort.ASC)
+                    .get("tr_id,dept.dept_name,j.title,training_title,no_of_participants,total_hours, from_day, to_day, rs.req_status_id, rs.req_status");
+
+            DisplayTrainingM(training_req);
+        } catch (Exception e) {
+            System.err.println(e);
         }
 
     }
 
-    public void DisplayDataInTable() {
+    public void DisplayTrainingM(List m) {
+        ObservableList<HR2_TrainingReq_Class> t_requests = FXCollections.observableArrayList();
+        t_requests.clear();
+        try {
 
-        col_history_jp.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().job_position);
-        col_history_sd.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().start_date);
-        col_history_ed.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().end_date);
-        historyTrainingButton();
+            for (Object d : m) {
+                HashMap hm1 = (HashMap) d;
 
-        col_job_position.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().job_position);
-        col_start_date.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().start_date);
-        col_end_date.setCellValueFactory((TableColumn.CellDataFeatures<HR2_Training_InfoClass, String> param) -> param.getValue().end_date);
-        TableColumn<HR2_Training_InfoClass, Void> addButton = new TableColumn("Action");
+                t_requests.add(
+                        new HR2_TrainingReq_Class(
+                                String.valueOf(hm1.get("tr_id")),
+                                String.valueOf(hm1.get("dept_name")),
+                                String.valueOf(hm1.get("title")),
+                                String.valueOf(hm1.get("training_title")),
+                                String.valueOf(hm1.get("no_of_participants")),
+                                String.valueOf(hm1.get("total_hours")),
+                                String.valueOf(hm1.get("from_day")),
+                                String.valueOf(hm1.get("to_day")),
+                                String.valueOf(hm1.get("reason")),
+                                String.valueOf(hm1.get("req_status_id")),
+                                String.valueOf(hm1.get("req_status")),
+                                String.valueOf(hm1.get("requested_by")),
+                                String.valueOf(hm1.get("date_requested"))
+                        ));
+            }
 
-        Callback<TableColumn<HR2_Training_InfoClass, Void>, TableCell<HR2_Training_InfoClass, Void>> cellFactory
-                = new Callback<TableColumn<HR2_Training_InfoClass, Void>, TableCell<HR2_Training_InfoClass, Void>>() {
+            tbl_training_mngmt.setItems(t_requests);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        System.err.println(tbl_training_mngmt.getItems().size());
+        tbl_training_mngmt.getSelectionModel().selectFirst();
+    }
+
+    //for tbl_training_req
+    public void loadTrainingRequests() {
+
+        try {
+            HR2_TM_Training_Requisition tr = new HR2_TM_Training_Requisition();
+            List training_req = tr.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "dept", "=", "dept_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr2_request_status", "req_status_id", "rs", "=", "req_status_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "ep", "=", "requested_by")
+                    .where(new Object[][]{
+                {"rs.req_status_id", "<>", "4"},
+                {"rs.req_status_id", "<>", "1"},
+                {"aerolink.tbl_hr2_training_requisition.isDeleted", "<>", "1"}
+            })
+                    .orderBy("aerolink.tbl_hr2_training_requisition.date_requested", Model.Sort.ASC)
+                    .get("aerolink.tbl_hr2_training_requisition.tr_id,dept.dept_name, j.title, aerolink.tbl_hr2_training_requisition.training_title,aerolink.tbl_hr2_training_requisition.no_of_participants,"
+                            + "aerolink.tbl_hr2_training_requisition.total_hours,aerolink.tbl_hr2_training_requisition.from_day, "
+                            + "aerolink.tbl_hr2_training_requisition.to_day, aerolink.tbl_hr2_training_requisition.reason,rs.req_status,concat(ep.firstname, ' ',ep.middlename, ' ',ep.lastname) as requested_by,"
+                            + "aerolink.tbl_hr2_training_requisition.date_requested,rs.req_status");
+
+            DisplayTrainingReq(training_req);
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
+    }
+
+    public void DisplayTrainingReq(List a) {
+        ObservableList<HR2_TrainingReq_Class> t_requests = FXCollections.observableArrayList();
+        t_requests.clear();
+        try {
+
+            for (Object d : a) {
+                HashMap hm1 = (HashMap) d;
+
+                t_requests.add(
+                        new HR2_TrainingReq_Class(
+                                String.valueOf(hm1.get("tr_id")),
+                                String.valueOf(hm1.get("dept_name")),
+                                String.valueOf(hm1.get("title")),
+                                String.valueOf(hm1.get("training_title")),
+                                String.valueOf(hm1.get("no_of_participants")),
+                                String.valueOf(hm1.get("total_hours")),
+                                String.valueOf(hm1.get("from_day")),
+                                String.valueOf(hm1.get("to_day")),
+                                String.valueOf(hm1.get("reason")),
+                                String.valueOf(hm1.get("req_status_id")),
+                                String.valueOf(hm1.get("req_status")),
+                                String.valueOf(hm1.get("requested_by")),
+                                String.valueOf(hm1.get("date_requested"))
+                        ));
+            }
+
+            tbl_training_req.setItems(t_requests);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        System.err.println(tbl_training_req.getItems().size());
+        tbl_training_req.getSelectionModel().selectFirst();
+    }
+
+    public void ForColumns() {
+        //for tbl_mngmt
+        col_tm_dept.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().dept_name);
+        col_tm_jp.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().title);
+        col_tm_p.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().no_of_participants);
+        col_tm_th.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().total_hours);
+        col_tm_from.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().from_day);
+        col_tm_to.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().to_day);
+        col_tm_pn_process.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().request_status);
+        //for tbl_req
+        col_req_dept.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().dept_name);
+        col_req_jp.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().title);
+        col_req_date_req.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().date_requested);
+        col_req_status.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().request_status);
+        TableColumn<HR2_TrainingReq_Class, Void> MB = new TableColumn("Action");
+
+        Callback<TableColumn<HR2_TrainingReq_Class, Void>, TableCell<HR2_TrainingReq_Class, Void>> cellFactory
+                = new Callback<TableColumn<HR2_TrainingReq_Class, Void>, TableCell<HR2_TrainingReq_Class, Void>>() {
             @Override
-            public TableCell<HR2_Training_InfoClass, Void> call(final TableColumn<HR2_Training_InfoClass, Void> param) {
+            public TableCell<HR2_TrainingReq_Class, Void> call(final TableColumn<HR2_TrainingReq_Class, Void> param) {
 
-                final TableCell<HR2_Training_InfoClass, Void> cell = new TableCell<HR2_Training_InfoClass, Void>() {
-                    private final Button btn = new Button("View");
+                final TableCell<HR2_TrainingReq_Class, Void> cell = new TableCell<HR2_TrainingReq_Class, Void>() {
+                    private final Button more_btn = new Button("More");
 
                     {
                         try {
-                            btn.setOnAction(e
+                            more_btn.setOnAction(e
                                     -> {
-                                HR2_TM_ViewTrainingInfo_Modal.init_Question(tbl_trainings.getSelectionModel().getSelectedItem().job_position.get(),
-                                        tbl_trainings.getSelectionModel().getSelectedItem().start_date.get(),
-                                        tbl_trainings.getSelectionModel().getSelectedItem().end_date.get());
-                                Modal viewTraining = Modal.getInstance(new Form("/FXMLS/HR2/Modals/TM_ViewTraining.fxml").getParent());
-                                viewTraining.open();
+
+                                HR2_TrainingReq_Class tr1 = (HR2_TrainingReq_Class) getTableRow().getItem();
+                                Modal lq = Modal.getInstance(new Form("/FXMLS/HR2/Modals/LM_CourseOutline.fxml").getParent());
+                                lq.open();
                             });
-                            btn.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
-                            btn.setCursor(javafx.scene.Cursor.HAND);
+                            more_btn.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
+                            more_btn.setCursor(javafx.scene.Cursor.HAND);
                         } catch (Exception ex) {
                             System.out.println(ex);
                         }
@@ -212,7 +269,7 @@ public class HR2_Training_ManagementController implements Initializable {
                         if (empty) {
                             setGraphic(null);
                         } else {
-                            setGraphic(btn);
+                            setGraphic(more_btn);
                         }
                     }
                 };
@@ -221,361 +278,38 @@ public class HR2_Training_ManagementController implements Initializable {
 
         };
 
-        addButton.setCellFactory(cellFactory);
-        tbl_trainings.getColumns().add(addButton);
-    }
-
-    public void historyTrainingButton() {
-        TableColumn<HR2_Training_InfoClass, Void> addButton = new TableColumn("Action");
-
-        Callback<TableColumn<HR2_Training_InfoClass, Void>, TableCell<HR2_Training_InfoClass, Void>> cellFactory
-                = new Callback<TableColumn<HR2_Training_InfoClass, Void>, TableCell<HR2_Training_InfoClass, Void>>() {
-            @Override
-            public TableCell<HR2_Training_InfoClass, Void> call(final TableColumn<HR2_Training_InfoClass, Void> param) {
-
-                final TableCell<HR2_Training_InfoClass, Void> cell = new TableCell<HR2_Training_InfoClass, Void>() {
-                    private final Button btn = new Button("View");
-
-                    {
-                        try {
-                            btn.setOnAction(e
-                                    -> {
-                                HR2_TM_ViewTrainingInfo_Modal.init_Question(tbl_history_of_trainings.getSelectionModel().getSelectedItem().job_position.get(),
-                                        tbl_history_of_trainings.getSelectionModel().getSelectedItem().start_date.get(),
-                                        tbl_history_of_trainings.getSelectionModel().getSelectedItem().end_date.get());
-                                Modal viewParticipants = Modal.getInstance(new Form("/FXMLS/HR2/Modals/TM_ViewTraining.fxml").getParent());
-                                viewParticipants.open();
-                            });
-                            btn.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
-                            btn.setCursor(javafx.scene.Cursor.HAND);
-                        } catch (Exception ex) {
-                            System.out.println(ex);
-                        }
-
-                    }
-
-                    public void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            setGraphic(btn);
-                        }
-                    }
-                };
-                return cell;
-            }
-
-        };
-
-        addButton.setCellFactory(cellFactory);
-        tbl_history_of_trainings.getColumns().add(addButton);
-
-    }
-
-    public void loadData() {
-
-        HR2_Training_Info tm = new HR2_Training_Info();
-
-        List training_data = tm.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "employees", "=", "id")
-                .join(Model.JOIN.INNER, "aerolink.tbl_hr2_type_of_training ", "type_of_training_id", "t_type", "=", "type_of_training_id")
-                .join(Model.JOIN.INNER, "aerolink.tbl_log2_vehicle_status ", "vehicle_id", "v", "=", "vehicle_id")
-                .where(new Object[][]{{"aerolink.tbl_hr2_training_info.status", "<>", "0"}})
-                .get("job_position", "training_title", "training_description", "CONCAT(employees.firstname, ' ' ,employees.middlename, ' ',"
-                        + "employees.lastname)as trainor", "start_date", "end_date", "start_time", "end_time", "t_type.type_of_training",
-                        "location", "v.vehicle", "budget_cost");
-        Data(training_data);
-
+        MB.setCellFactory(cellFactory);
+        tbl_training_req.getColumns().add(MB);
     }
 
     @FXML
-    public void searchTraining() {
-        HR2_Training_Info tm = new HR2_Training_Info();
-        tbl_trainings.getItems().clear();
-        try {
-            List training_data1 = tm.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "employees", "=", "id")
-                    .join(Model.JOIN.INNER, "aerolink.tbl_hr2_type_of_training ", "type_of_training_id", "t_type", "=", "type_of_training_id")
-                    .join(Model.JOIN.INNER, "aerolink.tbl_log2_vehicle_status ", "vehicle_id", "v", "=", "vehicle_id")
-                    .where(new Object[][]{{"job_position", "like", "%" + txt_search_training.getText() + "%"},
-            {"aerolink.tbl_hr2_training_info.status", "<>", "0"}})
-                    .get("job_position", "training_title", "training_description", "CONCAT(employees.firstname, ' ' ,employees.middlename, ' ',"
-                            + "employees.lastname)as trainor", "start_date", "end_date", "start_time", "end_time", "t_type.type_of_training",
-                            "location", "v.vehicle", "budget_cost");
-            Data(training_data1);
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-
-    public void Data(List b) {
-        ObservableList<HR2_Training_InfoClass> obj = FXCollections.observableArrayList();
-        obj.clear();
-        try {
-            for (Object d : b) {
-                HashMap hm = (HashMap) d;
-                System.out.println(hm);
-                obj.add(
-                        new HR2_Training_InfoClass(
-                                String.valueOf(hm.get("training_id")),
-                                String.valueOf(hm.get("job_position")),
-                                String.valueOf(hm.get("training_title")),
-                                String.valueOf(hm.get("start_date")),
-                                String.valueOf(hm.get("end_date"))
-                        ));
-
-            }
-            tbl_trainings.setItems(obj);
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-    //History of Training
-
-    public void loadHistoryOfTraining() {
-
-        HR2_Training_Info tm = new HR2_Training_Info();
-
-        List training_data = tm.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "employees", "=", "id")
-                .join(Model.JOIN.INNER, "aerolink.tbl_hr2_type_of_training ", "type_of_training_id", "t_type", "=", "type_of_training_id")
-                .join(Model.JOIN.INNER, "aerolink.tbl_log2_vehicle_status ", "vehicle_id", "v", "=", "vehicle_id")
-                .where(new Object[][]{{"aerolink.tbl_hr2_training_info.status", "=", "0"}})
-                .get("job_position", "training_title", "training_description", "CONCAT(employees.firstname, ' ' ,employees.middlename, ' ',"
-                        + "employees.lastname)as trainor", "start_date", "end_date", "start_time", "end_time", "t_type.type_of_training",
-                        "location", "v.vehicle", "budget_cost");
-        ht(training_data);
-
-    }
-
-    public void ht(List ht) {
-        ObservableList<HR2_Training_InfoClass> obj = FXCollections.observableArrayList();
-        obj.clear();
-        try {
-            for (Object d : ht) {
-                HashMap hm = (HashMap) d;
-                System.out.println(hm);
-                obj.add(
-                        new HR2_Training_InfoClass(
-                                String.valueOf(hm.get("training_id")),
-                                String.valueOf(hm.get("job_position")),
-                                String.valueOf(hm.get("training_title")),
-                                String.valueOf(hm.get("start_date")),
-                                String.valueOf(hm.get("end_date"))
-                        ));
-
-            }
-            tbl_history_of_trainings.setItems(obj);
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-
-    /*
-    @FXML
-     public void searchHistoryOfTraining() {
-        HR2_Training_Info tm = new HR2_Training_Info();
-        tbl_history_of_trainings.getItems().clear();
-        try {
-            List training_data1 = tm.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "id", "employees", "=", "id")
-                    .join(Model.JOIN.INNER, "aerolink.tbl_hr2_type_of_training ", "type_of_training_id", "t_type", "=", "type_of_training_id")
-                    .join(Model.JOIN.INNER, "aerolink.tbl_log2_vehicle_status ", "vehicle_id", "v", "=", "vehicle_id")
-                    .where(new Object[][]{{"job_position", "like", "%" + txt_search_historyTraining.getText() + "%","aerolink.tbl_hr2_training_info.status", "=", "0"}})
-                    .get("job_position", "training_title", "training_description", "CONCAT(employees.firstname, ' ' ,employees.middlename, ' ',\n"
-                            + "employees.lastname)as trainor", "start_date", "end_date", "start_time", "end_time", "t_type.type_of_training",
-                            "location", "v.vehicle", "budget_cost");
-            Data(training_data1);
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-     */
-    public void loadDataInComboBoxes() {
-        HR4_Jobs jobs = new HR4_Jobs();
-        HR2_Temp_Employee_Profiles trainors = new HR2_Temp_Employee_Profiles();
-        HR2_Type_of_Training type_of_training = new HR2_Type_of_Training();
-        HR2_Temp_Vehicles vehicles = new HR2_Temp_Vehicles();
-
-        List c = jobs.get();
-
-        for (Object d : c) {
-            HashMap hm1 = (HashMap) d;
-
-            cbox_select_jobs.getItems().add(hm1.get("title"));
-        }
-
-        List set_trainors = trainors.get();
-
-        for (Object e : set_trainors) {
-            HashMap hm2 = (HashMap) e;
-            //RS
-            cbox_trainor.getItems().add("T" + hm2.get("id") + " - " + hm2.get("firstname") + " " + hm2.get("middlename") + " " + hm2.get("lastname"));
-        }
-
-        List set_type_of_training = type_of_training.get();
-
-        for (Object f : set_type_of_training) {
-            HashMap hm3 = (HashMap) f;
-            //RS
-            cbox_select_type_of_training.getItems().add("TM" + hm3.get("type_of_training_id") + " - " + hm3.get("type_of_training"));
-        }
-
-        List set_vehicles = vehicles.get();
-
-        for (Object g : set_vehicles) {
-            HashMap hm4 = (HashMap) g;
-            //RS
-            cbox_vehicle.getItems().add("V" + hm4.get("vehicle_id") + " - " + hm4.get("vehicle"));
-        }
-    }
-
-    public void DisableComponents() {
-
-        Node[] d = {
-            btn_save,
-            cbox_select_jobs,
-            txt_training_title,
-            txt_training_desc,
-            cbox_trainor,
-            txt_start_time,
-            txt_end_time,
-            txt_start_date,
-            txt_end_date,
-            txt_location,
-            cbox_vehicle,
-            txt_budget_cost,
-            cbox_select_type_of_training,};
-        try {
-            for (Node c : d) {
-                if (c instanceof JFXTextField) {
-                    JFXTextField m = (JFXTextField) c;
-                    m.setDisable(true);
-                    m.setText("");
-                }
-                if (c instanceof JFXButton) {
-                    JFXButton m1 = (JFXButton) c;
-                    m1.setDisable(true);
-                }
-                if (c instanceof JFXDatePicker) {
-                    JFXDatePicker m2 = (JFXDatePicker) c;
-                    m2.setDisable(true);
-                    m2.setValue(null);
-                }
-                if (c instanceof JFXComboBox) {
-                    JFXComboBox m3 = (JFXComboBox) c;
-                    m3.setDisable(true);
-                    m3.setValue(null);
-                }
-                if (c instanceof JFXTextArea) {
-                    JFXTextArea m4 = (JFXTextArea) c;
-                    m4.setDisable(true);
-                    m4.setText("");
-                }
-
-            }
-
-        } catch (Exception e) {
-            Alert alert = new Alert(AlertType.WARNING);
-            alert.setContentText("Warning" + e);
-            alert.showAndWait();
-        }
-    }
-
-    @FXML
-    public void validate() {
-        if (!cbox_select_jobs.getValue().toString().isEmpty() && !txt_training_title.getText().isEmpty()
-                && !txt_training_desc.getText().isEmpty() && !cbox_trainor.getValue().toString().isEmpty()
-                && !txt_start_date.getValue().toString().isEmpty() && !txt_end_date.getValue().toString().isEmpty()
-                && !txt_start_time.getText().isEmpty() && !txt_end_time.getText().isEmpty()
-                && !cbox_select_type_of_training.getValue().toString().isEmpty() && !txt_location.getText().isEmpty()
-                && !cbox_vehicle.getValue().toString().isEmpty() && !txt_budget_cost.getText().isEmpty()) {
-            btn_save.setDisable(false);
-        } else {
-            btn_save.setDisable(true);
-        }
-    }
-
-    public void Save() {
-        if (cbox_select_jobs.getValue().toString().isEmpty() || txt_training_title.getText().isEmpty()
-                || txt_training_desc.getText().isEmpty() || cbox_trainor.getValue().toString().isEmpty()
-                || txt_start_date.getValue().toString().isEmpty() || txt_end_date.getValue().toString().isEmpty()
-                || txt_start_time.getText().isEmpty()
-                || txt_end_time.getText().isEmpty()
-                || cbox_select_type_of_training.getValue().toString().isEmpty() || txt_location.getText().isEmpty()
-                || cbox_vehicle.getValue().toString().isEmpty() || txt_budget_cost.getText().toString().isEmpty()) {
-            Alert alert = new Alert(AlertType.WARNING);
-            alert.setContentText("One or more fields are empty");
-            alert.showAndWait();
-        } else {
-            try {
-                HR2_Training_Info tm = new HR2_Training_Info();
-
-                String[][] tm_data
-                        = {
-                            {"job_position", cbox_select_jobs.getValue().toString()},
-                            {"training_title", txt_training_title.getText()},
-                            {"training_description", txt_training_desc.getText()},
-                            {"id", cbox_trainor.getSelectionModel().getSelectedItem().toString().substring(1).toString().split(" - ")[0]},
-                            {"start_date", txt_start_date.getValue().toString()},
-                            {"end_date", txt_end_date.getValue().toString()},
-                            {"start_time", txt_start_time.getText()},
-                            {"end_time", txt_end_time.getText()},
-                            {"type_of_training_id", cbox_select_type_of_training.getSelectionModel().getSelectedItem().toString().substring(2).toString().split(" - ")[0]},
-                            {"location", txt_location.getText()},
-                            {"vehicle_id", cbox_vehicle.getSelectionModel().getSelectedItem().toString().substring(1).toString().split(" - ")[0]},
-                            {"budget_cost", txt_budget_cost.getText()},
-                            {"status", "1"}
-                        };
-
-                tm.insert(tm_data);
-                loadData();
-                Alert saved = new Alert(Alert.AlertType.INFORMATION);
-                saved.setContentText("Saved");
-                saved.showAndWait();
-                DisableComponents();
-            } catch (Exception e) {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setContentText("Error" + e);
-                alert.showAndWait();
-            }
-        }
-    }
-
-    @FXML
-    public void ContextMenuOnTable(MouseEvent event) {
+    public void ContextMenu(MouseEvent event) {
 
         if (event.getButton() == MouseButton.SECONDARY) {
-            contextMenuTrainings.show(tbl_trainings, event.getSceneX(), event.getY());
-            contextmenu_item_delete_trainings.setOnAction(e -> DropData());
+            CMenu.show(tbl_training_mngmt, event.getX(), event.getSceneY());
+            MI_more.setOnAction(e
+                    -> {
+
+                HR2_TM_ViewTrainingInfo_Modal.init_Trainings(
+                        tbl_training_mngmt.getSelectionModel().getSelectedItem().tr_id.getValue(),
+                        tbl_training_mngmt.getSelectionModel().getSelectedItem().dept_name.getValue(),
+                        tbl_training_mngmt.getSelectionModel().getSelectedItem().title.getValue(),
+                        tbl_training_mngmt.getSelectionModel().getSelectedItem().no_of_participants.getValue(),
+                        tbl_training_mngmt.getSelectionModel().getSelectedItem().total_hours.getValue(),
+                        tbl_training_mngmt.getSelectionModel().getSelectedItem().from_day.getValue(),
+                        tbl_training_mngmt.getSelectionModel().getSelectedItem().to_day.getValue(),
+                          tbl_training_mngmt.getSelectionModel().getSelectedItem().request_status_id.getValue(),
+                        tbl_training_mngmt.getSelectionModel().getSelectedItem().request_status.getValue()
+                        );
+                Modal moreDetails = Modal.getInstance(new Form("/FXMLS/HR2/Modals/TM_ViewTraining.fxml").getParent());
+                moreDetails.open();
+            }
+            );
+            MI_archive.setOnAction(e -> {
+
+            });
         }
 
     }
 
-    //DROP DATA IN CURRENT TRAINING
-    public void DropData() {
-        Alert update = new Alert(Alert.AlertType.CONFIRMATION);
-        update.setContentText("Are you sure you want to drop this data?\n "
-                + "Note: The dropped data will be store to your history");
-        Optional<ButtonType> rs = update.showAndWait();
-
-        if (rs.get() == ButtonType.OK) {
-            //   System.out.println(tbl_Skills.getSelectionModel().getSelectedItem().Skill_ID.getValue());
-            HR2_Training_Info tm = new HR2_Training_Info();
-
-            Boolean a = tm.where(new Object[][]{
-                {"job_position", "=", tbl_trainings.getSelectionModel().getSelectedItem().job_position.get()}
-            }).update(new Object[][]{
-                {"status", "0"}
-            }).executeUpdate();
-            Alert dropnotif = new Alert(Alert.AlertType.INFORMATION);
-            dropnotif.setContentText(tbl_trainings.getSelectionModel().getSelectedItem().job_position.get() + " Droppped to History");
-            dropnotif.showAndWait();
-
-            System.out.println(a);
-            loadHistoryOfTraining();
-            loadData();
-        }
-    }
 }

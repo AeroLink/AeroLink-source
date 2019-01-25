@@ -803,6 +803,57 @@
                                 <FontAwesomeIconView fill="WHITE" glyphName="MONEY" size="25" strokeType="INSIDE" styleClass="fontIcon" />
                             </graphic>
                         </Tab>
+                  <Tab id="tab" fx:id="FINANCE1" closable="false">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="533.0" prefWidth="235.0" style="-fx-background-color: white; -fx-border-color: #34A853; -fx-border-width: 0 0 0 1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <AnchorPane prefHeight="40.0" prefWidth="235.0" style="-fx-background-color: #34A853;">
+                                       <children>
+                                          <Label text="REQUISITIONS" textFill="WHITE" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
+                                             <font>
+                                                <Font name="Segoe UI Semibold" size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane>
+                                       <children>
+                                          <JFXButton id="0xreq_hr2_skill" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="[ HR2 ] Request Skill" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                             <graphic>
+                                                <FontAwesomeIconView fill="#34a853" glyphName="ENVELOPE" size="25" styleClass="fontIcon" />
+                                             </graphic>
+                                          </JFXButton>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="11.0" layoutY="50.0">
+                                       <children>
+                                          <JFXButton id="0xreq_hr2_training" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="[ HR2 ] Request Training" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                             <graphic>
+                                                <FontAwesomeIconView fill="#34a853" glyphName="ENVELOPE" size="25" styleClass="fontIcon" />
+                                             </graphic>
+                                          </JFXButton>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="11.0" layoutY="86.0" />
+                                    <AnchorPane layoutX="11.0" layoutY="122.0" />
+                                    <AnchorPane layoutX="11.0" layoutY="50.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="LIST" size="25" strokeType="INSIDE" styleClass="fontIcon" />
+                     </graphic>
+                  </Tab>
                     </tabs>
                 </JFXTabPane>
             </children>

@@ -7,9 +7,12 @@ package FXMLS.Log1;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -19,23 +22,26 @@ import javafx.scene.control.TableView;
  * @author Crenz
  */
 public class MaintenanceRepairOHController implements Initializable {
+    
+    ObservableList<String> numberOfEmployeeNeeded = FXCollections.observableArrayList(
+            "1",
+            "2",
+            "3",
+            "4",
+            "5");
 
     @FXML
-    private TableView<?> building_tbl;
+    private ComboBox<String> howManyEmployees_combox;
     @FXML
-    private TableColumn<?, ?> building_col;
+    private ComboBox employee_1;
     @FXML
-    private TableColumn<?, ?> Type_col;
+    private ComboBox employee_2;
     @FXML
-    private TableColumn<?, ?> address_col;
+    private ComboBox employee_3;
     @FXML
-    private TableColumn<?, ?> contact_col;
+    private ComboBox employee_4;
     @FXML
-    private TableColumn<?, ?> Status_col;
-    @FXML
-    private TableColumn<?, ?> Status_col1;
-    @FXML
-    private TableColumn<?, ?> Status_col11;
+    private ComboBox employee_5;
 
     /**
      * Initializes the controller class.
@@ -43,14 +49,51 @@ public class MaintenanceRepairOHController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        howManyEmployees_combox.setItems(numberOfEmployeeNeeded);
+        employee_1.setDisable(true);
+        employee_2.setDisable(true);
+        employee_3.setDisable(true);
+        employee_4.setDisable(true);
+        employee_5.setDisable(true);        
     }    
 
     @FXML
-    private void AddBuildingAction(ActionEvent event) {
+    private void numberOfEmployeeAction(ActionEvent event) {
+        String num = howManyEmployees_combox.getValue();
+        
+        if(num=="1"){
+            employee_1.setDisable(false);
+            employee_2.setDisable(true);
+            employee_3.setDisable(true);
+            employee_4.setDisable(true);
+            employee_5.setDisable(true);
+        }else if(num=="2"){
+            employee_1.setDisable(false);
+            employee_2.setDisable(false);
+            employee_3.setDisable(true);
+            employee_4.setDisable(true);
+            employee_5.setDisable(true);
+        }else if(num=="3"){
+            employee_1.setDisable(false);
+            employee_2.setDisable(false);
+            employee_3.setDisable(false);
+            employee_4.setDisable(true);
+            employee_5.setDisable(true);
+        }else if(num=="4"){
+            employee_1.setDisable(false);
+            employee_2.setDisable(false);
+            employee_3.setDisable(false);
+            employee_4.setDisable(false);
+            employee_5.setDisable(true);
+        }else if(num=="5"){
+            employee_1.setDisable(false);
+            employee_2.setDisable(false);
+            employee_3.setDisable(false);
+            employee_4.setDisable(false);
+            employee_5.setDisable(false);
+        }
     }
 
-    @FXML
-    private void updateBuildingAction(ActionEvent event) {
-    }
+
     
 }

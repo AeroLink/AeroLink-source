@@ -5,33 +5,30 @@
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="id_gl" prefHeight="713.0" prefWidth="993.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="713.0" prefWidth="993.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane prefHeight="30.0" prefWidth="993.0" style="-fx-background-color: #34A853;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <AnchorPane prefHeight="21.0" prefWidth="993.0" style="-fx-background-color: #34a853;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Label layoutX="8.0" layoutY="-1.0" prefHeight="30.0" prefWidth="107.0" text="General Ledger" textFill="WHITE">
+            <Label layoutX="7.0" layoutY="1.0" text="General Ledger" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <JFXTabPane layoutX="-2.0" layoutY="30.0" prefHeight="700.0" prefWidth="993.0" stylesheets="@../../Assets/css/tabCSS.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="-7.0" AnchorPane.topAnchor="30.0">
+      <JFXTabPane layoutX="-2.0" layoutY="20.0" prefHeight="693.0" prefWidth="993.0" stylesheets="@../../Assets/css/MainPanel.css" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0">
          <tabs>
-            <Tab text="Ledger">
+            <Tab id="tab" text="Journal Entry">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView prefHeight="568.0" prefWidth="987.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="62.0">
+                        <TableView layoutX="14.0" layoutY="84.0" prefHeight="565.0" prefWidth="546.0" AnchorPane.leftAnchor="14.0">
                           <columns>
                             <TableColumn prefWidth="75.0" text="C1" />
                             <TableColumn prefWidth="75.0" text="C2" />
@@ -40,55 +37,37 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <JFXButton layoutX="304.0" layoutY="13.0" prefHeight="7.0" prefWidth="82.0" style="-fx-background-color: #34A853;" text="Go" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </JFXButton>
-                        <Separator layoutX="1.0" layoutY="55.0" prefHeight="0.0" prefWidth="993.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="8.0" />
-                        <JFXTextField layoutX="14.0" layoutY="13.0" maxWidth="258.0" minWidth="258.0" prefHeight="30.0" prefWidth="258.0" promptText="Search" />
+                        <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="22.0" prefWidth="543.0" style="-fx-background-color: #34a853;" AnchorPane.leftAnchor="14.0">
+                           <children>
+                              <Label layoutX="8.0" layoutY="1.0" text="List of Transaction" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="571.0" layoutY="4.0" prefHeight="643.0" prefWidth="416.0" style="-fx-border-color: #34a853;" AnchorPane.leftAnchor="571.0" AnchorPane.rightAnchor="6.0">
+                           <children>
+                              <AnchorPane layoutX="5.0" layoutY="10.0" prefHeight="22.0" prefWidth="553.0" style="-fx-background-color: #34a853;" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+                                 <children>
+                                    <Label layoutX="8.0" layoutY="1.0" text="Journal Entry" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
                      </children>
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab text="Trial Balance">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1002.0">
-                     <children>
-                        <Separator layoutX="249.0" layoutY="2.0" orientation="VERTICAL" prefHeight="641.0" prefWidth="8.0" AnchorPane.bottomAnchor="-8.0" AnchorPane.topAnchor="2.0" />
-                        <JFXComboBox layoutX="14.0" layoutY="67.0" prefHeight="44.0" prefWidth="225.0" promptText="Month" />
-                        <JFXComboBox layoutX="14.0" layoutY="142.0" prefHeight="44.0" prefWidth="225.0" promptText="Year" />
-                        <JFXButton layoutX="14.0" layoutY="220.0" prefHeight="30.0" prefWidth="229.0" style="-fx-background-color: #34A853;" text="Generate" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </JFXButton>
-                        <TableView layoutX="257.0" layoutY="177.0" prefHeight="457.0" prefWidth="734.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="257.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="177.0">
-                          <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
-                          </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
-                        <Label layoutX="767.0" layoutY="47.0" prefHeight="17.0" prefWidth="48.0" text="Aerolink" AnchorPane.leftAnchor="767.0" AnchorPane.rightAnchor="187.0" />
-                        <Label layoutX="756.0" layoutY="78.0" text="Trial Balance" AnchorPane.leftAnchor="756.0" AnchorPane.rightAnchor="176.0" />
-                        <Label layoutX="756.0" layoutY="108.0" text="January 2018" AnchorPane.leftAnchor="756.0" AnchorPane.rightAnchor="176.0" />
-                        <ImageView fitHeight="47.0" fitWidth="82.0" layoutX="685.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="685.0">
-                           <image>
-                              <Image url="@../../Assets/1920%20x%201080.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-            <Tab text="Financial Statement">
+            <Tab id="tab" text="General Ledger">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="7.0" layoutY="123.0" prefHeight="523.0" prefWidth="984.0">
+                        <TableView layoutX="14.0" layoutY="85.0" prefHeight="567.0" prefWidth="973.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="6.0">
                           <columns>
                             <TableColumn prefWidth="75.0" text="C1" />
                             <TableColumn prefWidth="75.0" text="C2" />
@@ -97,27 +76,97 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <JFXButton layoutX="9.0" layoutY="82.0" prefHeight="31.0" prefWidth="178.0" style="-fx-background-color: #34A853;" text="Income Statement" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton layoutX="205.0" layoutY="82.0" prefHeight="31.0" prefWidth="179.0" style="-fx-background-color: #34A853;" text="Balance Sheet" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton layoutX="406.0" layoutY="82.0" prefHeight="31.0" prefWidth="178.0" style="-fx-background-color: #34A853;" text="Cash Flow Statement" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton layoutX="605.0" layoutY="82.0" prefHeight="31.0" prefWidth="178.0" style="-fx-background-color: #34A853;" text="Changes in Equity" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </JFXButton>
                      </children></AnchorPane>
+              </content>
+            </Tab>
+            <Tab id="tab" text="Trial Balance">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane layoutX="8.0" layoutY="14.0" prefHeight="640.0" prefWidth="204.0" style="-fx-border-color: #34a853;">
+                           <children>
+                              <JFXComboBox layoutX="14.0" layoutY="96.0" prefHeight="25.0" prefWidth="176.0" promptText="Month" />
+                              <JFXComboBox layoutX="14.0" layoutY="147.0" prefHeight="25.0" prefWidth="176.0" promptText="Year" />
+                              <JFXButton layoutX="14.0" layoutY="221.0" prefHeight="25.0" prefWidth="179.0" style="-fx-background-color: #34a853;" text="Generate" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </AnchorPane>
+                        <TableView layoutX="221.0" layoutY="240.0" prefHeight="415.0" prefWidth="769.0" AnchorPane.leftAnchor="221.0" AnchorPane.rightAnchor="3.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+            <Tab id="tab" text="Financial Statement">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="8.0" layoutY="61.0" prefHeight="592.0" prefWidth="398.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="587.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <TableView layoutX="416.0" layoutY="61.0" prefHeight="251.0" prefWidth="572.0" AnchorPane.rightAnchor="5.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="C1" />
+                              <TableColumn prefWidth="75.0" text="C2" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <TableView layoutX="416.0" layoutY="402.0" prefHeight="251.0" prefWidth="572.0" AnchorPane.rightAnchor="5.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="C1" />
+                              <TableColumn prefWidth="75.0" text="C2" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+            <Tab id="tab" text="Chart of Accounts">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="15.0" layoutY="103.0" prefHeight="546.0" prefWidth="565.0" AnchorPane.leftAnchor="15.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <JFXComboBox layoutX="15.0" layoutY="61.0" prefHeight="25.0" prefWidth="187.0" promptText="t" />
+                        <JFXTextField layoutX="221.0" layoutY="60.0" maxWidth="212.0" minWidth="97.0" prefHeight="31.0" prefWidth="154.0" promptText="Code no" />
+                        <JFXButton layoutX="426.0" layoutY="61.0" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: #34a853;" text="Save" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton layoutX="507.0" layoutY="61.0" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: #34a853;" text="Update" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
               </content>
             </Tab>
          </tabs>

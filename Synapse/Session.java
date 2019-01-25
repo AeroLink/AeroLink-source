@@ -5,7 +5,6 @@
  */
 package Synapse;
 
-import java.security.Permission;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

@@ -31,7 +31,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXComboBox>
-      <JFXTextField fx:id="txt_skill" focusColor="#099036" labelFloat="true" layoutX="41.0" layoutY="126.0" maxWidth="352.0" minWidth="314.0" prefHeight="37.0" prefWidth="350.0" promptText="Skill">
+      <JFXTextField fx:id="txt_skill" focusColor="#099036" labelFloat="true" layoutX="49.0" layoutY="126.0" maxWidth="352.0" minWidth="314.0" prefHeight="37.0" prefWidth="331.0" promptText="Skill">
          <font>
             <Font name="Roboto Medium" size="15.0" />
          </font>

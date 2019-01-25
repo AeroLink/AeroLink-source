@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXDatePicker?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ContextMenu?>
@@ -13,13 +12,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="SNrootPane1" prefHeight="693.0" prefWidth="1370.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Core2.Change.SNviewMonitoringController">
+<AnchorPane id="AnchorPane" fx:id="SNrootPane" prefHeight="693.0" prefWidth="1370.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Core2.Change.SNviewMonitoringController">
    <children>
       <SplitPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <TableView layoutY="97.0" prefHeight="569.0" prefWidth="1150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <TableView layoutY="97.0" prefHeight="569.0" prefWidth="1150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="125.0">
                      <columns>
                         <TableColumn prefWidth="592.9999694824219" text="PACKAGE NO." />
                         <TableColumn prefWidth="432.0" text="STATUS" />
@@ -44,31 +43,43 @@
                         </ContextMenu>
                      </contextMenu>
                   </TableView>
-                  <AnchorPane prefHeight="40.0" prefWidth="1370.0" styleClass="card" stylesheets="@../../../Assets/css/card.css" AnchorPane.bottomAnchor="650.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane prefHeight="40.0" prefWidth="1370.0" styleClass="card" stylesheets="@../../../Assets/css/card.css">
                      <children>
-                        <Label layoutX="585.0" prefHeight="40.0" prefWidth="207.0" text=" SERVICE NETWORK" textFill="#34a853" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="586.0" AnchorPane.rightAnchor="575.0" AnchorPane.topAnchor="0.0">
+                        <Label layoutX="586.0" layoutY="-1.0" prefHeight="40.0" prefWidth="274.0" text="PACKAGE MONITORING" textFill="#34a853" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="1084.0" AnchorPane.topAnchor="0.0">
                            <font>
                               <Font name="Arial Bold" size="20.0" />
                            </font>
                         </Label>
-                        <JFXButton fx:id="SNback2" layoutX="10.0" layoutY="5.0" onAction="#back2" prefHeight="30.0" style="-fx-background-color: #34a853;" text="Back" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
+                        <JFXButton fx:id="SNviewN" buttonType="RAISED" ellipsisString="" layoutX="994.0" layoutY="5.0" onAction="#viewN" prefHeight="30.0" prefWidth="185.0" ripplerFill="WHITE" style="-fx-background-color: #34a853;" text="BRANCH MANAGEMENT" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="EYE" size="20" />
+                           </graphic>
                            <font>
                               <Font name="Arial" size="12.0" />
                            </font>
+                        </JFXButton>
+                        <JFXButton fx:id="SNviewR" buttonType="RAISED" ellipsisString="" layoutX="1204.0" layoutY="5.0" onAction="#viewR" prefHeight="30.0" prefWidth="170.0" ripplerFill="WHITE" style="-fx-background-color: #34a853;" text="REPORT" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
                            <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="BACKWARD" size="20" />
+                              <FontAwesomeIconView fill="WHITE" glyphName="BOOK" size="20" />
                            </graphic>
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
                         </JFXButton>
                      </children>
                   </AnchorPane>
-                  <ComboBox layoutX="14.0" layoutY="122.0" prefHeight="30.0" prefWidth="200.0" promptText="STATUS" />
-                  <ComboBox layoutX="14.0" layoutY="163.0" prefHeight="30.0" prefWidth="200.0" promptText="BRANCH" />
-                  <ComboBox layoutX="14.0" layoutY="204.0" prefHeight="30.0" prefWidth="200.0" promptText="SERVICE" />
-                  <ComboBox layoutX="14.0" layoutY="245.0" prefHeight="30.0" prefWidth="200.0" promptText="ORIGIN" />
-                  <ComboBox layoutX="14.0" layoutY="287.0" prefHeight="30.0" prefWidth="200.0" promptText="DESTINATION" />
-                  <ComboBox layoutX="14.0" layoutY="327.0" prefHeight="30.0" prefWidth="200.0" promptText="PROVIDER" />
-                  <JFXDatePicker defaultColor="#34a853" layoutX="14.0" layoutY="371.0" prefHeight="30.0" prefWidth="200.0" promptText="SHIPMENT DATE" />
-                  <JFXDatePicker defaultColor="#34a853" layoutX="14.0" layoutY="409.0" prefHeight="30.0" prefWidth="200.0" promptText="DELIVERY DATE" />
+                  <ComboBox fx:id="cbbFilter" layoutX="14.0" layoutY="73.0" onAction="#cbbMainFilter" prefHeight="30.0" prefWidth="200.0" promptText="STATUS" />
+                  <Label layoutX="972.0" layoutY="49.0" prefHeight="24.0" prefWidth="86.0" text="Reminder : " textFill="RED" wrapText="true">
+                     <font>
+                        <Font name="System Bold Italic" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="972.0" layoutY="73.0" prefHeight="41.0" prefWidth="384.0" text="Please select a branch that you want to view the details and&#10;&quot;Right Click the row and select [View Package] ,[View Airline]&quot;" wrapText="true">
+                     <font>
+                        <Font name="System Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="cbbShowFilter" layoutX="230.0" layoutY="73.0" prefHeight="30.0" prefWidth="200.0" promptText="STATUS" />
                </children>
             </AnchorPane>
          </items>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="820.0" prefWidth="1260.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView fx:id="appointmenttable" layoutX="64.0" layoutY="37.0" prefHeight="330.0" prefWidth="1133.0">
+         <columns>
+            <TableColumn fx:id="appointmentid" prefWidth="151.0" text="Complainant ID" />
+            <TableColumn fx:id="appointmentname" prefWidth="151.0" text="Complainant Name" />
+            <TableColumn fx:id="appointmenttime" prefWidth="151.0" text="Time" />
+            <TableColumn fx:id="appointmentdate" prefWidth="151.0" text="Date" />
+            <TableColumn fx:id="appointmentstatus" prefWidth="151.0" text="Status" />
+         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <JFXTextField fx:id="schedfn1" editable="false" focusColor="BLACK" labelFloat="true" layoutX="279.0" layoutY="410.0" maxWidth="376.0" minWidth="247.0" prefHeight="36.0" prefWidth="247.0" promptText="Complainants ID:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="schedfn11" editable="false" focusColor="BLACK" labelFloat="true" layoutX="279.0" layoutY="482.0" maxWidth="376.0" minWidth="247.0" prefHeight="36.0" prefWidth="247.0" promptText="Complainants Name:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXComboBox layoutX="366.0" layoutY="558.0" prefHeight="29.0" prefWidth="162.0" />
+      <Label layoutX="278.0" layoutY="564.0" prefHeight="29.0" prefWidth="70.0" text="Category:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="schedsave2" layoutX="925.0" layoutY="605.0" prefHeight="33.0" prefWidth="136.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="SUBMIT" textFill="WHITE">
+         <font>
+            <Font name="Aparajita" size="15.0" />
+         </font>
+      </JFXButton>
+      <Label layoutX="631.0" layoutY="411.0" prefHeight="29.0" prefWidth="102.0" text="Description:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextArea layoutX="719.0" layoutY="425.0" prefHeight="162.0" prefWidth="342.0" />
+   </children>
+</AnchorPane>

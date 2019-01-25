@@ -59,15 +59,19 @@ public class ViewRequestedStocksController implements Initializable {
                     ProcRequests.add(new Log1_ProcRequestsClassFile(
                 
                 String.valueOf(hm.get("RequestID")),
+                String.valueOf(hm.get("SupplierID")),
+                String.valueOf(hm.get("RequestDate")),
                 String.valueOf(hm.get("RequestDescription")),
                 String.valueOf(hm.get("Requestor")),
                 String.valueOf(hm.get("RequestorPosition")),
                 String.valueOf(hm.get("RequestDepartment")),
                 String.valueOf(hm.get("RequestPriorityLevel")),
                 String.valueOf(hm.get("RequestQuantity")),
-                String.valueOf(hm.get("RequestPrice")),
-                String.valueOf(hm.get("RequestStatus")),
-                String.valueOf(hm.get("RequestDate"))
+                String.valueOf(hm.get("RequestItemUnit")),
+                        String.valueOf(hm.get("RequestPricePerUnit")),
+                        String.valueOf(hm.get("RequestTotalPrice")),
+                String.valueOf(hm.get("RequestBudget")),
+                String.valueOf(hm.get("RequestStatus"))
                 
             ));       
         }

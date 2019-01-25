@@ -9,15 +9,12 @@ import FXMLS.Log1.ClassFiles.Log1_fullInventoryList;
 import FXMLS.Log1.util.AlertMaker;
 import Model.Log1.Log1_ProcurementPurchaseRequestModel;
 import Model.Log1.Log1_WarehouseItemsModel;
-import Synapse.Session;
+import Synapse.Model;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.CompletableFuture;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -29,7 +26,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -84,6 +80,12 @@ public class PurchaseRequestWarehouseController implements Initializable {
     private Label itemID_txt;
     @FXML
     private DatePicker dateToday_txt;
+    @FXML
+    private TableColumn<Log1_fullInventoryList, String> Supplier_col;
+    @FXML
+    private Label supplierName_txt;
+    @FXML
+    private Label supplierID_txt;
 
     /**
      * Initializes the controller class.
@@ -106,6 +108,8 @@ public class PurchaseRequestWarehouseController implements Initializable {
         reorderLevel_txt.setText(itemRequest_tbl.getSelectionModel().getSelectedItem().getCriticalQuantity());
         itemUnit_txt.setText(itemRequest_tbl.getSelectionModel().getSelectedItem().getItemUnit());
         unitPrice_txt.setText(itemRequest_tbl.getSelectionModel().getSelectedItem().getUnitPrice());
+        supplierName_txt.setText(itemRequest_tbl.getSelectionModel().getSelectedItem().getSupplierName());
+        supplierID_txt.setText(itemRequest_tbl.getSelectionModel().getSelectedItem().getSupplierID());
     }
     
     public void cancel(){
@@ -129,100 +133,43 @@ public class PurchaseRequestWarehouseController implements Initializable {
         dateToday_txt.getEditor().setText("");
     }
     
-//    public void fetchItemData(){ 
-//        Log1_WarehouseItemsModel searchItem = new Log1_WarehouseItemsModel();
-//        CompletableFuture.supplyAsync(() -> {
-//            
-//            while (Session.CurrentRoute.equals("log1WM")) {
-//                searchItem.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(row -> {
-//                    DummyCount = Long.parseLong(((HashMap) row).get("chk").toString());
-//                });
-//
-//                if (DummyCount != GlobalCount) {
-//
-//                    itemRequest_tbl.getItems().clear();
-//                    List b = searchItem.get();
-//        
-//         
-//            try{
-//                List list_coa = searchItem.where(new Object[][]{
-//                    {"Status", "=", "Need to Reorder!"}
-//                }).get(); 
-//        ObservableList<Log1_fullInventoryList> items = FXCollections.observableArrayList();
-//            for(Object d : list_coa)
-//                {
-//                    HashMap hm = (HashMap) d;   //exquisite casting
-//                
-//                    items.add(new Log1_fullInventoryList(
-//                        String.valueOf(hm.get("ItemID")),
-//                        String.valueOf(hm.get("SupplierName")),
-//                        String.valueOf(hm.get("ItemDescription")),
-//                        String.valueOf(hm.get("ItemType")),
-//                        String.valueOf(hm.get("ItemLocation")),
-//                        String.valueOf(hm.get("ItemUnit")),
-//                        String.valueOf(hm.get("UnitPrice")),
-//                        String.valueOf(hm.get("StockQuantity")),
-//                        String.valueOf(hm.get("CriticalQuantity")),
-//                        String.valueOf(hm.get("DisposalDate")),
-//                        String.valueOf(hm.get("Status"))
-//                        ));
-//                }
-//                itemRequest_tbl.setItems(items);
-//            }catch(Exception e){
-//                e.printStackTrace();
-//        }}, Session.SessionThreads); 
-//    }
+
     
     public void fetchItemData(){
         ObservableList<Log1_fullInventoryList> items = FXCollections.observableArrayList();
         Log1_WarehouseItemsModel searchItem = new Log1_WarehouseItemsModel();
-        
-//        CompletableFuture.supplyAsync(() -> {
-//
-//        while(Session.CurrentRoute.equals("log1WM")) {
-//            searchItem.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(row -> {
-//               DummyCount = Long.parseLong(((HashMap) row).get("chk").toString());
-//            });
-//
-//            if(DummyCount != GlobalCount) {
-//                itemRequest_tbl.getItems().clear();
-                List list_coa = searchItem.where(new Object[][]{
-                   {"Status", "=", "Need to Reorder!"}
-                }).get();
 
-        for(Object d : list_coa){
+            List b = searchItem.join
+               (Model.JOIN.INNER, "aerolink.tbl_log1_suppliers", "SupplierID", "=", "SupplierID")
+            .where(new Object[][]{
+                {"Status", "=", "Need to Reorder!"}
+            }).get();
+
+        for(Object d : b){
             HashMap hm = (HashMap) d;
-               items.add(new Log1_fullInventoryList(
+            items.add(new Log1_fullInventoryList(
                         
-                    String.valueOf(hm.get("ItemID")),
-                    String.valueOf(hm.get("SupplierName")),
-                    String.valueOf(hm.get("ItemDescription")),
-                    String.valueOf(hm.get("ItemType")),
-                    String.valueOf(hm.get("ItemLocation")),
-                    String.valueOf(hm.get("ItemUnit")),
-                    String.valueOf(hm.get("UnitPrice")),
-                    String.valueOf(hm.get("StockQuantity")),
-                    String.valueOf(hm.get("CriticalQuantity")),
-                    String.valueOf(hm.get("DisposalDate")),
-                    String.valueOf(hm.get("Status"))
-                    ));
-                }
-                itemRequest_tbl.setItems(items);
-//                GlobalCount = DummyCount;
-//                }
-//                try {
-//                    Thread.sleep(3000);
-//                } catch (InterruptedException ex) {
-//                    Logger.getLogger(PurchaseRequestWarehouseController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//            return 0;
-//        }, Session.SessionThreads);
+                String.valueOf(hm.get("ItemID")),
+                String.valueOf(hm.get("SupplierID")),
+                String.valueOf(hm.get("SupplierName")),
+                String.valueOf(hm.get("ItemDescription")),
+                String.valueOf(hm.get("ItemType")),
+                String.valueOf(hm.get("ItemLocation")),
+                String.valueOf(hm.get("ItemUnit")),
+                String.valueOf(hm.get("UnitPrice")),
+                String.valueOf(hm.get("StockQuantity")),
+                String.valueOf(hm.get("CriticalQuantity")),
+                String.valueOf(hm.get("DisposalDate")),
+                String.valueOf(hm.get("Status"))
+            ));
+        }
+        itemRequest_tbl.setItems(items);
      }        
     
     public void displayItem(){
             item_col1.setCellValueFactory(new PropertyValueFactory<>("ItemDescription"));
             status_ool2.setCellValueFactory(new PropertyValueFactory<>("Status"));
+            Supplier_col.setCellValueFactory(new PropertyValueFactory<>("SupplierName"));
     }
     
     
@@ -242,14 +189,17 @@ public class PurchaseRequestWarehouseController implements Initializable {
                 String[][] coa_table ={
                 
                 {"RequestDescription",itemDescription_txt.getText()},
+                {"SupplierID", supplierID_txt.getText()},
                 {"Requestor",Requestor_txt.getText()},
                 {"RequestorPosition",RequestorPosition_txt.getText()},
                 {"RequestDepartment","Warehouse Department"},
                 {"RequestPriorityLevel",PriorityLevel_txt.getValue()},
                 {"RequestQuantity",Quantity_txt.getText()},
-                {"RequestPrice",totalPrice_txt.getText()},
+                {"RequestPricePerUnit",unitPrice_txt.getText()},
+                {"RequestTotalPrice", totalPrice_txt.getText()},
                 {"RequestDate" ,dateToday_txt.getEditor().getText()},
-                {"RequestStatus","for Approval"}};
+                {"RequestBudget", "No Budget"},
+                {"RequestStatus","On Process"}};
                     if(coa.insert(coa_table)){
                         AlertMaker.showSimpleAlert("Success", "Request to procure "+ itemDescription_txt.getText() +" has been sent");
                         Log1_WarehouseItemsModel wh = new Log1_WarehouseItemsModel();

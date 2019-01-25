@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="visitorpassanchor" prefHeight="339.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Administrative.Visitor_CardController">
+<AnchorPane id="AnchorPane" fx:id="visitorpassanchor" prefHeight="339.0" prefWidth="780.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Administrative.Visitor_CardController">
    <children>
       <Label fx:id="txtdest" alignment="CENTER" layoutX="421.0" layoutY="211.0" prefHeight="37.0" prefWidth="280.0">
          <font>

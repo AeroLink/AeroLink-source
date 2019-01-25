@@ -79,18 +79,6 @@ public class CustomerRelationshipManagementController implements Initializable {
         this.generateTableColumn();
         this.populateTable();
     }
-
-    @FXML
-    private void viewComplaints(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/CRMviewComplaints.fxml"));
-        CRMrootPane.getChildren().setAll(pane);
-    }
-
-    @FXML
-    private void viewReports(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/CRMviewReport.fxml"));
-        CRMrootPane.getChildren().setAll(pane);
-    }
     
     // ito yung mga tablecolumn kasi wala akung nilagay sa tableview dun sa scene
     public void generateTableColumn() {
@@ -175,4 +163,16 @@ public class CustomerRelationshipManagementController implements Initializable {
         });
     }
 
+    @FXML
+    private void viewComplaints(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/CRMviewComplaints.fxml"));
+        CRMrootPane.getChildren().setAll(pane);
+    }
+
+    @FXML
+    private void viewReports(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/CRMviewReport.fxml"));
+        CRMrootPane.getChildren().setAll(pane);
+    }
+    
 }

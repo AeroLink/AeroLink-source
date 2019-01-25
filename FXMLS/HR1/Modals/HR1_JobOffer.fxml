@@ -27,7 +27,7 @@
       <DatePicker fx:id="txtStartDate" layoutX="11.0" layoutY="79.0" prefHeight="25.0" prefWidth="224.0" />
       <Label layoutX="11.0" layoutY="158.0" text="Workplace Location" />
       <TextField fx:id="txtWorkPlace" layoutX="11.0" layoutY="175.0" prefHeight="25.0" prefWidth="224.0" />
-      <Label layoutX="11.0" layoutY="207.0" text="Annual Salary" />
+      <Label layoutX="11.0" layoutY="207.0" text="Monthly Salary" />
       <TextField fx:id="txtAnnualSalary" layoutX="11.0" layoutY="224.0" prefHeight="25.0" prefWidth="224.0" />
       <TitledPane animated="false" collapsible="false" layoutX="255.0" layoutY="62.0" prefHeight="388.0" prefWidth="311.0" text="Duties and Responsibilities" AnchorPane.bottomAnchor="16.0" AnchorPane.topAnchor="62.0">
         <content>
