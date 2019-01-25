@@ -21,14 +21,14 @@
          <items>
             <AnchorPane prefHeight="650.0" prefWidth="1368.0">
                <children>
-                  <AnchorPane layoutY="1.0" prefHeight="40.0" prefWidth="1370.0" styleClass="card" stylesheets="@../../../Assets/css/card.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane prefHeight="40.0" prefWidth="1370.0" styleClass="card" stylesheets="@../../../Assets/css/card.css">
                      <children>
-                        <Label layoutX="586.0" layoutY="-1.0" prefHeight="40.0" prefWidth="207.0" text=" SERVICE NETWORK" textFill="#34a853" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="586.0" AnchorPane.rightAnchor="575.0" AnchorPane.topAnchor="0.0">
+                        <Label layoutX="586.0" layoutY="-1.0" prefHeight="40.0" prefWidth="274.0" text=" SERVICE NETWORK" textFill="#34a853" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="1084.0" AnchorPane.topAnchor="0.0">
                            <font>
                               <Font name="Arial Bold" size="20.0" />
                            </font>
                         </Label>
-                        <JFXButton fx:id="SNviewN" buttonType="RAISED" ellipsisString="" layoutX="1036.0" layoutY="5.0" onAction="#viewN" prefHeight="30.0" prefWidth="150.0" ripplerFill="WHITE" style="-fx-background-color: #34a853;" text="View Branches" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0">
+                        <JFXButton fx:id="SNviewN" buttonType="RAISED" ellipsisString="" layoutX="877.0" layoutY="5.0" onAction="#viewN" prefHeight="30.0" prefWidth="160.0" ripplerFill="WHITE" style="-fx-background-color: #34a853;" text="Branch Management" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0">
                            <graphic>
                               <FontAwesomeIconView fill="WHITE" glyphName="EYE" size="20" />
                            </graphic>
@@ -36,7 +36,7 @@
                               <Font name="Arial" size="12.0" />
                            </font>
                         </JFXButton>
-                        <JFXButton fx:id="SNviewM" buttonType="RAISED" ellipsisString="" layoutX="864.0" layoutY="5.0" onAction="#viewM" prefHeight="30.0" prefWidth="150.0" ripplerFill="WHITE" style="-fx-background-color: #34a853;" text="Monitor Package" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0">
+                        <JFXButton fx:id="SNviewM" buttonType="RAISED" ellipsisString="" layoutX="1048.0" layoutY="5.0" onAction="#viewM" prefHeight="30.0" prefWidth="150.0" ripplerFill="WHITE" style="-fx-background-color: #34a853;" text="Monitor Package" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0">
                            <graphic>
                               <FontAwesomeIconView fill="WHITE" glyphName="DESKTOP" size="20" />
                            </graphic>
@@ -52,15 +52,6 @@
                               <Font name="Arial" size="12.0" />
                            </font>
                         </JFXButton>
-                        <JFXButton fx:id="SNviewL" buttonType="RAISED" ellipsisString="" layoutX="103.0" layoutY="5.0" onAction="#viewL" prefHeight="30.0" prefWidth="150.0" ripplerFill="WHITE" style="-fx-background-color: #34a853;" text="Local" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="5.0">
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="FLAG" size="20" />
-                           </graphic>
-                           <font>
-                              <Font name="Arial" size="12.0" />
-                           </font>
-                        </JFXButton>
-                        <FontAwesomeIconView fill="#34a853" glyphName="GLOBE" layoutX="35.0" layoutY="26.0" size="30" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="5.0" />
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutX="10.0" layoutY="97.0" prefHeight="135.0" prefWidth="1358.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0">
@@ -184,6 +175,14 @@
                      </graphic>
                   </JFXButton>
                   <ComboBox fx:id="cbmType" layoutX="21.0" layoutY="54.0" prefHeight="30.0" prefWidth="200.0" promptText="Select Country" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="55.0" />
+                  <JFXButton fx:id="SNviewL" buttonType="RAISED" ellipsisString="" layoutX="464.0" layoutY="70.0" onAction="#viewL" prefHeight="30.0" prefWidth="150.0" ripplerFill="WHITE" style="-fx-background-color: #34a853;" text="Local" textFill="WHITE" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="55.0">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="FLAG" size="20" />
+                     </graphic>
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </JFXButton>
                </children>
             </AnchorPane>
          </items>

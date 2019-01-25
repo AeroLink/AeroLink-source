@@ -33,9 +33,12 @@ public class SOPviewInspectionGuidelinesController implements Initializable {
         // TODO
     }    
 
+    
+    
+    // mga button sa taas
     @FXML
-    private void packInspect(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/SOPviewPackageInspection.fxml"));
+    private void packagedetails(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/StandardOperationalProcedure.fxml"));
         SOProotPane.getChildren().setAll(pane);
     }
 
@@ -46,8 +49,8 @@ public class SOPviewInspectionGuidelinesController implements Initializable {
     }
 
     @FXML
-    private void prohibited(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/SOPviewProhibited.fxml"));
+    private void packageinspection(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/SOPviewPackageInspection.fxml"));
         SOProotPane.getChildren().setAll(pane);
     }
 }

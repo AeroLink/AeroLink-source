@@ -8,7 +8,6 @@ import FXMLS.Log1.util.AlertMaker;
 import FXMLS.Log1.util.Log1Util;
 import Model.Log1.Log1_WarehouseItemsModel;
 import Synapse.Model;
-import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
@@ -24,9 +23,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -35,51 +38,41 @@ public class WarehouseManagementController implements Initializable {
     long DummyCount = 0;
     long GlobalCount = 0;
     
-    @FXML
     private TableView<Log1_fullInventoryList> ItemWH_tbl;
-    @FXML
     private TableColumn<Log1_fullInventoryList, String> ItemDescript_col2;
-    @FXML
     private TableColumn<Log1_fullInventoryList, String> ItemType_col3;
-    @FXML
     private TableColumn<Log1_fullInventoryList, String> itemLoc_col4;
-    @FXML
     private TableColumn<Log1_fullInventoryList, String> itemUnit_col5;
-    @FXML
     private TableColumn<Log1_fullInventoryList, String> price_col6;
-    @FXML
     private TableColumn<Log1_fullInventoryList, String> Stock_col7;
-    @FXML
     private TableColumn<Log1_fullInventoryList, String> reorderLevle_col8;
-    @FXML
-    private TableColumn<Log1_fullInventoryList, String> disposalDate_col9;
-    @FXML
     private TableColumn<Log1_fullInventoryList, String> status_col11;
-    @FXML
-    private JFXTextField whSearch_txt;
-    @FXML
     private TableColumn<Log1_fullInventoryList, String> supp_col;
+    private TextField whSearch_txt;
+    @FXML
+    private Label itemID_txt;
+    @FXML
+    private Label supplierID_txt;
 
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        callWarehouseItems();
-        displayWarehouseItem();
-        whSearch_txt.setOnKeyReleased(e -> searchItem());
+//        callWarehouseItems();
+//        displayWarehouseItem();
+//        whSearch_txt.setOnKeyReleased(e -> searchItem());
     }
     
     //search functionality
     
     public void searchItem() {
         Log1_WarehouseItemsModel searchItem = new Log1_WarehouseItemsModel(); 
-      //  List b = coa.join(Model.JOIN.INNER, "aerolink.tbl_log_suppliers", "SupplierID", "=", "SupplierID").get();
 
             try{
-            List list_coa = searchItem.join(Model.JOIN.INNER, "aerolink.supplierdummyfromvendorportal", "SupplierID", "=", "SupplierID").where(new Object[][]{
-            {"ItemDescription", "like", "%" + whSearch_txt.getText() + "%"},
-            {"ShowInMainWindow", "=", "yes"}
+            List list_coa = searchItem.join(Model.JOIN.INNER, "aerolink.tbl_log1_suppliers", 
+                    "SupplierID", "=", "SupplierID").where(new Object[][]{
+            {"ItemDescription", "like", "%" + whSearch_txt.getText() + "%"}
             }).get();    
-        ObservableList<Log1_fullInventoryList> items = FXCollections.observableArrayList();
+            ObservableList<Log1_fullInventoryList> items = FXCollections.observableArrayList();
             for(Object d : list_coa)
             {
                 HashMap hm = (HashMap) d;   //exquisite casting
@@ -87,6 +80,7 @@ public class WarehouseManagementController implements Initializable {
                items.add(new Log1_fullInventoryList(
                 
                 String.valueOf(hm.get("ItemID")),
+                String.valueOf(hm.get("SupplierID")),
                 String.valueOf(hm.get("SupplierName")),
                 String.valueOf(hm.get("ItemDescription")),
                 String.valueOf(hm.get("ItemType")),
@@ -108,29 +102,23 @@ public class WarehouseManagementController implements Initializable {
     
     //fetching data
     public void callWarehouseItems(){
-         Log1_WarehouseItemsModel coa = new Log1_WarehouseItemsModel();
-         ObservableList<Log1_fullInventoryList> ItemsXD = FXCollections.observableArrayList();
+        Log1_WarehouseItemsModel coa = new Log1_WarehouseItemsModel();
+        ObservableList<Log1_fullInventoryList> ItemsXD = FXCollections.observableArrayList();
           
-//        CompletableFuture.supplyAsync(() -> {
-//
-//        while(Session.CurrentRoute.equals("log1WM")) {
-//            coa.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(row -> {
-//               DummyCount = Long.parseLong(((HashMap) row).get("chk").toString());
-//            });
 
-//        if(DummyCount != GlobalCount) {
-//            ItemWH_tbl.getItems().clear();
-            List b = coa.join(Model.JOIN.INNER, "aerolink.supplierdummyfromvendorportal", "SupplierID", "=", "SupplierID").where
-            (new Object [][]{
-               {"ShowInMainWindow", "=", "yes"}
-            }).get();
+        List b = coa.join
+            (Model.JOIN.INNER, "aerolink.tbl_log1_suppliers", "SupplierID", "=", "SupplierID").where(new Object[][]{
+            {"ShowInMainWindow", "=", "yes"}
+            }).get(); 
                 
+        
         for(Object d : b){//rs = hm
             
                 HashMap hm = (HashMap) d;   //exquisite casting
                 
                 ItemsXD.add(new Log1_fullInventoryList( 
                     String.valueOf(hm.get("ItemID")),
+                    String.valueOf(hm.get("SupplierID")),
                     String.valueOf(hm.get("SupplierName")),
                     String.valueOf(hm.get("ItemDescription")),
                     String.valueOf(hm.get("ItemType")),
@@ -144,15 +132,6 @@ public class WarehouseManagementController implements Initializable {
                 ));       
             }
                 ItemWH_tbl.setItems(ItemsXD);
-//                GlobalCount = DummyCount;
-//            }
-//                try{
-//                    Thread.sleep(3000);
-//                }catch(InterruptedException ex) {
-//                    Logger.getLogger(WarehouseManagementController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }return 0;
-//        },Session.SessionThreads);
     }
     
     //displaying on table column
@@ -165,7 +144,6 @@ public class WarehouseManagementController implements Initializable {
             price_col6.setCellValueFactory(new PropertyValueFactory<>("UnitPrice"));
             Stock_col7.setCellValueFactory(new PropertyValueFactory<>("StockQuantity"));
             reorderLevle_col8.setCellValueFactory(new PropertyValueFactory<>("CriticalQuantity"));
-            disposalDate_col9.setCellValueFactory(new PropertyValueFactory<>("DisposalDate"));
             status_col11.setCellValueFactory(new PropertyValueFactory<>("Status"));
     }
 
@@ -248,39 +226,41 @@ public class WarehouseManagementController implements Initializable {
         }
     }
 
-    @FXML
     private void handleActivityLogAction(ActionEvent event) {
         Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/WarehouseActivityLog.fxml"),
                  "Activity Log", null);
     }
 
-    @FXML
     private void handleRequestsViewAction(ActionEvent event) {
         Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/ViewRequestItems.fxml"),
                  "Requested items by other department", null);
     }
 
-    @FXML
     private void requestToProcure(ActionEvent event) {
         Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/PurchaseRequestWarehouse.fxml"),
                  "Request to Procurement", null);
     }
 
-    @FXML
     private void handleViewCountReportAction(ActionEvent event) {
         Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/WarehouseCountReport.fxml"),
                  "Count Report", null);
     }
 
-    @FXML
     private void showRequestedStocks(ActionEvent event) {
         Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/ViewRequestedStocks.fxml"),
                  "Requested Stocks", null);
     }
 
-    @FXML
-    private void RequestItemAction(ActionEvent event) {
+    private void RequestItemOnWarehouseAction(ActionEvent event) {
         Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/RequestItemsOnWarehouse.fxml"),
                  "Requested Items", null);
+    }
+
+    @FXML
+    private void selectItemToProcure(MouseEvent event) {
+    }
+
+    @FXML
+    private void quantityTimesPrice(KeyEvent event) {
     }
 }

@@ -32,13 +32,11 @@ public class AddBuildingController implements Initializable {
     
     private boolean ifForUpdate = false;
 
-    @FXML
     private TextArea buildingAddress_txt;
     @FXML
     private TextField buildingName_txt;
     @FXML
     private TextField buildingContact_txt;
-    @FXML
     private TextField buldingArea_txt;
     @FXML
     private TextField yearBuilt_txt;
@@ -48,7 +46,6 @@ public class AddBuildingController implements Initializable {
     private JFXButton cancel_btn;
     @FXML
     private TextField buildingID_txt;
-    @FXML
     private ComboBox buildingType_combox;
 
     /**
@@ -57,10 +54,10 @@ public class AddBuildingController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        save_btn.setOnMouseClicked(e -> saveBuilding());
-        cancel_btn.setOnMouseClicked(e -> closeAction());
-        loadBuildingToCombox();
-        buildingType_combox.setValue("Select Building Type");
+//        save_btn.setOnMouseClicked(e -> saveBuilding());
+//        cancel_btn.setOnMouseClicked(e -> closeAction());
+//        loadBuildingToCombox();
+//        buildingType_combox.setValue("Select Building Type");
     }    
     public void saveBuilding(){
         String Name = buildingName_txt.getText();
@@ -147,7 +144,6 @@ public class AddBuildingController implements Initializable {
         }
     }
 
-    @FXML
     private void setBuildingTypeAction(ActionEvent event) {
         Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/AssetManagement/Modal/SetBuildingType.fxml"),
                  "Add Building Type", null);

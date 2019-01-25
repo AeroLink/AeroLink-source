@@ -5,7 +5,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ContextMenu?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
@@ -32,7 +31,7 @@
                                     <Font name="Arial Bold" size="20.0" />
                                  </font>
                               </Label>
-                              <JFXButton fx:id="SRviewRD" buttonType="RAISED" ellipsisString="" layoutX="1048.0" layoutY="5.0" onAction="#viewRD" prefHeight="30.0" prefWidth="150.0" ripplerFill="WHITE" style="-fx-background-color: #34a853;" text="Rate Dashboard" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+                              <JFXButton fx:id="SRviewRD" buttonType="RAISED" ellipsisString="" layoutX="1048.0" layoutY="5.0" onAction="#viewRD" prefHeight="30.0" prefWidth="170.0" ripplerFill="WHITE" style="-fx-background-color: #34a853;" text="RATE DASHBOARD" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
                                  <graphic>
                                     <FontAwesomeIconView fill="WHITE" glyphName="DASHBOARD" size="20" />
                                  </graphic>
@@ -40,9 +39,17 @@
                                     <Font name="Arial" size="12.0" />
                                  </font>
                               </JFXButton>
+                              <JFXButton buttonType="RAISED" ellipsisString="" layoutX="1007.0" layoutY="7.0" onAction="#viewAS" prefHeight="30.0" prefWidth="170.0" ripplerFill="WHITE" style="-fx-background-color: #34a853;" text="AIRLINE SCHEDULE" textFill="WHITE" AnchorPane.topAnchor="5.0">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="PLANE" onDragDetected="#viewAS" size="20" />
+                                 </graphic>
+                                 <font>
+                                    <Font name="Arial" size="12.0" />
+                                 </font>
+                              </JFXButton>
                            </children>
                         </AnchorPane>
-                        <TableView layoutX="227.0" layoutY="124.0" prefHeight="614.0" prefWidth="1148.0" AnchorPane.bottomAnchor="-48.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="124.0">
+                        <TableView layoutX="227.0" layoutY="124.0" prefHeight="614.0" prefWidth="1148.0" AnchorPane.bottomAnchor="-48.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="124.0">
                           <columns>
                             <TableColumn prefWidth="75.0" text="SLOT NO." />
                             <TableColumn prefWidth="75.0" text="PACKAGE NO." />
@@ -67,39 +74,7 @@
                               </ContextMenu>
                            </contextMenu>
                         </TableView>
-                        <VBox layoutX="10.0" layoutY="175.0" prefHeight="219.0" prefWidth="200.0" AnchorPane.leftAnchor="10.0">
-                           <children>
-                              <AnchorPane prefHeight="244.0" prefWidth="200.0">
-                                 <children>
-                                    <ComboBox layoutY="-2.0" prefHeight="30.0" prefWidth="200.0" promptText="Service" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                                       <padding>
-                                          <Insets top="10.0" />
-                                       </padding>
-                                    </ComboBox>
-                                    <ComboBox layoutY="43.0" prefHeight="30.0" prefWidth="200.0" promptText="Airline" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                                       <padding>
-                                          <Insets top="10.0" />
-                                       </padding>
-                                    </ComboBox>
-                                    <ComboBox layoutY="87.0" prefHeight="30.0" prefWidth="200.0" promptText="Origin" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                                       <padding>
-                                          <Insets top="10.0" />
-                                       </padding>
-                                    </ComboBox>
-                                    <ComboBox layoutY="131.0" prefHeight="30.0" prefWidth="200.0" promptText="Destination" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                                       <padding>
-                                          <Insets top="10.0" />
-                                       </padding>
-                                    </ComboBox>
-                                    <ComboBox layoutY="175.0" prefHeight="30.0" prefWidth="200.0" promptText="Status">
-                                       <padding>
-                                          <Insets top="10.0" />
-                                       </padding>
-                                    </ComboBox>
-                                 </children>
-                              </AnchorPane>
-                           </children>
-                        </VBox>
+                        <VBox layoutX="10.0" layoutY="175.0" prefHeight="219.0" prefWidth="200.0" AnchorPane.leftAnchor="10.0" />
                         <TextField fx:id="srSearch" layoutX="52.0" layoutY="66.0" prefHeight="37.0" prefWidth="312.0" promptText="Search">
                            <font>
                               <Font size="15.0" />
@@ -117,7 +92,16 @@
                               <Font name="System Italic" size="14.0" />
                            </font>
                         </Label>
-                        <DatePicker layoutX="10.0" layoutY="125.0" prefHeight="36.0" prefWidth="200.0" promptText="Date" />
+                        <ComboBox fx:id="cbbFilter" layoutX="369.0" layoutY="66.0" onAction="#cbbMainFilter" prefHeight="30.0" prefWidth="200.0">
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                        </ComboBox>
+                        <ComboBox fx:id="cbbShowFilter" layoutX="580.0" layoutY="67.0" prefHeight="30.0" prefWidth="200.0">
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                        </ComboBox>
                      </children>
                   </AnchorPane>
                </content>

@@ -5,25 +5,25 @@
  */
 package FXMLS.FINANCIAL;
 
-import FXMLS.FINANCIAL.CLASSFILES.FINANCIAL_DR_CLASSFILE;
-import FXMLS.FINANCIAL.CLASSFILES.FINANCIAL_DVR_CLASSFILE;
+import FXMLS.FINANCIAL.CLASSFILES.Disbursement_Voucher_classfile;
+import FXMLS.FINANCIAL.CLASSFILES.Disbursement_request_classfile;
+import Model.Financial.Financial_budget_request;
 import Model.Financial.Financial_disbursement_request_model;
-
-import Model.Financial.Financial_voucher_model;
+import Model.Financial.Financial_disbursement_voucher;
 import Synapse.Session;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -31,7 +31,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.TextArea;
 import javafx.stage.StageStyle;
 
 /**
@@ -41,330 +41,377 @@ import javafx.stage.StageStyle;
  */
 public class FINANCIAL_DISBURSEMENTController implements Initializable {
 
-    @FXML private TableView<FINANCIAL_DR_CLASSFILE> dr_tbl;
-    @FXML private DatePicker drequest;
-    @FXML private JFXTextField dept_txt;
-    @FXML private JFXTextField amnt_txt;
-    @FXML private Label stat_lbl;
-    
-    @FXML private JFXComboBox<String> vt_cmbobx;
-    @FXML private JFXTextField clmnt_txt;
-    @FXML private JFXTextField org_txt;
-    @FXML private DatePicker drelease;
-        @FXML private JFXButton save_voucher_btn;
+    @FXML
+    private TableView<Disbursement_request_classfile> disbursement_tbl;
+    @FXML
+    private Label daterequest_label;
+    @FXML
+    private Label department_label;
+    @FXML
+    private Label claimant_label;
+    @FXML
+    private TextArea description_txtarea;
+    @FXML
+    private Label amount_label;
+    @FXML
+    private JFXButton dv_btn;
+    @FXML
+    private Label reqno_label;
+    @FXML
+    private Label prioritylvl_label;
+    @FXML
+    private Label status_label;
+    @FXML
+    private Label dr_id_label;
+    @FXML
+    private TableView<Disbursement_Voucher_classfile> dv_tbl;
+    @FXML
+    private JFXTextField srch_name_txt;
+    @FXML
+    private DatePicker srch_date;
 
-    ObservableList<String> voucher = FXCollections.observableArrayList("New", "Regular");
-    @FXML
-    private TableView<FINANCIAL_DVR_CLASSFILE> dvr_tbl;
-    @FXML
-    private JFXTextField SearchDVR;
-    @FXML
-    private JFXComboBox<String> cmbobxDvr;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        cmbobxDvr.setItems(voucher);
-        vt_cmbobx.setItems(voucher);
-        save_voucher_btn.setOnMouseClicked(e -> saveBtn());
-        SearchDVR.setOnKeyTyped(e -> searchdvr());
+        // TODO
+       // srch_date.setOnAction(e ->srchDate());
+        //srch_name_txt.setOnKeyTyped(e -> srch());
+        dv_btn.setOnMouseClicked(e -> disburseBtn());
+        
+        loadtable_disbursementrequest();
+        AddtableColumn_disbursementrequest();
+        
+        AddtableColumn_disbursementVoucher();
+        loadDisbursementVoucher();
         
         
-        showDR();
-        loadDR();
+        disbursement_tbl.setOnMouseClicked(e ->{
+        Disbursement_request_classfile drc = disbursement_tbl.getSelectionModel().getSelectedItem();
+        dr_id_label.setText(drc.getDr_id());
+        reqno_label.setText(drc.getRequestno());
+        daterequest_label.setText(drc.getDatereq());
+        department_label.setText(drc.getDepartment());
+        claimant_label.setText(drc.getReqname());
+        description_txtarea.setText(drc.getDescription());
+        amount_label.setText(drc.getAmount());
+        prioritylvl_label.setText(drc.getPriority_level());
+        status_label.setText(drc.getDisbursementStatus());
         
-        showDVR();
-        loadDVR();
-        dr_tbl.setOnMouseClicked(e -> {
-        FINANCIAL_DR_CLASSFILE cc = dr_tbl.getSelectionModel().getSelectedItem();
-       
- 
-        drequest.getEditor().setText(cc.getDisburse_date_request());
-        dept_txt.setText(cc.getDisburse_department());
-        amnt_txt.setText(cc.getDisburse_amount());
-        stat_lbl.setText(cc.getDisburse_description());
+        dv_btn.setDisable(false);
         
         
-              });
+            
+        });
+        
     }    
-      
-   private void searchRequestor(List requestor) {
+    /*
+     public void srchDate(){
+        Financial_disbursement_voucher fvm1 = new Financial_disbursement_voucher(); 
 
-        dvr_tbl.getItems().clear();
-
-        ObservableList<FINANCIAL_DVR_CLASSFILE> fdrc = FXCollections.observableArrayList();
-
-        try {
-             
-            for(Object d : requestor)
-            {
-                HashMap hm = (HashMap) d;   //exquisite casting
-                
-                hm.get("drv_date_req");
-                hm.get("drv_requestor");
-                hm.get("dr_amount");
-                hm.get("dr_department");
-                hm.get("drv_vt");
-                hm.get("drv_claimant");
-                hm.get("drv_organization");
-                hm.get("drv_date_rel");
-                
-               fdrc.add(new FINANCIAL_DVR_CLASSFILE(
-                String.valueOf(hm.get("drv_id")),
-                String.valueOf(hm.get("drv_date_req")),
-                String.valueOf(hm.get("drv_requestor")),
-                String.valueOf(hm.get("drv_amount")),
-                String.valueOf(hm.get("drv_department")),
-                String.valueOf(hm.get("drv_vt")),
-                String.valueOf(hm.get("drv_claimant")),
-                String.valueOf(hm.get("drv_organization")),
-                String.valueOf(hm.get("drv_date_rel"))
-                ) );   
-
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-        dvr_tbl.setItems(fdrc);
-
-    }
- 
-    public void searchdvr(){
-        
-        
-       Financial_voucher_model fvm = new Financial_voucher_model(); 
-
-    String SearchText = SearchDVR.getText().equals("") ? "[a-z]" : SearchDVR.getText();
+    //String SearchText = searchno.getText().equals("") ? "[a-z]" : searchno.getText();
         
         try {
 
-            List listreq = fvm.where(new Object[][]{
-                {"drv_requestor", "Like", "%"+SearchText+"%"}
+            List listrec = fvm1.where(new Object[][]{
+                {"dv_date_released","like", "%" + srch_date.getValue() + "%"}
             }).get();
 
-            searchRequestor(listreq);
+            //VoucherRecord(listrec);
      
         } catch (Exception e) {
             System.out.println(e);
         }
-
-    }
+    }*/
+    /*
     
-    
-     //Disbursement Voucher Record Module
-     public void showDVR(){
-    
-        dvr_tbl.getItems().clear();
-        dvr_tbl.getColumns().removeAll(dvr_tbl.getColumns());
+    public void srch(){
+           dv_tbl.getItems().clear();
+        Financial_disbursement_voucher fvm = new Financial_disbursement_voucher(); 
 
-        TableColumn<FINANCIAL_DVR_CLASSFILE, String> dreq = new TableColumn<>("Date Request");
-        TableColumn<FINANCIAL_DVR_CLASSFILE, String> de = new TableColumn<>("Department");
-       // TableColumn<FINANCIAL_DVR_CLASSFILE, String> re = new TableColumn<>("Requestor");
-        TableColumn<FINANCIAL_DVR_CLASSFILE, String> amn = new TableColumn<>("Amount");
-        TableColumn<FINANCIAL_DVR_CLASSFILE, String> vt = new TableColumn<>("Voucher Type");
-        TableColumn<FINANCIAL_DVR_CLASSFILE, String> cl = new TableColumn<>("Claimant");
-        TableColumn<FINANCIAL_DVR_CLASSFILE, String> or = new TableColumn<>("Organization");
-        TableColumn<FINANCIAL_DVR_CLASSFILE, String> drel = new TableColumn<>("Date Release");
-
+    String SearchText = srch_name_txt.getText().equals("") ? "[a-z]" : srch_name_txt.getText();
         
-        dreq.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_DVR_CLASSFILE, String> param) -> param.getValue().dvrDatereq);
-        de.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_DVR_CLASSFILE, String> param) -> param.getValue().dvrDepartment);
-        //re.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_DVR_CLASSFILE, String> param) -> param.getValue().dvrRequestor);
-        amn.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_DVR_CLASSFILE, String> param) -> param.getValue().dvrAmount);
-        vt.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_DVR_CLASSFILE, String> param) -> param.getValue().dvrVt);
-        cl.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_DVR_CLASSFILE, String> param) -> param.getValue().dvrClaimant);
-        or.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_DVR_CLASSFILE, String> param) -> param.getValue().dvrOrganization);
-        drel.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_DVR_CLASSFILE, String> param) -> param.getValue().dvrDateRelease);
-        
-        dvr_tbl.getColumns().addAll(dreq,de,amn,vt,cl,or,drel);
-    }
-    
+        try {
+
+            List listrec = fvm.where(new Object[][]{
+                {"dv_claimant","like", "%" + SearchText + "%"}
+            }).get();
+
+            VoucherRecord(listrec);
      
-      public void loadDVR(){
-         Financial_voucher_model fdrvm = new Financial_voucher_model();
-         ObservableList<FINANCIAL_DVR_CLASSFILE> fdrc = FXCollections.observableArrayList();
-          
-            List b = fdrvm.get();
-            
-            for(Object d : b)
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+          dv_tbl.setItems(dvc);
+    }
+    */
+    public void AddtableColumn_disbursementVoucher(){
+        dv_tbl.getItems().clear();
+        dv_tbl.getColumns().removeAll(dv_tbl.getColumns());
+        
+        TableColumn<Disbursement_Voucher_classfile, String> dreq = new TableColumn<>("Date Request");
+        TableColumn<Disbursement_Voucher_classfile, String> de = new TableColumn<>("Department");
+        TableColumn<Disbursement_Voucher_classfile, String> des = new TableColumn<>("Description");
+        TableColumn<Disbursement_Voucher_classfile, String> c = new TableColumn<>("Claimant");
+        TableColumn<Disbursement_Voucher_classfile, String> a = new TableColumn<>("Amount");
+        TableColumn<Disbursement_Voucher_classfile, String> rb = new TableColumn<>("Received By.");
+        TableColumn<Disbursement_Voucher_classfile, String> drel = new TableColumn<>("Date Released");
+       
+        dreq.setCellValueFactory((TableColumn.CellDataFeatures<Disbursement_Voucher_classfile, String> param) -> param.getValue().dvdreq);
+        de.setCellValueFactory((TableColumn.CellDataFeatures<Disbursement_Voucher_classfile, String> param) -> param.getValue().dvdep);
+        des.setCellValueFactory((TableColumn.CellDataFeatures<Disbursement_Voucher_classfile, String> param) -> param.getValue().dvdes);
+        c.setCellValueFactory((TableColumn.CellDataFeatures<Disbursement_Voucher_classfile, String> param) -> param.getValue().dvclaimant);
+        a.setCellValueFactory((TableColumn.CellDataFeatures<Disbursement_Voucher_classfile, String> param) -> param.getValue().dvamount);
+        rb.setCellValueFactory((TableColumn.CellDataFeatures<Disbursement_Voucher_classfile, String> param) -> param.getValue().dvreceivedby);
+        drel.setCellValueFactory((TableColumn.CellDataFeatures<Disbursement_Voucher_classfile, String> param) -> param.getValue().dvdatereleased);
+        
+        dv_tbl.getColumns().addAll(dreq,de,des,c,a,rb,drel);
+    
+    }
+    
+    ObservableList<Disbursement_Voucher_classfile> dvc = FXCollections.observableArrayList();
+    Financial_disbursement_voucher fdv = new Financial_disbursement_voucher();
+    public void loadDisbursementVoucher(){
+         CompletableFuture.supplyAsync(() -> {
+
+            while (Session.CurrentRoute.equals("id_disbursement")) {
+                
+                try {
+                    fdv.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
+                        DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
+                    });
+
+                    if (DummyCount != GlobalCount) {
+
+                        dv_tbl.getItems();
+                            List b = fdv.get("budget_date_req as budget_date_req",
+                                    "dv_department as dv_department",
+                                    "dv_description as dv_description",
+                                    "dv_claimant as dv_claimant",
+                                    "dv_amount as dv_amount",
+                                    "dv_received_by as dv_received_by",
+                                    "CONCAT(dv_disbursed_status, ' - ', dv_date_released) as dv_date_released");
+                            VoucherRecord(b);
+                     {
+                         
+                    }
+                    dv_tbl.setItems(dvc);
+                        GlobalCount = DummyCount;
+                    }
+                    Thread.sleep(3000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(FINANCIAL_BUDGET_MANAGEMENTController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            return 0;
+        }, Session.SessionThreads);
+
+     
+    }
+    
+    private void VoucherRecord(List voucher){
+         dv_tbl.getItems().clear();
+
+        try {
+             
+              for(Object d : voucher)
             {
-                HashMap hm = (HashMap) d;   //exquisite casting
+                HashMap hm = (HashMap) d; 
+                //exquisite casting
+                hm.get("budget_date_req");
+                hm.get("dv_department");
+                hm.get("dv_description");
+                hm.get("dv_claimant");
+                hm.get("dv_amount");
+                hm.get("dv_received_by");
+                hm.get("dv_date_released");
                 
-                hm.get("drv_date_req");
-                hm.get("drv_requestor");
-                hm.get("dr_amount");
-                hm.get("dr_department");
-                hm.get("drv_vt");
-                hm.get("drv_claimant");
-                hm.get("drv_organization");
-                hm.get("drv_date_rel");
-                
-               fdrc.add(new FINANCIAL_DVR_CLASSFILE(
-                
-                String.valueOf(hm.get("drv_id")),
-                String.valueOf(hm.get("drv_date_req")),
-                String.valueOf(hm.get("drv_requestor")),
-                String.valueOf(hm.get("drv_amount")),
-                String.valueOf(hm.get("drv_department")),
-                String.valueOf(hm.get("drv_vt")),
-                String.valueOf(hm.get("drv_claimant")),
-                String.valueOf(hm.get("drv_organization")),
-                String.valueOf(hm.get("drv_date_rel"))
+               dvc.add(new Disbursement_Voucher_classfile(
+                            String.valueOf(hm.get("budget_date_req")),
+                            String.valueOf(hm.get("dv_department")),
+                            String.valueOf(hm.get("dv_description")),
+                            String.valueOf(hm.get("dv_claimant")),
+                            String.valueOf(hm.get("dv_amount")),
+                            String.valueOf(hm.get("dv_received_by")),
+                            String.valueOf(hm.get("dv_date_released"))
                 ) );   
-               
             }
-            dvr_tbl.setItems(fdrc);
-            
-            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        dv_tbl.setItems(dvc);
+
      
-     
-    //Disbursement Request
-    public void saveBtn(){
-            Financial_voucher_model fddr = new Financial_voucher_model();
+    }
+    
+    public void disburseBtn(){
+        
+           Financial_disbursement_request_model fbr = new Financial_disbursement_request_model();
+           Financial_disbursement_voucher fddr = new Financial_disbursement_voucher();
             
            try
-        {
+           {
+                if(fbr.update(new Object[][]{
+                {"dr_status","Disbursed"}})
+                .where(new Object[][]{
+                {"dr_id","=",dr_id_label.getText()}
+                }).executeUpdate())
+                {
+                    
            String[][] dr_table =
         {
-        {"drv_date_req" , drequest.getEditor().getText()},
-        {"drv_requestor" , stat_lbl.getText()},
-        {"drv_amount" , amnt_txt.getText()},
-        {"drv_department" , dept_txt.getText()},
-        {"drv_vt" , vt_cmbobx.getValue()},
-        {"drv_claimant" , clmnt_txt.getText()},
-        {"drv_organization" , org_txt.getText()},
-        {"drv_date_rel" , drelease.getValue().toString()}
+        {"budget_req_no" ,     reqno_label.getText()},
+        {"budget_date_req" ,   daterequest_label.getText()},
+        {"dv_department" ,     department_label.getText()},
+        {"dv_claimant" ,       claimant_label.getText()},
+        {"dv_requestor" ,      claimant_label.getText()},
+        {"dv_description" ,    description_txtarea.getText()},
+        {"dv_priority_level" , prioritylvl_label.getText()},
+        {"dv_amount" ,         amount_label.getText()},
+        {"dv_budget_status" ,  "Approved"},
         };           
            
-        if(fddr.insert(dr_table)){
+                fddr.insert(dr_table);
              Alert alert = new Alert(Alert.AlertType.INFORMATION);
              alert.initStyle(StageStyle.UNDECORATED);
-             alert.setTitle("Saved");
-             alert.setContentText("DATA HAS BEEN SAVE"); 
+             alert.setTitle("Disbursed");
+             alert.setContentText("Request Has Been Disbursed"); 
              alert.showAndWait();
-             vt_cmbobx.setValue(null);
-             org_txt.clear();
-             clmnt_txt.clear();
-             drelease.setValue(null);
-             stat_lbl.setText(null);
-             amnt_txt.clear();
-             dept_txt.clear();
-             drequest.setValue(null);
-             
+               dv_btn.setDisable(true);
+               daterequest_label.setText("");
+               department_label.setText("");
+               claimant_label.setText("");
+               description_txtarea.setText("");
+               amount_label.setText("");
         }else{
-              Alert alert = new Alert(Alert.AlertType.ERROR);
+             Alert alert = new Alert(Alert.AlertType.ERROR);
              alert.initStyle(StageStyle.UNDECORATED);
              alert.setTitle("ERROR");
-             alert.setContentText("PLEASE FILL THE EMPTY FIELDS"); 
+             alert.setContentText("Disbursement Failed"); 
              alert.showAndWait();
         }
                                        
             }catch(Exception e)
                {
             e.printStackTrace();
-               }
-        showDVR();
-        loadDVR();
-            // show1();     
-            //dr_tbl.getItems().remove(0,1);  
+               }    
+           
     }
-  
-     public void showDR(){
     
-        dr_tbl.getItems().clear();
-        dr_tbl.getColumns().removeAll(dr_tbl.getColumns());
-
-        TableColumn<FINANCIAL_DR_CLASSFILE, String> de = new TableColumn<>("Department");
-        TableColumn<FINANCIAL_DR_CLASSFILE, String> na = new TableColumn<>("Name");
-        TableColumn<FINANCIAL_DR_CLASSFILE, String> am = new TableColumn<>("Amount");
-        TableColumn<FINANCIAL_DR_CLASSFILE, String> dr = new TableColumn<>("Date Request");
-
+    
+     public void AddtableColumn_disbursementrequest(){
         
-        de.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_DR_CLASSFILE, String> param) -> param.getValue().disburseDepartment);
-        na.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_DR_CLASSFILE, String> param) -> param.getValue().disburseDescription);
-        am.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_DR_CLASSFILE, String> param) -> param.getValue().disburseAmount);
-        dr.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_DR_CLASSFILE, String> param) -> param.getValue().disburseDateRequest);
-
-        dr_tbl.getColumns().addAll(de,na,am,dr);
+        disbursement_tbl.getItems().clear();
+        disbursement_tbl.getColumns().removeAll(disbursement_tbl.getColumns());
+        
+        
+        TableColumn<Disbursement_request_classfile, String> drreqno = new TableColumn<>("Request No");
+        TableColumn<Disbursement_request_classfile, String> drdatereq = new TableColumn<>("Date Request");
+        TableColumn<Disbursement_request_classfile, String> drrequestor = new TableColumn<>("Requestor");
+        TableColumn<Disbursement_request_classfile, String> drdep = new TableColumn<>("Department");
+        TableColumn<Disbursement_request_classfile, String> drdes = new TableColumn<>("Description");
+        TableColumn<Disbursement_request_classfile, String> dramnt = new TableColumn<>("Amount");
+        TableColumn<Disbursement_request_classfile, String> drstat = new TableColumn<>("Status");
+       
+        
+        drreqno.setCellValueFactory((TableColumn.CellDataFeatures<Disbursement_request_classfile, String> param) -> param.getValue().drReqno);
+        drdatereq.setCellValueFactory((TableColumn.CellDataFeatures<Disbursement_request_classfile, String> param) -> param.getValue().drDatereq);
+        drrequestor.setCellValueFactory((TableColumn.CellDataFeatures<Disbursement_request_classfile, String> param) -> param.getValue().drReqname);
+        drdep.setCellValueFactory((TableColumn.CellDataFeatures<Disbursement_request_classfile, String> param) -> param.getValue().drDepartment);
+        drdes.setCellValueFactory((TableColumn.CellDataFeatures<Disbursement_request_classfile, String> param) -> param.getValue().drDescription);
+        dramnt.setCellValueFactory((TableColumn.CellDataFeatures<Disbursement_request_classfile, String> param) -> param.getValue().drAmount);
+        drstat.setCellValueFactory((TableColumn.CellDataFeatures<Disbursement_request_classfile, String> param) -> param.getValue().drdisbursementStatus);
+        
+        disbursement_tbl.getColumns().addAll(drreqno,drdatereq,drrequestor,drdep,drdes,dramnt,drstat);
+    
     }
     
-    long DummyCount = 0;
-    long GlobalCount = 0;
-    Financial_disbursement_request_model fba = new Financial_disbursement_request_model();
-    ObservableList<FINANCIAL_DR_CLASSFILE> fdr = FXCollections.observableArrayList();
+    
+     long DummyCount = 0;
+     long GlobalCount = 0;
+     int Global_Count = 0;
+     ExecutorService e = Executors.newFixedThreadPool(1);   
+    ObservableList<Disbursement_request_classfile> brc = FXCollections.observableArrayList();
+    Financial_disbursement_request_model drm = new Financial_disbursement_request_model();
     
     
-     public void loadDR(){
-        CompletableFuture.supplyAsync(() -> {
+    public void loadtable_disbursementrequest(){
+        
+          CompletableFuture.supplyAsync(() -> {
 
             while (Session.CurrentRoute.equals("id_disbursement")) {
-                fba.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(row -> {
-                    DummyCount = Long.parseLong(((HashMap) row).get("chk").toString());
-                });
-
-                if (DummyCount != GlobalCount) {
-
-                    dr_tbl.getItems().clear();
-                    List b = fba.get();
-
-                    for(Object d : b)
-            {
-                HashMap hm = (HashMap) d;   //exquisite casting
-                
-                hm.get("disburse_id");
-                hm.get("disburse_datesend");
-                hm.get("disburse_date_req");
-                hm.get("disburse_department");
-                
-               fdr.add(new FINANCIAL_DR_CLASSFILE(
-                            String.valueOf(hm.get("disburse_id")),
-                            String.valueOf(hm.get("disburse_datesend")),
-                            String.valueOf(hm.get("disburse_date_req")),
-                            String.valueOf(hm.get("disburse_department")),
-                            String.valueOf(hm.get("disburse_requestor")),
-                            String.valueOf(hm.get("diburse_description")),
-                            String.valueOf(hm.get("disburse_prioritylvl")),
-                            String.valueOf(hm.get("disburse_amount")),
-                            String.valueOf(hm.get("disburse_status"))
-                ) );   
-               
-
-                    }
-                    dr_tbl.setItems(fdr);
-                    GlobalCount = DummyCount;
-                }
                 
                 try {
+                    drm.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
+                        DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
+                    });
+
+                    if (DummyCount != GlobalCount) {
+
+                        disbursement_tbl.getItems();
+                            List b = drm.where(new Object[][]{
+                             {"dr_status","=","Pending"}
+                    }).get();
+                            request(b);
+                            
+                     {
+                         
+                    }
+                    disbursement_tbl.setItems(brc);
+                        GlobalCount = DummyCount;
+                    }
                     Thread.sleep(3000);
                 } catch (InterruptedException ex) {
-                    Logger.getLogger(FINANCIAL_DISBURSEMENTController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(FINANCIAL_BUDGET_MANAGEMENTController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
             return 0;
         }, Session.SessionThreads);
-    
+
      }
-
-    @FXML
-    private void cbxdvr(ActionEvent event) {
-          Financial_voucher_model fvm = new Financial_voucher_model(); 
-
-    //    String SearchText = SearchDVR.getText().equals("") ? "[a-z]" : SearchDVR.getText();
-        
-        try {
-
-            List listreq = fvm.where(new Object[][]{
-                {"drv_vt", "=", cmbobxDvr.getSelectionModel().getSelectedItem().toString()}
-            }).get();
-
-            searchRequestor(listreq);
      
+     private void request(List req){
+         
+        disbursement_tbl.getItems().clear();
+        ObservableList<Disbursement_request_classfile> fdrc = FXCollections.observableArrayList();
+
+        try {
+             
+              for(Object d : req)
+            {
+                HashMap hm = (HashMap) d; 
+                //exquisite casting
+                 hm.get("dr_id");
+                hm.get("dr_requestno");
+                hm.get("dr_daterequest");
+                hm.get("dr_department");
+                hm.get("dr_requestor");
+                hm.get("dr_description");
+                hm.get("dr_prioritylvl");
+                hm.get("dr_amount");
+                hm.get("dr_status");
+                
+               brc.add(new Disbursement_request_classfile(
+                            String.valueOf(hm.get("dr_id")),
+                            String.valueOf(hm.get("dr_requestno")),
+                            String.valueOf(hm.get("dr_daterequest")),
+                            String.valueOf(hm.get("dr_requestor")),
+                            String.valueOf(hm.get("dr_department")),
+                            String.valueOf(hm.get("dr_description")),
+                            String.valueOf(hm.get("dr_prioritylvl")),
+                            String.valueOf(hm.get("dr_amount")),
+                            String.valueOf(hm.get("dr_status"))
+                ) );   
+            }
         } catch (Exception e) {
             System.out.println(e);
         }
 
-    }
+        disbursement_tbl.setItems(fdrc);
+
+     }
 }

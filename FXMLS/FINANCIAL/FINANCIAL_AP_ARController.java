@@ -5,24 +5,32 @@
  */
 package FXMLS.FINANCIAL;
 
-import FXMLS.FINANCIAL.CLASSFILES.FINANCIAL_COA_CLASSFILE;
-import Model.Financial.Financial_coa_model;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTextField;
+import FXMLS.FINANCIAL.CLASSFILES.AP_classfile;
+import FXMLS.FINANCIAL.CLASSFILES.AR_classfile;
+import FXMLS.FINANCIAL.CLASSFILES.Budget_Request_classfile;
+import Model.Financial.Financial_budget_request;
+import Model.Financial.Financial_disbursement_request_model;
+import Synapse.Session;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import javafx.beans.Observable;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.IntegerBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -32,158 +40,211 @@ import javafx.stage.StageStyle;
 public class FINANCIAL_AP_ARController implements Initializable {
 
     @FXML
-    private TableView<FINANCIAL_COA_CLASSFILE> coa_tbl;
-    
-    
-    private JFXComboBox<String> cdno_cmbbx;
-    private JFXTextField account_title;
-
-    
-      ObservableList<String> coaObs = FXCollections.observableArrayList("Cash",  "Petty Cash", "Supplies",
-                                                                        "Prepaid Insurance","Sales","Advertising Expense",
-                                                                        "Insurance Expense","Repair Expense","Utilities Expense",
-                                                                        "Office Equipment");
-    @FXML private JFXButton saveCoa_btn;
-    @FXML private JFXButton updateCoa_btn;
-    @FXML private JFXComboBox<String> account_title_cmbobx;
-    @FXML private JFXTextField codeno_txt;
+    private TableView<AP_classfile> ap_tbl;
     @FXML
-    private Label label_id;
+    private TableColumn<AP_classfile, String> amount_id;
+
     /**
      * Initializes the controller class.
      */
+
+
+    @FXML
+    private Label total_label;
+    @FXML
+    private TableView<AR_classfile> ar_tbl;
+    
+    
+     double total = 0;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       showCoa();
-       loadDataCOA();
-       
-       saveCoa_btn.setOnMouseClicked(e -> saveCoa());
-         updateCoa_btn.setOnMouseClicked(e -> updateBRR());
-        account_title_cmbobx.setItems(coaObs);
-        coa_tbl.setOnMouseClicked(e -> {
-        FINANCIAL_COA_CLASSFILE cc = coa_tbl.getSelectionModel().getSelectedItem();
+        // TODO
         
-        label_id.setText(cc.getCoa_id());
-        account_title_cmbobx.setValue(cc.getAcc_title());
-        codeno_txt.setText(cc.getCode_no());
-        updateCoa_btn.setDisable(false);
-              });
-    }    
+        AddtableColumn_AP();    
+        loadtable_ap();
+ 
+        //total_label.setText(String.valueOf(TotalLabel()));
+        
+        AddtableColumn_AR();
+    }   
     
-    public void updateBRR(){
-          Financial_coa_model fcm = new Financial_coa_model();
-    try{
-    if(fcm.update(new Object[][]{
-       {"code_no",codeno_txt.getText()},
-       {"acc_title",account_title_cmbobx.getValue().toString()}
-    }).where(new Object[][]{
-        {"coa_id","=",label_id.getText()}
-    }).executeUpdate()){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-             alert.initStyle(StageStyle.UNDECORATED);
-             alert.setTitle("Saved");
-             alert.setContentText("UPDATED"); 
-             alert.showAndWait();
-             codeno_txt.clear();
-             account_title_cmbobx.setValue(null);
-             updateCoa_btn.setDisable(true);
-    }else{
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-             alert.initStyle(StageStyle.UNDECORATED);
-             alert.setTitle("Error");
-             alert.setContentText("FAIL"); 
-             alert.showAndWait();
-    }
-    }catch(Exception e){
-        e.printStackTrace();
-    }
-     showCoa();
-     loadDataCOA();
     
-    }
+    
+    
+    
+   public void Loadtable_Ar(){
+       CompletableFuture.supplyAsync(() -> {
 
+            while (Session.CurrentRoute.equals("id_apr")) {
+                
+                try {
+                    fbr.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
+                        DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
+                    });
+
+                    if (DummyCount != GlobalCount) {
+
+                            ap_tbl.getItems();
+                            List b = fbr.where("dr_status","=","Pending").get();
+                           
+                            request(b);
+                            total_label.setText(String.valueOf(fbr.where("dr_status","=","Pending").get("sum(dr_amount)")));
+                    // total_label.setText(String.valueOf(fbr.where("dr_status","=","Pending").get("sum(dr_amount)")));
+                             
+                     {
+                       
+                         
+                    }
+                    ap_tbl.setItems(brc);
+                        GlobalCount = DummyCount;
+                    }
+                    Thread.sleep(3000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(FINANCIAL_BUDGET_MANAGEMENTController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            return 0;
+        }, Session.SessionThreads);
+       
+       
+   }
+  
+    public void AddtableColumn_AR(){
+        ar_tbl.getItems().clear();
+        ar_tbl.getColumns().removeAll(ar_tbl.getColumns());
+        
+        TableColumn<AR_classfile, String> d = new TableColumn<>("Date");
+        TableColumn<AR_classfile, String> in = new TableColumn<>("Invoice No.");
+        TableColumn<AR_classfile, String> des = new TableColumn<>("Description");
+        TableColumn<AR_classfile, String> am = new TableColumn<>("Amount");
+        TableColumn<AR_classfile, String> st = new TableColumn<>("Status");
+       
+        d.setCellValueFactory((TableColumn.CellDataFeatures<AR_classfile, String> param) -> param.getValue().arDate);
+        in.setCellValueFactory((TableColumn.CellDataFeatures<AR_classfile, String> param) -> param.getValue().arInvoiceno);
+        des.setCellValueFactory((TableColumn.CellDataFeatures<AR_classfile, String> param) -> param.getValue().arDescription);
+        am.setCellValueFactory((TableColumn.CellDataFeatures<AR_classfile, String> param) -> param.getValue().arAmount);
+        st.setCellValueFactory((TableColumn.CellDataFeatures<AR_classfile, String> param) -> param.getValue().arStatus);
+        
+        ar_tbl.getColumns().addAll(d,in,des,am,st);
+    }
     
-      public void saveCoa(){
-           
-            Financial_coa_model coa = new Financial_coa_model();
-            
-          try
-        {
-           String[][] coa_table =
-        {
-        {"code_no" , codeno_txt.getText()},
-        {"acc_title" , account_title_cmbobx.getValue()}
-        };           
-           
-           
-        if(coa.insert(coa_table)){
-         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-             alert.initStyle(StageStyle.UNDECORATED);
-             alert.setTitle("Saved");
-             alert.setContentText("DATA HAS BEEN SAVE"); 
-             alert.showAndWait();
-             codeno_txt.clear();
-             account_title_cmbobx.setValue(null);
+    
+   
+    
+    public void AddtableColumn_AP(){
+        
+        ap_tbl.getItems().clear();
+        ap_tbl.getColumns().removeAll(ap_tbl.getColumns());
+        TableColumn<AP_classfile, String> apd = new TableColumn<>("Date");
+        TableColumn<AP_classfile, String> apde = new TableColumn<>("Department");
+        TableColumn<AP_classfile, String> apa = new TableColumn<>("Amount");
+        TableColumn<AP_classfile, String> aps = new TableColumn<>("Status");
+       
+        apd.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apDate);
+        apde.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apDepartment);
+        apa.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apAmount);
+        aps.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apStatus);
+        
+        ap_tbl.getColumns().addAll(apd,apde,apa,aps);
+    
+    }
+    
+   
+    long DummyCount = 0;
+    long GlobalCount = 0;
+    int Global_Count = 0;
+    ExecutorService e = Executors.newFixedThreadPool(1);   
+    ObservableList<AP_classfile> brc = FXCollections.observableArrayList();
+    Financial_disbursement_request_model fbr = new Financial_disbursement_request_model();
+    
+  
+    
+    public void loadtable_ap(){
+        
+          CompletableFuture.supplyAsync(() -> {
+
+            while (Session.CurrentRoute.equals("id_apr")) {
+                
+                try {
+                    fbr.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
+                        DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
+                    });
+
+                    if (DummyCount != GlobalCount) {
+
+                            ap_tbl.getItems();
+                            List b = fbr.where("dr_status","=","Pending").get();
+                           
+                            request(b);
+                            total_label.setText(String.valueOf(fbr.where("dr_status","=","Pending").get("sum(dr_amount)")));
+                    // total_label.setText(String.valueOf(fbr.where("dr_status","=","Pending").get("sum(dr_amount)")));
+                             
+                     {
+                       
+                         
+                    }
+                    ap_tbl.setItems(brc);
+                        GlobalCount = DummyCount;
+                    }
+                    Thread.sleep(3000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(FINANCIAL_BUDGET_MANAGEMENTController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            return 0;
+        }, Session.SessionThreads);
+
+     }
+     
+     private int request(List req){
+         
+        ap_tbl.getItems().clear();
+        ObservableList<AP_classfile> fdrc = FXCollections.observableArrayList();
+
+        try {
              
-        }else{
-              Alert alert = new Alert(Alert.AlertType.ERROR);
-             alert.initStyle(StageStyle.UNDECORATED);
-             alert.setTitle("ERROR");
-             alert.setContentText("PLEASE FILL THE EMPTY FIELDS"); 
-             alert.showAndWait();
-            
-        }
-                                       
-            }catch(Exception e)
-               {
-            e.printStackTrace();
-               }
-          
-          
-       showCoa();
-       loadDataCOA();
-       
-    }
-    public void showCoa(){
-         coa_tbl.getItems().clear();
-        coa_tbl.getColumns().removeAll(coa_tbl.getColumns());
-
-        TableColumn<FINANCIAL_COA_CLASSFILE, String> cn = new TableColumn<>("Code No");
-        TableColumn<FINANCIAL_COA_CLASSFILE, String> at = new TableColumn<>("Account Title");
-
-        
-        cn.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_COA_CLASSFILE, String> param) -> param.getValue().cn);
-        at.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_COA_CLASSFILE, String> param) -> param.getValue().at);
-      
-        coa_tbl.getColumns().addAll(cn,at);
-    }
-    
-    public void loadDataCOA(){
-         Financial_coa_model coa = new Financial_coa_model();
-         ObservableList<FINANCIAL_COA_CLASSFILE> gl_coa1 = FXCollections.observableArrayList();
-          
-            List b = coa.get();
-            
-            for(Object d : b)
+              for(Object d : req)
             {
                 HashMap hm = (HashMap) d;   //exquisite casting
-                 hm.get("coa_id");
-                hm.get("code_no");
-                hm.get("acc_title");
                 
-               gl_coa1.add(new FINANCIAL_COA_CLASSFILE(
-                       
-                String.valueOf(hm.get("coa_id")),
-                String.valueOf(hm.get("code_no")),
-                String.valueOf(hm.get("acc_title"))
+                hm.get("dr_requestno");
+                hm.get("dr_daterequest");
+                hm.get("dr_department");
+                hm.get("dr_requestor");
+                hm.get("dr_description");
+                hm.get("dr_prioritylvl");
+                hm.get("dr_amount");
+                hm.get("dr_status");
+                
+               brc.add(new AP_classfile(
+                            String.valueOf(hm.get("dr_daterequest")),
+                            String.valueOf(hm.get("dr_department")),
+                            String.valueOf(hm.get("dr_amount")),
+                            String.valueOf(hm.get("dr_status"))
                 ) );   
                
+        /* for(int i  = 0; i<ap_tbl.getItems().size(); i++){
+         int amount = Integer.parseInt(ap_tbl.getItems().get(3).apAmount.getValue());
+         total += amount;
+                    }
+        total_label.setText(String.valueOf(total));
+      
+        */
+
             }
-            coa_tbl.setItems(gl_coa1);
-            }
-    
-    
-    
+                
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        ap_tbl.setItems(fdrc);
+        return 0;
+       
+     }
+       
     
     
 }

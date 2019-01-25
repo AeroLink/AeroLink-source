@@ -145,7 +145,9 @@ public class Model {
             if (!Session.offline) {
 
                 if (Session.isConnected) {
-                    System.err.println("Creating Request to API");
+                    if (!refresh) {
+                        System.err.println("Creating Request to API");
+                    }
                     HttpClient.post("{\"A1009\" : \"" + this.finalQuery + "\""
                             + (this.where ? ",\"B1009\" : \"" + Helpers.combine(this.whereValues.toArray(), ",") + "\"" : "") + ",\"refresher\" : " + refresh + " }", (error, obj) -> {
                         if (error) {
@@ -164,8 +166,10 @@ public class Model {
             } else {
 
                 if (Session.INSTANCE.hasConnection()) {
-                    System.out.println(this.finalQuery);
-                    System.err.println("Creating Request to DB Direct");
+                    if (!refresh) {
+                        System.out.println(this.finalQuery);
+                        System.err.println("Creating Request to DB Direct");
+                    }
                     this.clear();
                     return R2SL.convert(pst.executeQuery());
                 }
@@ -232,7 +236,9 @@ public class Model {
 
             if (!Session.offline) {
                 if (Session.isConnected) {
-                    System.err.println("Creating Request to API");
+                    if (!refresh) {
+                        System.err.println("Creating Request to API");
+                    }
                     HttpClient.post("{\"A1009\" : \"" + this.finalQuery + "\""
                             + (this.where ? ",\"B1009\" : \"" + Helpers.combine(this.whereValues.toArray(), ",") + "\"" : "") + ",\"refresher\" : " + refresh + " }", (error, obj) -> {
                         if (error) {
@@ -249,9 +255,11 @@ public class Model {
                 }
             } else {
 
-                System.out.println(this.finalQuery);
                 if (Session.INSTANCE.hasConnection()) {
-                    System.err.println("Creating Request to DB Direct");
+                    if (!refresh) {
+                        System.out.println(this.finalQuery);
+                        System.err.println("Creating Request to DB Direct");
+                    }
                     this.clear();
                     return R2SL.convert(pst.executeQuery());
                 }
@@ -852,5 +860,7 @@ public class Model {
         this.allowPermission = false;
         this.CurrentPermission = "canAccessSystem";
     }
+
+    
 
 }

@@ -2,34 +2,29 @@
 package FXMLS.Log1;
 
 
-import FXMLS.Log1.AssetManagement.Modal.AddBuildingController;
 import FXMLS.Log1.ClassFiles.Log1_AssetBuildingClassfiles;
 import FXMLS.Log1.ClassFiles.Log1_AssetEquipmentClassfiles;
-import FXMLS.Log1.util.AlertMaker;
+import FXMLS.Log1.ClassFiles.Log1_AssetVehiclesClassfiles;
 import FXMLS.Log1.util.Log1Util;
 import Model.Log1.Log1_AssetBuildingModel;
 import Model.Log1.Log1_AssetEquipmentModel;
+import Model.Log1.Log1_AssetVehiclesModel;
 import Synapse.Model;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 
 /**
  * FXML Controller class
@@ -37,67 +32,33 @@ import javafx.stage.StageStyle;
  * @author Crenz
  */
 public class AssetManagementController implements Initializable {
+    
+    ObservableList<String> selectAssetType = FXCollections.observableArrayList(
+            "Land",
+            "Building",
+            "Facility",
+            "Vehicle");
+   
+    @FXML
+    private AnchorPane registrationForm_pane;
+    @FXML
+    private ComboBox<String> selectAssetType_combox;
+    @FXML
+    private Label registerCategory_txt;
+    @FXML
+    private BorderPane computeAppraisalValuePane;
+    @FXML
+    private Label title_txt;
+    @FXML
+    private BorderPane computeDepreciationValuePane;
 
     
-    @FXML
-    private TableView<Log1_AssetBuildingClassfiles> building_tbl;
-    @FXML
-    private TableColumn<Log1_AssetBuildingClassfiles, String> buildingName_col;
-    @FXML
-    private TableColumn<Log1_AssetBuildingClassfiles, String> buildingAddress_col;
-    @FXML
-    private TableColumn<Log1_AssetBuildingClassfiles, String> buildingContact_col;
-    @FXML
-    private TableColumn<Log1_AssetBuildingClassfiles, String> buildingType_col;
-    @FXML
-    private TableColumn<Log1_AssetBuildingClassfiles, String> buildingStatus_col;
-    
-    @FXML
-    private TableView<Log1_AssetEquipmentClassfiles> equip_tbl;
-    @FXML
-    private TableColumn<Log1_AssetEquipmentClassfiles, String> equipment_col;
-    @FXML
-    private TableColumn<Log1_AssetEquipmentClassfiles, String> equipmentType_col;
-    @FXML
-    private TableColumn<Log1_AssetEquipmentClassfiles, String> equipmentBuilding_col;
-    @FXML
-    private TableColumn<Log1_AssetEquipmentClassfiles, String> equipmentlocation_col;
-    @FXML
-    private TableColumn<Log1_AssetEquipmentClassfiles, String> equipmentPrice_col;
-    @FXML
-    private TableColumn<Log1_AssetEquipmentClassfiles, String> EWarrantydate_col;
-    
-    @FXML
-    private TableView<?> vehicle_tbl;
-    @FXML
-    private TableColumn<?, ?> vehicle_col;
-    @FXML
-    private TableColumn<?, ?> Vehicletype_col;
-    @FXML
-    private TableColumn<?, ?> model_col;
-    @FXML
-    private TableColumn<?, ?> VehiclePrice_col;
-    @FXML
-    private TableColumn<?, ?> vbuilding_col;
-    @FXML
-    private TableColumn<?, ?> vlocation_col;
-    @FXML
-    private TableColumn<?, ?> vstatus_col;
-    
-    
-
-
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        callBuildingData();
-        displayBuildingData();
-        callEquipmentData();
-        displayEquipmentData();
+        selectAssetType_combox.setItems(selectAssetType);
     } 
+    
+    
     
     public void callBuildingData(){
          Log1_AssetBuildingModel Building = new Log1_AssetBuildingModel();
@@ -122,41 +83,39 @@ public class AssetManagementController implements Initializable {
                 String.valueOf(hm.get("BuildingFacilityType"))
                 ));       
             }
-            building_tbl.setItems(building);
+//            building_tbl.setItems(building);
     }
     
     public void displayBuildingData(){
-        buildingName_col.setCellValueFactory(new PropertyValueFactory<>("BuildingName"));
-        buildingAddress_col.setCellValueFactory(new PropertyValueFactory<>("BuildingAddress"));
-        buildingContact_col.setCellValueFactory(new PropertyValueFactory<>("BuildingContact"));
-        buildingStatus_col.setCellValueFactory(new PropertyValueFactory<>("BuildingStatus"));
-        buildingType_col.setCellValueFactory(new PropertyValueFactory<>("BuildingFacilityType"));
+//        buildingName_col.setCellValueFactory(new PropertyValueFactory<>("BuildingName"));
+//        buildingAddress_col.setCellValueFactory(new PropertyValueFactory<>("BuildingAddress"));
+//        buildingContact_col.setCellValueFactory(new PropertyValueFactory<>("BuildingContact"));
+//        buildingStatus_col.setCellValueFactory(new PropertyValueFactory<>("BuildingStatus"));
+//        buildingType_col.setCellValueFactory(new PropertyValueFactory<>("BuildingFacilityType"));
     }
     
-    @FXML
     private void updateBuildingAction(ActionEvent event) {
-        Log1_AssetBuildingClassfiles selectedForEdit = building_tbl.getSelectionModel().getSelectedItem();
-        if(selectedForEdit == null){
-            AlertMaker.showErrorMessage("No Building Selected","Please Select A Building From the table to proceed");
-            return;
-        }
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLS/Log1/AssetManagement/Modal/AddBuilding.fxml"));
-            Parent parent = loader.load();
-            
-            AddBuildingController controller = (AddBuildingController) loader.getController();
-            controller.displayBuildingData(selectedForEdit);
-            
-            Stage stage = new Stage(StageStyle.DECORATED);
-            stage.setTitle("Update Building Details");
-            stage.setScene(new Scene(parent));
-            stage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(AssetManagementController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        Log1_AssetBuildingClassfiles selectedForEdit = building_tbl.getSelectionModel().getSelectedItem();
+//        if(selectedForEdit == null){
+//            AlertMaker.showErrorMessage("No Building Selected","Please Select A Building From the table to proceed");
+//            return;
+//        }
+//        try {
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLS/Log1/AssetManagement/Modal/AddBuilding.fxml"));
+//            Parent parent = loader.load();
+//            
+//            AddBuildingController controller = (AddBuildingController) loader.getController();
+//            controller.displayBuildingData(selectedForEdit);
+//            
+//            Stage stage = new Stage(StageStyle.DECORATED);
+//            stage.setTitle("Update Building Details");
+//            stage.setScene(new Scene(parent));
+//            stage.show();
+//        } catch (IOException ex) {
+//            Logger.getLogger(AssetManagementController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
-    @FXML
     private void AddBuildingAction(ActionEvent event) {
         Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/AssetManagement/Modal/AddBuilding.fxml"),
                  "Add New Building", null);
@@ -186,26 +145,114 @@ public class AssetManagementController implements Initializable {
                 String.valueOf(hm.get("EquipmentPrice"))
                 ));       
         }
-        equip_tbl.setItems(Equipment);
+//        equip_tbl.setItems(Equipment);
     }
     
     public void displayEquipmentData(){
-        equipment_col.setCellValueFactory(new PropertyValueFactory<>("EquipmentName"));
-        equipmentType_col.setCellValueFactory(new PropertyValueFactory<>("EquipmentType"));
-        EWarrantydate_col.setCellValueFactory(new PropertyValueFactory<>("EquipmentWarrantyDate"));
-        equipmentlocation_col.setCellValueFactory(new PropertyValueFactory<>("EquipmentLocation"));
-        equipmentBuilding_col.setCellValueFactory(new PropertyValueFactory<>("BuildingName"));
-        equipmentPrice_col.setCellValueFactory(new PropertyValueFactory<>("EquipmentPrice"));
+//        equipment_col.setCellValueFactory(new PropertyValueFactory<>("EquipmentName"));
+//        equipmentType_col.setCellValueFactory(new PropertyValueFactory<>("EquipmentType"));
+//        EWarrantydate_col.setCellValueFactory(new PropertyValueFactory<>("EquipmentWarrantyDate"));
+//        equipmentlocation_col.setCellValueFactory(new PropertyValueFactory<>("EquipmentLocation"));
+//        equipmentBuilding_col.setCellValueFactory(new PropertyValueFactory<>("BuildingName"));
+//        equipmentPrice_col.setCellValueFactory(new PropertyValueFactory<>("EquipmentPrice"));
     }
     
-    @FXML
     private void addEquipActon(ActionEvent event) {
         Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/AssetManagement/Modal/AddNewEquipment.fxml"),
                  "Add New Equipment", null);
     }
 
+
+    private void addVehicleAction(ActionEvent event) {
+        Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/AssetManagement/Modal/AddVehicle.fxml"),
+                 "Add New Equipment", null);
+    }
+
+    public void callVehicleData() {
+        Log1_AssetVehiclesModel AE = new Log1_AssetVehiclesModel();
+         ObservableList<Log1_AssetVehiclesClassfiles> vehicles = FXCollections.observableArrayList();
+          
+            List b = AE.join(Model.JOIN.INNER, "aerolink.tbl_log1_AssetBuilding", "BuildingID", "=", "BuildingID").get();
+            
+            for(Object d : b)
+                {
+                    //rs = hm
+                HashMap hm = (HashMap) d;   //exquisite casting
+                
+                vehicles.add(new Log1_AssetVehiclesClassfiles(
+                
+                String.valueOf(hm.get("VehicleID")),
+                String.valueOf(hm.get("BuildingName")),
+                String.valueOf(hm.get("VehicleDescription")),
+                String.valueOf(hm.get("VehicleType")),
+                String.valueOf(hm.get("VehiclePrice")),
+                String.valueOf(hm.get("ChassisNumber")),
+                String.valueOf(hm.get("DateBought")),
+                String.valueOf(hm.get("VehicleLocation")),
+                String.valueOf(hm.get("VehicleManufacturer")),
+                String.valueOf(hm.get("VehicleWarranty")),
+                        String.valueOf(hm.get("VehicleStatus"))
+                ));       
+        }
+//        vehicle_tbl.setItems(vehicles);
+        
+    }
+
+    public void displayVehicleDate() {
+//        vehicle_col.setCellValueFactory(new PropertyValueFactory<>("VehicleDescription"));
+//        Vehicletype_col.setCellValueFactory(new PropertyValueFactory<>("VehicleType"));
+//        VehiclePrice_col.setCellValueFactory(new PropertyValueFactory<>("VehiclePrice"));
+//        vbuilding_col.setCellValueFactory(new PropertyValueFactory<>("BuildingName"));
+//        vlocation_col.setCellValueFactory(new PropertyValueFactory<>("VehicleLocation"));
+//        vstatus_col.setCellValueFactory(new PropertyValueFactory<>("VehicleStatus"));
+    }
+
     @FXML
-    private void editEquipAction(ActionEvent event) {
+    private void showRegisForm(ActionEvent event) throws IOException {
+        String AssetType = selectAssetType_combox.getValue();
+        
+        if(AssetType=="Building"){
+            registerCategory_txt.setText("Register Building");
+            registerCategory_txt.setVisible(true);
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Log1/AssetManagement/Modal/AddBuilding.fxml"));
+            registrationForm_pane.getChildren().setAll(pane);
+        }
+        else if(AssetType =="Vehicle"){
+            registerCategory_txt.setText("Register Vehicle");
+            registerCategory_txt.setVisible(true);
+            AnchorPane pane1 = FXMLLoader.load(getClass().getResource("/FXMLS/Log1/AssetManagement/Modal/AddVehicle.fxml"));
+            registrationForm_pane.getChildren().setAll(pane1);
+        }
+        else if(AssetType =="Land"){
+            registerCategory_txt.setText("Register Land");
+            registerCategory_txt.setVisible(true);
+            AnchorPane pane2 = FXMLLoader.load(getClass().getResource("/FXMLS/Log1/AssetManagement/Modal/AddLand.fxml"));
+            registrationForm_pane.getChildren().setAll(pane2);
+        }
+        else if(AssetType =="Facility"){
+            registerCategory_txt.setText("Register Facility");
+            registerCategory_txt.setVisible(true);
+            AnchorPane pane3 = FXMLLoader.load(getClass().getResource("/FXMLS/Log1/AssetManagement/Modal/AddFacility.fxml"));
+            registrationForm_pane.getChildren().setAll(pane3);
+        }
+    }
+
+    @FXML
+    private void selectAssetForAppraisal(ActionEvent event) {
+        computeAppraisalValuePane.setVisible(true);
+        computeAppraisalValuePane.setDisable(false);
+        computeDepreciationValuePane.setVisible(false);
+        computeDepreciationValuePane.setDisable(true);
+        title_txt.setText("Compute Appraisal Value");
+    }
+
+    @FXML
+    private void selectAssetForDepreciation(ActionEvent event) {
+        computeDepreciationValuePane.setVisible(true);
+        computeDepreciationValuePane.setDisable(false);
+        computeAppraisalValuePane.setVisible(false);
+        computeAppraisalValuePane.setDisable(true);
+        title_txt.setText("Compute Depreciation Value");
     }
 
     

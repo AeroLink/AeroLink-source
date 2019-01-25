@@ -50,7 +50,7 @@ public class HttpClient {
             }
 
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(con.getOutputStream()));
-            //System.err.println(json);
+            if(!json.contains("BINARY_CHECKSUM(*)")) {System.err.println(json);}
             out.write(json);
             out.flush();
             out.close();
