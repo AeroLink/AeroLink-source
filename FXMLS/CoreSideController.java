@@ -60,7 +60,7 @@ public class CoreSideController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         SessionUsername.setText(Session.pull("username").toString());
-        
+
         Rectangle clip = new Rectangle(userImage.getFitWidth() - 30, userImage.getFitHeight() - 1);
         clip.setArcHeight(50);
         clip.setArcWidth(50);
@@ -117,8 +117,14 @@ public class CoreSideController implements Initializable {
             Modal md = Modal.getInstance(new Form("/FXMLS/Deny.fxml").getParent());
             md.open();
         } else {
-            Session.CurrentRoute = ((JFXButton) event.getSource()).getId();
-            LoadSubSystem loadSubSystem = new Helpers.LoadSubSystem(((JFXButton) event.getSource()).getId(), dpp);
+            String nav_id = ((JFXButton) event.getSource()).getId();
+            Session.CurrentRoute = nav_id;
+            if (Session.CurrentRoute.contains("0xreq")) {
+                Modal md = Modal.getInstance(new Form(Route.routes.get(nav_id).toString()).getParent());
+                md.open();
+            } else {
+                LoadSubSystem loadSubSystem = new Helpers.LoadSubSystem(((JFXButton) event.getSource()).getId(), dpp);
+            }
         }
 
     }
