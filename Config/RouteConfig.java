@@ -66,11 +66,16 @@ public class RouteConfig {
         {"core1consol", "/FXMLS/core1/Core1_consol.fxml", "can_access_hr1_socialrecog"},
         {"core1mawb", "/FXMLS/core1/Core1_mawb.fxml", "can_access_hr1_socialrecog"},
         {"core1sf", "/FXML/core1/Core1_shipment.fxml", "can_access_hr1_socialrecog"},
+        //Legal Management
+        {"adminlegal", "/FXMLS/Administrative/Legal_Management.fxml", "can_access_admin_legal_management"},
+        {"admindoc", "/FXMLS/Administrative/Document_Management.fxml", "can_access_admin_document_management"},
+        {"adminvisitor", "/FXMLS/Administrative/Visitor_Management.fxml", "can_access_admin_visitor_management"},
+        {"adminfacility", "/FXMLS/Administrative/Facility_Reservation.fxml", "can_access_admin_facility_reservation"},
         //USM
         {"usmManageUsers", "/FXMLS/USM/ManageUsers.fxml", "can_access_hr1_socialrecog"},
         //Requisitions
         {"requisitions", "/FXMLS/Requisition.fxml", "canAccessSystem"}
-
+        
     };
 
 }

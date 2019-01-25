@@ -2,46 +2,294 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.chart.BarChart?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="SNrootPane1" prefHeight="693.0" prefWidth="1370.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Core2.Change.SNviewReportController">
+<AnchorPane id="AnchorPane" fx:id="SNrootPane" prefHeight="693.0" prefWidth="1370.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Core2.Change.SNviewReportController">
    <children>
       <SplitPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <AnchorPane prefHeight="40.0" prefWidth="1370.0" styleClass="card" stylesheets="@../../../Assets/css/card.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane prefHeight="40.0" prefWidth="1370.0" styleClass="card" stylesheets="@../../../Assets/css/card.css">
                      <children>
-                        <Label layoutX="585.0" prefHeight="40.0" prefWidth="207.0" text=" SERVICE NETWORK" textFill="#34a853" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="586.0" AnchorPane.rightAnchor="575.0" AnchorPane.topAnchor="0.0">
+                        <Label layoutX="586.0" layoutY="-1.0" prefHeight="40.0" prefWidth="99.0" text="REPORT" textFill="#34a853" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="1261.0" AnchorPane.topAnchor="0.0">
                            <font>
                               <Font name="Arial Bold" size="20.0" />
                            </font>
                         </Label>
-                        <JFXButton fx:id="SNback3" layoutX="10.0" layoutY="5.0" onAction="#back3" prefHeight="30.0" style="-fx-background-color: #34a853;" text="Back" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
+                        <JFXButton fx:id="SNviewN" buttonType="RAISED" ellipsisString="" layoutX="803.0" layoutY="5.0" onAction="#viewN" prefHeight="30.0" prefWidth="185.0" ripplerFill="WHITE" style="-fx-background-color: #34a853;" text="BRANCH MANAGEMENT" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="EYE" size="20" />
+                           </graphic>
                            <font>
                               <Font name="Arial" size="12.0" />
                            </font>
+                        </JFXButton>
+                        <JFXButton fx:id="SNviewM" buttonType="RAISED" ellipsisString="" layoutX="997.0" layoutY="5.0" onAction="#viewM" prefHeight="30.0" prefWidth="185.0" ripplerFill="WHITE" style="-fx-background-color: #34a853;" text="MONITORING PACKAGE" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0">
                            <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="BACKWARD" size="20" />
+                              <FontAwesomeIconView fill="WHITE" glyphName="DESKTOP" size="20" />
+                           </graphic>
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton buttonType="RAISED" layoutX="1214.0" layoutY="6.0" onAction="#viewDashboard" prefHeight="30.0" prefWidth="170.0" style="-fx-background-color: #34a853;" text="VIEW DASHBOARD" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="DASHBOARD" size="20" />
                            </graphic>
                         </JFXButton>
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="78.0" layoutY="73.0" prefHeight="200.0" prefWidth="200.0" styleClass="card" stylesheets="@../../../Assets/css/card.css" />
-                  <BarChart layoutX="78.0" layoutY="309.0" prefHeight="310.0" prefWidth="507.0" styleClass="card" stylesheets="@../../../Assets/css/card.css">
-                    <xAxis>
-                      <CategoryAxis side="BOTTOM" />
-                    </xAxis>
-                    <yAxis>
-                      <NumberAxis side="LEFT" />
-                    </yAxis>
-                  </BarChart>
+                  <TableView layoutX="566.0" layoutY="133.0" prefHeight="576.0" prefWidth="816.0" styleClass="card" stylesheets="@../../../Assets/css/card.css" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="80.0">
+                     <columns>
+                        <TableColumn prefWidth="75.0" text="CUSTOMER NO" />
+                        <TableColumn prefWidth="75.0" text="PACKAGE NO" />
+                        <TableColumn prefWidth="75.0" text="BOOK DATE" />
+                        <TableColumn prefWidth="75.0" text="STATUS" />
+                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <JFXButton buttonType="RAISED" layoutX="378.0" layoutY="59.0" prefHeight="29.0" prefWidth="99.0" style="-fx-background-color: RED;" text="Print" textFill="WHITE" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="50.0">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="PRINT" size="20" />
+                     </graphic>
+                  </JFXButton>
+                  <TitledPane animated="false" collapsible="false" layoutX="14.0" layoutY="79.0" prefHeight="598.0" prefWidth="504.0" text="ANALYTICS" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="80.0">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <AnchorPane layoutX="14.0" layoutY="6.0" prefHeight="169.0" prefWidth="139.0" styleClass="card" stylesheets="@../../../Assets/css/card.css" AnchorPane.leftAnchor="10.0">
+                                 <children>
+                                    <AnchorPane layoutX="6.0" layoutY="34.0" prefHeight="127.0" prefWidth="126.0" styleClass="card" stylesheets="@../../../Assets/css/card.css">
+                                       <children>
+                                          <Label alignment="CENTER" layoutY="41.0" prefHeight="21.0" prefWidth="126.0" text="TOTAL BRANCH" textAlignment="CENTER">
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="branchCount1" alignment="CENTER" layoutX="18.0" layoutY="62.0" prefHeight="48.0" prefWidth="79.0" text="0" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                             <font>
+                                                <Font size="30.0" />
+                                             </font>
+                                          </Label>
+                                          <Separator layoutX="18.0" layoutY="112.0" prefHeight="4.0" prefWidth="79.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="16.0" layoutY="5.0" prefHeight="65.0" prefWidth="70.0" style="-fx-background-color: skyblue;" styleClass="card" stylesheets="@../../../Assets/css/card.css">
+                                       <children>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="BUILDING" layoutX="14.0" layoutY="49.0" size="50" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="182.0" layoutY="6.0" prefHeight="169.0" prefWidth="139.0" styleClass="card" stylesheets="@../../../Assets/css/card.css">
+                                 <children>
+                                    <AnchorPane layoutX="6.0" layoutY="34.0" prefHeight="127.0" prefWidth="126.0" styleClass="card" stylesheets="@../../../Assets/css/card.css">
+                                       <children>
+                                          <Label alignment="CENTER" layoutY="41.0" prefHeight="21.0" prefWidth="126.0" text="TOTAL BRANCH" textAlignment="CENTER">
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="branchCount11" alignment="CENTER" layoutX="18.0" layoutY="62.0" prefHeight="48.0" prefWidth="79.0" text="0" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                             <font>
+                                                <Font size="30.0" />
+                                             </font>
+                                          </Label>
+                                          <Separator layoutX="18.0" layoutY="112.0" prefHeight="4.0" prefWidth="79.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="16.0" layoutY="5.0" prefHeight="65.0" prefWidth="70.0" style="-fx-background-color: skyblue;" styleClass="card" stylesheets="@../../../Assets/css/card.css">
+                                       <children>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="BUILDING" layoutX="14.0" layoutY="49.0" size="50" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="335.0" layoutY="6.0" prefHeight="169.0" prefWidth="139.0" styleClass="card" stylesheets="@../../../Assets/css/card.css" AnchorPane.rightAnchor="10.0">
+                                 <children>
+                                    <AnchorPane layoutX="6.0" layoutY="34.0" prefHeight="127.0" prefWidth="126.0" styleClass="card" stylesheets="@../../../Assets/css/card.css">
+                                       <children>
+                                          <Label alignment="CENTER" layoutY="41.0" prefHeight="21.0" prefWidth="126.0" text="TOTAL BRANCH" textAlignment="CENTER">
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="branchCount12" alignment="CENTER" layoutX="18.0" layoutY="62.0" prefHeight="48.0" prefWidth="79.0" text="0" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                             <font>
+                                                <Font size="30.0" />
+                                             </font>
+                                          </Label>
+                                          <Separator layoutX="18.0" layoutY="112.0" prefHeight="4.0" prefWidth="79.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="16.0" layoutY="5.0" prefHeight="65.0" prefWidth="70.0" style="-fx-background-color: skyblue;" styleClass="card" stylesheets="@../../../Assets/css/card.css">
+                                       <children>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="BUILDING" layoutX="14.0" layoutY="49.0" size="50" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="21.0" layoutY="192.0" prefHeight="169.0" prefWidth="139.0" styleClass="card" stylesheets="@../../../Assets/css/card.css" AnchorPane.leftAnchor="10.0">
+                                 <children>
+                                    <AnchorPane layoutX="6.0" layoutY="34.0" prefHeight="127.0" prefWidth="126.0" styleClass="card" stylesheets="@../../../Assets/css/card.css">
+                                       <children>
+                                          <Label alignment="CENTER" layoutY="41.0" prefHeight="21.0" prefWidth="126.0" text="TOTAL BRANCH" textAlignment="CENTER">
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="branchCount13" alignment="CENTER" layoutX="18.0" layoutY="62.0" prefHeight="48.0" prefWidth="79.0" text="0" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                             <font>
+                                                <Font size="30.0" />
+                                             </font>
+                                          </Label>
+                                          <Separator layoutX="18.0" layoutY="112.0" prefHeight="4.0" prefWidth="79.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="16.0" layoutY="5.0" prefHeight="65.0" prefWidth="70.0" style="-fx-background-color: skyblue;" styleClass="card" stylesheets="@../../../Assets/css/card.css">
+                                       <children>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="BUILDING" layoutX="14.0" layoutY="49.0" size="50" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="182.0" layoutY="192.0" prefHeight="169.0" prefWidth="139.0" styleClass="card" stylesheets="@../../../Assets/css/card.css">
+                                 <children>
+                                    <AnchorPane layoutX="6.0" layoutY="34.0" prefHeight="127.0" prefWidth="126.0" styleClass="card" stylesheets="@../../../Assets/css/card.css">
+                                       <children>
+                                          <Label alignment="CENTER" layoutY="41.0" prefHeight="21.0" prefWidth="126.0" text="TOTAL BRANCH" textAlignment="CENTER">
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="branchCount111" alignment="CENTER" layoutX="18.0" layoutY="62.0" prefHeight="48.0" prefWidth="79.0" text="0" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                             <font>
+                                                <Font size="30.0" />
+                                             </font>
+                                          </Label>
+                                          <Separator layoutX="18.0" layoutY="112.0" prefHeight="4.0" prefWidth="79.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="16.0" layoutY="5.0" prefHeight="65.0" prefWidth="70.0" style="-fx-background-color: skyblue;" styleClass="card" stylesheets="@../../../Assets/css/card.css">
+                                       <children>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="BUILDING" layoutX="14.0" layoutY="49.0" size="50" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="342.0" layoutY="192.0" prefHeight="169.0" prefWidth="139.0" styleClass="card" stylesheets="@../../../Assets/css/card.css" AnchorPane.rightAnchor="10.0">
+                                 <children>
+                                    <AnchorPane layoutX="6.0" layoutY="34.0" prefHeight="127.0" prefWidth="126.0" styleClass="card" stylesheets="@../../../Assets/css/card.css">
+                                       <children>
+                                          <Label alignment="CENTER" layoutY="41.0" prefHeight="21.0" prefWidth="126.0" text="TOTAL BRANCH" textAlignment="CENTER">
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="branchCount121" alignment="CENTER" layoutX="18.0" layoutY="62.0" prefHeight="48.0" prefWidth="79.0" text="0" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                             <font>
+                                                <Font size="30.0" />
+                                             </font>
+                                          </Label>
+                                          <Separator layoutX="18.0" layoutY="112.0" prefHeight="4.0" prefWidth="79.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="16.0" layoutY="5.0" prefHeight="65.0" prefWidth="70.0" style="-fx-background-color: skyblue;" styleClass="card" stylesheets="@../../../Assets/css/card.css">
+                                       <children>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="BUILDING" layoutX="14.0" layoutY="49.0" size="50" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="21.0" layoutY="370.0" prefHeight="169.0" prefWidth="139.0" styleClass="card" stylesheets="@../../../Assets/css/card.css" AnchorPane.leftAnchor="10.0">
+                                 <children>
+                                    <AnchorPane layoutX="6.0" layoutY="34.0" prefHeight="127.0" prefWidth="126.0" styleClass="card" stylesheets="@../../../Assets/css/card.css">
+                                       <children>
+                                          <Label alignment="CENTER" layoutY="41.0" prefHeight="21.0" prefWidth="126.0" text="TOTAL BRANCH" textAlignment="CENTER">
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="branchCount14" alignment="CENTER" layoutX="18.0" layoutY="62.0" prefHeight="48.0" prefWidth="79.0" text="0" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                             <font>
+                                                <Font size="30.0" />
+                                             </font>
+                                          </Label>
+                                          <Separator layoutX="18.0" layoutY="112.0" prefHeight="4.0" prefWidth="79.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="16.0" layoutY="5.0" prefHeight="65.0" prefWidth="70.0" style="-fx-background-color: skyblue;" styleClass="card" stylesheets="@../../../Assets/css/card.css">
+                                       <children>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="BUILDING" layoutX="14.0" layoutY="49.0" size="50" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="182.0" layoutY="370.0" prefHeight="169.0" prefWidth="139.0" styleClass="card" stylesheets="@../../../Assets/css/card.css">
+                                 <children>
+                                    <AnchorPane layoutX="6.0" layoutY="34.0" prefHeight="127.0" prefWidth="126.0" styleClass="card" stylesheets="@../../../Assets/css/card.css">
+                                       <children>
+                                          <Label alignment="CENTER" layoutY="41.0" prefHeight="21.0" prefWidth="126.0" text="TOTAL BRANCH" textAlignment="CENTER">
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="branchCount112" alignment="CENTER" layoutX="18.0" layoutY="62.0" prefHeight="48.0" prefWidth="79.0" text="0" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                             <font>
+                                                <Font size="30.0" />
+                                             </font>
+                                          </Label>
+                                          <Separator layoutX="18.0" layoutY="112.0" prefHeight="4.0" prefWidth="79.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="16.0" layoutY="5.0" prefHeight="65.0" prefWidth="70.0" style="-fx-background-color: skyblue;" styleClass="card" stylesheets="@../../../Assets/css/card.css">
+                                       <children>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="BUILDING" layoutX="14.0" layoutY="49.0" size="50" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="342.0" layoutY="370.0" prefHeight="169.0" prefWidth="139.0" styleClass="card" stylesheets="@../../../Assets/css/card.css" AnchorPane.rightAnchor="10.0">
+                                 <children>
+                                    <AnchorPane layoutX="6.0" layoutY="34.0" prefHeight="127.0" prefWidth="126.0" styleClass="card" stylesheets="@../../../Assets/css/card.css">
+                                       <children>
+                                          <Label alignment="CENTER" layoutY="41.0" prefHeight="21.0" prefWidth="126.0" text="TOTAL BRANCH" textAlignment="CENTER">
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="branchCount122" alignment="CENTER" layoutX="18.0" layoutY="62.0" prefHeight="48.0" prefWidth="79.0" text="0" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                             <font>
+                                                <Font size="30.0" />
+                                             </font>
+                                          </Label>
+                                          <Separator layoutX="18.0" layoutY="112.0" prefHeight="4.0" prefWidth="79.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="16.0" layoutY="5.0" prefHeight="65.0" prefWidth="70.0" style="-fx-background-color: skyblue;" styleClass="card" stylesheets="@../../../Assets/css/card.css">
+                                       <children>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="BUILDING" layoutX="14.0" layoutY="49.0" size="50" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                     <font>
+                        <Font name="System Bold Italic" size="15.0" />
+                     </font>
+                  </TitledPane>
                </children>
             </AnchorPane>
          </items>

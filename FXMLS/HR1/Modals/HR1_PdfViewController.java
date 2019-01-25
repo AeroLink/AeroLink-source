@@ -9,10 +9,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.web.WebView;
-import com.adobe.acrobat.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.scene.layout.AnchorPane;
 
 /**

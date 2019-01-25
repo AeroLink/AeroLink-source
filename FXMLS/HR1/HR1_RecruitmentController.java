@@ -26,6 +26,7 @@ import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -57,6 +58,8 @@ public class HR1_RecruitmentController implements Initializable {
 
     JobVacancy jobVacancy = new JobVacancy();
 
+    public static BooleanProperty refresher;
+    
     ObservableList<TableModel_jLimit> observableList = FXCollections.observableArrayList();
 
     ObservableList<TableModel_jPosted> observablePosting = FXCollections.observableArrayList();
@@ -105,11 +108,21 @@ public class HR1_RecruitmentController implements Initializable {
         this.generateTable();
         this.populateTable();
 
+        refresher = new SimpleBooleanProperty();
+        
+        refresher.setValue(false);
+        refresher.addListener(listener -> {
+            if(refresher.getValue()) {
+                generateTable();
+                populateTable();
+                refresher.setValue(false);
+            }
+        });
         tblOpenJobs.setContextMenu(this.contextMenuJobs);
         tblOpenJobs.setOnMouseClicked(e -> tableMouseEvent(e));
 
         menuPost.setOnAction(event -> {
-           this.viewModalPostJob(tblOpenJobs.getSelectionModel().getSelectedItem());
+            this.viewModalPostJob(tblOpenJobs.getSelectionModel().getSelectedItem());
         });
 
         txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -130,7 +143,8 @@ public class HR1_RecruitmentController implements Initializable {
         if (txtSearch.textProperty().getValue().isEmpty()) {
             populateTable();
         } else {
-            tblOpenJobs.getItems().clear();
+            tblOpenJobs.getItems().removeAll(tblOpenJobs.getItems());
+            generateTable();
 
             jobVacancy
                     .join(Model.JOIN.INNER,
@@ -257,13 +271,14 @@ public class HR1_RecruitmentController implements Initializable {
                     });
                     if (GlobalCount != DummyCount) {
 
-                        tblOpenJobs.getItems().clear();
-
+                        observableList.clear();
+                        tblOpenJobs.getItems().removeAll(tblOpenJobs.getItems());
+                        
                         jobVacancy
                                 .join(Model.JOIN.INNER,
                                         "aerolink.tbl_hr4_jobs", "job_id", "=", "job_id")
                                 .where(new Object[][]{
-                            {"jobOpen", "<>", "0"}
+                            {"jobOpen", ">", "0"}
                         })
                                 .get()
                                 .stream()

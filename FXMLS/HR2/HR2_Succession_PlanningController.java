@@ -76,8 +76,8 @@ public class HR2_Succession_PlanningController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         selectDepartment();
         DisplayDataInJTable();
-        // populateTableBySelectDept();
         viewJobVacancy();
+        populateTableBySelectDept();
         cbox_department.getSelectionModel().selectedItemProperty().addListener(listener -> {
             populateTableBySelectDept();
         });
@@ -88,9 +88,7 @@ public class HR2_Succession_PlanningController implements Initializable {
         HR4_Jobs jobs = new HR4_Jobs();
         List jv_data = jobs.join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_limit", "job_id", "j_limit", "=", "job_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "d", "=", "dept_id")
-                .join(Model.JOIN.INNER, "aerolink.tbl_hr2_competency_pivot", "job_id", "cp", "=", "job_id")
-                .join(Model.JOIN.INNER, "aerolink.tbl_hr2_skillset", "skill_id", "=", "cp", "skill_id", true)
-                .where(new Object[][]{{"j_limit.jobOpen", "!=", "0"},{"aerolink.tbl_hr2_skillset.isDeleted","<>" ,"1"}})
+                .where(new Object[][]{{"j_limit.jobOpen", "!=", "0"}})
                 .get("d.dept_name as department,aerolink.tbl_hr4_jobs.title");
         JV(jv_data);
     }
@@ -120,7 +118,6 @@ public class HR2_Succession_PlanningController implements Initializable {
 
         try {
             List c = dept.get();
-            //"concat(substring(title,0,2), job_id) as job_id, title"
             for (Object d : c) {
                 HashMap hm1 = (HashMap) d;
                 //RS
@@ -144,10 +141,9 @@ public class HR2_Succession_PlanningController implements Initializable {
                                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
                                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "=", "jobs", "dept_id",true)
                                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_classifications", "id", "=", "jobs", "classification_id", true)
-                                  /*  .where(new Object[][]{{"aerolink.tbl_hr4_department.dept_name", "=", cbox_department.getSelectionModel()
-                                .getSelectedItem().toString().substring(4).toString().split(" - ")[0]}})*/
                                     .where(new Object[][]{{"aerolink.tbl_hr4_department.dept_name", "=", cbox_department.getSelectionModel()
                                 .getSelectedItem().toString()}})
+                                    .orderBy("aerolink.tbl_hr4_job_classifications.class_name", Model.Sort.ASC)
                                     .get("jobs.title as position", "concat(emp.firstname, ' ',emp.middlename, ' ' ,emp.lastname)as employees",
                                             "aerolink.tbl_hr4_job_classifications.class_name as Classification");
                             Data(sp);

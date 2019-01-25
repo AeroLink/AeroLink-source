@@ -173,7 +173,7 @@ public class CRMviewComplaintsController implements Initializable {
                             rs = wq
                                     //.join(Model.JOIN.LEFT, "aerolink.tbl_core1_customer_details", "customer_id", "cid", "=", "customer_id") 
                                     // yung nasa baba nito ayan yung query na select baka malito kayo eh 
-                                    .get("CONCAT(email,' - ',created_at) as notif");
+                                    .get("CONCAT(email,' - ',created_at) as notif","name","comment");
                             Global_Count = count;
                         }
                         return rs;
@@ -223,6 +223,10 @@ public class CRMviewComplaintsController implements Initializable {
 
     @FXML // Modal sya
     private void reply(ActionEvent event) {
+        FXMLS.Core2.Modals.CRMviewComplaintsReplyController.email = tblNotification.getSelectionModel().getSelectedItem().email.getValue();
+        FXMLS.Core2.Modals.CRMviewComplaintsReplyController.name = tblNotification.getSelectionModel().getSelectedItem().name.getValue();
+        FXMLS.Core2.Modals.CRMviewComplaintsReplyController.comment = tblNotification.getSelectionModel().getSelectedItem().comment.getValue();
+        
         Modal md = Modal.getInstance(new Form("/FXMLS/Core2/Modals/CRMviewComplaintsReply.fxml").getParent());
         md.open();
         md.getF().getStage().setOnCloseRequest(action -> {
@@ -287,15 +291,11 @@ public class CRMviewComplaintsController implements Initializable {
             HashMap drow = (HashMap) row;
 
             String email = (String) drow.get("notif");
-
-            tblwq.add(new TableModel_WebQuestion(email));
+            String name = (String) drow.get("name");
+            String comment = (String) drow.get("comment");
+            
+            tblwq.add(new TableModel_WebQuestion(email,name,comment));
         }
-    }
-
-    @FXML
-    private void viewComplaints(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/CRMviewComplaints.fxml"));
-        CRMrootPane.getChildren().setAll(pane);
     }
 
     @FXML

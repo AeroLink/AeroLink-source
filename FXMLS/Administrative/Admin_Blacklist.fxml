@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="831.0" prefWidth="1260.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
+   <children>
+      <TableView fx:id="tablefr" layoutX="60.0" layoutY="39.0" prefHeight="335.0" prefWidth="1140.0">
+         <columns>
+            <TableColumn fx:id="FRreservationid" prefWidth="152.0" text="Name" />
+            <TableColumn fx:id="cfacility" prefWidth="152.0" text="Reason" />
+            <TableColumn fx:id="cstartdate" prefWidth="152.0" text=" " />
+            <TableColumn fx:id="cstarttime" prefWidth="152.0" text=" " />
+            <TableColumn fx:id="crby" prefWidth="152.0" text=" " />
+            <TableColumn fx:id="cstatus" prefWidth="152.0" text="Status" />
+         </columns>
+      </TableView>
+      <JFXButton fx:id="schedsave2" layoutX="1064.0" layoutY="383.0" prefHeight="33.0" prefWidth="136.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="SUBMIT" textFill="WHITE">
+         <font>
+            <Font name="Aparajita" size="15.0" />
+         </font>
+      </JFXButton>
+      <TableView fx:id="tablefr1" layoutX="60.0" layoutY="440.0" prefHeight="335.0" prefWidth="1140.0">
+         <columns>
+            <TableColumn fx:id="FRreservationid1" prefWidth="152.0" text="Blacklist ID" />
+            <TableColumn fx:id="cfacility1" prefWidth="162.0" text="Name" />
+            <TableColumn fx:id="cstartdate1" prefWidth="142.0" text="Reason" />
+            <TableColumn fx:id="cstarttime1" prefWidth="152.0" text="Status" />
+            <TableColumn fx:id="crby1" prefWidth="152.0" text=" " />
+            <TableColumn fx:id="cstatus1" prefWidth="152.0" text=" " />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

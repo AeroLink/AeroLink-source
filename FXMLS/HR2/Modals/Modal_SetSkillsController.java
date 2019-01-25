@@ -109,7 +109,7 @@ public class Modal_SetSkillsController implements Initializable {
                 int id = skillset.insert(cm_data, true);
                 Object[][] competency = {
                     {"skill_id", id},
-                    {"job_id", cbox_select_job.getSelectionModel().getSelectedItem().toString().substring(1).toString().split(" - ")[0]},
+                    {"job_id", cbox_select_job.getSelectionModel().getSelectedItem().toString().substring(1).split(" - ")[0]},
                 };
 
                 cm_pivot.insert(competency);
@@ -119,8 +119,6 @@ public class Modal_SetSkillsController implements Initializable {
                 saved.setContentText("Saved");
                 saved.showAndWait();
                 btn_save.setDisable(true);
-                HR2_Competency_ManagementController cm = new HR2_Competency_ManagementController();
-                cm.loadJob();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
             }

@@ -6,6 +6,7 @@
 package FXMLS.HR1.Modals;
 
 import FXMLS.HR1.ClassFiles.HR1_PostJobSelection;
+import FXMLS.HR1.HR1_RecruitmentController;
 import Model.HR1.JobPosting;
 import Model.HR1.JobVacancy;
 import Model.HR2_CM_Pivot;
@@ -58,14 +59,13 @@ public class HR1_PostJobController implements Initializable {
     private TextField txtSalary;
 
     String htmlText = "";
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        
+
         jobID.setId(HR1_PostJobSelection.jobID);
         txtOpen.setText(HR1_PostJobSelection.OpenPos);
         lblJob.setText(HR1_PostJobSelection.jobTitle);
@@ -91,9 +91,9 @@ public class HR1_PostJobController implements Initializable {
         });
 
         htmlText += "</ul></br></br>";
-        
+
         txtDesc.setHtmlText(htmlText);
-        
+
         Object[] cbo = {"Full Time", "Part Time"};
         cboStatus.getItems().addAll(cbo);
 
@@ -103,7 +103,7 @@ public class HR1_PostJobController implements Initializable {
                 value.consume();
             }
         });
-        
+
         txtSalary.setOnKeyReleased(value -> {
             if (txtSalary.getText().isEmpty()) {
                 txtSalary.setText("0");
@@ -124,7 +124,7 @@ public class HR1_PostJobController implements Initializable {
             int id = jp.insert(new Object[][]{
                 {"jobPosted_id", HR1_PostJobSelection.id},
                 {"title", lblJob.getText()},
-                {"description", txtDesc.getHtmlText().replace("\"", "'")},
+                {"description", txtDesc.getHtmlText().replace("\"", "'").replace(",", ".").replace("contenteditable='true'", "")},
                 {"status", cboStatus.getSelectionModel().getSelectedItem().toString()},
                 {"salary", txtSalary.getText()},
                 {"publish_on", dtpPublish.getValue().toString()},
@@ -141,6 +141,7 @@ public class HR1_PostJobController implements Initializable {
                 }).executeUpdate();
 
                 Helpers.EIS_Response.SuccessResponse("Success", "Job was successfully Posted");
+                HR1_RecruitmentController.refresher.setValue(true);
             }
 
         } catch (Exception e) {

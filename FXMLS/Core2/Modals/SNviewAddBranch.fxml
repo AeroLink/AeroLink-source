@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="SNrootPane" prefHeight="525.0" prefWidth="693.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Core2.Modals.SNviewAddBranchController">
+   <children>
+      <BorderPane layoutX="39.0" layoutY="22.0" prefHeight="462.0" prefWidth="732.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #34a853;" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="14.0" layoutY="12.0" text="REGISTRATION" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </top>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField fx:id="txtRegion" layoutX="21.0" layoutY="39.0" prefHeight="40.0" prefWidth="300.0" AnchorPane.leftAnchor="30.0" />
+                  <Label layoutX="21.0" layoutY="19.0" text="Region">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtCity" layoutX="366.0" layoutY="39.0" prefHeight="40.0" prefWidth="298.0" />
+                  <Label layoutX="366.0" layoutY="19.0" text="City">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtBarangay" layoutX="21.0" layoutY="101.0" prefHeight="40.0" prefWidth="300.0" AnchorPane.leftAnchor="30.0" />
+                  <Label layoutX="21.0" layoutY="81.0" text="Barangay">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtProvince" layoutX="366.0" layoutY="101.0" prefHeight="40.0" prefWidth="300.0" />
+                  <Label layoutX="366.0" layoutY="81.0" text="Province">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtZip" layoutX="21.0" layoutY="165.0" prefHeight="40.0" prefWidth="300.0" AnchorPane.leftAnchor="30.0" />
+                  <Label layoutX="21.0" layoutY="145.0" text="Zip Code">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtAddress" layoutX="366.0" layoutY="165.0" prefHeight="40.0" prefWidth="300.0" />
+                  <Label layoutX="366.0" layoutY="145.0" text="Address">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtEmail" layoutX="33.0" layoutY="292.0" prefHeight="40.0" prefWidth="300.0" AnchorPane.leftAnchor="33.0" />
+                  <Label layoutX="26.0" layoutY="272.0" text="Email">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtCellNumber" layoutX="366.0" layoutY="230.0" prefHeight="40.0" prefWidth="300.0" />
+                  <Label layoutX="366.0" layoutY="210.0" text="Cellphone Number">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtManager" layoutX="366.0" layoutY="292.0" prefHeight="40.0" prefWidth="300.0" />
+                  <Label layoutX="366.0" layoutY="272.0" text="Manager">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="25.0" layoutY="343.0" text="Services">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="submit" buttonType="RAISED" layoutX="567.0" layoutY="430.0" style="-fx-background-color: #34a853;" text="Submit" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="SEND" size="20" />
+                     </graphic>
+                  </JFXButton>
+                  <AnchorPane layoutX="21.0" layoutY="363.0" prefHeight="49.0" prefWidth="645.0" style="-fx-border-color: black;">
+                     <children>
+                        <JFXCheckBox fx:id="cbbDtd" layoutX="461.0" layoutY="10.0" text="Door to Door">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </JFXCheckBox>
+                        <JFXCheckBox fx:id="cbbExpress" layoutX="14.0" layoutY="10.0" text="Express">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </JFXCheckBox>
+                        <JFXCheckBox fx:id="cbbPickup" layoutX="243.0" layoutY="10.0" text="Pick Up">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </JFXCheckBox>
+                     </children>
+                  </AnchorPane>
+                  <Label fx:id="lblCountry" layoutX="24.0" layoutY="436.0" prefHeight="23.0" prefWidth="95.0" text="Philippines" visible="false" />
+                  <TextField fx:id="txtStreet" layoutX="32.0" layoutY="233.0" prefHeight="40.0" prefWidth="300.0" />
+                  <Label layoutX="20.0" layoutY="210.0" text="Street">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
