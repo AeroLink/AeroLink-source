@@ -17,7 +17,7 @@
          <items>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <TableView layoutY="97.0" prefHeight="595.0" prefWidth="1368.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
+                  <TableView layoutY="97.0" prefHeight="595.0" prefWidth="1368.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
                      <columns>
                         <TableColumn prefWidth="451.0" text="ITEM BRANDS" />
                         <TableColumn prefWidth="215.0" text="REQUIRED DOCUMENTS" />
@@ -36,61 +36,29 @@
                   </TableView>
                   <AnchorPane prefHeight="40.0" prefWidth="1370.0" styleClass="card" stylesheets="@../../../Assets/css/card.css">
                      <children>
-                        <Label layoutX="503.0" layoutY="-1.0" prefHeight="41.0" prefWidth="399.0" text="STANDARD OPERATIONAL PROCEDURE" textFill="#34a853" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0">
+                        <Label layoutX="503.0" layoutY="-1.0" prefHeight="41.0" prefWidth="265.0" text="INSPECTION GUIDELINES" textFill="#34a853" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0">
                            <font>
                               <Font name="Arial Bold" size="20.0" />
                            </font>
                         </Label>
-                        <JFXButton buttonType="RAISED" layoutX="1220.0" layoutY="7.0" onAction="#packInspect" prefHeight="31.0" prefWidth="199.0" style="-fx-background-color: #34a853;" text="PACKAGE INSPECTION" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+                        <JFXButton buttonType="RAISED" layoutX="1220.0" layoutY="7.0" onAction="#manageguidelines" prefHeight="30.0" prefWidth="170.0" style="-fx-background-color: #34a853;" text="MANAGE GUIDELINES" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
                            <graphic>
                               <FontAwesomeIconView fill="WHITE" glyphName="CUBE" size="20" />
                            </graphic>
-                           <font>
-                              <Font size="15.0" />
-                           </font>
                         </JFXButton>
-                        <JFXButton buttonType="RAISED" layoutX="951.0" layoutY="5.0" onAction="#manageguidelines" prefHeight="31.0" prefWidth="199.0" style="-fx-background-color: #34a853;" text="MANAGE GUIDELINES" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
+                        <JFXButton buttonType="RAISED" layoutX="1009.0" layoutY="5.0" onAction="#packageinspection" prefHeight="30.0" prefWidth="170.0" style="-fx-background-color: #34a853;" text="PACKAGE INSPECTION" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0">
                            <graphic>
                               <FontAwesomeIconView fill="WHITE" glyphName="CUBES" size="20" />
                            </graphic>
                         </JFXButton>
-                        <JFXButton buttonType="RAISED" layoutX="743.0" layoutY="5.0" onAction="#prohibited" prefHeight="31.0" prefWidth="199.0" style="-fx-background-color: #34a853;" text="PROHIBITED ITEMS" textFill="WHITE">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
+                        <JFXButton buttonType="RAISED" layoutX="828.0" layoutY="5.0" onAction="#packagedetails" prefHeight="30.0" prefWidth="170.0" style="-fx-background-color: #34a853;" text="PACKAGE DETAILS" textFill="WHITE">
                            <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="SHIELD" size="20" />
+                              <FontAwesomeIconView fill="WHITE" glyphName="CUBES" size="20" />
                            </graphic>
                         </JFXButton>
                      </children>
                   </AnchorPane>
-                  <JFXButton buttonType="RAISED" layoutX="1229.0" layoutY="652.0" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ee0c0c;" text="Delete" textFill="WHITE">
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="ERASER" size="20" />
-                     </graphic>
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="1109.0" layoutY="652.0" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ffa500;" text="Update" textFill="WHITE">
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="UPDATE" size="20" />
-                     </graphic>
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="992.0" layoutY="652.0" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #34a853;" text="Add" textFill="WHITE">
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="20" />
-                     </graphic>
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </JFXButton>
+                  <Label layoutX="69.0" layoutY="60.0" text="DITO NAKALAGAY LAHAT NG MGA MAMAHALING GAMIT" />
                </children>
             </AnchorPane>
          </items>

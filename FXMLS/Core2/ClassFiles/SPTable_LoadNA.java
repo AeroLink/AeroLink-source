@@ -11,12 +11,12 @@ import javafx.beans.property.SimpleStringProperty;
  *
  * @author JPEG
  */
-public class SPTable_LoadNA{
+public class SPTable_LoadNA {
 
     public SimpleStringProperty provider_name;
     public SimpleStringProperty provider_address;
     public SimpleStringProperty provider_contact;
-     public SimpleStringProperty country;
+    public SimpleStringProperty country;
 
     public SPTable_LoadNA(
             String provider_name,

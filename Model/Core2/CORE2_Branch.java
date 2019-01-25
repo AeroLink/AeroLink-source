@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FXMLS.Core2.Change;
+package Model.Core2;
 
 /**
  *
- * @author JPEG
+ * @author jpeg
  */
-class del {
-    
+public class CORE2_Branch extends Synapse.Model{
+    public CORE2_Branch(){
+        initTable("tbl_core2_created_branch");
+    }
 }
