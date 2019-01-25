@@ -5,6 +5,7 @@
  */
 package FXMLS.Administrative;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,6 +20,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -104,6 +108,17 @@ public class AlertBox {
          st.show();
      }
     
+     final static Tooltip tp = new Tooltip();
+     public static void tooltip(String text, Button btn){
+         tp.setText(text);
+         btn.setTooltip(tp);
+     }
+     
+     public void fxmlloader(String text,Pane pane) throws IOException{
+       
+       AnchorPane  p = FXMLLoader.load(getClass().getResource(text));
+       pane.getChildren().setAll(p);
+     }
     
     }
     

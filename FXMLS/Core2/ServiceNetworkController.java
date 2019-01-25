@@ -5,26 +5,29 @@
  */
 package FXMLS.Core2;
 
-import Model.Core2.CORE2_barangay;
-import Model.Core2.CORE2_province;
-import Model.Core2.CORE2_region;
-import Model.Core2.CORE2_type;
-import Model.Core2.CORE2_zip;
+import FXMLS.Core2.ClassFiles.SNTable_branch;
+import Model.Core2.CORE2_Branch;
 import Synapse.Components.Modal.Modal;
 import Synapse.Form;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXCheckBox;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.CompletableFuture;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -32,119 +35,146 @@ import javafx.scene.layout.AnchorPane;
 /**
  * FXML Controller class
  *
- * @author JPEG
+ * @author jpeg
  */
 public class ServiceNetworkController implements Initializable {
 
-//    ObservableList<String> regionList = FXCollections.observableArrayList("Region 1", "Region 2");
-//    ObservableList<String> R1 = FXCollections.observableArrayList("Ilocos Norte", "Ilocos Sur", "La Union", "Pangasinan");
-//    ObservableList<String> R2 = FXCollections.observableArrayList("Batanes", "Cagayan", "Isabela", "Nueva Vizcaya", "Quirino");
-
-    CORE2_type type = new CORE2_type();
-//    CORE2_region region = new CORE2_region();
-//    CORE2_province province = new CORE2_province();
-//    CORE2_barangay barangay = new CORE2_barangay();
-//    CORE2_zip zip = new CORE2_zip();
+    /* DECLARATION START */
+    int Global_Count = 0;
+    /* DECLARATION END */
+ /* FOR TABLE START */
+    ObservableList<SNTable_branch> snb = FXCollections.observableArrayList();
+    /* FOR TABLE END */
+    CORE2_Branch branch = new CORE2_Branch();
 
     @FXML
     private AnchorPane SNrootPane;
     @FXML
-    private JFXButton SNviewN;
+    private TableView<SNTable_branch> tblBranch;
+    @FXML
+    private ContextMenu contextMenu;
+    @FXML
+    private MenuItem menuVT;
     @FXML
     private JFXButton SNviewM;
     @FXML
     private JFXButton SNviewR;
     @FXML
-    private JFXButton SNviewI;
-    @FXML
-    private ComboBox cbmType;
-    @FXML
-    private ComboBox cbmDriver;
-    @FXML
-    private JFXButton submit;
-    @FXML
-    private TextField txtEmail;
-    @FXML
-    private TextField txtTnumber;
-    @FXML
-    private TextField txtMnumber;
-    @FXML
-    private TextField txtBaddress;
-    @FXML
-    private TextField txtS1;
-    @FXML
-    private TextField txtS3;
-    @FXML
-    private TextField txtS2;
-    @FXML
-    private ComboBox<?> cbmIcharge;
-    @FXML
-    private TableView<?> tVcharge;
-    @FXML
-    private TableView<?> tVdriver;
-    @FXML
-    private TextField txtRegion;
-    @FXML
-    private TextField txtBarangay;
-    @FXML
-    private TextField txtProvince;
-    @FXML
-    private TextField txtZipcode;
-    @FXML
-    private TextField txtEMPID1;
-    @FXML
-    private TextField txtEMPID2;
+    private TextField srSearch;
 
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //combobox kapag pipili ka kung philippines or singapore
-        type.get().stream().forEach(action -> {
-            HashMap row = (HashMap) action;
-            cbmType.getItems().add(row.get("country").toString());
+        // TODO
+        // para sa generated tableColumn ito
+        snb.addListener((ListChangeListener.Change<? extends Object> c) -> {
+            tblBranch.setItems(snb);
         });
-
-//        region.get().stream().forEach(action -> {
-//            HashMap row = (HashMap) action;
-//            cbmRegion.getItems().add(row.get("region_name").toString());
-//        });
-//
-//        province.get().stream().forEach(action -> {
-//            HashMap row = (HashMap) action;
-//            cbmProvince.getItems().add(row.get("province_name").toString());
-//        });
-
-//        cbmRegion.setValue("Region 1");
-//        cbmRegion.setItems(regionList);
-//
-//        cbmProvince.setValue("Ilocos Norte");
-//        cbmProvince.setItems(R1);
-//
-//        zip.get().stream().forEach(action -> {
-//            HashMap row = (HashMap) action;
-//            cbmZip.getItems().add(row.get("zipcode").toString());
-//        });
-//
-//        barangay.get().stream().forEach(action -> {
-//            HashMap row = (HashMap) action;
-//            cbmBarangay.getItems().add(row.get("barangay_name").toString());
-//        });
+        this.generateTableColumn();
+        this.populateTable();
     }
 
-//    @FXML
-//    private void provinceChange() {
-//        if (cbmRegion.getValue().equals("Region 1")) {
-//            cbmProvince.setValue("Ilocos Norte");
-//            cbmProvince.setItems(R1);
-//        }else{
-//            cbmProvince.setValue("Batanes");
-//            cbmProvince.setItems(R2);
-//        }
-//    }
+    // ito yung mga tablecolumn kasi wala akung nilagay sa tableview dun sa scene
+    public void generateTableColumn() {
+        tblBranch.getItems().clear();
+        tblBranch.getColumns().removeAll(tblBranch.getColumns());
+
+        TableColumn<SNTable_branch, String> code = new TableColumn<>("BRANCH CODE");
+        TableColumn<SNTable_branch, String> assign = new TableColumn<>("PERSONNEL ASSIGN");
+        TableColumn<SNTable_branch, String> address = new TableColumn<>("ADDRESS");
+        TableColumn<SNTable_branch, String> country = new TableColumn<>("COUNTRY");
+
+        code.setCellValueFactory((TableColumn.CellDataFeatures<SNTable_branch, String> param) -> param.getValue().branch_code);
+        assign.setCellValueFactory((TableColumn.CellDataFeatures<SNTable_branch, String> param) -> param.getValue().personnel_assign);
+        address.setCellValueFactory((TableColumn.CellDataFeatures<SNTable_branch, String> param) -> param.getValue().address);
+        country.setCellValueFactory((TableColumn.CellDataFeatures<SNTable_branch, String> param) -> param.getValue().country);
+        tblBranch.getColumns().addAll(code, assign, address,country);
+    }
+
+    // dito isinasagawa yung pag query and etc or inner|left join
+    public void populateTable() {
+        Thread th = new Thread(new Task() {
+            @Override
+            protected Object call() throws Exception {
+                while (true) {
+                    CompletableFuture.supplyAsync(() -> {
+                        List list = branch.get(("COUNT(*) as total"));
+                        return Integer.parseInt(((HashMap) list.get(0)).get("total").toString());
+                    }).thenApply((count) -> {
+                        List rs = new ArrayList<>();
+                        if (count != Global_Count) {
+                            rs = branch
+                                    //.join(Model.JOIN.LEFT, "aerolink.tbl_core1_customer_details", "customer_id", "cid", "=", "customer_id")
+                                    //.join(Model.JOIN.LEFT, "aerolink.tbl_core1_package_details", "customer_id1", "pid", "=", "customer_id")
+                                    .get("branch_code", "country", "region", "city", "barangay",
+                                            "street", "address", "province", "zipcode", "email",
+                                            "number", "personnel_assign", "express", "pickup", "doortodoor");
+                            Global_Count = count;
+                        }
+                        return rs;
+                    }).thenAccept((rs) -> {
+                        if (!rs.isEmpty()) {
+                            AddTable(rs);
+                        }
+                    });
+                    Thread.sleep(3000);
+                }
+            }
+        });
+        th.setDaemon(true);
+        th.start();
+    }
+
+    // need sya para lumabas yung result sa tableview ez LAWGIC
+    public void AddTable(List rs) {
+        snb.clear();
+
+        for (Object row : rs) {
+            HashMap drow = (HashMap) row;
+
+            String branch_code = String.valueOf(drow.get("branch_code")); // dapat ganto kapag primary key
+            String country = (String) drow.get("country");
+            String region = (String) drow.get("region");
+            String city = (String) drow.get("city");
+            String barangay = (String) drow.get("barangay");
+            String street = (String) drow.get("street");
+            String address = (String) drow.get("address");
+            String province = (String) drow.get("province");
+            String zipcode = (String) drow.get("zipcode");
+            String email = (String) drow.get("email");
+            String number = (String) drow.get("number");
+            String personnel_assign = (String) drow.get("personnel_assign"); // dapat ganto kapag primary key
+            String ex = (String) drow.get("express");
+            String pu = (String) drow.get("pickup");
+            String dtd = (String) drow.get("doortodoor");
+
+            snb.add(new SNTable_branch(branch_code, country, region, city, barangay, street, address, province,
+                    zipcode, email, number, personnel_assign, ex, pu, dtd));
+        }
+    }
 
     @FXML
-    public void viewN() throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/SNviewBranch.fxml"));
-        SNrootPane.getChildren().setAll(pane);
+    private void BranchInfoModal(ActionEvent event) {
+        FXMLS.Core2.Modals.SNviewCodeController.code = tblBranch.getSelectionModel().getSelectedItem().branch_code.getValue();
+        FXMLS.Core2.Modals.SNviewCodeController.region = tblBranch.getSelectionModel().getSelectedItem().region.getValue();
+        FXMLS.Core2.Modals.SNviewCodeController.province = tblBranch.getSelectionModel().getSelectedItem().province.getValue();
+        FXMLS.Core2.Modals.SNviewCodeController.barangay = tblBranch.getSelectionModel().getSelectedItem().barangay.getValue();
+        FXMLS.Core2.Modals.SNviewCodeController.zip = tblBranch.getSelectionModel().getSelectedItem().zipcode.getValue();
+        FXMLS.Core2.Modals.SNviewCodeController.address = tblBranch.getSelectionModel().getSelectedItem().address.getValue();
+        FXMLS.Core2.Modals.SNviewCodeController.email = tblBranch.getSelectionModel().getSelectedItem().email.getValue();
+        FXMLS.Core2.Modals.SNviewCodeController.number = tblBranch.getSelectionModel().getSelectedItem().number.getValue();
+        FXMLS.Core2.Modals.SNviewCodeController.fname = tblBranch.getSelectionModel().getSelectedItem().personnel_assign.getValue();
+        FXMLS.Core2.Modals.SNviewCodeController.express = tblBranch.getSelectionModel().getSelectedItem().ex.getValue();
+        FXMLS.Core2.Modals.SNviewCodeController.pickup = tblBranch.getSelectionModel().getSelectedItem().pu.getValue();
+        FXMLS.Core2.Modals.SNviewCodeController.door = tblBranch.getSelectionModel().getSelectedItem().dtd.getValue();
+
+        Modal md = Modal.getInstance(new Form("/FXMLS/Core2/Modals/SNviewCode.fxml").getParent());
+        md.open();
+        md.getF().getStage().setOnCloseRequest(action -> {
+            FXMLS.Core2.Modals.SNviewCodeController.modalOpen = false;
+        });
     }
 
     @FXML
@@ -160,9 +190,12 @@ public class ServiceNetworkController implements Initializable {
     }
 
     @FXML
-    private void viewI(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/SNviewInternationalBranch.fxml"));
-        SNrootPane.getChildren().setAll(pane);
+    private void viewRegistration(ActionEvent event) {
+        Modal md = Modal.getInstance(new Form("/FXMLS/Core2/Modals/SNviewAddBranch.fxml").getParent());
+        md.open();
+        md.getF().getStage().setOnCloseRequest(action -> {
+            FXMLS.Core2.Modals.SNviewAddBranchController.modalOpen = false;
+        });
     }
 
 }

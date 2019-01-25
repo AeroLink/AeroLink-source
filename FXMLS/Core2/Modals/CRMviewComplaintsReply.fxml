@@ -18,12 +18,8 @@
                   <AnchorPane prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: #34A853;" BorderPane.alignment="CENTER">
                      <children>
                         <FontAwesomeIconView fill="WHITE" glyphName="BELL" layoutX="6.0" layoutY="38.0" size="40" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
-                        <Label layoutX="50.0" layoutY="10.0" prefHeight="41.0" prefWidth="370.0" text="COMPLAINTS ID" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="5.0">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                        <JFXButton buttonType="RAISED" layoutX="525.0" layoutY="10.0" style="-fx-background-color: white;" text="Forward To Admin" textFill="#34a853" AnchorPane.rightAnchor="10.0">
+                        <Label fx:id="lblEmail" layoutX="53.0" layoutY="25.0" prefHeight="21.0" prefWidth="356.0" text="COMPLAINTS EMAIL" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="53.0" AnchorPane.rightAnchor="191.0" AnchorPane.topAnchor="25.0" />
+                        <JFXButton fx:id="btnForward" buttonType="RAISED" layoutX="525.0" layoutY="10.0" style="-fx-background-color: white;" text="Forward To Admin" textFill="#34a853" AnchorPane.rightAnchor="10.0">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -31,23 +27,28 @@
                               <FontAwesomeIconView fill="#34a853" glyphName="FORWARD" size="20" />
                            </graphic>
                         </JFXButton>
+                        <Label fx:id="lblName" layoutX="53.0" prefHeight="30.0" prefWidth="354.0" text="NAME" textFill="WHITE" AnchorPane.topAnchor="0.0">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </top>
                <center>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <TextArea layoutX="23.0" layoutY="28.0" prefHeight="130.0" prefWidth="580.0" text="QUESTION NG MGA CUSTOMER HINDI SYA EDITABLE" wrapText="true" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
+                        <TextArea fx:id="txtAquestion" editable="false" layoutX="23.0" layoutY="28.0" prefHeight="130.0" prefWidth="580.0" text="QUESTION NG MGA CUSTOMER HINDI SYA EDITABLE" wrapText="true" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </TextArea>
-                        <TextArea layoutX="10.0" layoutY="158.0" prefHeight="80.0" prefWidth="578.0" promptText="ANSWER" text="SAGOT MO SA MGA TANONG NG MGA COMPLAINTS" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                        <TextArea fx:id="txtAReply" layoutX="10.0" layoutY="158.0" prefHeight="80.0" prefWidth="578.0" promptText="Reply" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </TextArea>
-                        <JFXButton buttonType="RAISED" layoutX="436.0" layoutY="257.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #34A853;" text="Submit" textFill="WHITE" AnchorPane.rightAnchor="10.0">
+                        <JFXButton fx:id="btnSubmit" buttonType="RAISED" layoutX="436.0" layoutY="257.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #34A853;" text="Submit" textFill="WHITE" AnchorPane.rightAnchor="10.0">
                            <font>
                               <Font size="15.0" />
                            </font>

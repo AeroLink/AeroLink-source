@@ -7,15 +7,21 @@ package FXMLS.Core2.ClassFiles;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+
 /**
  *
  * @author jpeg
  */
 public class TableModel_WebQuestion {
+
     public SimpleStringProperty email;
-    
-    public TableModel_WebQuestion(String email){
+    public SimpleStringProperty name;
+    public SimpleStringProperty comment;
+
+    public TableModel_WebQuestion(String email,String name,String comment) {
         this.email = new SimpleStringProperty(email);
+        this.name = new SimpleStringProperty(name);
+        this.comment = new SimpleStringProperty(comment);
     }
 
 }
