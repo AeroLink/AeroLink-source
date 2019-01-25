@@ -5,6 +5,7 @@
  */
 package FXMLS.Log2;
 
+import FXMLS.Log1.ProcurementController;
 import FXMLS.Log2.ClassFiles.Log2_Fleet_ManagementClass;
 import FXMLS.Log2.ClassFiles.Log2_Vehicle_ReservationClass;
 import FXMLS.USM.Controllers.IUsers;
@@ -15,6 +16,8 @@ import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -61,12 +64,9 @@ public class Log2_Vehicle_ReservationController implements Initializable {
     @FXML
     private JFXButton model;
     @FXML
-    private ImageView imageview;
-    @FXML
     private TableColumn<Log2_Vehicle_ReservationClass, String> vehiclecode;
     @FXML
     private TableColumn<Log2_Vehicle_ReservationClass, String> vehiclemodel;
-
     @FXML
     private TableView<Log2_Vehicle_ReservationClass> vehiclemaintenance;
     @FXML
@@ -74,11 +74,7 @@ public class Log2_Vehicle_ReservationController implements Initializable {
     @FXML
     private TableColumn<Log2_Vehicle_ReservationClass, String> details;
     @FXML
-    private JFXTextField typeofvehicle;
-    @FXML
     private JFXTextField location;
-    @FXML
-    private JFXTextField vehicleid;
     @FXML
     private JFXTextField purpose;
     @FXML
@@ -154,21 +150,6 @@ public class Log2_Vehicle_ReservationController implements Initializable {
         tblmonitoring.getItems().addAll(monitoringdata);
     }
 
-    @FXML
-    private void btn_selectmodel(MouseEvent event) throws IOException {
-        Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-
-        Parent parent = loader.load(getClass().getResource("Log2_Vehicle_Reservation_SelectV.fxml"));
-
-        Scene scene = new Scene(parent);
-
-        stage.setFullScreen(false);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.setScene(scene);
-
-        stage.show();
-    }
 
     
      public void Save() {
@@ -181,8 +162,7 @@ public class Log2_Vehicle_ReservationController implements Initializable {
                     = {
                         {"purpose", purpose.getText()},
                         {"location", location.getText()},
-                        {"typeofvehicle", typeofvehicle.getText()},
-                        {"vehicleid", vehicleid.getText()}
+                 
                         
                        
                     };
@@ -200,6 +180,41 @@ public class Log2_Vehicle_ReservationController implements Initializable {
     
 
     }
+
+    @FXML
+    private void btnaddveicle(MouseEvent event) throws IOException {
+        
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+
+        Parent parent = loader.load(getClass().getResource("/FXMLS/Log2/vr/modals/Vehicle_reservation.fxml"));
+
+        Scene scene = new Scene(parent);
+
+        stage.setFullScreen(false);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setScene(scene);
+
+        stage.show();
+    }
+
+    @FXML
+    private void btn_selectmodel(MouseEvent event) throws IOException {
+        
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+
+        Parent parent = loader.load(getClass().getResource("/FXMLS/Log2/vr/modals/Log2_Vehicle_Reservation_SelectV.fxml"));
+
+        Scene scene = new Scene(parent);
+
+        stage.setFullScreen(false);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setScene(scene);
+
+        stage.show();
+    }
+    
 
 
   

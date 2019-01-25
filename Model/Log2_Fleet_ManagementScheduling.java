@@ -14,7 +14,7 @@ import static Synapse.Model.setColumns;
 public class Log2_Fleet_ManagementScheduling extends Synapse.Model{
     
     public Log2_Fleet_ManagementScheduling() {
-              setColumns("department","itemname","quantity","destination","departure","vehicle","vehicletype","vehiclecapacity","driver");
+              setColumns("department","itemname","quantity","destination","departure","vehicle","vehicletype","vehiclecapacity","driver","time");
         this.initTable("aerolink.tbl_log2_requestdeliveryscheduling");
     }
     
