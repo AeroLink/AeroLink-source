@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="431.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.Modal_EditSkillsController">
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="431.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.Modal_EditSkillsController">
    <children>
       <Pane layoutX="6.0" prefHeight="44.0" prefWidth="431.0" style="-fx-background-color: #34A853;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -35,7 +35,7 @@
          <font>
             <Font name="Lato Regular" size="12.0" />
          </font></JFXTextArea>
-      <JFXButton fx:id="btn_update" buttonType="RAISED" layoutX="50.0" layoutY="480.0" onAction="#Update" prefHeight="37.0" prefWidth="331.0" style="-fx-background-color: #34A853;" styleClass="btn-primary" text=" Update" textFill="WHITE">
+      <JFXButton fx:id="btn_update" buttonType="RAISED" layoutX="50.0" layoutY="480.0" onAction="#Update" prefHeight="37.0" prefWidth="331.0" styleClass="btn-primary" text=" Update" textFill="WHITE">
          <font>
             <Font name="Lato Black" size="15.0" />
          </font>

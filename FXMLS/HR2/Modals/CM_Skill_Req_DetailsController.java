@@ -8,7 +8,6 @@ package FXMLS.HR2.Modals;
 import FXMLS.HR2.ClassFiles.CM_SkillReq_ModalClass;
 import Model.HR2_CM_Skill_Requisition;
 import Model.HR2_RequestStatus;
-import Model.HR2_Training_Info;
 import Model.HR4_Departments;
 import Synapse.Model;
 import com.jfoenix.controls.JFXButton;

@@ -19,7 +19,6 @@ import Model.HR2_CM_Skill_Requisition;
 import Model.HR2_CM_Skills;
 import Model.HR2_Jobs;
 import Model.HR2_RequestStatus;
-import Model.HR2_Training_Info;
 import Model.HR4_Departments;
 import Model.HR4_Jobs;
 import Synapse.Components.Modal.Modal;
