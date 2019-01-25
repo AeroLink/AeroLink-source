@@ -119,8 +119,6 @@ public class Modal_SetSkillsController implements Initializable {
                 saved.setContentText("Saved");
                 saved.showAndWait();
                 btn_save.setDisable(true);
-                HR2_Competency_ManagementController cm = new HR2_Competency_ManagementController();
-                cm.loadJob();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
             }

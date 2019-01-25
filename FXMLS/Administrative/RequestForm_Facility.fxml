@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTimePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="967.0" prefWidth="717.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
+   <children>
+      <JFXTextField fx:id="reservedby" focusColor="BLACK" labelFloat="true" layoutX="444.0" layoutY="587.0" maxWidth="376.0" minWidth="169.0" prefHeight="37.0" prefWidth="169.0" promptText="Reserved By:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </JFXTextField>
+      <JFXDatePicker fx:id="startdate" defaultColor="#00b359" editable="false" layoutX="26.0" layoutY="333.0" prefHeight="44.0" prefWidth="229.0" promptText="Start Date" />
+      <JFXComboBox fx:id="urgencybox" layoutX="233.0" layoutY="632.0" prefHeight="25.0" prefWidth="186.0" />
+      <Label layoutX="476.0" layoutY="453.0" prefHeight="31.0" prefWidth="105.0" text="Urgency Level:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="edit" layoutX="26.0" layoutY="908.0" onAction="#saveFR" prefHeight="33.0" prefWidth="95.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="SUBMIT" textFill="WHITE">
+         <font>
+            <Font name="Aparajita" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="edit1" layoutX="128.0" layoutY="908.0" prefHeight="33.0" prefWidth="95.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="CANCEL" textFill="WHITE">
+         <font>
+            <Font name="Aparajita" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXDatePicker fx:id="enddate" defaultColor="#00b256" editable="false" layoutX="370.0" layoutY="355.0" prefHeight="39.0" prefWidth="294.0" promptText="End Date" />
+      <JFXComboBox fx:id="facilitybox" layoutX="98.0" layoutY="27.0" onAction="#facilityreservationselect" prefHeight="25.0" prefWidth="156.0" />
+      <Label layoutX="27.0" layoutY="22.0" prefHeight="34.0" prefWidth="79.0" text="Facility:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <JFXTimePicker fx:id="starttime" defaultColor="#00b256" layoutX="29.0" layoutY="419.0" prefHeight="34.0" prefWidth="294.0" promptText="Start Time" />
+      <JFXTimePicker fx:id="endtime" defaultColor="#00b256" layoutX="387.0" layoutY="215.0" prefHeight="40.0" prefWidth="294.0" promptText="End Time" />
+      <ImageView fx:id="frreservationiview" fitHeight="168.0" fitWidth="229.0" layoutX="27.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true" />
+      <JFXComboBox fx:id="purposebox" layoutX="509.0" layoutY="133.0" prefHeight="25.0" prefWidth="194.0" />
+      <Label layoutX="430.0" layoutY="133.0" prefHeight="34.0" prefWidth="79.0" text="Purpose:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="facilityidtxt" layoutX="241.0" layoutY="255.0" opacity="0.0" />
+      <TextField layoutX="106.0" layoutY="243.0" />
+      <Label layoutX="27.0" layoutY="238.0" prefHeight="34.0" prefWidth="79.0" text="Capacity:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="27.0" layoutY="276.0" prefHeight="34.0" prefWidth="79.0" text="Location:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField layoutX="106.0" layoutY="280.0" />
+   </children>
+</AnchorPane>

@@ -604,24 +604,13 @@
                                                     </children>
                                                 </AnchorPane>
                                     
-                                                <AnchorPane>
-                                                    <children>
-                                                        <JFXButton id="log2vp" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Vendor Portal" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                            <font>
-                                                                <Font size="14.0" />
-                                                            </font>
-                                                            <graphic>
-                                                                <FontAwesomeIconView fill="#34a853" glyphName="BOOK" size="25" styleClass="fontIcon" />
-                                                            </graphic>
-                                                        </JFXButton>
-                                                    </children>
-                                                </AnchorPane>
+                                                <AnchorPane />
                                                 <JFXButton id="log2fm" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Fleet Management System">
                                                     <font>
                                                         <Font size="14.0" />
                                                     </font>
                                                     <graphic>
-                                                        <FontAwesomeIconView fill="#34a853" glyphName="BOOK" size="25" styleClass="fontIcon" />
+                                                        <FontAwesomeIconView fill="#34a853" glyphName="TRUCK" size="25" styleClass="fontIcon" />
                                                     </graphic>
                                                 </JFXButton>
                                                 <JFXButton id="log2vr" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Vehicle Reservation ">
@@ -629,7 +618,7 @@
                                                         <Font size="14.0" />
                                                     </font>
                                                     <graphic>
-                                                        <FontAwesomeIconView fill="#34a853" glyphName="BOOK" size="25" styleClass="fontIcon" />
+                                                        <FontAwesomeIconView fill="#34a853" glyphName="CAR" size="25" styleClass="fontIcon" />
                                                     </graphic>
                                                 </JFXButton>
                                                 <JFXButton id="log2dt" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Document Tracking System">
@@ -637,7 +626,7 @@
                                                         <Font size="14.0" />
                                                     </font>
                                                     <graphic>
-                                                        <FontAwesomeIconView fill="#34a853" glyphName="BOOK" size="25" styleClass="fontIcon" />
+                                                        <FontAwesomeIconView fill="#34a853" glyphName="SEARCH" size="25" styleClass="fontIcon" />
                                                     </graphic>
                                                 </JFXButton>
                                                 <JFXButton id="log2am" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Audit Management System">
@@ -645,7 +634,7 @@
                                                         <Font size="14.0" />
                                                     </font>
                                                     <graphic>
-                                                        <FontAwesomeIconView fill="#34a853" glyphName="BOOK" size="25" styleClass="fontIcon" />
+                                                        <FontAwesomeIconView fill="#34a853" glyphName="PENCIL" size="25" styleClass="fontIcon" />
                                                     </graphic>
                                                 </JFXButton>
                                             </children>

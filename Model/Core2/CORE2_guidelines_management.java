@@ -9,16 +9,16 @@ package Model.Core2;
  *
  * @author jpeg
  */
-public class CORE2_guidelines_management extends Synapse.Model{
-    
-    public CORE2_guidelines_management(){
+public class CORE2_guidelines_management extends Synapse.Model {
+
+    public CORE2_guidelines_management() {
         this.initTable("tbl_core2_guidelines_policy");
         setColumns("description");
     }
-    
-    public CORE2_guidelines_management(String trigger){
-        
-        switch(trigger){
+
+    public CORE2_guidelines_management(String trigger) {
+
+        switch (trigger) {
             case "package-sorting":
                 this.initTable("tbl_core2_package_sorting");
                 setColumns("description");
@@ -31,13 +31,17 @@ public class CORE2_guidelines_management extends Synapse.Model{
                 this.initTable("tbl_core2_prohibited");
                 setColumns("description");
                 break;
-            case "package-inspection":   
+            case "package-inspection":
                 this.initTable("tbl_core2_package_inspection");
+                setColumns("description");
+                break;
+            case "prohibited":
+                this.initTable("tbl_core2_prohibited");
                 setColumns("description");
                 break;
             default:
                 break;
         }
     }
-    
+
 }

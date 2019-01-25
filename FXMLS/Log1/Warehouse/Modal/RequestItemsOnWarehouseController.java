@@ -19,6 +19,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -54,6 +55,8 @@ public class RequestItemsOnWarehouseController implements Initializable {
     private TableColumn<Log1_fullInventoryList, String> status_col;
     @FXML
     private Label itemID_txt;
+    @FXML
+    private DatePicker DateRequested_txt;
 
     /**
      * Initializes the controller class.
@@ -134,6 +137,7 @@ public class RequestItemsOnWarehouseController implements Initializable {
                ItemsXD.add(new Log1_fullInventoryList(
                 
                 String.valueOf(hm.get("ItemID")),
+                String.valueOf(hm.get("SupplierID")),
                 String.valueOf(hm.get("SupplierName")),
                 String.valueOf(hm.get("ItemDescription")),
                 String.valueOf(hm.get("ItemType")),

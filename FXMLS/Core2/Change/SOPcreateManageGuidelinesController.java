@@ -8,10 +8,12 @@ package FXMLS.Core2.Change;
 import FXMLS.Core2.ClassFiles.SOPTable_guidelines;
 import FXMLS.Core2.ClassFiles.SOPTable_package_sorting;
 import FXMLS.Core2.ClassFiles.SOPTable_policy;
+import FXMLS.Core2.ClassFiles.SOPTable_prohibited;
 import FXMLS.Core2.ClassFiles.SOPTable_terms_condition;
 import Model.Core2.CORE2_guidelines_management;
 import Model.Core2.CORE2_TermsCondition;
 import Model.Core2.CORE2_PackageSorting;
+import Model.Core2.CORE2_Prohibited;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
@@ -47,10 +49,12 @@ public class SOPcreateManageGuidelinesController implements Initializable {
     CORE2_guidelines_management gm = new CORE2_guidelines_management();
     CORE2_guidelines_management tc = new CORE2_guidelines_management("terms-condition");
     CORE2_guidelines_management ps = new CORE2_guidelines_management("package-sorting");
+    CORE2_guidelines_management p = new CORE2_guidelines_management("prohibited");
 
     CORE2_TermsCondition TC = new CORE2_TermsCondition();
     CORE2_PackageSorting PS = new CORE2_PackageSorting();
 
+    ObservableList<SOPTable_prohibited> pi = FXCollections.observableArrayList();
     ObservableList<SOPTable_guidelines> OLg = FXCollections.observableArrayList();
     ObservableList<SOPTable_terms_condition> OLtc = FXCollections.observableArrayList();
     ObservableList<SOPTable_package_sorting> OLps = FXCollections.observableArrayList();
@@ -64,6 +68,8 @@ public class SOPcreateManageGuidelinesController implements Initializable {
     @FXML
     private TableView<SOPTable_package_sorting> tblPS;
     @FXML
+    private TableView<SOPTable_prohibited> tblPI;
+    @FXML
     private JFXButton gpbtn;
     @FXML
     private TextArea TAgp;
@@ -75,6 +81,10 @@ public class SOPcreateManageGuidelinesController implements Initializable {
     private TextArea TAps;
     @FXML
     private JFXButton psbtn;
+    @FXML
+    private JFXButton pibtn;
+    @FXML
+    private TextArea TApi;
 
     /**
      * Initializes the controller class.
@@ -92,13 +102,20 @@ public class SOPcreateManageGuidelinesController implements Initializable {
             tblPS.setItems(OLps);
         });
 
+        pi.addListener((ListChangeListener.Change<? extends Object> c) -> {
+            tblPI.setItems(pi);
+        });
+
+        this.GeneratePI();
         this.GenerateGL();
         this.GenerateTAC();
         this.GeneratePS();
         this.populateTableGL();
         this.populateTableTAC();
         this.populateTablePS();
+        this.populateTablePI();
 
+        pibtn.setOnMouseClicked(e -> Insert());
         gpbtn.setOnMouseClicked(e -> Insert1());
         tcbtn.setOnMouseClicked(e -> Insert2());
         psbtn.setOnMouseClicked(e -> Insert3());
@@ -129,6 +146,15 @@ public class SOPcreateManageGuidelinesController implements Initializable {
         TableColumn<SOPTable_package_sorting, String> description = new TableColumn<>("PACKAGE SORTING");
         description.setCellValueFactory((TableColumn.CellDataFeatures<SOPTable_package_sorting, String> param) -> param.getValue().description);
         tblPS.getColumns().addAll(description);
+    }
+
+    public void GeneratePI() {
+        tblPI.getItems().clear();
+        tblPI.getColumns().removeAll(tblPI.getColumns());
+
+        TableColumn<SOPTable_prohibited, String> description = new TableColumn<>("PROHIBITED ITEMS");
+        description.setCellValueFactory((TableColumn.CellDataFeatures<SOPTable_prohibited, String> param) -> param.getValue().description);
+        tblPI.getColumns().addAll(description);
     }
 
     // dito isinasagawa yung pag query and etc or inner|left join
@@ -228,6 +254,38 @@ public class SOPcreateManageGuidelinesController implements Initializable {
     }
     // dito isinasagawa yung pag query and etc or inner|left join
 
+    // dito isinasagawa yung pag query and etc or inner|left join
+    public void populateTablePI() {
+        Thread th = new Thread(new Task() {
+            @Override
+            protected Object call() throws Exception {
+                while (true) {
+                    CompletableFuture.supplyAsync(() -> {
+                        List list = p.get(("COUNT(*) as total"));
+                        return Integer.parseInt(((HashMap) list.get(0)).get("total").toString());
+                    }).thenApply((count) -> {
+                        List rs = new ArrayList<>();
+                        if (count != Global_Count) {
+                            rs = p
+                                    //.join(Model.JOIN.LEFT, "aerolink.tbl_core1_customer_details", "customer_id", "cid", "=", "customer_id") 
+                                    // yung nasa baba nito ayan yung query na select baka malito kayo eh 
+                                    .get("description");
+                            Global_Count = count;
+                        }
+                        return rs;
+                    }).thenAccept((rs) -> {
+                        if (!rs.isEmpty()) {
+                            AddTablePI(rs);
+                        }
+                    });
+                    Thread.sleep(3000);
+                }
+            }
+        });
+        th.setDaemon(true);
+        th.start();
+    }
+
     // need sya para lumabas yung result sa tableview ez LAWGIC
     public void AddTableGL(List rs) {
         OLg.clear();
@@ -266,7 +324,45 @@ public class SOPcreateManageGuidelinesController implements Initializable {
             OLps.add(new SOPTable_package_sorting(description));
         }
     }
+
     // need sya para lumabas yung result sa tableview ez LAWGIC
+    public void AddTablePI(List rs) {
+        pi.clear();
+
+        for (Object row : rs) {
+            HashMap grow = (HashMap) row;
+
+            String description = (String) grow.get("description");
+
+            pi.add(new SOPTable_prohibited(description));
+        }
+    }
+
+    // INSERT QUERY para sa mga textfield etc. ganon
+    public void Insert() {
+        CORE2_Prohibited pi = new CORE2_Prohibited();
+        // ginawa ko to para mag popup yung else sa loob ng try
+        String TGP = TApi.getText();
+
+        try {
+            String[][] sop_data1 = {
+                {"description", TApi.getText()}
+            };
+            // Data Save kapag kumpleto yung nilagay sa mga JFXTextField
+            if (pi.insert(sop_data1)) {
+                Helpers.EIS_Response.SuccessResponse("Success", "Data has been Saved!");
+                TApi.setText("");
+            } else {
+                // Not Inserted kapag hindi kumpleto oh walang nilagay sa mga JFXTextField
+                if ((TGP.isEmpty())) {
+                    Helpers.EIS_Response.ErrorResponse("Error", "Data Not Save!");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        populateTableGL();
+    }
 
     // INSERT QUERY para sa mga textfield etc. ganon
     public void Insert1() {
@@ -346,28 +442,24 @@ public class SOPcreateManageGuidelinesController implements Initializable {
         populateTablePS();
     }
 
+    
+    
+    // mga button sa taas
     @FXML
-    private void packInspect(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/SOPviewPackageInspection.fxml"));
-        SOProotPane.getChildren().setAll(pane);
-    }
-
-    @FXML
-    private void manageguidelines(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/SOPcreateManageGuidelines.fxml"));
-        SOProotPane.getChildren().setAll(pane);
-    }
-
-    @FXML
-    private void prohibited(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/SOPviewProhibited.fxml"));
-        SOProotPane.getChildren().setAll(pane);
-    }
-
-    @FXML
-    private void originalPI(ActionEvent event) throws IOException {
+    private void packagedetails(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/StandardOperationalProcedure.fxml"));
         SOProotPane.getChildren().setAll(pane);
     }
 
+    @FXML
+    private void inspectionguidelines(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/SOPviewInspectionGuidelines.fxml"));
+        SOProotPane.getChildren().setAll(pane);
+    }
+
+    @FXML
+    private void packageinspection(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/SOPviewPackageInspection.fxml"));
+        SOProotPane.getChildren().setAll(pane);
+    }
 }

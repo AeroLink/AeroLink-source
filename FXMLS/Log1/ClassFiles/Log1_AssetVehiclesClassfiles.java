@@ -13,6 +13,7 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class Log1_AssetVehiclesClassfiles {
     public SimpleStringProperty Vid;
+    public SimpleStringProperty buildingID;
     public SimpleStringProperty Vtype;
     public SimpleStringProperty Vdescription;
     public SimpleStringProperty VPrice;
@@ -25,6 +26,7 @@ public class Log1_AssetVehiclesClassfiles {
     
     public Log1_AssetVehiclesClassfiles(
             String id,
+            String buildingID,
             String type,
             String description,
             String price,
@@ -36,6 +38,7 @@ public class Log1_AssetVehiclesClassfiles {
             String status
     ){
         this.Vid = new SimpleStringProperty(id);
+        this.buildingID = new SimpleStringProperty(buildingID);
         this.Vtype = new SimpleStringProperty(type);
         this.Vdescription = new SimpleStringProperty(description);
         this.VPrice = new SimpleStringProperty(price);
@@ -45,6 +48,10 @@ public class Log1_AssetVehiclesClassfiles {
         this.VManufacturer = new SimpleStringProperty(manufacturer);
         this.VWarranty = new SimpleStringProperty(warranty);
         this.VStatus = new SimpleStringProperty(status);
+    }
+
+    public String getBuildingID() {
+        return buildingID.get();
     }
 
     public String getVid() {

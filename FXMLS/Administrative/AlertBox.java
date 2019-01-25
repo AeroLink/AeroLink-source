@@ -24,7 +24,9 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -105,6 +107,8 @@ public class AlertBox {
          Stage st = new Stage();
          st.setScene(new Scene(p));
          st.setResizable(false);
+         st.initStyle(StageStyle.UNDECORATED);
+         st.initModality(Modality.APPLICATION_MODAL);
          st.show();
      }
     

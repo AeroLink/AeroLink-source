@@ -22,7 +22,7 @@
                               <Font name="Arial Bold" size="20.0" />
                            </font>
                         </Label>
-                        <JFXButton buttonType="RAISED" ellipsisString="" layoutX="1046.0" layoutY="5.0" prefHeight="30.0" prefWidth="150.0" ripplerFill="WHITE" style="-fx-background-color: #34a853;" text="COMPLAINS" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0">
+                        <JFXButton buttonType="RAISED" ellipsisString="" layoutX="1046.0" layoutY="5.0" prefHeight="30.0" prefWidth="150.0" ripplerFill="WHITE" style="-fx-background-color: #34a853;" text="COMPLAINTS" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0">
                            <graphic>
                               <FontAwesomeIconView fill="WHITE" glyphName="EYE" size="20" />
                            </graphic>
