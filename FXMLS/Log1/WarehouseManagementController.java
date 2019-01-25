@@ -1,21 +1,19 @@
 package FXMLS.Log1;
 
 import FXMLS.Log1.ClassFiles.Log1_fullInventoryList;
-import FXMLS.Log1.Modal.AddItemOnWarehouseController;
-import FXMLS.Log1.Modal.AddStockWHController;
-import FXMLS.Log1.Modal.StockOutWHController;
+import FXMLS.Log1.Warehouse.Modal.AddItemOnWarehouseController;
+import FXMLS.Log1.Warehouse.Modal.AddStockWHController;
+import FXMLS.Log1.Warehouse.Modal.StockOutWHController;
 import FXMLS.Log1.util.AlertMaker;
 import FXMLS.Log1.util.Log1Util;
 import Model.Log1.Log1_WarehouseItemsModel;
 import Synapse.Model;
-import Synapse.Session;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -77,7 +75,7 @@ public class WarehouseManagementController implements Initializable {
       //  List b = coa.join(Model.JOIN.INNER, "aerolink.tbl_log_suppliers", "SupplierID", "=", "SupplierID").get();
 
             try{
-            List list_coa = searchItem.join(Model.JOIN.INNER, "aerolink.tbl_log1_suppliers", "SupplierID", "=", "SupplierID").where(new Object[][]{
+            List list_coa = searchItem.join(Model.JOIN.INNER, "aerolink.supplierdummyfromvendorportal", "SupplierID", "=", "SupplierID").where(new Object[][]{
             {"ItemDescription", "like", "%" + whSearch_txt.getText() + "%"},
             {"ShowInMainWindow", "=", "yes"}
             }).get();    
@@ -122,7 +120,7 @@ public class WarehouseManagementController implements Initializable {
 
 //        if(DummyCount != GlobalCount) {
 //            ItemWH_tbl.getItems().clear();
-            List b = coa.join(Model.JOIN.INNER, "aerolink.tbl_log1_suppliers", "SupplierID", "=", "SupplierID").where
+            List b = coa.join(Model.JOIN.INNER, "aerolink.supplierdummyfromvendorportal", "SupplierID", "=", "SupplierID").where
             (new Object [][]{
                {"ShowInMainWindow", "=", "yes"}
             }).get();
@@ -180,7 +178,7 @@ public class WarehouseManagementController implements Initializable {
         } 
         Log1_fullInventoryList selectedForAddStock = ItemWH_tbl.getSelectionModel().getSelectedItem();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLS/Log1/Modal/AddStockWH.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/AddStockWH.fxml"));
             Parent parent = loader.load();
             
             AddStockWHController controller = (AddStockWHController) loader.getController();
@@ -204,7 +202,7 @@ public class WarehouseManagementController implements Initializable {
         } 
         Log1_fullInventoryList selectedForAddStock = ItemWH_tbl.getSelectionModel().getSelectedItem();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLS/Log1/Modal/StockOutWH.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/StockOutWH.fxml"));
             Parent parent = loader.load();
             
             StockOutWHController controller = (StockOutWHController) loader.getController();
@@ -222,7 +220,7 @@ public class WarehouseManagementController implements Initializable {
 
     @FXML
     private void addNewItemAction(ActionEvent event) {
-        Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Modal/AddItemOnWarehouse.fxml"),
+        Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/AddItemOnWarehouse.fxml"),
                  "Add New Item", null);
     }
 
@@ -235,7 +233,7 @@ public class WarehouseManagementController implements Initializable {
             return;
         } 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLS/Log1/Modal/AddItemOnWarehouse.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/AddItemOnWarehouse.fxml"));
             Parent parent = loader.load();
             
             AddItemOnWarehouseController controller = (AddItemOnWarehouseController) loader.getController();
@@ -252,37 +250,37 @@ public class WarehouseManagementController implements Initializable {
 
     @FXML
     private void handleActivityLogAction(ActionEvent event) {
-        Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Modal/WarehouseActivityLog.fxml"),
+        Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/WarehouseActivityLog.fxml"),
                  "Activity Log", null);
     }
 
     @FXML
     private void handleRequestsViewAction(ActionEvent event) {
-        Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Modal/ViewRequestItems.fxml"),
+        Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/ViewRequestItems.fxml"),
                  "Requested items by other department", null);
     }
 
     @FXML
     private void requestToProcure(ActionEvent event) {
-        Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Modal/PurchaseRequestWarehouse.fxml"),
+        Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/PurchaseRequestWarehouse.fxml"),
                  "Request to Procurement", null);
     }
 
     @FXML
     private void handleViewCountReportAction(ActionEvent event) {
-        Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Modal/WarehouseCountReport.fxml"),
+        Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/WarehouseCountReport.fxml"),
                  "Count Report", null);
     }
 
     @FXML
     private void showRequestedStocks(ActionEvent event) {
-        Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Modal/ViewRequestedStocks.fxml"),
+        Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/ViewRequestedStocks.fxml"),
                  "Requested Stocks", null);
     }
 
     @FXML
     private void RequestItemAction(ActionEvent event) {
-        Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Modal/RequestItemsOnWarehouse.fxml"),
-                 "Requeste Items", null);
+        Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/RequestItemsOnWarehouse.fxml"),
+                 "Requested Items", null);
     }
 }

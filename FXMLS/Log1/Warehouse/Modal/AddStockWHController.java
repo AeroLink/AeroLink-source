@@ -1,5 +1,5 @@
 
-package FXMLS.Log1.Modal;
+package FXMLS.Log1.Warehouse.Modal;
 
 import FXMLS.Log1.ClassFiles.Log1_fullInventoryList;
 import FXMLS.Log1.util.AlertMaker;

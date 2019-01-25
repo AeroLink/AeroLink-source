@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="925.0" prefWidth="1260.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="925.0" prefWidth="1260.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Administrative.Document_ManagementController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
@@ -73,7 +73,17 @@
                   </Tab>
                   <Tab text="Releasing Documents">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="tablevisitoremployee11" layoutX="43.0" layoutY="41.0" prefHeight="688.0" prefWidth="1175.0">
+                                 <columns>
+                                    <TableColumn fx:id="employeeid11" prefWidth="293.0" text="Request ID" />
+                                    <TableColumn fx:id="name11" prefWidth="293.0" text="Document Name" />
+                                    <TableColumn fx:id="office11" prefWidth="293.0" text="Date Request" />
+                                    <TableColumn fx:id="floor11" prefWidth="293.0" text="Department" />
+                                 </columns>
+                              </TableView>
+                           </children></AnchorPane>
                     </content>
                   </Tab>
                   <Tab text="Archieve">

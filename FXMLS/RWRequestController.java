@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FXMLS.Log1.Modal;
+package FXMLS;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,9 +12,9 @@ import javafx.fxml.Initializable;
 /**
  * FXML Controller class
  *
- * @author Crenz
+ * @author BlackMoon
  */
-public class WarehouseCountReportController implements Initializable {
+public class RWRequestController implements Initializable {
 
     /**
      * Initializes the controller class.

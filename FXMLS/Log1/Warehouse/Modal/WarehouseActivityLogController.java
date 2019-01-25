@@ -1,4 +1,4 @@
-package FXMLS.Log1.Modal;
+package FXMLS.Log1.Warehouse.Modal;
 
 import FXMLS.Log1.ClassFiles.ActivityLogforWHclassfiles;
 import Model.Log1.Log1_WarehouseActivityLogModel;

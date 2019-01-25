@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FXMLS.Log1.Modal;
+package FXMLS.Log1.Warehouse.Modal;
 
 import FXMLS.Log1.ClassFiles.Log1_fullInventoryList;
 import FXMLS.Log1.util.AlertMaker;
@@ -177,15 +177,15 @@ public class PurchaseRequestWarehouseController implements Initializable {
         ObservableList<Log1_fullInventoryList> items = FXCollections.observableArrayList();
         Log1_WarehouseItemsModel searchItem = new Log1_WarehouseItemsModel();
         
-        CompletableFuture.supplyAsync(() -> {
-
-        while(Session.CurrentRoute.equals("log1WM")) {
-            searchItem.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(row -> {
-               DummyCount = Long.parseLong(((HashMap) row).get("chk").toString());
-            });
-
-            if(DummyCount != GlobalCount) {
-                itemRequest_tbl.getItems().clear();
+//        CompletableFuture.supplyAsync(() -> {
+//
+//        while(Session.CurrentRoute.equals("log1WM")) {
+//            searchItem.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(row -> {
+//               DummyCount = Long.parseLong(((HashMap) row).get("chk").toString());
+//            });
+//
+//            if(DummyCount != GlobalCount) {
+//                itemRequest_tbl.getItems().clear();
                 List list_coa = searchItem.where(new Object[][]{
                    {"Status", "=", "Need to Reorder!"}
                 }).get();
@@ -208,16 +208,16 @@ public class PurchaseRequestWarehouseController implements Initializable {
                     ));
                 }
                 itemRequest_tbl.setItems(items);
-                GlobalCount = DummyCount;
-                }
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(PurchaseRequestWarehouseController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            return 0;
-        }, Session.SessionThreads);
+//                GlobalCount = DummyCount;
+//                }
+//                try {
+//                    Thread.sleep(3000);
+//                } catch (InterruptedException ex) {
+//                    Logger.getLogger(PurchaseRequestWarehouseController.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//            return 0;
+//        }, Session.SessionThreads);
      }        
     
     public void displayItem(){
