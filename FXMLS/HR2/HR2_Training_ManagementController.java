@@ -22,9 +22,13 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 /**
@@ -60,6 +64,32 @@ public class HR2_Training_ManagementController implements Initializable {
     private TableColumn<HR2_TrainingReq_Class, String> col_tm_pn_process;
     @FXML
     private TableColumn<HR2_TrainingReq_Class, String> col_req_status;
+    @FXML
+    private ContextMenu CMenu;
+    @FXML
+    private MenuItem MI_more;
+    @FXML
+    private MenuItem MI_archive;
+    @FXML
+    private TableView<?> tbl_training_req1;
+    @FXML
+    private TableColumn<?, ?> col_req_dept1;
+    @FXML
+    private TableColumn<?, ?> col_req_jp1;
+    @FXML
+    private TableColumn<?, ?> col_req_date_req1;
+    @FXML
+    private TableColumn<?, ?> col_req_status1;
+    @FXML
+    private TableView<?> tbl_training_req11;
+    @FXML
+    private TableColumn<?, ?> col_req_dept11;
+    @FXML
+    private TableColumn<?, ?> col_req_jp11;
+    @FXML
+    private TableColumn<?, ?> col_req_date_req11;
+    @FXML
+    private TableColumn<?, ?> col_req_status11;
 
     /**
      * Initializes the controller class.
@@ -245,6 +275,24 @@ public class HR2_Training_ManagementController implements Initializable {
 
         MB.setCellFactory(cellFactory);
         tbl_training_req.getColumns().add(MB);
+    }
+    
+    @FXML
+     public void ContextMenu(MouseEvent event) {
+
+        if (event.getButton() == MouseButton.SECONDARY) {
+            CMenu.show(tbl_training_mngmt, event.getX(), event.getSceneY());
+            MI_more.setOnAction(e -> 
+            {
+                    Modal moreDetails = Modal.getInstance(new Form("").getParent());
+                    moreDetails.open();
+            }
+            );
+            MI_archive.setOnAction(e -> {
+                
+            });
+        }
+
     }
 
 }
