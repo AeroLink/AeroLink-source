@@ -221,7 +221,7 @@ public class Log2_Fleet_ManagementController implements Initializable {
                 scheddestination.setText(rd.getDestination());
                 scheddeparture.setText(rd.getDeparture());
 
-            }
+            }   
         });
     }
 

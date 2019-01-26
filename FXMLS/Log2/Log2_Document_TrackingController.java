@@ -51,8 +51,7 @@ public class Log2_Document_TrackingController implements Initializable {
     ObservableList<Log2_Document_TrackingClass> monitoringdata = FXCollections.observableArrayList();
     @FXML
     private JFXButton deleterows;
-    @FXML
-    private JFXComboBox<String> combo_typeofdocument;
+    
     
     ObservableList<String> tod = FXCollections.observableArrayList("Original", "Certified True Copy");
      ObservableList<String> dept = FXCollections.observableArrayList("HRdept", "Logistics", "Core", "Administrative", "Finance");
@@ -60,6 +59,10 @@ public class Log2_Document_TrackingController implements Initializable {
     private JFXComboBox<String> combo_dept;
     @FXML
     private Button btnsubmitrequest;
+    @FXML
+    private Button btnsubmitrequest1;
+    @FXML
+    private Button btnsubmitrequest11;
 
     /**
      * Initializes the controller class.
@@ -68,9 +71,7 @@ public class Log2_Document_TrackingController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         monitoringcol();
         monitoringloaddata();
-        
-        combo_typeofdocument.setItems(tod);
-        combo_typeofdocument.setPromptText("Select Docu. Type");
+      
         
         combo_dept.setItems(dept);  
         combo_dept.setPromptText("Select Department");
