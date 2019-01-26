@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.util.Optional;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -24,7 +25,9 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -105,6 +108,8 @@ public class AlertBox {
          Stage st = new Stage();
          st.setScene(new Scene(p));
          st.setResizable(false);
+         st.initStyle(StageStyle.UNDECORATED);
+         st.initModality(Modality.APPLICATION_MODAL);
          st.show();
      }
     
@@ -120,6 +125,19 @@ public class AlertBox {
        pane.getChildren().setAll(p);
      }
     
+     
+     public static void cleartext(Pane anchor){
+         
+     TextField txt = null;
+     for(Node n: anchor.getChildren()){
+     if(n.getClass().toString().contains("TextField")){
+        txt = (TextField)n;
+        txt.setText(null);
+      }
+       }
+        }
+     
+     
     }
     
     

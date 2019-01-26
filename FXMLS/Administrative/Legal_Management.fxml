@@ -23,37 +23,37 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="appointmenttable" layoutX="40.0" layoutY="67.0" prefHeight="330.0" prefWidth="1160.0">
+                              <TableView fx:id="appointmenttable" layoutX="40.0" layoutY="67.0" prefHeight="330.0" prefWidth="1160.0" AnchorPane.bottomAnchor="498.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="67.0">
                                  <columns>
-                                    <TableColumn fx:id="appointmentid" prefWidth="151.0" text="Requestor ID" />
-                                    <TableColumn fx:id="appointmentname" prefWidth="151.0" text="Name" />
-                                    <TableColumn fx:id="appointmenttime" prefWidth="151.0" text="Time" />
-                                    <TableColumn fx:id="appointmentdate" prefWidth="151.0" text="Date" />
-                                    <TableColumn fx:id="appointmentptm" prefWidth="151.0" text="Status" />
+                                    <TableColumn fx:id="appointmentid" prefWidth="232.0" text="Requestor ID" />
+                                    <TableColumn fx:id="appointmentname" prefWidth="232.0" text="Name" />
+                                    <TableColumn fx:id="appointmenttime" prefWidth="232.0" text="Time" />
+                                    <TableColumn fx:id="appointmentdate" prefWidth="232.0" text="Date" />
+                                    <TableColumn fx:id="appointmentptm" prefWidth="232.0" text="Status" />
                                  </columns>
                                  <columnResizePolicy>
                                   
                                  </columnResizePolicy>
                               </TableView>
-                              <JFXTextField fx:id="schedfn" editable="false" focusColor="BLACK" labelFloat="true" layoutX="494.0" layoutY="521.0" maxWidth="376.0" minWidth="247.0" prefHeight="36.0" prefWidth="247.0" promptText="File:">
+                              <JFXTextField fx:id="schedfn" editable="false" focusColor="BLACK" labelFloat="true" layoutX="494.0" layoutY="521.0" maxWidth="376.0" minWidth="247.0" prefHeight="36.0" prefWidth="247.0" promptText="File:" AnchorPane.bottomAnchor="338.0" AnchorPane.leftAnchor="494.0" AnchorPane.rightAnchor="519.0" AnchorPane.topAnchor="521.0">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </JFXTextField>
-                              <MaterialDesignIconView fill="#00b359" glyphName="FOLDER" layoutX="747.0" layoutY="554.0" size="40" />
-                              <JFXDatePicker fx:id="scheddate" defaultColor="#00b359" editable="false" layoutX="494.0" layoutY="599.0" prefHeight="25.0" prefWidth="253.0" promptText="Date Issued" />
-                              <JFXDatePicker fx:id="scheddate1" defaultColor="#00b359" editable="false" layoutX="494.0" layoutY="658.0" prefHeight="25.0" prefWidth="253.0" promptText="Date Expired" />
-                              <JFXButton fx:id="schedsave" layoutX="502.0" layoutY="714.0" prefHeight="33.0" prefWidth="95.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="APPROVED" textFill="WHITE">
+                              <MaterialDesignIconView fx:id="folerchooser" fill="#00b359" glyphName="FOLDER" layoutX="747.0" layoutY="554.0" size="40" AnchorPane.bottomAnchor="336.0" AnchorPane.leftAnchor="747.0" AnchorPane.rightAnchor="473.0" AnchorPane.topAnchor="519.0" />
+                              <JFXDatePicker fx:id="scheddate" defaultColor="#00b359" editable="false" layoutX="494.0" layoutY="599.0" prefHeight="25.0" prefWidth="253.0" promptText="Date Issued" AnchorPane.bottomAnchor="271.0" AnchorPane.leftAnchor="494.0" AnchorPane.rightAnchor="513.0" AnchorPane.topAnchor="599.0" />
+                              <JFXDatePicker fx:id="scheddate1" defaultColor="#00b359" editable="false" layoutX="494.0" layoutY="666.0" prefHeight="25.0" prefWidth="253.0" promptText="Date Expired" AnchorPane.bottomAnchor="204.0" AnchorPane.leftAnchor="494.0" AnchorPane.rightAnchor="513.0" AnchorPane.topAnchor="666.0" />
+                              <JFXButton fx:id="schedsave" layoutX="502.0" layoutY="714.0" prefHeight="33.0" prefWidth="95.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="APPROVED" textFill="WHITE" AnchorPane.bottomAnchor="148.0" AnchorPane.leftAnchor="502.0" AnchorPane.rightAnchor="663.0" AnchorPane.topAnchor="714.0">
                                  <font>
                                     <Font name="Aparajita" size="15.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="schedsave1" layoutX="618.0" layoutY="714.0" prefHeight="33.0" prefWidth="95.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="CANCEL" textFill="WHITE">
+                              <JFXButton fx:id="schedsave1" layoutX="618.0" layoutY="714.0" prefHeight="33.0" prefWidth="95.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="CANCEL" textFill="WHITE" AnchorPane.bottomAnchor="148.0">
                                  <font>
                                     <Font name="Aparajita" size="15.0" />
                                  </font>
                               </JFXButton>
-                              <JFXTextField fx:id="schedfn1" editable="false" focusColor="BLACK" labelFloat="true" layoutX="494.0" layoutY="462.0" maxWidth="376.0" minWidth="247.0" prefHeight="36.0" prefWidth="247.0" promptText="Requestor ID:">
+                              <JFXTextField fx:id="schedfn1" editable="false" focusColor="BLACK" labelFloat="true" layoutX="494.0" layoutY="462.0" maxWidth="376.0" minWidth="247.0" prefHeight="36.0" prefWidth="247.0" promptText="Requestor ID:" AnchorPane.bottomAnchor="397.0" AnchorPane.leftAnchor="494.0" AnchorPane.rightAnchor="519.0" AnchorPane.topAnchor="462.0">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -71,9 +71,9 @@
                                     <Font name="Aparajita" size="15.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="randg" layoutX="1211.0" layoutY="13.0" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: #00b359;" text="... " textFill="WHITE">
+                              <JFXButton fx:id="randg" alignment="TOP_CENTER" contentDisplay="TEXT_ONLY" layoutX="1212.0" layoutY="24.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="34.0" style="-fx-background-color: #00b359;" text="... " textFill="WHITE">
                                  <font>
-                                    <Font name="Aparajita" size="17.0" />
+                                    <Font name="Aparajita" size="14.0" />
                                  </font>
                               </JFXButton>
                               <StackPane fx:id="stackpane" layoutY="79.0" prefHeight="810.0" prefWidth="1260.0" />
@@ -90,7 +90,7 @@
                            </children></AnchorPane>
                     </content>
                   </Tab>
-                  <Tab text="Reports">
+                  <Tab text="Case Docketing">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
