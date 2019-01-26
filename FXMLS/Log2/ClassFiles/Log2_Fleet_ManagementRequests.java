@@ -13,16 +13,17 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class Log2_Fleet_ManagementRequests  {
     
-        private SimpleStringProperty department;
-        private SimpleStringProperty item_name; 
-        private SimpleStringProperty size;
-        private SimpleStringProperty quantity; 
-        private SimpleStringProperty destination;
-        private SimpleStringProperty consignee;
-        private SimpleStringProperty departure;
+        private final SimpleStringProperty department;
+        private final SimpleStringProperty item_name; 
+        private final SimpleStringProperty size;
+        private final SimpleStringProperty quantity; 
+        private final SimpleStringProperty destination;
+        private final SimpleStringProperty consignee;
+        private final SimpleStringProperty departure;
+        private final SimpleStringProperty typeoftransaction;
     
           public Log2_Fleet_ManagementRequests(String department,String item_name,String size,String quantity,String destination,
-                  String consignee,String departure){
+                  String consignee,String departure,String typeoftransaction){
             this.department = new SimpleStringProperty(department);
             this.item_name = new SimpleStringProperty(item_name);
             this.size = new SimpleStringProperty(size);
@@ -30,6 +31,7 @@ public class Log2_Fleet_ManagementRequests  {
             this.destination = new SimpleStringProperty(destination);
             this.consignee = new SimpleStringProperty(consignee);
             this.departure = new SimpleStringProperty(departure);
+            this.typeoftransaction = new SimpleStringProperty(typeoftransaction);
             
 }
            public String getDepartment(){
@@ -58,6 +60,10 @@ public class Log2_Fleet_ManagementRequests  {
                 
                  public String getDeparture(){
             return departure.get();
+                 }
+                 
+                 public String getTypeoftransaction(){
+            return typeoftransaction.get();
                  }
                  
                 
