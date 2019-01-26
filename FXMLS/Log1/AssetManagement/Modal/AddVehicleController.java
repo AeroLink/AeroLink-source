@@ -7,10 +7,8 @@ package FXMLS.Log1.AssetManagement.Modal;
 
 import FXMLS.Log1.ClassFiles.Log1_ABforEquipmentClassfiles;
 import FXMLS.Log1.util.AlertMaker;
-import FXMLS.Log1.util.Log1Util;
 import Model.Log1.Log1_AssetBuildingModel;
-import Model.Log1.Log1_AssetEquipmentModel;
-import Model.Log1.Log1_AssetDesiredEquipmentTypeModel;
+import Model.Log1.Log1_AssetVehiclesModel;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.HashMap;
@@ -18,7 +16,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -29,76 +26,72 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
  *
  * @author Crenz
  */
-public class AddNewEquipmentController implements Initializable {
+public class AddVehicleController implements Initializable {
+    
+    ObservableList<String> VehicleType = FXCollections.observableArrayList(
+            "Company Vehicle", 
+            "Delivery Vehicle");
 
     @FXML
-    private TextField equipmentName_txt;
+    private TextField vehicleName_txt;
+    private ComboBox<String> vehicleTypeCombox;
     @FXML
     private TextField location_txt;
     @FXML
     private TextField modelNumber_txt;
-    @FXML
-    private TextField serialNumber_txt;
-    @FXML
-    private DatePicker warrantyDate_txt;
-    @FXML
+    private DatePicker dateBought_txt;
     private TextField price_txt;
     @FXML
     private JFXButton save_btn;
     @FXML
     private JFXButton cancel_btn;
-    @FXML
     private Label buildingID_txt;
-    @FXML
     private Label buildingName_txt;
     @FXML
+    private TextField manufacturer_txt;
+    private DatePicker warrantyDate_txt;
     private TableView<Log1_ABforEquipmentClassfiles> building_tbl;
-    @FXML
     private TableColumn<Log1_ABforEquipmentClassfiles, String> id_col;
-    @FXML
     private TableColumn<Log1_ABforEquipmentClassfiles, String> buildingName_col;
-    @FXML
     private TableColumn<Log1_ABforEquipmentClassfiles, String> buildingAddress_col;
     @FXML
-    private ComboBox EquipmentTypeCombox;
+    private TextField chassisNumber_txt;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        save_btn.setOnMouseClicked(e -> saveEquipment());
-        cancel_btn.setOnMouseClicked(e -> closeAction());
-        callBuildingData();
-        displayBuildingData();
-        loadItemTypeToCombox();
-    }
+//        vehicleTypeCombox.setItems(VehicleType);
+//        // TODO
+//        save_btn.setOnMouseClicked(e -> saveEquipment());
+//        callBuildingData();
+//        displayBuildingData();
+    }   
     
     private void clear() {
-        equipmentName_txt.setText("");
+        vehicleName_txt.setText("");
         location_txt.setText("");
         modelNumber_txt.setText("");
-        serialNumber_txt.setText("");
+        chassisNumber_txt.setText("");
         price_txt.setText("");
-        EquipmentTypeCombox.setValue("Select Equipment Type");
+        vehicleTypeCombox.setValue("Select Equipment Type");
         buildingID_txt.setText("");
         buildingName_txt.setText("");
         warrantyDate_txt.getEditor().setText("");
     }
     
     public void saveEquipment(){
-        String Name = equipmentName_txt.getText();
+        String Name = vehicleName_txt.getText();
         String Location = location_txt.getText();
         String Model = modelNumber_txt.getText();
-        String Serial = serialNumber_txt.getText();
+        String Serial = chassisNumber_txt.getText();
         String price = price_txt.getText();
         
         Boolean flag =  Name.isEmpty() ||
@@ -111,19 +104,21 @@ public class AddNewEquipmentController implements Initializable {
             AlertMaker.showErrorMessage("Invalid Input", "Please fill up all details");
             return;
         }
-        Log1_AssetEquipmentModel et = new Log1_AssetEquipmentModel();
+        Log1_AssetVehiclesModel et = new Log1_AssetVehiclesModel();
         try{String [][] et_table ={
-                {"EquipmentName",equipmentName_txt.getText()},
-                {"EquipmentLocation",location_txt.getText()},
-                {"EquipmentModelNumber",modelNumber_txt.getText()},
-                {"EquipmentSerialNumber",serialNumber_txt.getText()},
-                {"EquipmentPrice",price_txt.getText()},
-                {"EquipmentType",EquipmentTypeCombox.getValue().toString()},
-                {"EquipmentWarrantyDate",warrantyDate_txt.getEditor().getText()},
-                {"BuildingID",buildingID_txt.getText()}
+                {"VehicleDescription",vehicleName_txt.getText()},
+                {"VehicleType",vehicleTypeCombox.getValue()},
+                {"VehicleModel",modelNumber_txt.getText()},
+                {"VehiclePrice",price_txt.getText()},
+                {"ChassisNumber",chassisNumber_txt.getText()},
+                {"DateBought",dateBought_txt.getEditor().getText()},
+                {"VehicleLocation",location_txt.getText()},
+                {"VehicleManufacturer",manufacturer_txt.getText()},
+                {"VehicleWarranty",warrantyDate_txt.getEditor().getText()},
+                {"VehicleStatus","Not in used"}
             };
             if(et.insert(et_table)){
-                AlertMaker.showSimpleAlert("Saved", ""+ equipmentName_txt.getText() +" has been added to Equipment's Database");
+                AlertMaker.showSimpleAlert("Saved", ""+ vehicleName_txt.getText() +" has been added to Equipment's Database");
                 clear();
                 return;
             }
@@ -132,8 +127,8 @@ public class AddNewEquipmentController implements Initializable {
         }
         
     }
-        
-    public void callBuildingData(){
+    
+        public void callBuildingData(){
          Log1_AssetBuildingModel coa = new Log1_AssetBuildingModel();
          ObservableList<Log1_ABforEquipmentClassfiles> building = FXCollections.observableArrayList();
           
@@ -158,34 +153,10 @@ public class AddNewEquipmentController implements Initializable {
         buildingName_col.setCellValueFactory(new PropertyValueFactory<>("BuildingName"));
         buildingAddress_col.setCellValueFactory(new PropertyValueFactory<>("BuildingAddress"));
     }
-
-    @FXML
+    
     private void selectBuildingForEquipmenthehexd(MouseEvent event) {
         buildingID_txt.setText(building_tbl.getSelectionModel().getSelectedItem().getBuildingID());
         buildingName_txt.setText(building_tbl.getSelectionModel().getSelectedItem().getBuildingName());
     }
-
-    @FXML
-    private void setEquipmentType(ActionEvent event) {
-        Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/AssetManagement/Modal/setEquipmentType.fxml"),
-                 "Set Equipment Type", null);
-    }
     
-    public void loadItemTypeToCombox(){
-        Log1_AssetDesiredEquipmentTypeModel it = new Log1_AssetDesiredEquipmentTypeModel();
-        List itemType = it.get();
-
-        itemType.stream().forEach(row -> {
-            HashMap hash = (HashMap) row;
-
-            EquipmentTypeCombox.getItems().add(String.valueOf(hash.get("EquipmentTypeDesired")));
-        });
-    }
-
-    private void closeAction() {
-        Stage stage = (Stage) EquipmentTypeCombox.getScene().getWindow();
-        stage.close();
-    }
-
-
 }

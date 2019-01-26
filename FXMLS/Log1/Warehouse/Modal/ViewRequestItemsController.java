@@ -37,10 +37,7 @@ import javafx.stage.StageStyle;
  */
 public class ViewRequestItemsController implements Initializable {
 
-    @FXML
-    private JFXButton notifyRequestor_btn;
-    @FXML
-    private JFXButton itemRequestLogs_btn;
+    
     @FXML
     private JFXButton cancel_btn;
     @FXML
@@ -48,15 +45,7 @@ public class ViewRequestItemsController implements Initializable {
     @FXML
     private TableColumn<Log1_ItemRequestsClassfiles, String> itemReq_col;
     @FXML
-    private TableColumn<Log1_ItemRequestsClassfiles, String> quantity_col;
-    @FXML
-    private TableColumn<Log1_ItemRequestsClassfiles, String> requestedBy_col;
-    @FXML
-    private TableColumn<Log1_ItemRequestsClassfiles, String> destination_col;
-    @FXML
     private TableColumn<Log1_ItemRequestsClassfiles, String> dateRequested_col;
-    @FXML
-    private TableColumn<Log1_ItemRequestsClassfiles, String> status_col;
     @FXML
     private JFXButton approveRequest_btn;
 
@@ -74,7 +63,7 @@ public class ViewRequestItemsController implements Initializable {
     }
 
     public void close(){
-        Stage stage = (Stage) notifyRequestor_btn.getScene().getWindow();
+        Stage stage = (Stage) cancel_btn.getScene().getWindow();
         stage.close();
     }
 
@@ -82,8 +71,8 @@ public class ViewRequestItemsController implements Initializable {
          Log1_WarehouseRequestItemModel ir = new Log1_WarehouseRequestItemModel();
          ObservableList<Log1_ItemRequestsClassfiles> requests = FXCollections.observableArrayList();
           
-            List b = ir.join(Model.JOIN.INNER,"aerolink.tbl_log1_ItemWH", "ItemID", "=", "ItemID").where(new Object[][]{
-                {"RequestStatus", "=", "For Approval"}
+            List b = ir.join(Model.JOIN.INNER,"aerolink.tbl_log1_WarehouseItem", "ItemID", "=", "ItemID").where(new Object[][]{
+                {"RequestStatus", "=", "Pending"}
             }).get();
             
             for(Object d : b)
@@ -115,16 +104,11 @@ public class ViewRequestItemsController implements Initializable {
 
     private void displayRequestData(){
         itemReq_col.setCellValueFactory(new PropertyValueFactory<>("ItemDescription"));
-        quantity_col.setCellValueFactory(new PropertyValueFactory<>("QuantityRequested"));
-        requestedBy_col.setCellValueFactory(new PropertyValueFactory<>("RequestedBy"));
-        destination_col.setCellValueFactory(new PropertyValueFactory<>("Destination"));
         dateRequested_col.setCellValueFactory(new PropertyValueFactory<>("DateItemRequested"));
-        status_col.setCellValueFactory(new PropertyValueFactory<>("RequestStatus"));
     }
 
     @FXML
     private void ApproveRequestAction(ActionEvent event) {
-        
             Log1_ItemRequestsClassfiles checkIfNull = ItemRequests_tbl.getSelectionModel().getSelectedItem();
             if(checkIfNull == null){
                 AlertMaker.showErrorMessage("No Item selected","Please select an Item");
@@ -132,7 +116,7 @@ public class ViewRequestItemsController implements Initializable {
             }
             Log1_ItemRequestsClassfiles selectedForApproval = ItemRequests_tbl.getSelectionModel().getSelectedItem();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLS/Log1/Modal/ApproveWarehouseRequest.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/ApproveWarehouseRequest.fxml"));
             Parent parent = loader.load();
             
             ApproveWarehouseRequestController controller = (ApproveWarehouseRequestController) loader.getController();
