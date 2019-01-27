@@ -24,9 +24,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.TimerTask;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,7 +39,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
@@ -297,12 +294,7 @@ public class HR1_RecruitmentController implements Initializable {
 
                         tblOpenJobs.getItems().removeAll(tblOpenJobs.getItems());
 
-                        List<HashMap> list = jobVacancy
-                                .join(Model.JOIN.INNER,
-                                        "aerolink.tbl_hr4_jobs", "job_id", "=", "job_id")
-                                .where(new Object[][]{
-                            {"aerolink.tbl_hr4_job_limit.jobOpen", ">", "0"}
-                        }).get();
+                        List<HashMap> list = jobVacancy.join(Model.JOIN.INNER,"aerolink.tbl_hr4_jobs", "job_id", "=", "job_id").get();
 
                         int totalResultSet = list.size();
                         int incrementItem = 1;
@@ -331,7 +323,7 @@ public class HR1_RecruitmentController implements Initializable {
 
                     }
                 } catch (Exception ex) {
-                    System.err.println("Exception -> " + ex.getMessage());
+                    System.err.println("Exception Vacancies -> " + ex.getMessage());
                 }
 
                 try {
@@ -353,7 +345,7 @@ public class HR1_RecruitmentController implements Initializable {
 
             while (Session.CurrentRoute.equals("hr1RCC")) {
                 try {
-                    jp.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(row -> {
+                    jp.get("ISNULL(CHECKSUM_AGG(BINARY_CHECKSUM(*)), 0) as chk").stream().forEach(row -> {
                         totalCount = Long.parseLong(((HashMap) row).get("chk").toString());
                     });
 
@@ -391,7 +383,7 @@ public class HR1_RecruitmentController implements Initializable {
 
                     Thread.sleep(3000);
                 } catch (Exception ex) {
-                    System.err.println("Exception -> " + ex.getMessage());
+                    System.err.println("Exception Postings -> " + ex.getMessage());
                 }
             }
             return 0;
