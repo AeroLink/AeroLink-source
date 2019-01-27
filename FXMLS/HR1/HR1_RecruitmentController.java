@@ -22,10 +22,15 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.TimerTask;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
@@ -38,6 +43,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableCell;
@@ -48,6 +54,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
+import org.controlsfx.control.MaskerPane;
+import org.controlsfx.control.StatusBar;
 
 /**
  * FXML Controller class
@@ -59,7 +67,7 @@ public class HR1_RecruitmentController implements Initializable {
     JobVacancy jobVacancy = new JobVacancy();
 
     public static BooleanProperty refresher;
-    
+
     ObservableList<TableModel_jLimit> observableList = FXCollections.observableArrayList();
 
     ObservableList<TableModel_jPosted> observablePosting = FXCollections.observableArrayList();
@@ -67,6 +75,8 @@ public class HR1_RecruitmentController implements Initializable {
     long GlobalCount = 0;
     long DummyCount = 0;
     Thread th;
+
+    Label statusLabel = new Label("");
 
     JobPosting jp = new JobPosting();
 
@@ -93,11 +103,9 @@ public class HR1_RecruitmentController implements Initializable {
     @FXML
     private StackPane spane;
     @FXML
-    private ComboBox<?> cboDept;
+    private MaskerPane maskpane;
     @FXML
-    private ContextMenu secondContext;
-    @FXML
-    private MenuItem viewGrade;
+    private StatusBar statusBar;
 
     /**
      * Initializes the controller class.
@@ -108,13 +116,18 @@ public class HR1_RecruitmentController implements Initializable {
         this.generateTable();
         this.populateTable();
 
+        //Loading mask
+        maskpane.setText("Loading Data, Please Wait ... ");
+
+        //statusbar
+        //refresher
         refresher = new SimpleBooleanProperty();
-        
+
         refresher.setValue(false);
         refresher.addListener(listener -> {
-            if(refresher.getValue()) {
+            if (refresher.getValue()) {
                 generateTable();
-                populateTable();
+                GlobalCount = 0;
                 refresher.setValue(false);
             }
         });
@@ -137,6 +150,7 @@ public class HR1_RecruitmentController implements Initializable {
 
         tblPostingJobs.setContextMenu(this.contextPostingsJobs);
         menuPosting.setOnAction(event -> viewModalEditJob());
+
     }
 
     public void Search() {
@@ -266,43 +280,66 @@ public class HR1_RecruitmentController implements Initializable {
         CompletableFuture.supplyAsync(() -> {
             while (Session.CurrentRoute.equals("hr1RCC")) {
                 try {
+
+                    if (DummyCount == 0) {
+                        TimeUnit.SECONDS.sleep(1);
+                        maskpane.setVisible(false);
+                    }
+
                     jobVacancy.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(row -> {
                         DummyCount = Long.parseLong(((HashMap) row).get("chk").toString());
                     });
                     if (GlobalCount != DummyCount) {
+                        Platform.runLater(() -> {
+                            statusBar.setText("Loading ...");
+                            statusBar.setProgress(0);
+                        });
 
-                        observableList.clear();
                         tblOpenJobs.getItems().removeAll(tblOpenJobs.getItems());
-                        
-                        jobVacancy
+
+                        List<HashMap> list = jobVacancy
                                 .join(Model.JOIN.INNER,
                                         "aerolink.tbl_hr4_jobs", "job_id", "=", "job_id")
                                 .where(new Object[][]{
-                            {"jobOpen", ">", "0"}
-                        })
-                                .get()
-                                .stream()
-                                .forEach(row -> {
-                                    HashMap current_row = (HashMap) row;
-                                    String id = current_row.get("id").toString();
-                                    String job_id = current_row.get("job_id").toString();
-                                    String job_open = current_row.get("jobOpen").toString();
-                                    String job_title = current_row.get("title").toString();
-                                    String status = current_row.get("isPosted").toString().equals("0") ? "Pending" : "Posted";
-                                    String OpenDate = current_row.get("created_at").toString();
-                                    observableList.add(new TableModel_jLimit(id, job_id, job_open, job_title, status, OpenDate));
-                                });
+                            {"aerolink.tbl_hr4_job_limit.jobOpen", ">", "0"}
+                        }).get();
 
-                        tblOpenJobs.setItems(observableList);
-                        GlobalCount = DummyCount;
+                        int totalResultSet = list.size();
+                        int incrementItem = 1;
+                        for (HashMap current_row : list) {
+                            String id = current_row.get("id").toString();
+                            String job_id = current_row.get("job_id").toString();
+                            String job_open = current_row.get("jobOpen").toString();
+                            String job_title = current_row.get("title").toString();
+                            String status = current_row.get("isPosted").toString().equals("0") ? "Pending" : "Posted";
+                            String OpenDate = current_row.get("created_at").toString();
+                            observableList.add(new TableModel_jLimit(id, job_id, job_open, job_title, status, OpenDate));
+                            statusBar.setProgress(Double.parseDouble(String.valueOf((incrementItem / totalResultSet))));
+                            incrementItem += 1;
+                        }
+
+                        if (incrementItem >= totalResultSet) {
+
+                            tblOpenJobs.setItems(observableList);
+                            GlobalCount = DummyCount;
+                            Platform.runLater(() -> {
+                                statusBar.setText("Status : Data Load Complete, " + String.valueOf(totalResultSet) + " results found. ");
+                                statusBar.setProgress(0);
+                            });
+
+                        }
+
                     }
-
-                    Thread.sleep(3000);
                 } catch (Exception ex) {
                     System.err.println("Exception -> " + ex.getMessage());
                 }
-            }
 
+                try {
+                    TimeUnit.SECONDS.sleep(2);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(HR1_RecruitmentController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
             return 0;
         }, Session.SessionThreads);
 

@@ -14,6 +14,9 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.MaskerPane?>
+<?import org.controlsfx.control.StatusBar?>
+
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="804.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR1.HR1_RecruitmentController">
    <children>
@@ -57,25 +60,33 @@
                                  <center>
                                     <AnchorPane BorderPane.alignment="CENTER">
                                        <children>
-                                          <TableView fx:id="tblOpenJobs" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-                                            <columns>
-                                              <TableColumn prefWidth="75.0" text="C1" />
-                                              <TableColumn prefWidth="75.0" text="C2" />
-                                            </columns>
-                                             <columnResizePolicy>
-                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                             </columnResizePolicy>
-                                             <contextMenu>
-                                                <ContextMenu fx:id="contextMenuJobs">
-                                                   <items>
-                                                      <MenuItem fx:id="menuPost" mnemonicParsing="false" text="Post this Job" />
-                                                   </items>
-                                                </ContextMenu>
-                                             </contextMenu>
-                                          </TableView>
+                                          <StackPane layoutX="10.0" layoutY="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                                             <children>
+                                                <TableView fx:id="tblOpenJobs" prefHeight="200.0" prefWidth="200.0">
+                                                  <columns>
+                                                    <TableColumn prefWidth="75.0" text="C1" />
+                                                    <TableColumn prefWidth="75.0" text="C2" />
+                                                  </columns>
+                                                   <columnResizePolicy>
+                                                      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                   </columnResizePolicy>
+                                                   <contextMenu>
+                                                      <ContextMenu fx:id="contextMenuJobs">
+                                                         <items>
+                                                            <MenuItem fx:id="menuPost" mnemonicParsing="false" text="Post this Job" />
+                                                         </items>
+                                                      </ContextMenu>
+                                                   </contextMenu>
+                                                </TableView>
+                                                <MaskerPane fx:id="maskpane" />
+                                             </children>
+                                          </StackPane>
                                        </children>
                                     </AnchorPane>
                                  </center>
+                                 <bottom>
+                                    <StatusBar fx:id="statusBar" styleText="" text="" BorderPane.alignment="CENTER" />
+                                 </bottom>
                               </BorderPane>
                            </children>
                         </AnchorPane>
