@@ -91,8 +91,14 @@
                            <children>
                             <AnchorPane layoutY="4.0" minHeight="0.0" minWidth="0.0" prefHeight="543.0" prefWidth="673.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="4.0">
                                  <children>
-                                    <JFXComboBox fx:id="cbox_filter_status" layoutX="241.0" layoutY="23.0" prefHeight="25.0" prefWidth="196.0" promptText="Status" />
-                                    <JFXComboBox fx:id="cbox_filter_dept" layoutX="7.0" layoutY="24.0" prefHeight="25.0" prefWidth="196.0" promptText="Department" />
+                                    <JFXComboBox fx:id="cbox_filter_status" layoutX="241.0" layoutY="23.0" prefHeight="25.0" prefWidth="196.0" promptText="Status">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></JFXComboBox>
+                                    <JFXComboBox fx:id="cbox_filter_dept" layoutX="7.0" layoutY="24.0" prefHeight="25.0" prefWidth="196.0" promptText="Department">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></JFXComboBox>
                                     <TableView fx:id="tbl_req_skill" layoutY="86.0" prefHeight="458.0" prefWidth="667.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="86.0">
                                        <columns>
                                           <TableColumn fx:id="col_dept" prefWidth="75.0" text="Department" />

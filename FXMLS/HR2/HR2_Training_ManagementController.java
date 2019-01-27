@@ -16,6 +16,7 @@ import Model.HR2_TM_Training_Requisition;
 import Synapse.Components.Modal.Modal;
 import Synapse.Form;
 import Synapse.Model;
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -74,25 +75,21 @@ public class HR2_Training_ManagementController implements Initializable {
     @FXML
     private MenuItem MI_archive;
     @FXML
-    private TableView<?> tbl_training_req1;
+    private TableView<?> tbl_req_facility;
     @FXML
-    private TableColumn<?, ?> col_req_dept1;
+    private TableColumn<?, ?> col_req_facility;
     @FXML
-    private TableColumn<?, ?> col_req_jp1;
+    private TableColumn<?, ?> col_req_facilityImg;
     @FXML
-    private TableColumn<?, ?> col_req_date_req1;
+    private JFXTextField txt_search_facilities;
     @FXML
-    private TableColumn<?, ?> col_req_status1;
+    private TableView<?> tbl_req_vehicle;
     @FXML
-    private TableView<?> tbl_training_req11;
+    private TableColumn<?, ?> col_req_vehicleType;
     @FXML
-    private TableColumn<?, ?> col_req_dept11;
+    private TableColumn<?, ?> col_req_vehicleModel;
     @FXML
-    private TableColumn<?, ?> col_req_jp11;
-    @FXML
-    private TableColumn<?, ?> col_req_date_req11;
-    @FXML
-    private TableColumn<?, ?> col_req_status11;
+    private JFXTextField txt_search_vehicles;
 
     /**
      * Initializes the controller class.
@@ -113,7 +110,6 @@ public class HR2_Training_ManagementController implements Initializable {
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr2_request_status", "req_status_id", "rs", "=", "req_status_id")
                     .where(new Object[][]{
-                {"rs.req_status_id", "<>", "2"},
                 {"rs.req_status_id", "<>", "3"},
                 {"aerolink.tbl_hr2_training_requisition.isDeleted", "<>", "1"}})
                     .orderBy("aerolink.tbl_hr2_training_requisition.date_requested", Model.Sort.ASC)
@@ -171,8 +167,7 @@ public class HR2_Training_ManagementController implements Initializable {
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr2_request_status", "req_status_id", "rs", "=", "req_status_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "ep", "=", "requested_by")
                     .where(new Object[][]{
-                {"rs.req_status_id", "<>", "4"},
-                {"rs.req_status_id", "<>", "1"},
+                {"rs.req_status_id", "=", "3"},
                 {"aerolink.tbl_hr2_training_requisition.isDeleted", "<>", "1"}
             })
                     .orderBy("aerolink.tbl_hr2_training_requisition.date_requested", Model.Sort.ASC)

@@ -26,6 +26,7 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -177,8 +178,8 @@ public class TM_ViewTrainingController implements Initializable {
             txt_req_by.setText(((HashMap) row).get("requested_by").toString());
             txt_date_requested.setText(((HashMap) row).get("date_requested").toString());
             cbox_edit_trainor.setValue(((HashMap) row).get("trainor").toString());
-            //   txt_from_time.setText(((HashMap) row).get("start_time").toString());
-            // txt_to_time.setText(((HashMap) row).get("end_time").toString());
+          //  txt_from_time.setValue(LocalTime.parse(((HashMap) row).get("start_time").toString()));
+            //txt_to_time.setValue(LocalTime.parse(((HashMap) row).get("end_time").toString()));
             cbox_edit_type.setValue(((HashMap) row).get("type_of_training").toString());
           //  cbox_edit_v.setValue(((HashMap) row).get("vehicle").toString());
           //  txt_edit_budget.setText(((HashMap) row).get("budget_cost").toString());
