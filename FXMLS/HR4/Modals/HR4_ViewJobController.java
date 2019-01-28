@@ -139,12 +139,14 @@ public class HR4_ViewJobController implements Initializable {
         TableColumn<TOpen, String> eType = new TableColumn<>("Employment Status");
         TableColumn<TOpen, String> charP = new TableColumn<>("Add. Character Preference");
         TableColumn<TOpen, String> numP = new TableColumn<>("Number of Positions Opened");
-
+        TableColumn<TOpen, String> eSalary = new TableColumn<>("Salary");
+        
         eType.setCellValueFactory(param -> param.getValue().statusType);
         charP.setCellValueFactory(param -> param.getValue().char_pref);
         numP.setCellValueFactory(param -> param.getValue().num_open);
+        eSalary.setCellValueFactory(param -> param.getValue().salary);
 
-        tbl_openJobs.getColumns().addAll(eType, charP, numP);
+        tbl_openJobs.getColumns().addAll(eType, charP, numP, eSalary);
 
     }
 
@@ -160,7 +162,8 @@ public class HR4_ViewJobController implements Initializable {
                    new TOpen(
                            row.get("status_type").toString().equals("0") ? "Full Time" : "Part Time", 
                            row.get("additional_character_preference").toString(), 
-                           row.get("jobOpen").toString())
+                           row.get("jobOpen").toString(), 
+                           row.get("salary").toString())
            );
         }
         
@@ -245,7 +248,10 @@ public class HR4_ViewJobController implements Initializable {
         Label lbl_3 = new Label("Additional Character Reference (Optional)");
         TextArea text = new TextArea("");
 
-        VBox vbox = new VBox(lbl, num, new Label(""), lbl_2, combo, new Label(""), lbl_3, text);
+        Label lbl_4 = new Label("Job Salary");
+        TextField salary = new TextField("");
+        
+        VBox vbox = new VBox(lbl, num, new Label(""), lbl_2, combo, new Label(""), lbl_3, text, new Label(""), lbl_4, salary);
 
         layout.setBody(vbox);
 
@@ -263,7 +269,8 @@ public class HR4_ViewJobController implements Initializable {
                 {"job_id", HR4_MIZ.id},
                 {"jobOpen", num.getValue()},
                 {"status_type", combo.getSelectionModel().getSelectedIndex()},
-                {"additional_character_preference", text.getText()}
+                {"additional_character_preference", text.getText()},
+                {"salary", salary.getText()}
             });
 
             if (t) {
@@ -346,11 +353,13 @@ public class HR4_ViewJobController implements Initializable {
         SimpleStringProperty statusType;
         SimpleStringProperty char_pref;
         SimpleStringProperty num_open;
+        SimpleStringProperty salary;
 
-        public TOpen(String statusTypeS, String char_prefS, String num_openS) {
+        public TOpen(String statusTypeS, String char_prefS, String num_openS, String salaryS) {
             this.statusType = new SimpleStringProperty(statusTypeS);
             this.char_pref = new SimpleStringProperty(char_prefS);
             this.num_open = new SimpleStringProperty(num_openS);
+            this.salary = new SimpleStringProperty(salaryS);
         }
     }
 }

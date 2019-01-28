@@ -53,12 +53,13 @@ public class HR1_PostJobController implements Initializable {
     private JFXDatePicker dtpPublish;
     @FXML
     private JFXDatePicker dtpExpire;
-    @FXML
     private ComboBox cboStatus;
     @FXML
     private TextField txtSalary;
 
     String htmlText = "";
+    @FXML
+    private TextField txtStatus;
 
     /**
      * Initializes the controller class.
@@ -69,6 +70,14 @@ public class HR1_PostJobController implements Initializable {
         jobID.setId(HR1_PostJobSelection.jobID);
         txtOpen.setText(HR1_PostJobSelection.OpenPos);
         lblJob.setText(HR1_PostJobSelection.jobTitle);
+        txtSalary.setText(HR1_PostJobSelection.salary);
+        txtStatus.setText(HR1_PostJobSelection.status);
+
+        if (txtSalary.getText().isEmpty()) {
+            txtSalary.setText("0");
+        } else {
+            txtSalary.setText(NumberFormat.getInstance().format(Double.parseDouble(txtSalary.getText().replace(",", ""))));
+        }
 
         HR4_Jobs jobs = new HR4_Jobs();
 
@@ -94,25 +103,6 @@ public class HR1_PostJobController implements Initializable {
 
         txtDesc.setHtmlText(htmlText);
 
-        Object[] cbo = {"Full Time", "Part Time"};
-        cboStatus.getItems().addAll(cbo);
-
-        txtSalary.setOnKeyTyped(value -> {
-            System.err.println(value.getCharacter());
-            if (!Character.isDigit(value.getCharacter().charAt(0))) {
-                value.consume();
-            }
-        });
-
-        txtSalary.setOnKeyReleased(value -> {
-            if (txtSalary.getText().isEmpty()) {
-                txtSalary.setText("0");
-            } else {
-
-                txtSalary.setText(NumberFormat.getInstance().format(Double.parseDouble(txtSalary.getText().replace(",", ""))));
-                txtSalary.end();
-            }
-        });
     }
 
     @FXML
@@ -125,7 +115,7 @@ public class HR1_PostJobController implements Initializable {
                 {"jobPosted_id", HR1_PostJobSelection.id},
                 {"title", lblJob.getText()},
                 {"description", txtDesc.getHtmlText().replace("\"", "'").replace(",", ".").replace("contenteditable='true'", "")},
-                {"status", cboStatus.getSelectionModel().getSelectedItem().toString()},
+                {"status", txtStatus.getText()},
                 {"salary", txtSalary.getText()},
                 {"publish_on", dtpPublish.getValue().toString()},
                 {"until", dtpExpire.getValue().toString()}

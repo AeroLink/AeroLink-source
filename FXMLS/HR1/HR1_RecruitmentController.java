@@ -171,9 +171,11 @@ public class HR1_RecruitmentController implements Initializable {
                         String job_id = current_row.get("job_id").toString();
                         String job_open = current_row.get("jobOpen").toString();
                         String job_title = current_row.get("title").toString();
+                        String salaryS = current_row.get("salary").toString();
                         String status = current_row.get("isPosted").toString().equals("0") ? "Pending" : "Posted";
                         String OpenDate = current_row.get("created_at").toString();
-                        observableList.add(new TableModel_jLimit(id, job_id, job_open, job_title, status, OpenDate));
+                        String eS = current_row.get("status_type").toString().equals("0") ? "Full Time" : "Part Time";
+                        observableList.add(new TableModel_jLimit(id, job_id, job_open, job_title, status, OpenDate, salaryS, eS));
                     });
 
             tblOpenJobs.setItems(observableList);
@@ -190,6 +192,8 @@ public class HR1_RecruitmentController implements Initializable {
         TableColumn<TableModel_jLimit, String> job_open = new TableColumn<>("Number of Available Positions");
         TableColumn<TableModel_jLimit, String> status = new TableColumn<>("Posting Status");
         TableColumn<TableModel_jLimit, String> openDate = new TableColumn<>("Open Date");
+        TableColumn<TableModel_jLimit, String> salary = new TableColumn<>("Salary");
+        TableColumn<TableModel_jLimit, String> empStatus = new TableColumn<>("Salary");
 
         TableColumn btnAction = new TableColumn<>(" ");
 
@@ -245,8 +249,10 @@ public class HR1_RecruitmentController implements Initializable {
         job_open.setCellValueFactory((TableColumn.CellDataFeatures<TableModel_jLimit, String> param) -> param.getValue().job_open);
         status.setCellValueFactory((TableColumn.CellDataFeatures<TableModel_jLimit, String> param) -> param.getValue().status);
         openDate.setCellValueFactory((TableColumn.CellDataFeatures<TableModel_jLimit, String> param) -> param.getValue().opened_date);
+        salary.setCellValueFactory(param -> param.getValue().salary);
+        empStatus.setCellValueFactory(param -> param.getValue().empStatus);
 
-        tblOpenJobs.getColumns().addAll(status, job_title, job_open, openDate, btnAction);
+        tblOpenJobs.getColumns().addAll(status, job_title, job_open, openDate, empStatus, salary, btnAction);
 
     }
 
@@ -294,7 +300,7 @@ public class HR1_RecruitmentController implements Initializable {
 
                         tblOpenJobs.getItems().removeAll(tblOpenJobs.getItems());
 
-                        List<HashMap> list = jobVacancy.join(Model.JOIN.INNER,"aerolink.tbl_hr4_jobs", "job_id", "=", "job_id").get();
+                        List<HashMap> list = jobVacancy.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "job_id").get();
 
                         int totalResultSet = list.size();
                         int incrementItem = 1;
@@ -305,7 +311,9 @@ public class HR1_RecruitmentController implements Initializable {
                             String job_title = current_row.get("title").toString();
                             String status = current_row.get("isPosted").toString().equals("0") ? "Pending" : "Posted";
                             String OpenDate = current_row.get("created_at").toString();
-                            observableList.add(new TableModel_jLimit(id, job_id, job_open, job_title, status, OpenDate));
+                            String eS = current_row.get("status_type").toString().equals("0") ? "Full Time" : "Part Time";
+                            String salary = current_row.get("salary").toString();
+                            observableList.add(new TableModel_jLimit(id, job_id, job_open, job_title, status, OpenDate, salary, eS));
                             statusBar.setProgress(Double.parseDouble(String.valueOf((incrementItem / totalResultSet))));
                             incrementItem += 1;
                         }
@@ -414,6 +422,8 @@ public class HR1_RecruitmentController implements Initializable {
             HR1_PostJobSelection.jobID = j.job_id.getValue();
             HR1_PostJobSelection.jobTitle = j.job_title.getValue();
             HR1_PostJobSelection.OpenPos = j.job_open.getValue();
+            HR1_PostJobSelection.salary = j.salary.getValue();
+            HR1_PostJobSelection.status = j.empStatus.getValue();
 
             try {
                 AnchorPane spx = FXMLLoader.load(getClass().getResource("/FXMLS/HR1/Modals/HR1_PostJob.fxml"));
