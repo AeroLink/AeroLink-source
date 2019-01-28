@@ -69,7 +69,8 @@ public class HR1_PostJobController implements Initializable {
         jobID.setId(HR1_PostJobSelection.jobID);
         txtOpen.setText(HR1_PostJobSelection.OpenPos);
         lblJob.setText(HR1_PostJobSelection.jobTitle);
-
+//        txtSalary.setText(HR1_PostJobSelection.salary);
+        
         HR4_Jobs jobs = new HR4_Jobs();
 
         jobs.where(new Object[][]{
@@ -97,22 +98,6 @@ public class HR1_PostJobController implements Initializable {
         Object[] cbo = {"Full Time", "Part Time"};
         cboStatus.getItems().addAll(cbo);
 
-        txtSalary.setOnKeyTyped(value -> {
-            System.err.println(value.getCharacter());
-            if (!Character.isDigit(value.getCharacter().charAt(0))) {
-                value.consume();
-            }
-        });
-        
-        txtSalary.setOnKeyReleased(value -> {
-            if (txtSalary.getText().isEmpty()) {
-                txtSalary.setText("0");
-            } else {
-
-                txtSalary.setText(NumberFormat.getInstance().format(Double.parseDouble(txtSalary.getText().replace(",", ""))));
-                txtSalary.end();
-            }
-        });
     }
 
     @FXML
