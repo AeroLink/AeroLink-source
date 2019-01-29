@@ -5,6 +5,7 @@
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
@@ -34,9 +35,9 @@
                                     <AnchorPane prefHeight="163.0" prefWidth="804.0" BorderPane.alignment="CENTER">
                                        <children>
                                           <Label layoutX="300.0" layoutY="33.0" />
-                                          <AnchorPane layoutX="14.0" layoutY="11.0" prefHeight="144.0" prefWidth="418.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-background-color: white;" AnchorPane.leftAnchor="9.0">
+                                          <AnchorPane layoutX="14.0" layoutY="11.0" prefHeight="175.0" prefWidth="418.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-background-color: white;" AnchorPane.leftAnchor="9.0">
                                              <children>
-                                                <JFXButton fx:id="btnSearch" alignment="TOP_LEFT" buttonType="RAISED" graphicTextGap="10.0" layoutX="10.0" layoutY="102.0" prefHeight="25.0" prefWidth="111.0" styleClass="btn-primary" text="Search">
+                                                <JFXButton fx:id="btnSearch" alignment="TOP_LEFT" buttonType="RAISED" graphicTextGap="10.0" layoutX="10.0" layoutY="116.0" prefHeight="25.0" prefWidth="111.0" styleClass="btn-primary" text="Search">
                                                    <graphic>
                                                       <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" />
                                                    </graphic>
@@ -44,29 +45,39 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </JFXButton>
-                                                <CustomTextField fx:id="txtSearch" layoutX="12.0" layoutY="29.0" prefHeight="32.0" prefWidth="394.0" promptText="Search A Job" />
-                                                <Label layoutX="14.0" layoutY="6.0" text="Search Job">
+                                                <CustomTextField fx:id="txtSearch" layoutX="12.0" layoutY="43.0" prefHeight="32.0" prefWidth="394.0" promptText="Search A Job" />
+                                                <Label layoutX="14.0" layoutY="20.0" text="Search Job">
                                                    <font>
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
                                                 </Label>
-                                                <JFXCheckBox layoutX="15.0" layoutY="72.0" selected="true" text="Posted Status" />
-                                                <JFXCheckBox layoutX="123.0" layoutY="72.0" selected="true" text="Pending Status" />
-                                                <JFXCheckBox layoutX="244.0" layoutY="72.0" selected="true" text="Full Time" />
-                                                <JFXCheckBox layoutX="328.0" layoutY="72.0" selected="true" text="Part Time" />
+                                                <JFXCheckBox layoutX="15.0" layoutY="86.0" selected="true" text="Posted Status" />
+                                                <JFXCheckBox layoutX="123.0" layoutY="86.0" selected="true" text="Pending Status" />
+                                                <JFXCheckBox layoutX="244.0" layoutY="86.0" selected="true" text="Full Time" />
+                                                <JFXCheckBox layoutX="328.0" layoutY="86.0" selected="true" text="Part Time" />
                                              </children>
                                           </AnchorPane>
-                                          <AnchorPane layoutX="434.0" layoutY="11.0" prefHeight="144.0" prefWidth="138.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-background-color: white;">
+                                          <AnchorPane layoutX="434.0" layoutY="11.0" prefHeight="176.0" prefWidth="138.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-background-color: white;">
                                              <children>
                                                 <Label layoutX="13.0" layoutY="6.0" text="Filters">
                                                    <font>
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
                                                 </Label>
-                                                <JFXCheckBox fx:id="rdoPosted" layoutX="14.0" layoutY="32.0" selected="true" text="Posted Status" />
-                                                <JFXCheckBox fx:id="rdoPending" layoutX="13.0" layoutY="60.0" selected="true" text="Pending Status" />
-                                                <JFXCheckBox fx:id="rdoFullTime" layoutX="13.0" layoutY="87.0" selected="true" text="Full Time" />
-                                                <JFXCheckBox fx:id="rdoPartTime" layoutX="13.0" layoutY="114.0" selected="true" text="Part Time" />
+                                                <JFXCheckBox fx:id="rdoPosted" layoutX="14.0" layoutY="34.0" selected="true" text="Posted Status" />
+                                                <JFXCheckBox fx:id="rdoPending" layoutX="13.0" layoutY="67.0" selected="true" text="Pending Status" />
+                                                <JFXCheckBox fx:id="rdoFullTime" layoutX="13.0" layoutY="99.0" selected="true" text="Full Time" />
+                                                <JFXCheckBox fx:id="rdoPartTime" layoutX="13.0" layoutY="134.0" selected="true" text="Part Time" />
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane layoutX="578.0" layoutY="11.0" prefHeight="144.0" prefWidth="409.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-background-color: white;">
+                                             <children>
+                                                <Label layoutX="13.0" layoutY="6.0" text="Filters">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <PieChart fx:id="pieChart" labelLineLength="5.0" layoutX="14.0" layoutY="23.0" prefHeight="150.0" prefWidth="370.0" />
                                              </children>
                                           </AnchorPane>
                                        </children>

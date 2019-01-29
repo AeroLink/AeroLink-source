@@ -41,6 +41,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
@@ -71,7 +72,7 @@ public class HR1_RecruitmentController implements Initializable {
     public static BooleanProperty refresher;
 
     ObservableList<TableModel_jLimit> observableList = FXCollections.observableArrayList();
-
+    ObservableList<PieChart.Data> pieList = FXCollections.observableArrayList();
     ObservableList<TableModel_jPosted> observablePosting = FXCollections.observableArrayList();
 
     long GlobalCount = 0;
@@ -81,7 +82,7 @@ public class HR1_RecruitmentController implements Initializable {
     Label statusLabel = new Label("");
 
     JobPosting jp = new JobPosting();
-    
+
     Object[][] objFilter;
 
     @FXML
@@ -118,6 +119,8 @@ public class HR1_RecruitmentController implements Initializable {
     private JFXCheckBox rdoFullTime;
     @FXML
     private JFXCheckBox rdoPartTime;
+    @FXML
+    private PieChart pieChart;
 
     /**
      * Initializes the controller class.
@@ -127,7 +130,7 @@ public class HR1_RecruitmentController implements Initializable {
 
         this.generateTable();
         this.populateTable();
-        
+
         //Loading mask
         maskpane.setText("Loading Data, Please Wait ... ");
 
@@ -163,6 +166,18 @@ public class HR1_RecruitmentController implements Initializable {
         tblPostingJobs.setContextMenu(this.contextPostingsJobs);
         menuPosting.setOnAction(event -> viewModalEditJob());
 
+    }
+
+    public void chartStats() {
+        
+        pieList.clear();
+        List<HashMap> list = jobVacancy.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "job_id").get("IIF(isPosted = 0, 'Pending', 'Posted' ) as PostedStatus, COUNT(isPosted) as total");
+        for(HashMap row : list ){
+            pieList.add(new PieChart.Data(row.get("PostedStatus").toString(), Double.parseDouble(row.get("total").toString())));
+        }
+        
+        pieChart.setData(pieList);
+       
     }
 
     public void Search() {
