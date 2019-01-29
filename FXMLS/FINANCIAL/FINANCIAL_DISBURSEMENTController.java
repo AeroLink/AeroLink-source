@@ -7,9 +7,12 @@ package FXMLS.FINANCIAL;
 
 import FXMLS.FINANCIAL.CLASSFILES.Disbursement_Voucher_classfile;
 import FXMLS.FINANCIAL.CLASSFILES.Disbursement_request_classfile;
+import FXMLS.FINANCIAL.STATIC.CLASFILES.Finance_CreateVoucher;
 import Model.Financial.Financial_budget_request;
 import Model.Financial.Financial_disbursement_request_model;
 import Model.Financial.Financial_disbursement_voucher;
+import Synapse.Components.Modal.Modal;
+import Synapse.Form;
 import Synapse.Session;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -27,11 +30,14 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.MouseButton;
 import javafx.stage.StageStyle;
 
 /**
@@ -69,6 +75,10 @@ public class FINANCIAL_DISBURSEMENTController implements Initializable {
     private JFXTextField srch_name_txt;
     @FXML
     private DatePicker srch_date;
+    @FXML
+    private ContextMenu contextMenu;
+    @FXML
+    private MenuItem Voucher_menuItem;
 
     /**
      * Initializes the controller class.
@@ -78,7 +88,6 @@ public class FINANCIAL_DISBURSEMENTController implements Initializable {
         // TODO
        // srch_date.setOnAction(e ->srchDate());
         //srch_name_txt.setOnKeyTyped(e -> srch());
-        dv_btn.setOnMouseClicked(e -> disburseBtn());
         
         loadtable_disbursementrequest();
         AddtableColumn_disbursementrequest();
@@ -86,26 +95,45 @@ public class FINANCIAL_DISBURSEMENTController implements Initializable {
         AddtableColumn_disbursementVoucher();
         loadDisbursementVoucher();
         
+        //contexmenu
+        /*disbursement_tbl.setOnMouseClicked(value -> {
+            if (!disbursement_tbl.isDisabled() || !disbursement_tbl.getItems().isEmpty()) {
+                if (value.getButton() == MouseButton.SECONDARY) {
+                    contextMenu.show(disbursement_tbl, value.getX(), value.getY());
+                }
+
+                if (value.getButton() == MouseButton.PRIMARY) {
+                    if (value.getClickCount() == 2) {
+                       viewingVoucher();
+                    }
+                }
+            }
+        });*/
         
-        disbursement_tbl.setOnMouseClicked(e ->{
-        Disbursement_request_classfile drc = disbursement_tbl.getSelectionModel().getSelectedItem();
-        dr_id_label.setText(drc.getDr_id());
-        reqno_label.setText(drc.getRequestno());
-        daterequest_label.setText(drc.getDatereq());
-        department_label.setText(drc.getDepartment());
-        claimant_label.setText(drc.getReqname());
-        description_txtarea.setText(drc.getDescription());
-        amount_label.setText(drc.getAmount());
-        prioritylvl_label.setText(drc.getPriority_level());
-        status_label.setText(drc.getDisbursementStatus());
+         disbursement_tbl.setContextMenu(contextMenu);
+         Voucher_menuItem.setOnAction(value -> viewingVoucher());
         
-        dv_btn.setDisable(false);
-        
-        
-            
-        });
         
     }    
+   
+    public void viewingVoucher() {
+        
+        Finance_CreateVoucher.id = disbursement_tbl.getSelectionModel().getSelectedItem().drID.getValue();
+        Finance_CreateVoucher.RequestNo = disbursement_tbl.getSelectionModel().getSelectedItem().drReqno.getValue();
+        Finance_CreateVoucher.DateRequest = disbursement_tbl.getSelectionModel().getSelectedItem().drDatereq.getValue();
+        Finance_CreateVoucher.Requestor = disbursement_tbl.getSelectionModel().getSelectedItem().drReqname.getValue();
+        Finance_CreateVoucher.Department = disbursement_tbl.getSelectionModel().getSelectedItem().drDepartment.getValue();
+        Finance_CreateVoucher.Description = disbursement_tbl.getSelectionModel().getSelectedItem().drDescription.getValue();
+        Finance_CreateVoucher.PriorityLevel = disbursement_tbl.getSelectionModel().getSelectedItem().drprioritylvl.getValue();
+        Finance_CreateVoucher.Amount = disbursement_tbl.getSelectionModel().getSelectedItem().drAmount.getValue();
+        Finance_CreateVoucher.Status = disbursement_tbl.getSelectionModel().getSelectedItem().drdisbursementStatus.getValue();
+
+        Modal md = Modal.getInstance(new Form("/FXMLS/FINANCIAL/CALLER/DISBURSEMENT_VOUCHER.fxml").getParent());
+        md.open();
+        //md.getF().getStage().setOnCloseRequest(event -> this.AddtableColumn_disbursementrequest());
+
+    }
+    
     /*
      public void srchDate(){
         Financial_disbursement_voucher fvm1 = new Financial_disbursement_voucher(); 
@@ -247,59 +275,7 @@ public class FINANCIAL_DISBURSEMENTController implements Initializable {
      
     }
     
-    public void disburseBtn(){
-        
-           Financial_disbursement_request_model fbr = new Financial_disbursement_request_model();
-           Financial_disbursement_voucher fddr = new Financial_disbursement_voucher();
-            
-           try
-           {
-                if(fbr.update(new Object[][]{
-                {"dr_status","Disbursed"}})
-                .where(new Object[][]{
-                {"dr_id","=",dr_id_label.getText()}
-                }).executeUpdate())
-                {
-                    
-           String[][] dr_table =
-        {
-        {"budget_req_no" ,     reqno_label.getText()},
-        {"budget_date_req" ,   daterequest_label.getText()},
-        {"dv_department" ,     department_label.getText()},
-        {"dv_claimant" ,       claimant_label.getText()},
-        {"dv_requestor" ,      claimant_label.getText()},
-        {"dv_description" ,    description_txtarea.getText()},
-        {"dv_priority_level" , prioritylvl_label.getText()},
-        {"dv_amount" ,         amount_label.getText()},
-        {"dv_budget_status" ,  "Approved"},
-        };           
-           
-                fddr.insert(dr_table);
-             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-             alert.initStyle(StageStyle.UNDECORATED);
-             alert.setTitle("Disbursed");
-             alert.setContentText("Request Has Been Disbursed"); 
-             alert.showAndWait();
-               dv_btn.setDisable(true);
-               daterequest_label.setText("");
-               department_label.setText("");
-               claimant_label.setText("");
-               description_txtarea.setText("");
-               amount_label.setText("");
-        }else{
-             Alert alert = new Alert(Alert.AlertType.ERROR);
-             alert.initStyle(StageStyle.UNDECORATED);
-             alert.setTitle("ERROR");
-             alert.setContentText("Disbursement Failed"); 
-             alert.showAndWait();
-        }
-                                       
-            }catch(Exception e)
-               {
-            e.printStackTrace();
-               }    
-           
-    }
+  
     
     
      public void AddtableColumn_disbursementrequest(){

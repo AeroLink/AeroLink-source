@@ -13,7 +13,6 @@ package Config;
 public class RouteConfig {
 
     public static String[][] links = {
-        //test
         {"Main", "/FXMLS/MainDash.fxml", "canAccessSystem"},
         //FINANCIALS
         {"id_apr", "/FXMLS/FINANCIAL/FINANCIAL_AP_AR.fxml", "can_access_apar_management"},
@@ -61,11 +60,11 @@ public class RouteConfig {
         {"core2SOP", "/FXMLS/Core2/StandardOperationalProcedure.fxml", "can_access_core2_sop"},
         {"core2CRM", "/FXMLS/Core2/CustomerRelationshipManagement.fxml", "can_access_core2_crm"},
         //Core1   
-        {"core1_booking", "/FXMLS/core1/Core1_booking.fxml", "can_access_hr1_socialrecog"},
-        {"core1pom", "/FXMLS/core1/Core1_pom.fxml", "can_access_hr1_socialrecog"},
-        {"core1consol", "/FXMLS/core1/Core1_consol.fxml", "can_access_hr1_socialrecog"},
-        {"core1mawb", "/FXMLS/core1/Core1_mawb.fxml", "can_access_hr1_socialrecog"},
-        {"core1sf", "/FXML/core1/Core1_shipment.fxml", "can_access_hr1_socialrecog"},
+        {"core1_booking", "/FXMLS/Core1_Main/booking_main.fxml", "can_access_core1_booking"},
+        {"core1pom", "/FXMLS/Core1_Main/po_management.fxml", "can_access_core1_pom"},
+        {"core1consol", "/FXMLS/Core1_Main/consolidation_deconsolidation.fxml", "can_access_core1_consol"},
+        {"core1mawb", "/FXMLS/Core1_Main/mawb_hawb.fxml", "can_access_core1_mawb"},
+        {"core1sf", "/FXMLS/Core1_Main/shipment_files.fxml", "can_access_core1_shipment"},
         //Legal Management
         {"adminlegal", "/FXMLS/Administrative/Legal_Management.fxml", "can_access_admin_legal_management"},
         {"admindoc", "/FXMLS/Administrative/Document_Management.fxml", "can_access_admin_document_management"},
@@ -73,9 +72,15 @@ public class RouteConfig {
         {"adminfacility", "/FXMLS/Administrative/Facility_Reservation.fxml", "can_access_admin_facility_reservation"},
         //USM
         {"usmManageUsers", "/FXMLS/USM/ManageUsers.fxml", "can_access_hr1_socialrecog"},
-        //Requisitions
-        {"requisitions", "/FXMLS/Requisition.fxml", "canAccessSystem"}
         
+        
+        //Requisitions
+        {"requisitions", "/FXMLS/Requisition.fxml", "canAccessSystem"},
+        
+        //HR2 Request Forms
+        {"0xreq_hr2_skill", "/FXMLS/HR2/Requisition/CM_RequestSkill.fxml", "canAccessSystem"}, //canAccessSystem permission for testing
+        {"0xreq_hr2_training", "/FXMLS/HR2/Requisition/LM_RequestExam.fxml", "canAccessSystem"}
+            
     };
 
 }

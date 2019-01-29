@@ -42,7 +42,7 @@ public class Model {
 
     private String finalQuery = "SELECT * From ";
 
-    private ArrayList<Object> finalValues = new ArrayList<Object>();
+    private ArrayList<Object> finalValues = new ArrayList<>();
 
     JSONObject json = new JSONObject();
     private ArrayList<Object> whereValues = new ArrayList<>();

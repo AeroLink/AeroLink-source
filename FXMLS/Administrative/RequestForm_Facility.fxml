@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTimePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="710.0" prefWidth="612.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXDatePicker fx:id="startdate" defaultColor="#00b359" editable="false" layoutX="26.0" layoutY="359.0" prefHeight="44.0" prefWidth="229.0" promptText="Start Date" />
+      <JFXComboBox fx:id="urgencybox" layoutX="124.0" layoutY="579.0" prefHeight="25.0" prefWidth="128.0" />
+      <Label layoutX="30.0" layoutY="579.0" prefHeight="31.0" prefWidth="107.0" text="Urgency Level:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="edit" layoutX="39.0" layoutY="664.0" onAction="#saveFR" prefHeight="33.0" prefWidth="95.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="SUBMIT" textFill="WHITE">
+         <font>
+            <Font name="Aparajita" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="edit1" layoutX="141.0" layoutY="664.0" prefHeight="33.0" prefWidth="95.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="CANCEL" textFill="WHITE">
+         <font>
+            <Font name="Aparajita" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXDatePicker fx:id="enddate" defaultColor="#00b256" editable="false" layoutX="26.0" layoutY="464.0" prefHeight="39.0" prefWidth="229.0" promptText="End Date" />
+      <JFXComboBox fx:id="facilitybox" layoutX="98.0" layoutY="27.0" onAction="#facilityreservationselect" prefHeight="25.0" prefWidth="149.0" />
+      <Label layoutX="27.0" layoutY="22.0" prefHeight="34.0" prefWidth="79.0" text="Facility:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <JFXTimePicker fx:id="starttime" defaultColor="#00b256" layoutX="27.0" layoutY="412.0" prefHeight="34.0" prefWidth="229.0" promptText="Start Time" />
+      <JFXTimePicker fx:id="endtime" defaultColor="#00b256" layoutX="26.0" layoutY="516.0" prefHeight="40.0" prefWidth="229.0" promptText="End Time" />
+      <ImageView fx:id="frreservationiview" fitHeight="168.0" fitWidth="229.0" layoutX="27.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true" />
+      <JFXComboBox fx:id="purposebox" layoutX="107.0" layoutY="319.0" prefHeight="25.0" prefWidth="149.0" />
+      <Label layoutX="28.0" layoutY="319.0" prefHeight="34.0" prefWidth="79.0" text="Purpose:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="facilityidtxt" layoutX="256.0" layoutY="27.0" opacity="0.0" prefHeight="25.0" prefWidth="95.0" />
+      <TextField layoutX="106.0" layoutY="243.0" />
+      <Label layoutX="27.0" layoutY="238.0" prefHeight="34.0" prefWidth="79.0" text="Capacity:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="27.0" layoutY="276.0" prefHeight="34.0" prefWidth="79.0" text="Location:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField layoutX="106.0" layoutY="280.0" />
+      <Label layoutX="28.0" layoutY="620.0" prefHeight="34.0" prefWidth="79.0" text="Reserve By;">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField layoutX="107.0" layoutY="625.0" />
+      <TableView layoutX="266.0" layoutY="27.0" prefHeight="663.0" prefWidth="325.0">
+        <columns>
+          <TableColumn prefWidth="108.0" text="Facility" />
+          <TableColumn prefWidth="108.0" text="Reserved Date" />
+            <TableColumn prefWidth="108.0" text="Status" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

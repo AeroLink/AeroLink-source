@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="674.0" prefWidth="1372.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Core1_Main.Consolidation_deconsolidationController">
+   <children>
+      <SplitPane prefHeight="829.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <items>
+            <AnchorPane prefHeight="680.0" prefWidth="1370.0">
+               <children>
+                  <AnchorPane prefHeight="40.0" prefWidth="1370.0" styleClass="card" stylesheets="@../../Assets/css/card.css">
+                     <children>
+                        <Label layoutX="-1.0" prefHeight="43.0" prefWidth="384.0" styleClass="text" text="Consolidation &amp; Deconsolidation" textFill="#34a853">
+                           <font>
+                              <Font name="Arial Bold" size="20.0" />
+                           </font>
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                        </Label>
+                        <HBox layoutX="963.0" layoutY="7.0" prefHeight="30.0" prefWidth="384.0">
+                           <children>
+                              <JFXButton buttonType="RAISED" onAction="#viewConsol" prefHeight="30.0" prefWidth="195.0" style="-fx-background-color: #34A853;" text="CONSOLIDATED PACKAGES" textFill="WHITE">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="EYE" size="20" />
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </JFXButton>
+                              <JFXButton buttonType="RAISED" onAction="#viewHold" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #34A853;" text="HOLD PACKAGES" textFill="WHITE">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="EYE" size="20" />
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutY="44.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0">
+                     <children>
+                        <HBox layoutX="954.0" layoutY="563.0" prefHeight="30.0" prefWidth="406.0" spacing="10.0">
+                           <children>
+                              <Label prefHeight="30.0" prefWidth="62.0" text="Action :">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <JFXButton buttonType="RAISED" onAction="#consolidate" prefHeight="30.0" prefWidth="148.0" style="-fx-background-color: #34A853;" text="CONSOLIDATE" textFill="WHITE">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="CUBE" size="20" />
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton buttonType="RAISED" onAction="#hold" prefHeight="30.0" prefWidth="157.0" style="-fx-background-color: RED;" text="HOLD" textFill="WHITE">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="TIMES_CIRCLE" size="20" />
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                        <HBox layoutX="12.0" layoutY="31.0" prefHeight="43.0" prefWidth="851.0">
+                           <children>
+                              <Label prefHeight="43.0" prefWidth="422.0" text="Enter package destination that you want to consolidate :">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </Label>
+                              <ComboBox fx:id="combo_province" onAction="#searchData" prefHeight="25.0" prefWidth="167.0" promptText="All">
+                                 <HBox.margin>
+                                    <Insets top="10.0" />
+                                 </HBox.margin>
+                              </ComboBox>
+                              <Label fx:id="lbl_ref" prefHeight="47.0" prefWidth="321.0" text="Label" visible="false" />
+                           </children>
+                        </HBox>
+                        <TableView fx:id="tbl_consol" layoutX="21.0" layoutY="84.0" onMouseClicked="#displayTable" prefHeight="449.0" prefWidth="1322.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="27.0" AnchorPane.topAnchor="84.0">
+                          <columns>
+                            <TableColumn fx:id="col_ref_no" prefWidth="204.00003051757812" text="Reference No." />
+                              <TableColumn fx:id="col_rec_add" prefWidth="744.0" text="Destination" />
+                              <TableColumn fx:id="col_weight" prefWidth="184.0" text="Weight" />
+                              <TableColumn fx:id="col_status" prefWidth="203.0" text="Status" />
+                          </columns>
+                        </TableView>
+                        <HBox layoutX="21.0" layoutY="563.0" prefHeight="30.0" prefWidth="272.0">
+                           <children>
+                              <Label prefHeight="30.0" prefWidth="131.0" text="Consolidation No.">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lbl_consol_no" prefHeight="30.0" prefWidth="138.0">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox layoutX="299.0" layoutY="561.0" prefHeight="30.0" prefWidth="272.0">
+                           <children>
+                              <Label prefHeight="30.0" prefWidth="153.0" text="Total Weight :">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lbl_total_weight" prefHeight="30.0" prefWidth="215.0" text="0.00">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox layoutX="1195.0" layoutY="44.0" prefHeight="30.0" prefWidth="148.0">
+                           <children>
+                              <JFXButton buttonType="RAISED" ellipsisString="" onAction="#refresh_table" prefHeight="30.0" prefWidth="155.0" style="-fx-background-color: #34A853;" text="REFRESH TABLE" textFill="WHITE">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="REFRESH" size="20" />
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                        <Separator layoutX="21.0" layoutY="540.0" prefHeight="14.0" prefWidth="1322.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

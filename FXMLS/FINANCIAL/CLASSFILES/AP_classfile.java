@@ -15,25 +15,26 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class AP_classfile {
           public SimpleStringProperty apDate;
+          public SimpleStringProperty apinvoice;
           public SimpleStringProperty apDepartment; 
           public SimpleStringProperty apAmount;
           public SimpleStringProperty apStatus;
+           public SimpleStringProperty apJournalStatus;
         
         
         
         
-        public AP_classfile(String date,String department,String amount,String status){
+        public AP_classfile(String date,String invoice,String department,String amount,String status,String js){
             
             this.apDate = new SimpleStringProperty(date); 
+            this.apinvoice = new SimpleStringProperty(invoice); 
             this.apDepartment = new SimpleStringProperty(department);
             this.apAmount = new SimpleStringProperty(amount);
             this.apStatus = new SimpleStringProperty(status);
+            this.apJournalStatus = new SimpleStringProperty(js);
             
         }
         
-           public String getAmount(){
-            return apAmount.get();
-             }
-           
+      
 
 }

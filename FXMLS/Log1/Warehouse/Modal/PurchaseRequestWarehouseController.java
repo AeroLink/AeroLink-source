@@ -109,7 +109,7 @@ public class PurchaseRequestWarehouseController implements Initializable {
         itemUnit_txt.setText(itemRequest_tbl.getSelectionModel().getSelectedItem().getItemUnit());
         unitPrice_txt.setText(itemRequest_tbl.getSelectionModel().getSelectedItem().getUnitPrice());
         supplierName_txt.setText(itemRequest_tbl.getSelectionModel().getSelectedItem().getSupplierName());
-        supplierID_txt.setText(itemRequest_tbl.getSelectionModel().getSelectedItem().getSupplierID());
+//        supplierID_txt.setText(itemRequest_tbl.getSelectionModel().getSelectedItem().getSupplierID());
     }
     
     public void cancel(){
@@ -136,34 +136,34 @@ public class PurchaseRequestWarehouseController implements Initializable {
 
     
     public void fetchItemData(){
-        ObservableList<Log1_fullInventoryList> items = FXCollections.observableArrayList();
-        Log1_WarehouseItemsModel searchItem = new Log1_WarehouseItemsModel();
-
-            List b = searchItem.join
-               (Model.JOIN.INNER, "aerolink.tbl_log1_suppliers", "SupplierID", "=", "SupplierID")
-            .where(new Object[][]{
-                {"Status", "=", "Need to Reorder!"}
-            }).get();
-
-        for(Object d : b){
-            HashMap hm = (HashMap) d;
-            items.add(new Log1_fullInventoryList(
-                        
-                String.valueOf(hm.get("ItemID")),
-                String.valueOf(hm.get("SupplierID")),
-                String.valueOf(hm.get("SupplierName")),
-                String.valueOf(hm.get("ItemDescription")),
-                String.valueOf(hm.get("ItemType")),
-                String.valueOf(hm.get("ItemLocation")),
-                String.valueOf(hm.get("ItemUnit")),
-                String.valueOf(hm.get("UnitPrice")),
-                String.valueOf(hm.get("StockQuantity")),
-                String.valueOf(hm.get("CriticalQuantity")),
-                String.valueOf(hm.get("DisposalDate")),
-                String.valueOf(hm.get("Status"))
-            ));
-        }
-        itemRequest_tbl.setItems(items);
+//        ObservableList<Log1_fullInventoryList> items = FXCollections.observableArrayList();
+//        Log1_WarehouseItemsModel searchItem = new Log1_WarehouseItemsModel();
+//
+//            List b = searchItem.join
+//               (Model.JOIN.INNER, "aerolink.tbl_log1_suppliers", "SupplierID", "=", "SupplierID")
+//            .where(new Object[][]{
+//                {"Status", "=", "Need to Reorder!"}
+//            }).get();
+//
+//        for(Object d : b){
+//            HashMap hm = (HashMap) d;
+//            items.add(new Log1_fullInventoryList(
+//                        
+//                String.valueOf(hm.get("ItemID")),
+//                String.valueOf(hm.get("SupplierID")),
+//                String.valueOf(hm.get("SupplierName")),
+//                String.valueOf(hm.get("ItemDescription")),
+//                String.valueOf(hm.get("ItemType")),
+//                String.valueOf(hm.get("ItemLocation")),
+//                String.valueOf(hm.get("ItemUnit")),
+//                String.valueOf(hm.get("UnitPrice")),
+//                String.valueOf(hm.get("StockQuantity")),
+//                String.valueOf(hm.get("CriticalQuantity")),
+//                String.valueOf(hm.get("DisposalDate")),
+//                String.valueOf(hm.get("Status"))
+//            ));
+//        }
+//        itemRequest_tbl.setItems(items);
      }        
     
     public void displayItem(){

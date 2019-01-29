@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="rootPane" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Core1_Main.Modals.Booking_informationController">
+   <children>
+      <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="500.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: #34A853;" BorderPane.alignment="CENTER">
+               <children>
+                  <FontAwesomeIconView fill="WHITE" glyphName="INFO_CIRCLE" layoutX="6.0" layoutY="38.0" size="40" wrappingWidth="31.285714149475098" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
+                  <Label layoutX="50.0" layoutY="10.0" prefHeight="41.0" prefWidth="290.0" text="SHIPPER &amp; RECEIVER INFORMATION" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </top>
+         <bottom>
+            <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="59.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton buttonType="RAISED" layoutX="241.0" layoutY="9.0" onAction="#btn_confirm" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #34A853;" text="Confirm" textFill="WHITE" AnchorPane.rightAnchor="40.0">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="CHECK" size="20" />
+                     </graphic></JFXButton>
+                  <JFXButton fx:id="cancel" buttonType="RAISED" layoutX="122.0" layoutY="9.0" onAction="#close" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #34A853;" text="Cancel" textFill="WHITE" AnchorPane.rightAnchor="160.0">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="TIMES" size="20" />
+                     </graphic></JFXButton>
+               </children>
+            </AnchorPane>
+         </bottom>
+         <center>
+            <AnchorPane prefHeight="447.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox layoutX="40.0" layoutY="14.0" prefHeight="382.0" prefWidth="1060.0" spacing="50.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
+                     <children>
+                        <VBox prefHeight="444.0" prefWidth="262.0">
+                           <children>
+                              <Label prefHeight="45.0" prefWidth="260.0" text="Please fill out all fields with asterisk ( * )" textFill="RED">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="10.0" />
+                                 </padding>
+                              </Label>
+                              <Label text="Service Type *">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Label>
+                              <ComboBox fx:id="combo_service_type" onAction="#setDisabled" prefHeight="25.0" prefWidth="336.0" promptText="Select">
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </ComboBox>
+                              <HBox prefHeight="14.0" prefWidth="330.0">
+                                 <children>
+                                    <Label text="Box Size *">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <ComboBox fx:id="combo_box_size" prefHeight="25.0" prefWidth="336.0" promptText="Select">
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </ComboBox>
+                              <Label text="Quantity *">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txt_quantity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="109.0">
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <Label text="Shipment Insurance *">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox prefHeight="24.0" prefWidth="262.0">
+                                 <children>
+                                    <RadioButton fx:id="insu_yes" mnemonicParsing="false" text="Yes">
+                                       <HBox.margin>
+                                          <Insets right="50.0" />
+                                       </HBox.margin>
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="insurance" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="insu_no" mnemonicParsing="false" text="No" toggleGroup="$insurance" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <Label text="Extended Liability *">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="10.0" />
+                                 </padding>
+                              </Label>
+                              <HBox prefHeight="24.0" prefWidth="262.0">
+                                 <children>
+                                    <RadioButton fx:id="lia_yes" mnemonicParsing="false" text="Yes">
+                                       <HBox.margin>
+                                          <Insets right="50.0" />
+                                       </HBox.margin>
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="liability" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="lia_no" mnemonicParsing="false" text="No" toggleGroup="$liability" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <Separator orientation="VERTICAL" prefHeight="429.0" prefWidth="44.0">
+                           <HBox.margin>
+                              <Insets left="-30.0" right="-30.0" />
+                           </HBox.margin>
+                        </Separator>
+                        <VBox prefHeight="429.0" prefWidth="302.0">
+                           <children>
+                              <HBox prefHeight="39.0" prefWidth="262.0">
+                                 <children>
+                                    <Label prefHeight="25.0" prefWidth="160.0" text="Reference No. :">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbl_ref" prefHeight="28.0" prefWidth="202.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Label fx:id="lbl_name" prefHeight="21.0" prefWidth="129.0" text="Shipper's Name *">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label fx:id="lbl_name_error" prefHeight="21.0" prefWidth="177.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <TextField fx:id="txt_ship_name" onMouseClicked="#name_focus" promptText="ex. Nicko Lagmay">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <Label text="Home No. / Street *">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txt_ship_add" prefWidth="294.0" promptText="ex. 356 Tabigo St.">
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <HBox prefHeight="27.0" prefWidth="310.0">
+                                 <children>
+                                    <VBox prefHeight="46.0" prefWidth="167.0">
+                                       <children>
+                                          <Label text="Barangay *">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="txt_ship_brgy" prefHeight="25.0" prefWidth="46.0" promptText="ex. Commonwealth" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="46.0" prefWidth="174.0">
+                                       <children>
+                                          <Label prefHeight="21.0" prefWidth="124.0" text="Zip Code *">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="txt_ship_zip" promptText="ex. 1121" />
+                                       </children>
+                                       <padding>
+                                          <Insets left="10.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="27.0" prefWidth="310.0">
+                                 <children>
+                                    <VBox prefHeight="46.0" prefWidth="158.0">
+                                       <children>
+                                          <Label prefHeight="21.0" prefWidth="124.0" text="City / Municipal *">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox fx:id="combo_ship_city" prefHeight="25.0" prefWidth="163.0" promptText="Select" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="46.0" prefWidth="153.0">
+                                       <children>
+                                          <Label text="Province *">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox fx:id="combo_ship_province" prefHeight="25.0" prefWidth="147.0" promptText="Select" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                       <padding>
+                                          <Insets left="10.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Label fx:id="lbl_email" prefHeight="21.0" prefWidth="148.0" text="Shipper's Email *">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label fx:id="lbl_email_error" prefHeight="21.0" prefWidth="206.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <TextField fx:id="txt_ship_email" onMouseClicked="#email_focus" promptText="ex. nickolagmay@gmail.com">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <HBox>
+                                 <children>
+                                    <Label fx:id="lbl_contact" prefHeight="21.0" prefWidth="172.0" text="Shipper's Contact No. *">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label fx:id="lbl_contact_error" prefHeight="21.0" prefWidth="159.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <TextField fx:id="txt_ship_contact" onMouseClicked="#contact_focus" promptText="ex. 09393179813">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </TextField>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="392.0" prefWidth="317.0">
+                           <children>
+                              <HBox prefHeight="16.0" prefWidth="310.0">
+                                 <children>
+                                    <Label prefHeight="21.0" prefWidth="62.0" text="Date  :">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbl_date" ellipsisString="" prefHeight="21.0" prefWidth="146.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Label fx:id="lbl_name2" prefHeight="21.0" prefWidth="136.0" text="Receiver's Name *">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label fx:id="lbl_name_error2" prefHeight="21.0" prefWidth="178.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <TextField fx:id="txt_rec_name" onMouseClicked="#name_focus2">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <HBox>
+                                 <children>
+                                    <Label fx:id="lbl_add" text="Home No. / Street *">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <TextField fx:id="txt_rec_add" prefWidth="294.0">
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <HBox prefHeight="27.0" prefWidth="310.0">
+                                 <children>
+                                    <VBox prefHeight="46.0" prefWidth="151.0">
+                                       <children>
+                                          <Label fx:id="lbl_brgy" text="Barangay *">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="txt_rec_brgy" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="46.0" prefWidth="174.0">
+                                       <children>
+                                          <Label fx:id="lbl_zip" prefHeight="21.0" prefWidth="124.0" text="Zip Code *">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="txt_rec_zip" />
+                                       </children>
+                                       <padding>
+                                          <Insets left="15.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="27.0" prefWidth="310.0">
+                                 <children>
+                                    <VBox prefHeight="46.0" prefWidth="174.0">
+                                       <children>
+                                          <Label fx:id="lbl_city" prefHeight="21.0" prefWidth="154.0" text="City / Municipal *">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox fx:id="combo_rec_city" prefHeight="25.0" prefWidth="163.0" promptText="Select" />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="59.0" prefWidth="181.0">
+                                       <children>
+                                          <Label fx:id="lbl_province" text="Province *">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox fx:id="combo_rec_province" prefHeight="25.0" prefWidth="147.0" promptText="Select" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                       <padding>
+                                          <Insets left="10.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Label fx:id="lbl_contact2" prefHeight="21.0" prefWidth="182.0" text="Receiver's Contact No. * ">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label fx:id="lbl_contact_error2" prefHeight="21.0" prefWidth="156.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <TextField fx:id="txt_rec_contact" onMouseClicked="#contact_focus2">
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </TextField>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
