@@ -95,7 +95,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </JFXComboBox>
-                        <JFXComboBox fx:id="cbox_hs_trainor" layoutX="207.0" layoutY="37.0" prefHeight="25.0" prefWidth="236.0" promptText="Select Job Position">
+                        <JFXComboBox fx:id="cbox_hs_trainor" layoutX="207.0" layoutY="37.0" prefHeight="25.0" prefWidth="236.0" promptText="Select Trainor">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>

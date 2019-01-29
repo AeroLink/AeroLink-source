@@ -441,7 +441,7 @@ public class HR2_Competency_ManagementController implements Initializable {
 
     public void DropData() {
         Alert update = new Alert(Alert.AlertType.CONFIRMATION);
-        update.setContentText("Are you sure you want to update this data?");
+        update.setContentText("Are you sure you want to Archive this data?");
         Optional<ButtonType> rs = update.showAndWait();
 
         if (rs.get() == ButtonType.OK) {
@@ -452,7 +452,7 @@ public class HR2_Competency_ManagementController implements Initializable {
             }).update(new Object[][]{
                 {"isDeleted", "1"},}).executeUpdate();
             Alert dropnotif = new Alert(Alert.AlertType.INFORMATION);
-            dropnotif.setContentText(tbl_jobs.getSelectionModel().getSelectedItem().Skill.get() + " Successfully Dropped");
+            dropnotif.setContentText(tbl_jobs.getSelectionModel().getSelectedItem().Skill.get() + " Successfully Archived");
             dropnotif.showAndWait();
             loadData();
         }
