@@ -12,9 +12,12 @@ import FXMLS.HR2.ClassFiles.HR2_LM_CourseOutlineModal;
 import FXMLS.HR2.ClassFiles.HR2_TM_ViewTrainingInfo_Modal;
 import FXMLS.HR2.ClassFiles.HR2_TrainingReq_Class;
 import FXMLS.HR2.ClassFiles.HR4_Jobs_Class;
+import FXMLS.HR2.ClassFiles.TM_AssetFacilities;
+import FXMLS.HR2.ClassFiles.TM_FacilityDetailsClass_for_Modal;
 import FXMLS.HR2.ClassFiles.TM_ViewTrainingReqClassModal;
 import Model.HR2_TM_Training_Requisition;
 import Model.HR2_Temp_Employee_Profiles;
+import Model.HR2_Temp_Facilities;
 import Model.HR4_Departments;
 import Model.HR4_Jobs;
 import Synapse.Components.Modal.Modal;
@@ -79,13 +82,9 @@ public class HR2_Training_ManagementController implements Initializable {
     @FXML
     private MenuItem MI_archive;
     @FXML
-    private TableView<?> tbl_req_facility;
+    private TableView<TM_AssetFacilities> tbl_req_facility;
     @FXML
-    private TableColumn<?, ?> col_req_facility;
-    @FXML
-    private TableColumn<?, ?> col_req_facilityImg;
-    @FXML
-    private JFXTextField txt_search_facilities;
+    private TableColumn<TM_AssetFacilities, String> col_req_facility;
     @FXML
     private TableView<?> tbl_req_vehicle;
     @FXML
@@ -122,6 +121,16 @@ public class HR2_Training_ManagementController implements Initializable {
     private JFXComboBox cbox_tm_trainor;
     @FXML
     private JFXComboBox cbox_hs_trainor;
+    @FXML
+    private TableColumn<TM_AssetFacilities, String> col_building;
+    @FXML
+    private TableColumn<TM_AssetFacilities, String> col_facilityStatus;
+    @FXML
+    private JFXComboBox cbox_filter_Fstatus;
+    @FXML
+    private TableColumn<TM_AssetFacilities, String> col_f_roomNumber;
+    @FXML
+    private TableColumn<TM_AssetFacilities, String> col_f_capacity;
 
     /**
      * Initializes the controller class.
@@ -132,6 +141,8 @@ public class HR2_Training_ManagementController implements Initializable {
         ForColumns();
         loadTrainingMngmt();
         loadHistoryOfTraining();
+        LoadFacilities();
+
         int d = tbl_training_req.getItems().size();
         lbl_training_req_notif.setText(String.valueOf(d));
         DisplayDataInCB();
@@ -445,6 +456,46 @@ public class HR2_Training_ManagementController implements Initializable {
         tbl_training_req.getSelectionModel().selectFirst();
     }
 
+    public void LoadFacilities() {
+        try {
+            HR2_Temp_Facilities facilities = new HR2_Temp_Facilities();
+            List f = facilities.join(Model.JOIN.INNER, "aerolink.tbl_log1_AssetBuilding", "BuildingID", "ab", "=", "BuildingID")
+                    .where(new Object[][]{{"FacilityType", "=", "training"}})
+                    .get("FacilityID, FacilityName, FacilityStatus, FacilityRoomNumber, FacilityCapacity, ab.BuildingName");
+            DisplayFacilities(f);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void DisplayFacilities(List af) {
+        ObservableList<TM_AssetFacilities> OLfacilities = FXCollections.observableArrayList();
+        OLfacilities.clear();
+        try {
+
+            for (Object olf : af) {
+                HashMap hmf = (HashMap) olf;
+
+                OLfacilities.add(
+                        new TM_AssetFacilities(
+                                String.valueOf(hmf.get("FacilityID")),
+                                String.valueOf(hmf.get("FacilityName")),
+                                String.valueOf(hmf.get("FacilityRoomNumber")),
+                                String.valueOf(hmf.get("FacilityCapacity")),
+                                String.valueOf(hmf.get("BuildingName")),
+                                String.valueOf(hmf.get("FacilityStatus"))
+                        ));
+            }
+
+            tbl_req_facility.setItems(OLfacilities);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        System.err.println(tbl_req_facility.getItems().size());
+        tbl_req_facility.getSelectionModel().selectFirst();
+    }
+
     public void ForColumns() {
         //for tbl_mngmt
         col_tm_dept.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().dept_name);
@@ -517,6 +568,62 @@ public class HR2_Training_ManagementController implements Initializable {
 
         MB.setCellFactory(cellFactory);
         tbl_training_req.getColumns().add(MB);
+        //for tbl facilities
+        col_req_facility.setCellValueFactory((TableColumn.CellDataFeatures<TM_AssetFacilities, String> param) -> param.getValue().facilityName);
+        col_f_roomNumber.setCellValueFactory((TableColumn.CellDataFeatures<TM_AssetFacilities, String> param) -> param.getValue().facilityRoomNumber);
+        col_f_capacity.setCellValueFactory((TableColumn.CellDataFeatures<TM_AssetFacilities, String> param) -> param.getValue().facilityCapacity);
+        col_building.setCellValueFactory((TableColumn.CellDataFeatures<TM_AssetFacilities, String> param) -> param.getValue().BuildingName);
+        col_facilityStatus.setCellValueFactory((TableColumn.CellDataFeatures<TM_AssetFacilities, String> param) -> param.getValue().facilityStatus);
+        TableColumn<TM_AssetFacilities, Void> col_btn_facility = new TableColumn("Request Facility");
+
+        Callback<TableColumn<TM_AssetFacilities, Void>, TableCell<TM_AssetFacilities, Void>> cellFacility
+                = new Callback<TableColumn<TM_AssetFacilities, Void>, TableCell<TM_AssetFacilities, Void>>() {
+            @Override
+            public TableCell<TM_AssetFacilities, Void> call(final TableColumn<TM_AssetFacilities, Void> param) {
+
+                final TableCell<TM_AssetFacilities, Void> cellBtn_F = new TableCell<TM_AssetFacilities, Void>() {
+                    private final Button btn_facility = new Button("Request");
+
+                    {
+                        try {
+                            btn_facility.setOnAction(e
+                                    -> {
+
+                                TM_AssetFacilities af = (TM_AssetFacilities) getTableRow().getItem();
+                                TM_FacilityDetailsClass_for_Modal.FacilityDetails(
+                                        af.facilityID.getValue(),
+                                        af.facilityName.getValue(), 
+                                        af.facilityRoomNumber.getValue(), 
+                                        af.facilityCapacity.getValue(), 
+                                        af.BuildingName.getValue(),
+                                        af.facilityStatus.getValue());
+                                Modal lq = Modal.getInstance(new Form("/FXMLS/HR2/Modals/TM_ViewFacilityDetails.fxml").getParent());
+                                lq.open();
+                            });
+                            btn_facility.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
+                            btn_facility.setCursor(javafx.scene.Cursor.HAND);
+                        } catch (Exception ex) {
+                            System.out.println(ex);
+                        }
+
+                    }
+
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn_facility);
+                        }
+                    }
+                };
+                return cellBtn_F;
+            }
+
+        };
+
+        col_btn_facility.setCellFactory(cellFacility);
+        tbl_req_facility.getColumns().add(col_btn_facility);
     }
 
     @FXML

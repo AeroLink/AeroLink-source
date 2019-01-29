@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="554.0" prefWidth="392.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="FXMLS.HR2.Modals.TM_ViewFacilityDetailsController">
+   <children>
+      <Pane prefHeight="35.0" prefWidth="392.0" style="-fx-background-color: #34A853;">
+         <children>
+            <Label layoutX="8.0" layoutY="7.0" text="Facility Details" textFill="WHITE">
+               <font>
+                  <Font name="Lato Bold" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Label fx:id="lbl_RoomNumber" layoutX="134.0" layoutY="111.0" prefHeight="20.0" prefWidth="138.0" text="Room Number" textFill="#222222">
+         <font>
+            <Font name="Lato Regular" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="18.0" layoutY="57.0" text="Facility Name:" textFill="#222222">
+         <font>
+            <Font name="Lato Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_facName" layoutX="126.0" layoutY="57.0" prefHeight="20.0" prefWidth="263.0" text="Facility Name" textFill="#222222">
+         <font>
+            <Font name="Lato Regular" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="18.0" layoutY="83.0" text="Bulding Name:" textFill="#222222">
+         <font>
+            <Font name="Lato Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_BName" layoutX="127.0" layoutY="83.0" prefHeight="20.0" prefWidth="263.0" text="Building" textFill="#222222">
+         <font>
+            <Font name="Lato Regular" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="18.0" layoutY="110.0" text="Room Number: " textFill="#222222">
+         <font>
+            <Font name="Lato Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_Capacity" layoutX="88.0" layoutY="136.0" prefHeight="20.0" prefWidth="138.0" text="Capacity" textFill="#222222">
+         <font>
+            <Font name="Lato Regular" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="17.0" layoutY="136.0" text="Capacity: " textFill="#222222">
+         <font>
+            <Font name="Lato Bold" size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
