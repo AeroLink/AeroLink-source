@@ -3,7 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXTabPane?>
-<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.ContextMenu?>
@@ -20,7 +20,7 @@
 <?import org.controlsfx.control.StatusBar?>
 <?import org.controlsfx.control.textfield.CustomTextField?>
 
-<AnchorPane id="AnchorPane" prefHeight="634.0" prefWidth="1580.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR1.HR1_RecruitmentController">
+<AnchorPane id="AnchorPane" prefHeight="634.0" prefWidth="1426.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR1.HR1_RecruitmentController">
    <children>
       <StackPane fx:id="spane" prefHeight="400.0" prefWidth="804.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -35,9 +35,9 @@
                                     <AnchorPane prefHeight="163.0" prefWidth="804.0" BorderPane.alignment="CENTER">
                                        <children>
                                           <Label layoutX="300.0" layoutY="33.0" />
-                                          <AnchorPane layoutX="14.0" layoutY="11.0" prefHeight="175.0" prefWidth="418.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-background-color: white;" AnchorPane.leftAnchor="9.0">
+                                          <AnchorPane layoutX="14.0" layoutY="11.0" prefHeight="175.0" prefWidth="393.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-background-color: white;" AnchorPane.leftAnchor="9.0">
                                              <children>
-                                                <JFXButton fx:id="btnSearch" alignment="TOP_LEFT" buttonType="RAISED" graphicTextGap="10.0" layoutX="10.0" layoutY="116.0" prefHeight="25.0" prefWidth="111.0" styleClass="btn-primary" text="Search">
+                                                <JFXButton fx:id="btnSearch" alignment="TOP_LEFT" buttonType="RAISED" graphicTextGap="10.0" layoutX="296.0" layoutY="45.0" prefHeight="29.0" prefWidth="85.0" styleClass="btn-primary" text="Search">
                                                    <graphic>
                                                       <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" />
                                                    </graphic>
@@ -45,32 +45,26 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </JFXButton>
-                                                <CustomTextField fx:id="txtSearch" layoutX="12.0" layoutY="43.0" prefHeight="32.0" prefWidth="394.0" promptText="Search A Job" />
+                                                <CustomTextField fx:id="txtSearch" layoutX="12.0" layoutY="43.0" prefHeight="32.0" prefWidth="278.0" promptText="Search A Job" />
                                                 <Label layoutX="14.0" layoutY="20.0" text="Search Job">
                                                    <font>
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
                                                 </Label>
-                                                <JFXCheckBox layoutX="15.0" layoutY="86.0" selected="true" text="Posted Status" />
-                                                <JFXCheckBox layoutX="123.0" layoutY="86.0" selected="true" text="Pending Status" />
-                                                <JFXCheckBox layoutX="244.0" layoutY="86.0" selected="true" text="Full Time" />
-                                                <JFXCheckBox layoutX="328.0" layoutY="86.0" selected="true" text="Part Time" />
-                                             </children>
-                                          </AnchorPane>
-                                          <AnchorPane layoutX="434.0" layoutY="11.0" prefHeight="176.0" prefWidth="138.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-background-color: white;">
-                                             <children>
-                                                <Label layoutX="13.0" layoutY="6.0" text="Filters">
+                                                <JFXCheckBox fx:id="chkFilter" layoutX="14.0" layoutY="88.0" text="Apply Filter ?" />
+                                                <JFXToggleButton fx:id="switchPostingStatus" alignment="CENTER_LEFT" disable="true" layoutX="209.0" layoutY="107.0" prefHeight="58.0" prefWidth="173.0" text="Postings Status Filter" toggleColor="#0f9d58">
                                                    <font>
-                                                      <Font name="System Bold" size="12.0" />
+                                                      <Font size="11.0" />
                                                    </font>
-                                                </Label>
-                                                <JFXCheckBox fx:id="rdoPosted" layoutX="14.0" layoutY="34.0" selected="true" text="Posted Status" />
-                                                <JFXCheckBox fx:id="rdoPending" layoutX="13.0" layoutY="67.0" selected="true" text="Pending Status" />
-                                                <JFXCheckBox fx:id="rdoFullTime" layoutX="13.0" layoutY="99.0" selected="true" text="Full Time" />
-                                                <JFXCheckBox fx:id="rdoPartTime" layoutX="13.0" layoutY="134.0" selected="true" text="Part Time" />
+                                                </JFXToggleButton>
+                                                <JFXToggleButton fx:id="switchEmpStatus" alignment="CENTER_LEFT" disable="true" layoutX="5.0" layoutY="107.0" prefHeight="58.0" prefWidth="198.0" text="Employment Status Filter" toggleColor="#0f9d58">
+                                                   <font>
+                                                      <Font size="11.0" />
+                                                   </font>
+                                                </JFXToggleButton>
                                              </children>
                                           </AnchorPane>
-                                          <AnchorPane layoutX="578.0" layoutY="11.0" prefHeight="176.0" prefWidth="812.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-background-color: white;">
+                                          <AnchorPane layoutX="412.0" layoutY="11.0" prefHeight="176.0" prefWidth="812.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-background-color: white;">
                                              <children>
                                                 <Label layoutX="13.0" layoutY="6.0" text="Statistics">
                                                    <font>
@@ -80,6 +74,31 @@
                                                 <PieChart fx:id="pieChart" labelLineLength="5.0" layoutX="14.0" layoutY="23.0" prefHeight="150.0" prefWidth="259.0" />
                                                 <PieChart fx:id="pieFullPart" labelLineLength="5.0" layoutX="275.0" layoutY="23.0" prefHeight="150.0" prefWidth="254.0" />
                                                 <PieChart fx:id="pieJobs" labelLineLength="5.0" layoutX="529.0" layoutY="21.0" prefHeight="150.0" prefWidth="276.0" />
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane layoutX="1233.0" layoutY="11.0" prefHeight="175.0" prefWidth="183.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-background-color: white;" AnchorPane.rightAnchor="10.0">
+                                             <children>
+                                                <Label layoutX="14.0" layoutY="14.0" text="Other Functionalities">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <JFXButton fx:id="btnRefresh" alignment="TOP_LEFT" buttonType="RAISED" graphicTextGap="10.0" layoutX="12.0" layoutY="42.0" prefHeight="29.0" prefWidth="161.0" styleClass="btn-primary" text="REFRESH TABLE">
+                                                   <graphic>
+                                                      <FontAwesomeIconView fill="WHITE" glyphName="REFRESH" />
+                                                   </graphic>
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </JFXButton>
+                                                <JFXButton fx:id="btnExport" alignment="TOP_LEFT" buttonType="RAISED" graphicTextGap="10.0" layoutX="12.0" layoutY="77.0" prefHeight="29.0" prefWidth="161.0" styleClass="btn-primary" text="EXPORT">
+                                                   <graphic>
+                                                      <FontAwesomeIconView fill="WHITE" glyphName="DOWNLOAD" />
+                                                   </graphic>
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </JFXButton>
                                              </children>
                                           </AnchorPane>
                                        </children>
@@ -126,30 +145,58 @@
                            <children>
                               <BorderPane prefHeight="365.0" prefWidth="804.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <top>
-                                    <AnchorPane prefHeight="81.0" prefWidth="804.0" BorderPane.alignment="CENTER">
+                                    <AnchorPane prefHeight="195.0" prefWidth="1426.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <JFXTextField fx:id="txtSearchPostings" focusColor="#34a853" labelFloat="true" layoutX="10.0" layoutY="27.0" maxWidth="187.0" minWidth="180.0" prefHeight="31.0" prefWidth="187.0" promptText="Search a Job" AnchorPane.leftAnchor="10.0" />
-                                          <JFXButton fx:id="btnSearchPostings" alignment="TOP_LEFT" buttonType="RAISED" graphicTextGap="10.0" layoutX="197.0" layoutY="30.0" prefHeight="25.0" prefWidth="81.0" styleClass="btn-primary" text="Search">
-                                             <graphic>
-                                                <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" />
-                                             </graphic>
-                                          </JFXButton>
                                           <Label layoutX="300.0" layoutY="33.0" />
-                                          <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="RIGHT" graphicTextGap="10.0" layoutX="697.0" layoutY="28.0" onAction="#btnEditPost" prefHeight="25.0" prefWidth="85.0" styleClass="btn-primary" text="Edit" AnchorPane.rightAnchor="14.0">
-                                             <graphic>
-                                                <FontAwesomeIconView fill="WHITE" glyphName="PENCIL" />
-                                             </graphic>
-                                          </JFXButton>
-                                          <Label layoutX="290.0" layoutY="8.0" prefHeight="24.0" prefWidth="69.0" text="Reminder : " textFill="RED" wrapText="true">
-                                             <font>
-                                                <Font name="System Bold Italic" size="12.0" />
-                                             </font>
-                                          </Label>
-                                          <Label layoutX="290.0" layoutY="28.0" prefHeight="41.0" prefWidth="396.0" text="Please select a posted job below befor hitting the edit button or you could &quot;Right Click the row and select [Edit this Posted Job]&quot;" wrapText="true">
-                                             <font>
-                                                <Font name="System Italic" size="12.0" />
-                                             </font>
-                                          </Label>
+                                          <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="175.0" prefWidth="317.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-background-color: white;">
+                                             <children>
+                                                <JFXButton fx:id="btnSearchPostings" alignment="TOP_LEFT" buttonType="RAISED" graphicTextGap="10.0" layoutX="221.0" layoutY="45.0" prefHeight="29.0" prefWidth="85.0" styleClass="btn-primary" text="Search">
+                                                   <graphic>
+                                                      <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" />
+                                                   </graphic>
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </JFXButton>
+                                                <CustomTextField fx:id="txtSearchPostings" layoutX="12.0" layoutY="43.0" prefHeight="32.0" prefWidth="202.0" promptText="Search A Job" />
+                                                <Label layoutX="14.0" layoutY="20.0" text="Search Job">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <JFXCheckBox fx:id="chkFilterPostings" layoutX="14.0" layoutY="88.0" text="Apply Filter ?" />
+                                                <JFXToggleButton fx:id="switchEmpStatusPostings" alignment="CENTER_LEFT" disable="true" layoutX="5.0" layoutY="107.0" prefHeight="58.0" prefWidth="198.0" text="Employment Status Filter" toggleColor="#0f9d58">
+                                                   <font>
+                                                      <Font size="11.0" />
+                                                   </font>
+                                                </JFXToggleButton>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane layoutX="414.0" layoutY="14.0" prefHeight="175.0" prefWidth="183.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-background-color: white;" AnchorPane.rightAnchor="10.0">
+                                             <children>
+                                                <Label layoutX="14.0" layoutY="14.0" text="Other Functionalities">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <JFXButton fx:id="btnRefreshPostings" alignment="TOP_LEFT" buttonType="RAISED" graphicTextGap="10.0" layoutX="12.0" layoutY="42.0" prefHeight="29.0" prefWidth="161.0" styleClass="btn-primary" text="REFRESH TABLE">
+                                                   <graphic>
+                                                      <FontAwesomeIconView fill="WHITE" glyphName="REFRESH" />
+                                                   </graphic>
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </JFXButton>
+                                                <JFXButton fx:id="btnExportPostings" alignment="TOP_LEFT" buttonType="RAISED" graphicTextGap="10.0" layoutX="12.0" layoutY="77.0" prefHeight="29.0" prefWidth="161.0" styleClass="btn-primary" text="EXPORT">
+                                                   <graphic>
+                                                      <FontAwesomeIconView fill="WHITE" glyphName="DOWNLOAD" />
+                                                   </graphic>
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </JFXButton>
+                                             </children>
+                                          </AnchorPane>
                                        </children>
                                     </AnchorPane>
                                  </top>
