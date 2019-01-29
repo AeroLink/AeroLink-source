@@ -545,7 +545,7 @@
                                                     <children>
                                                         <JFXButton id="log1AM" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Asset Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <graphic>
-                                                                <FontAwesomeIconView fill="#34a853" glyphName="USER" size="25" strokeType="INSIDE" />
+                                                                <FontAwesomeIconView fill="#34a853" glyphName="BUILDING" size="25" strokeType="INSIDE" />
                                                             </graphic>
                                                             <font>
                                                                 <Font size="13.0" />
@@ -558,7 +558,7 @@
                                                     <children>
                                                         <JFXButton id="log1Proc" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Procurement" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <graphic>
-                                                                <FontAwesomeIconView fill="#34a853" glyphName="USER" size="25" strokeType="INSIDE" />
+                                                                <FontAwesomeIconView fill="#34a853" glyphName="SHOPPING_CART" size="25" strokeType="INSIDE" />
                                                             </graphic>
                                                             <font>
                                                                 <Font size="13.0" />
@@ -571,7 +571,7 @@
                                                     <children>
                                                         <JFXButton id="log1WM" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Warehouse Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <graphic>
-                                                                <FontAwesomeIconView fill="#34a853" glyphName="USER" size="25" strokeType="INSIDE" />
+                                                                <FontAwesomeIconView fill="#34a853" glyphName="CUBES" size="25" strokeType="INSIDE" />
                                                             </graphic>
                                                             <font>
                                                                 <Font size="13.0" />
@@ -584,7 +584,7 @@
                                                     <children>
                                                         <JFXButton id="log1MRO" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Maintenance Repair Overhaul" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <graphic>
-                                                                <FontAwesomeIconView fill="#34a853" glyphName="USER" size="25" strokeType="INSIDE" />
+                                                                <FontAwesomeIconView fill="#34a853" glyphName="COGS" size="25" strokeType="INSIDE" />
                                                             </graphic>
                                                             <font>
                                                                 <Font size="13.0" />

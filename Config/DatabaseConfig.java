@@ -25,6 +25,6 @@ public class DatabaseConfig {
     public static String IP = "127.0.0.1"; //NS558185\AEROLINKSQL
     public static String PORT = "1433";//1443
     public static String DATABASE = "AeroLink";
-    public static String USER = "nicko";//core
-    public static String PASSWORD = "123";//core
+    public static String USER = "log";//core
+    public static String PASSWORD = "log1";//core
 }
