@@ -92,8 +92,6 @@ public class HR2_Competency_ManagementController implements Initializable {
     @FXML
     private TableColumn<CM_Skill_RequisitionClass, String> col_jp;
     @FXML
-    private JFXComboBox cbox_filter_status;
-    @FXML
     private JFXComboBox cbox_filter_dept;
     @FXML
     private Label lbl_req_countTable;
@@ -105,16 +103,16 @@ public class HR2_Competency_ManagementController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         loadData();
         DisplayDataInTable();
-        displaySkillReq();
         //     btn_refresh.setOnAction(e -> loadJob());
         // diplaycols();
+        displaySkillReq();
         btn_set_skills.setOnAction(e -> {
             Modal set_skill_modal = Modal.getInstance(new Form("/FXMLS/HR2/Modals/Modal_SetSkills.fxml").getParent());
             set_skill_modal.open();
         });
-        /*   cbox_filter_dept.getSelectionModel().selectedItemProperty().addListener(listener -> {
-            displaySkillReq();
-        });*/
+         cbox_filter_dept.getSelectionModel().selectedItemProperty().addListener(listener -> {
+            SearchSkillReq();
+        });
  /*  cbox_filter_status.getSelectionModel().selectedItemProperty().addListener(listener -> {
             displaySkillReq();
         });*/
@@ -136,13 +134,6 @@ public class HR2_Competency_ManagementController implements Initializable {
                 //RS
                 //  cbox_department.getItems().add("DEPT" + hm1.get("id") + " - " + hm1.get("dept_name"));
                 cbox_filter_dept.getItems().add(hm1.get("dept_name"));
-            }
-
-            List c1 = rs.get();
-            for (Object d2 : c1) {
-                HashMap hm2 = (HashMap) d2;
-                cbox_filter_status.getItems().add(hm2.get("req_status"));
-
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -237,15 +228,36 @@ public class HR2_Competency_ManagementController implements Initializable {
     }
 
     //For TBL_Requisition
+    public void SearchSkillReq() {
+        try{
+          HR2_CM_Skill_Requisition skill_req = new HR2_CM_Skill_Requisition();
+            List sr = skill_req.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "dept", "=", "dept_id")
+                    .where(new Object[][]{
+                    {"dept.dept_name", "=", cbox_filter_dept.getSelectionModel()
+                    .getSelectedItem().toString()},
+                /*  {"rs.req_status", "=", cbox_filter_status.getSelectionModel()
+                    .getSelectedItem().toString()},*/
+                {"aerolink.tbl_hr2_skill_requisition.isDeleted", "<>", "1"}})
+                    .orderBy("aerolink.tbl_hr2_skill_requisition.date_requested", Model.Sort.ASC)
+                    .get("aerolink.tbl_hr2_skill_requisition.sr_id,dept.dept_name, jobs.title");
+
+            Req_Skill_Data(sr);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     public void displaySkillReq() {
         try {
             HR2_CM_Skill_Requisition skill_req = new HR2_CM_Skill_Requisition();
             List sr = skill_req.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "dept", "=", "dept_id")
                     .where(new Object[][]{
-                /*  {"dept.dept_name", "=", cbox_filter_dept.getSelectionModel()
-                    .getSelectedItem().toString()},
-                {"rs.req_status", "=", cbox_filter_status.getSelectionModel()
+                /*    {"dept.dept_name", "=", cbox_filter_dept.getSelectionModel()
+                    .getSelectedItem().toString()},*/
+                /*  {"rs.req_status", "=", cbox_filter_status.getSelectionModel()
                     .getSelectedItem().toString()},*/
                 {"aerolink.tbl_hr2_skill_requisition.isDeleted", "<>", "1"}})
                     .orderBy("aerolink.tbl_hr2_skill_requisition.date_requested", Model.Sort.ASC)

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import java.lang.String?>
@@ -51,8 +52,55 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </TableView>
+                        <JFXComboBox fx:id="cbox_tm_dept" layoutX="14.0" layoutY="42.0" prefHeight="25.0" prefWidth="146.0" promptText="Select Department">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></JFXComboBox>
+                        <JFXComboBox fx:id="cbox_tm_trainor" layoutX="184.0" layoutY="42.0" prefHeight="25.0" prefWidth="276.0" promptText="Select Trainor">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></JFXComboBox>
                      </children>
                   </AnchorPane>
+              </content>
+            </Tab>
+            <Tab id="tab" text="History of Trainings">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="6.0" layoutY="3.0" text="History">
+                           <font>
+                              <Font name="Lato Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="tbl_history_of_trainings" layoutX="14.0" layoutY="77.0" prefHeight="286.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="77.0">
+                          <columns>
+                            <TableColumn fx:id="col_hs_dept" prefWidth="75.0" text="Department" />
+                            <TableColumn fx:id="col_hs_jp" prefWidth="75.0" text="Job Position" />
+                              <TableColumn fx:id="col_hs_p" prefWidth="75.0" text="Participants" />
+                              <TableColumn fx:id="col_hs_trainor" prefWidth="75.0" text="Trainor" />
+                              <TableColumn fx:id="col_hs_from" prefWidth="75.0" text="From" />
+                              <TableColumn fx:id="col_hs_to" prefWidth="75.0" text="To" />
+                              <TableColumn fx:id="col_hs_status" prefWidth="75.0" text="Status" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </TableView>
+                        <JFXComboBox fx:id="cbox_hs_dept" layoutX="8.0" layoutY="36.0" prefHeight="25.0" prefWidth="174.0" promptText="Select Department">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXComboBox>
+                        <JFXComboBox fx:id="cbox_hs_trainor" layoutX="207.0" layoutY="37.0" prefHeight="25.0" prefWidth="236.0" promptText="Select Job Position">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXComboBox>
+                     </children></AnchorPane>
               </content>
             </Tab>
             <Tab id="tab" text="Training Requests">
