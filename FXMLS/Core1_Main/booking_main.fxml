@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="674.0" prefWidth="1372.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Core1_Main.Booking_mainController">
+   <children>
+      <SplitPane prefHeight="829.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <items>
+            <AnchorPane prefHeight="680.0" prefWidth="1370.0">
+               <children>
+                  <AnchorPane prefHeight="40.0" prefWidth="1370.0" styleClass="card" stylesheets="@../../Assets/css/card.css">
+                     <children>
+                        <Label prefHeight="43.0" prefWidth="223.0" styleClass="text" text="BOOKING" textFill="#34a853">
+                           <font>
+                              <Font name="Arial Bold" size="20.0" />
+                           </font>
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                        </Label>
+                        <HBox layoutX="1037.0" layoutY="7.0" prefHeight="30.0" prefWidth="325.0">
+                           <children>
+                              <Label prefHeight="30.0" prefWidth="71.0" text="Search :">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txt_search" onInputMethodTextChanged="#searchData" prefHeight="23.0" prefWidth="216.0" promptText="Reference no. / Shipper name">
+                                 <HBox.margin>
+                                    <Insets top="3.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <FontAwesomeIconView glyphName="SEARCH" size="25" wrappingWidth="18.0">
+                                 <HBox.margin>
+                                    <Insets left="5.0" top="2.0" />
+                                 </HBox.margin>
+                              </FontAwesomeIconView>
+                           </children>
+                        </HBox>
+                        <Label fx:id="lbl_ref" layoutX="918.0" layoutY="14.0" prefHeight="17.0" prefWidth="84.0" text="Reference No." visible="false" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="-57.0" layoutY="44.0" prefHeight="639.0" prefWidth="1425.0" style="-fx-background-color: ;" AnchorPane.bottomAnchor="-11.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="44.0">
+                     <children>
+                        <TableView fx:id="tbl_booking" layoutX="56.0" layoutY="44.0" onMouseClicked="#displayTable" prefHeight="495.0" prefWidth="1357.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                          <columns>
+                            <TableColumn fx:id="col_ref" prefWidth="141.0" text="Reference No." />
+                            <TableColumn fx:id="col_ship_from" prefWidth="410.0" text="Ship From" />
+                              <TableColumn fx:id="col_ship_to" prefWidth="408.0" text="Ship To" />
+                              <TableColumn fx:id="col_contact" prefWidth="250.0" text="Contact Person" />
+                              <TableColumn fx:id="col_status" prefWidth="158.0" text="Status" />
+                          </columns>
+                        </TableView>
+                        <JFXButton buttonType="RAISED" layoutX="1204.0" layoutY="579.0" onAction="#deleteData" prefHeight="30.0" prefWidth="137.0" style="-fx-background-color: #ee0808;" text="CANCEL" textFill="WHITE">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="TRASH_ALT" size="20" />
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton buttonType="RAISED" layoutX="894.0" layoutY="579.0" onAction="#openNew" prefHeight="30.0" prefWidth="137.0" style="-fx-background-color: #34A853;" text="ADD NEW" textFill="WHITE">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="20" />
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton buttonType="RAISED" layoutX="1049.0" layoutY="579.0" onAction="#refresh" prefHeight="30.0" prefWidth="137.0" style="-fx-background-color: #34A853;" text="REFRESH" textFill="WHITE">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="REFRESH" size="20" />
+                           </graphic>
+                        </JFXButton>
+                        <Separator layoutX="211.0" layoutY="550.0" prefHeight="15.0" prefWidth="1343.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="12.0" />
+                        <Label layoutX="584.0" layoutY="14.0" text="PENDING SHIPMENTS">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children></AnchorPane>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

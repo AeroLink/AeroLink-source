@@ -107,7 +107,7 @@ public class Add_DocumentController implements Initializable {
             pst.execute();
             
            Document_ManagementController dmc = new Document_ManagementController();
-           dmc.loadtblreqstoring();
+       
         
             AlertBox.display("Alert", "Document is now Pending");
             AlertBox.close(btnsubmit);
