@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Core1_Main.Modals.Consol_remarksController">
+   <children>
+      <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="433.0" prefWidth="700.0" AnchorPane.bottomAnchor="167.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane minWidth="-Infinity" prefHeight="51.0" prefWidth="500.0" style="-fx-background-color: #34A853;" BorderPane.alignment="CENTER">
+               <children>
+                  <FontAwesomeIconView fill="WHITE" glyphName="INFO_CIRCLE" layoutX="6.0" layoutY="38.0" size="40" wrappingWidth="31.285714149475098" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
+                  <Label layoutX="50.0" layoutY="10.0" prefHeight="41.0" prefWidth="289.0" text="REMARKS" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="161.0" AnchorPane.topAnchor="5.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </top>
+         <center>
+            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label fx:id="lbl_ref" layoutX="540.0" layoutY="14.0" prefHeight="31.0" prefWidth="145.0" />
+                  <HBox layoutX="-2.0" layoutY="35.0" prefHeight="44.0" prefWidth="700.0">
+                     <children>
+                        <Label prefHeight="44.0" prefWidth="106.0" text="Reference No. :">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbl_ref" prefHeight="50.0" prefWidth="293.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="30.0" right="30.0" />
+                     </padding>
+                  </HBox>
+                  <VBox layoutX="-2.0" layoutY="79.0" prefHeight="274.0" prefWidth="640.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+                     <children>
+                        <Separator prefHeight="40.0" prefWidth="640.0" />
+                        <Label prefHeight="56.0" prefWidth="735.0" text="Remarks :">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextArea fx:id="txt_remarks" prefHeight="170.0" prefWidth="640.0" />
+                     </children>
+                  </VBox>
+                  <JFXButton buttonType="RAISED" layoutX="279.0" layoutY="368.0" onAction="#submit" prefHeight="31.0" prefWidth="143.0" style="-fx-background-color: #34A853;" text="Submit" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="CHECK" size="20" />
+                     </graphic>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

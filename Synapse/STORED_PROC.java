@@ -12,12 +12,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.json.JSONObject;
 
 /**
  *
  * @author BlackMoon
  */
 public class STORED_PROC {
+
+    static JSONObject json = new JSONObject();
 
     //StoredProcedures
     public static List executeCall(String PROC_NAME, Object[][] vals) {
@@ -46,15 +49,35 @@ public class STORED_PROC {
         }
 
         try {
-            CallableStatement call = Session.INSTANCE.getConnection().prepareCall("{ call " + PROC_NAME + "(" + columns + ") }");
 
-            System.out.println(Arrays.asList(values.toArray()));
-            for (int i = 1; i <= values.size(); i++) {
-                call.setObject(i, values.get(i - 1));
+            String query = " call " + PROC_NAME + "(" + columns + ") ";
+
+            System.out.println("[SQL QUERY] : -> " + query);
+            System.err.println("[Values] : -> " + Helpers.combine(values.toArray(), ","));
+
+            if (Session.offline) {
+                CallableStatement call = Session.INSTANCE.getConnection().prepareCall(query);
+
+                for (int i = 1; i <= values.size(); i++) {
+                    call.setObject(i, values.get(i - 1));
+                }
+                return R2SL.convert(call.executeQuery());
+
+            } else {
+                if (Session.isConnected) {
+
+                    HttpClient.post(HttpClient.METHOD.STORED_PROC, "{\"A1009\" : \"" + query + "\",\"B1009\" : \"" + Helpers.combine(values.toArray(), ",,") + "\" }", (error, obj) -> {
+                        if (error) {
+                            System.err.println("Error -> " + error);
+                        }
+                        json = obj;
+                    });
+
+                    return R2SL.convert(json);
+                }
             }
-            
-            return R2SL.convert(call.executeQuery());
-        } catch (SQLException ex) {
+
+        } catch (Exception ex) {
             Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -62,14 +85,31 @@ public class STORED_PROC {
     }
 
     public static List executeCall(String PROC_NAME) {
-        String Query = "";
 
         try {
-            CallableStatement call = Session.INSTANCE.getConnection().prepareCall("{ call " + PROC_NAME + " }");
 
-            return R2SL.convert(call.executeQuery());
+            String query = " call " + PROC_NAME;
 
-        } catch (SQLException ex) {
+            System.out.println("[SQL QUERY] : -> " + query);
+
+            if (Session.offline) {
+                CallableStatement call = Session.INSTANCE.getConnection().prepareCall(query);
+                return R2SL.convert(call.executeQuery());
+            } else {
+                if (Session.isConnected) {
+
+                    HttpClient.post(HttpClient.METHOD.STORED_PROC, "{\"A1009\" : \"" + query + "\"}", (error, obj) -> {
+                        if (error) {
+                            System.err.println("Error -> " + error);
+                        }
+                        json = obj;
+                    });
+
+                    return R2SL.convert(json);
+                }
+            }
+
+        } catch (Exception ex) {
             Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
         }
 

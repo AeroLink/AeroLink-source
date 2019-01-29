@@ -227,7 +227,13 @@ and open the template in the editor.
 .table-row-cell .btnTable .menu-item:showing  .fontIconMenu{
     -fx-fill: white !important;
 }
-
+.text-input:disabled {
+-fx-opacity: 1.0;
+}
+.datepicker:disabled {
+-fx-opacity: 1.0;
+-fx-text-fill: #000;
+}
 
 /* Sched Pane */
 
