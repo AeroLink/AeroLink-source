@@ -20,7 +20,7 @@
 <?import org.controlsfx.control.StatusBar?>
 <?import org.controlsfx.control.textfield.CustomTextField?>
 
-<AnchorPane id="AnchorPane" prefHeight="634.0" prefWidth="1069.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR1.HR1_RecruitmentController">
+<AnchorPane id="AnchorPane" prefHeight="634.0" prefWidth="1580.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR1.HR1_RecruitmentController">
    <children>
       <StackPane fx:id="spane" prefHeight="400.0" prefWidth="804.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -70,14 +70,16 @@
                                                 <JFXCheckBox fx:id="rdoPartTime" layoutX="13.0" layoutY="134.0" selected="true" text="Part Time" />
                                              </children>
                                           </AnchorPane>
-                                          <AnchorPane layoutX="578.0" layoutY="11.0" prefHeight="144.0" prefWidth="409.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-background-color: white;">
+                                          <AnchorPane layoutX="578.0" layoutY="11.0" prefHeight="176.0" prefWidth="812.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-background-color: white;">
                                              <children>
-                                                <Label layoutX="13.0" layoutY="6.0" text="Filters">
+                                                <Label layoutX="13.0" layoutY="6.0" text="Statistics">
                                                    <font>
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
                                                 </Label>
-                                                <PieChart fx:id="pieChart" labelLineLength="5.0" layoutX="14.0" layoutY="23.0" prefHeight="150.0" prefWidth="370.0" />
+                                                <PieChart fx:id="pieChart" labelLineLength="5.0" layoutX="14.0" layoutY="23.0" prefHeight="150.0" prefWidth="259.0" />
+                                                <PieChart fx:id="pieFullPart" labelLineLength="5.0" layoutX="275.0" layoutY="23.0" prefHeight="150.0" prefWidth="254.0" />
+                                                <PieChart fx:id="pieJobs" labelLineLength="5.0" layoutX="529.0" layoutY="21.0" prefHeight="150.0" prefWidth="276.0" />
                                              </children>
                                           </AnchorPane>
                                        </children>

@@ -72,7 +72,9 @@ public class HR1_RecruitmentController implements Initializable {
     public static BooleanProperty refresher;
 
     ObservableList<TableModel_jLimit> observableList = FXCollections.observableArrayList();
-    ObservableList<PieChart.Data> pieList = FXCollections.observableArrayList();
+    private final ObservableList<PieChart.Data> pieList = FXCollections.observableArrayList();
+    private final ObservableList<PieChart.Data> pieList_FullPart = FXCollections.observableArrayList();
+    private final ObservableList<PieChart.Data> pieList_Jobs = FXCollections.observableArrayList();
     ObservableList<TableModel_jPosted> observablePosting = FXCollections.observableArrayList();
 
     long GlobalCount = 0;
@@ -121,6 +123,10 @@ public class HR1_RecruitmentController implements Initializable {
     private JFXCheckBox rdoPartTime;
     @FXML
     private PieChart pieChart;
+    @FXML
+    private PieChart pieFullPart;
+    @FXML
+    private PieChart pieJobs;
 
     /**
      * Initializes the controller class.
@@ -134,6 +140,10 @@ public class HR1_RecruitmentController implements Initializable {
         //Loading mask
         maskpane.setText("Loading Data, Please Wait ... ");
 
+//        pieList.add(new PieChart.Data("samssse", 2));
+//        pieList.add(new PieChart.Data("zzxz", 3));
+//        
+        this.chartStats();
         //statusbar
         //refresher
         refresher = new SimpleBooleanProperty();
@@ -169,15 +179,36 @@ public class HR1_RecruitmentController implements Initializable {
     }
 
     public void chartStats() {
-        
+
         pieList.clear();
-        List<HashMap> list = jobVacancy.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "job_id").get("IIF(isPosted = 0, 'Pending', 'Posted' ) as PostedStatus, COUNT(isPosted) as total");
-        for(HashMap row : list ){
-            pieList.add(new PieChart.Data(row.get("PostedStatus").toString(), Double.parseDouble(row.get("total").toString())));
-        }
+        pieList_FullPart.clear();
+        pieList_Jobs.clear();
         
+        List<HashMap> list = jobVacancy.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "job_id")
+                .groupBy("isPosted")
+                .get("IIF(isPosted = 0, 'Pending', 'Posted' ) as PostedStatus, COUNT(isPosted) as total");
+        list.forEach((row) -> {
+            pieList.add(new PieChart.Data(row.get("PostedStatus").toString(), Double.parseDouble(row.get("total").toString())));
+        });
+
+        List<HashMap> list2x = jobVacancy.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "job_id")
+                .groupBy("status_type")
+                .get("IIF(status_type = 0, 'Full Time', 'Part Time' ) as PostedStatus, COUNT(status_type) as total");
+        list2x.forEach((row) -> {
+            pieList_FullPart.add(new PieChart.Data(row.get("PostedStatus").toString(), Double.parseDouble(row.get("total").toString())));
+        });
+
+        List<HashMap> list3x = jobVacancy.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "job_id")
+                .groupBy("title")
+                .get("title, COUNT(title) as total");
+        list3x.forEach((row) -> {
+            pieList_Jobs.add(new PieChart.Data(row.get("title").toString(), Double.parseDouble(row.get("total").toString())));
+        });
+
         pieChart.setData(pieList);
-       
+        pieFullPart.setData(pieList_FullPart);
+        pieJobs.setData(pieList_Jobs);
+
     }
 
     public void Search() {
@@ -349,12 +380,12 @@ public class HR1_RecruitmentController implements Initializable {
                         }
 
                         if (incrementItem >= totalResultSet) {
-
                             tblOpenJobs.setItems(observableList);
                             GlobalCount = DummyCount;
                             Platform.runLater(() -> {
                                 statusBar.setText("Status : Data Load Complete, " + String.valueOf(totalResultSet) + " results found. ");
                                 statusBar.setProgress(0);
+                                chartStats();
                             });
 
                         }
