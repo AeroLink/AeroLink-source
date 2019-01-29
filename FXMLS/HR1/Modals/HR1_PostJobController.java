@@ -78,7 +78,7 @@ public class HR1_PostJobController implements Initializable {
         } else {
             txtSalary.setText(NumberFormat.getInstance().format(Double.parseDouble(txtSalary.getText().replace(",", ""))));
         }
-
+        
         HR4_Jobs jobs = new HR4_Jobs();
 
         jobs.where(new Object[][]{

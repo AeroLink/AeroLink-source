@@ -16,6 +16,7 @@ import Model.HR2_TM_Training_Requisition;
 import Synapse.Components.Modal.Modal;
 import Synapse.Form;
 import Synapse.Model;
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +27,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -58,8 +60,6 @@ public class HR2_Training_ManagementController implements Initializable {
     @FXML
     private TableColumn<HR2_TrainingReq_Class, String> col_tm_p;
     @FXML
-    private TableColumn<HR2_TrainingReq_Class, String> col_tm_th;
-    @FXML
     private TableColumn<HR2_TrainingReq_Class, String> col_tm_from;
     @FXML
     private TableColumn<HR2_TrainingReq_Class, String> col_tm_to;
@@ -74,25 +74,25 @@ public class HR2_Training_ManagementController implements Initializable {
     @FXML
     private MenuItem MI_archive;
     @FXML
-    private TableView<?> tbl_training_req1;
+    private TableView<?> tbl_req_facility;
     @FXML
-    private TableColumn<?, ?> col_req_dept1;
+    private TableColumn<?, ?> col_req_facility;
     @FXML
-    private TableColumn<?, ?> col_req_jp1;
+    private TableColumn<?, ?> col_req_facilityImg;
     @FXML
-    private TableColumn<?, ?> col_req_date_req1;
+    private JFXTextField txt_search_facilities;
     @FXML
-    private TableColumn<?, ?> col_req_status1;
+    private TableView<?> tbl_req_vehicle;
     @FXML
-    private TableView<?> tbl_training_req11;
+    private TableColumn<?, ?> col_req_vehicleType;
     @FXML
-    private TableColumn<?, ?> col_req_dept11;
+    private TableColumn<?, ?> col_req_vehicleModel;
     @FXML
-    private TableColumn<?, ?> col_req_jp11;
+    private JFXTextField txt_search_vehicles;
     @FXML
-    private TableColumn<?, ?> col_req_date_req11;
+    private Label lbl_training_req_notif;
     @FXML
-    private TableColumn<?, ?> col_req_status11;
+    private TableColumn<HR2_TrainingReq_Class, String> col_tm_trainor;
 
     /**
      * Initializes the controller class.
@@ -102,6 +102,8 @@ public class HR2_Training_ManagementController implements Initializable {
         loadTrainingRequests();
         ForColumns();
         loadTrainingMngmt();
+        int d = tbl_training_req.getItems().size();
+        lbl_training_req_notif.setText(String.valueOf(d));
     }
 
     //for training mngmt.
@@ -112,12 +114,15 @@ public class HR2_Training_ManagementController implements Initializable {
             List training_req = tr.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "dept", "=", "dept_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr2_request_status", "req_status_id", "rs", "=", "req_status_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr2_trainingInfo", "tr_id" ,"ti", "=", "tr_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "=","ti", "trainor",true)
                     .where(new Object[][]{
-                {"rs.req_status_id", "<>", "2"},
                 {"rs.req_status_id", "<>", "3"},
                 {"aerolink.tbl_hr2_training_requisition.isDeleted", "<>", "1"}})
                     .orderBy("aerolink.tbl_hr2_training_requisition.date_requested", Model.Sort.ASC)
-                    .get("tr_id,dept.dept_name,j.title,training_title,no_of_participants,total_hours, from_day, to_day, rs.req_status_id, rs.req_status");
+                    .get("aerolink.tbl_hr2_training_requisition.tr_id,dept.dept_name,j.title,training_title,no_of_participants,"
+                            + "concat(aerolink.tbl_hr4_employee_profiles.firstname,' ',aerolink.tbl_hr4_employee_profiles.middlename,' ',aerolink.tbl_hr4_employee_profiles.lastname) as trainor,"
+                            + "from_day, to_day, rs.req_status_id, rs.req_status");
 
             DisplayTrainingM(training_req);
         } catch (Exception e) {
@@ -133,7 +138,7 @@ public class HR2_Training_ManagementController implements Initializable {
 
             for (Object d : m) {
                 HashMap hm1 = (HashMap) d;
-
+                System.out.println("TRAINING MANAGEMENT" + d);
                 t_requests.add(
                         new HR2_TrainingReq_Class(
                                 String.valueOf(hm1.get("tr_id")),
@@ -141,7 +146,7 @@ public class HR2_Training_ManagementController implements Initializable {
                                 String.valueOf(hm1.get("title")),
                                 String.valueOf(hm1.get("training_title")),
                                 String.valueOf(hm1.get("no_of_participants")),
-                                String.valueOf(hm1.get("total_hours")),
+                                String.valueOf(hm1.get("trainor")),
                                 String.valueOf(hm1.get("from_day")),
                                 String.valueOf(hm1.get("to_day")),
                                 String.valueOf(hm1.get("reason")),
@@ -171,8 +176,7 @@ public class HR2_Training_ManagementController implements Initializable {
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr2_request_status", "req_status_id", "rs", "=", "req_status_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "ep", "=", "requested_by")
                     .where(new Object[][]{
-                {"rs.req_status_id", "<>", "4"},
-                {"rs.req_status_id", "<>", "1"},
+                {"rs.req_status_id", "=", "3"},
                 {"aerolink.tbl_hr2_training_requisition.isDeleted", "<>", "1"}
             })
                     .orderBy("aerolink.tbl_hr2_training_requisition.date_requested", Model.Sort.ASC)
@@ -228,7 +232,7 @@ public class HR2_Training_ManagementController implements Initializable {
         col_tm_dept.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().dept_name);
         col_tm_jp.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().title);
         col_tm_p.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().no_of_participants);
-        col_tm_th.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().total_hours);
+        col_tm_trainor.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().total_hours);
         col_tm_from.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().from_day);
         col_tm_to.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().to_day);
         col_tm_pn_process.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().request_status);
@@ -298,9 +302,9 @@ public class HR2_Training_ManagementController implements Initializable {
                         tbl_training_mngmt.getSelectionModel().getSelectedItem().total_hours.getValue(),
                         tbl_training_mngmt.getSelectionModel().getSelectedItem().from_day.getValue(),
                         tbl_training_mngmt.getSelectionModel().getSelectedItem().to_day.getValue(),
-                          tbl_training_mngmt.getSelectionModel().getSelectedItem().request_status_id.getValue(),
+                        tbl_training_mngmt.getSelectionModel().getSelectedItem().request_status_id.getValue(),
                         tbl_training_mngmt.getSelectionModel().getSelectedItem().request_status.getValue()
-                        );
+                );
                 Modal moreDetails = Modal.getInstance(new Form("/FXMLS/HR2/Modals/TM_ViewTraining.fxml").getParent());
                 moreDetails.open();
             }
