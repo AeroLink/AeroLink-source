@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -21,10 +22,19 @@ public class SPviewSPDetailsController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    // info ng company
     public static String pname = "";
     public static String paddress = "";
-    
+    public static String pemail = "";
+    public static String pcontact = "";
+    public static String pcode = "";
+    public static String pcountry = "";
+    // info ng tao
+    public static String pefn = "";
+    public static String peemail = "";
+
     public static Boolean modalOpen = true;
+    // para sa info ng company
     @FXML
     private JFXTextField providername;
     @FXML
@@ -34,14 +44,27 @@ public class SPviewSPDetailsController implements Initializable {
     @FXML
     private JFXTextField providercontact;
     @FXML
+    private Label providercode;
+    @FXML
+    private JFXTextField providercountry;
+    // para sa info ng tao
+    @FXML
     private JFXTextField PEfullname;
     @FXML
     private JFXTextField PEemail;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // company
         providername.setText(pname);
         provideraddress.setText(paddress);
-    }    
-    
+        provideremail.setText(pemail);
+        providercontact.setText(pcontact);
+        providercode.setText(pcode);
+        providercountry.setText(pcountry);
+        // tao
+        PEfullname.setText(pefn);
+        PEemail.setText(peemail);
+    }
+
 }

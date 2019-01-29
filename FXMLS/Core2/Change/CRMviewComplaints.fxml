@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -13,7 +15,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="CRMrootPane" prefHeight="693.0" prefWidth="1370.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Core2.Change.CRMviewComplaintsController">
+<AnchorPane id="AnchorPane" fx:id="CRMrootPane" prefHeight="693.0" prefWidth="1370.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Core2.Change.CRMviewComplaintsController">
    <children>
       <StackPane fx:id="sp" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -44,85 +46,135 @@
                         </JFXButton>
                      </children>
                   </AnchorPane>
-                  <TableView fx:id="tblNotification" layoutX="1140.0" layoutY="43.0" prefHeight="648.0" prefWidth="272.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
-                     <columns>
-                        <TableColumn prefWidth="75.0" text="NOTIFICATIONS" />
-                     </columns>
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
-                     <contextMenu>
-                        <ContextMenu fx:id="contextReply">
-                           <items>
-                              <MenuItem fx:id="ctmReply" mnemonicParsing="false" onAction="#reply" text="Reply" />
-                           </items>
-                        </ContextMenu>
-                     </contextMenu>
-                  </TableView>
-                  <FontAwesomeIconView fill="RED" glyphName="BELL" layoutX="1164.0" layoutY="64.0" size="20" />
-                  <TableView fx:id="tblOpenQA" layoutX="498.0" layoutY="45.0" prefHeight="648.0" prefWidth="593.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="45.0">
-                     <columns>
-                        <TableColumn fx:id="colQuestion" prefWidth="75.0" text="QUESTION" />
-                        <TableColumn fx:id="colAnswer" prefWidth="75.0" text="ANSWER" />
-                     </columns>
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
-                     <contextMenu>
-                        <ContextMenu fx:id="contextmenu">
-                           <items>
-                              <MenuItem fx:id="delete" mnemonicParsing="false" text="Delete" />
-                           </items>
-                        </ContextMenu>
-                     </contextMenu>
-                  </TableView>
-                  <TitledPane collapsible="false" layoutX="14.0" layoutY="45.0" prefHeight="410.0" prefWidth="478.0" text="Create FAQ's">
-                     <content>
-                        <AnchorPane prefHeight="378.0" prefWidth="476.0">
-                           <children>
-                              <TextField fx:id="answer" alignment="TOP_LEFT" layoutX="23.0" layoutY="207.0" prefHeight="102.0" prefWidth="429.0">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </TextField>
-                              <TextField fx:id="question" alignment="TOP_LEFT" layoutX="22.0" layoutY="34.0" prefHeight="139.0" prefWidth="429.0">
-                                 <font>
-                                    <Font name="System Bold Italic" size="20.0" />
-                                 </font>
-                              </TextField>
-                              <Label layoutX="22.0" layoutY="12.0" text="Question">
-                                 <font>
-                                    <Font size="13.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="23.0" layoutY="184.0" text="Answer">
-                                 <font>
-                                    <Font size="13.0" />
-                                 </font>
-                              </Label>
-                              <JFXButton fx:id="submit" buttonType="RAISED" layoutX="302.0" layoutY="323.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #34a853;" text="Submit" textFill="WHITE">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                                 <graphic>
-                                    <FontAwesomeIconView fill="WHITE" glyphName="SEND" size="20" />
-                                 </graphic>
-                              </JFXButton>
-                           </children>
-                        </AnchorPane>
-                     </content>
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </TitledPane>
-                  <TableView layoutX="14.0" layoutY="468.0" prefHeight="230.0" prefWidth="478.0" AnchorPane.bottomAnchor="0.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="LIST OF FORWARDED COMPLAINTS" />
-                    </columns>
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
-                  </TableView>
+                  <JFXTabPane layoutY="42.0" prefHeight="648.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
+                     <tabs>
+                        <Tab id="tab" styleClass="tab-label" text="FAQ's MANAGEMENT">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="tblOpenQA" editable="true" layoutX="558.0" layoutY="14.0" prefHeight="566.0" prefWidth="800.0" style="-fx-border-color: #34a853;" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="15.0">
+                                       <columns>
+                                          <TableColumn fx:id="colQuestion" prefWidth="75.0" text="QUESTION" />
+                                          <TableColumn fx:id="colAnswer" editable="false" prefWidth="75.0" text="ANSWER" />
+                                       </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                       <contextMenu>
+                                          <ContextMenu fx:id="contextmenu">
+                                             <items>
+                                                <MenuItem fx:id="delete" mnemonicParsing="false" text="Delete" />
+                                             </items>
+                                          </ContextMenu>
+                                       </contextMenu>
+                                    </TableView>
+                                    <TitledPane collapsible="false" layoutY="16.0" prefHeight="595.0" prefWidth="544.0" style="-fx-border-color: #34a853;" text="CREATE FAQ's" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="15.0">
+                                       <content>
+                                          <AnchorPane prefHeight="378.0" prefWidth="476.0">
+                                             <children>
+                                                <TextField fx:id="answer" alignment="TOP_LEFT" layoutX="36.0" layoutY="279.0" prefHeight="195.0" prefWidth="474.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </TextField>
+                                                <TextField fx:id="question" alignment="TOP_LEFT" layoutX="36.0" layoutY="42.0" prefHeight="206.0" prefWidth="476.0">
+                                                   <font>
+                                                      <Font name="System Bold Italic" size="20.0" />
+                                                   </font>
+                                                </TextField>
+                                                <Label layoutX="37.0" layoutY="251.0" text="Answer">
+                                                   <font>
+                                                      <Font name="System Bold" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <JFXButton fx:id="submit" buttonType="RAISED" layoutX="357.0" layoutY="490.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #34a853;" text="Submit" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                   <graphic>
+                                                      <FontAwesomeIconView fill="WHITE" glyphName="SEND" size="20" />
+                                                   </graphic>
+                                                </JFXButton>
+                                                <Label layoutX="37.0" layoutY="14.0" text="Question">
+                                                   <font>
+                                                      <Font name="System Bold" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </TitledPane>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </Tab>
+                        <Tab id="tab" styleClass="tab-label" text="ONLINE COMPLAINTS">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="tblNotification" layoutY="10.0" prefHeight="601.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0">
+                                       <columns>
+                                          <TableColumn prefWidth="75.0" text="NOTIFICATIONS" />
+                                       </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                       <contextMenu>
+                                          <ContextMenu fx:id="contextReply">
+                                             <items>
+                                                <MenuItem fx:id="ctmReply" mnemonicParsing="false" onAction="#reply" text="Reply" />
+                                             </items>
+                                          </ContextMenu>
+                                       </contextMenu>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </Tab>
+                        <Tab id="tab" styleClass="tab-label" text="CUSTOMER SERVICE">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="tblCase" layoutX="66.0" layoutY="58.0" prefHeight="553.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="58.0">
+                                      <columns>
+                                        <TableColumn prefWidth="75.0" text="CASE NUMBER" />
+                                        <TableColumn prefWidth="75.0" text="EMPLOYEE ID" />
+                                          <TableColumn prefWidth="75.0" text="REFERENCE NUMBER" />
+                                          <TableColumn prefWidth="75.0" text="CATEGORY" />
+                                          <TableColumn prefWidth="75.0" text="DATE ISSUE" />
+                                          <TableColumn editable="false" prefWidth="75.0" text="LEVEL" />
+                                          <TableColumn editable="false" prefWidth="75.0" text="STATUS" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                       <contextMenu>
+                                          <ContextMenu fx:id="contextMenu">
+                                            <items>
+                                              <MenuItem fx:id="viewIssue" mnemonicParsing="false" onAction="#viewIssue" text="View Issue" />
+                                            </items>
+                                          </ContextMenu>
+                                       </contextMenu>
+                                    </TableView>
+                                    <JFXButton buttonType="RAISED" layoutX="1259.0" layoutY="16.0" onAction="#viewAddCase" style="-fx-background-color: #34a853;" text="Add Case" textFill="WHITE" AnchorPane.rightAnchor="20.0">
+                                       <graphic>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="SEND" size="20" />
+                                       </graphic>
+                                    </JFXButton>
+                                    <JFXButton buttonType="RAISED" layoutX="1116.0" layoutY="16.0" onAction="#viewSearch" style="-fx-background-color: #34a853;" text="Search Customer" textFill="WHITE" visible="false">
+                                       <graphic>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="20" />
+                                       </graphic>
+                                    </JFXButton>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </Tab>
+                     </tabs>
+                  </JFXTabPane>
                </children>
             </AnchorPane>
          </children>
