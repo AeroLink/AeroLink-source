@@ -157,7 +157,10 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </TableView>
-                        <JFXComboBox fx:id="cbox_filter_Fstatus" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="168.0" promptText="Facility Status" />
+                        <JFXComboBox fx:id="cbox_filter_Fstatus" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="168.0" promptText="Facility Status">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></JFXComboBox>
                      </children>
                   </AnchorPane>
                </content>
