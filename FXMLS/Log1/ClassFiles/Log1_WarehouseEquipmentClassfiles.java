@@ -11,7 +11,7 @@ import javafx.beans.property.SimpleStringProperty;
  *
  * @author Crenz
  */
-public class Log1_AssetEquipmentClassfiles {
+public class Log1_WarehouseEquipmentClassfiles {
     public SimpleStringProperty EquipmentID;
     public SimpleStringProperty BuildingName;
     public SimpleStringProperty EquipmentName;
@@ -22,7 +22,7 @@ public class Log1_AssetEquipmentClassfiles {
     public SimpleStringProperty EquipmentWarrantyDate;
     public SimpleStringProperty EquipmentPrice;
     
-    public Log1_AssetEquipmentClassfiles(
+    public Log1_WarehouseEquipmentClassfiles(
             String ID,
             String bName,
             String Name,
