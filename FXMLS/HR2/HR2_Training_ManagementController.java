@@ -137,6 +137,10 @@ public class HR2_Training_ManagementController implements Initializable {
     private TableColumn<TM_AssetFacilities, String> col_f_roomNumber;
     @FXML
     private TableColumn<TM_AssetFacilities, String> col_f_capacity;
+    @FXML
+    private ContextMenu hs_contextMenu;
+    @FXML
+    private MenuItem mi_view_hs_training;
 
     /**
      * Initializes the controller class.
@@ -743,6 +747,33 @@ public class HR2_Training_ManagementController implements Initializable {
             });
         }
 
+    }
+
+    @FXML
+    public void ContextMenuForHistory(MouseEvent event) {
+        if (event.getButton() == MouseButton.SECONDARY) {
+            hs_contextMenu.show(tbl_history_of_trainings, event.getX(), event.getSceneY());
+            mi_view_hs_training.setOnAction(e
+                    -> {
+
+                HR2_TM_ViewTrainingInfo_Modal.init_Trainings(
+                        tbl_history_of_trainings.getSelectionModel().getSelectedItem().tr_id.getValue(),
+                        tbl_history_of_trainings.getSelectionModel().getSelectedItem().dept_name.getValue(),
+                        tbl_history_of_trainings.getSelectionModel().getSelectedItem().title.getValue(),
+                        tbl_history_of_trainings.getSelectionModel().getSelectedItem().no_of_participants.getValue(),
+                        tbl_history_of_trainings.getSelectionModel().getSelectedItem().employee_code.getValue(),
+                        tbl_history_of_trainings.getSelectionModel().getSelectedItem().trainor.getValue(),
+                        tbl_history_of_trainings.getSelectionModel().getSelectedItem().from_day.getValue(),
+                        tbl_history_of_trainings.getSelectionModel().getSelectedItem().to_day.getValue(),
+                        tbl_history_of_trainings.getSelectionModel().getSelectedItem().request_status_id.getValue(),
+                        tbl_history_of_trainings.getSelectionModel().getSelectedItem().request_status.getValue()
+                );
+                Modal moreDetails = Modal.getInstance(new Form("/FXMLS/HR2/Modals/TM_ViewHistoryyOfTraining.fxml").getParent());
+                moreDetails.open();
+            }
+            );
+
+        }
     }
 
 }
