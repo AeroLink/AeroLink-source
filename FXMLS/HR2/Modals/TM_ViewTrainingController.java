@@ -96,6 +96,8 @@ public class TM_ViewTrainingController implements Initializable {
 
         cbox_edit_title.getItems().add(HR2_TM_ViewTrainingInfo_Modal.job_position);
         cbox_edit_title.getSelectionModel().selectFirst();
+        cbox_edit_trainor.getItems().add(HR2_TM_ViewTrainingInfo_Modal.employee_code + " - " + HR2_TM_ViewTrainingInfo_Modal.trainor);
+        cbox_edit_trainor.getSelectionModel().selectFirst();
         txt_from_day.setText(HR2_TM_ViewTrainingInfo_Modal.from_day);
         txt_to_day.setText(HR2_TM_ViewTrainingInfo_Modal.to_day);
         // txt_from_day.setValue(LocalDate.parse(HR2_TM_ViewTrainingInfo_Modal.from_day));
@@ -177,7 +179,7 @@ public class TM_ViewTrainingController implements Initializable {
             cbox_edit_status.setValue(((HashMap) row).get("request_status").toString());
             txt_req_by.setText(((HashMap) row).get("requested_by").toString());
             txt_date_requested.setText(((HashMap) row).get("date_requested").toString());
-            cbox_edit_trainor.setValue(((HashMap) row).get("trainor").toString());
+            //   cbox_edit_trainor.setValue(((HashMap) row).get("trainor").toString());
             //  txt_from_time.setValue(LocalTime.parse(((HashMap) row).get("start_time").toString()));
             //txt_to_time.setValue(LocalTime.parse(((HashMap) row).get("end_time").toString()));
             cbox_edit_type.setValue(((HashMap) row).get("type_of_training").toString());

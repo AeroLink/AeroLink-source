@@ -52,6 +52,14 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </TableView>
+                        <JFXComboBox fx:id="cbox_tm_dept" layoutX="14.0" layoutY="42.0" prefHeight="25.0" prefWidth="146.0" promptText="Select Department">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></JFXComboBox>
+                        <JFXComboBox fx:id="cbox_tm_trainor" layoutX="184.0" layoutY="42.0" prefHeight="25.0" prefWidth="276.0" promptText="Select Trainor">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></JFXComboBox>
                      </children>
                   </AnchorPane>
               </content>
@@ -87,7 +95,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </JFXComboBox>
-                        <JFXComboBox fx:id="cbox_hs_jp" layoutX="232.0" layoutY="37.0" prefHeight="25.0" prefWidth="174.0" promptText="Select Job Position">
+                        <JFXComboBox fx:id="cbox_hs_jp" layoutX="207.0" layoutY="37.0" prefHeight="25.0" prefWidth="236.0" promptText="Select Job Position">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
