@@ -12,6 +12,7 @@ import FXMLS.HR2.ClassFiles.HR2_LM_CourseOutlineModal;
 import FXMLS.HR2.ClassFiles.HR2_TM_ViewTrainingInfo_Modal;
 import FXMLS.HR2.ClassFiles.HR2_TrainingReq_Class;
 import FXMLS.HR2.ClassFiles.HR4_Jobs_Class;
+import FXMLS.HR2.ClassFiles.TM_ViewTrainingReqClassModal;
 import Model.HR2_TM_Training_Requisition;
 import Model.HR2_Temp_Employee_Profiles;
 import Model.HR4_Departments;
@@ -116,11 +117,11 @@ public class HR2_Training_ManagementController implements Initializable {
     @FXML
     private JFXComboBox cbox_hs_dept;
     @FXML
-    private JFXComboBox cbox_hs_jp;
-    @FXML
     private JFXComboBox cbox_tm_dept;
     @FXML
     private JFXComboBox cbox_tm_trainor;
+    @FXML
+    private JFXComboBox cbox_hs_trainor;
 
     /**
      * Initializes the controller class.
@@ -140,6 +141,12 @@ public class HR2_Training_ManagementController implements Initializable {
         cbox_tm_trainor.getSelectionModel().selectedItemProperty().addListener(listener -> {
             searchTM_Trainor();
         });
+        cbox_hs_dept.getSelectionModel().selectedItemProperty().addListener(listener -> {
+            searchHS_Dept();
+        });
+        cbox_hs_trainor.getSelectionModel().selectedItemProperty().addListener(listener -> {
+            searchHS_Trainor();
+        });
     }
 
     public void DisplayDataInCB() {
@@ -155,13 +162,6 @@ public class HR2_Training_ManagementController implements Initializable {
                 cbox_hs_dept.getItems().add(hm1.get("dept_name"));
 
             }
-            List d = jobs.get();
-            //"concat(substring(title,0,2), job_id) as job_id, title"
-            for (Object e : d) {
-                HashMap hm2 = (HashMap) e;
-                //RS
-                cbox_hs_jp.getItems().add(hm2.get("title"));
-            }
 
             List tm_dept = dept.get();
             for (Object td : tm_dept) {
@@ -176,6 +176,13 @@ public class HR2_Training_ManagementController implements Initializable {
                 HashMap hm4 = (HashMap) tjp;
                 //RS
                 cbox_tm_trainor.getItems().add(hm4.get("employee_code") + " - " + hm4.get("firstname") + " " + hm4.get("middlename") + " " + hm4.get("lastname"));
+            }
+            List trainorsHistory = emp.get();
+            //"concat(substring(title,0,2), job_id) as job_id, title"
+            for (Object th : trainorsHistory) {
+                HashMap hm5 = (HashMap) th;
+                //RS
+                cbox_hs_trainor.getItems().add(hm5.get("employee_code") + " - " + hm5.get("firstname") + " " + hm5.get("middlename") + " " + hm5.get("lastname"));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -193,13 +200,31 @@ public class HR2_Training_ManagementController implements Initializable {
                 .where(new Object[][]{
             {"dept.dept_name", "=", cbox_tm_dept.getSelectionModel().getSelectedItem().toString()},
             {"rs.req_status_id", "<>", "3"},
-            {"aerolink.tbl_hr2_training_requisition.isDeleted", "<>", "1"}})
+            {"ti.isDeleted", "<>", "1"}})
                 .orderBy("aerolink.tbl_hr2_training_requisition.date_requested", Model.Sort.ASC)
                 .get("aerolink.tbl_hr4_employee_profiles.employee_code, aerolink.tbl_hr2_training_requisition.tr_id,dept.dept_name,j.title,training_title,no_of_participants,"
                         + "concat(aerolink.tbl_hr4_employee_profiles.firstname,' ',aerolink.tbl_hr4_employee_profiles.middlename,' ',aerolink.tbl_hr4_employee_profiles.lastname) as trainor,"
                         + "from_day, to_day, rs.req_status_id, rs.req_status");
 
         DisplayTrainingM(training_req);
+    }
+
+    public void searchHS_Dept() {
+        HR2_TM_Training_Requisition tr = new HR2_TM_Training_Requisition();
+        List training_req_archive = tr.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "dept", "=", "dept_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_hr2_request_status", "req_status_id", "rs", "=", "req_status_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_hr2_trainingInfo", "tr_id", "ti", "=", "tr_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "=", "ti", "trainor", true)
+                .where(new Object[][]{
+            {"dept.dept_name", "=", cbox_hs_dept.getSelectionModel().getSelectedItem().toString()},
+            {"ti.isDeleted", "<>", "0"}})
+                .orderBy("aerolink.tbl_hr4_employee_profiles.employee_code, aerolink.tbl_hr2_training_requisition.date_requested", Model.Sort.ASC)
+                .get("aerolink.tbl_hr2_training_requisition.tr_id,dept.dept_name,j.title,training_title,no_of_participants,"
+                        + "concat(aerolink.tbl_hr4_employee_profiles.firstname,' ',aerolink.tbl_hr4_employee_profiles.middlename,' ',aerolink.tbl_hr4_employee_profiles.lastname) as trainor,"
+                        + "from_day, to_day, rs.req_status_id, rs.req_status");
+
+        DisplayHistoryOfTraining(training_req_archive);
     }
 
     public void searchTM_Trainor() {
@@ -212,7 +237,26 @@ public class HR2_Training_ManagementController implements Initializable {
                 .where(new Object[][]{
             {"aerolink.tbl_hr4_employee_profiles.employee_code", "=", cbox_tm_trainor.getSelectionModel().getSelectedItem().toString().split(" - ")[0]},
             {"rs.req_status_id", "<>", "3"},
-            {"aerolink.tbl_hr2_training_requisition.isDeleted", "<>", "1"}})
+            {"ti.isDeleted", "<>", "1"}})
+                .orderBy("aerolink.tbl_hr2_training_requisition.date_requested", Model.Sort.ASC)
+                .get("aerolink.tbl_hr4_employee_profiles.employee_code, aerolink.tbl_hr2_training_requisition.tr_id,dept.dept_name,j.title,training_title,no_of_participants,"
+                        + "concat(aerolink.tbl_hr4_employee_profiles.firstname,' ',aerolink.tbl_hr4_employee_profiles.middlename,' ',aerolink.tbl_hr4_employee_profiles.lastname) as trainor,"
+                        + "from_day, to_day, rs.req_status_id, rs.req_status");
+
+        DisplayTrainingM(training_req);
+    }
+
+    public void searchHS_Trainor() {
+        HR2_TM_Training_Requisition tr = new HR2_TM_Training_Requisition();
+        List training_req = tr.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "dept", "=", "dept_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_hr2_request_status", "req_status_id", "rs", "=", "req_status_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_hr2_trainingInfo", "tr_id", "ti", "=", "tr_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "=", "ti", "trainor", true)
+                .where(new Object[][]{
+            {"aerolink.tbl_hr4_employee_profiles.employee_code", "=", cbox_hs_trainor.getSelectionModel().getSelectedItem().toString().split(" - ")[0]},
+            {"rs.req_status_id", "<>", "3"},
+            {"ti.isDeleted", "<>", "1"}})
                 .orderBy("aerolink.tbl_hr2_training_requisition.date_requested", Model.Sort.ASC)
                 .get("aerolink.tbl_hr4_employee_profiles.employee_code, aerolink.tbl_hr2_training_requisition.tr_id,dept.dept_name,j.title,training_title,no_of_participants,"
                         + "concat(aerolink.tbl_hr4_employee_profiles.firstname,' ',aerolink.tbl_hr4_employee_profiles.middlename,' ',aerolink.tbl_hr4_employee_profiles.lastname) as trainor,"
@@ -233,7 +277,7 @@ public class HR2_Training_ManagementController implements Initializable {
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "=", "ti", "trainor", true)
                     .where(new Object[][]{
                 {"rs.req_status_id", "<>", "3"},
-                {"aerolink.tbl_hr2_training_requisition.isDeleted", "<>", "1"}})
+                {"ti.isDeleted", "<>", "1"}})
                     .orderBy("aerolink.tbl_hr2_training_requisition.date_requested", Model.Sort.ASC)
                     .get("aerolink.tbl_hr4_employee_profiles.employee_code,aerolink.aerolink.tbl_hr2_training_requisition.tr_id,dept.dept_name,j.title,training_title,no_of_participants,"
                             + "aerolink.tbl_hr4_employee_profiles.employee_code, concat(aerolink.tbl_hr4_employee_profiles.firstname,' ',aerolink.tbl_hr4_employee_profiles.middlename,' ',aerolink.tbl_hr4_employee_profiles.lastname) as trainor,"
@@ -355,8 +399,8 @@ public class HR2_Training_ManagementController implements Initializable {
                     .orderBy("aerolink.tbl_hr2_training_requisition.date_requested", Model.Sort.ASC)
                     .get("aerolink.tbl_hr2_training_requisition.tr_id,dept.dept_name, j.title, aerolink.tbl_hr2_training_requisition.training_title,aerolink.tbl_hr2_training_requisition.no_of_participants,"
                             + "ep.employee_code, aerolink.tbl_hr2_training_requisition.total_hours,aerolink.tbl_hr2_training_requisition.from_day, "
-                            + "aerolink.tbl_hr2_training_requisition.to_day, aerolink.tbl_hr2_training_requisition.reason,rs.req_status,concat(ep.firstname, ' ',ep.middlename, ' ',ep.lastname) as requested_by,"
-                            + "aerolink.tbl_hr2_training_requisition.date_requested,rs.req_status");
+                            + "aerolink.tbl_hr2_training_requisition.to_day, aerolink.tbl_hr2_training_requisition.reason,concat(ep.firstname, ' ',ep.middlename, ' ',ep.lastname) as requested_by,"
+                            + "aerolink.tbl_hr2_training_requisition.date_requested,rs.req_status_id,rs.req_status");
 
             DisplayTrainingReq(training_req);
         } catch (Exception e) {
@@ -439,7 +483,14 @@ public class HR2_Training_ManagementController implements Initializable {
                                     -> {
 
                                 HR2_TrainingReq_Class tr1 = (HR2_TrainingReq_Class) getTableRow().getItem();
-                                Modal lq = Modal.getInstance(new Form("/FXMLS/HR2/Modals/LM_CourseOutline.fxml").getParent());
+                                TM_ViewTrainingReqClassModal.initVTRClass(
+                                        tr1.tr_id.getValue(), 
+                                        tr1.dept_name.getValue(), 
+                                        tr1.title.getValue(), 
+                                        tr1.date_requested.getValue(),
+                                        tr1.request_status_id.getValue(),
+                                        tr1.request_status.getValue());
+                                Modal lq = Modal.getInstance(new Form("/FXMLS/HR2/Modals/TM_ViewTrainingRequest.fxml").getParent());
                                 lq.open();
                             });
                             more_btn.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
