@@ -14,14 +14,18 @@ import static Synapse.Model.setColumns;
 public class Log_assetsales_model extends Synapse.Model{
     public Log_assetsales_model(){
              
-        setColumns("asset_id",
+        setColumns("ast_id",
                 "ast_date",
-                "ast_invoice",
+                "ast_firstname",
+                "ast_lastname",
                 "ast_description",
                 "ast_amount",
+                "ast_quantity",
+                "ast_quantity",
                 "ast_status",
-                "ast_type");
-        this.initTable("tbl_asset");
+                "ast_type",
+                "journal_status");
+        this.initTable("tbl_finance_asset_po_sales_report");
     
 }
 }

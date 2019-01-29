@@ -6,6 +6,7 @@
 package FXMLS.FINANCIAL;
 
 import FXMLS.FINANCIAL.CLASSFILES.Collection_classfile;
+import Model.Financial.Log_assetsales_model;
 import Synapse.Model;
 import Synapse.Session;
 import java.net.URL;
@@ -40,13 +41,16 @@ public class FINANCIAL_COLLECTIONController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        AddTableColumn_collection();
-       
-       //LoadTable_collection();
+       LoadTable_collection();
     }    
     
     
     
-    public void AddTableColumn_collection() {
+    
+    
+    
+    public void AddTableColumn_collection() 
+    {
 
         collection_tbl.getItems().clear();
         collection_tbl.getColumns().removeAll(collection_tbl.getColumns());
@@ -57,11 +61,11 @@ public class FINANCIAL_COLLECTIONController implements Initializable {
         TableColumn<Collection_classfile, String> type = new TableColumn<>("Type");
        
     
-        date.setCellValueFactory((TableColumn.CellDataFeatures<Collection_classfile, String> param) -> param.getValue().podate);
-        invoice.setCellValueFactory((TableColumn.CellDataFeatures<Collection_classfile, String> param) -> param.getValue().poinvoice);
-        description.setCellValueFactory((TableColumn.CellDataFeatures<Collection_classfile, String> param) -> param.getValue().podescription);
-        amount.setCellValueFactory((TableColumn.CellDataFeatures<Collection_classfile, String> param) -> param.getValue().poamount);
-        type.setCellValueFactory((TableColumn.CellDataFeatures<Collection_classfile, String> param) -> param.getValue().potype);
+        date.setCellValueFactory((TableColumn.CellDataFeatures<Collection_classfile, String> param) -> param.getValue().coldate);
+        invoice.setCellValueFactory((TableColumn.CellDataFeatures<Collection_classfile, String> param) -> param.getValue().colinvoice);
+        description.setCellValueFactory((TableColumn.CellDataFeatures<Collection_classfile, String> param) -> param.getValue().coldescription);
+        amount.setCellValueFactory((TableColumn.CellDataFeatures<Collection_classfile, String> param) -> param.getValue().colamount);
+        type.setCellValueFactory((TableColumn.CellDataFeatures<Collection_classfile, String> param) -> param.getValue().coltype);
       
 
         
@@ -70,31 +74,62 @@ public class FINANCIAL_COLLECTIONController implements Initializable {
     } 
     
     
+    
+    
+     private int collection(List col){
+        collection_tbl.getItems().clear();
+        try {
+             
+              for(Object d : col)
+            {
+                HashMap hm = (HashMap) d;   //exquisite casting
+                
+                hm.get("ast_date");
+                hm.get("ast_id");
+                hm.get("ast_description");
+                hm.get("ast_amount");
+                hm.get("ast_type");
+               cc.add(new Collection_classfile(
+                            String.valueOf(hm.get("ast_date")),
+                            String.valueOf(hm.get("ast_id")),
+                            String.valueOf(hm.get("ast_description")),
+                            String.valueOf(hm.get("ast_amount")),
+                            String.valueOf(hm.get("ast_type"))
+                ) );   
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        collection_tbl.setItems(cc);
+        return 0;
+       
+     }
+    
     long DummyCount = 0;
     long GlobalCount = 0;
     int Global_Count = 0;
      ExecutorService e = Executors.newFixedThreadPool(1);   
-    ObservableList<Collection_classfile> pom = FXCollections.observableArrayList();
-    
-   /* public void LoadTable_collection(){
+    ObservableList<Collection_classfile> cc = FXCollections.observableArrayList();
+      Log_assetsales_model arm = new Log_assetsales_model();
+   public void LoadTable_collection(){
         
          CompletableFuture.supplyAsync(() -> {
 
             while (Session.CurrentRoute.equals("id_collection")) {
                 
                 try {
-                    fpm.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
+                    arm.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
                         DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
                     });
 
                     if (DummyCount != GlobalCount) {
 
-                        collection_tbl.getItems().removeAll(pom);
-                            List rs = fpm
-                                    .join(Model.JOIN.LEFT, "aerolink.tbl_finance_to_asset", "asset_id", "tblA", "=", "po_id")
-                                    .get( "po_invoice"
-                                          );
-                        AddSalesToTable(rs);
+                        collection_tbl.getItems();
+                            List rs = arm.where("ast_status","=","Collected").get();
+                            collection(rs);
+                            
+                            
                         GlobalCount = DummyCount;
                     }
 
@@ -107,28 +142,9 @@ public class FINANCIAL_COLLECTIONController implements Initializable {
             return 0;
         }, Session.SessionThreads);
 
-    }*/
-    
-    
-    public void AddSalesToTable(List rs) {
-        collection_tbl.refresh();
-        pom.clear();
-        
-        for (Object row : rs) {
-            HashMap crow = (HashMap) row;
-            
-            
-            String id = String.valueOf(crow.get("poid"));
-            String no = (String) crow.get("pono");
-            String date = (String) crow.get("date");
-            String inv = (String) crow.get("invoice");
-            String desc = (String) crow.get("description");
-            String amnt = (String) crow.get("amount");
-            String tpe = (String) crow.get("type");
-            
-            pom.add(new Collection_classfile(id,no,date,inv,desc,amnt,tpe));
-        }
-         collection_tbl.setItems(pom);
     }
+    
+    
+
  
 }

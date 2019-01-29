@@ -4,13 +4,12 @@
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -31,7 +30,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="disbursement_tbl" layoutX="13.0" layoutY="66.0" prefHeight="576.0" prefWidth="437.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="541.0">
+                        <TableView fx:id="disbursement_tbl" layoutX="13.0" layoutY="84.0" prefHeight="558.0" prefWidth="966.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="12.0">
                           <columns>
                             <TableColumn prefWidth="75.0" text="C1" />
                             <TableColumn prefWidth="75.0" text="C2" />
@@ -39,8 +38,18 @@
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
+                           <contextMenu>
+                              <ContextMenu fx:id="contextMenu" style="#34a853: #34a853;">
+                                <items>
+                                  <MenuItem fx:id="Voucher_menuItem" mnemonicParsing="false" text="Create Voucher">
+                                       <graphic>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="PLUS" />
+                                       </graphic></MenuItem>
+                                </items>
+                              </ContextMenu>
+                           </contextMenu>
                         </TableView>
-                        <AnchorPane layoutX="13.0" layoutY="38.0" prefHeight="24.0" prefWidth="435.0" style="-fx-background-color: #34a853;" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="543.0">
+                        <AnchorPane layoutX="13.0" layoutY="2.0" prefHeight="24.0" prefWidth="964.0" style="-fx-background-color: #34a853;" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="14.0">
                            <children>
                               <Label layoutX="26.0" prefHeight="24.0" prefWidth="54.0" text="Request" textFill="WHITE">
                                  <font>
@@ -50,92 +59,26 @@
                               <FontAwesomeIconView fill="WHITE" glyphName="FILE" layoutX="10.0" layoutY="16.0" />
                            </children>
                         </AnchorPane>
-                        <AnchorPane layoutX="466.0" layoutY="35.0" prefHeight="388.0" prefWidth="517.0" style="-fx-border-color: #34a853;" AnchorPane.rightAnchor="8.0">
-                           <children>
-                              <AnchorPane layoutX="3.0" layoutY="3.0" prefHeight="24.0" prefWidth="510.0" style="-fx-background-color: #34a853;">
-                                 <children>
-                                    <Label layoutX="22.0" prefHeight="24.0" prefWidth="120.0" text="Create Voucher" textFill="WHITE">
-                                       <font>
-                                          <Font name="System Bold" size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <FontAwesomeIconView fill="WHITE" glyphName="PLUS" layoutX="8.0" layoutY="17.0" />
-                                 </children>
-                              </AnchorPane>
-                              <Label layoutX="14.0" layoutY="46.0" text="Date Request:">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="daterequest_label" layoutX="143.0" layoutY="46.0" text="None">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="14.0" layoutY="96.0" text="Department:">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="department_label" layoutX="143.0" layoutY="96.0" text="None">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="14.0" layoutY="149.0" text="Description:">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="16.0" layoutY="255.0" text="Claimant:">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="claimant_label" layoutX="144.0" layoutY="255.0" text="None">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                              <TextArea fx:id="description_txtarea" editable="false" layoutX="143.0" layoutY="154.0" prefHeight="66.0" prefWidth="355.0" />
-                              <Label layoutX="16.0" layoutY="307.0" text="Amount:">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="amount_label" layoutX="144.0" layoutY="307.0" text="None">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                              <Separator layoutX="12.0" layoutY="76.0" prefHeight="3.0" prefWidth="492.0" style="-fx-background-color: #34a853;" />
-                              <Separator layoutX="12.0" layoutY="126.0" prefHeight="0.0" prefWidth="492.0" style="-fx-background-color: #34a853;" />
-                              <Separator layoutX="10.0" layoutY="237.0" prefHeight="0.0" prefWidth="492.0" style="-fx-background-color: #34a853;" />
-                              <Separator layoutX="11.0" layoutY="289.0" prefHeight="0.0" prefWidth="492.0" style="-fx-background-color: #34a853;" />
-                              <Separator layoutX="10.0" layoutY="343.0" prefHeight="0.0" prefWidth="492.0" style="-fx-background-color: #34a853;" />
-                              <Label fx:id="reqno_label" layoutX="284.0" layoutY="46.0" text="reqno" visible="false">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="prioritylvl_label" layoutX="362.0" layoutY="46.0" text="priority" visible="false">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="status_label" layoutX="450.0" layoutY="46.0" text="status" visible="false">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </AnchorPane>
-                        <JFXButton fx:id="dv_btn" buttonType="RAISED" disable="true" layoutX="638.0" layoutY="439.0" prefHeight="37.0" prefWidth="160.0" style="-fx-background-color: #34a853;" text="Disburse Voucher" textFill="WHITE" AnchorPane.rightAnchor="193.0">
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="SEND" wrappingWidth="26.0" />
-                           </graphic>
-                        </JFXButton>
-                        <Label fx:id="dr_id_label" layoutX="466.0" layoutY="14.0" text="dr_id" visible="false" />
+                        <Label layoutX="787.0" layoutY="26.0" text="Note:" textFill="#c90505" AnchorPane.rightAnchor="170.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="826.0" layoutY="28.0" text="Click rows from the table" AnchorPane.rightAnchor="35.0">
+                           <font>
+                              <Font name="System Italic" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="828.0" layoutY="45.0" text="then right click and click" AnchorPane.rightAnchor="37.0">
+                           <font>
+                              <Font name="System Italic" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="828.0" layoutY="62.0" text="Create Voucher." AnchorPane.rightAnchor="74.0">
+                           <font>
+                              <Font name="System Bold Italic" size="12.0" />
+                           </font>
+                        </Label>
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -143,7 +86,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="dv_tbl" layoutX="5.0" layoutY="114.0" prefHeight="537.0" prefWidth="982.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="4.0">
+                        <TableView fx:id="dv_tbl" layoutX="5.0" layoutY="81.0" prefHeight="570.0" prefWidth="982.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="4.0">
                           <columns>
                             <TableColumn prefWidth="75.0" text="C1" />
                             <TableColumn prefWidth="75.0" text="C2" />
@@ -152,18 +95,17 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="14.0" layoutY="74.0" prefHeight="32.0" prefWidth="37.0" style="-fx-background-color: #34a853;" text=" " textFill="WHITE">
+                        <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="14.0" layoutY="30.0" prefHeight="32.0" prefWidth="37.0" style="-fx-background-color: #34a853;" text=" " textFill="WHITE">
                            <graphic>
                               <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="14" wrappingWidth="4.0" />
                            </graphic>
                         </JFXButton>
-                        <JFXTextField fx:id="srch_name_txt" focusColor="#34a853" layoutX="60.0" layoutY="75.0" maxWidth="195.0" minWidth="195.0" prefHeight="31.0" prefWidth="195.0" promptText="Search by Name" unFocusColor="#34a853" />
-                        <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="876.0" layoutY="75.0" prefHeight="32.0" prefWidth="108.0" style="-fx-background-color: #34a853;" text="Print" textFill="WHITE" AnchorPane.rightAnchor="7.0">
+                        <JFXTextField fx:id="srch_name_txt" focusColor="#34a853" layoutX="60.0" layoutY="31.0" maxWidth="195.0" minWidth="195.0" prefHeight="31.0" prefWidth="195.0" promptText="Search by Name" unFocusColor="#34a853" />
+                        <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="869.0" layoutY="31.0" prefHeight="32.0" prefWidth="108.0" style="-fx-background-color: #34a853;" text="Print" textFill="WHITE" AnchorPane.rightAnchor="14.0">
                            <graphic>
                               <FontAwesomeIconView fill="WHITE" glyphName="PRINT" size="14" wrappingWidth="13.0" />
                            </graphic>
                         </JFXButton>
-                        <DatePicker fx:id="srch_date" layoutX="265.0" layoutY="79.0" promptText="Search Date Released" />
                      </children></AnchorPane>
               </content>
             </Tab>
