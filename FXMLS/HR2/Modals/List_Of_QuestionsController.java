@@ -7,6 +7,7 @@ package FXMLS.HR2.Modals;
 
 import FXMLS.HR2.ClassFiles.HR2_AssessmentClass;
 import FXMLS.HR2.ClassFiles.HR2_CoursesClass;
+import FXMLS.HR2.ClassFiles.HR2_ExaminationClass;
 import FXMLS.HR2.ClassFiles.HR2_LMClass_For_AddQuestion_Modal;
 import Model.HR2_Assessment;
 import Model.HR2_Courses;
@@ -108,7 +109,7 @@ public class List_Of_QuestionsController implements Initializable {
                     if (DummyCount != GlobalCount) {
 
                         List questions = q.join(Model.JOIN.INNER, "aerolink.tbl_hr2_examination", "exam_id", "e", "=", "exam_id")
-                            //    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "c", "job_id", true)
+                                //    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "c", "job_id", true)
                                 .where(new Object[][]{{"e.exam_name", "=", HR2_LMClass_For_AddQuestion_Modal.exam_name},
                         {"aerolink.tbl_hr2_assessment.isDeleted", "=", "0"}})
                                 .get("aerolink.tbl_hr2_assessment.question_id,aerolink.tbl_hr2_assessment.question");
@@ -168,8 +169,12 @@ public class List_Of_QuestionsController implements Initializable {
                         try {
                             btn.setOnAction(e
                                     -> {
-                                tbl_questions.getItems().get(getIndex());
-                                ViewChoices();
+                                HR2_AssessmentClass vc = (HR2_AssessmentClass) getTableRow().getItem();
+                                HR2_LMClass_For_AddQuestion_Modal.initCourseQuestion(
+                                        vc.question.getValue());
+                                //   tbl_questions.getItems().get(getIndex());
+                                Modal choices = Modal.getInstance(new Form("/FXMLS/HR2/Modals/HR2_View_Choices.fxml").getParent());
+                                choices.open();
                             });
                             btn.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
                             btn.setCursor(javafx.scene.Cursor.HAND);
@@ -195,12 +200,6 @@ public class List_Of_QuestionsController implements Initializable {
 
         addButton.setCellFactory(cellFactory);
         tbl_questions.getColumns().add(addButton);
-    }
-
-    public void ViewChoices() {
-        HR2_LMClass_For_AddQuestion_Modal.initCourseQuestion(tbl_questions.getSelectionModel().getSelectedItem().question.get());
-        Modal choices = Modal.getInstance(new Form("/FXMLS/HR2/Modals/HR2_View_Choices.fxml").getParent());
-        choices.open();
     }
 
     @FXML
@@ -283,7 +282,7 @@ public class List_Of_QuestionsController implements Initializable {
             XSSFSheet sp = w.createSheet("D");
             w.write(out);
             out.close();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
