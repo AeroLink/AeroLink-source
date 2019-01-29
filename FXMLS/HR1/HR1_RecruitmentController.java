@@ -15,12 +15,14 @@ import Synapse.Model;
 import Synapse.Session;
 import Synapse.SysDialog;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -49,10 +51,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
 import org.controlsfx.control.MaskerPane;
+import org.controlsfx.control.SegmentedBar;
 import org.controlsfx.control.StatusBar;
+import org.controlsfx.control.textfield.CustomTextField;
 
 /**
  * FXML Controller class
@@ -76,6 +81,8 @@ public class HR1_RecruitmentController implements Initializable {
     Label statusLabel = new Label("");
 
     JobPosting jp = new JobPosting();
+    
+    Object[][] objFilter;
 
     @FXML
     private TableView<TableModel_jLimit> tblOpenJobs;
@@ -84,7 +91,7 @@ public class HR1_RecruitmentController implements Initializable {
     @FXML
     private MenuItem menuPost;
     @FXML
-    private JFXTextField txtSearch;
+    private CustomTextField txtSearch;
     @FXML
     private JFXButton btnSearch;
     @FXML
@@ -103,6 +110,14 @@ public class HR1_RecruitmentController implements Initializable {
     private MaskerPane maskpane;
     @FXML
     private StatusBar statusBar;
+    @FXML
+    private JFXCheckBox rdoPosted;
+    @FXML
+    private JFXCheckBox rdoPending;
+    @FXML
+    private JFXCheckBox rdoFullTime;
+    @FXML
+    private JFXCheckBox rdoPartTime;
 
     /**
      * Initializes the controller class.
@@ -112,7 +127,7 @@ public class HR1_RecruitmentController implements Initializable {
 
         this.generateTable();
         this.populateTable();
-
+        
         //Loading mask
         maskpane.setText("Loading Data, Please Wait ... ");
 
@@ -193,7 +208,7 @@ public class HR1_RecruitmentController implements Initializable {
         TableColumn<TableModel_jLimit, String> status = new TableColumn<>("Posting Status");
         TableColumn<TableModel_jLimit, String> openDate = new TableColumn<>("Open Date");
         TableColumn<TableModel_jLimit, String> salary = new TableColumn<>("Salary");
-        TableColumn<TableModel_jLimit, String> empStatus = new TableColumn<>("Salary");
+        TableColumn<TableModel_jLimit, String> empStatus = new TableColumn<>("empStatus");
 
         TableColumn btnAction = new TableColumn<>(" ");
 
@@ -411,7 +426,6 @@ public class HR1_RecruitmentController implements Initializable {
         }
     }
 
-    @FXML
     private void btnPostAJob(ActionEvent event) {
         this.viewModalPostJob(tblOpenJobs.getSelectionModel().getSelectedItem());
     }
