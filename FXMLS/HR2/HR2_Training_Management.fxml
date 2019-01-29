@@ -73,7 +73,7 @@
                               <Font name="Lato Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TableView fx:id="tbl_history_of_trainings" layoutX="14.0" layoutY="77.0" prefHeight="286.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="77.0">
+                        <TableView fx:id="tbl_history_of_trainings" layoutX="14.0" layoutY="77.0" onMouseClicked="#ContextMenuForHistory" prefHeight="286.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="77.0">
                           <columns>
                             <TableColumn fx:id="col_hs_dept" prefWidth="75.0" text="Department" />
                             <TableColumn fx:id="col_hs_jp" prefWidth="75.0" text="Job Position" />
@@ -89,6 +89,13 @@
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
+                           <contextMenu>
+                              <ContextMenu fx:id="hs_contextMenu">
+                                <items>
+                                  <MenuItem fx:id="mi_view_hs_training" mnemonicParsing="false" text="View" />
+                                </items>
+                              </ContextMenu>
+                           </contextMenu>
                         </TableView>
                         <JFXComboBox fx:id="cbox_hs_dept" layoutX="8.0" layoutY="36.0" prefHeight="25.0" prefWidth="174.0" promptText="Select Department">
                            <cursor>
