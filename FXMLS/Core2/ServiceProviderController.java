@@ -49,13 +49,10 @@ public class ServiceProviderController implements Initializable {
     int Global_Count = 0;
     /* DECLARATION END */
     // dito lalabas yung another scene na tinatawag 
-    private AnchorPane rootPane;
     @FXML
-    private AnchorPane SNrootPane;
+    private AnchorPane SProotPane;
     @FXML
     private JFXButton SPviewR;
-    @FXML
-    private JFXButton SPviewR1;
     @FXML
     private TextField searchP;
 
@@ -146,21 +143,8 @@ public class ServiceProviderController implements Initializable {
             String provider_contact = (String) drow.get("provider_contact");
             String country = (String) drow.get("country");
 
-            sptbl.add(new SPTable_LoadNA(provider_name, provider_address,provider_contact, country));
+            sptbl.add(new SPTable_LoadNA(provider_name, provider_address, provider_contact, country));
         }
-    }
-
-    //ito yung pag call ng another scene pero hindi magiging modal 
-    @FXML
-    private void viewR(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/SPviewReport.fxml"));
-        SNrootPane.getChildren().setAll(pane);
-    }
-
-    @FXML
-    private void viewR1(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/SPviewRegistration.fxml"));
-        SNrootPane.getChildren().setAll(pane);
     }
 
     @FXML
@@ -168,7 +152,7 @@ public class ServiceProviderController implements Initializable {
         // sya yung ginamit pang tawag ng data via controller
         FXMLS.Core2.Modals.SPviewSPDetailsController.pname = tblOpenDetails.getSelectionModel().getSelectedItem().provider_name.getValue();
         FXMLS.Core2.Modals.SPviewSPDetailsController.paddress = tblOpenDetails.getSelectionModel().getSelectedItem().provider_address.getValue();
-        
+
         Modal md = Modal.getInstance(new Form("/FXMLS/Core2/Modals/SPviewSPDetails.fxml").getParent());
         md.open();
         md.getF().getStage().setOnCloseRequest(action -> {
@@ -233,4 +217,10 @@ public class ServiceProviderController implements Initializable {
 
     }
 
+    //ito yung pag call ng another scene pero hindi magiging modal 
+    @FXML
+    private void viewR(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/SPviewReport.fxml"));
+        SProotPane.getChildren().setAll(pane);
+    }
 }

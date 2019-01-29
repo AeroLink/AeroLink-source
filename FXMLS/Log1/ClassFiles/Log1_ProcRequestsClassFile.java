@@ -13,6 +13,7 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class Log1_ProcRequestsClassFile {
     public SimpleStringProperty requestID;
+    public SimpleStringProperty SupplierID;
     public SimpleStringProperty requestDate;
     public SimpleStringProperty requestDescription;
     public SimpleStringProperty requestor;
@@ -20,11 +21,15 @@ public class Log1_ProcRequestsClassFile {
     public SimpleStringProperty requestDepartment;
     public SimpleStringProperty requestPriorityLevel;
     public SimpleStringProperty requestQuantity;
-    public SimpleStringProperty requestPrice;
+    public SimpleStringProperty requestItemUnit;
+    public SimpleStringProperty requestPricePerUnit;
+    public SimpleStringProperty requestTotalPrice;
+    public SimpleStringProperty requestBudget;
     public SimpleStringProperty requestStatus;
     
     public Log1_ProcRequestsClassFile(
             String requestID,
+            String supplierID,
             String requestDate,
             String requestDescription,
             String requestor,
@@ -32,24 +37,40 @@ public class Log1_ProcRequestsClassFile {
             String requestDepartment,
             String requestPriorityLevel,
             String requestQuantity,
-            String requestPrice,
+            String requestItemUnit,
+            String requestPricePerUnit,
+            String requestTotalPrice,
+            String requestBudget,
             String requestStatus
         ) 
     {
         this.requestID = new SimpleStringProperty(requestID);
-        this.requestDate = new SimpleStringProperty(requestDate);
+        this.SupplierID = new SimpleStringProperty(supplierID);
         this.requestDescription = new SimpleStringProperty(requestDescription);
         this.requestor = new SimpleStringProperty(requestor);
         this.requestorPosition = new SimpleStringProperty(requestorPosition);
         this.requestDepartment = new SimpleStringProperty(requestDepartment);
         this.requestPriorityLevel = new SimpleStringProperty(requestPriorityLevel);
         this.requestQuantity = new SimpleStringProperty(requestQuantity);
-        this.requestPrice = new SimpleStringProperty(requestPrice);
+        this.requestItemUnit = new SimpleStringProperty(requestItemUnit);
+        this.requestPricePerUnit = new SimpleStringProperty(requestPricePerUnit);
+        this.requestTotalPrice = new SimpleStringProperty(requestTotalPrice);
+        this.requestBudget = new SimpleStringProperty(requestBudget);
         this.requestStatus = new SimpleStringProperty(requestStatus);
+        this.requestDate = new SimpleStringProperty(requestDate);
     }
 
+    
     public String getRequestID() {
         return requestID.get();
+    }
+
+    public String getSupplierID() {
+        return SupplierID.get();
+    }
+
+    public String getRequestDate() {
+        return requestDate.get();
     }
 
     public String getRequestDescription() {
@@ -76,15 +97,25 @@ public class Log1_ProcRequestsClassFile {
         return requestQuantity.get();
     }
 
-    public String getRequestPrice() {
-        return requestPrice.get();
+    public String getRequestItemUnit() {
+        return requestItemUnit.get();
+    }
+
+    public String getRequestPricePerUnit() {
+        return requestPricePerUnit.get();
+    }
+
+    public String getRequestTotalPrice() {
+        return requestTotalPrice.get();
+    }
+
+    public String getRequestBudget() {
+        return requestBudget.get();
     }
 
     public String getRequestStatus() {
         return requestStatus.get();
     }
 
-    public String getRequestDate() {
-        return requestDate.get();
-    }
+   
 }

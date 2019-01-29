@@ -98,7 +98,7 @@ public class HR1_EditJobController implements Initializable {
 
         System.err.println(HR1_EditJobSelection.id);
         if (jp.update(new Object[][]{
-            {"description", txtDesc.getHtmlText().replace("\"", "'").replace(",", ".")},
+            {"description", txtDesc.getHtmlText().replace("\"", "'").replace(",", ".").replace("contenteditable='true'", "")},
             {"status", cboStatus.getSelectionModel().getSelectedItem().toString()},
             {"salary", txtSalary.getText()},
             {"publish_on", dtpPublish.getValue().toString()},

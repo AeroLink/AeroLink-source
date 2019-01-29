@@ -60,8 +60,8 @@ public class WarehouseActivityLogController implements Initializable {
     }
     
     public void refreshData(){
-            user_col.setCellValueFactory(new PropertyValueFactory<>("ActivityItemName"));
-            itemDescript_col1.setCellValueFactory(new PropertyValueFactory<>("ActivityUser"));
+            user_col.setCellValueFactory(new PropertyValueFactory<>("ActivityUser"));
+            itemDescript_col1.setCellValueFactory(new PropertyValueFactory<>("ActivityItemName"));
             act_col2.setCellValueFactory(new PropertyValueFactory<>("ActivityAction"));
             val_col3.setCellValueFactory(new PropertyValueFactory<>("ActivityValueAddedOrRemoved"));
             date_col4.setCellValueFactory(new PropertyValueFactory<>("created_at"));

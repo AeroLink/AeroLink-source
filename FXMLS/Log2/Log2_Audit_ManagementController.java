@@ -14,6 +14,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -29,6 +31,10 @@ public class Log2_Audit_ManagementController implements Initializable {
     private JFXButton btn_leadauditor;
     @FXML
     private JFXButton btn_auditmember;
+    @FXML
+    private TableView<?> tblar;
+    @FXML
+    private TableColumn<?, ?> columnar;
 
     /**
      * Initializes the controller class.
@@ -44,7 +50,7 @@ public class Log2_Audit_ManagementController implements Initializable {
          Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader();
 
-        Parent parent = loader.load(getClass().getResource("Log2_Audit_Management_LeadAuditor.fxml"));
+        Parent parent = loader.load(getClass().getResource("/FXMLS/Log2/am/modals/Log2_Audit_Management_LeadAuditor.fxml"));
 
         Scene scene = new Scene(parent);
 
@@ -63,7 +69,7 @@ public class Log2_Audit_ManagementController implements Initializable {
          Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader();
 
-        Parent parent = loader.load(getClass().getResource("Log2_Audit_ManagementAuditMember.fxml"));
+        Parent parent = loader.load(getClass().getResource("/FXMLS/Log2/am/modals/Log2_Audit_ManagementAuditMember.fxml"));
 
         Scene scene = new Scene(parent);
 

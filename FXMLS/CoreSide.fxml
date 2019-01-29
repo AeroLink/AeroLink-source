@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="825.0" prefWidth="311.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.CoreSideController">
+<BorderPane prefHeight="825.0" prefWidth="311.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.CoreSideController">
     <center>
         <VBox prefHeight="657.0" prefWidth="311.0" style="-fx-background-color: white;">
             <children>
@@ -604,24 +604,13 @@
                                                     </children>
                                                 </AnchorPane>
                                     
-                                                <AnchorPane>
-                                                    <children>
-                                                        <JFXButton id="log2vp" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Vendor Portal" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                            <font>
-                                                                <Font size="14.0" />
-                                                            </font>
-                                                            <graphic>
-                                                                <FontAwesomeIconView fill="#34a853" glyphName="BOOK" size="25" styleClass="fontIcon" />
-                                                            </graphic>
-                                                        </JFXButton>
-                                                    </children>
-                                                </AnchorPane>
+                                                <AnchorPane />
                                                 <JFXButton id="log2fm" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Fleet Management System">
                                                     <font>
                                                         <Font size="14.0" />
                                                     </font>
                                                     <graphic>
-                                                        <FontAwesomeIconView fill="#34a853" glyphName="BOOK" size="25" styleClass="fontIcon" />
+                                                        <FontAwesomeIconView fill="#34a853" glyphName="TRUCK" size="25" styleClass="fontIcon" />
                                                     </graphic>
                                                 </JFXButton>
                                                 <JFXButton id="log2vr" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Vehicle Reservation ">
@@ -629,7 +618,7 @@
                                                         <Font size="14.0" />
                                                     </font>
                                                     <graphic>
-                                                        <FontAwesomeIconView fill="#34a853" glyphName="BOOK" size="25" styleClass="fontIcon" />
+                                                        <FontAwesomeIconView fill="#34a853" glyphName="CAR" size="25" styleClass="fontIcon" />
                                                     </graphic>
                                                 </JFXButton>
                                                 <JFXButton id="log2dt" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Document Tracking System">
@@ -637,7 +626,7 @@
                                                         <Font size="14.0" />
                                                     </font>
                                                     <graphic>
-                                                        <FontAwesomeIconView fill="#34a853" glyphName="BOOK" size="25" styleClass="fontIcon" />
+                                                        <FontAwesomeIconView fill="#34a853" glyphName="SEARCH" size="25" styleClass="fontIcon" />
                                                     </graphic>
                                                 </JFXButton>
                                                 <JFXButton id="log2am" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Audit Management System">
@@ -645,7 +634,7 @@
                                                         <Font size="14.0" />
                                                     </font>
                                                     <graphic>
-                                                        <FontAwesomeIconView fill="#34a853" glyphName="BOOK" size="25" styleClass="fontIcon" />
+                                                        <FontAwesomeIconView fill="#34a853" glyphName="PENCIL" size="25" styleClass="fontIcon" />
                                                     </graphic>
                                                 </JFXButton>
                                             </children>
@@ -814,6 +803,57 @@
                                 <FontAwesomeIconView fill="WHITE" glyphName="MONEY" size="25" strokeType="INSIDE" styleClass="fontIcon" />
                             </graphic>
                         </Tab>
+                  <Tab id="tab" fx:id="FINANCE1" closable="false">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="533.0" prefWidth="235.0" style="-fx-background-color: white; -fx-border-color: #34A853; -fx-border-width: 0 0 0 1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <AnchorPane prefHeight="40.0" prefWidth="235.0" style="-fx-background-color: #34A853;">
+                                       <children>
+                                          <Label text="REQUISITIONS" textFill="WHITE" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
+                                             <font>
+                                                <Font name="Segoe UI Semibold" size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane>
+                                       <children>
+                                          <JFXButton id="0xreq_hr2_skill" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="[ HR2 ] Request Skill" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                             <graphic>
+                                                <FontAwesomeIconView fill="#34a853" glyphName="ENVELOPE" size="25" styleClass="fontIcon" />
+                                             </graphic>
+                                          </JFXButton>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="11.0" layoutY="50.0">
+                                       <children>
+                                          <JFXButton id="0xreq_hr2_training" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="[ HR2 ] Request Training" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                             <graphic>
+                                                <FontAwesomeIconView fill="#34a853" glyphName="ENVELOPE" size="25" styleClass="fontIcon" />
+                                             </graphic>
+                                          </JFXButton>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="11.0" layoutY="86.0" />
+                                    <AnchorPane layoutX="11.0" layoutY="122.0" />
+                                    <AnchorPane layoutX="11.0" layoutY="50.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="LIST" size="25" strokeType="INSIDE" styleClass="fontIcon" />
+                     </graphic>
+                  </Tab>
                     </tabs>
                 </JFXTabPane>
             </children>

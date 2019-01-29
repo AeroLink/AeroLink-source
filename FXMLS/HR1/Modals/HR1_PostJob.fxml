@@ -56,7 +56,7 @@
                   </Label>
                   <ComboBox fx:id="cboStatus" layoutX="421.0" layoutY="345.0" prefWidth="150.0" />
                   <TextField fx:id="txtSalary" layoutX="209.0" layoutY="345.0" prefHeight="25.0" prefWidth="200.0" />
-                  <Label layoutX="211.0" layoutY="320.0" text="Assumed Salary :">
+                  <Label layoutX="211.0" layoutY="320.0" text="Assumed Monthly Salary :">
                      <font>
                         <Font name="System Bold Italic" size="11.0" />
                      </font>

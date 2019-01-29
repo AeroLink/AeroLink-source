@@ -18,21 +18,27 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="412.0" prefWidth="697.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Log1.Modal.RequestItemsOnWarehouseController">
+<AnchorPane id="AnchorPane" prefHeight="412.0" prefWidth="697.0" stylesheets="@../../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Log1.Warehouse.Modal.RequestItemsOnWarehouseController">
    <children>
       <VBox prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="CENTER_LEFT" spacing="5.0">
+            <HBox alignment="CENTER_LEFT" styleClass="btn-primary">
                <children>
-                  <FontAwesomeIconView size="20" />
-                  <Label text="Request Item">
+                  <FontAwesomeIconView fill="WHITE" glyphName="ARROW_RIGHT" size="20">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin></FontAwesomeIconView>
+                  <Label text="Request Item" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="21.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </HBox.margin>
                   </Label>
                </children>
                <VBox.margin>
-                  <Insets bottom="5.0" left="10.0" top="5.0" />
+                  <Insets />
                </VBox.margin>
             </HBox>
             <Separator prefWidth="200.0" />
@@ -83,8 +89,14 @@
                                  <children>
                                     <HBox alignment="CENTER" prefHeight="63.0" prefWidth="514.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <JFXButton fx:id="Request_btn" prefHeight="40.0" prefWidth="125.0" styleClass="btn-primary" text="Request" />
-                                          <JFXButton fx:id="cancel_btn" layoutX="10.0" layoutY="29.0" prefHeight="40.0" prefWidth="125.0" styleClass="btn-primary" text="Cancel" />
+                                          <JFXButton fx:id="Request_btn" prefHeight="40.0" prefWidth="125.0" styleClass="btn-primary" text="Send">
+                                             <graphic>
+                                                <FontAwesomeIconView fill="WHITE" glyphName="PAPER_PLANE" size="14" />
+                                             </graphic></JFXButton>
+                                          <JFXButton fx:id="cancel_btn" layoutX="10.0" layoutY="29.0" prefHeight="40.0" prefWidth="125.0" styleClass="btn-primary" text="Cancel">
+                                             <graphic>
+                                                <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" size="14" />
+                                             </graphic></JFXButton>
                                        </children>
                                     </HBox>
                                  </children>

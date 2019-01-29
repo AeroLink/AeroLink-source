@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -23,6 +24,10 @@ public class CRMviewReportController implements Initializable {
 
     @FXML
     private AnchorPane CRMrootPane;
+    @FXML
+    private Label branchCount;
+    @FXML
+    private Label branchCount1;
 
     /**
      * Initializes the controller class.
@@ -45,8 +50,14 @@ public class CRMviewReportController implements Initializable {
     }
 
     @FXML
-    private void viewMonitoring(ActionEvent event) throws IOException{
+    private void viewMonitoring(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/CustomerRelationshipManagement.fxml"));
+        CRMrootPane.getChildren().setAll(pane);
+    }
+
+    @FXML
+    private void viewDashboard(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Dashboard.fxml"));
         CRMrootPane.getChildren().setAll(pane);
     }
 
