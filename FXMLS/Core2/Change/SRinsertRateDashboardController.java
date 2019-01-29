@@ -29,6 +29,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -162,6 +163,10 @@ public class SRinsertRateDashboardController implements Initializable {
     private JFXButton btnExtraService;
     @FXML
     private JFXButton btnExtraServiceCancel;
+    @FXML
+    private TextArea TAphilippines;
+    @FXML
+    private TextArea TAsingapore;
 
     /**
      * Initializes the controller class.
