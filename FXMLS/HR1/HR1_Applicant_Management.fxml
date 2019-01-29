@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="607.0" prefWidth="893.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR1.HR1_Applicant_ManagementController">
+<AnchorPane id="AnchorPane" prefHeight="628.0" prefWidth="980.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR1.HR1_Applicant_ManagementController">
    <children>
       <StackPane fx:id="spane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -26,14 +26,14 @@
                            <children>
                               <BorderPane prefHeight="426.0" prefWidth="681.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <left>
-                                    <BorderPane prefHeight="551.0" prefWidth="517.0">
+                                    <BorderPane prefHeight="570.0" prefWidth="598.0">
                                        <center>
-                                          <TableView fx:id="tblOpenJobs" prefHeight="426.0" prefWidth="200.0">
+                                          <TableView fx:id="tblOpenJobs" prefHeight="570.0" prefWidth="536.0">
                                             <columns>
                                               <TableColumn prefWidth="145.0" text="C1" />
                                               <TableColumn prefWidth="87.0" text="C2" />
                                                 <TableColumn prefWidth="75.0" text="C2" />
-                                                <TableColumn prefWidth="75.0" text="C2" />
+                                                <TableColumn prefWidth="129.0" text="C2" />
                                             </columns>
                                              <columnResizePolicy>
                                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -86,9 +86,6 @@
                                        </top>
                                     </BorderPane>
                                  </center>
-                                 <top>
-                                    <AnchorPane prefHeight="21.0" prefWidth="1158.0" BorderPane.alignment="CENTER" />
-                                 </top>
                               </BorderPane>
                            </children>
                         </AnchorPane>

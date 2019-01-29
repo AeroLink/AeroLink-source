@@ -65,73 +65,73 @@ public class WarehouseManagementController implements Initializable {
     //search functionality
     
     public void searchItem() {
-        Log1_WarehouseItemsModel searchItem = new Log1_WarehouseItemsModel(); 
-
-            try{
-            List list_coa = searchItem.join(Model.JOIN.INNER, "aerolink.tbl_log1_suppliers", 
-                    "SupplierID", "=", "SupplierID").where(new Object[][]{
-            {"ItemDescription", "like", "%" + whSearch_txt.getText() + "%"}
-            }).get();    
-            ObservableList<Log1_fullInventoryList> items = FXCollections.observableArrayList();
-            for(Object d : list_coa)
-            {
-                HashMap hm = (HashMap) d;   //exquisite casting
-                
-               items.add(new Log1_fullInventoryList(
-                
-                String.valueOf(hm.get("ItemID")),
-                String.valueOf(hm.get("SupplierID")),
-                String.valueOf(hm.get("SupplierName")),
-                String.valueOf(hm.get("ItemDescription")),
-                String.valueOf(hm.get("ItemType")),
-                String.valueOf(hm.get("ItemLocation")),
-                String.valueOf(hm.get("ItemUnit")),
-                String.valueOf(hm.get("UnitPrice")),
-                String.valueOf(hm.get("StockQuantity")),
-                String.valueOf(hm.get("CriticalQuantity")),
-                String.valueOf(hm.get("DisposalDate")),
-                String.valueOf(hm.get("Status"))
-                       
-                ));}
-            ItemWH_tbl.setItems(items);
-            
-            }catch(Exception e){
-                e.printStackTrace();
-            } 
+//        Log1_WarehouseItemsModel searchItem = new Log1_WarehouseItemsModel(); 
+//
+//            try{
+//            List list_coa = searchItem.join(Model.JOIN.INNER, "aerolink.tbl_log1_suppliers", 
+//                    "SupplierID", "=", "SupplierID").where(new Object[][]{
+//            {"ItemDescription", "like", "%" + whSearch_txt.getText() + "%"}
+//            }).get();    
+//            ObservableList<Log1_fullInventoryList> items = FXCollections.observableArrayList();
+//            for(Object d : list_coa)
+//            {
+//                HashMap hm = (HashMap) d;   //exquisite casting
+//                
+//               items.add(new Log1_fullInventoryList(
+//                
+//                String.valueOf(hm.get("ItemID")),
+//                String.valueOf(hm.get("SupplierID")),
+//                String.valueOf(hm.get("SupplierName")),
+//                String.valueOf(hm.get("ItemDescription")),
+//                String.valueOf(hm.get("ItemType")),
+//                String.valueOf(hm.get("ItemLocation")),
+//                String.valueOf(hm.get("ItemUnit")),
+//                String.valueOf(hm.get("UnitPrice")),
+//                String.valueOf(hm.get("StockQuantity")),
+//                String.valueOf(hm.get("CriticalQuantity")),
+//                String.valueOf(hm.get("DisposalDate")),
+//                String.valueOf(hm.get("Status"))
+//                       
+//                ));}
+//            ItemWH_tbl.setItems(items);
+//            
+//            }catch(Exception e){
+//                e.printStackTrace();
+//            } 
         }
     
     //fetching data
     public void callWarehouseItems(){
-        Log1_WarehouseItemsModel coa = new Log1_WarehouseItemsModel();
-        ObservableList<Log1_fullInventoryList> ItemsXD = FXCollections.observableArrayList();
-          
-
-        List b = coa.join
-            (Model.JOIN.INNER, "aerolink.tbl_log1_suppliers", "SupplierID", "=", "SupplierID").where(new Object[][]{
-            {"ShowInMainWindow", "=", "yes"}
-            }).get(); 
-                
-        
-        for(Object d : b){//rs = hm
-            
-                HashMap hm = (HashMap) d;   //exquisite casting
-                
-                ItemsXD.add(new Log1_fullInventoryList( 
-                    String.valueOf(hm.get("ItemID")),
-                    String.valueOf(hm.get("SupplierID")),
-                    String.valueOf(hm.get("SupplierName")),
-                    String.valueOf(hm.get("ItemDescription")),
-                    String.valueOf(hm.get("ItemType")),
-                    String.valueOf(hm.get("ItemLocation")),
-                    String.valueOf(hm.get("ItemUnit")),
-                    String.valueOf(hm.get("UnitPrice")),
-                    String.valueOf(hm.get("StockQuantity")),
-                    String.valueOf(hm.get("CriticalQuantity")),
-                    String.valueOf(hm.get("DisposalDate")),
-                    String.valueOf(hm.get("Status"))
-                ));       
-            }
-                ItemWH_tbl.setItems(ItemsXD);
+//        Log1_WarehouseItemsModel coa = new Log1_WarehouseItemsModel();
+//        ObservableList<Log1_fullInventoryList> ItemsXD = FXCollections.observableArrayList();
+//          
+//
+//        List b = coa.join
+//            (Model.JOIN.INNER, "aerolink.tbl_log1_suppliers", "SupplierID", "=", "SupplierID").where(new Object[][]{
+//            {"ShowInMainWindow", "=", "yes"}
+//            }).get(); 
+//                
+//        
+//        for(Object d : b){//rs = hm
+//            
+//                HashMap hm = (HashMap) d;   //exquisite casting
+//                
+//                ItemsXD.add(new Log1_fullInventoryList( 
+//                    String.valueOf(hm.get("ItemID")),
+//                    String.valueOf(hm.get("SupplierID")),
+//                    String.valueOf(hm.get("SupplierName")),
+//                    String.valueOf(hm.get("ItemDescription")),
+//                    String.valueOf(hm.get("ItemType")),
+//                    String.valueOf(hm.get("ItemLocation")),
+//                    String.valueOf(hm.get("ItemUnit")),
+//                    String.valueOf(hm.get("UnitPrice")),
+//                    String.valueOf(hm.get("StockQuantity")),
+//                    String.valueOf(hm.get("CriticalQuantity")),
+//                    String.valueOf(hm.get("DisposalDate")),
+//                    String.valueOf(hm.get("Status"))
+//                ));       
+//            }
+//                ItemWH_tbl.setItems(ItemsXD);
     }
     
     //displaying on table column

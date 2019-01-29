@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
@@ -14,8 +15,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.MaskerPane?>
+<?import org.controlsfx.control.StatusBar?>
+<?import org.controlsfx.control.textfield.CustomTextField?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="804.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR1.HR1_RecruitmentController">
+<AnchorPane id="AnchorPane" prefHeight="634.0" prefWidth="1069.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR1.HR1_RecruitmentController">
    <children>
       <StackPane fx:id="spane" prefHeight="400.0" prefWidth="804.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -27,55 +31,77 @@
                            <children>
                               <BorderPane prefHeight="365.0" prefWidth="804.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <top>
-                                    <AnchorPane prefHeight="81.0" prefWidth="804.0" BorderPane.alignment="CENTER">
+                                    <AnchorPane prefHeight="163.0" prefWidth="804.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <JFXTextField fx:id="txtSearch" focusColor="#34a853" labelFloat="true" layoutX="10.0" layoutY="27.0" maxWidth="187.0" minWidth="180.0" prefHeight="31.0" prefWidth="187.0" promptText="Search a Job" AnchorPane.leftAnchor="10.0" />
-                                          <JFXButton fx:id="btnSearch" alignment="TOP_LEFT" buttonType="RAISED" graphicTextGap="10.0" layoutX="197.0" layoutY="30.0" prefHeight="25.0" prefWidth="81.0" styleClass="btn-primary" text="Search">
-                                             <graphic>
-                                                <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" />
-                                             </graphic>
-                                          </JFXButton>
                                           <Label layoutX="300.0" layoutY="33.0" />
-                                          <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="RIGHT" graphicTextGap="10.0" layoutX="697.0" layoutY="28.0" onAction="#btnPostAJob" prefHeight="25.0" prefWidth="93.0" styleClass="btn-primary" text="Post Job" AnchorPane.rightAnchor="14.0">
-                                             <graphic>
-                                                <FontAwesomeIconView fill="WHITE" glyphName="PAPER_PLANE_ALT" />
-                                             </graphic>
-                                          </JFXButton>
-                                          <Label layoutX="290.0" layoutY="8.0" prefHeight="24.0" prefWidth="69.0" text="Reminder : " textFill="RED" wrapText="true">
-                                             <font>
-                                                <Font name="System Bold Italic" size="12.0" />
-                                             </font>
-                                          </Label>
-                                          <Label layoutX="290.0" layoutY="28.0" prefHeight="41.0" prefWidth="396.0" text="Please select a job below befor hitting the post job button or you could &quot;Right Click the row and select [Post this Job]&quot;" wrapText="true">
-                                             <font>
-                                                <Font name="System Italic" size="12.0" />
-                                             </font>
-                                          </Label>
+                                          <AnchorPane layoutX="14.0" layoutY="11.0" prefHeight="144.0" prefWidth="418.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-background-color: white;" AnchorPane.leftAnchor="9.0">
+                                             <children>
+                                                <JFXButton fx:id="btnSearch" alignment="TOP_LEFT" buttonType="RAISED" graphicTextGap="10.0" layoutX="10.0" layoutY="102.0" prefHeight="25.0" prefWidth="111.0" styleClass="btn-primary" text="Search">
+                                                   <graphic>
+                                                      <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" />
+                                                   </graphic>
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </JFXButton>
+                                                <CustomTextField fx:id="txtSearch" layoutX="12.0" layoutY="29.0" prefHeight="32.0" prefWidth="394.0" promptText="Search A Job" />
+                                                <Label layoutX="14.0" layoutY="6.0" text="Search Job">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <JFXCheckBox layoutX="15.0" layoutY="72.0" selected="true" text="Posted Status" />
+                                                <JFXCheckBox layoutX="123.0" layoutY="72.0" selected="true" text="Pending Status" />
+                                                <JFXCheckBox layoutX="244.0" layoutY="72.0" selected="true" text="Full Time" />
+                                                <JFXCheckBox layoutX="328.0" layoutY="72.0" selected="true" text="Part Time" />
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane layoutX="434.0" layoutY="11.0" prefHeight="144.0" prefWidth="138.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-background-color: white;">
+                                             <children>
+                                                <Label layoutX="13.0" layoutY="6.0" text="Filters">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <JFXCheckBox fx:id="rdoPosted" layoutX="14.0" layoutY="32.0" selected="true" text="Posted Status" />
+                                                <JFXCheckBox fx:id="rdoPending" layoutX="13.0" layoutY="60.0" selected="true" text="Pending Status" />
+                                                <JFXCheckBox fx:id="rdoFullTime" layoutX="13.0" layoutY="87.0" selected="true" text="Full Time" />
+                                                <JFXCheckBox fx:id="rdoPartTime" layoutX="13.0" layoutY="114.0" selected="true" text="Part Time" />
+                                             </children>
+                                          </AnchorPane>
                                        </children>
                                     </AnchorPane>
                                  </top>
                                  <center>
                                     <AnchorPane BorderPane.alignment="CENTER">
                                        <children>
-                                          <TableView fx:id="tblOpenJobs" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-                                            <columns>
-                                              <TableColumn prefWidth="75.0" text="C1" />
-                                              <TableColumn prefWidth="75.0" text="C2" />
-                                            </columns>
-                                             <columnResizePolicy>
-                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                             </columnResizePolicy>
-                                             <contextMenu>
-                                                <ContextMenu fx:id="contextMenuJobs">
-                                                   <items>
-                                                      <MenuItem fx:id="menuPost" mnemonicParsing="false" text="Post this Job" />
-                                                   </items>
-                                                </ContextMenu>
-                                             </contextMenu>
-                                          </TableView>
+                                          <StackPane layoutX="10.0" layoutY="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                                             <children>
+                                                <TableView fx:id="tblOpenJobs" prefHeight="200.0" prefWidth="200.0">
+                                                  <columns>
+                                                    <TableColumn prefWidth="75.0" text="C1" />
+                                                    <TableColumn prefWidth="75.0" text="C2" />
+                                                  </columns>
+                                                   <columnResizePolicy>
+                                                      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                   </columnResizePolicy>
+                                                   <contextMenu>
+                                                      <ContextMenu fx:id="contextMenuJobs">
+                                                         <items>
+                                                            <MenuItem fx:id="menuPost" mnemonicParsing="false" text="Post this Job" />
+                                                         </items>
+                                                      </ContextMenu>
+                                                   </contextMenu>
+                                                </TableView>
+                                                <MaskerPane fx:id="maskpane" />
+                                             </children>
+                                          </StackPane>
                                        </children>
                                     </AnchorPane>
                                  </center>
+                                 <bottom>
+                                    <StatusBar fx:id="statusBar" styleText="" text="" BorderPane.alignment="CENTER" />
+                                 </bottom>
                               </BorderPane>
                            </children>
                         </AnchorPane>

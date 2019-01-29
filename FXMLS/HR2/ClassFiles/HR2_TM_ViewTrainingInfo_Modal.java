@@ -14,15 +14,16 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class HR2_TM_ViewTrainingInfo_Modal {
     //shared data when the button clicked in current trainings table 
-    public static String tr_id, department, job_position, participants, total_hours, from_day, to_day, status_id, status;
+    public static String tr_id, department, job_position, participants, employee_code, trainor, from_day, to_day, status_id, status;
 
     public static void init_Trainings(String trid, String d,
-            String jp, String p, String th, String fd, String td, String si, String s) {
+            String jp, String p, String ep, String t, String fd, String td, String si, String s) {
         tr_id = trid;
         department = d;
         job_position = jp;
         participants = p;
-        total_hours = th;
+        employee_code = ep;
+        trainor = t;
         from_day = fd;
         to_day = td;
         status_id = si;
