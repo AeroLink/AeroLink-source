@@ -5,11 +5,11 @@
  */
 package FXMLS.Administrative;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -45,8 +45,6 @@ public class Document_ManagementController implements Initializable {
     private String directory = "";
     
     
-    @FXML
-    private JFXTextField locationfield111111;
     @FXML
     private JFXButton btntakephoto11;
     @FXML
@@ -143,6 +141,23 @@ public class Document_ManagementController implements Initializable {
     private TableColumn<?, ?> storedate;
     @FXML
     private TableColumn<?, ?> status2;
+    @FXML
+    private JFXTextField filesearch;
+    @FXML
+    private TableView<tbl_retrieved_files> filestable;
+    ObservableList<tbl_retrieved_files> filestable1 = FXCollections.observableArrayList();
+    @FXML
+    private TableColumn<?, ?> docid3;
+    @FXML
+    private TableColumn<?, ?> docname3;
+    @FXML
+    private TableColumn<?, ?> cat3;
+    @FXML
+    private TableColumn<?, ?> status3;
+    @FXML
+    private TableView<tbl_files_category> filescategory;
+    @FXML
+    private TableColumn<ObservableList,String> filecolumncat;
     /**
      * Initializes the controller class.
      */
@@ -154,6 +169,8 @@ public class Document_ManagementController implements Initializable {
         tblclick1();
         tbldo_approved();
         tbl_document_archive();
+        tbl_retrieved_files();
+        tbl_files_category();
     }    
 
     
@@ -194,6 +211,13 @@ public class Document_ManagementController implements Initializable {
         storetime.setCellValueFactory(new PropertyValueFactory<>("storetime"));
         storedate.setCellValueFactory(new PropertyValueFactory<>("storedate"));
         status2.setCellValueFactory(new PropertyValueFactory<>("status"));
+        
+        docid3.setCellValueFactory(new PropertyValueFactory<>("docid"));
+        docname3.setCellValueFactory(new PropertyValueFactory<>("docname"));
+        cat3.setCellValueFactory(new PropertyValueFactory<>("catname"));
+        status3.setCellValueFactory(new PropertyValueFactory<>("status"));
+        
+       filecolumncat.setCellValueFactory(new PropertyValueFactory<>("categoryname"));
     }
     
     private void loadrequesttbl(){
@@ -210,6 +234,7 @@ public class Document_ManagementController implements Initializable {
         }catch(Exception ex){}
     }
     
+    //Load Table for Storing
     public void loadtblreqstoring(){
             tblreqstoring.clear();
         try{
@@ -258,6 +283,41 @@ public class Document_ManagementController implements Initializable {
         }
         }
     
+   
+    
+    //Load Table Retrieve Files
+    @FXML
+    public void tbl_retrieved_files(){
+        filestable1.clear();
+            try{
+                String query = "select * from aerolink.admin_document_file";
+                pst = con.prepareStatement(query);
+                rs = pst.executeQuery();
+                while(rs.next()){
+                    filestable1.add(new tbl_retrieved_files(""+rs.getInt("Document ID"),rs.getString("Document Name"),rs.getString("Category"),rs.getString("Status")));
+                }
+                filestable.setItems(filestable1);
+            }catch(Exception ex){
+                System.out.println(ex.getMessage());
+            }
+    }
+    
+    //Load Table Category Files
+    private void tbl_files_category(){
+        ObservableList<tbl_files_category> filescategory1 = FXCollections.observableArrayList(
+                new tbl_files_category("201 Files"),
+                new tbl_files_category("Contracts"),
+                new tbl_files_category("Shipment Files"),
+                new tbl_files_category("Legal Records"),
+                new tbl_files_category("Procurememt Reports"),
+                new tbl_files_category("Warehouse Reports"),
+                new tbl_files_category("Other Files")
+        );
+        
+        filescategory.setItems(filescategory1);
+    
+    }
+    
     
     @FXML
     public void adddocument(){
@@ -268,17 +328,21 @@ public class Document_ManagementController implements Initializable {
     }
     
    private void tblclick1(){
+       
        tabledocrequest.setOnMouseClicked(e ->{ 
+           
            try{
-           tbladmin_doc_request tdr = tabledocrequest.getItems().get(tabledocrequest.getSelectionModel().getSelectedIndex());
+          tbladmin_doc_request tdr = tabledocrequest.getItems().get(tabledocrequest.getSelectionModel().getSelectedIndex());
+         if(tdr.getDocreq() != null){
           txtreqno.setText(tdr.getDocreq());
           txtdoctitle.setText(tdr.getReqtitle());
           txtreq.setText(tdr.getReqby());
-           }catch(Exception ex){
-               AlertBox.display("Alert", "No Selected Value");
-           }
-               
-               });
+         }}catch(Exception ex){
+             AlertBox.display("Alert", "No Value Selected");
+         }
+         });
+       
+       
    }
    
    
@@ -353,56 +417,17 @@ public class Document_ManagementController implements Initializable {
    //Button add to archive for update
     @FXML
    public void addtoarchieve(){
-       
        try{
            fortblreqstoring frq = tblforreqstoring.getItems().get(tblforreqstoring.getSelectionModel().getSelectedIndex());
-           if(frq.getDocno() != null){
+            if(frq.getDocno() != null){
            String query = "update aerolink.admin_document_reqstoring set Status = 'Stored' where [Documents No] = '"+frq.getDocno()+"' ";
            pst = con.prepareStatement(query);
            AlertBox.display("Alert", "Document is now Added to Archieve");
            pst.execute();}
-       }catch(Exception ex){
-           AlertBox.display("Alert", "No Selected Value");
-       }
+        }catch(Exception ex){
+           AlertBox.display("Alert", "No Value is Selected");
+      }
    }
-   
-   
-   public void openfile(){
-   try{
-      tbl_document_archieve tda = documentstable.getItems().get(documentstable.getSelectionModel().getSelectedIndex());
-      String query = "select * from aerolink.admin_document_reqstoring where [Documents No] = '"+tda.getDocno()+"' ";
-      pst = con.prepareStatement(query);
-      rs = pst.executeQuery();
-      while(rs.next()){
-     File pdfFile = new File(""+rs.getBinaryStream("Doc File"));
-    if (pdfFile.exists())
-    {
-     if (Desktop.isDesktopSupported())
-     {
-      try
-      {
-       Desktop.getDesktop().open(pdfFile);
-      }
-      catch (IOException e)
-      {
-        e.printStackTrace();
-      }
-     }
-     else
-      {
-       System.out.println("Awt Desktop is not supported!");
-      }
-    }
-    else
-    {
-     System.out.println("File is not exists!");
-    }
-      }
-    }catch(Exception ex){
-     System.out.println(ex.getMessage());
-     }
-   }
-   
     
     
 }

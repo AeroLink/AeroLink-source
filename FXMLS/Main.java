@@ -29,7 +29,7 @@ public class Main extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-      //  System.loadLibrary(org.opencv.core.Core.NATIVE_LIBRARY_NAME);
+       System.loadLibrary(org.opencv.core.Core.NATIVE_LIBRARY_NAME);
         launch(args);
     }
 

@@ -148,7 +148,7 @@
                         </AnchorPane>
                     </content>
                   </Tab>
-                  <Tab text="Archieve">
+                  <Tab onSelectionChanged="#tbl_retrieved_files" text="Archieve">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -177,26 +177,26 @@
                                     <Font name="Arial" size="18.0" />
                                  </font>
                               </Label>
-                              <JFXButton fx:id="btntakephoto2" layoutX="956.0" layoutY="456.0" onAction="#openfile" prefHeight="33.0" prefWidth="75.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="OPEN" textFill="WHITE">
+                              <JFXButton fx:id="btntakephoto2" layoutX="956.0" layoutY="456.0" prefHeight="33.0" prefWidth="75.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="OPEN" textFill="WHITE">
                                  <font>
                                     <Font name="Aparajita" size="15.0" />
                                  </font>
                               </JFXButton>
                               <AnchorPane layoutX="1066.0" prefHeight="961.0" prefWidth="226.0">
                                  <children>
-                                    <TableView prefHeight="962.0" prefWidth="226.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <TableView fx:id="filescategory" prefHeight="962.0" prefWidth="226.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                       <columns>
-                                        <TableColumn prefWidth="225.0" text="Document Files" />
+                                        <TableColumn fx:id="filecolumncat" editable="false" prefWidth="225.0" sortable="false" text="Document Files Category" />
                                       </columns>
                                     </TableView>
                                  </children>
                               </AnchorPane>
                               <TableView fx:id="filestable" layoutX="52.0" layoutY="93.0" prefHeight="354.0" prefWidth="989.0">
                                 <columns>
-                                  <TableColumn prefWidth="247.25" text="Document ID" />
-                                    <TableColumn prefWidth="247.25" text="Document Name" />
-                                    <TableColumn prefWidth="247.25" text="Category" />
-                                    <TableColumn prefWidth="247.25" text="Status" />
+                                  <TableColumn fx:id="docid3" editable="false" prefWidth="247.25" sortable="false" text="Document ID" />
+                                    <TableColumn fx:id="docname3" editable="false" prefWidth="247.25" sortable="false" text="Document Name" />
+                                    <TableColumn fx:id="cat3" editable="false" prefWidth="247.25" sortable="false" text="Category" />
+                                    <TableColumn fx:id="status3" editable="false" prefWidth="247.25" sortable="false" text="Status" />
                                 </columns>
                               </TableView>
                            </children>

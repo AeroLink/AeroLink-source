@@ -116,8 +116,10 @@ public class Add_DocumentController implements Initializable {
     public void opendialog(){
             FileChooser fc = new FileChooser();
             FileChooser.ExtensionFilter exf1 = new FileChooser.ExtensionFilter("PDF Files", "*.pdf");
+            fc.getExtensionFilters().add(exf1);
             File f = fc.showOpenDialog(null);
             if(f != null){
+           
                 txtpathfile.setText(""+f);
             }
             else{

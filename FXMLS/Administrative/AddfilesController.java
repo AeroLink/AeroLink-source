@@ -53,13 +53,13 @@ public class AddfilesController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        addbox.setItems(addbox1);
     }    
     
     public void insertvalue(){
     
         try{
-            String query = "insert into aerolink.admin_document_files values(?,?,?,?,?,?)";
+            String query = "insert into aerolink.admin_document_file values(?,?,?,?,?,?)";
             pst = con.prepareStatement(query);
             pst.setString(1, adddocname.getText());
             pst.setString(2, addbox.getSelectionModel().getSelectedItem());
@@ -76,7 +76,9 @@ public class AddfilesController implements Initializable {
             java.sql.Date date = new java.sql.Date(t);
             pst.setDate(6, date);
             
+            pst.execute();
             AlertBox.display("Alert", "Document is now Ready");
+            AlertBox.close(btntoarch);
         }catch(Exception ex){
             AlertBox.display("Alert", "Data Cannot be Empty");
         }
@@ -85,8 +87,11 @@ public class AddfilesController implements Initializable {
     public void opendialog(){
             FileChooser fc = new FileChooser();
             FileChooser.ExtensionFilter exf1 = new FileChooser.ExtensionFilter("PDF Files", "*.pdf");
+            fc.getExtensionFilters().add(exf1);
             File f = fc.showOpenDialog(null);
+               
             if(f != null){
+              
                 addpathtxt.setText(""+f);
             }
             else{
@@ -96,6 +101,7 @@ public class AddfilesController implements Initializable {
     
     public void cancel(){
         AlertBox.close(btntoarch1);
+        AlertBox.display("Alert", "Adding Files has been Canceled");
     }
     
 }
