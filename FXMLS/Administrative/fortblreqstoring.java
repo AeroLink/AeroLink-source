@@ -10,8 +10,6 @@ package FXMLS.Administrative;
  * @author Onodera-Chan
  */
 public class fortblreqstoring {
-    
-    public fortblreqstoring(){}
     private String docno;
     private String docname;
     private String docdep;
@@ -25,6 +23,7 @@ public class fortblreqstoring {
         this.doccat = doccat;
         this.docstat = docstat;
     }
+    
 
     /**
      * @return the docno
@@ -95,5 +94,8 @@ public class fortblreqstoring {
     public void setDocstat(String docstat) {
         this.docstat = docstat;
     }
+    
+    
+   
     
 }

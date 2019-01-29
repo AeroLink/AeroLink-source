@@ -26,226 +26,99 @@
    <children>
       <BorderPane prefHeight="925.0" prefWidth="1260.0" stylesheets="@admintheme.css">
          <center>
-            <AnchorPane prefHeight="925.0" prefWidth="1260.0" BorderPane.alignment="CENTER">
-               <children>
-                  <JFXTabPane stylesheets ="@admintheme.css" prefHeight="655.0" prefWidth="840.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <tabs>
-                        <Tab text="Request">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="885.0" stylesheets="@../../Assets/css/admintheme.css">
-                                 <children>
-                                    <JFXDatePicker defaultColor="#00b359" layoutX="363.0" layoutY="379.0" prefHeight="31.0" prefWidth="282.0" promptText="Date Issued" />
-                                    <JFXDatePicker defaultColor="#00b359" layoutX="363.0" layoutY="330.0" prefHeight="31.0" prefWidth="282.0" promptText="Date Expired" />
-                                    <TableView fx:id="request_table" layoutX="197.0" layoutY="50.0" prefHeight="200.0" prefWidth="627.0">
-                                       <columns>
-                                          <TableColumn fx:id="request_id" prefWidth="179.0" text="Request ID" />
-                                          <TableColumn fx:id="requestor_id" prefWidth="175.0" text="Requestor ID" />
-                                          <TableColumn fx:id="datei" minWidth="0.0" prefWidth="126.0" text="Date Issued" />
-                                          <TableColumn fx:id="datee" minWidth="4.0" prefWidth="156.0" text="Date Expired" />
-                                       </columns>
-                                    </TableView>
-                                    <Label layoutX="14.0" layoutY="524.0" text="Request ID" />
-                                    <Label layoutX="88.0" layoutY="524.0" text="Requestor ID" />
-                                    <JFXButton layoutX="441.0" layoutY="422.0" onAction="#update" prefHeight="33.0" prefWidth="105.0" style="-fx-background-color: #00b359;" text="SEND" textFill="WHITE">
-                                       <font>
-                                          <Font name="Aparajita" size="15.0" />
-                                       </font>
-                                    </JFXButton>
-                                    <FontAwesomeIconView fill="#00b359" glyphName="FOLDER" layoutX="613.0" layoutY="305.0" onMouseClicked="#open" size="30">
-                                       <cursor>
-                                        
-                                       </cursor>
-                                    </FontAwesomeIconView>
-                                    <JFXListView fx:id="reqfilepath" layoutX="368.0" layoutY="273.0" prefHeight="38.0" prefWidth="235.0" />
-                                 </children></AnchorPane>
-                           </content>
-                        </Tab>
-                        <Tab text="Complains &amp; Concerns">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="979.0">
-                                 <children>
-                                    <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <center>
-                                          <JFXTabPane style="-fx-border-width: 52;" BorderPane.alignment="CENTER">
-                                             <tabs>
-                                                <Tab text="Complains">
-                                                  <content>
-                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                         <children>
-                                                            <BorderPane layoutX="272.0" layoutY="38.0" prefHeight="369.0" prefWidth="663.0" stylesheets="@width.css">
-                                                               <center>
-                                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="345.0" prefWidth="663.0" style="-fx-border-width: 5;" BorderPane.alignment="CENTER">
-                                                                     <children>
-                                                                        <JFXTextField focusColor="BLACK" labelFloat="true" layoutX="91.0" layoutY="34.0" maxWidth="376.0" minWidth="172.0" prefHeight="36.0" prefWidth="213.0" promptText="First Name">
-                                                                           <font>
-                                                                              <Font size="14.0" />
-                                                                           </font>
-                                                                        </JFXTextField>
-                                                                        <JFXTextField focusColor="BLACK" labelFloat="true" layoutX="91.0" layoutY="92.0" maxWidth="376.0" minWidth="172.0" prefHeight="36.0" prefWidth="213.0" promptText="Middle Name">
-                                                                           <font>
-                                                                              <Font size="14.0" />
-                                                                           </font>
-                                                                        </JFXTextField>
-                                                                        <JFXTextField focusColor="BLACK" labelFloat="true" layoutX="91.0" layoutY="155.0" maxWidth="376.0" minWidth="172.0" prefHeight="36.0" prefWidth="213.0" promptText="Last Name">
-                                                                           <font>
-                                                                              <Font size="14.0" />
-                                                                           </font>
-                                                                        </JFXTextField>
-                                                                        <JFXDatePicker defaultColor="#00b359" layoutX="93.0" layoutY="218.0" prefHeight="31.0" prefWidth="207.0" promptText="Birthday" />
-                                                                        <JFXTextField focusColor="BLACK" labelFloat="true" layoutX="91.0" layoutY="277.0" maxWidth="376.0" minWidth="172.0" prefHeight="36.0" prefWidth="213.0" promptText="Email Address">
-                                                                           <font>
-                                                                              <Font size="14.0" />
-                                                                           </font>
-                                                                        </JFXTextField>
-                                                                        <JFXRadioButton layoutX="418.0" layoutY="45.0" text="Male">
-                                                                           <toggleGroup>
-                                                                              <ToggleGroup fx:id="gender" />
-                                                                           </toggleGroup>
-                                                                        </JFXRadioButton>
-                                                                        <JFXRadioButton layoutX="484.0" layoutY="45.0" text="Female" toggleGroup="$gender" />
-                                                                        <Label layoutX="368.0" layoutY="41.0" prefHeight="22.0" prefWidth="51.0" text="Gender">
-                                                                           <font>
-                                                                              <Font size="15.0" />
-                                                                           </font>
-                                                                        </Label>
-                                                                        <JFXTextField focusColor="BLACK" labelFloat="true" layoutX="360.0" layoutY="92.0" maxWidth="376.0" minWidth="172.0" prefHeight="36.0" prefWidth="213.0" promptText="Company Name">
-                                                                           <font>
-                                                                              <Font size="14.0" />
-                                                                           </font>
-                                                                        </JFXTextField>
-                                                                        <JFXTextField focusColor="BLACK" labelFloat="true" layoutX="360.0" layoutY="155.0" maxWidth="376.0" minWidth="172.0" prefHeight="36.0" prefWidth="213.0" promptText="Company Address">
-                                                                           <font>
-                                                                              <Font size="14.0" />
-                                                                           </font>
-                                                                        </JFXTextField>
-                                                                        <JFXTextField focusColor="BLACK" labelFloat="true" layoutX="360.0" layoutY="216.0" maxWidth="376.0" minWidth="172.0" prefHeight="36.0" prefWidth="213.0" promptText="Contact No.">
-                                                                           <font>
-                                                                              <Font size="14.0" />
-                                                                           </font>
-                                                                        </JFXTextField>
-                                                                        <JFXTextField focusColor="BLACK" labelFloat="true" layoutX="360.0" layoutY="277.0" maxWidth="376.0" minWidth="172.0" prefHeight="36.0" prefWidth="213.0" promptText="Address">
-                                                                           <font>
-                                                                              <Font size="14.0" />
-                                                                           </font>
-                                                                        </JFXTextField>
-                                                                     </children>
-                                                                  </AnchorPane>
-                                                               </center>
-                                                            </BorderPane>
-                                                            <Label layoutX="21.0" layoutY="494.0" text="Complain ID" />
-                                                            <JFXTextField focusColor="BLACK" labelFloat="true" layoutX="28.0" layoutY="40.0" maxWidth="376.0" minWidth="242.0" prefHeight="36.0" prefWidth="242.0" promptText="Complainee's Name">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                            </JFXTextField>
-                                                            <JFXTextField focusColor="BLACK" labelFloat="true" layoutX="28.0" layoutY="105.0" maxWidth="376.0" minWidth="242.0" prefHeight="36.0" prefWidth="242.0" promptText="Complainant Name">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                            </JFXTextField>
-                                                            <JFXTextArea layoutX="35.0" layoutY="229.0" maxWidth="344.0" minWidth="228.0" prefWidth="228.0" />
-                                                            <JFXComboBox fx:id="casecategory" layoutX="149.0" layoutY="166.0" prefHeight="25.0" prefWidth="116.0" />
-                                                            <Label layoutX="39.0" layoutY="173.0" text="Case Category">
-                                                               <font>
-                                                                  <Font size="15.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label layoutX="36.0" layoutY="207.0" text="Description">
-                                                               <font>
-                                                                  <Font size="15.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label layoutX="102.0" layoutY="494.0" text="File Date" />
-                                                            <JFXButton layoutX="845.0" layoutY="455.0" onAction="#update" prefHeight="33.0" prefWidth="105.0" style="-fx-background-color: #00b359;" text="SUBMIT" textFill="WHITE">
-                                                               <font>
-                                                                  <Font name="Aparajita" size="15.0" />
-                                                               </font>
-                                                            </JFXButton>
-                                                         </children></AnchorPane>
-                                                  </content>
-                                                </Tab>
-                                                <Tab text="Scheduling">
-                                                  <content>
-                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                         <children>
-                                                            <JFXDatePicker layoutX="193.0" layoutY="205.0" prefHeight="30.0" prefWidth="231.0" />
-                                                            <JFXDatePicker layoutX="521.0" layoutY="205.0" prefHeight="30.0" prefWidth="231.0" />
-                                                            <Label layoutX="14.0" layoutY="494.0" text="Facility" />
-                                                            <JFXTextField focusColor="BLACK" labelFloat="true" layoutX="111.0" layoutY="94.0" maxWidth="376.0" minWidth="189.0" prefHeight="36.0" prefWidth="189.0" promptText="Complain ID">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                            </JFXTextField>
-                                                            <JFXButton layoutX="416.0" layoutY="263.0" onAction="#update" prefHeight="33.0" prefWidth="105.0" style="-fx-background-color: #00b359;" text="SUBMIT" textFill="WHITE">
-                                                               <font>
-                                                                  <Font name="Aparajita" size="15.0" />
-                                                               </font>
-                                                            </JFXButton>
-                                                            <JFXTextField focusColor="BLACK" labelFloat="true" layoutX="111.0" layoutY="137.0" maxWidth="376.0" minWidth="189.0" prefHeight="36.0" prefWidth="189.0" promptText="Atty.">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                            </JFXTextField>
-                                                            <TableView layoutX="162.0" layoutY="315.0" prefHeight="159.0" prefWidth="632.0">
-                                                              <columns>
-                                                                <TableColumn prefWidth="75.0" text="C1" />
-                                                                <TableColumn prefWidth="75.0" text="C2" />
-                                                              </columns>
-                                                            </TableView>
-                                                            <Label layoutX="63.0" layoutY="494.0" text="Time &amp; Date" />
-                                                         </children>
-                                                      </AnchorPane>
-                                                  </content>
-                                                </Tab>
-                                                <Tab text="Concerns">
-                                                  <content>
-                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                         <children>
-                                                            <TableView layoutX="84.0" layoutY="72.0" prefHeight="324.0" prefWidth="808.0">
-                                                              <columns>
-                                                                <TableColumn prefWidth="75.0" text="C1" />
-                                                                <TableColumn prefWidth="75.0" text="C2" />
-                                                              </columns>
-                                                            </TableView>
-                                                            <Label layoutX="85.0" layoutY="55.0" text="Concern Table" />
-                                                         </children></AnchorPane>
-                                                  </content>
-                                                </Tab>
-                                             </tabs>
-                                          </JFXTabPane>
-                                       </center>
-                                    </BorderPane>
-                                 </children></AnchorPane>
-                           </content>
-                        </Tab>
-                        <Tab text="Reports">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                 <children>
-                                    <TableView layoutX="44.0" layoutY="81.0" prefHeight="418.0" prefWidth="866.0">
-                                       <columns>
-                                          <TableColumn prefWidth="75.0" text="C1" />
-                                          <TableColumn prefWidth="75.0" text="C2" />
-                                       </columns>
-                                    </TableView>
-                                    <JFXTextField focusColor="BLACK" labelFloat="true" layoutX="44.0" layoutY="34.0" maxWidth="376.0" minWidth="202.0" prefHeight="36.0" prefWidth="202.0" promptText="Search:">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </JFXTextField>
-                                    <JFXButton layoutX="778.0" layoutY="36.0" onAction="#update" prefHeight="33.0" prefWidth="132.0" style="-fx-background-color: #00b359;" text="ADD TO ARCHIVE" textFill="WHITE">
-                                       <font>
-                                          <Font name="Aparajita" size="15.0" />
-                                       </font>
-                                    </JFXButton>
-                                 </children></AnchorPane>
-                          </content>
-                        </Tab>
-                     </tabs>
-                  </JFXTabPane>
-                  <JFXHamburger fx:id="hamburger" prefHeight="32.0" prefWidth="48.0" styleClass="jfx-hamburger-icon" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0" />
-               </children>
-            </AnchorPane>
+            <JFXTabPane stylesheets="@admintheme.css" BorderPane.alignment="CENTER">
+               <tabs>
+                  <Tab text="Request">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="appointmenttable" layoutX="40.0" layoutY="67.0" prefHeight="330.0" prefWidth="1160.0" AnchorPane.bottomAnchor="498.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="67.0">
+                                 <columns>
+                                    <TableColumn fx:id="appointmentid" prefWidth="232.0" text="Requestor ID" />
+                                    <TableColumn fx:id="appointmentname" prefWidth="232.0" text="Name" />
+                                    <TableColumn fx:id="appointmenttime" prefWidth="232.0" text="Time" />
+                                    <TableColumn fx:id="appointmentdate" prefWidth="232.0" text="Date" />
+                                    <TableColumn fx:id="appointmentptm" prefWidth="232.0" text="Status" />
+                                 </columns>
+                                 <columnResizePolicy>
+                                  
+                                 </columnResizePolicy>
+                              </TableView>
+                              <JFXTextField fx:id="schedfn" editable="false" focusColor="BLACK" labelFloat="true" layoutX="494.0" layoutY="521.0" maxWidth="376.0" minWidth="247.0" prefHeight="36.0" prefWidth="247.0" promptText="File:" AnchorPane.bottomAnchor="338.0" AnchorPane.leftAnchor="494.0" AnchorPane.rightAnchor="519.0" AnchorPane.topAnchor="521.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </JFXTextField>
+                              <MaterialDesignIconView fx:id="folerchooser" fill="#00b359" glyphName="FOLDER" layoutX="747.0" layoutY="554.0" size="40" AnchorPane.bottomAnchor="336.0" AnchorPane.leftAnchor="747.0" AnchorPane.rightAnchor="473.0" AnchorPane.topAnchor="519.0" />
+                              <JFXDatePicker fx:id="scheddate" defaultColor="#00b359" editable="false" layoutX="494.0" layoutY="599.0" prefHeight="25.0" prefWidth="253.0" promptText="Date Issued" AnchorPane.bottomAnchor="271.0" AnchorPane.leftAnchor="494.0" AnchorPane.rightAnchor="513.0" AnchorPane.topAnchor="599.0" />
+                              <JFXDatePicker fx:id="scheddate1" defaultColor="#00b359" editable="false" layoutX="494.0" layoutY="666.0" prefHeight="25.0" prefWidth="253.0" promptText="Date Expired" AnchorPane.bottomAnchor="204.0" AnchorPane.leftAnchor="494.0" AnchorPane.rightAnchor="513.0" AnchorPane.topAnchor="666.0" />
+                              <JFXButton fx:id="schedsave" layoutX="502.0" layoutY="714.0" prefHeight="33.0" prefWidth="95.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="APPROVED" textFill="WHITE" AnchorPane.bottomAnchor="148.0" AnchorPane.leftAnchor="502.0" AnchorPane.rightAnchor="663.0" AnchorPane.topAnchor="714.0">
+                                 <font>
+                                    <Font name="Aparajita" size="15.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton fx:id="schedsave1" layoutX="618.0" layoutY="714.0" prefHeight="33.0" prefWidth="95.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="CANCEL" textFill="WHITE" AnchorPane.bottomAnchor="148.0">
+                                 <font>
+                                    <Font name="Aparajita" size="15.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXTextField fx:id="schedfn1" editable="false" focusColor="BLACK" labelFloat="true" layoutX="494.0" layoutY="462.0" maxWidth="376.0" minWidth="247.0" prefHeight="36.0" prefWidth="247.0" promptText="Requestor ID:" AnchorPane.bottomAnchor="397.0" AnchorPane.leftAnchor="494.0" AnchorPane.rightAnchor="519.0" AnchorPane.topAnchor="462.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </JFXTextField>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab text="Complains &amp; Concerns">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <JFXButton fx:id="schedsave2" layoutX="14.0" layoutY="24.0" onAction="#loadcomplainfxml" prefHeight="33.0" prefWidth="155.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="COMPLAINS" textFill="WHITE">
+                                 <font>
+                                    <Font name="Aparajita" size="15.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton fx:id="randg" alignment="TOP_CENTER" contentDisplay="TEXT_ONLY" layoutX="1212.0" layoutY="24.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="34.0" style="-fx-background-color: #00b359;" text="... " textFill="WHITE">
+                                 <font>
+                                    <Font name="Aparajita" size="14.0" />
+                                 </font>
+                              </JFXButton>
+                              <StackPane fx:id="stackpane" layoutY="79.0" prefHeight="810.0" prefWidth="1260.0" />
+                              <JFXButton fx:id="schedsave21" layoutX="187.0" layoutY="24.0" onAction="#loadschedulingfxml" prefHeight="33.0" prefWidth="155.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="SCHEDULING" textFill="WHITE">
+                                 <font>
+                                    <Font name="Aparajita" size="15.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton fx:id="schedsave211" layoutX="360.0" layoutY="24.0" onAction="#laodblacklistfxml" prefHeight="33.0" prefWidth="155.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="BLACKLIST" textFill="WHITE">
+                                 <font>
+                                    <Font name="Aparajita" size="15.0" />
+                                 </font>
+                              </JFXButton>
+                           </children></AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab text="Case Docketing">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView layoutX="55.0" layoutY="74.0" prefHeight="573.0" prefWidth="1138.0">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" text="C1" />
+                                  <TableColumn prefWidth="75.0" text="C2" />
+                                </columns>
+                              </TableView>
+                              <JFXButton fx:id="schedsave2111" layoutX="1038.0" layoutY="670.0" prefHeight="33.0" prefWidth="155.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="PRINT" textFill="WHITE">
+                                 <font>
+                                    <Font name="Aparajita" size="15.0" />
+                                 </font>
+                              </JFXButton>
+                           </children></AnchorPane>
+                    </content>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
          </center>
          <right>
             <JFXDrawer fx:id="drawer" defaultDrawerSize="325.0" direction="RIGHT" BorderPane.alignment="CENTER" />

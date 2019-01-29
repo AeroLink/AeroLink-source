@@ -9,8 +9,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Optional;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -18,9 +20,12 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -101,11 +106,55 @@ public class AlertBox {
          Stage st = new Stage();
          st.setScene(new Scene(p));
          st.setResizable(false);
+         st.initStyle(StageStyle.UNDECORATED);
+         st.initModality(Modality.APPLICATION_MODAL);
          st.show();
      }
     
+     final static Tooltip tp = new Tooltip();
+     public static void tooltip(String text, Button btn){
+         tp.setText(text);
+         btn.setTooltip(tp);
+     }
+     
+     public void fxmlloader(String text,Pane pane) throws IOException{
+       
+       AnchorPane  p = FXMLLoader.load(getClass().getResource(text));
+       pane.getChildren().setAll(p);
+     }
+     
+     public static void cleartxt(Pane p){
+     TextField txt = null;
+     for(Node n: p.getChildren()){
+     if(n.getClass().toString().contains("TextField")){
+         txt = (TextField)n;
+         txt.setText(null);
+     }
+     }  
+     }
+     
+     public static void warning(Pane p,TextField t,String title,String message){
+          t  = null;
+         for(Node n : p.getChildren()){
+         if(n.getClass().toString().contains("TextField")){
+            t = (TextField)n;
+            
+            }
+         }if(t.getText().equals("")){
+                      a = new Alert(AlertType.INFORMATION);
+                      a.setTitle(title);
+                      a.setHeaderText(null);
+                      a.setContentText(message);
+                      action = a.showAndWait();
+                }
+     }
+     
+     
+   
     
     }
+
+
     
     
    
