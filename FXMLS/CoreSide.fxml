@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="825.0" prefWidth="311.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.CoreSideController">
+<BorderPane prefHeight="825.0" prefWidth="311.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.CoreSideController">
     <center>
         <VBox prefHeight="657.0" prefWidth="311.0" style="-fx-background-color: white;">
             <children>
@@ -67,7 +67,7 @@
                                                 </AnchorPane>
                                                 <AnchorPane>
                                                     <children>
-                                                        <JFXButton id="core1_booking" alignment="BOTTOM_LEFT" graphicTextGap="10.0" layoutY="4.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Booking">
+                                                        <JFXButton id="core1_booking" alignment="BOTTOM_LEFT" graphicTextGap="10.0" layoutY="4.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Booking">
                                                             <graphic>
                                                                 <FontAwesomeIconView fill="#34a853" glyphName="BOOK" size="25" strokeType="INSIDE" />
                                                             </graphic>
@@ -80,7 +80,7 @@
                                                 <AnchorPane prefHeight="10.0" prefWidth="273.0" />
                                                 <AnchorPane>
                                                     <children>
-                                                        <JFXButton id="core1pom" alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Purchase Order Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <JFXButton id="core1pom" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Purchase Order Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <graphic>
                                                                 <FontAwesomeIconView fill="#34a853" glyphName="CLIPBOARD" size="25" strokeType="INSIDE" />
                                                             </graphic>
@@ -93,7 +93,7 @@
                                                 <AnchorPane prefHeight="10.0" prefWidth="273.0" />
                                                 <AnchorPane>
                                                     <children>
-                                                        <JFXButton id="core1consol" alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Consolidation/Deconsolidation" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <JFXButton id="core1consol" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Consolidation/Deconsolidation" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <graphic>
                                                                 <FontAwesomeIconView fill="#34a853" glyphName="SHIELD" size="25" strokeType="INSIDE" />
                                                             </graphic>
@@ -106,7 +106,7 @@
                                                 <AnchorPane prefHeight="10.0" prefWidth="273.0" />
                                                 <AnchorPane>
                                                     <children>
-                                                        <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Master &amp; House Bill of Lading" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <JFXButton id="core1mawb" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Master &amp; House Bill of Lading" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <graphic>
                                                                 <FontAwesomeIconView fill="#34a853" glyphName="SHOPPING_BASKET" size="25" strokeType="INSIDE" />
                                                             </graphic>
@@ -119,7 +119,7 @@
                                                 <AnchorPane prefHeight="10.0" prefWidth="273.0" />
                                                 <AnchorPane>
                                                     <children>
-                                                        <JFXButton alignment="BOTTOM_LEFT" graphicTextGap="10.0" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Shipment Files" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <JFXButton id="core1sf" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Shipment Files" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <graphic>
                                                                 <FontAwesomeIconView fill="#34a853" glyphName="SHIP" size="25" strokeType="INSIDE" />
                                                             </graphic>

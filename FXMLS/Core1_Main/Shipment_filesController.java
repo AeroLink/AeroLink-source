@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FXMLS.Administrative;
+package FXMLS.Core1_Main;
 
-import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -16,22 +16,20 @@ import javafx.scene.control.TableView;
 /**
  * FXML Controller class
  *
- * @author Onodera
+ * @author lemnovo
  */
-public class Document_ManagementController implements Initializable {
+public class Shipment_filesController implements Initializable {
 
     @FXML
-    private JFXTextField locationfield111111;
+    private TableView<?> tableShipment;
     @FXML
-    private TableView<?> tablevisitoremployee;
+    private TableColumn<?, ?> columnTracking;
     @FXML
-    private TableColumn<?, ?> employeeid;
+    private TableColumn<?, ?> columnShipper;
     @FXML
-    private TableColumn<?, ?> name;
+    private TableColumn<?, ?> columnConsign;
     @FXML
-    private TableColumn<?, ?> office;
-    @FXML
-    private TableColumn<?, ?> floor;
+    private TableColumn<?, ?> columnPack;
 
     /**
      * Initializes the controller class.
@@ -40,5 +38,9 @@ public class Document_ManagementController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void handleButtonAction(ActionEvent event) {
+    }
     
 }
