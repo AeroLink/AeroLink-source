@@ -574,6 +574,57 @@ public class HR2_Training_ManagementController implements Initializable {
         col_f_capacity.setCellValueFactory((TableColumn.CellDataFeatures<TM_AssetFacilities, String> param) -> param.getValue().facilityCapacity);
         col_building.setCellValueFactory((TableColumn.CellDataFeatures<TM_AssetFacilities, String> param) -> param.getValue().BuildingName);
         col_facilityStatus.setCellValueFactory((TableColumn.CellDataFeatures<TM_AssetFacilities, String> param) -> param.getValue().facilityStatus);
+        TableColumn<TM_AssetFacilities, Void> col_btn_viewFacility = new TableColumn("View Action");
+
+        Callback<TableColumn<TM_AssetFacilities, Void>, TableCell<TM_AssetFacilities, Void>> cellFacilityDetails
+                = new Callback<TableColumn<TM_AssetFacilities, Void>, TableCell<TM_AssetFacilities, Void>>() {
+            @Override
+            public TableCell<TM_AssetFacilities, Void> call(final TableColumn<TM_AssetFacilities, Void> param) {
+
+                final TableCell<TM_AssetFacilities, Void> cellBtn_VF = new TableCell<TM_AssetFacilities, Void>() {
+                    private final Button btn_view_facility_details = new Button("View Details");
+
+                    {
+                        try {
+                            btn_view_facility_details.setOnAction(e
+                                    -> {
+
+                                TM_AssetFacilities af = (TM_AssetFacilities) getTableRow().getItem();
+                                TM_FacilityDetailsClass_for_Modal.FacilityDetails(
+                                        af.facilityID.getValue(),
+                                        af.facilityName.getValue(),
+                                        af.facilityRoomNumber.getValue(),
+                                        af.facilityCapacity.getValue(),
+                                        af.BuildingName.getValue(),
+                                        af.facilityStatus.getValue());
+                                Modal lq = Modal.getInstance(new Form("/FXMLS/HR2/Modals/TM_ViewFacilityDetails.fxml").getParent());
+                                lq.open();
+                            });
+                            btn_view_facility_details.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
+                            btn_view_facility_details.setCursor(javafx.scene.Cursor.HAND);
+                        } catch (Exception ex) {
+                            System.out.println(ex);
+                        }
+
+                    }
+
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn_view_facility_details);
+                        }
+                    }
+                };
+                return cellBtn_VF;
+            }
+
+        };
+
+        col_btn_viewFacility.setCellFactory(cellFacilityDetails);
+        tbl_req_facility.getColumns().add(col_btn_viewFacility);
+        
         TableColumn<TM_AssetFacilities, Void> col_btn_facility = new TableColumn("Request Facility");
 
         Callback<TableColumn<TM_AssetFacilities, Void>, TableCell<TM_AssetFacilities, Void>> cellFacility
@@ -592,9 +643,9 @@ public class HR2_Training_ManagementController implements Initializable {
                                 TM_AssetFacilities af = (TM_AssetFacilities) getTableRow().getItem();
                                 TM_FacilityDetailsClass_for_Modal.FacilityDetails(
                                         af.facilityID.getValue(),
-                                        af.facilityName.getValue(), 
-                                        af.facilityRoomNumber.getValue(), 
-                                        af.facilityCapacity.getValue(), 
+                                        af.facilityName.getValue(),
+                                        af.facilityRoomNumber.getValue(),
+                                        af.facilityCapacity.getValue(),
                                         af.BuildingName.getValue(),
                                         af.facilityStatus.getValue());
                                 Modal lq = Modal.getInstance(new Form("/FXMLS/HR2/Modals/TM_ViewFacilityDetails.fxml").getParent());
