@@ -99,7 +99,7 @@ public class SP_ViewEmployeeInfoController implements Initializable {
     }
     @FXML
     public void RequestPromotion(){
-        Modal req_promotion = Modal.getInstance(new Form("/FXMLS/HR2/Modals/SP_ViewEmployeeInfo.fxml").getParent());
+        Modal req_promotion = Modal.getInstance(new Form("/FXMLS/HR2/Modals/SP_RequestPromotion.fxml").getParent());
         req_promotion.open();
     }
     public void populateLabels() {
