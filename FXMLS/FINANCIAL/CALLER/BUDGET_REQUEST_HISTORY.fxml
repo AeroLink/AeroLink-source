@@ -36,5 +36,6 @@
          </graphic>
       </JFXButton>
       <JFXComboBox fx:id="combobc_filter" layoutX="45.0" layoutY="48.0" onAction="#FilterStatus" prefHeight="25.0" prefWidth="195.0" promptText="Filter Status" />
+      <Label fx:id="countlbl" layoutX="282.0" layoutY="52.0" text="0" />
    </children>
 </AnchorPane>

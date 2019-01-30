@@ -102,7 +102,7 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab id="tab" text="Request">
+            <Tab id="tab" text="Budget Request">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -129,9 +129,14 @@
                            </graphic></JFXButton>
                         <AnchorPane fx:id="ancrpane3" layoutX="7.0" layoutY="9.0" prefHeight="30.0" prefWidth="983.0" style="-fx-background-color: #34a853;" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="3.0">
                            <children>
-                              <Label layoutX="9.0" layoutY="1.0" prefHeight="30.0" prefWidth="176.0" text="Budget Request" textFill="WHITE">
+                              <Label layoutX="33.0" layoutY="1.0" prefHeight="30.0" prefWidth="117.0" text="Request" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="notif_label" layoutX="15.0" layoutY="6.0" style="-fx-background-color: WHITE;" text="0" textFill="#0095ff">
+                                 <font>
+                                    <Font size="15.0" />
                                  </font>
                               </Label>
                            </children>

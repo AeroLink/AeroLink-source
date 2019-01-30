@@ -13,6 +13,7 @@ import Model.Financial.Financial_allocation_model;
 import Model.Financial.Financial_annualbudget_model;
 import Model.Financial.Financial_budget_request;
 import Model.Financial.Financial_disbursement_request_model;
+import Model.Financial.users_tbl;
 import Synapse.Components.Modal.Modal;
 import Synapse.Form;
 import Synapse.Session;
@@ -82,8 +83,10 @@ public class FINANCIAL_BUDGET_MANAGEMENTController implements Initializable {
     private JFXButton reqHistory_btn;
     @FXML
     private JFXButton declined_btn;
+    @FXML
+    private Label notif_label;
 
-    
+    users_tbl user = new users_tbl();
     
     /**
      * Initializes the controller class.
@@ -101,6 +104,8 @@ public class FINANCIAL_BUDGET_MANAGEMENTController implements Initializable {
         AddTableColumn_Budget_Allocation();
         loadAllocation();
         
+         int id = budgetrequest_tbl.getItems().size();
+         notif_label.setText(String.valueOf(id));
         
         AddTableColumn_Budget_Request();
         LoadBudgetRequest();
@@ -110,24 +115,26 @@ public class FINANCIAL_BUDGET_MANAGEMENTController implements Initializable {
         AddTableColumn_AnnualBudgets();
         
         
-        ancrpane3.setOnMouseClicked(e -> {approved_btn.setDisable(true);});
-        enable_btn.setOnMouseClicked(e -> enable());
-        
-        budgetrequest_tbl.setOnMouseClicked(e ->{
-        Budget_Request_classfile r = budgetrequest_tbl.getSelectionModel().getSelectedItem();
-      drno_label.setText(r.getRequestNo());
-      datereq_label.setText(r.getDate());
-      dept_label.setText(r.getDepartment());
-      requestor_label.setText(r.getRequestor_name());
-      desc_label.setText(r.getDescription());
-      prioritylvl_label.setText(r.getPrioritylevel());
-      amount_label.setText(r.getAmount());
-      approved_btn.setDisable(false);
-      label_id.setText(r.getRequestNo());
-      declined_btn.setDisable(false);
+         ancrpane3.setOnMouseClicked(e -> {approved_btn.setDisable(true);});
+         enable_btn.setOnMouseClicked(e -> enable());                    
+         budgetrequest_tbl.setOnMouseClicked(e ->{
+         Budget_Request_classfile r = budgetrequest_tbl.getSelectionModel().getSelectedItem();
+         drno_label.setText(r.getRequestNo());
+         datereq_label.setText(r.getDate());
+         dept_label.setText(r.getDepartment());
+         requestor_label.setText(r.getRequestor_name());
+         desc_label.setText(r.getDescription());
+         prioritylvl_label.setText(r.getPrioritylevel());
+         amount_label.setText(r.getAmount());
+         approved_btn.setDisable(false);
+         label_id.setText(r.getRequestNo());
+         declined_btn.setDisable(false);
         });
         
         reqHistory_btn.setOnMouseClicked(e ->OpenReqHistory());
+        
+
+        
         
         
     }    
@@ -137,8 +144,6 @@ public class FINANCIAL_BUDGET_MANAGEMENTController implements Initializable {
           Modal md = Modal.getInstance(new Form("/FXMLS/FINANCIAL/CALLER/BUDGET_REQUEST_HISTORY.fxml").getParent());
           md.open();
     }
-    
-    
     
     public void enable(){
         allocate_btn.setDisable(false);
@@ -214,17 +219,16 @@ public class FINANCIAL_BUDGET_MANAGEMENTController implements Initializable {
                     fbr.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
                         DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
                     });
-
+                 budgetrequest_tbl.getItems();
                     if (DummyCount != GlobalCount) {
                             List b = fbr.where(new Object[][]{
                              {"budget_status","=","Pending"}
                     }).get();
                             request(b);
-                             budgetrequest_tbl.getItems();
-                     {
-                    }
-                    budgetrequest_tbl.setItems(brc);
-                        GlobalCount = DummyCount;
+                           
+                              
+                                 budgetrequest_tbl.setItems(brc);
+                                     GlobalCount = DummyCount;
                     }
                     Thread.sleep(3000);
                 } catch (InterruptedException ex) {
@@ -234,7 +238,7 @@ public class FINANCIAL_BUDGET_MANAGEMENTController implements Initializable {
 
             return 0;
         }, Session.SessionThreads);
-
+        System.err.println(budgetrequest_tbl.getItems().size());
      }
      
      private void request(List req){
@@ -293,6 +297,8 @@ public class FINANCIAL_BUDGET_MANAGEMENTController implements Initializable {
          Financial_budget_request fbrr = new Financial_budget_request();
          
          try{
+             
+             
             if(fbrr.update(new Object[][]{
                 {"budget_status","Approved"},
                 {"budget_approvedby","Admin"}
@@ -480,15 +486,14 @@ public class FINANCIAL_BUDGET_MANAGEMENTController implements Initializable {
                             List b = abm.get("ab_year as ab_year",
                                              "ab_amount as ab_amount");
                                         Annual(b);
-                        {
-                        } 
+                        
                       ab_tbl.setItems(abc);
                         GlobalCount = DummyCount;
                     }
                     Thread.sleep(3000);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(FINANCIAL_BUDGET_MANAGEMENTController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                } 
             }
 
             return 0;
