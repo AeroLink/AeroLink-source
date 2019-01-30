@@ -8,11 +8,9 @@ package FXMLS.Administrative;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Method;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -40,7 +38,7 @@ public class Add_DocumentController implements Initializable {
     private PreparedStatement pst = null;
     private ResultSet rs = null;
     private String directory = "";
-    
+   
     @FXML
     private JFXButton btncancel;
     @FXML
@@ -61,8 +59,6 @@ public class Add_DocumentController implements Initializable {
     private JFXButton btnsubmit;
     /**
      * Initializes the controller class.
-     * @param url
-     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -70,11 +66,8 @@ public class Add_DocumentController implements Initializable {
      doccategory.setItems(categorybox);
      doctype.setItems(typebox);
      
-    }  
+    }    
     
-    /**
-     *
-     */
     @FXML
     public void close(){
        AlertBox.display("Alert", "Adding Documents has been Cancel");
@@ -82,18 +75,8 @@ public class Add_DocumentController implements Initializable {
     }
         
     
-    
-    /**
-     *
-     * @return
-    
-
-    /**
-     *
-     * @throws Exception
-     */
     @FXML
-    public void insertdocument() throws Exception{
+    public void insertdocument(){
         String sql  = "insert into aerolink.admin_document_reqstoring values(?,?,?,?,?,?,?,?)";
         try{
             pst = con.prepareStatement(sql);
@@ -109,7 +92,7 @@ public class Add_DocumentController implements Initializable {
           
             java.sql.Date date = new java.sql.Date(t);
             pst.setDate(6, date);
-           
+            
             File f = new File(directory+txtpathfile.getText());
             FileInputStream fs = new FileInputStream(f);
             pst.setBinaryStream(7, fs);
@@ -117,32 +100,31 @@ public class Add_DocumentController implements Initializable {
             
             pst.execute();
             
-            
+          
             AlertBox.display("Alert", "Document is now Pending");
             AlertBox.close(btnsubmit);
             
             
     }   catch (SQLException ex) {
-          System.out.print(ex.getMessage());
+            Logger.getLogger(Add_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (FileNotFoundException ex) {
-           System.out.print(ex.getMessage());
+            Logger.getLogger(Add_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
-  
+     
     }
     
-    /**
-     *
-     */
     public void opendialog(){
             FileChooser fc = new FileChooser();
-            fc.getExtensionFilters().addAll(
-                    new FileChooser.ExtensionFilter("PDF Files","*.pdf")
-        
-            );
+            FileChooser.ExtensionFilter exf1 = new FileChooser.ExtensionFilter("PDF Files", "*.pdf");
             File f = fc.showOpenDialog(null);
-            txtpathfile.setText(""+f);
-    }
+            if(f != null){
+                txtpathfile.setText(""+f);
+            }
+            else{
+               AlertBox.display("Alert", "No File Selected");
+            }
+            
+            }
     
    
 

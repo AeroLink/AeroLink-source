@@ -9,47 +9,63 @@ package FXMLS.Administrative;
  *
  * @author Onodera-Chan
  */
-public class tblSentItems {
-    private String reqno;
-    private String doctitle;
+public class tbldo_approved {
+    private String requestno;
+    private String documenttitle;
+    private String requestby;
     private String senttime;
     private String sentdate;
     private String status;
 
-    public tblSentItems(String reqno, String doctitle, String senttime, String sentdate, String status) {
-        this.reqno = reqno;
-        this.doctitle = doctitle;
+    public tbldo_approved(String requestno, String documenttitle, String requestby, String senttime, String sentdate, String status) {
+        this.requestno = requestno;
+        this.documenttitle = documenttitle;
+        this.requestby = requestby;
         this.senttime = senttime;
         this.sentdate = sentdate;
         this.status = status;
     }
 
     /**
-     * @return the reqno
+     * @return the requestno
      */
-    public String getReqno() {
-        return reqno;
+    public String getRequestno() {
+        return requestno;
     }
 
     /**
-     * @param reqno the reqno to set
+     * @param requestno the requestno to set
      */
-    public void setReqno(String reqno) {
-        this.reqno = reqno;
+    public void setRequestno(String requestno) {
+        this.requestno = requestno;
     }
 
     /**
-     * @return the doctitle
+     * @return the documenttitle
      */
-    public String getDoctitle() {
-        return doctitle;
+    public String getDocumenttitle() {
+        return documenttitle;
     }
 
     /**
-     * @param doctitle the doctitle to set
+     * @param documenttitle the documenttitle to set
      */
-    public void setDoctitle(String doctitle) {
-        this.doctitle = doctitle;
+    public void setDocumenttitle(String documenttitle) {
+        this.documenttitle = documenttitle;
+    }
+
+    /**
+     * @return the requestby
+     */
+    public String getRequestby() {
+        return requestby;
+    }
+
+    /**
+     * @param requestby the requestby to set
+     */
+    public void setRequestby(String requestby) {
+        this.requestby = requestby;
     }
 
     /**
@@ -93,5 +109,4 @@ public class tblSentItems {
     public void setStatus(String status) {
         this.status = status;
     }
-    
 }

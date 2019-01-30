@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
@@ -9,11 +8,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="705.0" prefWidth="452.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Administrative.RequestForm_Document_ManagementController">
+
+<AnchorPane id="AnchorPane" prefHeight="705.0" prefWidth="452.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="FXMLS.Administrative.RequestForm_Document_ManagementController">
    <children>
       <AnchorPane layoutX="50.0" layoutY="30.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="49.0" AnchorPane.topAnchor="30.0">
          <children>
-            <JFXTextArea fx:id="txtdescription" layoutY="114.0" prefHeight="270.0" prefWidth="353.0">
+            <JFXTextArea layoutY="114.0" prefHeight="270.0" prefWidth="353.0">
                <font>
                   <Font size="16.0" />
                </font>
@@ -23,13 +23,13 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="txtreqby" editable="false" layoutX="78.0" layoutY="527.0" prefHeight="25.0" prefWidth="197.0" />
-            <Label layoutX="132.0" layoutY="558.0" text="Request By">
+            <JFXTextField editable="false" layoutX="78.0" layoutY="589.0" prefHeight="25.0" prefWidth="197.0" />
+            <Label layoutX="132.0" layoutY="620.0" text="Request By">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="txttitle" layoutX="131.0" prefHeight="25.0" prefWidth="219.0">
+            <TextField layoutX="131.0" prefHeight="25.0" prefWidth="219.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -44,23 +44,13 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="78.0" layoutY="438.0" text="Department">
+            <Label layoutX="78.0" layoutY="500.0" text="Department">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <JFXComboBox fx:id="combodepartment" layoutX="78.0" layoutY="463.0" prefHeight="25.0" prefWidth="197.0" />
-            <JFXComboBox fx:id="comboto" layoutX="43.0" layoutY="43.0" prefHeight="25.0" prefWidth="197.0" />
-            <JFXButton fx:id="btnsubmit" layoutX="142.0" layoutY="599.0" onAction="#insertdata" prefHeight="15.0" prefWidth="95.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="SUBMIT" textFill="WHITE">
-               <font>
-                  <Font name="Aparajita" size="15.0" />
-               </font>
-            </JFXButton>
-            <JFXButton fx:id="btncancel" layoutX="244.0" layoutY="599.0" onAction="#cancel" prefHeight="15.0" prefWidth="95.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="CANCEL" textFill="WHITE">
-               <font>
-                  <Font name="Aparajita" size="15.0" />
-               </font>
-            </JFXButton>
+            <JFXComboBox layoutX="78.0" layoutY="525.0" prefHeight="25.0" prefWidth="197.0" />
+            <JFXComboBox layoutX="43.0" layoutY="43.0" prefHeight="25.0" prefWidth="197.0" />
          </children>
       </AnchorPane>
    </children>

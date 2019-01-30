@@ -9,19 +9,21 @@ package FXMLS.Administrative;
  *
  * @author Onodera-Chan
  */
-public class admin_doc_request {
+public class tbladmin_doc_request {
     private String docreq;
     private String reqtitle;
     private String description;
     private String reqby;
     private String datereq;
+    private String status;
 
-    public admin_doc_request(String docreq, String reqtitle, String description, String reqby, String datereq) {
+    public tbladmin_doc_request(String docreq, String reqtitle, String description, String reqby, String datereq, String status) {
         this.docreq = docreq;
         this.reqtitle = reqtitle;
         this.description = description;
         this.reqby = reqby;
         this.datereq = datereq;
+        this.status = status;
     }
 
     /**
@@ -92,6 +94,20 @@ public class admin_doc_request {
      */
     public void setDatereq(String datereq) {
         this.datereq = datereq;
+    }
+
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
     }
     
 }
