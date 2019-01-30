@@ -254,7 +254,9 @@ addButton.setCellFactory(cellFactory);
                         try {
                             btn.setOnAction(e
                                     -> {
-                                SP_JV_with_Skills_Modal.view_skill(tbl_job_vacancy.getSelectionModel().getSelectedItem().title.get());
+                                HR2_JV_With_Skills_for_SP skills_sp = (HR2_JV_With_Skills_for_SP) getTableRow().getItem();
+                                SP_JV_with_Skills_Modal.view_skill(
+                                        skills_sp.title.get());
                                 Modal viewEmp = Modal.getInstance(new Form("/FXMLS/HR2/Modals/SP_ViewSkills.fxml").getParent());
                                 viewEmp.open();
                             });
