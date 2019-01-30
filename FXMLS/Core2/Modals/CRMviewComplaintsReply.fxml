@@ -19,14 +19,6 @@
                      <children>
                         <FontAwesomeIconView fill="WHITE" glyphName="BELL" layoutX="6.0" layoutY="38.0" size="40" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
                         <Label fx:id="lblEmail" layoutX="53.0" layoutY="25.0" prefHeight="21.0" prefWidth="356.0" text="COMPLAINTS EMAIL" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="53.0" AnchorPane.rightAnchor="191.0" AnchorPane.topAnchor="25.0" />
-                        <JFXButton fx:id="btnForward" buttonType="RAISED" layoutX="525.0" layoutY="10.0" style="-fx-background-color: white;" text="Forward To Admin" textFill="#34a853" AnchorPane.rightAnchor="10.0">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                           <graphic>
-                              <FontAwesomeIconView fill="#34a853" glyphName="FORWARD" size="20" />
-                           </graphic>
-                        </JFXButton>
                         <Label fx:id="lblName" layoutX="53.0" prefHeight="30.0" prefWidth="354.0" text="NAME" textFill="WHITE" AnchorPane.topAnchor="0.0">
                            <font>
                               <Font size="20.0" />

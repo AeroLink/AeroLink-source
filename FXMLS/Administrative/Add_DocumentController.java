@@ -11,7 +11,6 @@ import com.jfoenix.controls.JFXTextField;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Method;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -39,7 +38,7 @@ public class Add_DocumentController implements Initializable {
     private PreparedStatement pst = null;
     private ResultSet rs = null;
     private String directory = "";
-    
+   
     @FXML
     private JFXButton btncancel;
     @FXML
@@ -55,7 +54,7 @@ public class Add_DocumentController implements Initializable {
     
     ObservableList<String> depbox = FXCollections.observableArrayList("HR","Logistics","Core","Administrative");
     ObservableList<String> categorybox = FXCollections.observableArrayList("201 Files","Contracts","Shipment Files","Legal Records","Procurement Reports","Warehouse Reports","Other Files");
-    ObservableList<String> typebox = FXCollections.observableArrayList(".docx",".pdf");
+    ObservableList<String> typebox = FXCollections.observableArrayList(".pdf");
     @FXML
     private JFXButton btnsubmit;
     /**
@@ -67,22 +66,17 @@ public class Add_DocumentController implements Initializable {
      doccategory.setItems(categorybox);
      doctype.setItems(typebox);
      
-    }  
+    }    
     
-   
     @FXML
     public void close(){
        AlertBox.display("Alert", "Adding Documents has been Cancel");
        AlertBox.close(btncancel);
     }
         
-    final a2 A2 = new a2();
     
-      public a2 newclass(){
-        return new a2();
-    }
     @FXML
-    public void insertdocument() throws Exception{
+    public void insertdocument(){
         String sql  = "insert into aerolink.admin_document_reqstoring values(?,?,?,?,?,?,?,?)";
         try{
             pst = con.prepareStatement(sql);
@@ -106,27 +100,33 @@ public class Add_DocumentController implements Initializable {
             
             pst.execute();
             
-           Document_ManagementController dmc = new Document_ManagementController();
-           dmc.loadtblreqstoring();
-        
+          
             AlertBox.display("Alert", "Document is now Pending");
             AlertBox.close(btnsubmit);
             
             
     }   catch (SQLException ex) {
-          
+            Logger.getLogger(Add_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (FileNotFoundException ex) {
-           
+            Logger.getLogger(Add_DocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
-  
+     
     }
     
     public void opendialog(){
             FileChooser fc = new FileChooser();
+            FileChooser.ExtensionFilter exf1 = new FileChooser.ExtensionFilter("PDF Files", "*.pdf");
+            fc.getExtensionFilters().add(exf1);
             File f = fc.showOpenDialog(null);
-            txtpathfile.setText(""+f);
-    }
+            if(f != null){
+           
+                txtpathfile.setText(""+f);
+            }
+            else{
+               AlertBox.display("Alert", "No File Selected");
+            }
+            
+            }
     
    
 

@@ -147,8 +147,6 @@ public class HR1_Performance_ManagementController implements Initializable {
         ObservableList<TableModel_EmployeeList> list = FXCollections.observableArrayList();
 
         STORED_PROC.executeCall("HR1_PERFOMANCE_MODULE_getAllEmployees", new Object[][]{
-            //dito ilalagay yung mga parameters na nilagay natin sa taas
-            //sorry, dapat nilalgay lang dito yung Parameter name at value
             {"dept", cboDept.getSelectionModel().getSelectedItem().toString()},
             {"type_id",  5},
             {"status_id", 1}

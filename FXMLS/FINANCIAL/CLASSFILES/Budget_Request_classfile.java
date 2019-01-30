@@ -20,12 +20,14 @@ public class Budget_Request_classfile {
           public SimpleStringProperty brprioritylevel;
           public SimpleStringProperty bramount;
           public SimpleStringProperty brstatus;
+          public SimpleStringProperty brApprovedBy;
+          public SimpleStringProperty brReason;
         
         
         
         
         public Budget_Request_classfile(String requestno,String date,String department,String requestor_name,String description,
-                                        String prioritylevel,String amount,String status){
+                                        String prioritylevel,String amount,String status,String approvedby,String reason){
             
             this.brrequestno = new SimpleStringProperty(requestno); 
             this.brdate = new SimpleStringProperty(date);
@@ -35,6 +37,8 @@ public class Budget_Request_classfile {
             this.brprioritylevel = new SimpleStringProperty(prioritylevel);
             this.bramount = new SimpleStringProperty(amount); 
             this.brstatus = new SimpleStringProperty(status);
+            this.brApprovedBy = new SimpleStringProperty(approvedby);
+            this.brReason = new SimpleStringProperty(reason);
         }
             
             public String getRequestNo(){

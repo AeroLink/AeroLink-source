@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import java.lang.String?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
@@ -29,7 +31,7 @@
                             <TableColumn fx:id="col_tm_dept" prefWidth="293.0" text="Department" />
                             <TableColumn fx:id="col_tm_jp" prefWidth="297.0" text="Job Position" />
                               <TableColumn fx:id="col_tm_p" prefWidth="118.0" text="Participants" />
-                              <TableColumn fx:id="col_tm_th" prefWidth="81.0" text="Total Hours" />
+                              <TableColumn fx:id="col_tm_trainor" prefWidth="81.0" text="Trainor" />
                               <TableColumn fx:id="col_tm_from" prefWidth="297.0" text="From" />
                               <TableColumn fx:id="col_tm_to" prefWidth="297.0" text="To" />
                               <TableColumn fx:id="col_tm_pn_process" prefWidth="297.0" text="Status" />
@@ -45,9 +47,66 @@
                                 </items>
                               </ContextMenu>
                            </contextMenu>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </TableView>
+                        <JFXComboBox fx:id="cbox_tm_dept" layoutX="14.0" layoutY="42.0" prefHeight="25.0" prefWidth="146.0" promptText="Select Department">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></JFXComboBox>
+                        <JFXComboBox fx:id="cbox_tm_trainor" layoutX="184.0" layoutY="42.0" prefHeight="25.0" prefWidth="276.0" promptText="Select Trainor">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></JFXComboBox>
                      </children>
                   </AnchorPane>
+              </content>
+            </Tab>
+            <Tab id="tab" text="History of Trainings">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="6.0" layoutY="3.0" text="History">
+                           <font>
+                              <Font name="Lato Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="tbl_history_of_trainings" layoutX="14.0" layoutY="77.0" onMouseClicked="#ContextMenuForHistory" prefHeight="286.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="77.0">
+                          <columns>
+                            <TableColumn fx:id="col_hs_dept" prefWidth="75.0" text="Department" />
+                            <TableColumn fx:id="col_hs_jp" prefWidth="75.0" text="Job Position" />
+                              <TableColumn fx:id="col_hs_p" prefWidth="75.0" text="Participants" />
+                              <TableColumn fx:id="col_hs_trainor" prefWidth="75.0" text="Trainor" />
+                              <TableColumn fx:id="col_hs_from" prefWidth="75.0" text="From" />
+                              <TableColumn fx:id="col_hs_to" prefWidth="75.0" text="To" />
+                              <TableColumn fx:id="col_hs_status" prefWidth="75.0" text="Status" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <contextMenu>
+                              <ContextMenu fx:id="hs_contextMenu">
+                                <items>
+                                  <MenuItem fx:id="mi_view_hs_training" mnemonicParsing="false" text="View" />
+                                </items>
+                              </ContextMenu>
+                           </contextMenu>
+                        </TableView>
+                        <JFXComboBox fx:id="cbox_hs_dept" layoutX="8.0" layoutY="36.0" prefHeight="25.0" prefWidth="174.0" promptText="Select Department">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXComboBox>
+                        <JFXComboBox fx:id="cbox_hs_trainor" layoutX="207.0" layoutY="37.0" prefHeight="25.0" prefWidth="236.0" promptText="Select Trainor">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXComboBox>
+                     </children></AnchorPane>
               </content>
             </Tab>
             <Tab id="tab" text="Training Requests">
@@ -64,6 +123,9 @@
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </TableView>
                      </children></AnchorPane>
                </content>
@@ -71,7 +133,7 @@
                <graphic>
                   <AnchorPane prefHeight="0.0" prefWidth="0.0">
                      <children>
-                        <Label layoutX="1.0" layoutY="6.0" prefHeight="12.0" prefWidth="7.0" style="-fx-text-fill: #fff; -fx-background-color: #ff1a1a;" text="0" AnchorPane.bottomAnchor="14.0">
+                        <Label fx:id="lbl_training_req_notif" layoutX="1.0" layoutY="6.0" prefHeight="12.0" prefWidth="7.0" style="-fx-text-fill: #fff; -fx-background-color: #ff1a1a;" text="0" AnchorPane.bottomAnchor="14.0">
                            <styleClass>
                               <String fx:value="btn-rounded" />
                               <String fx:value="btnTable" />
@@ -86,17 +148,25 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tbl_training_req1" layoutX="7.0" layoutY="54.0" prefHeight="310.0" prefWidth="594.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="54.0">
+                        <TableView fx:id="tbl_req_facility" layoutX="7.0" layoutY="54.0" prefHeight="310.0" prefWidth="594.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="54.0">
                            <columns>
-                              <TableColumn fx:id="col_req_dept1" prefWidth="75.0" text="Department" />
-                              <TableColumn fx:id="col_req_jp1" prefWidth="75.0" text="Job Position" />
-                              <TableColumn fx:id="col_req_date_req1" prefWidth="75.0" text="Date  Requested" />
-                              <TableColumn fx:id="col_req_status1" prefWidth="75.0" text="Status" />
+                              <TableColumn fx:id="col_req_facility" prefWidth="75.0" text="Facility Name" />
+                              <TableColumn fx:id="col_f_roomNumber" prefWidth="75.0" text="Facility Room Number" />
+                              <TableColumn fx:id="col_f_capacity" prefWidth="75.0" text="Facility Capacity" />
+                              <TableColumn fx:id="col_building" prefWidth="75.0" text="Building" />
+                              <TableColumn fx:id="col_facilityStatus" prefWidth="75.0" text="Facility Status" />
                            </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </TableView>
+                        <JFXComboBox fx:id="cbox_filter_Fstatus" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="168.0" promptText="Facility Status">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></JFXComboBox>
                      </children>
                   </AnchorPane>
                </content>
@@ -105,17 +175,24 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tbl_training_req11" layoutX="7.0" layoutY="54.0" prefHeight="310.0" prefWidth="594.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="54.0">
+                        <TableView fx:id="tbl_req_vehicle" layoutX="7.0" layoutY="54.0" prefHeight="310.0" prefWidth="594.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="54.0">
                            <columns>
-                              <TableColumn fx:id="col_req_dept11" prefWidth="75.0" text="Department" />
-                              <TableColumn fx:id="col_req_jp11" prefWidth="75.0" text="Job Position" />
-                              <TableColumn fx:id="col_req_date_req11" prefWidth="75.0" text="Date  Requested" />
-                              <TableColumn fx:id="col_req_status11" prefWidth="75.0" text="Status" />
+                              <TableColumn fx:id="col_req_vehicleType" prefWidth="75.0" text="Vehicle Type" />
+                              <TableColumn fx:id="col_req_vehicleModel" prefWidth="75.0" text="Vehicle Model" />
+                              <TableColumn fx:id="col_req_vehicleStatus" prefWidth="75.0" text="Vehicle Status" />
                            </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </TableView>
+                        <JFXComboBox fx:id="cbox_filter_Vstatus" layoutX="12.0" layoutY="10.0" prefHeight="25.0" prefWidth="168.0" promptText="Vehicle Status">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXComboBox>
                      </children>
                   </AnchorPane>
                </content>

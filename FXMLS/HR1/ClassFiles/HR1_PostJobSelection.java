@@ -15,5 +15,8 @@ public class HR1_PostJobSelection {
     public static String jobID;
     public static String jobTitle;
     public static String OpenPos;
+    public static String status;
+    public static String salary;
+    
     
 }

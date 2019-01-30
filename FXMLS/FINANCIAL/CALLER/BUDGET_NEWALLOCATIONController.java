@@ -5,6 +5,7 @@
  */
 package FXMLS.FINANCIAL.CALLER;
 
+import FXMLS.FINANCIAL.FINANCIAL_BUDGET_MANAGEMENTController;
 import Model.Financial.Financial_allocation_model;
 import Synapse.Components.Modal.Modal;
 import Synapse.Form;
@@ -71,6 +72,7 @@ public class BUDGET_NEWALLOCATIONController implements Initializable {
              ba_amount_txtfield.clear();
              Stage stage = (Stage) ba_insert_btn.getScene().getWindow();
              stage.close();
+           
             
         }else{
               Alert alert = new Alert(Alert.AlertType.ERROR);

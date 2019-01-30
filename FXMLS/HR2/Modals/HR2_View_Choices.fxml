@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="499.0" prefWidth="443.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.HR2_View_ChoicesController">
+<AnchorPane id="AnchorPane" prefHeight="499.0" prefWidth="443.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.HR2_View_ChoicesController">
    <children>
       <Label layoutX="9.0" layoutY="214.0" prefHeight="21.0" prefWidth="111.0" text="List of Choices">
          <font>
