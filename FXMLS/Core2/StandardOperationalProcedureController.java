@@ -10,6 +10,8 @@ import FXMLS.Core2.ClassFiles.SOPTable_package_information;
 import Model.Core2.CORE1_Book;
 import Model.Core2.CORE2_package;
 import Model.Core2.CORE1_Customer_Details;
+import Synapse.Components.Modal.Modal;
+import Synapse.Form;
 import Synapse.Model;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
@@ -281,7 +283,7 @@ public class StandardOperationalProcedureController implements Initializable {
         ship_name.setCellValueFactory((TableColumn.CellDataFeatures<SOPTable_package_information, String> param) -> param.getValue().ship_name);
 //        book_date.setCellValueFactory((TableColumn.CellDataFeatures<SOPTable_package_information, String> param) -> param.getValue().book_date);
 //        status.setCellValueFactory((TableColumn.CellDataFeatures<SOPTable_package_information, String> param) -> param.getValue().status);
-        tblPackage.getColumns().addAll(package_no,ref_no,ship_name);// book_date, status
+        tblPackage.getColumns().addAll(package_no, ref_no, ship_name);// book_date, status
     }
 
     public void populateTable() {
@@ -351,7 +353,7 @@ public class StandardOperationalProcedureController implements Initializable {
 //            String book_date = (String) drow.get("book_date");
 
             spi.add(new SOPTable_package_information(package_no, ref_no, ship_name,
-                     list_item, note
+                    list_item, note
             //                    rec_name,CompleteAddress,rec_contact,serv_type,box,quantity,status,book_date
             ));
         }
@@ -403,6 +405,18 @@ public class StandardOperationalProcedureController implements Initializable {
     private void packageinspection(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/SOPviewPackageInspection.fxml"));
         SOProotPane.getChildren().setAll(pane);
+    }
+
+    @FXML
+    private void viewPackDetails(ActionEvent event) {
+        FXMLS.Core2.Modals.SOPviewPackageDetailController.packno = tblPackage.getSelectionModel().getSelectedItem().package_no.getValue();
+        FXMLS.Core2.Modals.SOPviewPackageDetailController.pack = tblPackage.getSelectionModel().getSelectedItem().list_item.getValue();
+
+        Modal md = Modal.getInstance(new Form("/FXMLS/Core2/Modals/SOPviewPackageDetail.fxml").getParent());
+        md.open();
+        md.getF().getStage().setOnCloseRequest(action -> {
+            FXMLS.Core2.Modals.SOPviewPackageDetailController.modalOpen = false;
+        });
     }
 
 }

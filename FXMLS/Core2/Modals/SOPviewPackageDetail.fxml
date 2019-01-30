@@ -2,37 +2,41 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Core2.Modals.SOPviewPackageDetailController">
    <children>
       <BorderPane prefHeight="500.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
             <AnchorPane prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: #34A853;" BorderPane.alignment="CENTER">
                <children>
                   <FontAwesomeIconView fill="WHITE" glyphName="CUBES" layoutX="20.0" layoutY="29.0" size="40" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
-                  <Label layoutX="72.0" layoutY="17.0" text="PACKAGE NUMBER" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+                  <Label fx:id="lblpacknumber" layoutX="70.0" layoutY="15.0" prefHeight="34.0" prefWidth="187.0" text="PACKAGE NUMBER" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="143.0" AnchorPane.topAnchor="15.0">
                      <font>
                         <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="68.0" layoutY="11.0" text="Package Number" textFill="WHITE" AnchorPane.topAnchor="2.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                </children>
             </AnchorPane>
          </top>
          <center>
-            <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-              <columns>
-                <TableColumn prefWidth="75.0" text="LIST OF PACKAGE" />
-              </columns>
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
-            </TableView>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TextArea fx:id="TApackage" editable="false" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #34A853;" wrapText="true" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </TextArea>
+               </children>
+            </AnchorPane>
          </center>
       </BorderPane>
    </children>
