@@ -12,6 +12,7 @@ import FXMLS.HR2.ClassFiles.TM_ViewParticipantsClass;
 import Model.HR2_RequestStatus;
 import Model.HR2_TM_Training_Requisition;
 import Model.HR2_Temp_Employee_Profiles;
+import Model.HR2_Temp_Facilities;
 import Model.HR2_Temp_Vehicles;
 import Model.HR2_Type_of_Training;
 import Model.HR4_Jobs;
@@ -122,6 +123,7 @@ public class TM_ViewTrainingController implements Initializable {
         HR2_Type_of_Training type_of_training = new HR2_Type_of_Training();
         HR2_Temp_Vehicles vehicles = new HR2_Temp_Vehicles();
         HR2_RequestStatus rst = new HR2_RequestStatus();
+        HR2_Temp_Facilities facilities = new HR2_Temp_Facilities();
 
         List set_trainors = trainors.get();
 
@@ -137,6 +139,14 @@ public class TM_ViewTrainingController implements Initializable {
             HashMap hm3 = (HashMap) f;
             //RS
             cbox_edit_type.getItems().add("TM" + hm3.get("type_of_training_id") + " - " + hm3.get("type_of_training"));
+        }
+
+        List set_venue = facilities.get();
+
+        for (Object venue : set_venue) {
+            HashMap hmVenue = (HashMap) venue;
+            //RS
+            cbox_edit_venue.getItems().add("F00" + hmVenue.get("FacilityID") + " - " + hmVenue.get("FacilityName"));
         }
 
         List set_vehicles = vehicles.get();
@@ -181,8 +191,8 @@ public class TM_ViewTrainingController implements Initializable {
             txt_req_by.setText(((HashMap) row).get("requested_by").toString());
             txt_date_requested.setText(((HashMap) row).get("date_requested").toString());
             //   cbox_edit_trainor.setValue(((HashMap) row).get("trainor").toString());
-            //  txt_from_time.setValue(LocalTime.parse(((HashMap) row).get("start_time").toString()));
-            //txt_to_time.setValue(LocalTime.parse(((HashMap) row).get("end_time").toString()));
+            //txt_from_time.setValue(LocalTime.parse(((HashMap) row).get("start_time").toString()));
+            // txt_to_time.setValue(LocalTime.parse(((HashMap) row).get("end_time").toString()));
             cbox_edit_type.setValue(((HashMap) row).get("type_of_training").toString());
             //  cbox_edit_v.setValue(((HashMap) row).get("vehicle").toString());
             //  txt_edit_budget.setText(((HashMap) row).get("budget_cost").toString());

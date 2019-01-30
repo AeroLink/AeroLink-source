@@ -121,8 +121,8 @@ public class HR2_Succession_PlanningController implements Initializable {
             for (Object d : c) {
                 HashMap hm1 = (HashMap) d;
                 //RS
-              //  cbox_department.getItems().add("DEPT" + hm1.get("id") + " - " + hm1.get("dept_name"));
-              cbox_department.getItems().add(hm1.get("dept_name"));
+                //  cbox_department.getItems().add("DEPT" + hm1.get("id") + " - " + hm1.get("dept_name"));
+                cbox_department.getItems().add(hm1.get("dept_name"));
 
             }
         } catch (Exception e) {
@@ -136,19 +136,18 @@ public class HR2_Succession_PlanningController implements Initializable {
         try {
 
             HR2_Temp_Employee_Jobs ej = new HR2_Temp_Employee_Jobs();
-                            List sp = ej.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "emp",
-                                    "=", "employee_code")
-                                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
-                                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "=", "jobs", "dept_id",true)
-                                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_classifications", "id", "=", "jobs", "classification_id", true)
-                                    .where(new Object[][]{{"aerolink.tbl_hr4_department.dept_name", "=", cbox_department.getSelectionModel()
-                                .getSelectedItem().toString()}})
-                                    .orderBy("aerolink.tbl_hr4_job_classifications.class_name", Model.Sort.ASC)
-                                    .get("jobs.title as position", "concat(emp.firstname, ' ',emp.middlename, ' ' ,emp.lastname)as employees",
-                                            "aerolink.tbl_hr4_job_classifications.class_name as Classification");
-                            Data(sp);
-                        } 
-        catch(Exception e){
+            List sp = ej.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "emp",
+                    "=", "employee_code")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "=", "jobs", "dept_id", true)
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_classifications", "id", "=", "jobs", "classification_id", true)
+                    .where(new Object[][]{{"aerolink.tbl_hr4_department.dept_name", "=", cbox_department.getSelectionModel()
+                .getSelectedItem().toString()}})
+                    .orderBy("aerolink.tbl_hr4_job_classifications.class_name", Model.Sort.ASC)
+                    .get("jobs.title as position", "concat(emp.firstname, ' ',emp.middlename, ' ' ,emp.lastname)as employees",
+                            "aerolink.tbl_hr4_job_classifications.class_name as Classification");
+            Data(sp);
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
@@ -169,7 +168,7 @@ public class HR2_Succession_PlanningController implements Initializable {
                         ));
 
             }
-    /*       Collections.sort(b,new Comparator<HashMap<String, String>>() {
+            /*       Collections.sort(b,new Comparator<HashMap<String, String>>() {
                 public int compare(HashMap<String, String> one, HashMap<String, String> two) {
                     return one.get("site_name")
                     .compareTo(two.get("site_name"));
@@ -204,35 +203,39 @@ public class HR2_Succession_PlanningController implements Initializable {
                     {
                         try {
                             btn.setOnAction(e
-                                    -> {
-                                SP_Employee_Info_Modal.init_EmpInfo(tbl_view_positions.getSelectionModel().getSelectedItem().Fullname.get(),
-                                        tbl_view_positions.getSelectionModel().getSelectedItem().Job_Title.get());
-                                Modal viewEmp = Modal.getInstance(new Form("/FXMLS/HR2/Modals/SP_ViewEmployeeInfo.fxml").getParent());
-                                viewEmp.open();
-                            });
-                            btn.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
-                            btn.setCursor(javafx.scene.Cursor.HAND);
-                        } catch (Exception ex) {
+                                    -> 
+                            {
+                            HR2_Organizational_List ol = (HR2_Organizational_List) getTableRow().getItem();
+                            SP_Employee_Info_Modal.init_EmpInfo(
+                                    ol.Fullname.get(),
+                                    ol.Job_Title.get());
+                            Modal viewEmp = Modal.getInstance(new Form("/FXMLS/HR2/Modals/SP_ViewEmployeeInfo.fxml").getParent());
+                            viewEmp.open();
+                        });
+                        btn.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
+                        btn.setCursor(javafx.scene.Cursor.HAND);
+                    }
+                    catch (Exception ex) {
                             System.out.println(ex);
-                        }
-
                     }
 
-                    public void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            setGraphic(btn);
-                        }
-                    }
-                };
-                return cell;
+                }
+
+            public void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(btn);
+                }
             }
-
         };
+        return cell;
+    }
 
-        addButton.setCellFactory(cellFactory);
+};
+
+addButton.setCellFactory(cellFactory);
         tbl_view_positions.getColumns().add(addButton);
     }
 
@@ -242,7 +245,7 @@ public class HR2_Succession_PlanningController implements Initializable {
         Callback<TableColumn<HR2_JV_With_Skills_for_SP, Void>, TableCell<HR2_JV_With_Skills_for_SP, Void>> cellFactory
                 = new Callback<TableColumn<HR2_JV_With_Skills_for_SP, Void>, TableCell<HR2_JV_With_Skills_for_SP, Void>>() {
             @Override
-            public TableCell<HR2_JV_With_Skills_for_SP, Void> call(final TableColumn<HR2_JV_With_Skills_for_SP, Void> param) {
+        public TableCell<HR2_JV_With_Skills_for_SP, Void> call(final TableColumn<HR2_JV_With_Skills_for_SP, Void> param) {
 
                 final TableCell<HR2_JV_With_Skills_for_SP, Void> cell = new TableCell<HR2_JV_With_Skills_for_SP, Void>() {
                     private final Button btn = new Button("View Skills");

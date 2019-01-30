@@ -41,8 +41,6 @@ public class CRMviewComplaintsReplyController implements Initializable {
     @FXML
     private Label lblEmail;
     @FXML
-    private JFXButton btnForward;
-    @FXML
     private TextArea txtAquestion;
     @FXML
     private TextArea txtAReply;
