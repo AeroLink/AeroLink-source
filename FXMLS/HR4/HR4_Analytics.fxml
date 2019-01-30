@@ -1,28 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXTabPane?>
-<?import javafx.scene.chart.PieChart?>
-<?import javafx.scene.control.Tab?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="606.0" prefWidth="1170.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR4.HR4_AnalyticsController">
+<AnchorPane id="AnchorPane" prefHeight="686.0" prefWidth="1203.0" style="-fx-background-color: 000;" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR4.HR4_AnalyticsController">
    <children>
-      <JFXTabPane prefHeight="606.0" prefWidth="1170.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <tabs>
-            <Tab id="tab" styleClass="tab-label" text="Untitled Tab">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+      <AnchorPane prefHeight="618.0" prefWidth="998.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <BorderPane prefHeight="557.0" prefWidth="940.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <top>
+                  <AnchorPane prefHeight="66.0" prefWidth="779.0" BorderPane.alignment="CENTER">
                      <children>
-                        <PieChart fx:id="pieChart" layoutX="77.0" layoutY="59.0" />
-                     </children></AnchorPane>
-              </content>
-            </Tab>
-            <Tab id="tab" styleClass="tab-label" text="Untitled Tab">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-              </content>
-            </Tab>
-         </tabs>
-      </JFXTabPane>
+                        <Label layoutX="47.0" layoutY="20.0" text="HR Graphical Reports" textFill="GREEN">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <FontAwesomeIconView fill="GREEN" glyphName="TABLE" layoutX="26.0" layoutY="37.0" />
+                     </children>
+                  </AnchorPane>
+               </top>
+               <center>
+                  <AnchorPane prefHeight="479.0" prefWidth="779.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label layoutX="635.0" layoutY="310.0" text="Total No. of Employees" AnchorPane.bottomAnchor="285.0" AnchorPane.rightAnchor="404.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="14.0" text="Post-Employment Graph" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="634.0" layoutY="14.0" text="Pre-Employment Graph" AnchorPane.rightAnchor="403.0" AnchorPane.topAnchor="14.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="310.0" text="Total Applicants Graph" AnchorPane.bottomAnchor="285.0" AnchorPane.leftAnchor="14.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <BarChart fx:id="peg_barchart" layoutX="14.0" layoutY="56.0" prefHeight="252.0" prefWidth="482.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="56.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" fx:id="x" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis fx:id="y" side="LEFT" />
+                          </yAxis>
+                        </BarChart>
+                        <BarChart fx:id="tag_barchart" layoutX="14.0" layoutY="314.0" prefHeight="255.0" prefWidth="483.0" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="14.0">
+                           <xAxis>
+                              <CategoryAxis side="BOTTOM" fx:id="x" />
+                           </xAxis>
+                           <yAxis>
+                              <NumberAxis fx:id="y" side="LEFT" />
+                           </yAxis>
+                        </BarChart>
+                        <BarChart fx:id="pegg_barchart" layoutX="499.0" layoutY="56.0" prefHeight="247.0" prefWidth="497.0" AnchorPane.rightAnchor="69.0" AnchorPane.topAnchor="56.0">
+                           <xAxis>
+                              <CategoryAxis side="BOTTOM" fx:id="x" />
+                           </xAxis>
+                           <yAxis>
+                              <NumberAxis fx:id="y" side="LEFT" />
+                           </yAxis>
+                        </BarChart>
+                        <BarChart fx:id="emp_chart" layoutX="499.0" layoutY="314.0" prefHeight="259.0" prefWidth="523.0" AnchorPane.bottomAnchor="17.0" AnchorPane.rightAnchor="69.0">
+                           <xAxis>
+                              <CategoryAxis side="BOTTOM" fx:id="x" />
+                           </xAxis>
+                           <yAxis>
+                              <NumberAxis fx:id="y" label="Nos. of Employees" side="LEFT" />
+                           </yAxis>
+                        </BarChart>
+                     </children>
+                  </AnchorPane>
+               </center>
+            </BorderPane>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
