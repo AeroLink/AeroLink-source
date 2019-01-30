@@ -14,6 +14,7 @@ import Model.HR4_Jobs;
 import Synapse.Components.Modal.Modal;
 import Synapse.Form;
 import Synapse.Model;
+import Synapse.STORED_PROC;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -144,31 +145,48 @@ public class HR1_Performance_ManagementController implements Initializable {
 
         ObservableList<TableModel_EmployeeList> list = FXCollections.observableArrayList();
 
-        empJob.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "=", "employee_code")
-                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employees", "employee_code", "=", "employee_code")
-                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "job_id")
-                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "=", "aerolink.tbl_hr4_jobs", "dept_id", true)
-                .where(new Object[][]{
-            {"aerolink.tbl_hr4_department.dept_name", "=", cboDept.getSelectionModel().getSelectedItem().toString()},
-            {"aerolink.tbl_hr4_employees.type_id", "<>", 5},
-            {"aerolink.tbl_hr4_employees.status_id", "=", 1}
-        }).get()
-                .stream().forEach(action -> {
+        STORED_PROC.executeCall("HR1_PERFOMANCE_MODULE_getAllEmployees", new Object[][]{
+            {"dept", cboDept.getSelectionModel().getSelectedItem().toString()},
+            {"type_id",  5},
+            {"status_id", 1}
+        }).stream().forEach(action -> {
 
-                    HashMap row = (HashMap) action;
+            HashMap row = (HashMap) action;
 
-                    list.add(new TableModel_EmployeeList(row.get("employee_code").toString(),
-                            (row.get("lastname").toString() + ", "
-                            + row.get("firstname").toString() + " "
-                            + row.get("middlename").toString()),
-                            row.get("email").toString(),
-                            row.get("contact_number").toString(),
-                            row.get("title").toString(),
-                            grd.where(new Object[][]{{"employee_code", "=", row.get("employee_code").toString()}}).get().stream().count() != 0 ? "Evaluated" : "Not Evaluated"
-                    ));
+            list.add(new TableModel_EmployeeList(row.get("employee_code").toString(),
+                    (row.get("lastname").toString() + ", "
+                    + row.get("firstname").toString() + " "
+                    + row.get("middlename").toString()),
+                    row.get("email").toString(),
+                    row.get("contact_number").toString(),
+                    row.get("title").toString(),
+                    grd.where(new Object[][]{{"employee_code", "=", row.get("employee_code").toString()}}).get().stream().count() != 0 ? "Evaluated" : "Not Evaluated"
+            ));
 
-                });
-
+        });
+        
+//        empJob.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "=", "employee_code")
+//                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employees", "employee_code", "=", "employee_code")
+//                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "job_id")
+//                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "=", "aerolink.tbl_hr4_jobs", "dept_id", true)
+//                .where(new Object[][]{
+//            
+//        }).get()
+//                .stream().forEach(action -> {
+//
+//                    HashMap row = (HashMap) action;
+//
+//                    list.add(new TableModel_EmployeeList(row.get("employee_code").toString(),
+//                            (row.get("lastname").toString() + ", "
+//                            + row.get("firstname").toString() + " "
+//                            + row.get("middlename").toString()),
+//                            row.get("email").toString(),
+//                            row.get("contact_number").toString(),
+//                            row.get("title").toString(),
+//                            grd.where(new Object[][]{{"employee_code", "=", row.get("employee_code").toString()}}).get().stream().count() != 0 ? "Evaluated" : "Not Evaluated"
+//                    ));
+//
+//                });
         tblEmployeeList.getItems().clear();
         tblEmployeeList.setItems(list);
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="224.0" prefWidth="259.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.FINANCIAL.CALLER.BUDGET_DECLINEController">
+   <children>
+      <AnchorPane prefHeight="29.0" prefWidth="259.0" style="-fx-background-color: #34a853;" />
+      <Label layoutX="14.0" layoutY="38.0" text="Request No.">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="reqno_label" layoutX="165.0" layoutY="38.0" text="0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <JFXTextArea fx:id="textarea" focusColor="#34a853" layoutX="15.0" layoutY="92.0" maxWidth="398.0" minWidth="230.0" prefHeight="76.0" prefWidth="237.0" promptText="Insert text here!" unFocusColor="#34a853" wrapText="true" />
+      <Label layoutX="15.0" layoutY="71.0" text="Reason:">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="declined_btn" buttonType="RAISED" disable="true" layoutX="75.0" layoutY="189.0" prefHeight="25.0" prefWidth="110.0" style="-fx-background-color: #34a853;" text="Declined" textFill="WHITE" />
+   </children>
+</AnchorPane>

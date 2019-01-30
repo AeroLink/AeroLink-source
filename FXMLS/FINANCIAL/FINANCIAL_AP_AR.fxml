@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -27,7 +28,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="ar_tbl" layoutX="5.0" layoutY="79.0" prefHeight="485.0" prefWidth="361.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="625.0">
+                        <TableView fx:id="ar_tbl" layoutX="5.0" layoutY="79.0" prefHeight="521.0" prefWidth="361.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="625.0">
                           <columns>
                             <TableColumn prefWidth="75.0" text="C1" />
                             <TableColumn prefWidth="75.0" text="C2" />
@@ -36,12 +37,12 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <TableView fx:id="ap_tbl" layoutX="383.0" layoutY="79.0" prefHeight="485.0" prefWidth="612.0" AnchorPane.rightAnchor="-4.0">
+                        <TableView fx:id="ap_tbl" layoutX="383.0" layoutY="79.0" prefHeight="521.0" prefWidth="612.0" AnchorPane.rightAnchor="-4.0">
                            <columns>
-                              <TableColumn prefWidth="75.0" text="Date" />
-                              <TableColumn prefWidth="75.0" text="Department" />
+                              <TableColumn fx:id="dateCol" prefWidth="75.0" text="Date" />
+                              <TableColumn fx:id="deptCol" prefWidth="75.0" text="Department" />
                               <TableColumn fx:id="amount_id" prefWidth="75.0" text="Amount" />
-                              <TableColumn prefWidth="75.0" text="Status" />
+                              <TableColumn fx:id="statusCol" prefWidth="75.0" text="Status" />
                            </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -65,32 +66,39 @@
                               </Label>
                            </children>
                         </AnchorPane>
-                        <Label layoutX="388.0" layoutY="589.0" text="Total of Unpaid Accounts:" AnchorPane.rightAnchor="443.0">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Separator layoutX="388.0" layoutY="617.0" prefHeight="0.0" prefWidth="600.0" AnchorPane.rightAnchor="3.0" />
-                        <Label fx:id="total_label" layoutX="653.0" layoutY="589.0" text="0" AnchorPane.rightAnchor="302.0">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                        <Separator layoutX="388.0" layoutY="579.0" prefHeight="0.0" prefWidth="600.0" AnchorPane.rightAnchor="3.0" />
-                        <Separator layoutX="15.0" layoutY="579.0" prefHeight="1.0" prefWidth="348.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="628.0" />
-                        <Separator layoutX="15.0" layoutY="616.0" prefHeight="1.0" prefWidth="344.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="632.0" />
-                        <Label layoutX="21.0" layoutY="589.0" text="Total of Uncollected Accounts">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="323.0" layoutY="589.0" text="0">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                        <Separator layoutX="373.0" orientation="VERTICAL" prefHeight="658.0" prefWidth="5.0" AnchorPane.rightAnchor="612.0" />
-                        <JFXButton layoutX="114.0" layoutY="14.0" />
+                        <AnchorPane layoutX="5.0" layoutY="603.0" prefHeight="40.0" prefWidth="360.0" style="-fx-border-color: #34a853;" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="626.0">
+                           <children>
+                              <Label fx:id="ar_total_lbl" layoutX="318.0" layoutY="11.0" text="0">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="7.0" layoutY="10.0" text="Total of Uncollected Accounts">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="383.0" layoutY="603.0" prefHeight="39.0" prefWidth="608.0" style="-fx-border-color: #34a853;" AnchorPane.rightAnchor="0.0">
+                           <children>
+                              <Label layoutX="6.0" layoutY="10.0" text="Total of Unpaid Accounts:" AnchorPane.rightAnchor="442.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="total_label" layoutX="220.0" layoutY="10.0" text="0" AnchorPane.rightAnchor="295.0">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <Separator layoutX="373.0" layoutY="53.0" orientation="VERTICAL" prefHeight="607.0" prefWidth="7.0" AnchorPane.rightAnchor="612.0" />
+                        <JFXButton fx:id="pom_btn" layoutX="26.0" layoutY="14.0" prefHeight="25.0" prefWidth="73.0" style="-fx-background-color: #34a853;" text="POM" textFill="WHITE" />
+                        <JFXComboBox fx:id="salesStatus_cmbbx" layoutX="391.0" layoutY="14.0" onAction="#searchSales" prefHeight="25.0" prefWidth="138.0" promptText="Sales Status" />
+                        <JFXComboBox fx:id="journalStatus_cmbbx" layoutX="570.0" layoutY="14.0" prefHeight="25.0" prefWidth="138.0" promptText="Journal Status" />
+                        <JFXButton fx:id="asset_btn" layoutX="120.0" layoutY="14.0" prefHeight="25.0" prefWidth="73.0" style="-fx-background-color: #34a853;" text="Asset" textFill="WHITE" />
                      </children></AnchorPane>
               </content>
             </Tab>

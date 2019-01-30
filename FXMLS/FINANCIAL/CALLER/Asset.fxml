@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="362.0" prefWidth="562.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.FINANCIAL.CALLER.AssetController">
+   <children>
+      <AnchorPane layoutY="-6.0" prefHeight="40.0" prefWidth="562.0" style="-fx-background-color: #34a853;">
+         <children>
+            <Label layoutX="14.0" layoutY="12.0" prefHeight="25.0" prefWidth="173.0" text="ASSET" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <JFXTextField fx:id="astLname" focusColor="#34a853" labelFloat="true" layoutX="28.0" layoutY="64.0" promptText="Lastname" unFocusColor="#34a853">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="astFname" focusColor="#34a853" labelFloat="true" layoutX="224.0" layoutY="64.0" promptText="Firstname" unFocusColor="#34a853">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextArea fx:id="astDesc" focusColor="#34a853" labelFloat="true" layoutX="28.0" layoutY="122.0" maxWidth="382.0" minWidth="365.0" prefHeight="108.0" prefWidth="382.0" promptText="Description" unFocusColor="#34a853" />
+      <JFXTextField fx:id="astAmount" focusColor="#34a853" labelFloat="true" layoutX="419.0" layoutY="131.0" maxWidth="129.0" minWidth="129.0" prefHeight="36.0" prefWidth="129.0" promptText="Amount" unFocusColor="#34a853">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="astQuantity" focusColor="#34a853" labelFloat="true" layoutX="420.0" layoutY="196.0" maxWidth="79.0" minWidth="79.0" prefHeight="36.0" prefWidth="79.0" promptText="Quantity" unFocusColor="#34a853">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <Label layoutX="373.0" layoutY="258.0" text="Total">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="astTotal_label" layoutX="455.0" layoutY="258.0" text="0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="save_btn" disable="true" layoutX="245.0" layoutY="323.0" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: #34a853;" text="Save" textFill="WHITE" />
+      <JFXButton fx:id="compute_btn" layoutX="433.0" layoutY="323.0" onAction="#ComputeAmount" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: #34a853;" text="Compute" textFill="WHITE" />
+      <JFXComboBox fx:id="combbox" layoutX="28.0" layoutY="256.0" prefHeight="25.0" prefWidth="153.0" />
+   </children>
+</AnchorPane>

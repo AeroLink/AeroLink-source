@@ -85,10 +85,10 @@ public class HR2_Learning_ManagementController implements Initializable {
         // populateExam();
         DisplayExamInTable();
         tbl_courses.getSelectionModel().selectFirst();
-        tbl_courses.setOnMouseClicked(e-> {
+        tbl_courses.setOnMouseClicked(e -> {
             populateExam();
         });
-        
+
         loadJobsInComboBox();
 
         /*    if(!cbox_job_title.getValue().toString().isEmpty()){
@@ -299,9 +299,10 @@ public class HR2_Learning_ManagementController implements Initializable {
                         try {
                             btn_add_exam.setOnAction(e
                                     -> {
+                                HR2_CoursesClass fc1 = (HR2_CoursesClass) getTableRow().getItem();
                                 HR2_LM_AddExamModalClass.AddExam(
-                                        tbl_courses.getSelectionModel().getSelectedItem().course_id.getValue(),
-                                        tbl_courses.getSelectionModel().getSelectedItem().job_title.getValue()
+                                        fc1.course_id.getValue(),
+                                        fc1.job_title.getValue()
                                 );
                                 Modal lq = Modal.getInstance(new Form("/FXMLS/HR2/Modals/LM_AddExam.fxml").getParent());
                                 lq.open();
@@ -349,11 +350,13 @@ public class HR2_Learning_ManagementController implements Initializable {
                         try {
                             btn_q_list.setOnAction(e
                                     -> {
+                                HR2_ExaminationClass ec = (HR2_ExaminationClass) getTableRow().getItem();
+
                                 HR2_LMClass_For_AddQuestion_Modal.initCourseTitle(
-                                        tbl_exam.getSelectionModel().getSelectedItem().exam_id.get(),
-                                        tbl_exam.getSelectionModel().getSelectedItem().exam_name.get(),
-                                        tbl_exam.getSelectionModel().getSelectedItem().exam_desc.get(),
-                                        tbl_exam.getSelectionModel().getSelectedItem().id.get());
+                                        ec.exam_id.getValue(),
+                                        ec.exam_name.getValue(),
+                                        ec.exam_desc.getValue(),
+                                        ec.id.get());
                                 Modal md = Modal.getInstance(new Form("/FXMLS/HR2/Modals/List_Of_Questions.fxml").getParent());
                                 md.open();
                             });
@@ -396,11 +399,13 @@ public class HR2_Learning_ManagementController implements Initializable {
                         try {
                             btn_add_q.setOnAction(e
                                     -> {
+                                HR2_ExaminationClass ec1 = (HR2_ExaminationClass) getTableRow().getItem();
+
                                 HR2_LMClass_For_AddQuestion_Modal.initCourseTitle(
-                                        tbl_exam.getSelectionModel().getSelectedItem().exam_id.get(),
-                                        tbl_exam.getSelectionModel().getSelectedItem().exam_name.get(),
-                                        tbl_exam.getSelectionModel().getSelectedItem().exam_desc.get(),
-                                        tbl_exam.getSelectionModel().getSelectedItem().id.get());
+                                        ec1.exam_id.get(),
+                                        ec1.exam_name.get(),
+                                        ec1.exam_desc.get(),
+                                        ec1.id.get());
                                 Modal md = Modal.getInstance(new Form("/FXMLS/HR2/Modals/LM_AddQuestions.fxml").getParent());
                                 md.open();
                             });

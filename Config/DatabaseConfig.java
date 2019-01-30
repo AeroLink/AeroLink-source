@@ -1,5 +1,3 @@
-
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,7 +15,7 @@ public class DatabaseConfig {
 
     public static String PROVIDER = "mssql";
     public static String schema = "aerolink"; //will be change if you were using mssql
-    public static String HttpURL = "http://192.168.1.2:8423/api/";
+    public static String HttpURL = "http://127.0.0.1:8423/api/";
     public static String key = "$2a$10$0S0Q9s6rrlAnabpLXoaWyuG5lgdQGMciIdSgxMzSULZW0e9vaCDke";
 
     //if offline mode

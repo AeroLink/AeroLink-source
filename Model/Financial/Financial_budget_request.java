@@ -23,7 +23,9 @@ public class Financial_budget_request extends Synapse.Model {
                 "budget_priority_lvl",
                 "budget_amount",
                 "budget_status",
-                "budget_disbursementstatus");
+                "budget_disbursementstatus",
+                "budget_approvedby",
+                "budget_reason");
         this.initTable("tbl_financials_request_budget");
 }
 }

@@ -110,36 +110,36 @@ public class ProcurementController implements Initializable {
     
 
     public void loadProcurementRequestData(){
-         Log1_ProcurementPurchaseRequestModel coa = new Log1_ProcurementPurchaseRequestModel();
-         ObservableList<Log1_ProcRequestsClassFile> ProcRequests = FXCollections.observableArrayList();
-          
-            List b = coa.get();
-            
-            for(Object d : b)
-                {
-                    //rs = hm
-                HashMap hm = (HashMap) d;   //exquisite casting
-                
-                ProcRequests.add(new Log1_ProcRequestsClassFile(
-                
-                String.valueOf(hm.get("RequestID")),
-                String.valueOf(hm.get("SupplierID")),
-                String.valueOf(hm.get("RequestDate")),
-                String.valueOf(hm.get("RequestDescription")),
-                String.valueOf(hm.get("Requestor")),
-                String.valueOf(hm.get("RequestorPosition")),
-                String.valueOf(hm.get("RequestDepartment")),
-                String.valueOf(hm.get("RequestPriorityLevel")),
-                String.valueOf(hm.get("RequestQuantity")),
-                String.valueOf(hm.get("RequestItemUnit")),
-                        String.valueOf(hm.get("RequestPricePerUnit")),
-                        String.valueOf(hm.get("RequestTotalPrice")),
-                String.valueOf(hm.get("RequestBudget")),
-                String.valueOf(hm.get("RequestStatus"))
-                
-                ));       
-            }
-                ProcRequest_tbl.setItems(ProcRequests);
+//         Log1_ProcurementPurchaseRequestModel coa = new Log1_ProcurementPurchaseRequestModel();
+//         ObservableList<Log1_ProcRequestsClassFile> ProcRequests = FXCollections.observableArrayList();
+//          
+//            List b = coa.get();
+//            
+//            for(Object d : b)
+//                {
+//                    //rs = hm
+//                HashMap hm = (HashMap) d;   //exquisite casting
+//                
+//                ProcRequests.add(new Log1_ProcRequestsClassFile(
+//                
+//                String.valueOf(hm.get("RequestID")),
+//                String.valueOf(hm.get("SupplierID")),
+//                String.valueOf(hm.get("RequestDate")),
+//                String.valueOf(hm.get("RequestDescription")),
+//                String.valueOf(hm.get("Requestor")),
+//                String.valueOf(hm.get("RequestorPosition")),
+//                String.valueOf(hm.get("RequestDepartment")),
+//                String.valueOf(hm.get("RequestPriorityLevel")),
+//                String.valueOf(hm.get("RequestQuantity")),
+//                String.valueOf(hm.get("RequestItemUnit")),
+//                        String.valueOf(hm.get("RequestPricePerUnit")),
+//                        String.valueOf(hm.get("RequestTotalPrice")),
+//                String.valueOf(hm.get("RequestBudget")),
+//                String.valueOf(hm.get("RequestStatus"))
+//                
+//                ));       
+//            }
+//                ProcRequest_tbl.setItems(ProcRequests);
     }
     
     public void displayProcurementRequestData(){
