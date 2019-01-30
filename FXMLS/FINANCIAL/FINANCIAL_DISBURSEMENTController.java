@@ -95,25 +95,8 @@ public class FINANCIAL_DISBURSEMENTController implements Initializable {
         AddtableColumn_disbursementVoucher();
         loadDisbursementVoucher();
         
-        //contexmenu
-        /*disbursement_tbl.setOnMouseClicked(value -> {
-            if (!disbursement_tbl.isDisabled() || !disbursement_tbl.getItems().isEmpty()) {
-                if (value.getButton() == MouseButton.SECONDARY) {
-                    contextMenu.show(disbursement_tbl, value.getX(), value.getY());
-                }
-
-                if (value.getButton() == MouseButton.PRIMARY) {
-                    if (value.getClickCount() == 2) {
-                       viewingVoucher();
-                    }
-                }
-            }
-        });*/
-        
          disbursement_tbl.setContextMenu(contextMenu);
          Voucher_menuItem.setOnAction(value -> viewingVoucher());
-        
-        
     }    
    
     public void viewingVoucher() {

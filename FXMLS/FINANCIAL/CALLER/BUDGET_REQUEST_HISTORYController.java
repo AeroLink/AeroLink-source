@@ -24,6 +24,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -43,6 +44,8 @@ public class BUDGET_REQUEST_HISTORYController implements Initializable {
 
    
     ObservableList<String> fs = FXCollections.observableArrayList("Approved", "Declined");
+    @FXML
+    private Label countlbl;
     
     
     /**
@@ -51,11 +54,14 @@ public class BUDGET_REQUEST_HISTORYController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+       
         combobc_filter.setItems(fs);
         AddTableColumn_RequestHistory();
         LoadRequestHistory();
         
-        
+         
+          int d = requestHistory_tbl.getItems().size();
+          countlbl.setText(String.valueOf(d));
         
     }    
     
@@ -198,7 +204,7 @@ public class BUDGET_REQUEST_HISTORYController implements Initializable {
         try {
 
             List b = fbrs.where(new Object[][]{
-                             {"budget_status","=","Approved" }
+                    {"budget_status","=","Approved" }
                     }).orWhere("budget_status","=","Declined" ).get();
                             requestHistory(b);
      
