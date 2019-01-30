@@ -14,6 +14,8 @@ import Model.HR2_Temp_Employee_Profiles;
 import Model.HR4_Classification;
 import Model.HR4_Jobs;
 import Model.VirtualTables.VT_HR2;
+import Synapse.Components.Modal.Modal;
+import Synapse.Form;
 import Synapse.Model;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -75,10 +77,6 @@ public class SP_ViewEmployeeInfoController implements Initializable {
     @FXML
     private Label lbl_remarks;
     @FXML
-    private JFXButton btn_update_position;
-    @FXML
-    private JFXComboBox jfx_position;
-    @FXML
     private Label lbl_suffix;
     @FXML
     private Label lbl_fullname;
@@ -86,6 +84,8 @@ public class SP_ViewEmployeeInfoController implements Initializable {
     ObservableList<SP_EmployeeInfo_in_Modal> emp = FXCollections.observableArrayList();
     @FXML
     private Label lbl_employee_code;
+    @FXML
+    private JFXButton btn_req_promotion;
 
     /**
      * Initializes the controller class.
@@ -95,28 +95,13 @@ public class SP_ViewEmployeeInfoController implements Initializable {
         lbl_fullname.setText(SP_Employee_Info_Modal.fullname);
         lbl_position.setText(SP_Employee_Info_Modal.title);
         populateLabels();
-        Classifications();
 
     }
-
-    public void Classifications() {
-        HR4_Jobs jobs = new HR4_Jobs();
-
-        try {
-            List c = jobs.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "d", "=", "dept_id")
-                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_classifications", "id", "c", "=", "classification_id")
-                    .where(new Object[][]{{"d.dept_name", "=", lbl_department.getText()}})
-                    .get();
-
-            for (Object d : c) {
-                HashMap hm1 = (HashMap) d;
-                jfx_position.getItems().add("J" + hm1.get("job_id") + " - " + hm1.get("title"));
-            }
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
+    @FXML
+    public void RequestPromotion(){
+        Modal req_promotion = Modal.getInstance(new Form("/FXMLS/HR2/Modals/SP_ViewEmployeeInfo.fxml").getParent());
+        req_promotion.open();
     }
-
     public void populateLabels() {
         VT_HR2 vthr2 = new VT_HR2();
 
@@ -149,9 +134,8 @@ public class SP_ViewEmployeeInfoController implements Initializable {
         });
     }
 
-    @FXML
-    public void UpdatePosition() {
-        Alert update = new Alert(Alert.AlertType.CONFIRMATION);
+   /* public void UpdatePosition() {
+             Alert update = new Alert(Alert.AlertType.CONFIRMATION);
         update.setContentText("Are you sure you want to promote " + lbl_fullname.getText() + " as " +
                 jfx_position.getSelectionModel().getSelectedItem().toString() + "?");
         Optional<ButtonType> rs = update.showAndWait();
@@ -167,7 +151,5 @@ public class SP_ViewEmployeeInfoController implements Initializable {
             Alert dropnotif = new Alert(Alert.AlertType.INFORMATION);
             dropnotif.setContentText(lbl_fullname.getText() + " Successfully Promoted ");
             dropnotif.showAndWait();
-        }
-    }
-
+    }*/
 }
