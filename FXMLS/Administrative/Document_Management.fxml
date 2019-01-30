@@ -177,7 +177,7 @@
                                     <Font name="Arial" size="18.0" />
                                  </font>
                               </Label>
-                              <JFXButton fx:id="btntakephoto2" layoutX="956.0" layoutY="456.0" prefHeight="33.0" prefWidth="75.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="OPEN" textFill="WHITE">
+                              <JFXButton fx:id="btntakephoto2" layoutX="956.0" layoutY="456.0" onAction="#openfile" prefHeight="33.0" prefWidth="75.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="OPEN" textFill="WHITE">
                                  <font>
                                     <Font name="Aparajita" size="15.0" />
                                  </font>

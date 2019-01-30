@@ -8,8 +8,10 @@ package FXMLS.Administrative;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -365,6 +367,44 @@ public class Document_ManagementController implements Initializable {
            AlertBox.display("Alert", "No Selected Value");
        }
    }
+   
+   
+   public void openfile(){
+   try{
+      tbl_document_archieve tda = documentstable.getItems().get(documentstable.getSelectionModel().getSelectedIndex());
+      String query = "select * from aerolink.admin_document_reqstoring where [Documents No] = '"+tda.getDocno()+"' ";
+      pst = con.prepareStatement(query);
+      rs = pst.executeQuery();
+      while(rs.next()){
+     File pdfFile = new File(""+rs.getBinaryStream("Doc File"));
+    if (pdfFile.exists())
+    {
+     if (Desktop.isDesktopSupported())
+     {
+      try
+      {
+       Desktop.getDesktop().open(pdfFile);
+      }
+      catch (IOException e)
+      {
+        e.printStackTrace();
+      }
+     }
+     else
+      {
+       System.out.println("Awt Desktop is not supported!");
+      }
+    }
+    else
+    {
+     System.out.println("File is not exists!");
+    }
+      }
+    }catch(Exception ex){
+     System.out.println(ex.getMessage());
+     }
+   }
+   
     
     
 }
