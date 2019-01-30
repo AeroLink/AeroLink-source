@@ -14,11 +14,13 @@ import FXMLS.HR2.ClassFiles.HR2_Temp_VehicleClass;
 import FXMLS.HR2.ClassFiles.HR2_TrainingReq_Class;
 import FXMLS.HR2.ClassFiles.HR4_Jobs_Class;
 import FXMLS.HR2.ClassFiles.TM_AssetFacilities;
+import FXMLS.HR2.ClassFiles.TM_DefaultTrainings;
 import FXMLS.HR2.ClassFiles.TM_FacilityDetailsClass_for_Modal;
 import FXMLS.HR2.ClassFiles.TM_TrainingRequisition_Class;
 import FXMLS.HR2.ClassFiles.TM_VehicleDetailsClassModal;
 import FXMLS.HR2.ClassFiles.TM_ViewTrainingReqClassModal;
 import Model.HR2_CM_Skills;
+import Model.HR2_TM_DefaultTrainings;
 import Model.HR2_TM_TrainingInfo;
 import Model.HR2_TM_Training_Requisition;
 import Model.HR2_Temp_Employee_Profiles;
@@ -146,6 +148,14 @@ public class HR2_Training_ManagementController implements Initializable {
     private JFXComboBox cbox_filter_Vstatus;
     @FXML
     private TableColumn<HR2_Temp_VehicleClass, String> col_req_vehicleStatus;
+    @FXML
+    private TableView<TM_DefaultTrainings> tbl_default_trainings;
+    @FXML
+    private TableColumn<TM_DefaultTrainings, String> col_jp;
+    @FXML
+    private TableColumn<TM_DefaultTrainings, String> col_training_title;
+    @FXML
+    private JFXComboBox cbox_filter_jp;
 
     /**
      * Initializes the controller class.
@@ -158,6 +168,7 @@ public class HR2_Training_ManagementController implements Initializable {
         loadHistoryOfTraining();
         LoadFacilities();
         LoadVehicles();
+        DefaultTrainings();
         int d = tbl_training_req.getItems().size();
         lbl_training_req_notif.setText(String.valueOf(d));
         DisplayDataInCB();
@@ -286,8 +297,47 @@ public class HR2_Training_ManagementController implements Initializable {
 
         DisplayHistoryOfTraining(training_req);
     }
-    //for training mngmt.
 
+    //tbl_default_trainings
+    public void DefaultTrainings() {
+        try {
+            HR2_TM_DefaultTrainings dt = new HR2_TM_DefaultTrainings();
+            List defTrainings = dt.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
+                    .where(new Object[][]{{"aerolink.tbl_hr2_default_trainings.isDeleted", "<>", "1"}})
+                    .orderBy("j.title", Model.Sort.ASC)
+                    .get("dt_id, j.title, training_title");
+
+            DisplayDefaultTrainings(defTrainings);
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
+    
+    public void DisplayDefaultTrainings(List m) {
+        ObservableList<TM_DefaultTrainings> DTrainings = FXCollections.observableArrayList();
+        DTrainings.clear();
+        try {
+
+            for (Object d : m) {
+                HashMap hm1 = (HashMap) d;
+                DTrainings.add(
+                        new TM_DefaultTrainings(
+                                String.valueOf(hm1.get("dt_id")),
+                                String.valueOf(hm1.get("title")),
+                                String.valueOf(hm1.get("training_title"))
+                        ));
+            }
+
+            tbl_default_trainings.setItems(DTrainings);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        System.err.println(tbl_default_trainings.getItems().size());
+        tbl_default_trainings.getSelectionModel().selectFirst();
+    }
+
+    //for training mngmt.
     public void loadTrainingMngmt() {
 
         try {
@@ -301,7 +351,7 @@ public class HR2_Training_ManagementController implements Initializable {
                 {"rs.req_status_id", "<>", "3"},
                 {"ti.isDeleted", "<>", "1"}})
                     .orderBy("aerolink.tbl_hr2_training_requisition.date_requested", Model.Sort.ASC)
-                    .get("ti.t_id, aerolink.tbl_hr4_employee_profiles.employee_code,aerolink.aerolink.tbl_hr2_training_requisition.tr_id,dept.dept_name,j.title,training_title,no_of_participants,"
+                    .get("ti.t_id, aerolink.tbl_hr4_employee_profiles.employee_code,aerolink.tbl_hr2_training_requisition.tr_id,dept.dept_name,j.title,training_title,no_of_participants,"
                             + "aerolink.tbl_hr4_employee_profiles.employee_code, concat(aerolink.tbl_hr4_employee_profiles.firstname,' ',aerolink.tbl_hr4_employee_profiles.middlename,' ',aerolink.tbl_hr4_employee_profiles.lastname) as trainor,"
                             + "from_day, to_day, rs.req_status_id, rs.req_status");
 
@@ -533,6 +583,9 @@ public class HR2_Training_ManagementController implements Initializable {
     }
 
     public void ForColumns() {
+        //for tbl_default_trainings
+        col_jp.setCellValueFactory((TableColumn.CellDataFeatures<TM_DefaultTrainings, String> param) -> param.getValue().job_title);
+        col_training_title.setCellValueFactory((TableColumn.CellDataFeatures<TM_DefaultTrainings, String> param) -> param.getValue().training_title);
         //for tbl_mngmt
         col_tm_dept.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().dept_name);
         col_tm_jp.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().title);
