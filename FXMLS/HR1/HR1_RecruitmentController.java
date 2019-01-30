@@ -236,16 +236,6 @@ public class HR1_RecruitmentController implements Initializable {
             nBuilder.showInformation();
         });
 
-        switchPostingStatus.setOnAction(v -> {
-            Notifications nBuilder = Notifications.create()
-                    .title("[ JOB Postings ]Toggled!")
-                    .text("Now Filtered to Posting Status : " + (switchPostingStatusPostings.isSelected() ? "Posted" : "Pending"))
-                    .hideAfter(Duration.seconds(2))
-                    .position(Pos.BOTTOM_RIGHT);
-
-            nBuilder.showInformation();
-        });
-
         btnRefreshPostings.setOnAction(ac -> {
             jpCount = 0;
             Notifications nBuilder = Notifications.create()
