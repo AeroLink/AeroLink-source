@@ -10,6 +10,7 @@ import Model.Log1.Log1_AssetFacilityModel;
 import Model.Log1.Log1_AssetLandModel;
 import Model.Log1.Log1_AssetVehiclesModel;
 import Synapse.Model;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
@@ -26,6 +27,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
@@ -33,7 +37,8 @@ public class AssetManagementController implements Initializable {
     
     ObservableList<String> selectAssetType = FXCollections.observableArrayList("Land","Building","Facility","Vehicle");
     ObservableList<String> AllAssetForViewing = FXCollections.observableArrayList("Land","Building","Facility","Vehicle","Equipment","Supplies");
-   
+    ObservableList<String> asd = FXCollections.observableArrayList("Occupied","Vacant");
+    
     Log1_AssetCountModel assetCount = new Log1_AssetCountModel();
     
     @FXML
@@ -42,10 +47,6 @@ public class AssetManagementController implements Initializable {
     private ComboBox<String> selectAssetType_combox;
     @FXML
     private BorderPane computeAppraisalValuePane;
-    @FXML
-    private Label title_txt;
-    @FXML
-    private BorderPane computeDepreciationValuePane;
     @FXML
     private AnchorPane assetTable_pane;
     @FXML
@@ -82,10 +83,100 @@ public class AssetManagementController implements Initializable {
     private Label totalOfSupplies_txt;
     @FXML
     private Label totalNumberOfAssets_txt;
+    
+    
+    @FXML
+    private TableView<Log1_AssetLandClassfiles> LandLiquidation_tbl;
+    @FXML
+    private JFXButton StartValueAppraisal;
+    @FXML
+    private TitledPane AppraisalAssetDetails;
+    @FXML
+    private JFXTextField AppraisalLandName_txt;
+    @FXML
+    private JFXTextField AppraisalLandAddress_txt;
+    @FXML
+    private JFXTextField AppraisalLandArea_txt;
+    @FXML
+    private JFXTextField AppraisalLandPricePerSqMeters_txt;
+    @FXML
+    private JFXTextField AppraisalLandPurchasedYear_txt;
+    @FXML
+    private JFXTextField AppraisalLandStatus_txt;
+    @FXML
+    private TitledPane AppraisalValueUpdate;
+    @FXML
+    private TextField AppraisalLandTotalPurchasedValue_txt;
+    @FXML
+    private TextField AppraisalPercent_txt;
+    @FXML
+    private TextField YearsHasBeenUsed_txt;
+    @FXML
+    private JFXTextField AppraisalPerYear_txt;
+    @FXML
+    private JFXButton saveAppraisal_btn;
+    @FXML
+    private JFXButton cancelAppraisal_btn;
+    @FXML
+    private Label LandIDforAppraisal_txt;
+    @FXML
+    private JFXButton computeAppraisal_btn;
+    
+    
+    @FXML
+    private JFXTextField DepreciationVehicleLastUpdatedPrice_txt1;
+    @FXML
+    private JFXTextField DepreciationVehiclePreviousPrice_txt1;
+    @FXML
+    private TableView<Log1_AssetVehiclesClassfiles> VehicleDepreciation_tbl;
+    @FXML
+    private TableView<?> equipmentTableForDepreciation_tbl;
+    @FXML
+    private JFXTextField DepraciationVehicleType_txt;
+    @FXML
+    private JFXTextField DepreciationVehicleModel_txt;
+    @FXML
+    private JFXTextField DepreciationVehicleColor_txt;
+    @FXML
+    private JFXTextField DepreciationVehicleYearBought_txt;
+    @FXML
+    private JFXTextField DepreciatonVehicleStatus_txt;
+    @FXML
+    private Label DepreciationVehicleID_txt;
+    @FXML
+    private JFXTextField DepreciationVehiclePurchasedPrice_txt;
+    @FXML
+    private Label AppaisalBookValue_txt;
+    @FXML
+    private JFXButton StartDepreciation_btn;
+    @FXML
+    private TitledPane DepreciationVehicleDetails_window;
+    @FXML
+    private JFXButton computeDepreciaton_btn;
+    @FXML
+    private BorderPane DepreciationVehicleDetails_pane;
+    @FXML
+    private TitledPane computeDepreciationValue_pane;
+    @FXML
+    private JFXButton updateDepreciationvalue_btn;
+    @FXML
+    private TextField depreciationPurchaseValue_txt;
+    @FXML
+    private TextField salvageValue_txt;
+    @FXML
+    private TextField DepreciationLifeTimeYears_txt;
+    @FXML
+    private TextField DepreciationYearsHasBeenUsed_txt;
+    @FXML
+    private Label DepreciationBookValue_txt;
+    @FXML
+    private JFXTextField depreciatonValue_txt;
 
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        computeDepreciationValue_pane.setDisable(true);
+        DepreciationVehicleDetails_window.setDisable(true);
         selectAssetType_combox.setItems(selectAssetType);
         selectAssetForMonitoring_combox.setItems(AllAssetForViewing);
         renderLandTable();
@@ -110,7 +201,104 @@ public class AssetManagementController implements Initializable {
         callVehicleDataForMonitoring();
         loadAssetCount();
         totalOfAsset();
-    } 
+//        tite_combox.setVisible(false);
+//        searchItem();
+        renderLandTableForAppraisal();
+        callLandDataForAppraisal();
+        
+        AppraisalAssetDetails.setDisable(true);
+        AppraisalValueUpdate.setDisable(true);
+        
+        AppraisalLandName_txt.setVisible(false);
+        AppraisalLandAddress_txt.setVisible(false);
+        AppraisalLandArea_txt.setVisible(false);
+        AppraisalLandPricePerSqMeters_txt.setVisible(false);
+        AppraisalLandPurchasedYear_txt.setVisible(false);
+        AppraisalLandStatus_txt.setVisible(false);
+        
+        StartValueAppraisal.setOnMouseClicked(e->startAppraisal());
+        cancelAppraisal_btn.setOnMouseClicked(e->cancelAppraisal());
+        LandIDforAppraisal_txt.setVisible(false);
+        saveAppraisal_btn.setDisable(true);
+        AppraisalPercent_txt.setText("0");
+        AppraisalPercent_txt.setOnKeyReleased(e->computeAppraisal());
+        computeAppraisal_btn.setOnMouseClicked(e->computeAppraisalBookValue());
+        //Deppreciation
+        updateDepreciationvalue_btn.setDisable(true);
+        renderVehicleTableForDepreciation();
+        callVehicleDataforDepreciation();
+        disableVehicleTxtFields();
+        StartDepreciation_btn.setOnMouseClicked(e-> startDepreciation());
+        computeDepreciationValue_pane.setDisable(true);
+        DepreciationVehicleDetails_window.setDisable(true);
+        DepreciationVehicleID_txt.setVisible(false);
+        DepreciationLifeTimeYears_txt.setOnKeyReleased(e->computeDepreciationValue());
+        computeDepreciaton_btn.setOnMouseClicked(e-> computeDepreciationBookValue());
+        salvageValue_txt.setOnKeyReleased(e->computeDepreciationValue());
+        DepreciationVehicleID_txt.setVisible(true);
+        
+    }
+    public void computeAppraisalBookValue(){
+        int purchaseValue = Integer.parseInt(AppraisalLandTotalPurchasedValue_txt.getText());
+        int appraisalPerYear = Integer.parseInt(AppraisalPerYear_txt.getText());
+        int yearsHasBeenUsed = Integer.parseInt(YearsHasBeenUsed_txt.getText());
+        
+        int TotalAppraisal = Integer.valueOf(appraisalPerYear*yearsHasBeenUsed);
+        
+        String updatedLandPrice = String.valueOf(TotalAppraisal+purchaseValue);
+        
+        AppaisalBookValue_txt.setText(updatedLandPrice);
+        saveAppraisal_btn.setDisable(false);
+    }
+    
+    public void computeAppraisal(){
+        int totalLandPrice = Integer.parseInt(AppraisalLandTotalPurchasedValue_txt.getText());
+        int Percentage =Integer.parseInt(AppraisalPercent_txt.getText());
+        
+        int PercentageAndTotalLandPrice = Integer.valueOf(totalLandPrice*Percentage);
+        
+        String appraisalPerYear = String.valueOf(PercentageAndTotalLandPrice/100);
+        AppraisalPerYear_txt.setText(appraisalPerYear);
+    }
+    
+    public void cancelAppraisal(){
+        AppraisalLandName_txt.setText("");
+        AppraisalLandAddress_txt.setText("");
+        AppraisalLandArea_txt.setText("");
+        AppraisalLandPricePerSqMeters_txt.setText("");
+        AppraisalLandPurchasedYear_txt.setText("");
+        AppraisalLandStatus_txt.setText("");
+        AppraisalAssetDetails.setDisable(true);
+        AppraisalValueUpdate.setDisable(true);
+        AppraisalLandTotalPurchasedValue_txt.setText("");
+        AppraisalPercent_txt.setText("");
+        AppraisalPerYear_txt.setText("");
+        YearsHasBeenUsed_txt.setText("");
+        AppaisalBookValue_txt.setText("");
+        AppraisalLandName_txt.setVisible(false);
+        AppraisalLandAddress_txt.setVisible(false);
+        AppraisalLandArea_txt.setVisible(false);
+        AppraisalLandPricePerSqMeters_txt.setVisible(false);
+        AppraisalLandPurchasedYear_txt.setVisible(false);
+        AppraisalLandStatus_txt.setVisible(false);
+    }
+    
+    public void startAppraisal(){
+        AppraisalLandName_txt.setVisible(true);
+        AppraisalLandAddress_txt.setVisible(true);
+        AppraisalLandArea_txt.setVisible(true);
+        AppraisalLandPricePerSqMeters_txt.setVisible(true);
+        AppraisalLandPurchasedYear_txt.setVisible(true);
+        AppraisalLandStatus_txt.setVisible(true);
+        
+        AppraisalAssetDetails.setDisable(false);
+        AppraisalValueUpdate.setDisable(false);
+        
+        int x = Integer.parseInt(AppraisalLandArea_txt.getText());
+        int y = Integer.parseInt(AppraisalLandPricePerSqMeters_txt.getText());
+        String answer = String.valueOf(x*y);
+        AppraisalLandTotalPurchasedValue_txt.setText(answer);
+    }
     
     public void totalOfAsset(){
         int totalBuilding =Integer.parseInt(totalOfBuildings_txt.getText());
@@ -692,22 +880,165 @@ public class AssetManagementController implements Initializable {
     }
 
     @FXML
-    private void selectAssetForAppraisal(ActionEvent event) {
-        computeAppraisalValuePane.setVisible(true);
-        computeAppraisalValuePane.setDisable(false);
-        computeDepreciationValuePane.setVisible(false);
-        computeDepreciationValuePane.setDisable(true);
-        title_txt.setText("Compute Appraisal Value");
+    private void selectLandForAppraisal(MouseEvent event) {
+        LandIDforAppraisal_txt.setText(LandLiquidation_tbl.getSelectionModel().getSelectedItem().getLandID());
+        AppraisalLandName_txt.setText(LandLiquidation_tbl.getSelectionModel().getSelectedItem().getLandName());
+        AppraisalLandAddress_txt.setText(LandLiquidation_tbl.getSelectionModel().getSelectedItem().getLandAddress());
+        AppraisalLandArea_txt.setText(LandLiquidation_tbl.getSelectionModel().getSelectedItem().getLandArea());
+        AppraisalLandPricePerSqMeters_txt.setText(LandLiquidation_tbl.getSelectionModel().getSelectedItem().getLandPricePerSqMeters());
+        AppraisalLandPurchasedYear_txt.setText(LandLiquidation_tbl.getSelectionModel().getSelectedItem().getLandPurchasedDate());
+        AppraisalLandStatus_txt.setText(LandLiquidation_tbl.getSelectionModel().getSelectedItem().getLandStatus());
+    }
+    
+    public void renderLandTableForAppraisal() {
+        LandLiquidation_tbl.getItems().clear();
+        LandLiquidation_tbl.getColumns().removeAll(LandLiquidation_tbl.getColumns());
+
+        TableColumn<Log1_AssetLandClassfiles, String> LandName = new TableColumn<>("Land Name");
+
+        LandName.setCellValueFactory((param) -> param.getValue().LandName);
+
+        LandLiquidation_tbl.getColumns().addAll(LandName);
+    }
+    
+    public void callLandDataForAppraisal(){
+         Log1_AssetLandModel assetLand = new Log1_AssetLandModel();
+         ObservableList<Log1_AssetLandClassfiles> Land = FXCollections.observableArrayList();
+          
+            List b = assetLand.get();
+            
+            for(Object d : b)
+                {
+                    //rs = hm
+                HashMap hm = (HashMap) d;   //exquisite casting
+                
+                Land.add(new Log1_AssetLandClassfiles(
+                
+                String.valueOf(hm.get("LandID")),
+                String.valueOf(hm.get("AssetCategory")),
+                String.valueOf(hm.get("LandName")),
+                String.valueOf(hm.get("LandArea")),
+                String.valueOf(hm.get("LandAddress")),
+                String.valueOf(hm.get("LandPricePerSqMeters")),
+                String.valueOf(hm.get("LandPurchasedDate")),
+                String.valueOf(hm.get("LandStatus"))
+                ));       
+        }
+        LandLiquidation_tbl.getItems().clear();
+        LandLiquidation_tbl.setItems(Land);
+    }
+    
+    public void renderVehicleTableForDepreciation(){
+        VehicleDepreciation_tbl.getItems().clear();
+        VehicleDepreciation_tbl.getColumns().removeAll(VehicleDepreciation_tbl.getColumns());
+
+        TableColumn<Log1_AssetVehiclesClassfiles, String> Type = new TableColumn<>("Vehicle Type");
+        TableColumn<Log1_AssetVehiclesClassfiles, String> Model = new TableColumn<>("Model");
+        TableColumn<Log1_AssetVehiclesClassfiles, String> Color = new TableColumn<>("Color");
+
+        Type.setCellValueFactory((param) -> param.getValue().VehicleType);
+        Model.setCellValueFactory((param) -> param.getValue().VehicleModel);
+        Color.setCellValueFactory((param) -> param.getValue().VehicleColor);
+
+        VehicleDepreciation_tbl.getColumns().addAll(Type, Model, Color);
+    }
+    
+    public void callVehicleDataforDepreciation(){
+         Log1_AssetVehiclesModel assetVehicle = new Log1_AssetVehiclesModel();
+         ObservableList<Log1_AssetVehiclesClassfiles> vehicle = FXCollections.observableArrayList();
+          
+            List b = assetVehicle.get();
+            
+            for(Object d : b)
+                {
+                    //rs = hm
+                HashMap hm = (HashMap) d;   //exquisite casting
+                
+                vehicle.add(new Log1_AssetVehiclesClassfiles(
+                
+                String.valueOf(hm.get("VehicleID")),
+                String.valueOf(hm.get("BuildingName")),
+                String.valueOf(hm.get("AssetCategory")),
+                String.valueOf(hm.get("VehicleType")),
+                String.valueOf(hm.get("VehicleModel")),
+                String.valueOf(hm.get("VehicleColor")),
+                String.valueOf(hm.get("VehicleSerialNumber")),
+                String.valueOf(hm.get("VehicleChassisNumber")),
+                String.valueOf(hm.get("VehicleYearBought")),
+                String.valueOf(hm.get("VehicleWarrantyDate")),
+                String.valueOf(hm.get("VehiclePurchasedPrice")),
+                String.valueOf(hm.get("VehicleFuelType")),
+                String.valueOf(hm.get("VehicleUsability")),
+                String.valueOf(hm.get("VehicleStatus"))
+                ));       
+        }
+        VehicleDepreciation_tbl.getItems().clear();
+        VehicleDepreciation_tbl.setItems(vehicle);
     }
 
     @FXML
-    private void selectAssetForDepreciation(ActionEvent event) {
-        computeDepreciationValuePane.setVisible(true);
-        computeDepreciationValuePane.setDisable(false);
-        computeAppraisalValuePane.setVisible(false);
-        computeAppraisalValuePane.setDisable(true);
-        title_txt.setText("Compute Depreciation Value");
+    private void selectVehicleForDepreciation(MouseEvent event) {
+        DepraciationVehicleType_txt.setText(VehicleDepreciation_tbl
+                .getSelectionModel().getSelectedItem().getVehicleType());
+        DepreciationVehicleModel_txt.setText(VehicleDepreciation_tbl
+                .getSelectionModel().getSelectedItem().getVehicleModel());
+        DepreciationVehicleColor_txt.setText(VehicleDepreciation_tbl
+                .getSelectionModel().getSelectedItem().getVehicleColor());
+        DepreciationVehicleYearBought_txt.setText(VehicleDepreciation_tbl
+                .getSelectionModel().getSelectedItem().getVehicleYearBought());
+        DepreciationVehiclePurchasedPrice_txt.setText(VehicleDepreciation_tbl
+                .getSelectionModel().getSelectedItem().getVehiclePurchasedPrice());
+        DepreciatonVehicleStatus_txt.setText(VehicleDepreciation_tbl
+                .getSelectionModel().getSelectedItem().getVehicleStatus());
+        DepreciationVehicleID_txt.setText(VehicleDepreciation_tbl
+                .getSelectionModel().getSelectedItem().getVehicleID());
+    }
+    public void disableVehicleTxtFields(){
+        DepraciationVehicleType_txt.setVisible(false);
+        DepreciationVehicleModel_txt.setVisible(false);
+        DepreciationVehicleColor_txt.setVisible(false);
+        DepreciationVehicleYearBought_txt.setVisible(false);
+        DepreciationVehiclePurchasedPrice_txt.setVisible(false);
+        DepreciatonVehicleStatus_txt.setVisible(false);
+        DepreciationVehicleID_txt.setVisible(false);
+        updateDepreciationvalue_btn.setDisable(true);
+    }
+    public void EnableVehicleFields(){
+        DepraciationVehicleType_txt.setVisible(true);
+        DepreciationVehicleModel_txt.setVisible(true);
+        DepreciationVehicleColor_txt.setVisible(true);
+        DepreciationVehicleYearBought_txt.setVisible(true);
+        DepreciationVehiclePurchasedPrice_txt.setVisible(true);
+        DepreciatonVehicleStatus_txt.setVisible(true);
+        DepreciationVehicleID_txt.setVisible(true);
     }
 
-
+    private void startDepreciation() {
+        computeDepreciationValue_pane.setDisable(false);
+        DepreciationVehicleDetails_window.setDisable(false);
+        EnableVehicleFields();
+        depreciationPurchaseValue_txt.setText(DepreciationVehiclePurchasedPrice_txt.getText());
+    }
+    public void computeDepreciationValue(){
+        int cost = Integer.parseInt(DepreciationVehiclePurchasedPrice_txt.getText());
+        int salvage = Integer.parseInt(salvageValue_txt.getText());
+        int life = Integer.parseInt(DepreciationLifeTimeYears_txt.getText());
+        
+        int firstValue = Integer.valueOf(cost-salvage);
+        String DepreciationValue = String.valueOf(firstValue/life);
+        
+        depreciatonValue_txt.setText(DepreciationValue);
+    }
+    public void computeDepreciationBookValue(){
+        int depreciationValue = Integer.parseInt(depreciatonValue_txt.getText());
+        int yearsHasbeenUsed = Integer.parseInt(DepreciationYearsHasBeenUsed_txt.getText());
+        int cost = Integer.parseInt(DepreciationVehiclePurchasedPrice_txt.getText());
+        
+        int depreciationOverTheYears = Integer.valueOf(depreciationValue*yearsHasbeenUsed);
+        
+        String DepreciationBookValue = String.valueOf(cost-depreciationOverTheYears);
+        
+        DepreciationBookValue_txt.setText(DepreciationBookValue);
+        updateDepreciationvalue_btn.setDisable(false);
+    }
 }
