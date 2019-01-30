@@ -33,7 +33,7 @@
                      <contextMenu>
                         <ContextMenu fx:id="contextMenu">
                            <items>
-                              <MenuItem fx:id="menuVPD" mnemonicParsing="false" text="View Package Details" />
+                              <MenuItem fx:id="menuVPD" mnemonicParsing="false" onAction="#viewPackDetails" text="View Package Details" />
                            </items>
                         </ContextMenu>
                      </contextMenu>

@@ -446,12 +446,12 @@
                                           <Font size="24.0" />
                                        </font>
                                     </Label>
-                                    <TextArea editable="false" layoutX="33.0" layoutY="69.0" prefHeight="230.0" prefWidth="1280.0" wrapText="true" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                                    <TextArea fx:id="TAphilippines" editable="false" layoutX="33.0" layoutY="69.0" prefHeight="230.0" prefWidth="1280.0" wrapText="true" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                     </TextArea>
-                                    <TextArea editable="false" layoutX="14.0" layoutY="340.0" prefHeight="230.0" prefWidth="1280.0" wrapText="true" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                                    <TextArea fx:id="TAsingapore" editable="false" layoutX="14.0" layoutY="340.0" prefHeight="230.0" prefWidth="1280.0" wrapText="true" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
