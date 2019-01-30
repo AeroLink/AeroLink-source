@@ -11,11 +11,10 @@ package FXMLS.HR2.ClassFiles;
  */
 public class TM_ViewTrainingReqClassModal {
     
-    public static String tr_id, t_id,dept, job_position, date_req,status_id, status;
+    public static String tr_id,dept, job_position, date_req,status_id, status;
     
-    public static void initVTRClass(String trid, String tid, String d, String jp, String dr, String sid, String s){
+    public static void initVTRClass(String trid, String d, String jp, String dr, String sid, String s){
         tr_id = trid;
-        t_id = tid;
         dept = d;
         job_position = jp;
         date_req = dr;
