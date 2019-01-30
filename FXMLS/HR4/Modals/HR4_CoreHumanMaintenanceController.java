@@ -7,17 +7,14 @@ package FXMLS.HR4.Modals;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
  *
  * @author Jaeeeee
  */
-public class HR4_InfoCHCController implements Initializable {
-
+public class HR4_CoreHumanMaintenanceController implements Initializable {
 
     /**
      * Initializes the controller class.
