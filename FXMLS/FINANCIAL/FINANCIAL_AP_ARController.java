@@ -162,8 +162,7 @@ public class FINANCIAL_AP_ARController implements Initializable {
                           total1 = total1+ amount;
                     }
                                      ar_total_lbl.setText(String.valueOf(total1));
-                     {
-                    }
+                     { }
                     ar_tbl.setItems(ars);
                     GlobalCount = DummyCount;
                     }

@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author Crenz
  */
-public class MakeRequestController implements Initializable {
+public class RequestProcurementController implements Initializable {
 
     /**
      * Initializes the controller class.
