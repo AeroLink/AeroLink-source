@@ -110,10 +110,10 @@ public class HR2_Competency_ManagementController implements Initializable {
             Modal set_skill_modal = Modal.getInstance(new Form("/FXMLS/HR2/Modals/Modal_SetSkills.fxml").getParent());
             set_skill_modal.open();
         });
-         cbox_filter_dept.getSelectionModel().selectedItemProperty().addListener(listener -> {
+        cbox_filter_dept.getSelectionModel().selectedItemProperty().addListener(listener -> {
             SearchSkillReq();
         });
- /*  cbox_filter_status.getSelectionModel().selectedItemProperty().addListener(listener -> {
+        /*  cbox_filter_status.getSelectionModel().selectedItemProperty().addListener(listener -> {
             displaySkillReq();
         });*/
         txt_search_job.setOnKeyReleased(e -> SearchJob());
@@ -190,6 +190,7 @@ public class HR2_Competency_ManagementController implements Initializable {
             List c = cm_pivot.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr2_skillset", "skill_id", "s", "=", "skill_id")
                     .where(new Object[][]{{"jobs.title", "like", "%" + txt_search_job.getText() + "%"}, {"s.isDeleted", "<>", "1"}})
+                    .orderBy("jobs.title", Model.Sort.ASC)
                     .get("jobs.title", "jobs.description", "s.skill_id", "s.skill", "s.skill_description");
 
             Data(c);
@@ -229,12 +230,12 @@ public class HR2_Competency_ManagementController implements Initializable {
 
     //For TBL_Requisition
     public void SearchSkillReq() {
-        try{
-          HR2_CM_Skill_Requisition skill_req = new HR2_CM_Skill_Requisition();
+        try {
+            HR2_CM_Skill_Requisition skill_req = new HR2_CM_Skill_Requisition();
             List sr = skill_req.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "dept", "=", "dept_id")
                     .where(new Object[][]{
-                    {"dept.dept_name", "=", cbox_filter_dept.getSelectionModel()
+                {"dept.dept_name", "=", cbox_filter_dept.getSelectionModel()
                     .getSelectedItem().toString()},
                 /*  {"rs.req_status", "=", cbox_filter_status.getSelectionModel()
                     .getSelectedItem().toString()},*/
@@ -440,7 +441,7 @@ public class HR2_Competency_ManagementController implements Initializable {
 
     public void DropData() {
         Alert update = new Alert(Alert.AlertType.CONFIRMATION);
-        update.setContentText("Are you sure you want to update this data?");
+        update.setContentText("Are you sure you want to Archive this data?");
         Optional<ButtonType> rs = update.showAndWait();
 
         if (rs.get() == ButtonType.OK) {
@@ -451,7 +452,7 @@ public class HR2_Competency_ManagementController implements Initializable {
             }).update(new Object[][]{
                 {"isDeleted", "1"},}).executeUpdate();
             Alert dropnotif = new Alert(Alert.AlertType.INFORMATION);
-            dropnotif.setContentText(tbl_jobs.getSelectionModel().getSelectedItem().Skill.get() + " Successfully Dropped");
+            dropnotif.setContentText(tbl_jobs.getSelectionModel().getSelectedItem().Skill.get() + " Successfully Archived");
             dropnotif.showAndWait();
             loadData();
         }
