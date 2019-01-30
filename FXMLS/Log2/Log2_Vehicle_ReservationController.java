@@ -7,15 +7,26 @@ package FXMLS.Log2;
 
 import FXMLS.Log1.ProcurementController;
 import FXMLS.Log2.ClassFiles.Log2_Fleet_ManagementClass;
+import FXMLS.Log2.ClassFiles.Log2_Fleet_Management_outboundtable;
 import FXMLS.Log2.ClassFiles.Log2_Vehicle_ReservationClass;
+import FXMLS.Log2.ClassFiles.Log2_Vehicle_ReservationFormClass;
 import FXMLS.USM.Controllers.IUsers;
+import Model.Log2.Log2_reservationform;
 import Model.Log2_Fleet_Management;
 import Model.Log2_Vehicle_Reservation;
+import Synapse.Components.Modal.Modal;
+import Synapse.Form;
+import Synapse.Session;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXTimePicker;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -58,7 +69,7 @@ import javafx.util.converter.DefaultStringConverter;
 public class Log2_Vehicle_ReservationController implements Initializable {
 
     ObservableList<Log2_Vehicle_ReservationClass> data = FXCollections.observableArrayList();
-    
+
     ObservableList<Log2_Vehicle_ReservationClass> monitoringdata = FXCollections.observableArrayList();
 
     @FXML
@@ -74,39 +85,82 @@ public class Log2_Vehicle_ReservationController implements Initializable {
     @FXML
     private TableColumn<Log2_Vehicle_ReservationClass, String> details;
     @FXML
-    private JFXTextField location;
-    @FXML
-    private JFXTextField purpose;
-    @FXML
     private JFXButton btnsubmitreservation;
     @FXML
-    private TableColumn<Log2_Vehicle_ReservationClass , String> name;
+    private TableColumn<Log2_Vehicle_ReservationClass, String> name;
     @FXML
-    private TableColumn<Log2_Vehicle_ReservationClass , String> daterented;
+    private TableColumn<Log2_Vehicle_ReservationClass, String> daterented;
     @FXML
-    private TableColumn<Log2_Vehicle_ReservationClass , String> time;
+    private TableColumn<Log2_Vehicle_ReservationClass, String> time;
     @FXML
-    private TableColumn<Log2_Vehicle_ReservationClass , String> timeend;
+    private TableColumn<Log2_Vehicle_ReservationClass, String> timeend;
     @FXML
-    private TableColumn<Log2_Vehicle_ReservationClass , String> status;
+    private TableColumn<Log2_Vehicle_ReservationClass, String> status;
     @FXML
     private TableColumn<Log2_Vehicle_ReservationClass, String> monitoringlocation;
     @FXML
     private TableView<Log2_Vehicle_ReservationClass> tblmonitoring;
+    @FXML
+    private TableView<Log2_Vehicle_ReservationFormClass> tblreservation;
+    @FXML
+    private JFXDatePicker date_ofreservation;
+    @FXML
+    private JFXTimePicker reservationtime;
+    @FXML
+    private JFXTextField txtvmodel;
+    @FXML
+    private JFXTextField txtpurpose;
+    @FXML
+    private JFXTextField txtdestination;
+   
+    @FXML
+    private JFXTextField txtdriver;
+    @FXML
+    private JFXTextField txtplateno;
+    @FXML
+    private JFXTextField txtcap;
+    @FXML
+    private JFXTextField txtstype;
+    @FXML
+    private JFXTextField txtvtype;
+    @FXML
+    private JFXTextField txtspec;
 
-    /**-
+    /**
+     * -
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
+        //Disabled fields
+        txtvmodel.setDisable(true);
+        txtvtype.setDisable(true);
+        txtspec.setDisable(true);
+        txtstype.setDisable(true);
+        txtplateno.setDisable(true);
+        txtcap.setDisable(true);
+        txtdriver.setDisable(false);
+        txtpurpose.setDisable(false);
+        txtdestination.setDisable(false);
+        date_ofreservation.setDisable(false);
+        reservationtime.setDisable(false);
+        
+        
         loaddata();
         Cols();
-        
+
         reserveCols();
         reserveloaddata();
+
+        btnsubmitreservation.setOnMouseClicked(e -> Savereservation());
         
-         btnsubmitreservation.setOnMouseClicked(e -> Save());
+        
+
+        this.generatetable();
+        this.reservationformloaddata();
+        
+     
 
     }
 
@@ -114,17 +168,15 @@ public class Log2_Vehicle_ReservationController implements Initializable {
         vehiclecode.setCellValueFactory(new PropertyValueFactory<>("vehiclecode"));
         vehiclemodel.setCellValueFactory(new PropertyValueFactory<>("vehiclemodel"));
         lastmaintenance.setCellValueFactory(new PropertyValueFactory<>("lastmaintenance"));
-         details.setCellValueFactory(new PropertyValueFactory<>("button"));
-       
+        details.setCellValueFactory(new PropertyValueFactory<>("button"));
 
-        
     }
 
     private void loaddata() {
         data.removeAll(data);
-        data.addAll(new Log2_Vehicle_ReservationClass("1kz23","Yamaha","07/02/18"));
-        data.addAll(new Log2_Vehicle_ReservationClass("5kf2m","Ford","04/12/18"));
-        data.addAll(new Log2_Vehicle_ReservationClass("6ls4k7","Honda","11/22/18"));
+        data.addAll(new Log2_Vehicle_ReservationClass("1kz23", "Yamaha", "07/02/18"));
+        data.addAll(new Log2_Vehicle_ReservationClass("5kf2m", "Ford", "04/12/18"));
+        data.addAll(new Log2_Vehicle_ReservationClass("6ls4k7", "Honda", "11/22/18"));
         vehiclemaintenance.getItems().addAll(data);
 
     }
@@ -150,72 +202,81 @@ public class Log2_Vehicle_ReservationController implements Initializable {
         tblmonitoring.getItems().addAll(monitoringdata);
     }
 
+    private void generatetable() {
 
-    
-     public void Save() {
-        
-         Log2_Vehicle_Reservation vr = new Log2_Vehicle_Reservation();
+        tblreservation.getColumns().removeAll(tblreservation.getColumns());
 
-        try {
+        TableColumn<Log2_Vehicle_ReservationFormClass, String> vehiclemodel = new TableColumn<>("Vehicle Model");
+        TableColumn<Log2_Vehicle_ReservationFormClass, String> datereserved = new TableColumn<>("Date of Reservation");
+        TableColumn<Log2_Vehicle_ReservationFormClass, String> time = new TableColumn<>("Time");
 
-            String[][] vr_data
-                    = {
-                        {"purpose", purpose.getText()},
-                        {"location", location.getText()},
-                 
-                        
-                       
-                    };
+        vehiclemodel.setCellValueFactory(value -> value.getValue().Vehiclemodel);
+        datereserved.setCellValueFactory(value -> value.getValue().Datereserved);
+        time.setCellValueFactory(value -> value.getValue().Time);
 
-            vr.insert(vr_data);
-            
-          
-            Alert saved = new Alert(Alert.AlertType.INFORMATION);
-            saved.setContentText("Saved");
-            saved.showAndWait();
-
-        } catch (Exception e) {
-            
-        }
-    
+        tblreservation.getColumns().addAll(vehiclemodel, datereserved, time);
 
     }
 
-    @FXML
-    private void btnaddveicle(MouseEvent event) throws IOException {
-        
-        Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
+    Log2_reservationform rf = new Log2_reservationform("reservation");
+    ObservableList<Log2_Vehicle_ReservationFormClass> vrreservation = FXCollections.observableArrayList();
+    long DummyCount = 0;
+    long GlobalCount = 0;
 
-        Parent parent = loader.load(getClass().getResource("/FXMLS/Log2/vr/modals/Vehicle_reservation.fxml"));
+    private void reservationformloaddata() {
 
-        Scene scene = new Scene(parent);
+        CompletableFuture.supplyAsync(() -> {
 
-        stage.setFullScreen(false);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.setScene(scene);
+            while (Session.CurrentRoute.equals("log2vr")) {
+                rf.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
+                    DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
+                });
 
-        stage.show();
+                if (DummyCount != GlobalCount) {
+                    tblreservation.getItems().clear();
+                    List<HashMap> hash = rf.get();
+                    hash.stream().forEach(e -> {
+                        vrreservation.add(new Log2_Vehicle_ReservationFormClass(
+                                String.valueOf(e.get("vehicle_model")),
+                                String.valueOf(e.get("date_of_reservation")),
+                                String.valueOf(e.get("time"))
+                        ));
+                    });
+                    tblreservation.setItems(vrreservation);
+                    GlobalCount = DummyCount;
+                }
+
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Log2_Vehicle_ReservationController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            return 0;
+        }, Session.SessionThreads);
     }
+
+    public void Savereservation() {
+        
+         rf.insert(new Object[][]{
+            {"vehiclemodel", txtvmodel.getText()},
+            {"datereserved", date_ofreservation.getValue().toString()},
+            {"time", reservationtime.getValue().toString()}
+        });
+        Helpers.EIS_Response.SuccessResponse("Success!", "New reservation was successfully added");
+        
+
+    }
+    
+    
+
 
     @FXML
     private void btn_selectmodel(MouseEvent event) throws IOException {
-        
-        Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
 
-        Parent parent = loader.load(getClass().getResource("/FXMLS/Log2/vr/modals/Log2_Vehicle_Reservation_SelectV.fxml"));
-
-        Scene scene = new Scene(parent);
-
-        stage.setFullScreen(false);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.setScene(scene);
-
-        stage.show();
+        Modal md = Modal.getInstance(new Form("/FXMLS/Log2/vr/modals/Log2_Vehicle_Reservation_SelectV.fxml").getParent());
+        md.open();
     }
-    
 
-
-  
 }

@@ -52,6 +52,8 @@ public class CoreSideController implements Initializable {
     private Tab FINANCE;
     @FXML
     private Label SessionUsername;
+    @FXML
+    private Tab FINANCE1;
 
     /**
      * Initializes the controller class.

@@ -523,7 +523,7 @@
                                             <children>
                                                 <AnchorPane prefHeight="40.0" prefWidth="235.0" style="-fx-background-color: #34A853;">
                                                     <children>
-                                                        <Label text="LOGSITICS MODULE" textFill="WHITE" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
+                                                        <Label text="LOGISTICS MODULE" textFill="WHITE" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
                                                             <font>
                                                                 <Font name="Segoe UI Semibold" size="18.0" />
                                                             </font>
