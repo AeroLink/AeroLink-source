@@ -35,23 +35,7 @@
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="astQuantity" focusColor="#34a853" labelFloat="true" layoutX="420.0" layoutY="196.0" maxWidth="79.0" minWidth="79.0" prefHeight="36.0" prefWidth="79.0" promptText="Quantity" unFocusColor="#34a853">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </JFXTextField>
-      <Label layoutX="373.0" layoutY="258.0" text="Total">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label fx:id="astTotal_label" layoutX="455.0" layoutY="258.0" text="0">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Label>
-      <JFXButton fx:id="save_btn" disable="true" layoutX="245.0" layoutY="323.0" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: #34a853;" text="Save" textFill="WHITE" />
-      <JFXButton fx:id="compute_btn" layoutX="433.0" layoutY="323.0" onAction="#ComputeAmount" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: #34a853;" text="Compute" textFill="WHITE" />
+      <JFXButton fx:id="save_btn" layoutX="245.0" layoutY="323.0" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: #34a853;" text="Save" textFill="WHITE" />
       <JFXComboBox fx:id="combbox" layoutX="28.0" layoutY="256.0" prefHeight="25.0" prefWidth="153.0" />
    </children>
 </AnchorPane>

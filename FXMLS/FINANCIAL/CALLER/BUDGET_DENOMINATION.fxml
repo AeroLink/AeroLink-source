@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="647.0" prefWidth="295.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141">
+<AnchorPane id="AnchorPane" prefHeight="647.0" prefWidth="295.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane prefHeight="647.0" prefWidth="361.0" style="-fx-border-color: #34a853;">
          <children>
@@ -29,7 +28,6 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <Label layoutX="133.0" layoutY="36.0" prefHeight="17.0" prefWidth="223.0" text="None" />
             <Label layoutX="25.0" layoutY="71.0" text="1000">
                <font>
                   <Font size="15.0" />
@@ -117,6 +115,11 @@
                </columnResizePolicy>
             </TableView>
             <DatePicker layoutX="11.0" layoutY="472.0" promptText="Search by Date" />
+            <Label layoutX="158.0" layoutY="34.0" text="0">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>
