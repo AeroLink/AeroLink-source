@@ -134,7 +134,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXComboBox>
-      <JFXTextField focusColor="#595c64" layoutX="79.0" layoutY="539.0" prefHeight="25.0" prefWidth="274.0" promptText="Select...">
+      <JFXTextField focusColor="#595c64" layoutX="79.0" layoutY="539.0" prefHeight="25.0" prefWidth="274.0" promptText="Amount">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

@@ -230,7 +230,7 @@
                   <Font name="Lato Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lbl_rating1" alignment="CENTER_RIGHT" layoutX="129.0" layoutY="19.0" prefHeight="19.0" prefWidth="38.0" text="0" textFill="#0387a1">
+            <Label fx:id="lbl_exam_taken" alignment="CENTER_RIGHT" layoutX="129.0" layoutY="19.0" onMouseClicked="#ExamTaken" prefHeight="19.0" prefWidth="38.0" text="0" textFill="#0387a1">
                <font>
                   <Font name="Lato Bold" size="14.0" />
                </font>
@@ -243,7 +243,7 @@
                   <Font name="Lato Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lbl_remarks1" alignment="CENTER_RIGHT" layoutX="113.0" layoutY="44.0" prefHeight="18.0" prefWidth="54.0" text="0" textFill="#0387a1">
+            <Label fx:id="lbl_training_taken" alignment="CENTER_RIGHT" layoutX="113.0" layoutY="44.0" onMouseClicked="#TrainingTaken" prefHeight="18.0" prefWidth="54.0" text="0" textFill="#0387a1">
                <font>
                   <Font name="Lato Bold" size="14.0" />
                </font>
