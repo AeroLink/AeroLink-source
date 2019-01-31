@@ -6,7 +6,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Log2.vr.modals.Log2_Vehicle_Reservation_SelectVController">
    <children>
-      <TableView layoutX="-2.0" layoutY="-2.0" prefHeight="400.0" prefWidth="730.0">
+      <TableView layoutX="17.0" layoutY="37.0" prefHeight="327.0" prefWidth="696.0">
         <columns>
           <TableColumn prefWidth="75.0" text="Vehicle Model" />
           <TableColumn prefWidth="75.0" text="Vehicle Type" />

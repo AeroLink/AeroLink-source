@@ -9,7 +9,6 @@ import FXMLS.HR2.ClassFiles.HR2_Job_VacancyClass;
 import FXMLS.HR2.ClassFiles.HR2_Training_InfoClass;
 import FXMLS.HR2.ClassFiles.HR4_Jobs_Class;
 import Model.HR2_Jobs;
-import Model.HR2_Training_Info;
 import Model.HR4_Departments;
 import Synapse.Model;
 import java.net.URL;

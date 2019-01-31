@@ -49,12 +49,10 @@ public class Log2_Document_TrackingController implements Initializable {
     private TableView<Log2_Document_TrackingClass> tbl_monitoring;
 
     ObservableList<Log2_Document_TrackingClass> monitoringdata = FXCollections.observableArrayList();
-    @FXML
-    private JFXButton deleterows;
     
     
     ObservableList<String> tod = FXCollections.observableArrayList("Original", "Certified True Copy");
-     ObservableList<String> dept = FXCollections.observableArrayList("HRdept", "Logistics", "Core", "Administrative", "Finance");
+     ObservableList<String> dept = FXCollections.observableArrayList("HR", "Logistics", "Core", "Administrative", "Finance");
     @FXML
     private JFXComboBox<String> combo_dept;
     @FXML
@@ -103,10 +101,7 @@ public class Log2_Document_TrackingController implements Initializable {
     }
    
 
-    @FXML
-    private void deleterowact(MouseEvent event) {
-        tbl_monitoring.getItems().removeAll(tbl_monitoring.getSelectionModel().getSelectedItem());
-    }
+ 
 
     @FXML
     private void submitrequest(MouseEvent event) {

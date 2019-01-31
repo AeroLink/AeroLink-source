@@ -5,14 +5,19 @@
  */
 package FXMLS.Log2;
 
+import FXMLS.HR3.ClassFiles.HR3_tpLeaves;
+import FXMLS.HR3.HR3_Leave_ManagementController;
 import FXMLS.Log2.ClassFiles.Log2_Fleet_ManagementClass;
 import FXMLS.Log2.ClassFiles.Log2_Fleet_ManagementRequests;
+import FXMLS.Log2.ClassFiles.Log2_Fleet_Management_outboundtable;
+import Model.Log2.Log2_outbound;
 import Model.Log2_Fleet_ManagementAddtask;
 import Model.Log2_Fleet_ManagementAddvehicle;
 import Model.Log2_Fleet_ManagementRequest;
 import Model.Log2_Fleet_ManagementScheduling;
 import Synapse.Components.Modal.Modal;
 import Synapse.Form;
+import Synapse.Session;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -34,6 +39,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import java.lang.String;
+import java.util.concurrent.CompletableFuture;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -63,6 +71,8 @@ public class Log2_Fleet_ManagementController implements Initializable {
     ObservableList<String> driver = FXCollections.observableArrayList("d1", "d2", "d3");
 
     ObservableList<String> task = FXCollections.observableArrayList("Deliver", "", "");
+    
+    ObservableList<String> remarks = FXCollections.observableArrayList("Remarks", "Remarks", "Remarks");
     @FXML
     private TableColumn<Log2_Fleet_ManagementRequests, String> requestdept;
     @FXML
@@ -108,12 +118,22 @@ public class Log2_Fleet_ManagementController implements Initializable {
     @FXML
     private MenuItem detailspost;
     @FXML
-    private TableView<?> tblob;
+    private TableView<Log2_Fleet_Management_outboundtable> tblob;
+    @FXML
+    private TableView<?> tbl_dispatched;
+    @FXML
+    private JFXTextField txt_vmodel;
+    @FXML
+    private JFXTextField txt_plateno;
+    @FXML
+    private JFXComboBox<String> combo_remarks;
    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        this.generatetable();
+        this.loadDataoutbound();
+        
         reqDisplaydata();
         reqloaddata();
 
@@ -131,6 +151,9 @@ public class Log2_Fleet_ManagementController implements Initializable {
 
         scheddriver.setItems(driver);
         scheddriver.setPromptText("Choose Driver");
+        
+        combo_remarks.setItems(remarks);
+        combo_remarks.setPromptText("Choose Remarks");
 
         
         btnsubmit.setOnMouseClicked(e -> Save());
@@ -142,7 +165,11 @@ public class Log2_Fleet_ManagementController implements Initializable {
         scheddestination.setEditable(false);
         scheddeparture.setEditable(false);
         
-        //tableright click
+        //dispatch table...
+        txt_vmodel.setEditable(false);
+        txt_plateno.setEditable(false);
+        
+        //table rightclick...
         this.tblob.setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.SECONDARY) {
                 if (event.getClickCount() == 2) {
@@ -160,6 +187,66 @@ public class Log2_Fleet_ManagementController implements Initializable {
          Modal md = Modal.getInstance(new Form("/FXMLS/Log2/fm/modals/Log2_Fleet_Management_VehicleModel.fxml").getParent());
         md.open();
     }
+    
+    
+    // generate table ng outbound
+    private void generatetable() {
+        
+        tblob.getColumns().removeAll(tblob.getColumns());
+        
+        TableColumn<Log2_Fleet_Management_outboundtable, String> vehicle_model = new TableColumn<>("Vehicle Model");
+        TableColumn<Log2_Fleet_Management_outboundtable, String> plate_no = new TableColumn<>("Plate No");
+        
+
+        vehicle_model.setCellValueFactory(value -> value.getValue().Vehicle_model);
+        plate_no.setCellValueFactory(value -> value.getValue().Plate_no);
+        
+        tblob.getColumns().addAll(vehicle_model, plate_no);
+       
+        
+    }
+    
+    //need para sa loaddata..
+    Log2_outbound obdb = new Log2_outbound("outbound");
+    ObservableList<Log2_Fleet_Management_outboundtable> outbound = FXCollections.observableArrayList();
+    long DummyCount = 0;
+    long GlobalCount = 0;
+    
+    private void loadDataoutbound() {
+        
+        CompletableFuture.supplyAsync(() -> {
+
+            while (Session.CurrentRoute.equals("log2fm")) {
+                obdb.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
+                    DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
+                });
+
+                if (DummyCount != GlobalCount) {
+                    tblob.getItems().clear();
+                    List<HashMap> hash = obdb.get();
+                    hash.stream().forEach(e -> {
+                        outbound.add(new Log2_Fleet_Management_outboundtable(
+                                String.valueOf(e.get("id")),
+                                String.valueOf(e.get("vehiclemodel")),
+                                String.valueOf(e.get("plateno"))
+                                
+                        ));
+                    });
+                    tblob.setItems(outbound);
+                    GlobalCount = DummyCount;
+                }
+
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Log2_Fleet_ManagementController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            return 0;
+        }, Session.SessionThreads);
+    }
+    
 
     private void reqDisplaydata() {
 
@@ -271,12 +358,19 @@ public class Log2_Fleet_ManagementController implements Initializable {
 
     }
 
-    @FXML
-    private void btnview(MouseEvent event) {
-    }
 
     @FXML
     private void btndispatch(MouseEvent event) {
+         Modal md = Modal.getInstance(new Form("/FXMLS/Log2/fm/modals/Log2_Fleet_Management_Dispatch.fxml").getParent());
+        md.open();
+    }
+
+    @FXML
+    private void btn_deliveryrecord(MouseEvent event) {
+        
+         Modal md = Modal.getInstance(new Form("/FXMLS/Log2/fm/modals/Log2_Fleet_Management_DeliveryRecord.fxml").getParent());
+        md.open();
+        
     }
 
 }

@@ -13,7 +13,6 @@ package Config;
 public class RouteConfig {
 
     public static String[][] links = {
-        //test
         {"Main", "/FXMLS/MainDash.fxml", "canAccessSystem"},
         //FINANCIALS
         {"id_apr", "/FXMLS/FINANCIAL/FINANCIAL_AP_AR.fxml", "can_access_apar_management"},
@@ -73,9 +72,15 @@ public class RouteConfig {
         {"adminfacility", "/FXMLS/Administrative/Facility_Reservation.fxml", "can_access_admin_facility_reservation"},
         //USM
         {"usmManageUsers", "/FXMLS/USM/ManageUsers.fxml", "can_access_hr1_socialrecog"},
-        //Requisitions
-        {"requisitions", "/FXMLS/Requisition.fxml", "canAccessSystem"}
         
+        
+        //Requisitions
+        {"requisitions", "/FXMLS/Requisition.fxml", "canAccessSystem"},
+        
+        //HR2 Request Forms
+        {"0xreq_hr2_skill", "/FXMLS/HR2/Requisition/CM_RequestSkill.fxml", "canAccessSystem"}, //canAccessSystem permission for testing
+        {"0xreq_hr2_training", "/FXMLS/HR2/Requisition/LM_RequestExam.fxml", "canAccessSystem"}
+            
     };
 
 }

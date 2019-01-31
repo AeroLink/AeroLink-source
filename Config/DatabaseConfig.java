@@ -27,4 +27,5 @@ public class DatabaseConfig {
     public static String DATABASE = "AeroLink";
     public static String USER = "sa";//core
     public static String PASSWORD = "randelle";//core
+   
 }
