@@ -86,6 +86,8 @@ public class SP_ViewEmployeeInfoController implements Initializable {
     private Label lbl_employee_code;
     @FXML
     private JFXButton btn_req_promotion;
+    @FXML
+    private JFXComboBox cbox_select_position;
 
     /**
      * Initializes the controller class.
@@ -95,6 +97,30 @@ public class SP_ViewEmployeeInfoController implements Initializable {
         lbl_fullname.setText(SP_Employee_Info_Modal.fullname);
         lbl_position.setText(SP_Employee_Info_Modal.title);
         populateLabels();
+        selectJobs();
+
+    }
+    public void selectJobs() {
+        HR4_Jobs jobs = new HR4_Jobs();
+
+        try {
+            List c = jobs.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department","id","dept","=","dept_id")
+                    .where(new Object[][]{{"dept.dept_name","=",lbl_department.getText()}})
+                    .get();
+            //"concat(substring(title,0,2), job_id) as job_id, title"
+            for (Object d : c) {
+                HashMap hm1 = (HashMap) d;
+                //RS
+                String j_id = String.valueOf(hm1.get("job_id"));
+                String sjobs = (String) hm1.get("title");
+
+                cbox_select_position.getItems().add("J" + j_id + " - " + sjobs);
+
+            }
+        }catch(Exception e)
+        {
+            System.out.println(e);
+        }
 
     }
     @FXML

@@ -31,6 +31,7 @@ import Model.HR4_Jobs;
 import Synapse.Components.Modal.Modal;
 import Synapse.Form;
 import Synapse.Model;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
@@ -156,6 +157,8 @@ public class HR2_Training_ManagementController implements Initializable {
     private TableColumn<TM_DefaultTrainings, String> col_training_title;
     @FXML
     private JFXComboBox cbox_filter_jp;
+    @FXML
+    private JFXButton btn_add_training;
 
     /**
      * Initializes the controller class.
@@ -184,6 +187,12 @@ public class HR2_Training_ManagementController implements Initializable {
         cbox_hs_trainor.getSelectionModel().selectedItemProperty().addListener(listener -> {
             searchHS_Trainor();
         });
+    }
+    //add training
+    @FXML
+    public void AddTrainingModal(){
+        Modal atm = Modal.getInstance(new Form("/FXMLS/HR2/Modals/TM_AddTraining.fxml").getParent());
+        atm.open();
     }
 
     public void DisplayDataInCB() {
