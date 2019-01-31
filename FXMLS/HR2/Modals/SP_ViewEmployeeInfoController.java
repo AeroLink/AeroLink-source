@@ -87,11 +87,11 @@ public class SP_ViewEmployeeInfoController implements Initializable {
     @FXML
     private JFXButton btn_req_promotion;
     @FXML
-    private Label lbl_rating1;
-    @FXML
-    private Label lbl_remarks1;
-    @FXML
     private JFXComboBox cbox_select_position;
+    @FXML
+    private Label lbl_exam_taken;
+    @FXML
+    private Label lbl_training_taken;
 
     /**
      * Initializes the controller class.
@@ -133,6 +133,16 @@ public class SP_ViewEmployeeInfoController implements Initializable {
     public void RequestPromotion(){
         Modal req_promotion = Modal.getInstance(new Form("/FXMLS/HR2/Modals/SP_RequestPromotion.fxml").getParent());
         req_promotion.open();
+    }
+    @FXML
+    public void ExamTaken(){
+        Modal exam_taken = Modal.getInstance(new Form("/FXMLS/HR2/Modals/SP_Employee_Exam_Taken.fxml").getParent());
+        exam_taken.open();
+    }
+    @FXML
+     public void TrainingTaken(){
+        Modal training_taken = Modal.getInstance(new Form("/FXMLS/HR2/Modals/SP_Employee_Training_Taken.fxml").getParent());
+        training_taken.open();
     }
     public void populateLabels() {
         VT_HR2 vthr2 = new VT_HR2();

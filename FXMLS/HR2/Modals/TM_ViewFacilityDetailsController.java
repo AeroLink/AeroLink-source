@@ -33,8 +33,6 @@ public class TM_ViewFacilityDetailsController implements Initializable {
     @FXML
     private Label lbl_Capacity;
     @FXML
-    private Label lbl_category;
-    @FXML
     private JFXTextArea lbl_building_desc;
     @FXML
     private Label lbl_contact;
@@ -62,7 +60,6 @@ public class TM_ViewFacilityDetailsController implements Initializable {
                             + "FacilityRoomNumber, FacilityCapacity, ab.BuildingName, ab.BuildingDescription, ab.BuildingContact, ab.BuildingYearBuilt");
                f.stream().forEach(row -> {
            
-            lbl_category.setText(((HashMap) row).get("AssetCategory").toString());
             lbl_building_desc.setText(((HashMap) row).get("BuildingDescription").toString());
             lbl_contact.setText(((HashMap) row).get("BuildingContact").toString());
             lbl_year_built.setText(((HashMap) row).get("BuildingYearBuilt").toString());
