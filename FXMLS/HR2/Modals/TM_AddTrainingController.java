@@ -5,8 +5,13 @@
  */
 package FXMLS.HR2.Modals;
 
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 /**
@@ -15,6 +20,25 @@ import javafx.fxml.Initializable;
  * @author EdenRamoneda
  */
 public class TM_AddTrainingController implements Initializable {
+
+    @FXML
+    private JFXComboBox<?> cbox_jp;
+    @FXML
+    private JFXTextField txt_training_title;
+    @FXML
+    private JFXTextArea txt_training_desc;
+    @FXML
+    private JFXComboBox<?> cbox_trainor;
+    @FXML
+    private JFXDatePicker txt_date;
+    @FXML
+    private JFXDatePicker txt_date2;
+    @FXML
+    private JFXTextField txt_total_hours;
+    @FXML
+    private JFXComboBox<?> cbox_type_of_training;
+    @FXML
+    private JFXTextField txt_limit_participants;
 
     /**
      * Initializes the controller class.
