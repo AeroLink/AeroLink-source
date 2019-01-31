@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -160,7 +161,7 @@
             <Font name="Roboto Regular" size="15.0" />
          </font>
       </Label>
-      <Pane layoutX="13.0" layoutY="449.0" prefHeight="132.0" prefWidth="172.0" style="-fx-border-color: #999966; -fx-background-color: #fff;">
+      <Pane layoutX="16.0" layoutY="470.0" prefHeight="132.0" prefWidth="172.0" style="-fx-border-color: #999966; -fx-background-color: #fff;">
          <children>
             <Label layoutX="14.0" prefHeight="30.0" prefWidth="54.0" text="Rating:">
                <font>
@@ -184,7 +185,7 @@
             </Label>
          </children>
       </Pane>
-      <JFXButton fx:id="btn_req_promotion" buttonType="RAISED" layoutX="291.0" layoutY="536.0" onAction="#RequestPromotion" prefHeight="37.0" prefWidth="199.0" style="-fx-background-color: #34A853;" text="Request Promotion" textFill="WHITE">
+      <JFXButton fx:id="btn_req_promotion" buttonType="RAISED" layoutX="403.0" layoutY="577.0" onAction="#RequestPromotion" prefHeight="25.0" prefWidth="89.0" style="-fx-background-color: #34A853;" text="Submit" textFill="WHITE">
          <font>
             <Font name="Roboto Bold" size="15.0" />
          </font>
@@ -210,6 +211,15 @@
       <Label fx:id="lbl_employee_code" layoutX="14.0" layoutY="239.0" prefHeight="30.0" prefWidth="110.0" text="None">
          <font>
             <Font name="Roboto Regular" size="15.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="cbox_select_position" layoutX="302.0" layoutY="526.0" prefHeight="25.0" prefWidth="192.0" promptText="Select Position">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXComboBox>
+      <Label layoutX="301.0" layoutY="495.0" prefHeight="30.0" prefWidth="172.0" text="Position to Promote to: ">
+         <font>
+            <Font name="Roboto Bold" size="15.0" />
          </font>
       </Label>
    </children>
