@@ -70,4 +70,8 @@ public class Log1_AssetLandClassfiles {
     public String getLandPurchasedDate() {
         return LandPurchasedDate.get();
     }
+    
+    public String getLandStatus(){
+        return LandStatus.get();
+    }
 }

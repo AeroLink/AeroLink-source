@@ -172,6 +172,7 @@ public class AddBuildingController implements Initializable {
             selectLand_combox.getItems().add(String.valueOf(hash.get("LandName")));
         });
     }
+    
     public void loadAssetBuildingCount(){
         Log1_AssetCountModel assetCount = new Log1_AssetCountModel();
         
