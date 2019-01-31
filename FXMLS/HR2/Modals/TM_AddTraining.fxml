@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="529.0" prefWidth="375.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.TM_AddTrainingController">
+<AnchorPane id="AnchorPane" prefHeight="634.0" prefWidth="375.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.TM_AddTrainingController">
    <children>
       <Pane prefHeight="36.0" prefWidth="375.0" style="-fx-background-color: #34A853;">
          <children>
@@ -32,7 +35,7 @@
                   <Font name="Lato Bold" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="17.0" layoutY="265.0" text="Trainor" textFill="#3c3c3c">
+            <Label layoutX="17.0" layoutY="266.0" text="Trainor" textFill="#3c3c3c">
                <font>
                   <Font name="Lato Bold" size="15.0" />
                </font>
@@ -42,15 +45,112 @@
                   <Font name="Lato Bold" size="15.0" />
                </font>
             </Label>
+            <Label layoutX="17.0" layoutY="377.0" text="Total Hours: " textFill="#3c3c3c">
+               <font>
+                  <Font name="Lato Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="17.0" layoutY="405.0" text="Type of Training: " textFill="#3c3c3c">
+               <font>
+                  <Font name="Lato Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="17.0" layoutY="434.0" text="Limit of Participants: " textFill="#3c3c3c">
+               <font>
+                  <Font name="Lato Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="17.0" layoutY="462.0" text="Venue: " textFill="#3c3c3c">
+               <font>
+                  <Font name="Lato Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="18.0" layoutY="493.0" text="Facility: " textFill="#3c3c3c">
+               <font>
+                  <Font name="Lato Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="18.0" layoutY="521.0" text="Vehicle: " textFill="#3c3c3c">
+               <font>
+                  <Font name="Lato Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="17.0" layoutY="548.0" text="Budget: " textFill="#3c3c3c">
+               <font>
+                  <Font name="Lato Bold" size="15.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
-      <JFXComboBox focusColor="#4d4d4d" layoutX="115.0" layoutY="52.0" prefHeight="25.0" prefWidth="236.0" />
-      <JFXTextField focusColor="#595c64" layoutX="21.0" layoutY="119.0" prefHeight="25.0" prefWidth="332.0" />
-      <JFXTextArea focusColor="WHITE" layoutX="14.0" layoutY="184.0" prefHeight="78.0" prefWidth="338.0" style="-fx-border-color: #4d4d4d;" unFocusColor="WHITE">
+      <JFXComboBox fx:id="cbox_jp" focusColor="#4d4d4d" layoutX="115.0" layoutY="52.0" prefHeight="25.0" prefWidth="236.0" promptText="Select..." />
+      <JFXTextField fx:id="txt_training_title" focusColor="#595c64" layoutX="21.0" layoutY="119.0" prefHeight="25.0" prefWidth="332.0">
+         <font>
+            <Font name="Lato Regular" size="12.0" />
+         </font></JFXTextField>
+      <JFXTextArea fx:id="txt_training_desc" focusColor="WHITE" layoutX="14.0" layoutY="184.0" prefHeight="78.0" prefWidth="338.0" style="-fx-border-color: #4d4d4d;" unFocusColor="WHITE">
          <font>
             <Font name="Lato Regular" size="12.0" />
          </font>
       </JFXTextArea>
-      <JFXComboBox focusColor="#4d4d4d" layoutX="15.0" layoutY="282.0" prefHeight="25.0" prefWidth="338.0" />
+      <JFXComboBox fx:id="cbox_trainor" focusColor="#4d4d4d" layoutX="15.0" layoutY="284.0" prefHeight="25.0" prefWidth="338.0" promptText="Select...">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXComboBox>
+      <Label layoutX="35.0" layoutY="346.0" text="from: " textFill="#3c3c3c">
+         <font>
+            <Font name="Lato Italic" size="14.0" />
+         </font>
+      </Label>
+      <JFXDatePicker fx:id="txt_date" defaultColor="#34a853" layoutX="73.0" layoutY="335.0" prefHeight="25.0" prefWidth="109.0" />
+      <Label layoutX="193.0" layoutY="346.0" text="to: " textFill="#3c3c3c">
+         <font>
+            <Font name="Lato Italic" size="14.0" />
+         </font>
+      </Label>
+      <JFXDatePicker fx:id="txt_date2" defaultColor="#34a853" layoutX="231.0" layoutY="335.0" prefHeight="25.0" prefWidth="109.0" />
+      <JFXTextField fx:id="txt_total_hours" focusColor="#595c64" layoutX="107.0" layoutY="366.0" prefHeight="25.0" prefWidth="73.0">
+         <font>
+            <Font name="Lato Regular" size="12.0" />
+         </font></JFXTextField>
+      <JFXComboBox fx:id="cbox_type_of_training" layoutX="137.0" layoutY="396.0" prefHeight="25.0" prefWidth="166.0" promptText="Select...">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXComboBox>
+      <JFXTextField fx:id="txt_limit_participants" focusColor="#595c64" layoutX="158.0" layoutY="424.0" prefHeight="25.0" prefWidth="73.0">
+         <font>
+            <Font name="Lato Regular" size="12.0" />
+         </font></JFXTextField>
+      <JFXComboBox focusColor="#4d4d4d" layoutX="77.0" layoutY="454.0" prefHeight="25.0" prefWidth="274.0" promptText="Select...">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXComboBox>
+      <JFXComboBox focusColor="#4d4d4d" layoutX="77.0" layoutY="483.0" prefHeight="25.0" prefWidth="274.0" promptText="Select...">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXComboBox>
+      <JFXComboBox focusColor="#4d4d4d" layoutX="78.0" layoutY="512.0" prefHeight="25.0" prefWidth="274.0" promptText="Select...">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXComboBox>
+      <JFXTextField focusColor="#595c64" layoutX="79.0" layoutY="539.0" prefHeight="25.0" prefWidth="274.0" promptText="Select...">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXTextField>
+      <JFXButton layoutX="137.0" layoutY="583.0" prefHeight="25.0" prefWidth="91.0" styleClass="btn-primary" text="Submit">
+         <font>
+            <Font name="Lato Regular" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Label layoutX="186.0" layoutY="377.0" text="hrs." textFill="#3c3c3c">
+         <font>
+            <Font name="Lato Italic" size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
