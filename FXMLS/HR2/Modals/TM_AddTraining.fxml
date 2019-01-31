@@ -32,10 +32,25 @@
                   <Font name="Lato Bold" size="15.0" />
                </font>
             </Label>
+            <Label layoutX="17.0" layoutY="265.0" text="Trainor" textFill="#3c3c3c">
+               <font>
+                  <Font name="Lato Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="17.0" layoutY="317.0" text="Date of Training" textFill="#3c3c3c">
+               <font>
+                  <Font name="Lato Bold" size="15.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
-      <JFXComboBox layoutX="115.0" layoutY="52.0" prefHeight="25.0" prefWidth="236.0" />
-      <JFXTextField layoutX="21.0" layoutY="119.0" prefHeight="25.0" prefWidth="332.0" />
-      <JFXTextArea layoutX="14.0" layoutY="184.0" prefHeight="78.0" prefWidth="338.0" />
+      <JFXComboBox focusColor="#4d4d4d" layoutX="115.0" layoutY="52.0" prefHeight="25.0" prefWidth="236.0" />
+      <JFXTextField focusColor="#595c64" layoutX="21.0" layoutY="119.0" prefHeight="25.0" prefWidth="332.0" />
+      <JFXTextArea focusColor="WHITE" layoutX="14.0" layoutY="184.0" prefHeight="78.0" prefWidth="338.0" style="-fx-border-color: #4d4d4d;" unFocusColor="WHITE">
+         <font>
+            <Font name="Lato Regular" size="12.0" />
+         </font>
+      </JFXTextArea>
+      <JFXComboBox focusColor="#4d4d4d" layoutX="15.0" layoutY="282.0" prefHeight="25.0" prefWidth="338.0" />
    </children>
 </AnchorPane>

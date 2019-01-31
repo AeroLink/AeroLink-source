@@ -87,6 +87,10 @@ public class SP_ViewEmployeeInfoController implements Initializable {
     @FXML
     private JFXButton btn_req_promotion;
     @FXML
+    private Label lbl_rating1;
+    @FXML
+    private Label lbl_remarks1;
+    @FXML
     private JFXComboBox cbox_select_position;
 
     /**
@@ -105,6 +109,8 @@ public class SP_ViewEmployeeInfoController implements Initializable {
 
         try {
             List c = jobs.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department","id","dept","=","dept_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_classifications","id","c","=","classification_id")
+                    .orderBy("c.class_level", Model.Sort.ASC)
                     .where(new Object[][]{{"dept.dept_name","=",lbl_department.getText()}})
                     .get();
             //"concat(substring(title,0,2), job_id) as job_id, title"
