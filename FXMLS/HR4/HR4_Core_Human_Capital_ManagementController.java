@@ -232,7 +232,6 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "tblD", "=", "dept_id")
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_classifications", "id", "tblC", "=", "classification_id")
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_designations", "id", "tblDD", "=", "designation_id")
-                                .where(new Object[][]{{"tblC.class_name", "=", ckasscb.getSelectionModel().getSelectedItem().toString()}})
                                 .get(
                                         "job_id",
                                         "title",
