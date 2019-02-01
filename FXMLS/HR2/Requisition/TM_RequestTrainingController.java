@@ -9,6 +9,7 @@ import Model.HR2_LM_Exam_Request;
 import Model.HR2_Temp_Employee_Profiles;
 import Model.HR4_Departments;
 import Model.HR4_Jobs;
+import Synapse.STORED_PROC;
 import Synapse.Session;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -55,7 +56,8 @@ public class TM_RequestTrainingController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         DisplayDataInCB();
-     } 
+    }
+
     public void DisplayDataInCB() {
         HR4_Departments dept = new HR4_Departments();
         HR4_Jobs j = new HR4_Jobs();
@@ -73,19 +75,32 @@ public class TM_RequestTrainingController implements Initializable {
                 HashMap hm3 = (HashMap) td;
                 //RS
                 cbox_job_position.getItems().add("J" + hm3.get("job_id") + hm3.get("title"));
-               
+
             }
-         
+
         } catch (Exception e) {
             System.out.println(e);
         }
 
     }
+
+    String rq_id = ""; //needed for accepting the request_id
+
     @FXML
-     public void SubmitRequest() {
+    public void SubmitRequest() {
 
         if (!cbox_department.getValue().toString().isEmpty() || !cbox_job_position.getValue().toString().isEmpty() || !txt_reason.getText().isEmpty()) {
             HR2_LM_Exam_Request rs = new HR2_LM_Exam_Request();
+
+            List<HashMap> list = STORED_PROC.executeCall("EIS_CreateRequest", new Object[][]{
+                {"request", "Training Request"},
+                {"request_description", txt_reason.getText()},
+                {"requestor_id", Session.pull("employee_code")}
+            });
+
+            list.stream().forEach((HashMap e) -> {
+                rq_id = e.get("id").toString();
+            });
 
             try {
                 String[][] skill_req = {
@@ -97,7 +112,8 @@ public class TM_RequestTrainingController implements Initializable {
                     {"from_day", txt_from_day.getValue().toString()},
                     {"to_day", txt_to_day.getValue().toString()},
                     {"reason", txt_reason.getText()},
-                    {"employee_code",Session.pull("employee_code").toString()}
+                    {"employee_code", Session.pull("employee_code").toString()},
+                    {"request_id", rq_id}
                 };
                 rs.insert(skill_req);
                 Alert saved = new Alert(Alert.AlertType.INFORMATION);
@@ -113,5 +129,5 @@ public class TM_RequestTrainingController implements Initializable {
             saved.showAndWait();
         }
     }
-    
+
 }
