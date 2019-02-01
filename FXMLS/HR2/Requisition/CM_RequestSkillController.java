@@ -9,6 +9,7 @@ import Model.HR2_CM_Skill_Requisition;
 import Model.HR4_Departments;
 import Model.HR4_Jobs;
 import Synapse.Model;
+import Synapse.Session;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
@@ -88,7 +89,8 @@ public class CM_RequestSkillController implements Initializable {
             try {
                 String[][] skill_req = {
                     {"job_id", cbox_job_position.getSelectionModel().getSelectedItem().toString().substring(1).split(" - ")[0]},
-                    {"reason", txt_reason.getText()}
+                    {"reason", txt_reason.getText()},
+                    {"requested_by", Session.pull("employee_code").toString()}
                 };
                 rs.insert(skill_req);
                 Alert saved = new Alert(Alert.AlertType.INFORMATION);
