@@ -160,9 +160,9 @@ public class HR2_Training_ManagementController implements Initializable {
     @FXML
     private TableColumn<TM_DefaultTrainings, String> col_t_trainor;
     @FXML
-    private JFXComboBox<?> cbox_filter_t_jp;
+    private JFXComboBox cbox_filter_t_jp;
     @FXML
-    private JFXComboBox<?> cbox_filter_t_trainor;
+    private JFXComboBox cbox_filter_t_trainor;
 
     /**
      * Initializes the controller class.
@@ -202,7 +202,7 @@ public class HR2_Training_ManagementController implements Initializable {
     public void DisplayDataInCB() {
         HR4_Departments dept = new HR4_Departments();
         HR2_Temp_Employee_Profiles emp = new HR2_Temp_Employee_Profiles();
-
+        HR4_Jobs j = new HR4_Jobs();
         try {
             List c = dept.get();
             for (Object d : c) {
@@ -217,19 +217,26 @@ public class HR2_Training_ManagementController implements Initializable {
                 HashMap hm3 = (HashMap) td;
                 //RS
                 cbox_tm_dept.getItems().add(hm3.get("dept_name"));
-
+               
             }
             List trainors = emp.get();
             for (Object tjp : trainors) {
                 HashMap hm4 = (HashMap) tjp;
                 //RS
                 cbox_tm_trainor.getItems().add(hm4.get("employee_code") + " - " + hm4.get("firstname") + " " + hm4.get("middlename") + " " + hm4.get("lastname"));
+                cbox_filter_t_trainor.getItems().add(hm4.get("employee_code") + " - " + hm4.get("firstname") + " " + hm4.get("middlename") + " " + hm4.get("lastname"));
             }
             List trainorsHistory = emp.get();
             for (Object th : trainorsHistory) {
                 HashMap hm5 = (HashMap) th;
                 //RS
                 cbox_hs_trainor.getItems().add(hm5.get("employee_code") + " - " + hm5.get("firstname") + " " + hm5.get("middlename") + " " + hm5.get("lastname"));
+            }
+             List job_title = j.get();
+            for (Object jt : job_title) {
+                HashMap hm6 = (HashMap) jt;
+                //RS
+                cbox_filter_t_jp.getItems().add(hm6.get("title"));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -316,9 +323,10 @@ public class HR2_Training_ManagementController implements Initializable {
         try {
             HR2_TM_DefaultTrainings dt = new HR2_TM_DefaultTrainings();
             List defTrainings = dt.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "emp", "=", "trainor")
                     .where(new Object[][]{{"aerolink.tbl_hr2_default_trainings.isDeleted", "<>", "1"}})
                     .orderBy("j.title", Model.Sort.ASC)
-                    .get("dt_id, j.title, training_title");
+                    .get("dt_id, j.title, training_title, CONCAT(emp.firstname,' ',emp.middlename,' ',emp.lastname)as emp_trainor");
 
             DisplayDefaultTrainings(defTrainings);
         } catch (Exception e) {
@@ -337,7 +345,8 @@ public class HR2_Training_ManagementController implements Initializable {
                         new TM_DefaultTrainings(
                                 String.valueOf(hm1.get("dt_id")),
                                 String.valueOf(hm1.get("title")),
-                                String.valueOf(hm1.get("training_title"))
+                                String.valueOf(hm1.get("training_title")),
+                                String.valueOf(hm1.get("emp_trainor"))
                         ));
             }
 
@@ -599,6 +608,7 @@ public class HR2_Training_ManagementController implements Initializable {
         //for tbl_default_trainings
         col_t_jp.setCellValueFactory((TableColumn.CellDataFeatures<TM_DefaultTrainings, String> param) -> param.getValue().job_title);
         col_t_training_title.setCellValueFactory((TableColumn.CellDataFeatures<TM_DefaultTrainings, String> param) -> param.getValue().training_title);
+        col_t_trainor.setCellValueFactory((TableColumn.CellDataFeatures<TM_DefaultTrainings, String> param) -> param.getValue().trainor);
         //for tbl_mngmt
         col_tm_dept.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().dept_name);
         col_tm_jp.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().title);
