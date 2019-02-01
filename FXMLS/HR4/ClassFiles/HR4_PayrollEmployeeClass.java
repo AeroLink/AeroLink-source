@@ -14,8 +14,16 @@ import javafx.beans.property.SimpleStringProperty;
 public class HR4_PayrollEmployeeClass {
     public SimpleStringProperty a;
     public SimpleStringProperty b;
-    public HR4_PayrollEmployeeClass(String payroll_code,String employee_code){
+    public SimpleStringProperty c;
+    public SimpleStringProperty d;
+    public SimpleStringProperty e;
+    
+    public HR4_PayrollEmployeeClass(String payroll_code,String employee_code,String Fullname,String job_id,String dept_id){
     this.a = new SimpleStringProperty(payroll_code);
     this.b = new SimpleStringProperty(employee_code);
+    this.c = new SimpleStringProperty(Fullname);
+    this.d = new SimpleStringProperty(job_id);
+    this.e = new SimpleStringProperty(dept_id);
+    
     }
 }

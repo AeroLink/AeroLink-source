@@ -86,9 +86,11 @@ public class HR4_PayrollController implements Initializable {
         this.generateTable1();
         this.populateTable2();
         this.generateTable2();
+        this.generateTable1010();
+        
         tbl_eer.getSelectionModel().selectFirst();
         tbl_eer.setOnMouseClicked(e -> {
-        //populate();
+        populate();
         });
     }
     
@@ -160,6 +162,26 @@ public class HR4_PayrollController implements Initializable {
         tbl_ps.getColumns()
         .addAll(payroll_code,start_date,end_date,dept_id);
    }
+   public void generateTable1010(){
+        tlb_eer1.getItems().clear();
+        tlb_eer1.getColumns().removeAll(tlb_eer1.getColumns());
+        TableColumn<HR4_PayrollEmployeeClass, String> payroll_code = new TableColumn<>("Payroll Code");
+        TableColumn<HR4_PayrollEmployeeClass, String> employee_code = new TableColumn<>("Employee Code");
+        TableColumn<HR4_PayrollEmployeeClass, String> Fullname = new TableColumn<>("Fullname");
+        TableColumn<HR4_PayrollEmployeeClass, String> job_id = new TableColumn<>("Position");
+        TableColumn<HR4_PayrollEmployeeClass, String> dept_id = new TableColumn<>("Department");
+        
+        //<editor-fold defaultstate="collapsed" desc="Cell value factories">
+        payroll_code.setCellValueFactory((TableColumn.CellDataFeatures<HR4_PayrollEmployeeClass, String> param) -> param.getValue().a);
+        employee_code.setCellValueFactory((TableColumn.CellDataFeatures<HR4_PayrollEmployeeClass, String> param) -> param.getValue().b);
+        Fullname.setCellValueFactory((TableColumn.CellDataFeatures<HR4_PayrollEmployeeClass, String> param) -> param.getValue().c);
+        job_id.setCellValueFactory((TableColumn.CellDataFeatures<HR4_PayrollEmployeeClass, String> param) -> param.getValue().d);
+        dept_id.setCellValueFactory((TableColumn.CellDataFeatures<HR4_PayrollEmployeeClass, String> param) -> param.getValue().d);
+         //</editor-fold>
+        tlb_eer1.getColumns()
+        .addAll(payroll_code,employee_code,Fullname,job_id,dept_id);
+   }
+        
    public void populateTable1(){
        CompletableFuture.supplyAsync(() -> {
 
@@ -321,21 +343,21 @@ public class HR4_PayrollController implements Initializable {
         }
         tbl_eer.setItems(obj2);   
    }
-   /*public void populate() {
+   public void populate() {
 
         try {
             //tbl courses
             HR4_PayrollEmployeeModel pem = new HR4_PayrollEmployeeModel();
 
-            List e = pem.join(Model.JOIN.INNER, "aerolink.tbl_hr4_payroll", "payroll_code", "c", "=", "payroll_code")
+            List e = pem.join(Model.JOIN.INNER, "aerolink.tbl_hr4_payroll", "payroll_code", "tblD", "=", "payroll_code")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "tblDD", "=", "employee_code")
-                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_jobs", "employee_code", "tblD", "=", "employee_code")
-                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "tblD", "job_id", true)
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_jobs", "employee_code", "tblDDD", "=", "employee_code")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "tblDDD", "job_id", true)
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "=", "aerolink.tbl_hr4_jobs", "dept_id", true)
-                    .where(new Object[][]{{"c.payroll_code", "=", tbl_eer.getSelectionModel().getSelectedItem().a.getValue()}, {"aerolink.tbl_hr4_payroll3.isDeleted", "<>", "1"}})
-                    .get("payroll_code",
-                         "tblD.employee_code",
-                         "CONCAT(tblDD.lastname,', ',tblDD.firstname,' ',tblDD.middlename,'.') as fnn",
+                    .where(new Object[][]{{"tblD.payroll_code", "=", tbl_eer.getSelectionModel().getSelectedItem().a.getValue()}})
+                    .get("tbl_hr4_payroll3.payroll_code",
+                         "tblDD.employee_code",
+                         "CONCAT(tblDD.lastname,', ',tblDD.firstname,' ',tblDD.middlename,'.') as Fullname",
                          "aerolink.tbl_hr4_jobs.title as job_id",
                          "aerolink.tbl_hr4_department.dept_name as dept_id");
             Stored(e);
@@ -355,7 +377,13 @@ public class HR4_PayrollController implements Initializable {
                 obj.add(
                         new HR4_PayrollEmployeeClass(
                                 String.valueOf(hm.get("payroll_code")),
-                                String.valueOf(hm.get("employee_code"))));
+                                String.valueOf(hm.get("employee_code")),
+                                String.valueOf(hm.get("Fullname")),
+                                String.valueOf(hm.get("job_id")),
+                                String.valueOf(hm.get("dept_id"))
+                        
+                        
+                        ));
 
             }
             tlb_eer1.setItems(obj);
@@ -363,7 +391,7 @@ public class HR4_PayrollController implements Initializable {
         } catch (Exception e) {
             System.out.println(e);
         }
-    }*/
+    }
     @FXML
     private void addbtn(ActionEvent event) {
         Modal lq = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_NewPayrollMain.fxml").getParent());

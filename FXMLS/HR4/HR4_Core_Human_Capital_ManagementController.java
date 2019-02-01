@@ -10,6 +10,7 @@ import FXMLS.HR4.Model.HR4_EmployeeInfo;
 import FXMLS.HR4.ClassFiles.HR4_MIZ;
 import FXMLS.HR4.ClassFiles.TableModel_Jobs;
 import FXMLS.HR4.Model.HR4_ClassificationModel;
+import FXMLS.HR4.Model.HR4_InfoChartModel;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -37,6 +38,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.geometry.Side;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
@@ -70,8 +73,6 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
     @FXML
     private JFXButton btnNewDept;
     @FXML
-    private JFXTextField Search_Job;
-    @FXML
     private TableView<HR4_EmpInfoClass> tbl_chc;
     @FXML
     private ComboBox statcb;
@@ -79,6 +80,16 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
     private ComboBox ckasscb;
     @FXML
     private JFXTextField srch1;
+    @FXML
+    private JFXTextField Search_Job;
+    @FXML
+    private PieChart pieChartGender;
+    private final ObservableList<PieChart.Data> pie = FXCollections.observableArrayList();
+    @FXML
+    private PieChart pieChartDept;
+    private final ObservableList<PieChart.Data> piee = FXCollections.observableArrayList();
+    @FXML
+    private PieChart pieChartAge;
 
     /**
      * Initializes the controller class.
@@ -106,12 +117,12 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         tbl_jobs.setContextMenu(contextMenuJobs);
         //SearchOfJob
 
-        Search_Job.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-            if (!Search_Job.getText().equals("")) {
-                searchStatus = true;
-                SearchJOB();
-            }
-        });
+        //Search_Job.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+          //  if (!Search_Job.getText().equals("")) {
+            //    searchStatus = true;
+              //  SearchJOB();
+            //}
+        //});
         ///////2ndobj
 
         obj1.addListener((ListChangeListener.Change<? extends Object> c) -> {
@@ -124,7 +135,10 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         srch1.setOnMouseClicked(event -> Search());
 
         this.generateTable1();
-        this.populateTable1();
+        this.populateTable1();        
+        this.Piechart1(); 
+        this.Piechart2();
+
 
     }
 
@@ -158,7 +172,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         }
     }
 
-    public void SearchJOB() {
+    /*public void SearchJOB() {
 
         tbl_jobs.getItems().clear();
         List rs = jobs
@@ -175,6 +189,55 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
                         "tblC.class_name as classification",
                         "tblDD.designation as designation");
         this.AddJobToTable(rs);
+    }*/
+    HR4_InfoChartModel gcm = new HR4_InfoChartModel();
+    
+    public void Piechart1() {
+
+        pie.clear();
+        List<HashMap> list3x = gcm
+                .groupBy("gender")
+                .get("gender,COUNT(gender) as Total");
+        list3x.forEach((row) -> {
+            pie.add(new PieChart.Data(row.get("gender").toString(),
+                    Double.parseDouble(row.get("Total").toString())));
+        });
+        pieChartGender.setData(pie);
+        pieChartGender.setLegendSide(Side.BOTTOM);
+        pieChartGender.setStartAngle(90);
+
+    }
+    public void Piechart2() {
+        HR4_Jobs jobs = new HR4_Jobs();
+        piee.clear();
+        List<HashMap> list3x = jobs.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "=", "dept_id")
+                .groupBy("dept_name")
+                .get("dept_name, COUNT(dept_name) as Total");
+        list3x.forEach((row) -> {
+            piee.add(new PieChart.Data(row.get("dept_name").toString(),
+                    Double.parseDouble(row.get("Total").toString())));
+        
+        });
+        pieChartDept.setData(piee);
+        pieChartDept.setLegendSide(Side.BOTTOM);
+        pieChartDept.setStartAngle(90);
+
+    }
+    public void Piechart3() {
+        HR4_Jobs jobs = new HR4_Jobs();
+        piee.clear();
+        List<HashMap> list3x = jobs.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "=", "dept_id")
+                .groupBy("dept_name")
+                .get("dept_name, COUNT(dept_name) as Total");
+        list3x.forEach((row) -> {
+            piee.add(new PieChart.Data(row.get("dept_name").toString(),
+                    Double.parseDouble(row.get("Total").toString())));
+        
+        });
+        pieChartDept.setData(piee);
+        pieChartDept.setLegendSide(Side.BOTTOM);
+        pieChartDept.setStartAngle(90);
+
     }
 
     public void Search() {
