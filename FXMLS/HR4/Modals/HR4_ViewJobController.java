@@ -5,6 +5,7 @@
  */
 package FXMLS.HR4.Modals;
 
+import FXMLS.HR4.ClassFiles.HR4_EmpInfoClass;
 import FXMLS.HR4.ClassFiles.HR4_MIZ;
 import Model.HR4_Classification;
 import Model.HR4_Departments;
@@ -28,22 +29,21 @@ import java.util.concurrent.Executors;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
-
-
 
 /**
  * FXML Controller class
@@ -74,7 +74,7 @@ public class HR4_ViewJobController implements Initializable {
 
     StringProperty jobLimit;
     StringProperty jobOpen;
-    
+
     @FXML
     private FontAwesomeIconView jobID;
     @FXML
@@ -85,18 +85,19 @@ public class HR4_ViewJobController implements Initializable {
     private TextField txtOpen;
     @FXML
     private StackPane stackpane;
-    @FXML
     private JFXToggleButton switchOpen;
 
-    
     ExecutorService e = Executors.newFixedThreadPool(1);
-    
+    @FXML
+    private TableView<TOpen> tbl_openJobs;
+    @FXML
+    private JFXButton btnNewJobOpening;
+
+    ObservableList<TOpen> objTOPEN = FXCollections.observableArrayList();
+
     public void initialize(URL url, ResourceBundle rb) {
-        
-        
-        CompletableFuture
-                .supplyAsync(() -> getLimit(HR4_MIZ.id), e)
-                .thenAcceptAsync((limit) -> applyLimit(limit));
+
+        System.err.println("Testing mis " + HR4_MIZ.id);
 
         lblJob.setText(HR4_MIZ.t);
         cboDept.getItems().add(HR4_MIZ.dpt);
@@ -109,47 +110,81 @@ public class HR4_ViewJobController implements Initializable {
         cboClass.getSelectionModel().selectFirst();
 
         Platform.runLater(() -> getTotalPopulation(HR4_MIZ.id));
+
+        List<HashMap> limit = jobs.where(new Object[][]{
+            {"aerolink.tbl_hr4_jobs.job_id", "=", HR4_MIZ.id}
+        }).get("aerolink.tbl_hr4_jobs.population_limit");
+
+        jobLimit = new SimpleStringProperty(String.valueOf(limit.get(0).get("population_limit")));
+        txtLimit.textProperty().bind(jobLimit);
+
+        List<HashMap> totalOpen = jobs
+                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_limit", "job_id", "=", "job_id")
+                .where(new Object[][]{
+            {"aerolink.tbl_hr4_jobs.job_id", "=", HR4_MIZ.id}
+        }).get("COALESCE(SUM(aerolink.tbl_hr4_job_limit.jobOpen), 0) as totalOpen");
+
+        txtOpen.setText(totalOpen.get(0).get("totalOpen").toString());
         
+        this.generateTable();
+        this.renderData();
+        
+        btnNewJobOpening.setOnAction(e -> createDialog());
+
     }
 
-    public List getLimit(String id) {
-        return jobs.join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_limit", "job_id", "=", "job_id").where(new Object[][]{
-            {"aerolink.tbl_hr4_jobs.job_id", "=", id}
-        }).get("aerolink.tbl_hr4_job_limit.job_limit", "aerolink.tbl_hr4_job_limit.jobOpen");
+    public void generateTable() {
+        tbl_openJobs.getColumns().removeAll(tbl_openJobs.getColumns());
+
+        TableColumn<TOpen, String> eType = new TableColumn<>("Employment Status");
+        TableColumn<TOpen, String> charP = new TableColumn<>("Add. Character Preference");
+        TableColumn<TOpen, String> numP = new TableColumn<>("Number of Positions Opened");
+        TableColumn<TOpen, String> eSalary = new TableColumn<>("Salary");
+        
+        eType.setCellValueFactory(param -> param.getValue().statusType);
+        charP.setCellValueFactory(param -> param.getValue().char_pref);
+        numP.setCellValueFactory(param -> param.getValue().num_open);
+        eSalary.setCellValueFactory(param -> param.getValue().salary);
+
+        tbl_openJobs.getColumns().addAll(eType, charP, numP, eSalary);
+
     }
 
-    public List getTotalPopulation(String id){
+    public void renderData() {
+        tbl_openJobs.getItems().removeAll(tbl_openJobs.getItems());
+        
+        List<HashMap> op = new HR4_JobLimits().where(new Object[][]{
+            {"aerolink.tbl_hr4_job_limit.job_id", "=", HR4_MIZ.id}
+        }).get();
+        
+        for(HashMap row : op) {
+           objTOPEN.add(
+                   new TOpen(
+                           row.get("status_type").toString().equals("0") ? "Full Time" : "Part Time", 
+                           row.get("additional_character_preference").toString(), 
+                           row.get("jobOpen").toString(), 
+                           row.get("salary").toString())
+           );
+        }
+        
+        tbl_openJobs.setItems(objTOPEN);
+    }
+
+    public List getTotalPopulation(String id) {
         List l = jobs.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_jobs", "job_id", "=", "job_id").where(new Object[][]{
             {"aerolink.tbl_hr4_jobs.job_id", "=", id}
         }).get("COUNT(*) as population");
         applyPopulation(l);
         return l;
     }
-    
-    public void applyLimit(List limit) {
-        for(Object c : limit) {
-            HashMap hash = (HashMap) c;
-            
-            jobLimit = new SimpleStringProperty(String.valueOf(hash.get("job_limit")));
-            jobOpen = new SimpleStringProperty(String.valueOf(hash.get("jobOpen")));
-            txtLimit.textProperty().bind(jobLimit);
-            txtOpen.textProperty().bind(jobOpen);
-            
-        }
-        
-        if(Integer.parseInt(jobOpen.get()) > 0) {
-           switchOpen.setSelected(true);
+
+    public void applyPopulation(List population) {
+        for (Object d : population) {
+            HashMap hash = (HashMap) d;
+            txtTotal.setText(String.valueOf(hash.get("population")).isEmpty() ? "0" : String.valueOf(hash.get("population")));
         }
     }
 
-    public void applyPopulation(List population) {
-        for(Object d : population) {
-            HashMap hash = (HashMap) d;
-            
-            txtTotal.setText(String.valueOf(hash.get("population")).isEmpty() ? "0" :  String.valueOf(hash.get("population")));
-        }
-    }
-    
     @FXML
     private void editJob(ActionEvent event) {
         txtDesc.setEditable(true);
@@ -196,71 +231,135 @@ public class HR4_ViewJobController implements Initializable {
             cboDes.getItems().add(hm.get("id") + " - " + hm.get("designation"));
         }
     }
-    
-    public void createDialog(){
+
+    public void createDialog() {
         JFXDialogLayout layout = new JFXDialogLayout();
         layout.setHeading(new Text("Opening Job Positions"));
-        
-        
+
         Label lbl = new Label("How many positions do you want to open?");
         Spinner num = new Spinner(0, Integer.parseInt(jobLimit.get()), 0);
-        VBox vbox = new VBox(lbl, num);
+
+        Label lbl_2 = new Label("What employment status?");
+        String[] listCombo = {"Full Time", "Part Time"};
+        ComboBox<String> combo = new ComboBox();
+        combo.getItems().addAll(listCombo);
+        combo.getSelectionModel().selectFirst();
+
+        Label lbl_3 = new Label("Additional Character Reference (Optional)");
+        TextArea text = new TextArea("");
+
+        Label lbl_4 = new Label("Job Salary");
+        TextField salary = new TextField("");
+        
+        VBox vbox = new VBox(lbl, num, new Label(""), lbl_2, combo, new Label(""), lbl_3, text, new Label(""), lbl_4, salary);
+
         layout.setBody(vbox);
-        
-        
+
         JFXDialog dialog = new JFXDialog(stackpane, layout, JFXDialog.DialogTransition.TOP);
-        
+
         JFXButton btn = new JFXButton("Submit");
         JFXButton btnCancel = new JFXButton("Cancel");
         JFXButton btnDummy = new JFXButton(" ");
-        
+
         btnDummy.setDisable(true);
-        
-        num.valueProperty().addListener((observable) -> {
-            jobOpen.setValue(String.valueOf(num.getValue()));
-        });
-        
+
         btn.setOnAction((event) -> {
-          
-          Boolean t = new HR4_JobLimits().update(new Object[][] {
-                {"jobOpen", num.getValue()}
-            }).where(new Object[][] {
-                {"job_id", "=", HR4_MIZ.id}
-            }).executeUpdate();
-          
-          if(t) {
-            Helpers.EIS_Response.SuccessResponse("Success", "Job was successfully opened with " + num.getValue() + " " + (Integer.parseInt(num.getValue().toString()) <= 1 ? "position" : "positions."));
-            switchOpen.setSelected(true);
-            dialog.close();
-          }
+
+            Boolean t = new HR4_JobLimits().insert(new Object[][]{
+                {"job_id", HR4_MIZ.id},
+                {"jobOpen", num.getValue()},
+                {"status_type", combo.getSelectionModel().getSelectedIndex()},
+                {"additional_character_preference", text.getText()},
+                {"salary", salary.getText()}
+            });
+
+            if (t) {
+                Helpers.EIS_Response.SuccessResponse("Success", "Job was successfully opened with " + num.getValue() + " " + (Integer.parseInt(num.getValue().toString()) <= 1 ? "position" : "positions."));
+                dialog.close();
+            }
         });
-        
-        
+
         btnCancel.setOnAction((event) -> {
             dialog.close();
         });
-        
-        
+
         btn.getStyleClass().add("btn-primary");
         btnCancel.getStyleClass().add("btn-danger");
-        
-        
+
         layout.setActions(btn, btnDummy, btnCancel);
         dialog.show();
-        
-        
+//        if (Integer.parseInt(jobOpen.get()) == 0) {
+//
+//        } else {
+//            JFXDialogLayout layout = new JFXDialogLayout();
+//            layout.setHeading(new Text("Closing Job Position"));
+//
+//            Label lbl = new Label("Are you sure you want to close this position?");
+//            VBox vbox = new VBox(lbl);
+//            layout.setBody(vbox);
+//
+//            JFXDialog dialog = new JFXDialog(stackpane, layout, JFXDialog.DialogTransition.TOP);
+//
+//            JFXButton btn = new JFXButton("Submit");
+//            JFXButton btnCancel = new JFXButton("Cancel");
+//            JFXButton btnDummy = new JFXButton(" ");
+//
+//            btnDummy.setDisable(true);
+//
+//            btn.setOnAction((event) -> {
+//
+//                Boolean t = new HR4_JobLimits().update(new Object[][]{
+//                    {"jobOpen", 0}
+//                }).where(new Object[][]{
+//                    {"job_id", "=", HR4_MIZ.id}
+//                }).executeUpdate();
+//
+//                if (t) {
+//                    Helpers.EIS_Response.SuccessResponse("Success", "Job was successfully Closed");
+//                    switchOpen.setSelected(false);
+//                    dialog.close();
+//                }
+//            });
+//
+//            btnCancel.setOnAction((event) -> {
+//                dialog.close();
+//            });
+//
+//            btn.getStyleClass().add("btn-primary");
+//            btnCancel.getStyleClass().add("btn-danger");
+//
+//            layout.setActions(btn, btnDummy, btnCancel);
+//            dialog.show();
+//        }
+
     }
 
-    @FXML
     private void toggleJob(ActionEvent event) {
 
-        switchOpen.setSelected(false);
-        if(Integer.parseInt(txtTotal.getText()) < Integer.parseInt(txtLimit.getText())) {
+        if (switchOpen.isSelected()) {
             createDialog();
-        }else {
-            Helpers.EIS_Response.ErrorResponse("Opps!", "Total Population is already on its limit, Adjust the job limit");
+        } else {
+            if (Integer.parseInt(txtTotal.getText()) < Integer.parseInt(txtLimit.getText())) {
+                createDialog();
+            } else {
+                Helpers.EIS_Response.ErrorResponse("Opps!", "Total Population is already on its limit, Adjust the job limit");
+            }
         }
-        
+
     }
 
+    public class TOpen {
+
+        SimpleStringProperty statusType;
+        SimpleStringProperty char_pref;
+        SimpleStringProperty num_open;
+        SimpleStringProperty salary;
+
+        public TOpen(String statusTypeS, String char_prefS, String num_openS, String salaryS) {
+            this.statusType = new SimpleStringProperty(statusTypeS);
+            this.char_pref = new SimpleStringProperty(char_prefS);
+            this.num_open = new SimpleStringProperty(num_openS);
+            this.salary = new SimpleStringProperty(salaryS);
+        }
+    }
 }

@@ -5,16 +5,24 @@
  */
 package FXMLS.Log2;
 
+import FXMLS.HR3.ClassFiles.HR3_tpLeaves;
+import FXMLS.HR3.HR3_Leave_ManagementController;
 import FXMLS.Log2.ClassFiles.Log2_Fleet_ManagementClass;
 import FXMLS.Log2.ClassFiles.Log2_Fleet_ManagementRequests;
+import FXMLS.Log2.ClassFiles.Log2_Fleet_Management_outboundtable;
+import Model.Log2.Log2_outbound;
 import Model.Log2_Fleet_ManagementAddtask;
 import Model.Log2_Fleet_ManagementAddvehicle;
 import Model.Log2_Fleet_ManagementRequest;
 import Model.Log2_Fleet_ManagementScheduling;
+import Synapse.Components.Modal.Modal;
+import Synapse.Form;
+import Synapse.Session;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXTimePicker;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
@@ -31,9 +39,15 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import java.lang.String;
+import java.util.concurrent.CompletableFuture;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -57,10 +71,14 @@ public class Log2_Fleet_ManagementController implements Initializable {
     ObservableList<String> driver = FXCollections.observableArrayList("d1", "d2", "d3");
 
     ObservableList<String> task = FXCollections.observableArrayList("Deliver", "", "");
+    
+    ObservableList<String> remarks = FXCollections.observableArrayList("Remarks", "Remarks", "Remarks");
     @FXML
     private TableColumn<Log2_Fleet_ManagementRequests, String> requestdept;
     @FXML
     private TableColumn<Log2_Fleet_ManagementRequests, String> requestitemname;
+    @FXML
+    private TableColumn<Log2_Fleet_ManagementRequests, String> requesttypeoftransaction;
     @FXML
     private TableColumn<Log2_Fleet_ManagementRequests, String> requestsize;
     @FXML
@@ -92,83 +110,37 @@ public class Log2_Fleet_ManagementController implements Initializable {
     @FXML
     private JFXComboBox<String> scheddriver;
     @FXML
-    private TableColumn<Log2_Fleet_ManagementClass, String> pvehicleno;
-    @FXML
-    private TableColumn<Log2_Fleet_ManagementClass, String> ptypeofvehicle;
-    @FXML
-    private TableColumn<Log2_Fleet_ManagementClass, String> pdestination;
-    @FXML
-    private TableColumn<Log2_Fleet_ManagementClass, String> ptime;
-    @FXML
-    private TableColumn<Log2_Fleet_ManagementClass, String> pstatus;
-    @FXML
-    private TableView<Log2_Fleet_ManagementClass> prooutbound;
-    @FXML
-    private TableView<Log2_Fleet_ManagementClass> proinbound;
-    @FXML
-    private TableColumn<Log2_Fleet_ManagementClass, String> proinvehicleno;
-    @FXML
-    private TableColumn<Log2_Fleet_ManagementClass, String> prointypeofvehicle;
-    @FXML
-    private TableColumn<Log2_Fleet_ManagementClass, String> proinitemname;
-    @FXML
-    private TableColumn<Log2_Fleet_ManagementClass, String> proindestination;
-    @FXML
-    private TableColumn<Log2_Fleet_ManagementClass, String> prointime;
-    @FXML
-    private TableColumn<Log2_Fleet_ManagementClass, String> proinremarks;
-    @FXML
     private JFXButton btnsubmit;
     @FXML
-    private TableColumn<?, ?> scheduledepartment;
+    private JFXTimePicker schedtime;
     @FXML
-    private TableColumn<?, ?> scheduleitemname;
+    private ContextMenu contextmenudetails;
     @FXML
-    private TableColumn<?, ?> scheduledestination;
+    private MenuItem detailspost;
     @FXML
-    private TableColumn<?, ?> scheduled;
+    private TableView<Log2_Fleet_Management_outboundtable> tblob;
     @FXML
-    private TableColumn<?, ?> scheduleassignvehicle;
+    private TableView<?> tbl_dispatched;
     @FXML
-    private TableColumn<?, ?> scheduledriver;
+    private JFXTextField txt_vmodel;
     @FXML
-    private TableColumn<?, ?> schedulestatus;
+    private JFXTextField txt_plateno;
     @FXML
-    private JFXDatePicker vehicledate;
-    @FXML
-    private JFXComboBox<String> combovehicletask;
-    @FXML
-    private JFXButton btnsubmittask;
-    private JFXTextField txtvehicle;
-    private JFXTextField vehicletype;
-    private JFXTextField plateno;
-    private JFXTextField chassisno;
-    private JFXButton btnsubmitaddvehicle;
-    @FXML
-    private TableView<?> tblsched;
-    @FXML
-    private JFXButton addvehicle;
-    @FXML
-    private JFXButton deletetask;
-    @FXML
-    private JFXButton edittask;
-    @FXML
-    private JFXButton addtask;
+    private JFXComboBox<String> combo_remarks;
+   
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        this.generatetable();
+        this.loadDataoutbound();
+        
         reqDisplaydata();
         reqloaddata();
 
-        proCols();
-        proloaddata();
-
-        proinCols();
-        proinloaddata();
+       
         loadData();
         displaydata();
-       
+
         getdataontableview();
 
         schedvehicle.setItems(vehicle);
@@ -179,17 +151,102 @@ public class Log2_Fleet_ManagementController implements Initializable {
 
         scheddriver.setItems(driver);
         scheddriver.setPromptText("Choose Driver");
-
-        combovehicletask.setItems(task);
-        combovehicletask.setPromptText("Choose Task");
-
-        btnsubmit.setOnMouseClicked(e -> Save());
-
-        btnsubmittask.setOnMouseClicked(e -> Savetask());
+        
+        combo_remarks.setItems(remarks);
+        combo_remarks.setPromptText("Choose Remarks");
 
         
-
+        btnsubmit.setOnMouseClicked(e -> Save());
+        
+        // disable textfield.
+        scheddept.setEditable(false);
+        scheditemname.setEditable(false);
+        schedquantity.setEditable(false);
+        scheddestination.setEditable(false);
+        scheddeparture.setEditable(false);
+        
+        //dispatch table...
+        txt_vmodel.setEditable(false);
+        txt_plateno.setEditable(false);
+        
+        //table rightclick...
+        this.tblob.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.SECONDARY) {
+                if (event.getClickCount() == 2) {
+                    this.contextmenudetails.show(tblob, event.getX(), event.getY());
+                }
+            }
+        });
+        
+        this.tblob.setContextMenu(contextmenudetails);
+        this.detailspost.setOnAction(action -> viewdetails());
+       
     }
+    
+    private void viewdetails() {
+         Modal md = Modal.getInstance(new Form("/FXMLS/Log2/fm/modals/Log2_Fleet_Management_VehicleModel.fxml").getParent());
+        md.open();
+    }
+    
+    
+    // generate table ng outbound
+    private void generatetable() {
+        
+        tblob.getColumns().removeAll(tblob.getColumns());
+        
+        TableColumn<Log2_Fleet_Management_outboundtable, String> vehicle_model = new TableColumn<>("Vehicle Model");
+        TableColumn<Log2_Fleet_Management_outboundtable, String> plate_no = new TableColumn<>("Plate No");
+        
+
+        vehicle_model.setCellValueFactory(value -> value.getValue().Vehicle_model);
+        plate_no.setCellValueFactory(value -> value.getValue().Plate_no);
+        
+        tblob.getColumns().addAll(vehicle_model, plate_no);
+       
+        
+    }
+    
+    //need para sa loaddata..
+    Log2_outbound obdb = new Log2_outbound("outbound");
+    ObservableList<Log2_Fleet_Management_outboundtable> outbound = FXCollections.observableArrayList();
+    long DummyCount = 0;
+    long GlobalCount = 0;
+    
+    private void loadDataoutbound() {
+        
+        CompletableFuture.supplyAsync(() -> {
+
+            while (Session.CurrentRoute.equals("log2fm")) {
+                obdb.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
+                    DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
+                });
+
+                if (DummyCount != GlobalCount) {
+                    tblob.getItems().clear();
+                    List<HashMap> hash = obdb.get();
+                    hash.stream().forEach(e -> {
+                        outbound.add(new Log2_Fleet_Management_outboundtable(
+                                String.valueOf(e.get("id")),
+                                String.valueOf(e.get("vehiclemodel")),
+                                String.valueOf(e.get("plateno"))
+                                
+                        ));
+                    });
+                    tblob.setItems(outbound);
+                    GlobalCount = DummyCount;
+                }
+
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Log2_Fleet_ManagementController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            return 0;
+        }, Session.SessionThreads);
+    }
+    
 
     private void reqDisplaydata() {
 
@@ -200,6 +257,7 @@ public class Log2_Fleet_ManagementController implements Initializable {
         requestdestination.setCellValueFactory(new PropertyValueFactory<>("destination"));
         requestconsignee.setCellValueFactory(new PropertyValueFactory<>("consignee"));
         requestdeparture.setCellValueFactory(new PropertyValueFactory<>("departure"));
+         requesttypeoftransaction.setCellValueFactory(new PropertyValueFactory<>("typeoftransaction")); 
 
     }
 
@@ -220,6 +278,7 @@ public class Log2_Fleet_ManagementController implements Initializable {
             hm.get("destination");
             hm.get("consignee");
             hm.get("departure");
+            hm.get("typeoftransaction");
 
             fmrs.add(
                     new Log2_Fleet_ManagementRequests(
@@ -229,7 +288,9 @@ public class Log2_Fleet_ManagementController implements Initializable {
                             String.valueOf(hm.get("quantity")),
                             String.valueOf(hm.get("destination")),
                             String.valueOf(hm.get("consignee")),
-                            String.valueOf(hm.get("departure"))
+                            String.valueOf(hm.get("departure")),
+                            String.valueOf(hm.get("typeoftransaction"))
+                                                
                     ));
         }
         tblreq.setItems(fmrs);
@@ -247,55 +308,10 @@ public class Log2_Fleet_ManagementController implements Initializable {
                 scheddestination.setText(rd.getDestination());
                 scheddeparture.setText(rd.getDeparture());
 
-            }
+            }   
         });
     }
 
-    private void proCols() {
-
-        pvehicleno.setCellValueFactory(new PropertyValueFactory<>("pvehicleno"));
-        ptypeofvehicle.setCellValueFactory(new PropertyValueFactory<>("ptypeofvehicle"));
-        pdestination.setCellValueFactory(new PropertyValueFactory<>("pdestination"));
-        ptime.setCellValueFactory(new PropertyValueFactory<>("ptime"));
-        pstatus.setCellValueFactory(new PropertyValueFactory<>("pstatus"));
-
-    }
-
-    private void proloaddata() {
-
-        prodata.removeAll(prodata);
-        prodata.addAll(new Log2_Fleet_ManagementClass("1001", "Motor", "Makati", "6am", "ongoing"));
-        prodata.addAll(new Log2_Fleet_ManagementClass("1002", "Truck", "Batangas", "6am", "ongoing"));
-        prodata.addAll(new Log2_Fleet_ManagementClass("1003", "Motor", "Cubao", "6am", "ongoing"));
-        prodata.addAll(new Log2_Fleet_ManagementClass("1004", "Car", "Bulacan", "6am", "ongoing"));
-        prodata.addAll(new Log2_Fleet_ManagementClass("1005", "Truck", "Leyte", "6am", "ongoing"));
-        prooutbound.getItems().addAll(prodata);
-
-    }
-
-    private void proinCols() {
-
-        proinvehicleno.setCellValueFactory(new PropertyValueFactory<>("proinvehicleno"));
-        prointypeofvehicle.setCellValueFactory(new PropertyValueFactory<>("prointypeofvehicle"));
-        proinitemname.setCellValueFactory(new PropertyValueFactory<>("proinitemname"));
-        proindestination.setCellValueFactory(new PropertyValueFactory<>("proindestination"));
-        prointime.setCellValueFactory(new PropertyValueFactory<>("prointime"));
-        proinremarks.setCellValueFactory(new PropertyValueFactory<>("proinremarks"));
-
-    }
-
-    private void proinloaddata() {
-
-        prodata.removeAll(proindata);
-        proindata.addAll(new Log2_Fleet_ManagementClass("1111", "Truck", "Chair", "Cubao", "7am", "Manager"));
-        proindata.addAll(new Log2_Fleet_ManagementClass("1112", "Motor", "Table", "Batangas", "7am", "Manager"));
-        proindata.addAll(new Log2_Fleet_ManagementClass("1113", "Motor", "Tools", "Makati", "7am", "Manager"));
-        proindata.addAll(new Log2_Fleet_ManagementClass("1114", "Motor", "Chair", "Leyte", "7am", "Manager"));
-        proindata.addAll(new Log2_Fleet_ManagementClass("1115", "Truck", "Table", "Marikina", "7am", "Manager"));
-        proindata.addAll(new Log2_Fleet_ManagementClass("1116", "Truck", "Table", "Pangasinan", "7am", "Manager"));
-        proinbound.getItems().addAll(proindata);
-
-    }
 
     public void displaydata() {
 
@@ -311,7 +327,7 @@ public class Log2_Fleet_ManagementController implements Initializable {
 
         try {
 
-            String[][] fm_data
+            String [][] fm_data
                     = {
                         {"department", scheddept.getText()},
                         {"itemname", scheditemname.getText()},
@@ -321,16 +337,20 @@ public class Log2_Fleet_ManagementController implements Initializable {
                         {"vehicle", schedvehicle.getValue()},
                         {"vehicletype", schedvtype.getValue()},
                         {"vehiclecapacity", schedvcapacity.getText()},
-                        {"driver", scheddriver.getValue()}
+                        {"driver", scheddriver.getValue()},
+                        {"time", schedtime.getValue().toString()}
 
                     };
 
             fm.insert(fm_data);
+         
             loadData();
 
             Alert saved = new Alert(Alert.AlertType.INFORMATION);
             saved.setContentText("Saved");
             saved.showAndWait();
+            
+            
 
         } catch (Exception e) {
 
@@ -338,95 +358,19 @@ public class Log2_Fleet_ManagementController implements Initializable {
 
     }
 
-    public void Savetask() {
 
-        Log2_Fleet_ManagementAddtask fm = new Log2_Fleet_ManagementAddtask();
-
-        try {
-
-            String[][] fm_data
-                    = {
-                        {"task", combovehicletask.getValue().toString()},
-                        {"datetask", vehicledate.getValue().toString()}
-
-                    };
-
-            fm.insert(fm_data);
-            loadData();
-
-            Alert saved = new Alert(Alert.AlertType.INFORMATION);
-            saved.setContentText("Saved");
-            saved.showAndWait();
-
-        } catch (Exception e) {
-
-        }
-
-    }
-
-    public void Saveaddvehicle() {
-
-        Log2_Fleet_ManagementAddvehicle fm = new Log2_Fleet_ManagementAddvehicle();
-
-        try {
-
-            String[][] fm_data
-                    = {
-                        {"vehicle", txtvehicle.getText()},
-                        {"vehicletype", vehicletype.getText()},
-                        {"plateno", plateno.getText()},
-                        {"chassisno", chassisno.getText()}
-
-                    };
-
-            fm.insert(fm_data);
-            loadData();
-
-            Alert saved = new Alert(Alert.AlertType.INFORMATION);
-            saved.setContentText("Saved");
-            saved.show();
-
-        } catch (Exception e) {
-
-        }
-
+    @FXML
+    private void btndispatch(MouseEvent event) {
+         Modal md = Modal.getInstance(new Form("/FXMLS/Log2/fm/modals/Log2_Fleet_Management_Dispatch.fxml").getParent());
+        md.open();
     }
 
     @FXML
-    private void btn_av(MouseEvent event) throws IOException {
+    private void btn_deliveryrecord(MouseEvent event) {
         
-         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-
-        Parent parent = loader.load(getClass().getResource("Log2_Audit_Management_AddVehicle.fxml"));
-
-        Scene scene = new Scene(parent);
-
-        stage.setFullScreen(false);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.setScene(scene);
-
-        stage.show();
+         Modal md = Modal.getInstance(new Form("/FXMLS/Log2/fm/modals/Log2_Fleet_Management_DeliveryRecord.fxml").getParent());
+        md.open();
+        
     }
 
-    @FXML
-    private void btn_et(MouseEvent event) throws IOException {
-        
-         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-
-        Parent parent = loader.load(getClass().getResource("Log2_Audit_Management_EditTask.fxml"));
-
-        Scene scene = new Scene(parent);
-
-        stage.setFullScreen(false);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.setScene(scene);
-
-        stage.show();
-    }
-
-    
-
-  
 }

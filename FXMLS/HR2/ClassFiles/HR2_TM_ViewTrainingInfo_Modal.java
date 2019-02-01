@@ -14,17 +14,24 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class HR2_TM_ViewTrainingInfo_Modal {
     //shared data when the button clicked in current trainings table 
-    public static String tid, jp, t_title, sd, ed;
+    public static String tr_id, department, job_position, participants, employee_code, trainor, from_day, to_day, status_id, status;
 
-    public static void init_Question(String job_position1,
-            String sd_of_training, String ed_of_training) {
-        jp = job_position1;
-        sd = sd_of_training;
-        ed = ed_of_training;                                 
+    public static void init_Trainings(String trid, String d,
+            String jp, String p, String ep, String t, String fd, String td, String si, String s) {
+        tr_id = trid;
+        department = d;
+        job_position = jp;
+        participants = p;
+        employee_code = ep;
+        trainor = t;
+        from_day = fd;
+        to_day = td;
+        status_id = si;
+        status = s;
     }
     
     
-    public SimpleStringProperty training_id,job_position,training_title,trainor,
+  /*  public SimpleStringProperty training_id,job_position,training_title,trainor,
             start_date,end_date,start_time,end_time,type,location,vehicle,budget_cost;
 
     public HR2_TM_ViewTrainingInfo_Modal(String training_id, String job_position, 
@@ -45,6 +52,6 @@ public class HR2_TM_ViewTrainingInfo_Modal {
         this.budget_cost = new SimpleStringProperty(budget_cost);
     }
     
-   
+   */
     
 }

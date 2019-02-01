@@ -11,20 +11,21 @@ import static Synapse.Model.setColumns;
  *
  * @author Gilbert
  */
-public class Financial_disbursement_request_model extends Synapse.Model {
-    
+public class Financial_disbursement_request_model extends Synapse.Model{
     public Financial_disbursement_request_model(){
-         
-            setColumns("disburse_id",
-                "disburse_datesend",
-                "disburse_date_req",
-                "disburse_department",
-                "disburse_requestor",
-                "diburse_description",
-                "disburse_prioritylvl",
-                "disburse_amount",
-                "disburse_status");
-        this.initTable("tbl_financials_disbursement_requests");
+             
+        setColumns("dr_id",
+                "dr_requestno",
+                "dr_daterequest",
+                "dr_department",
+                "dr_requestor",
+                "dr_description",
+                "dr_prioritylvl",
+                "dr_amount",
+                "dr_budget_status",
+                "dr_status",
+                "dr_journal_status");
+        this.initTable("tbl_finance_disbursement_request");
     
-    }
+}
 }

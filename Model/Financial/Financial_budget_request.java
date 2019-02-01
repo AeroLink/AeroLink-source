@@ -16,14 +16,16 @@ public class Financial_budget_request extends Synapse.Model {
     
     public Financial_budget_request(){
                 setColumns("budget_id",
-                "budget_no",
                 "budget_date_request",
                 "budget_department  ",
                 "budget_requestor",
                 "budget_description",
-                "budget_priority_lvl    ",
+                "budget_priority_lvl",
                 "budget_amount",
-                "budget_status");
+                "budget_status",
+                "budget_disbursementstatus",
+                "budget_approvedby",
+                "budget_reason");
         this.initTable("tbl_financials_request_budget");
 }
 }

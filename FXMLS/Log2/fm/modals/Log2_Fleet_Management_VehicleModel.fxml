@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Log2.fm.modals.Log2_Fleet_Management_VehicleModelController">
+   <children>
+      <TableView fx:id="tbldetails" layoutX="31.0" layoutY="168.0" prefHeight="200.0" prefWidth="298.0">
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Label layoutX="31.0" layoutY="47.0" text="Vehicle Model">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="346.0" layoutY="47.0" text="Plate no.">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <JFXTextField layoutX="31.0" layoutY="70.0" prefHeight="25.0" prefWidth="182.0" />
+      <JFXTextField layoutX="346.0" layoutY="68.0" prefHeight="25.0" prefWidth="182.0" />
+      <JFXButton layoutX="477.0" layoutY="330.0" style="-fx-background-color: #34a853;" text="Back" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

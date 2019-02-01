@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -18,11 +19,11 @@ public class DatabaseConfig {
     public static String HttpURL = "http://127.0.0.1:8423/api/";
     public static String key = "$2a$10$0S0Q9s6rrlAnabpLXoaWyuG5lgdQGMciIdSgxMzSULZW0e9vaCDke";
 
-    //if offline mode
     public static Boolean offline = true;
-    public static String IP = "127.0.0.1"; //NS558185\AEROLINKSQL 3d3nr4m0n3d4
-    public static String PORT = "1433";
+    public static String IP = "127.0.0.1"; //NS558185\AEROLINKSQL //139.99.62.2
+    public static String PORT = "1433";//1443 //8420
     public static String DATABASE = "AeroLink";
-    public static String USER = "sa";
-    public static String PASSWORD = "qweqwe";
+    public static String USER = "sa";//core
+    public static String PASSWORD = "root";//core
+    //PYWETgMDWTaS834fo9ijGkENpl43yrFtXpcJ9ovB0$yPS38
 }

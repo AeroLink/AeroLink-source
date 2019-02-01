@@ -27,7 +27,7 @@ public class HttpClient {
     String jsonBuild = null;
 
     public static enum METHOD {
-        GET, CONNECT, INSERT, INSERT_RT_ID, UPDATE, LOGIN
+        GET, CONNECT, INSERT, INSERT_RT_ID, UPDATE, LOGIN, STORED_PROC
     }
 
     protected static String post(String path, String json) {
@@ -50,7 +50,9 @@ public class HttpClient {
             }
 
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(con.getOutputStream()));
-            //System.err.println(json);
+            if (!json.contains("BINARY_CHECKSUM(*)")) {
+                System.err.println(json);
+            }
             out.write(json);
             out.flush();
             out.close();
@@ -120,6 +122,11 @@ public class HttpClient {
 
             case "UPDATE":
                 obj = new JSONObject(HttpClient.post("update", json));
+                callback.result_set(false, obj);
+                break;
+
+            case "STORED_PROC":
+                obj = new JSONObject(HttpClient.post("stored_proc", json));
                 callback.result_set(false, obj);
                 break;
 

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="249.0" prefWidth="317.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR4.Modals.HR4_NewPayrollMainController">
+   <children>
+      <Label layoutX="37.0" layoutY="14.0" text="CREATE NEW PAYROLL ITEM">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="25.0" layoutY="63.0" text="START DATE:">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="25.0" layoutY="103.0" text="END DATE:">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <JFXDatePicker fx:id="sd" layoutX="143.0" layoutY="55.0" prefHeight="25.0" prefWidth="155.0" />
+      <JFXDatePicker fx:id="ed" layoutX="143.0" layoutY="94.0" prefHeight="25.0" prefWidth="155.0" />
+      <JFXComboBox fx:id="dept_cb" layoutX="149.0" layoutY="136.0" prefHeight="25.0" prefWidth="145.0" />
+      <Label layoutX="25.0" layoutY="146.0" text="DEPARTMENT:">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <JFXButton buttonType="RAISED" layoutX="166.0" layoutY="197.0" styleClass="btn-primary" text="Clear">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="228.0" layoutY="197.0" styleClass="btn-primary" text="Create">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

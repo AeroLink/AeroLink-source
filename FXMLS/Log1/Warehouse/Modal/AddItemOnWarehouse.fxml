@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="549.0" prefWidth="453.0" stylesheets="@../../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Log1.Warehouse.Modal.AddItemOnWarehouseController">
+   <children>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="549.0" prefWidth="916.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox prefHeight="467.0" prefWidth="322.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" styleClass="btn-primary">
+                     <children>
+                        <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="20">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </FontAwesomeIconView>
+                        <Label text="Add New Item" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <Separator prefWidth="200.0" />
+                  <SplitPane dividerPositions="0.851685393258427" orientation="VERTICAL" prefHeight="513.0" prefWidth="390.0">
+                     <items>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Label text="Item">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" left="5.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <GridPane prefHeight="424.0" prefWidth="378.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="222.0" minWidth="10.0" prefWidth="96.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="340.0" minWidth="10.0" prefWidth="282.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label text="Asset Code:" />
+                                          <Label text="Location:" GridPane.rowIndex="2" />
+                                          <Label text="Stock:" GridPane.rowIndex="3" />
+                                          <Label text="Critical level:" GridPane.rowIndex="4" />
+                                          <Label text="Unit:" GridPane.rowIndex="5" />
+                                          <Label text="Price per unit:" GridPane.rowIndex="6" />
+                                          <Label text="Item Type:" GridPane.rowIndex="7" />
+                                          <Label alignment="TOP_LEFT" text="Disposal date:" GridPane.rowIndex="8" />
+                                          <JFXTextField fx:id="cantDoBooleanSoFuckThisShit" disable="true" editable="false" visible="false" GridPane.rowIndex="6" />
+                                          <JFXTextField fx:id="itemID_txt" disable="true" editable="false" visible="false" GridPane.rowIndex="6" />
+                                          <HBox alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                             <children>
+                                                <TextField prefWidth="260.0" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                                             <children>
+                                                <TextField editable="false" prefWidth="260.0" text="Supply" />
+                                             </children>
+                                          </HBox>
+                                          <DatePicker editable="false" prefHeight="25.0" prefWidth="260.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                          <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1">
+                                             <children>
+                                                <TextField prefHeight="25.0" prefWidth="260.0" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <children>
+                                                <TextField prefWidth="260.0" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                             <children>
+                                                <TextField prefWidth="260.0" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                             <children>
+                                                <TextField prefWidth="260.0" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                             <children>
+                                                <TextField prefWidth="260.0" />
+                                             </children>
+                                          </HBox>
+                                          <Label fx:id="supp_id" prefHeight="17.0" prefWidth="17.0" text="0" visible="false" GridPane.rowIndex="9" />
+                                          <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <children>
+                                                <TextField prefWidth="260.0" />
+                                             </children>
+                                          </HBox>
+                                          <Label layoutX="10.0" layoutY="22.0" text="Item Name:" GridPane.rowIndex="1" />
+                                          <Label alignment="TOP_LEFT" layoutX="10.0" layoutY="334.0" text="Warranty:" GridPane.rowIndex="9" />
+                                          <DatePicker editable="false" layoutX="138.0" layoutY="330.0" prefHeight="25.0" prefWidth="260.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" left="10.0" />
+                                       </VBox.margin>
+                                    </GridPane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="63.0" prefWidth="320.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <JFXButton prefHeight="40.0" prefWidth="100.0" styleClass="btn-primary" text="Save">
+                                       <graphic>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="CHECK" size="13" />
+                                       </graphic>
+                                    </JFXButton>
+                                    <JFXButton prefHeight="40.0" prefWidth="100.0" styleClass="btn-danger" text="Cancel">
+                                       <graphic>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" size="14" />
+                                       </graphic>
+                                    </JFXButton>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                     </items>
+                  </SplitPane>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

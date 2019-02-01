@@ -8,16 +8,22 @@ package FXMLS.HR1;
 import FXMLS.HR1.ClassFiles.HR1_Applicant;
 import FXMLS.HR1.ClassFiles.TableModel_Applicants;
 import FXMLS.HR1.ClassFiles.TableModel_PostedJob;
+import FXMLS.HR1.ClassFiles.TableModel_jLimit;
 import Model.HR1.HR1_Applicants;
 import Model.HR1.JobPosting;
 import Synapse.Components.Modal.Modal;
 import Synapse.Form;
 import Synapse.Model;
 import Synapse.Session;
+import com.jfoenix.controls.JFXButton;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,10 +31,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.StackPane;
+import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -63,6 +73,8 @@ public class HR1_Applicant_ManagementController implements Initializable {
     private MenuItem menuItemView;
     @FXML
     private TableView<TableModel_Applicants> tblArchive;
+    @FXML
+    private StackPane spane;
 
     /**
      * Initializes the controller class.
@@ -93,7 +105,7 @@ public class HR1_Applicant_ManagementController implements Initializable {
 
                 if (value.getButton() == MouseButton.PRIMARY) {
                     if (value.getClickCount() == 2) {
-                        viewingApplicant();
+                        viewingApplicant(tblApplicantList.getSelectionModel().getSelectedItem().id.getValue());
                     }
                 }
             }
@@ -107,13 +119,13 @@ public class HR1_Applicant_ManagementController implements Initializable {
             populateApplicants(tblOpenJobs.getSelectionModel().getSelectedItem().id.getValue());
         });
 
-        menuItemView.setOnAction(value -> viewingApplicant());
+        menuItemView.setOnAction(value -> viewingApplicant(tblApplicantList.getSelectionModel().getSelectedItem().id.getValue()));
 
     }
 
-    public void viewingApplicant() {
+    public void viewingApplicant(String AppID) {
 
-        HR1_Applicant.app_id = tblApplicantList.getSelectionModel().getSelectedItem().id.getValue();
+        HR1_Applicant.app_id = AppID;
         HR1_Applicant.job_title = lbljobTitle.getText();
         HR1_Applicant.fullname = tblApplicantList.getSelectionModel().getSelectedItem().fullname.getValue();
         HR1_Applicant.school = tblApplicantList.getSelectionModel().getSelectedItem().prevSchool.getValue();
@@ -162,7 +174,9 @@ public class HR1_Applicant_ManagementController implements Initializable {
                     if (DummyCount != GlobalCount) {
 
                         tblOpenJobs.getItems().clear();
-                        jobPostings.get().stream().forEach(row -> {
+                        jobPostings.where(new Object[][]{
+                            {"isDeleted", "=", 0}
+                        }).get().stream().forEach(row -> {
 
                             HashMap current = (HashMap) row;
 
@@ -203,6 +217,7 @@ public class HR1_Applicant_ManagementController implements Initializable {
         TableColumn<TableModel_Applicants, String> email = new TableColumn<>("Email");
         TableColumn<TableModel_Applicants, String> prevSchool = new TableColumn<>("Previous School");
         TableColumn<TableModel_Applicants, String> status = new TableColumn<>("Application Status");
+        TableColumn action = new TableColumn<>("Action");
 
         fullname.setCellValueFactory(value -> value.getValue().fullname);
         applicantCode.setCellValueFactory(value -> value.getValue().applicant_code);
@@ -211,7 +226,39 @@ public class HR1_Applicant_ManagementController implements Initializable {
         email.setCellValueFactory(value -> value.getValue().email);
         status.setCellValueFactory(value -> value.getValue().status);
 
-        tblApplicantList.getColumns().addAll(applicantCode, fullname, email, educAttain, prevSchool, status);
+        action.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TableModel_Applicants, Boolean>, ObservableValue<Boolean>>() {
+            @Override
+            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<TableModel_Applicants, Boolean> param) {
+                return new SimpleBooleanProperty(param.getValue() != null);
+            }
+        });
+        action.setCellFactory(new Callback<TableColumn<TableModel_Applicants, Boolean>, TableCell<TableModel_Applicants, Boolean>>() {
+            @Override
+            public TableCell<TableModel_Applicants, Boolean> call(TableColumn<TableModel_Applicants, Boolean> param) {
+                return new TableCell<TableModel_Applicants, Boolean>() {
+                    FontAwesomeIconView f = new FontAwesomeIconView(FontAwesomeIcon.EYE);
+                    private final JFXButton btn = new JFXButton("View this Applicant", f);
+
+                    {
+                        f.getStyleClass().add("fontIconTable");
+                        btn.getStyleClass().add("btnTable");
+                        btn.setOnAction(value -> {
+                            viewingApplicant(((TableModel_Applicants) getTableRow().getItem()).id.getValue());
+                        });
+                    }
+
+                    @Override
+                    protected void updateItem(Boolean t, boolean empty) {
+                        super.updateItem(t, empty);
+                        if (!empty) {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+            }
+        });
+
+        tblApplicantList.getColumns().addAll(applicantCode, fullname, email, educAttain, prevSchool, status, action);
     }
 
     public void RenderArchive() {
@@ -268,6 +315,7 @@ public class HR1_Applicant_ManagementController implements Initializable {
 
     public void populateApplicants(String jobid) {
 
+        this.renderApplicants();
         ObservableList<TableModel_Applicants> listApp = FXCollections.observableArrayList();
 
         hr1PivotApp
@@ -284,7 +332,7 @@ public class HR1_Applicant_ManagementController implements Initializable {
                     (action.get("lastname").toString() + ", "
                     + action.get("firstname").toString() + " "
                     + (action.get("suffix_name").toString().equals("None") ? "" : action.get("suffix_name").toString()) + " "
-                    + action.get("middlename").toString()),
+                    + (action.get("middlename").toString().equals("NO MNAME") ? "" : action.get("middlename").toString())),
                     action.get("email").toString(),
                     action.get("educAttain").toString(),
                     action.get("prevSchool").toString(),
@@ -315,7 +363,7 @@ public class HR1_Applicant_ManagementController implements Initializable {
                     (action.get("lastname").toString() + ", "
                     + action.get("firstname").toString() + " "
                     + (action.get("suffix_name").toString().equals("None") ? "" : action.get("suffix_name").toString()) + " "
-                    + action.get("middlename").toString()),
+                    + (action.get("middlename").toString().equals("NO MNAME") ? "" : action.get("middlename").toString())),
                     action.get("email").toString(),
                     action.get("educAttain").toString(),
                     action.get("prevSchool").toString(),

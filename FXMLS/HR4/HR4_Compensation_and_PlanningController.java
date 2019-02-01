@@ -13,6 +13,8 @@ import FXMLS.HR4.Model.HR4_PHModel;
 import FXMLS.HR4.Model.HR4_SSSModel;
 import FXMLS.HR4.Model.HR4_SalaryModel;
 import FXMLS.HR4.Model.HR4_TaxModel;
+import Synapse.Components.Modal.Modal;
+import Synapse.Form;
 import Synapse.Model;
 import Synapse.Session;
 import java.net.URL;
@@ -29,11 +31,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -61,6 +66,8 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         this.generateSalaryGrade();
         this.populateSalaryGrade();
+        this.generateTable();
+        this.populateTable();
     
     }
     public void weabo1() {
@@ -121,7 +128,7 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
 
                     if (DummyCount != GlobalCount) {
 
-                        tri_tbl.getItems().removeAll(obj);
+                        tri_tbl.getItems();
                             List rs = sssmodel
                                     .get(
                                             "CONCAT(rocmin,' - ',rocmax) as roc",
@@ -151,6 +158,7 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
 
     public void AddJobToTable(List rs) {
         obj.clear();
+        tri_tbl.refresh();
 
         for (Object row : rs) {
             HashMap crow = (HashMap) row;
@@ -391,6 +399,18 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
             obj3.add(new HR4_SalaryClass(salary_grade,step1,step2,step3,step4,step5,step6,step7,step8));
         }
             tbl_salary.setItems(obj3);
+    }
+
+    @FXML
+    private void OtherDeducBtn(MouseEvent event) {
+        Modal md = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_OtherDeduc.fxml").getParent());
+        md.open();
+    }
+
+    @FXML
+    private void EditSalaryBtn(ActionEvent event) {
+        Modal md = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_Settings.fxml").getParent());
+        md.open();
     }
     
 }

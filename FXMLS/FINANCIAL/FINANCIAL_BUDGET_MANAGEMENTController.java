@@ -5,21 +5,30 @@
  */
 package FXMLS.FINANCIAL;
 
-import FXMLS.FINANCIAL.CALLER.BUDGET_MORE_MODALController;
-import FXMLS.FINANCIAL.CLASSFILES.FINANCIAL_BM_ALLOCATION;
-import FXMLS.FINANCIAL.CLASSFILES.FINANCIAL_BR_CLASSFILE;
+import FXMLS.FINANCIAL.CLASSFILES.Annual_budget_classfile;
+import FXMLS.FINANCIAL.CLASSFILES.Budget_Allocation_classfile;
+import FXMLS.FINANCIAL.CLASSFILES.Budget_Request_classfile;
+import FXMLS.FINANCIAL.CLASSFILES.Pendingbudget_classfile;
+import FXMLS.FINANCIAL.STATIC.CLASFILES.Finance_budget_decline;
 import Model.Financial.Financial_allocation_model;
-import Model.Financial.Financial_br_model;
+import Model.Financial.Financial_annualbudget_model;
 import Model.Financial.Financial_budget_request;
+import Model.Financial.Financial_disbursement_request_model;
+import Model.Financial.Financial_entries;
+import Model.Financial.users_tbl;
+import Synapse.Components.Modal.Modal;
+import Synapse.Form;
 import Synapse.Session;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -28,11 +37,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Side;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -43,296 +57,437 @@ import javafx.stage.StageStyle;
  */
 public class FINANCIAL_BUDGET_MANAGEMENTController implements Initializable {
 
-    private boolean forViewing = false;
+    @FXML
+    private JFXButton brForm_btn;
+    @FXML
+    private JFXButton allocate_btn;
+    @FXML
+    private TableView<Budget_Allocation_classfile> allocation_tbl;
+    @FXML
+    private TableView<Budget_Request_classfile> budgetrequest_tbl;
+    @FXML
+    private JFXButton approved_btn;
+    @FXML
+    private Label label_id;
+    @FXML
+    private Label status_lbl;
+    @FXML
+    private JFXTextField searchno;
 
     @FXML
-    private TableView<FINANCIAL_BM_ALLOCATION> allocation_tbl;
+    private Label drno_label;
     @FXML
-    private JFXButton allocation_btn;
+    private Label datereq_label;
     @FXML
-    private TableView<FINANCIAL_BR_CLASSFILE> tbl_bpr;
+    private Label dept_label;
     @FXML
-    private JFXComboBox<String> cmbobx_stats;
+    private Label requestor_label;
+    @FXML
+    private Label desc_label;
+    @FXML
+    private Label prioritylvl_label;
+    @FXML
+    private Label amount_label;
+    @FXML
+    private Label status_label;
+    @FXML
+    private JFXButton budget_history_btn;
+    @FXML
+    private AnchorPane ancrpane3;
+    @FXML
+    private JFXButton enable_btn;
+    @FXML
+    private TableView<Annual_budget_classfile> ab_tbl;
+    @FXML
+    private JFXButton reqHistory_btn;
+    @FXML
+    private JFXButton declined_btn;
 
-    ObservableList<String> voucher = FXCollections.observableArrayList("Pending", "Approved");
+    private final ObservableList<PieChart.Data> pie = FXCollections.observableArrayList();
+    users_tbl user = new users_tbl();
     @FXML
-    private JFXButton view_btn;
-
+    private PieChart Piechart1;
+    @FXML
+    private PieChart disbursebudget_piechart;
+    
+  private final ObservableList<PieChart.Data> pie2 = FXCollections.observableArrayList();
+    @FXML
+    private Label pendingreq_label;
+    @FXML
+    private TableView<Pendingbudget_classfile> pendingno_tbl;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+        
+        declined_btn.setOnMouseClicked(e -> declineRequest());
 
-        view_btn.setOnMouseClicked(e -> ViewData());
-        cmbobx_stats.setItems(voucher);
+        brForm_btn.setOnMouseClicked(e -> openbrForm());
+        allocate_btn.setOnMouseClicked(e -> openAllocation());
+        approved_btn.setOnMouseClicked(e -> updateRequest());
+        //searchno.setOnKeyTyped(e ->searchno());
+        budget_history_btn.setOnMouseClicked(e -> openBudgetHistory());
+        AddTableColumn_Budget_Allocation();
+        loadAllocation();
 
-        allocation_btn.setOnMouseClicked(e -> OpenAllocation());
+  
 
-        TableBR();
-        ShowDataBR();
+        AddTableColumn_Budget_Request();
+        LoadBudgetRequest();
 
-        displayAlloc();
-        loadAlloc();
+        loadAB();
+        AddTableColumn_AnnualBudgets();
 
-        tbl_bpr.setOnMouseClicked(e -> {
-            FINANCIAL_BR_CLASSFILE cc = tbl_bpr.getSelectionModel().getSelectedItem();
-            view_btn.setDisable(false);
-
+        ancrpane3.setOnMouseClicked(e -> {
+         approved_btn.setDisable(true);
         });
+        enable_btn.setOnMouseClicked(e -> enable());
+        budgetrequest_tbl.setOnMouseClicked(e -> {
+            Budget_Request_classfile r = budgetrequest_tbl.getSelectionModel().getSelectedItem();
+            
+            drno_label.setText(r.getRequestNo());
+            datereq_label.setText(r.getDate());
+            dept_label.setText(r.getDepartment());
+            requestor_label.setText(r.getRequestor_name());
+            desc_label.setText(r.getDescription());
+            prioritylvl_label.setText(r.getPrioritylevel());
+            amount_label.setText(r.getAmount());
+            approved_btn.setDisable(false);
+            label_id.setText(r.getRequestNo());
+            declined_btn.setDisable(false);
+        });
+
+        reqHistory_btn.setOnMouseClicked(e -> OpenReqHistory());
+        this.Piechart();
+        this.Piechart2();
+        
+        addpendingtable();
+        loadpending();
+        
+           int a = pendingno_tbl.getItems().size();
+           pendingreq_label.setText(String.valueOf(a));
+    }
+ 
+    
+
+    
+      ObservableList<Pendingbudget_classfile> op = FXCollections.observableArrayList();
+    Financial_budget_request p = new Financial_budget_request();
+    public void addpendingtable(){
+         pendingno_tbl.getItems().clear();
+        pendingno_tbl.getColumns().removeAll(pendingno_tbl.getColumns());
+        
+        TableColumn<Pendingbudget_classfile, String> id = new TableColumn<>("astAmount");
+        
+        id.setCellValueFactory((TableColumn.CellDataFeatures<Pendingbudget_classfile,
+                String> param) -> param.getValue().id);
+      
+        pendingno_tbl.getColumns().addAll(id);
+        
+    }
+    public void loadpending(){
+        try{
+          List rs = p.where("budget_status", "=", "Pending").get();
+                            pend(rs);
+    }catch(Exception e){
+        System.err.println(e);
+    }
+    }
+   private int pend(List pendings){
+         pendingno_tbl.getItems().clear();
+        try {
+              for(Object d : pendings)
+            {
+              HashMap hm = (HashMap) d;   //exquisite casting
+             op.add(new Pendingbudget_classfile(
+                            String.valueOf(hm.get("budget_status"))
+                ) );   
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        pendingno_tbl.setItems(op);
+        return 0;
+    }
+    
+    
+    
+     Financial_disbursement_request_model disbursement= new Financial_disbursement_request_model();
+     public void Piechart2() {
+
+        pie2.clear();
+        List<HashMap> list3x = disbursement
+                .groupBy("dr_status")
+                .get("dr_status,SUM(dr_amount) as DTotal");
+        list3x.forEach((row) -> {
+            pie2.add(new PieChart.Data(row.get("dr_status").toString(),
+                    Double.parseDouble(row.get("DTotal").toString())));
+        });
+        disbursebudget_piechart.setData(pie2);
+        disbursebudget_piechart.setLegendSide(Side.RIGHT);
+        disbursebudget_piechart.setStartAngle(90);
+
+    }
+     Financial_annualbudget_model annual = new Financial_annualbudget_model();
+     Financial_allocation_model totalAllocate = new Financial_allocation_model();
+   public void Piechart() {
+
+        pie.clear();
+        List<HashMap> list3x = totalAllocate
+                .groupBy("ba_department")
+                .get("ba_department,SUM(ba_amount) as Total");
+        list3x.forEach((row) -> {
+            pie.add(new PieChart.Data(row.get("ba_department").toString(),
+                    Double.parseDouble(row.get("Total").toString())));
+        });
+        Piechart1.setData(pie);
+        Piechart1.setLegendSide(Side.RIGHT);
+        Piechart1.setStartAngle(90);
+
     }
 
-    private void searchStatus(List requestor) {
+    public void OpenReqHistory() {
+        Modal md = Modal.getInstance(new Form("/FXMLS/FINANCIAL/CALLER/BUDGET_REQUEST_HISTORY.fxml").getParent());
+        md.open();
+    }
 
-        //tbl_bpr.getItems().clear();
+    public void enable() {
+        allocate_btn.setDisable(false);
+        enable_btn.setDisable(true);
+    }
 
-        ObservableList<FINANCIAL_BR_CLASSFILE> brc = FXCollections.observableArrayList();
+    //budget request
+    public void openbrForm() {
+        Modal md = Modal.getInstance(new Form("/FXMLS/FINANCIAL/CALLER/BUDGET_REQUESTFORM.fxml").getParent());
+        md.open();
+    }
 
+    /*
+       public void searchno(){
+       Financial_budget_request fvm = new Financial_budget_request(); 
+
+    //String SearchText = searchno.getText().equals("") ? "[a-z]" : searchno.getText();
+        
         try {
-            for (Object d : requestor) {
+
+            List listreq = fvm.where(new Object[][]{
+                {"budget_id","like", "%" + searchno.getText() + "%"}
+            }).get();
+
+            request(listreq);
+     
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+     }
+     */
+    public void AddTableColumn_Budget_Request() {
+
+        budgetrequest_tbl.getItems().clear();
+        budgetrequest_tbl.getColumns().removeAll(budgetrequest_tbl.getColumns());
+        TableColumn<Budget_Request_classfile, String> reqno = new TableColumn<>("Request No");
+        TableColumn<Budget_Request_classfile, String> brdate = new TableColumn<>("Date");
+        TableColumn<Budget_Request_classfile, String> brrn = new TableColumn<>("Requestor Name");
+        TableColumn<Budget_Request_classfile, String> brdep = new TableColumn<>("Department");
+        TableColumn<Budget_Request_classfile, String> brdesc = new TableColumn<>("Description");
+        TableColumn<Budget_Request_classfile, String> brpl = new TableColumn<>("Priority Level");
+        TableColumn<Budget_Request_classfile, String> bramount = new TableColumn<>("Amount");
+        TableColumn<Budget_Request_classfile, String> brstats = new TableColumn<>("Status");
+
+        reqno.setCellValueFactory((TableColumn.CellDataFeatures<Budget_Request_classfile, String> param) -> param.getValue().brrequestno);
+        brdate.setCellValueFactory((TableColumn.CellDataFeatures<Budget_Request_classfile, String> param) -> param.getValue().brdate);
+        brrn.setCellValueFactory((TableColumn.CellDataFeatures<Budget_Request_classfile, String> param) -> param.getValue().brrequestorname);
+        brdep.setCellValueFactory((TableColumn.CellDataFeatures<Budget_Request_classfile, String> param) -> param.getValue().brdepartment);
+        brdesc.setCellValueFactory((TableColumn.CellDataFeatures<Budget_Request_classfile, String> param) -> param.getValue().brdescription);
+        brpl.setCellValueFactory((TableColumn.CellDataFeatures<Budget_Request_classfile, String> param) -> param.getValue().brprioritylevel);
+        bramount.setCellValueFactory((TableColumn.CellDataFeatures<Budget_Request_classfile, String> param) -> param.getValue().bramount);
+        brstats.setCellValueFactory((TableColumn.CellDataFeatures<Budget_Request_classfile, String> param) -> param.getValue().brstatus);
+
+        budgetrequest_tbl.getColumns().addAll(reqno, brdate, brrn, brdep, brdesc, brpl, bramount, brstats);
+
+    }
+
+    long DummyCount = 0;
+    long GlobalCount = 0;
+    int Global_Count = 0;
+    ExecutorService e = Executors.newFixedThreadPool(1);
+    ObservableList<Budget_Request_classfile> brc = FXCollections.observableArrayList();
+    Financial_budget_request fbr = new Financial_budget_request();
+
+    public void LoadBudgetRequest() {
+        CompletableFuture.supplyAsync(() -> {
+
+            while (Session.CurrentRoute.equals("id_budget")) {
+
+                try {
+                    fbr.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
+                        DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
+                    });
+                    budgetrequest_tbl.getItems();
+                    if (DummyCount != GlobalCount) {
+                        List b = fbr.where(new Object[][]{
+                            {"budget_status", "=", "Pending"}
+                        }).get();
+                        request(b);
+
+                        budgetrequest_tbl.setItems(brc);
+                        GlobalCount = DummyCount;
+                    }
+                    Thread.sleep(3000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(FINANCIAL_BUDGET_MANAGEMENTController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            return 0;
+        }, Session.SessionThreads);
+        System.err.println(budgetrequest_tbl.getItems().size());
+    }
+
+    private void request(List req) {
+
+        budgetrequest_tbl.getItems().clear();
+        try {
+
+            for (Object d : req) {
                 HashMap hm = (HashMap) d;   //exquisite casting
+
                 hm.get("budget_id");
-                hm.get("budget_no");
                 hm.get("budget_date_request");
                 hm.get("budget_department");
                 hm.get("budget_requestor");
                 hm.get("budget_description");
-                hm.get("budget_priority_lvl");
+                hm.get("budget_priority_lvlment");
                 hm.get("budget_amount");
                 hm.get("budget_status");
+                hm.get("budget_reason");
 
-                brc.add(new FINANCIAL_BR_CLASSFILE(
+                brc.add(new Budget_Request_classfile(
                         String.valueOf(hm.get("budget_id")),
-                        String.valueOf(hm.get("budget_no")),
                         String.valueOf(hm.get("budget_date_request")),
                         String.valueOf(hm.get("budget_department")),
                         String.valueOf(hm.get("budget_requestor")),
                         String.valueOf(hm.get("budget_description")),
                         String.valueOf(hm.get("budget_priority_lvl")),
                         String.valueOf(hm.get("budget_amount")),
-                        String.valueOf(hm.get("budget_status"))
+                        String.valueOf(hm.get("budget_status")),
+                        String.valueOf(hm.get("budget_approvedby")),
+                        String.valueOf(hm.get("budget_reason"))
                 ));
-
             }
+            
+        budgetrequest_tbl.setItems(brc);
         } catch (Exception e) {
             System.out.println(e);
         }
 
-        tbl_bpr.setItems(brc);
-
+   
     }
 
-    //Budget Request Module
-    public void TableBR() {
-        tbl_bpr.getItems().clear();
-        tbl_bpr.getColumns().removeAll(tbl_bpr.getColumns());
+    public void declineRequest() {
+        Finance_budget_decline.reqno = budgetrequest_tbl.getSelectionModel().getSelectedItem().brrequestno.getValue();
 
-        TableColumn<FINANCIAL_BR_CLASSFILE, String> dt = new TableColumn<>("Date Request");
-        TableColumn<FINANCIAL_BR_CLASSFILE, String> dept = new TableColumn<>("Department");
-        //TableColumn<FINANCIAL_BR_CLASSFILE, String> req = new TableColumn<>("Requestor");
-        //TableColumn<FINANCIAL_BR_CLASSFILE, String> des = new TableColumn<>("Description");
-        //TableColumn<FINANCIAL_BR_CLASSFILE, String> pl = new TableColumn<>("Priority Level");
-        TableColumn<FINANCIAL_BR_CLASSFILE, String> tprce = new TableColumn<>("Amount");
-        TableColumn<FINANCIAL_BR_CLASSFILE, String> st = new TableColumn<>("Status");
-        // TableColumn More = new TableColumn<>("More Options");
-
-        dt.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_BR_CLASSFILE, String> param) -> param.getValue().dateRequest);
-        dept.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_BR_CLASSFILE, String> param) -> param.getValue().department);
-        //req.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_BR_CLASSFILE, String> param) -> param.getValue().requestor);
-        // des.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_BR_CLASSFILE, String> param) -> param.getValue().description);
-        // pl.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_BR_CLASSFILE, String> param) -> param.getValue().prioritylvl);
-        tprce.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_BR_CLASSFILE, String> param) -> param.getValue().amount);
-        st.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_BR_CLASSFILE, String> param) -> param.getValue().status);
-
-        /* More.setSortable(false);
-
-        More.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<FINANCIAL_BR_CLASSFILE, Boolean>, ObservableValue<Boolean>>() {
-            @Override
-            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<FINANCIAL_BR_CLASSFILE, Boolean> param) {
-                return new SimpleBooleanProperty(param.getValue() != null);
-            }
-        });
-
-        More.setCellFactory(new Callback<TableColumn<FINANCIAL_BR_CLASSFILE, Boolean>, TableCell<FINANCIAL_BR_CLASSFILE, Boolean>>() {
-            @Override
-            public TableCell<FINANCIAL_BR_CLASSFILE, Boolean> call(TableColumn<FINANCIAL_BR_CLASSFILE, Boolean> param) {
-                return new Synapse.Components.ButtonInCell<FINANCIAL_BR_CLASSFILE>().create("More", new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        System.err.println("Modal Has Been Open");
-                        Modal md = Modal.getInstance(new Form("/FXMLS/FINANCIAL/CALLER/BUDGET_MORE_MODAL.fxml").getParent());
-                        md.open();
-                        
-                     
-                        
-                    }
-                });
-            }
-        });
-         */
-        tbl_bpr.getColumns().addAll(dt, dept, tprce, st);
-
+        Modal md = Modal.getInstance(new Form("/FXMLS/FINANCIAL/CALLER/BUDGET_DECLINE.fxml").getParent());
+        md.open();
+        approved_btn.setDisable(true);
+        declined_btn.setDisable(true);
     }
 
-    long DummyCount = 0;
-    long GlobalCount = 0;
-    Financial_budget_request ba = new Financial_budget_request();
-    ObservableList<FINANCIAL_BR_CLASSFILE> bamod = FXCollections.observableArrayList();
+    public void updateRequest() {
+        Financial_disbursement_request_model drm = new Financial_disbursement_request_model();
+        Financial_budget_request fbrr = new Financial_budget_request();
 
-    public void ShowDataBR() {
+        try {
 
-        CompletableFuture.supplyAsync(() -> {
+            if (fbrr.update(new Object[][]{
+                {"budget_status", "Approved"},
+                {"budget_approvedby", "Admin"}
 
-            while (Session.CurrentRoute.equals("id_budgetm")) {
-                ba.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(row -> {
-                    DummyCount = Long.parseLong(((HashMap) row).get("chk").toString());
-                });
+            }).where(new Object[][]{
+                {"budget_id", "=", label_id.getText()}
+            }).executeUpdate()) {
+                String[][] insertodisbursement
+                        = {
+                            {"dr_requestno", drno_label.getText()},
+                            {"dr_daterequest", datereq_label.getText()},
+                            {"dr_department", dept_label.getText()},
+                            {"dr_requestor", requestor_label.getText()},
+                            {"dr_description", desc_label.getText()},
+                            {"dr_prioritylvl", prioritylvl_label.getText()},
+                            {"dr_amount", amount_label.getText()},
+                            {"dr_budget_status", "Approved"}
+                        };
+                drm.insert(insertodisbursement);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.initStyle(StageStyle.UNDECORATED);
+                alert.setTitle("Approved");
+                alert.setContentText("Request Approved, and has been send to Disbursement");
+                alert.showAndWait();
 
-                if (DummyCount != GlobalCount) {
-                           bamod.clear();
-                    List b = ba.get();
-
-                    for (Object d : b) {
-                        HashMap hm = (HashMap) d;   //exquisite casting
-                        hm.get("budget_id");
-                        hm.get("budget_no");
-                        hm.get("budget_date_request");
-                        hm.get("budget_department");
-                        hm.get("budget_requestor");
-                        hm.get("budget_description");
-                        hm.get("budget_priority_lvl");
-                        hm.get("budget_amount");
-                        hm.get("budget_status");
-
-                        bamod.add(new FINANCIAL_BR_CLASSFILE(
-                                String.valueOf(hm.get("budget_id")),
-                                String.valueOf(hm.get("budget_no")),
-                                String.valueOf(hm.get("budget_date_request")),
-                                String.valueOf(hm.get("budget_department")),
-                                String.valueOf(hm.get("budget_requestor")),
-                                String.valueOf(hm.get("budget_description")),
-                                String.valueOf(hm.get("budget_priority_lvl")),
-                                String.valueOf(hm.get("budget_amount")),
-                                String.valueOf(hm.get("budget_status"))
-                        ));
-
-                    }
-                    tbl_bpr.setItems(bamod);
-                    GlobalCount = DummyCount;
-                }
-
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(FINANCIAL_BUDGET_MANAGEMENTController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                approved_btn.setDisable(true);
+                declined_btn.setDisable(true);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.initStyle(StageStyle.UNDECORATED);
+                alert.setTitle("Error");
+                alert.setContentText("FAIL");
+                alert.showAndWait();
             }
-
-            return 0;
-        }, Session.SessionThreads);
-
-    }
-/*
-    public void AddJobToTable(List rs) {
-        tbl_bpr.refresh();
-        bamod.clear();
-
-        for (Object row : rs) {
-            HashMap crow = (HashMap) row;
-
-            String bi = String.valueOf(crow.get("budget_id"));
-            String bn = (String) crow.get("budget_no");
-            String bdr = (String) crow.get("budget_date_request");
-            String bd = (String) crow.get("budget_department");
-            String br = (String) crow.get("budget_requestor");
-            String bde = (String) crow.get("budget_description");
-            String bp = (String) crow.get("budget_priority_lvl");
-            String ba = (String) crow.get("budget_amount");
-            String bs = (String) crow.get("budget_status");
-
-            bamod.add(new FINANCIAL_BR_CLASSFILE(bi, bn, bdr, bd, br, bde, bp, ba, bs));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        tbl_bpr.setItems(bamod);
-    }*/
 
-    public void ViewData() {
-        FINANCIAL_BR_CLASSFILE fbrc = tbl_bpr.getSelectionModel().getSelectedItem();
-        if (fbrc == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initStyle(StageStyle.UNDECORATED);
-            alert.setTitle("Caution!");
-            alert.setContentText("You must click from table first");
-            alert.showAndWait();
-        } else {
-
-            try {
-
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLS/FINANCIAL/CALLER/BUDGET_MORE_MODAL.fxml"));
-                Parent parent = loader.load();
-
-                BUDGET_MORE_MODALController controller = (BUDGET_MORE_MODALController) loader.getController();
-                controller.DisplayData(fbrc);
-
-                Stage stage = new Stage(StageStyle.DECORATED);
-                stage.setTitle("View");
-                stage.setScene(new Scene(parent));
-                stage.show();
-            } catch (IOException ex) {
-                Logger.getLogger(FINANCIAL_BUDGET_MANAGEMENTController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
     }
 
-    //Budget Plan Module
-    public void displayAlloc() {
+    public void openBudgetHistory() {
+        Modal md = Modal.getInstance(new Form("/FXMLS/FINANCIAL/CALLER/BUDGET_HISTORY.fxml").getParent());
+        md.open();
+    }
 
+    //Allocation 
+    public void openAllocation() {
+        Modal md = Modal.getInstance(new Form("/FXMLS/FINANCIAL/CALLER/BUDGET_NEWALLOCATION.fxml").getParent());
+        md.open();
+        allocate_btn.setDisable(true);
+        enable_btn.setDisable(false);
+    }
+
+    public void AddTableColumn_Budget_Allocation() {
         allocation_tbl.getItems().clear();
         allocation_tbl.getColumns().removeAll(allocation_tbl.getColumns());
+        TableColumn<Budget_Allocation_classfile, String> badep = new TableColumn<>("Department");
+        TableColumn<Budget_Allocation_classfile, String> baa = new TableColumn<>("Estimated Amount");
 
-        TableColumn<FINANCIAL_BM_ALLOCATION, String> d = new TableColumn<>("Department");
-        TableColumn<FINANCIAL_BM_ALLOCATION, String> a = new TableColumn<>("Amount");
+        badep.setCellValueFactory((TableColumn.CellDataFeatures<Budget_Allocation_classfile, String> param) -> param.getValue().badepartment);
+        baa.setCellValueFactory((TableColumn.CellDataFeatures<Budget_Allocation_classfile, String> param) -> param.getValue().baamount);
 
-        d.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_BM_ALLOCATION, String> param) -> param.getValue().department);
-        a.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_BM_ALLOCATION, String> param) -> param.getValue().amount);
+        allocation_tbl.getColumns().addAll(badep, baa);
 
-        allocation_tbl.getColumns().addAll(d, a);
     }
+    Financial_allocation_model fam = new Financial_allocation_model();
+    ObservableList<Budget_Allocation_classfile> fac = FXCollections.observableArrayList();
 
-    Financial_allocation_model fba = new Financial_allocation_model();
-    ObservableList<FINANCIAL_BM_ALLOCATION> allc = FXCollections.observableArrayList();
-
-    public void loadAlloc() {
-
+    public void loadAllocation() {
         CompletableFuture.supplyAsync(() -> {
-
-            while (Session.CurrentRoute.equals("id_budgetm")) {
-                fba.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(row -> {
-                    DummyCount = Long.parseLong(((HashMap) row).get("chk").toString());
-                });
-
-                if (DummyCount != GlobalCount) {
-
-                    allocation_tbl.getItems().clear();
-                    List b = fba.get();
-
-                    for (Object d : b) {
-                        HashMap hm = (HashMap) d;   //exquisite casting
-
-                        hm.get("department");
-                        hm.get("allocated_amount");
-
-                        allc.add(new FINANCIAL_BM_ALLOCATION(
-                                String.valueOf(hm.get("department")),
-                                String.valueOf(hm.get("allocated_amount"))
-                        ));
-
-                    }
-                    allocation_tbl.setItems(allc);
-
-                    GlobalCount = DummyCount;
-                }
-
+            while (Session.CurrentRoute.equals("id_budget")) {
                 try {
+                    fam.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
+                        DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
+                    });
+                    if (DummyCount != GlobalCount) {
+
+                        allocation_tbl.getItems();
+                        List b = fam.get("ba_department as ba_department",
+                                            "ba_amount as ba_amount");
+                        alloc(b);
+                      
+                        allocation_tbl.setItems(fac);
+                        GlobalCount = DummyCount;
+                    }
                     Thread.sleep(3000);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(FINANCIAL_BUDGET_MANAGEMENTController.class.getName()).log(Level.SEVERE, null, ex);
@@ -344,37 +499,99 @@ public class FINANCIAL_BUDGET_MANAGEMENTController implements Initializable {
 
     }
 
-    public void OpenAllocation() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLS/FINANCIAL/CALLER/BUDGET_NEWALLOCATION.fxml"));
-        Parent root1 = null;
-        try {
-            root1 = (Parent) loader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(FINANCIAL_COLLECTIONController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Stage stage = new Stage();
-        stage.setTitle("Insert New");
-        stage.setScene(new Scene(root1));
-        stage.show();
+    private void alloc(List allc) {
 
-    }
+        allocation_tbl.getItems().clear();
 
-    @FXML
-    private void SearchStatus(ActionEvent event) {
-
-        Financial_budget_request fbr = new Financial_budget_request();
-
-        //    String SearchText = SearchDVR.getText().equals("") ? "[a-z]" : SearchDVR.getText();
         try {
 
-            List listst = fbr.where(new Object[][]{
-                {"budget_status", "=", cmbobx_stats.getSelectionModel().getSelectedItem().toString()}
-            }).get();
+            for (Object d : allc) {
+                HashMap hm = (HashMap) d;   //exquisite casting
 
-            searchStatus(listst);
+                hm.get("ba_date");
+                hm.get("ba_department");
+                hm.get("ba_amount");
 
+                fac.add(new Budget_Allocation_classfile(
+                        String.valueOf(hm.get("ba_date")),
+                        String.valueOf(hm.get("ba_department")),
+                        String.valueOf(hm.get("ba_amount"))
+                ));
+            }
         } catch (Exception e) {
             System.out.println(e);
         }
+
+        allocation_tbl.setItems(fac);
+
     }
+
+    public void AddTableColumn_AnnualBudgets() {
+        ab_tbl.getItems().clear();
+        ab_tbl.getColumns().removeAll(ab_tbl.getColumns());
+        TableColumn<Annual_budget_classfile, String> y = new TableColumn<>("Year");
+        TableColumn<Annual_budget_classfile, String> b = new TableColumn<>("Budget");
+
+        y.setCellValueFactory((TableColumn.CellDataFeatures<Annual_budget_classfile, String> param) -> param.getValue().abYear);
+        b.setCellValueFactory((TableColumn.CellDataFeatures<Annual_budget_classfile, String> param) -> param.getValue().abBudget);
+
+        ab_tbl.getColumns().addAll(y, b);
+
+    }
+
+    Financial_annualbudget_model abm = new Financial_annualbudget_model();
+    ObservableList<Annual_budget_classfile> abc = FXCollections.observableArrayList();
+
+    private void Annual(List ab) {
+
+        ab_tbl.getItems().clear();
+
+        try {
+            for (Object d : ab) {
+                HashMap hm = (HashMap) d;   //exquisite casting
+
+                hm.get("ab_year");
+                hm.get("ab_amount");
+
+                abc.add(new Annual_budget_classfile(
+                        String.valueOf(hm.get("ab_year")),
+                        String.valueOf(hm.get("ab_amount"))
+                ));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        ab_tbl.setItems(abc);
+
+    }
+
+    public void loadAB() {
+        CompletableFuture.supplyAsync(() -> {
+            while (Session.CurrentRoute.equals("id_budget")) {
+                try {
+                    abm.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
+                        DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
+                    });
+                    if (DummyCount != GlobalCount) {
+
+                        ab_tbl.getItems();
+                        List b = abm.get("ab_year as ab_year",
+                                "ab_amount as ab_amount");
+                        Annual(b);
+
+                        ab_tbl.setItems(abc);
+                        GlobalCount = DummyCount;
+                    }
+                    Thread.sleep(3000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(FINANCIAL_BUDGET_MANAGEMENTController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            return 0;
+        }, Session.SessionThreads);
+
+    }
+
 }

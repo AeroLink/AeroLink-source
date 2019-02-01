@@ -14,6 +14,8 @@ import Model.HR2_Temp_Employee_Profiles;
 import Model.HR4_Classification;
 import Model.HR4_Jobs;
 import Model.VirtualTables.VT_HR2;
+import Synapse.Components.Modal.Modal;
+import Synapse.Form;
 import Synapse.Model;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -75,10 +77,6 @@ public class SP_ViewEmployeeInfoController implements Initializable {
     @FXML
     private Label lbl_remarks;
     @FXML
-    private JFXButton btn_update_position;
-    @FXML
-    private JFXComboBox jfx_position;
-    @FXML
     private Label lbl_suffix;
     @FXML
     private Label lbl_fullname;
@@ -86,6 +84,14 @@ public class SP_ViewEmployeeInfoController implements Initializable {
     ObservableList<SP_EmployeeInfo_in_Modal> emp = FXCollections.observableArrayList();
     @FXML
     private Label lbl_employee_code;
+    @FXML
+    private JFXButton btn_req_promotion;
+    @FXML
+    private JFXComboBox cbox_select_position;
+    @FXML
+    private Label lbl_exam_taken;
+    @FXML
+    private Label lbl_training_taken;
 
     /**
      * Initializes the controller class.
@@ -95,28 +101,49 @@ public class SP_ViewEmployeeInfoController implements Initializable {
         lbl_fullname.setText(SP_Employee_Info_Modal.fullname);
         lbl_position.setText(SP_Employee_Info_Modal.title);
         populateLabels();
-        Classifications();
+        selectJobs();
 
     }
-
-    public void Classifications() {
+    public void selectJobs() {
         HR4_Jobs jobs = new HR4_Jobs();
 
         try {
-            List c = jobs.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "d", "=", "dept_id")
-                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_classifications", "id", "c", "=", "classification_id")
-                    .where(new Object[][]{{"d.dept_name", "=", lbl_department.getText()}})
+            List c = jobs.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department","id","dept","=","dept_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_classifications","id","c","=","classification_id")
+                    .orderBy("c.class_level", Model.Sort.ASC)
+                    .where(new Object[][]{{"dept.dept_name","=",lbl_department.getText()}})
                     .get();
-
+            //"concat(substring(title,0,2), job_id) as job_id, title"
             for (Object d : c) {
                 HashMap hm1 = (HashMap) d;
-                jfx_position.getItems().add("J" + hm1.get("job_id") + " - " + hm1.get("title"));
-            }
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
-    }
+                //RS
+                String j_id = String.valueOf(hm1.get("job_id"));
+                String sjobs = (String) hm1.get("title");
 
+                cbox_select_position.getItems().add("J" + j_id + " - " + sjobs);
+
+            }
+        }catch(Exception e)
+        {
+            System.out.println(e);
+        }
+
+    }
+    @FXML
+    public void RequestPromotion(){
+        Modal req_promotion = Modal.getInstance(new Form("/FXMLS/HR2/Modals/SP_RequestPromotion.fxml").getParent());
+        req_promotion.open();
+    }
+    @FXML
+    public void ExamTaken(){
+        Modal exam_taken = Modal.getInstance(new Form("/FXMLS/HR2/Modals/SP_Employee_Exam_Taken.fxml").getParent());
+        exam_taken.open();
+    }
+    @FXML
+     public void TrainingTaken(){
+        Modal training_taken = Modal.getInstance(new Form("/FXMLS/HR2/Modals/SP_Employee_Training_Taken.fxml").getParent());
+        training_taken.open();
+    }
     public void populateLabels() {
         VT_HR2 vthr2 = new VT_HR2();
 
@@ -126,10 +153,10 @@ public class SP_ViewEmployeeInfoController implements Initializable {
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "=", "aerolink.tbl_hr4_jobs", "dept_id", true)
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employees", "employee_code", "emps", "=", "e", "employee_code", true)
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employeeTypes", "type_id", "=", "emps", "type_id", true)
-                .join(Model.JOIN.INNER, "temp_performace", "employee_code", "tp", "=", "e", "employee_code", true)
+                .join(Model.JOIN.INNER, "aerolink.tbl_hr1_perfGrading", "employee_code", "tp", "=", "e", "employee_code", true)
                 .where(new Object[][]{{"e.fullname", "like", "%" + lbl_fullname.getText() + "%"}})
-                .get("ej.employee_code,e.fullname,e.suffix_name,e.gender,aerolink.tbl_hr4_jobs.title,aerolink.tbl_hr4_department.dept_name,\n"
-                        + "cs.civil_status,e.contact_number,aerolink.tbl_hr4_employeeTypes.type_name,emps.datehired,tp.productivity,tp.qualityofwork,\n"
+                .get("ej.employee_code,e.fullname,e.suffix_name,e.gender,aerolink.tbl_hr4_jobs.title,aerolink.tbl_hr4_department.dept_name,"
+                        + "cs.civil_status,e.contact_number,aerolink.tbl_hr4_employeeTypes.type_name,emps.datehired,tp.productivity,tp.qualityofwork,"
                         + "tp.Initiative,tp.teamwork,tp.problemsolving,tp.attendance");
         list.stream().forEach(row -> {
             lbl_employee_code.setText(((HashMap) row).get("employee_code").toString());
@@ -149,9 +176,8 @@ public class SP_ViewEmployeeInfoController implements Initializable {
         });
     }
 
-    @FXML
-    public void UpdatePosition() {
-        Alert update = new Alert(Alert.AlertType.CONFIRMATION);
+   /* public void UpdatePosition() {
+             Alert update = new Alert(Alert.AlertType.CONFIRMATION);
         update.setContentText("Are you sure you want to promote " + lbl_fullname.getText() + " as " +
                 jfx_position.getSelectionModel().getSelectedItem().toString() + "?");
         Optional<ButtonType> rs = update.showAndWait();
@@ -167,7 +193,5 @@ public class SP_ViewEmployeeInfoController implements Initializable {
             Alert dropnotif = new Alert(Alert.AlertType.INFORMATION);
             dropnotif.setContentText(lbl_fullname.getText() + " Successfully Promoted ");
             dropnotif.showAndWait();
-        }
-    }
-
+    }*/
 }

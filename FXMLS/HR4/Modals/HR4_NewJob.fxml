@@ -29,5 +29,11 @@
          </graphic>
       </JFXButton>
       <FontAwesomeIconView fill="#34a853" glyphName="BRIEFCASE" layoutX="16.0" layoutY="31.0" size="22" />
+      <Label layoutX="314.0" layoutY="402.0" text="No. of Department:">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="cnt_dept" layoutX="454.0" layoutY="402.0" text="Label" />
    </children>
 </AnchorPane>

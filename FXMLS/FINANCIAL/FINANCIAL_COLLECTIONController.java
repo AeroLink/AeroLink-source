@@ -5,14 +5,15 @@
  */
 package FXMLS.FINANCIAL;
 
-import FXMLS.FINANCIAL.CLASSFILES.FINANCIAL_CM_CLASSFILE;
-import FXMLS.HR4.HR4_Core_Human_Capital_ManagementController;
-import Model.Financial.Financial_cm_model;
-import Model.Financial.Financial_core1_type;
-import Synapse.Session;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTextField;
+import FXMLS.FINANCIAL.CLASSFILES.Collection_classfile;
+import FXMLS.FINANCIAL.CLASSFILES.col_totalasset_classfile;
+import FXMLS.FINANCIAL.CLASSFILES.coltotal_classfile;
+import Model.Financial.Log_assetsales_model;
+import Synapse.Components.Modal.Modal;
+import Synapse.Form;
 import Synapse.Model;
+import Synapse.Session;
+import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -23,11 +24,12 @@ import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -39,160 +41,214 @@ import javafx.scene.control.TableView;
 public class FINANCIAL_COLLECTIONController implements Initializable {
 
     @FXML
-    private JFXTextField searchcm;
+    private TableView<Collection_classfile> collection_tbl;
     @FXML
-    private JFXComboBox col_combobox;
+    private ContextMenu col_contextmenu;
     @FXML
-    private TableView<FINANCIAL_CM_CLASSFILE> cm_tbl;
+    private MenuItem col_menuItem;
+    @FXML
+    private JFXButton denomination_btn;
+    @FXML
+    public Label totals;
+    @FXML
+    private TableView<coltotal_classfile> col_total_tbl;
+    @FXML
+    private Label totalAsset_label;
+    @FXML
+    private TableView<col_totalasset_classfile> col_asset_tbl;
 
-    
-    
-    
-  private ContextMenu contextMenuJobs;
-  int Global_Count = 0;
-  ExecutorService e = Executors.newFixedThreadPool(1);   
-ObservableList<FINANCIAL_CM_CLASSFILE> collection = FXCollections.observableArrayList();
-Financial_cm_model fcm = new Financial_cm_model();
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-     combobox();
-        col_combobox.getSelectionModel().selectedItemProperty().addListener(listener -> {
-            DummyCount = 0;
-            GlobalCount = 0;
-        });
-        
-        
-         collection.addListener((ListChangeListener.Change<? extends Object> c) -> {
-          cm_tbl.setItems(collection);
-        });
-     
-         searchcm.setOnKeyReleased(e -> SearchCol());
-         
-        this.generateTable();
-        this.populateTables();
-        cm_tbl.setContextMenu(contextMenuJobs);
+       AddTableColumn_collection();
+       LoadTable_collection();
+       denomination_btn.setOnMouseClicked(e -> openDenomination());  
+      addcolamount();
+      loadcolamount();
+      
+      
+      addColTotalAst();
+      loadColTotalAst();
     }    
+    public int total =0;
+    public void total(){
+        for(int i  = 0; i<col_total_tbl.getItems().size(); i++){
+         int amount = Integer.parseInt(col_total_tbl.getItems().get(i).colsamount.getValue());
+         total += amount;
+                    }
+      totals.setText(String.valueOf(total));
+    }
+    public void openDenomination(){
+        Modal md = Modal.getInstance(new Form("/FXMLS/FINANCIAL/CALLER/BUDGET_DENOMINATION.fxml").getParent());
+        md.open();
+    }
     
-    long DummyCount = 0;
-    long GlobalCount = 0;
     
-     public void combobox() {
-        Financial_core1_type cc = new Financial_core1_type();
+    public int total2 =0;
+   ObservableList<col_totalasset_classfile> ctc = FXCollections.observableArrayList();
+   public void addColTotalAst(){
+        col_asset_tbl.getItems().clear();
+        col_asset_tbl.getColumns().removeAll(col_asset_tbl.getColumns());
+        
+        TableColumn<col_totalasset_classfile, String> astamount = new TableColumn<>("astAmount");
+        
+        astamount.setCellValueFactory((TableColumn.CellDataFeatures<col_totalasset_classfile,
+                String> param) -> param.getValue().colAstamount);
+      
+        col_asset_tbl.getColumns().addAll(astamount);
+   } 
+   public void loadColTotalAst(){
+       try{
+          List rs = arm.where("ast_status","=","Collected").andWhere("ast_status2","=","CollectedAsset").get();
+                            colAssets(rs);
+                                total2();
+    }catch(Exception e){
+        System.err.println(e);
+    }
+       
+   }
+   private int colAssets(List ca){
+          col_asset_tbl.getItems().clear();
         try {
-            List bo2 = cc.get();
-            for (Object bo : bo2) {
-                HashMap ka = (HashMap) bo;
-                col_combobox.getItems().add(ka.get("title"));
+              for(Object d : ca)
+            {
+                HashMap hm = (HashMap) d;   //exquisite casting
+             ctc.add(new col_totalasset_classfile(
+                            String.valueOf(hm.get("ast_amount")),
+                            String.valueOf(hm.get("ast_status2"))
+                ) );   
             }
-
-            col_combobox.getSelectionModel().selectFirst();
         } catch (Exception e) {
             System.out.println(e);
         }
+
+        col_asset_tbl.setItems(ctc);
+        return 0;
+   }
+   public void total2(){
+        for(int i  = 0; i<col_asset_tbl.getItems().size(); i++){
+         int amount = Integer.parseInt(col_asset_tbl.getItems().get(i).colAstamount.getValue());
+         total2 += amount;
+                    }
+      totalAsset_label.setText(String.valueOf(total2));
+   }
+    
+    
+    ObservableList<coltotal_classfile> sss = FXCollections.observableArrayList();
+    public void addcolamount(){
+        col_total_tbl.getItems().clear();
+        col_total_tbl.getColumns().removeAll(col_total_tbl.getColumns());
+        TableColumn<coltotal_classfile, String> amount = new TableColumn<>("Amount");
+        
+        amount.setCellValueFactory((TableColumn.CellDataFeatures<coltotal_classfile,
+                String> param) -> param.getValue().colsamount);
+      
+        col_total_tbl.getColumns().addAll(amount);
+    }
+    public void loadcolamount(){
+        try{
+          List rs = arm.where("ast_status","=","Collected").andWhere("ast_status2","=","Collected").get();
+                            col(rs);
+                                total();
+    }catch(Exception e){
+        System.err.println(e);
+    }
+    }
+    private int col(List cols){
+         col_total_tbl.getItems().clear();
+        try {
+              for(Object d : cols)
+            {
+                HashMap hm = (HashMap) d;   //exquisite casting
+             sss.add(new coltotal_classfile(
+                            String.valueOf(hm.get("ast_amount")),
+                            String.valueOf(hm.get("ast_status2"))
+                ) );   
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        col_total_tbl.setItems(sss);
+        return 0;
     }
     
-     
-     
-public void generateTable() {
-
-        cm_tbl.getItems().clear();
-        cm_tbl.getColumns().removeAll(cm_tbl.getColumns());
-        TableColumn<FINANCIAL_CM_CLASSFILE, String> inv_no1 = new TableColumn<>("Invoice No");
-        TableColumn<FINANCIAL_CM_CLASSFILE, String> coltype = new TableColumn<>("Type");
-        TableColumn<FINANCIAL_CM_CLASSFILE, String> colname = new TableColumn<>("Name");
-        TableColumn<FINANCIAL_CM_CLASSFILE, String> coldesc = new TableColumn<>("Description");
-        TableColumn<FINANCIAL_CM_CLASSFILE, String> coldate = new TableColumn<>("Date & Amount");
-       
     
-        inv_no1.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_CM_CLASSFILE, String> param) -> param.getValue().inv);
-        colname.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_CM_CLASSFILE, String> param) -> param.getValue().name);
-        coldesc.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_CM_CLASSFILE, String> param) -> param.getValue().desc);
-        coldate.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_CM_CLASSFILE, String> param) -> param.getValue().date);
-        coltype.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_CM_CLASSFILE, String> param) -> param.getValue().type);
+    
+    
+    long DummyCount = 0;
+    long GlobalCount = 0;
+    int Global_Count = 0;
+     ExecutorService e = Executors.newFixedThreadPool(1);   
+    ObservableList<Collection_classfile> cc = FXCollections.observableArrayList();
+      Log_assetsales_model arm = new Log_assetsales_model();
+    public void AddTableColumn_collection() {
+
+        collection_tbl.getItems().clear();
+        collection_tbl.getColumns().removeAll(collection_tbl.getColumns());
+        TableColumn<Collection_classfile, String> date = new TableColumn<>("Date");
+        TableColumn<Collection_classfile, String> invoice = new TableColumn<>("Invoice No.");
+        TableColumn<Collection_classfile, String> description = new TableColumn<>("Description");
+        TableColumn<Collection_classfile, String> amount = new TableColumn<>("Amount");
+        TableColumn<Collection_classfile, String> type = new TableColumn<>("Type");
+        
+        date.setCellValueFactory((TableColumn.CellDataFeatures<Collection_classfile, String> param) -> param.getValue().coldate);
+        invoice.setCellValueFactory((TableColumn.CellDataFeatures<Collection_classfile, String> param) -> param.getValue().colinvoice);
+        description.setCellValueFactory((TableColumn.CellDataFeatures<Collection_classfile, String> param) -> param.getValue().coldescription);
+        amount.setCellValueFactory((TableColumn.CellDataFeatures<Collection_classfile, String> param) -> param.getValue().colamount);
+        type.setCellValueFactory((TableColumn.CellDataFeatures<Collection_classfile, String> param) -> param.getValue().coltype);
       
 
         
-        cm_tbl.getColumns().addAll(inv_no1,colname,coldesc,coldate,coltype);
+        collection_tbl.getColumns().addAll(date,invoice,description,amount,type);
        
     } 
-
-//a code for search  
-    public void SearchCol() {
-      
-         cm_tbl.getItems().clear();
-         List rs = fcm
-                .join(Model.JOIN.LEFT, "aerolink.tbl_type", "id", "tblD", "=", "col_type1")
-                .join(Model.JOIN.LEFT, "aerolink.tbl_ast","id","tbl","=","asset_id")
-                .where(new Object[][]{
-                {"tbl.invoice_no1","like", "%" + searchcm.getText() + "%"}})
-                 .get("tbl.invoice_no1 as invoices1",
-                "CONCAT(tblD.id,'   -  ',tblD.title) as col_type1",
-                "tbl.name as col_name",
-                "CONCAT(tbl.date , '            -           ', tbl.amount) as col_date",
-                "tbl.description as col_description");
-        this.AddJobToTable(rs);
-        
-        
-    }
-    public void populateTables() {
-        CompletableFuture.supplyAsync(() -> {
-
-            while (Session.CurrentRoute.equals("id_collection")) {
-                try {
-                    fcm.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
-                        DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
-                    });
-
-                    if (DummyCount != GlobalCount) {
-
-                        cm_tbl.getItems().removeAll(collection);
-                            List rs = fcm
-                                    .join(Model.JOIN.INNER,"aerolink.tbl_ast","id","tbl","=","asset_id")
-                                    .join(Model.JOIN.INNER,"aerolink.tbl_type","id","tbl1","=","col_type1")
-                                     .where(new Object[][]{{"tbl1.title", "=", col_combobox.getSelectionModel().getSelectedItem().toString()}})
-                                    .get( "tbl.invoice_no1 as invoices1",
-                                          "CONCAT(tbl1.id,'   -  ',tbl1.title) as col_type1",
-                                          "tbl.name as col_name",
-                                          "CONCAT(tbl.date , '            -           ', tbl.amount) as col_date",
-                                          "tbl.description as col_description"
-                                          );
-                        AddJobToTable(rs);
-                        GlobalCount = DummyCount;
-                    }
-
-                    Thread.sleep(3000);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(HR4_Core_Human_Capital_ManagementController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+     private int collection(List col){
+        collection_tbl.getItems().clear();
+        try {
+              for(Object d : col)
+            {
+                HashMap hm = (HashMap) d;   //exquisite casting
+                hm.get("ast_date");
+                hm.get("ast_id");
+                hm.get("ast_description");
+                hm.get("ast_amount");
+                hm.get("ast_pom_ast_amount");
+                hm.get("ast_type");
+               cc.add(new Collection_classfile(
+                            String.valueOf(hm.get("ast_date")),
+                            String.valueOf(hm.get("ast_id")),
+                            String.valueOf(hm.get("ast_description")),
+                            String.valueOf(hm.get("ast_amount")),
+                            String.valueOf(hm.get("ast_pom_ast_amount")),
+                            String.valueOf(hm.get("ast_type")),
+                            String.valueOf(hm.get("ast_status2"))
+                ) );   
             }
-
-            return 0;
-        }, Session.SessionThreads);
-
-    }
- 
- public void AddJobToTable(List rs) {
-        cm_tbl.refresh();
-        collection.clear();
-        
-        for (Object row : rs) {
-            HashMap crow = (HashMap) row;
-            
-            
-            String inv1 = String.valueOf(crow.get("invoices1"));
-            String cn = (String) crow.get("col_name");
-            String cd = (String) crow.get("col_description");
-            String cdt = (String) crow.get("col_date");
-            String ct = (String) crow.get("col_type1");
-            String cm = (String) crow.get("col_amount");
-            
-            
-            collection.add(new FINANCIAL_CM_CLASSFILE(inv1,cn,cd,cdt,ct,cm));
+        } catch (Exception e) {
+            System.out.println(e);
         }
-         cm_tbl.setItems(collection);
+
+        collection_tbl.setItems(cc);
+        return 0;
+       
+     }
+   
+   public void LoadTable_collection(){
+        
+    try{
+          List rs = arm.where("ast_status","=","Collected").get();
+                            collection(rs);
+                    
+    }catch(Exception e){
+        System.err.println(e);
     }
+
+    }
+    
+    
+
  
 }

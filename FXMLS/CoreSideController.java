@@ -17,6 +17,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -26,6 +27,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -52,6 +54,8 @@ public class CoreSideController implements Initializable {
     private Tab FINANCE;
     @FXML
     private Label SessionUsername;
+    @FXML
+    private Tab FINANCE1;
 
     /**
      * Initializes the controller class.
@@ -60,7 +64,7 @@ public class CoreSideController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         SessionUsername.setText(Session.pull("username").toString());
-        
+
         Rectangle clip = new Rectangle(userImage.getFitWidth() - 30, userImage.getFitHeight() - 1);
         clip.setArcHeight(50);
         clip.setArcWidth(50);
@@ -114,11 +118,25 @@ public class CoreSideController implements Initializable {
     public void triggerButton(ActionEvent event) {
 
         if (!Session.getPermissions().contains(Route.routePermission.get(((JFXButton) event.getSource()).getId()))) {
-            Modal md = Modal.getInstance(new Form("/FXMLS/Deny.fxml").getParent());
-            md.open();
+//            Modal md = Modal.getInstance(new Form("/FXMLS/Deny.fxml").getParent());
+//            md.open();
+
+            Notifications nBuilder = Notifications.create()
+                    .title("Access Denied")
+                    .text("Unable to access this module due to lack of permission")
+                    .hideAfter(Duration.seconds(3))
+                    .position(Pos.CENTER);
+
+            nBuilder.showError();
         } else {
-            Session.CurrentRoute = ((JFXButton) event.getSource()).getId();
-            LoadSubSystem loadSubSystem = new Helpers.LoadSubSystem(((JFXButton) event.getSource()).getId(), dpp);
+            String nav_id = ((JFXButton) event.getSource()).getId();
+            Session.CurrentRoute = nav_id;
+            if (Session.CurrentRoute.contains("0xreq")) {
+                Modal md = Modal.getInstance(new Form(Route.routes.get(nav_id).toString()).getParent());
+                md.open();
+            } else {
+                LoadSubSystem loadSubSystem = new Helpers.LoadSubSystem(((JFXButton) event.getSource()).getId(), dpp);
+            }
         }
 
     }

@@ -5,23 +5,48 @@
  */
 package FXMLS.FINANCIAL;
 
-import FXMLS.FINANCIAL.CLASSFILES.FINANCIAL_COA_CLASSFILE;
-import Model.Financial.Financial_coa_model;
+import FXMLS.FINANCIAL.CLASSFILES.APAR_Entries_classfile;
+import FXMLS.FINANCIAL.CLASSFILES.AP_classfile;
+import FXMLS.FINANCIAL.CLASSFILES.AR_classfile;
+import FXMLS.FINANCIAL.CLASSFILES.Budget_Request_classfile;
+import FXMLS.FINANCIAL.STATIC.CLASFILES.Finance_Entries;
+import Model.Financial.Financial_ar_model;
+import Model.Financial.Financial_budget_request;
+import Model.Financial.Financial_disbursement_request_model;
+import Model.Financial.Financial_entries;
+import Model.Financial.Log_assetsales_model;
+import Synapse.Components.Modal.Modal;
+import Synapse.Form;
+import Synapse.Session;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTextField;
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.function.Supplier;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import javafx.beans.Observable;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.IntegerBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
@@ -32,158 +57,578 @@ import javafx.stage.StageStyle;
 public class FINANCIAL_AP_ARController implements Initializable {
 
     @FXML
-    private TableView<FINANCIAL_COA_CLASSFILE> coa_tbl;
-    
-    
-    private JFXComboBox<String> cdno_cmbbx;
-    private JFXTextField account_title;
-
-    
-      ObservableList<String> coaObs = FXCollections.observableArrayList("Cash",  "Petty Cash", "Supplies",
-                                                                        "Prepaid Insurance","Sales","Advertising Expense",
-                                                                        "Insurance Expense","Repair Expense","Utilities Expense",
-                                                                        "Office Equipment");
-    @FXML private JFXButton saveCoa_btn;
-    @FXML private JFXButton updateCoa_btn;
-    @FXML private JFXComboBox<String> account_title_cmbobx;
-    @FXML private JFXTextField codeno_txt;
+    private TableView<AP_classfile> ap_tbl;
     @FXML
-    private Label label_id;
+    private TableColumn<AP_classfile, String> amount_id;
+
     /**
      * Initializes the controller class.
      */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-       showCoa();
-       loadDataCOA();
-       
-       saveCoa_btn.setOnMouseClicked(e -> saveCoa());
-         updateCoa_btn.setOnMouseClicked(e -> updateBRR());
-        account_title_cmbobx.setItems(coaObs);
-        coa_tbl.setOnMouseClicked(e -> {
-        FINANCIAL_COA_CLASSFILE cc = coa_tbl.getSelectionModel().getSelectedItem();
-        
-        label_id.setText(cc.getCoa_id());
-        account_title_cmbobx.setValue(cc.getAcc_title());
-        codeno_txt.setText(cc.getCode_no());
-        updateCoa_btn.setDisable(false);
-              });
-    }    
+
+
+    @FXML private Label total_label;
+    @FXML private TableView<AR_classfile> ar_tbl;
+    @FXML private TableColumn<?, ?> dateCol;
+    @FXML  private TableColumn<?, ?> deptCol;
+    @FXML  private TableColumn<?, ?> statusCol;
+    @FXML private Label ar_total_lbl;
+    @FXML
+    private JFXButton pom_btn;
+    @FXML
+    private JFXButton asset_btn;
+    @FXML
+    private JFXComboBox comboboxSales;
     
-    public void updateBRR(){
-          Financial_coa_model fcm = new Financial_coa_model();
-    try{
-    if(fcm.update(new Object[][]{
-       {"code_no",codeno_txt.getText()},
-       {"acc_title",account_title_cmbobx.getValue().toString()}
-    }).where(new Object[][]{
-        {"coa_id","=",label_id.getText()}
-    }).executeUpdate()){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-             alert.initStyle(StageStyle.UNDECORATED);
-             alert.setTitle("Saved");
-             alert.setContentText("UPDATED"); 
-             alert.showAndWait();
-             codeno_txt.clear();
-             account_title_cmbobx.setValue(null);
-             updateCoa_btn.setDisable(true);
-    }else{
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-             alert.initStyle(StageStyle.UNDECORATED);
-             alert.setTitle("Error");
-             alert.setContentText("FAIL"); 
-             alert.showAndWait();
-    }
-    }catch(Exception e){
-        e.printStackTrace();
-    }
-     showCoa();
-     loadDataCOA();
-    
-    }
+    ObservableList<String> s = FXCollections.observableArrayList("Uncollected","Collected");
+    @FXML
+    private TableView<AR_classfile> arPosting_tbl;
+    @FXML
+    private TableView<AP_classfile> apPosting_tbl;
+    @FXML
+    private ContextMenu arContextMenu;
+    @FXML
+    private MenuItem ARmenuItem;
+    @FXML
+    private TableView<APAR_Entries_classfile> tbl_entries;
+    @FXML
+    private Label invoiceid;
+    @FXML
+    private Label date;
+    @FXML
+    private Label firstname;
+    @FXML
+    private Label lastname;
+    @FXML
+    private Label description;
+    @FXML
+    private Label amount;
+    @FXML
+    private Label status;
+    @FXML
+    private Label typestatus;
+    @FXML
+    private Label journalstatus;
+    @FXML
+    private Label id_ast;
 
     
-      public void saveCoa(){
-           
-            Financial_coa_model coa = new Financial_coa_model();
-            
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+      
+        AddtableColumn_AP();    
+        loadtable_ap();
+        
+        
+      comboboxSales.setItems(s);
+        AddtableColumn_AR();
+        Loadtable_Ar();
+     
+        addTableARposting();
+        LoadARposting();
+        
+        AddtableAPposting();
+        LoadAPposting();
+          
+      AddtableEntries();
+      LoadEntriesTable();
+        pom_btn.setOnMouseClicked(e ->openPOM());
+        asset_btn.setOnMouseClicked(e ->openAsset());
+      // comboboxSales.setOnAction(e ->FilterStatus());
+      ar_tbl.setContextMenu(arContextMenu);
+     ARmenuItem.setOnAction(e -> PostToJournal());
+    
+      arPosting_tbl.setOnMouseClicked(e -> {
+      AR_classfile ar = arPosting_tbl.getSelectionModel().getSelectedItem();
+      invoiceid.setText(ar.getInvoiceno());
+      date.setText(ar.getDate());
+      firstname.setText(ar.getFirstname());
+      lastname.setText(ar.getLastname());
+      description.setText(ar.getDescription());
+      amount.setText(ar.getAmount());
+      status.setText(ar.getStatus());
+      typestatus.setText(ar.getTypestatus());
+              
+      });
+     
+     
+    }   
+
+    
+    
+    Financial_entries fe = new Financial_entries();
+    ObservableList<APAR_Entries_classfile> aec = FXCollections.observableArrayList();
+    public void AddtableEntries(){
+         tbl_entries.getItems().clear();
+         tbl_entries.getColumns().removeAll(tbl_entries.getColumns());
+        
+        TableColumn<APAR_Entries_classfile, String> id = new TableColumn<>("Entries No");
+        TableColumn<APAR_Entries_classfile, String> date = new TableColumn<>("Date");
+        TableColumn<APAR_Entries_classfile, String> name = new TableColumn<>("Name");
+        TableColumn<APAR_Entries_classfile, String> description = new TableColumn<>("Descriptinon");
+        TableColumn<APAR_Entries_classfile, String> amount = new TableColumn<>("Amount");
+        TableColumn<APAR_Entries_classfile, String> status = new TableColumn<>("Status");
+       
+        id.setCellValueFactory((TableColumn.CellDataFeatures<APAR_Entries_classfile, String> param) -> param.getValue().IdEntries);
+        date.setCellValueFactory((TableColumn.CellDataFeatures<APAR_Entries_classfile, String> param) -> param.getValue().DateEntries);
+        name.setCellValueFactory((TableColumn.CellDataFeatures<APAR_Entries_classfile, String> param) -> param.getValue().FirstnameEntries);
+        description.setCellValueFactory((TableColumn.CellDataFeatures<APAR_Entries_classfile, String> param) -> param.getValue().DescriptionEntries);
+        amount.setCellValueFactory((TableColumn.CellDataFeatures<APAR_Entries_classfile, String> param) -> param.getValue().AmountEntries);
+        status.setCellValueFactory((TableColumn.CellDataFeatures<APAR_Entries_classfile, String> param) -> param.getValue().AccountStatusEntries);
+        
+        tbl_entries.getColumns().addAll(id,date,name,description,amount,status);
+    }
+    public void LoadEntriesTable(){
+         CompletableFuture.supplyAsync(() -> {
+            while (Session.CurrentRoute.equals("id_apr")) {
+                try {
+                    fe.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
+                        DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
+                    });
+                     tbl_entries.getItems();
+                     if (DummyCount != GlobalCount) {
+                         List b = fe.where("AccountStatus","=","Pending").get();
+                         
+                         Entries(b);
+                         tbl_entries.setItems(aec);
+                         GlobalCount = DummyCount;
+                    }
+                    Thread.sleep(3000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(FINANCIAL_AP_ARController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            return 0;
+        }, Session.SessionThreads);
+    }
+    public void Entries(List enries){
+        tbl_entries.getItems().clear();
+        try {
+              for(Object d : enries)
+            {
+                HashMap hm = (HashMap) d; 
+                hm.get("e_id");
+                hm.get("DateEntries");
+                hm.get("InvoiceEntries");
+                hm.get("FirstnameEntries");
+                hm.get("LastnameEntries");
+                hm.get("AmountEntries");
+                aec.add(new APAR_Entries_classfile(
+                            String.valueOf(hm.get("e_id")),
+                            String.valueOf(hm.get("DateEntries")),
+                            String.valueOf(hm.get("InvoiceEntries")),
+                            String.valueOf(hm.get("FirstnameEntries")),
+                            String.valueOf(hm.get("LastnameEntries")),
+                            String.valueOf(hm.get("DescriptionEntries")),
+                            String.valueOf(hm.get("AmountEntries")),
+                            String.valueOf(hm.get("StatusEntries")),
+                            String.valueOf(hm.get("TypeStatusEntries")),
+                             String.valueOf(hm.get("AccountStatus")),
+                            String.valueOf(hm.get("JournalStatusEntries"))
+                ) );   
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        tbl_entries.setItems(aec);
+    }
+    public void PostToJournal(){
+        Log_assetsales_model lam = new Log_assetsales_model();
+        
+        lam.update(new Object[][]{
+                {"journal_status","Posted"}
+                }).where(new Object[][]{
+                {"ast_id","=",invoiceid.getText()}
+                }).executeUpdate();
           try
         {
-           String[][] coa_table =
+           String[][] entries_tbl =
         {
-        {"code_no" , codeno_txt.getText()},
-        {"acc_title" , account_title_cmbobx.getValue()}
-        };           
-           
-           
-        if(coa.insert(coa_table)){
-         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        {"InvoiceEntries" ,      invoiceid.getText()},
+        {"DateEntries" ,         date.getText()},
+        {"FirstnameEntries" ,    firstname.getText() },
+        {"LastnameEntries" ,     lastname.getText()  },
+        {"DescriptionEntries" ,  description.getText() },
+        {"AmountEntries" ,       amount.getText() },
+        {"StatusEntries" ,       status.getText() },
+        {"TypeStatusEntries" ,   typestatus.getText() },
+        {"JournalStatusEntries" ,"Posted"},
+        };
+        if(fe.insert(entries_tbl)){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
              alert.initStyle(StageStyle.UNDECORATED);
-             alert.setTitle("Saved");
-             alert.setContentText("DATA HAS BEEN SAVE"); 
+             alert.setTitle("Posted");
+             alert.setContentText("Posted"); 
              alert.showAndWait();
-             codeno_txt.clear();
-             account_title_cmbobx.setValue(null);
-             
         }else{
-              Alert alert = new Alert(Alert.AlertType.ERROR);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
              alert.initStyle(StageStyle.UNDECORATED);
-             alert.setTitle("ERROR");
-             alert.setContentText("PLEASE FILL THE EMPTY FIELDS"); 
+             alert.setTitle("Fail");
+             alert.setContentText("Failed"); 
              alert.showAndWait();
-            
         }
-                                       
             }catch(Exception e)
+                
                {
             e.printStackTrace();
                }
-          
-          
-       showCoa();
-       loadDataCOA();
-       
     }
-    public void showCoa(){
-         coa_tbl.getItems().clear();
-        coa_tbl.getColumns().removeAll(coa_tbl.getColumns());
+   
+  /*  public void FilterStatus(){
+         Log_assetsales_model arm4 = new Log_assetsales_model();
+         try {
+            List fss = arm4.where(new Object[][]{
+                {"ast_status", "=", comboboxSales.getSelectionModel().getSelectedItem().toString()}
+            }).get();
+                 Ar(fss);
+     
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
-        TableColumn<FINANCIAL_COA_CLASSFILE, String> cn = new TableColumn<>("Code No");
-        TableColumn<FINANCIAL_COA_CLASSFILE, String> at = new TableColumn<>("Account Title");
-
-        
-        cn.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_COA_CLASSFILE, String> param) -> param.getValue().cn);
-        at.setCellValueFactory((TableColumn.CellDataFeatures<FINANCIAL_COA_CLASSFILE, String> param) -> param.getValue().at);
-      
-        coa_tbl.getColumns().addAll(cn,at);
-    }
+    }*/
     
-    public void loadDataCOA(){
-         Financial_coa_model coa = new Financial_coa_model();
-         ObservableList<FINANCIAL_COA_CLASSFILE> gl_coa1 = FXCollections.observableArrayList();
-          
-            List b = coa.get();
-            
-            for(Object d : b)
+    Log_assetsales_model arm5 = new Log_assetsales_model();
+    ObservableList<AR_classfile> ars5 = FXCollections.observableArrayList();
+   
+    public void addTableARposting(){
+         arPosting_tbl.getItems().clear();
+         arPosting_tbl.getColumns().removeAll(arPosting_tbl.getColumns());
+        
+        TableColumn<AR_classfile, String> d = new TableColumn<>("Date");
+        TableColumn<AR_classfile, String> in = new TableColumn<>("Invoice No.");
+        TableColumn<AR_classfile, String> des = new TableColumn<>("Description");
+        TableColumn<AR_classfile, String> am = new TableColumn<>("Amount");
+        TableColumn<AR_classfile, String> st = new TableColumn<>("Status");
+        TableColumn<AR_classfile, String> js = new TableColumn<>("Journal Status");
+       
+        d.setCellValueFactory((TableColumn.CellDataFeatures<AR_classfile, String> param) -> param.getValue().arDate);
+        in.setCellValueFactory((TableColumn.CellDataFeatures<AR_classfile, String> param) -> param.getValue().arInvoiceno);
+        des.setCellValueFactory((TableColumn.CellDataFeatures<AR_classfile, String> param) -> param.getValue().arDescription);
+        am.setCellValueFactory((TableColumn.CellDataFeatures<AR_classfile, String> param) -> param.getValue().arAmount);
+        st.setCellValueFactory((TableColumn.CellDataFeatures<AR_classfile, String> param) -> param.getValue().arStatus);
+        js.setCellValueFactory((TableColumn.CellDataFeatures<AR_classfile, String> param) -> param.getValue().arJournalStatus);
+        
+        arPosting_tbl.getColumns().addAll(d,in,des,am,st,js);
+    }
+    public void LoadARposting(){
+         CompletableFuture.supplyAsync(() -> {
+            while (Session.CurrentRoute.equals("id_apr")) {
+                try {
+                    arm5.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
+                        DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
+                    });
+                      arPosting_tbl.getItems();
+                    if (DummyCount != GlobalCount) {
+                            List b = arm5.where(new Object[][]{
+                             {"journal_status","=","Not Posted" } }).get();
+                            arPOSTING(b);
+                    arPosting_tbl.setItems(ars5);
+                    GlobalCount = DummyCount;
+                    }
+                    Thread.sleep(3000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(FINANCIAL_AP_ARController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            return 0;
+        }, Session.SessionThreads);
+    }
+    private void arPOSTING(List post){
+        arPosting_tbl.getItems().clear();
+        try {
+              for(Object d : post)
+            {
+                HashMap hm = (HashMap) d; 
+                hm.get("ast_date");
+                hm.get("ast_id");
+                hm.get("ast_description");
+                hm.get("ast_amount");
+                hm.get("ast_status");
+                hm.get("journal_status");
+                ars5.add(new AR_classfile(
+                            String.valueOf(hm.get("ast_date")),
+                            String.valueOf(hm.get("ast_id")),
+                            String.valueOf(hm.get("ast_firstname")),
+                            String.valueOf(hm.get("ast_lastname")),
+                            String.valueOf(hm.get("ast_description")),
+                            String.valueOf(hm.get("ast_amount")),
+                            String.valueOf(hm.get("ast_status")),
+                            String.valueOf(hm.get("ast_type")),
+                            String.valueOf(hm.get("journal_status"))
+                ) );   
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        arPosting_tbl.setItems(ars5);
+    }   
+    
+     public void openAsset(){
+          Modal md = Modal.getInstance(new Form("/FXMLS/FINANCIAL/CALLER/Asset.fxml").getParent());
+          md.open();
+     }
+     public void openPOM(){
+         Modal md = Modal.getInstance(new Form("/FXMLS/FINANCIAL/CALLER/PurchaseOrder.fxml").getParent());
+         md.open();
+     }
+       
+     
+         Log_assetsales_model arm = new Log_assetsales_model();
+   ObservableList<AR_classfile> ars = FXCollections.observableArrayList();
+    double total1 = 0;
+    
+   private void Ar(List arr){
+        ar_tbl.getItems().clear();
+        try {
+              for(Object d : arr)
             {
                 HashMap hm = (HashMap) d;   //exquisite casting
-                 hm.get("coa_id");
-                hm.get("code_no");
-                hm.get("acc_title");
                 
-               gl_coa1.add(new FINANCIAL_COA_CLASSFILE(
-                       
-                String.valueOf(hm.get("coa_id")),
-                String.valueOf(hm.get("code_no")),
-                String.valueOf(hm.get("acc_title"))
+                hm.get("ast_date");
+                hm.get("ast_id");
+                hm.get("ast_description");
+                hm.get("ast_amount");
+                hm.get("ast_status");
+                hm.get("journal_status");
+                ars.add(new AR_classfile(
+                            String.valueOf(hm.get("ast_date")),
+                            String.valueOf(hm.get("ast_id")),
+                            String.valueOf(hm.get("ast_firstname")),
+                            String.valueOf(hm.get("ast_lastname")),
+                            String.valueOf(hm.get("ast_description")),
+                            String.valueOf(hm.get("ast_amount")),
+                            String.valueOf(hm.get("ast_status")),
+                            String.valueOf(hm.get("ast_type")),
+                            String.valueOf(hm.get("journal_status"))
                 ) );   
-               
+                 
             }
-            coa_tbl.setItems(gl_coa1);
+              
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        ar_tbl.setItems(ars);
+   
+       
+     }
+    
+   public void Loadtable_Ar(){
+       CompletableFuture.supplyAsync(() -> {
+            while (Session.CurrentRoute.equals("id_apr")) {
+                try {
+                    arm.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
+                        DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
+                    });
+                      ar_tbl.getItems();
+                    if (DummyCount != GlobalCount) {
+                            List b = arm.where(new Object[][]{
+                             {"ast_status","=","Uncollected" }
+                    }).get();
+                            Ar(b);
+                            
+                       /*  for(int i  = 0; i<ar_tbl.getItems().size(); i++){
+                           int amount = Integer.parseInt(ar_tbl.getItems().get(i).arAmount.getValue());
+                          total1 = total1+ amount;
+                    }   // yung ar_tbl tableview
+                        // yung arAmount galing classfile simplestring
+                        // total1 sya yung double
+                                     ar_total_lbl.setText(String.valueOf(total1));*/
+                         
+                    ar_tbl.setItems(ars);
+                    GlobalCount = DummyCount;
+                    }
+                    Thread.sleep(3000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(FINANCIAL_AP_ARController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
+            return 0;
+        }, Session.SessionThreads);
+                   
+   }
+  
+   public void AddtableColumn_AR(){
+        ar_tbl.getItems().clear();
+        ar_tbl.getColumns().removeAll(ar_tbl.getColumns());
+        
+        TableColumn<AR_classfile, String> d = new TableColumn<>("Date");
+        TableColumn<AR_classfile, String> in = new TableColumn<>("Invoice No.");
+        TableColumn<AR_classfile, String> des = new TableColumn<>("Description");
+        TableColumn<AR_classfile, String> am = new TableColumn<>("Amount");
+        TableColumn<AR_classfile, String> st = new TableColumn<>("Status");
+       
+        d.setCellValueFactory((TableColumn.CellDataFeatures<AR_classfile, String> param) -> param.getValue().arDate);
+        in.setCellValueFactory((TableColumn.CellDataFeatures<AR_classfile, String> param) -> param.getValue().arInvoiceno);
+        des.setCellValueFactory((TableColumn.CellDataFeatures<AR_classfile, String> param) -> param.getValue().arDescription);
+        am.setCellValueFactory((TableColumn.CellDataFeatures<AR_classfile, String> param) -> param.getValue().arAmount);
+        st.setCellValueFactory((TableColumn.CellDataFeatures<AR_classfile, String> param) -> param.getValue().arStatus);
+        
+        ar_tbl.getColumns().addAll(d,in,des,am,st);
+    }
     
     
+   
+    long DummyCount = 0;
+    long GlobalCount = 0;
+    int Global_Count = 0;
     
+    ExecutorService e = Executors.newFixedThreadPool(1);   
+    ObservableList<AP_classfile> brc = FXCollections.observableArrayList();
+    Financial_disbursement_request_model fbr = new Financial_disbursement_request_model();
+    double total2 = 0;
+    public void totalAP(){
+           for(int i  = 0; i<ap_tbl.getItems().size(); i++){
+                             int amount = Integer.parseInt(ap_tbl.getItems().get(i).apAmount.getValue());
+                          total2 = total2+ amount;
+                    }
+                                     total_label.setText(String.valueOf(total2));
+    }
+    public void AddtableColumn_AP(){
+        
+        ap_tbl.getItems().clear();
+        ap_tbl.getColumns().removeAll(ap_tbl.getColumns());
+        TableColumn<AP_classfile, String> apd = new TableColumn<>("Date");
+        TableColumn<AP_classfile, String> apin = new TableColumn<>("Invoice No");
+        TableColumn<AP_classfile, String> apde = new TableColumn<>("Department");
+        TableColumn<AP_classfile, String> apa = new TableColumn<>("Amount");
+        TableColumn<AP_classfile, String> aps = new TableColumn<>("Status");
+       
+        apd.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apDate);
+        apin.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apinvoice);
+        apde.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apDepartment);
+        apa.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apAmount);
+        aps.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apStatus);
+        
+        ap_tbl.getColumns().addAll(apd,apin,apde,apa,aps);
     
-    
+    }
+    public void loadtable_ap(){
+          CompletableFuture.supplyAsync(() -> {
+            while (Session.CurrentRoute.equals("id_apr")) {
+                try {
+                    fbr.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
+                        DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
+                    });
+                    if (DummyCount != GlobalCount) {
+                           ap_tbl.getItems();
+                            List b = fbr.where("dr_status","=","Unpaid").get();
+                            Ap(b);  
+                          
+                    ap_tbl.setItems(brc);
+                        GlobalCount = DummyCount;
+                    }
+                    Thread.sleep(3000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(FINANCIAL_BUDGET_MANAGEMENTController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            return 0;
+        }, Session.SessionThreads);
+
+     }
+    private int Ap(List app){
+        ap_tbl.getItems().clear();
+        try {
+              for(Object d : app)
+            {
+                HashMap hm = (HashMap) d;   //exquisite casting
+                hm.get("dr_daterequest");
+                hm.get("dr_id");
+                hm.get("dr_department");
+                hm.get("dr_amount");
+                hm.get("dr_status");
+                
+               brc.add(new AP_classfile(
+                            String.valueOf(hm.get("dr_daterequest")),
+                             String.valueOf(hm.get("dr_id")),
+                            String.valueOf(hm.get("dr_department")),
+                            String.valueOf(hm.get("dr_amount")),
+                            String.valueOf(hm.get("dr_status")),
+                            String.valueOf(hm.get("dr_journal_status"))
+                            
+                ) );                 
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        ap_tbl.setItems(brc);
+        return 0;
+     }
+
+    ObservableList<AP_classfile> brc5 = FXCollections.observableArrayList();
+    Financial_disbursement_request_model fbr5 = new Financial_disbursement_request_model();
+      
+    public void AddtableAPposting(){
+        apPosting_tbl.getItems().clear();
+        apPosting_tbl.getColumns().removeAll(apPosting_tbl.getColumns());
+        TableColumn<AP_classfile, String> apd = new TableColumn<>("Date");
+        TableColumn<AP_classfile, String> apin = new TableColumn<>("Invoice No");
+        TableColumn<AP_classfile, String> apde = new TableColumn<>("Department");
+        TableColumn<AP_classfile, String> apa = new TableColumn<>("Amount");
+        TableColumn<AP_classfile, String> aps = new TableColumn<>("Status");
+        TableColumn<AP_classfile, String> apjs = new TableColumn<>("Journal Status");
+       
+        apd.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apDate);
+        apin.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apinvoice);
+        apde.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apDepartment);
+        apa.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apAmount);
+        aps.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apStatus);
+        apjs.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apJournalStatus);
+        
+        apPosting_tbl.getColumns().addAll(apd,apin,apde,apa,aps,apjs);
+    }
+    public void LoadAPposting(){
+         CompletableFuture.supplyAsync(() -> {
+            while (Session.CurrentRoute.equals("id_apr")) {
+                try {
+                    fbr5.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
+                        DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
+                    });
+                    if (DummyCount != GlobalCount) {
+                           apPosting_tbl.getItems();
+                            List b = fbr5.where("dr_status","=","Unpaid")
+                                    .orWhere("dr_status","=","Released").get();
+                                    apPosting(b);  
+                         apPosting_tbl.setItems(brc5);
+                         GlobalCount = DummyCount;
+                    }
+                    Thread.sleep(3000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(FINANCIAL_BUDGET_MANAGEMENTController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            return 0;
+        }, Session.SessionThreads);
+
+    }
+    private int apPosting(List apPost){
+          apPosting_tbl.getItems().clear();
+        try {
+              for(Object d : apPost)
+            {
+                HashMap hm = (HashMap) d;   //exquisite casting
+                hm.get("dr_daterequest");
+                hm.get("dr_id");
+                hm.get("dr_department");
+                hm.get("dr_amount");
+                hm.get("dr_status");
+               brc5.add(new AP_classfile(
+                            String.valueOf(hm.get("dr_daterequest")),
+                            String.valueOf(hm.get("dr_id")),
+                            String.valueOf(hm.get("dr_department")),
+                            String.valueOf(hm.get("dr_amount")),
+                            String.valueOf(hm.get("dr_status")),
+                            String.valueOf(hm.get("dr_journal_status"))
+                ) );                 
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        apPosting_tbl.setItems(brc5);
+        return 0;
+    }
 }

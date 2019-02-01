@@ -16,7 +16,9 @@ public class HR2_Temp_Vehicles extends Synapse.Model{
     
          public HR2_Temp_Vehicles()
             {
-                   setColumns("vehicle_id");
-                    this.initTable("tbl_log2_vehicle_status");
+                   setColumns("VehicleID","VehicleType","VehicleModel","VehicleColor","VehicleSerialNumber",
+                           "VehicleChassisNumber","VehicleYearBought","VehicleWarrantyDate","VehiclePurchasedPrice",
+                           "VehicleFuelType","VehicleUsability","VehicleStatus");
+                    this.initTable("tbl_log1_AssetVehicles");
             }
 }

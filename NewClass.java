@@ -1,24 +1,19 @@
 
 import Config.DatabaseConfig;
-import Model.Sample;
-import Model.UserPermissions;
+import Controllers.SplashScreen;
 import Model.Users;
-import Synapse.Crypt;
-import Synapse.DB.MSSQL;
-import Synapse.DB.MYSQL;
 import Synapse.Database;
-import Synapse.Model;
+import Synapse.HttpClient;
+import Synapse.STORED_PROC;
 import Synapse.Session;
-import com.github.nkzawa.socketio.client.IO;
-import com.github.nkzawa.socketio.client.Socket;
-import java.net.URISyntaxException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
+import Synapse.iDB;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -31,19 +26,43 @@ import java.util.logging.Logger;
  */
 public class NewClass {
 
-    private static Socket socket;
-
     public static void main(String[] args) {
 
-        try {
-            //FXMLS.HR1.ClassFiles.HR1_GenerateEC.generateEC("Software Engineer", "PHP 15,000.00", LocalDate.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)), "Lecias, Ariel Jr. Calio", "Ma. Eden Ramoneda", "MIS Office");
+        Session.HttpURL = DatabaseConfig.HttpURL;
+        Session.schema = DatabaseConfig.schema;
+        Session.provider = DatabaseConfig.PROVIDER;
 
-            socket = IO.socket("http://127.0.0.1:5000");
-            socket.connect();
-        } catch (URISyntaxException ex) {
-            Logger.getLogger(NewClass.class.getName()).log(Level.SEVERE, null, ex);
+        //if offline
+        if (DatabaseConfig.offline) {
+            Session.Database = DatabaseConfig.DATABASE;
+            Session.Ip = DatabaseConfig.IP;
+            Session.Password = DatabaseConfig.PASSWORD;
+            Session.Port = DatabaseConfig.PORT;
+            Session.User = DatabaseConfig.USER;
+            Session.offline = DatabaseConfig.offline;
         }
-    
-    }   
+
+        if (Session.offline) {
+            try {
+                Database.getInstance().DB_INIT((iDB) Class.forName("Synapse.DB." + DatabaseConfig.PROVIDER.toUpperCase()).newInstance()).startConnection();
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+                Logger.getLogger(SplashScreen.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            HttpClient.post(HttpClient.METHOD.CONNECT, "{\"aerolink_secret_key\" : \"" + DatabaseConfig.key + "\"}", (err, data) -> {
+                if (err) {
+                    JOptionPane.showMessageDialog(null, "Unable to connect to server");
+                    System.exit(0);
+                } else {
+                    Session.isConnected = true;
+                    Session.sestoken = (String) data.get("value");
+                }
+            });
+        }
+
+        List list = STORED_PROC.executeCall("getAllEmployees");
+
+        System.err.println(Arrays.asList(list.toArray()));
+    }
 
 }

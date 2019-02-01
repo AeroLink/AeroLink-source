@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="674.0" prefWidth="1372.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Core1_Main.Po_managementController">
+   <children>
+      <SplitPane prefHeight="829.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <items>
+            <AnchorPane prefHeight="680.0" prefWidth="1370.0">
+               <children>
+                  <AnchorPane prefHeight="40.0" prefWidth="1370.0" styleClass="card" stylesheets="@../../Assets/css/card.css">
+                     <children>
+                        <Label layoutX="-1.0" prefHeight="43.0" prefWidth="384.0" styleClass="text" text="PURCHASE ORDER MANAGEMENT" textFill="#34a853">
+                           <font>
+                              <Font name="Arial Bold" size="20.0" />
+                           </font>
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                        </Label>
+                        <HBox layoutX="1076.0" layoutY="6.0" prefHeight="31.0" prefWidth="287.0">
+                           <children>
+                              <JFXButton buttonType="RAISED" onAction="#viewPO" prefHeight="30.0" prefWidth="137.0" style="-fx-background-color: #34A853;" text="View P.O." textFill="WHITE">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="EYE" size="20" />
+                                 </graphic>
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </JFXButton>
+                              <JFXButton buttonType="RAISED" onAction="#viewInvoices" prefHeight="30.0" prefWidth="137.0" style="-fx-background-color: #34A853;" text="View Invoices" textFill="WHITE">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="EYE" size="20" />
+                                 </graphic>
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                        <Label fx:id="lbl_book_no" layoutX="383.0" layoutY="16.0" prefHeight="17.0" prefWidth="109.0" visible="false" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutY="43.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="43.0">
+                     <children>
+                        <TableView fx:id="tbl_pom" layoutY="72.0" onMouseClicked="#displayTable" prefHeight="557.0" prefWidth="222.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="72.0">
+                          <columns>
+                            <TableColumn fx:id="col_ref" prefWidth="99.0" text="Reference No." />
+                            <TableColumn fx:id="col_status" prefWidth="123.0" text="Status" />
+                          </columns>
+                        </TableView>
+                        <HBox layoutX="222.0" layoutY="72.0" prefHeight="557.0" prefWidth="1148.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="226.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="72.0">
+                           <children>
+                              <VBox prefHeight="557.0" prefWidth="401.0">
+                                 <children>
+                                    <Label prefHeight="38.0" prefWidth="100.0" text="P.O Date :">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbl_po_date" ellipsisString="" prefHeight="21.0" prefWidth="161.0" text="( PO DATE HERE )">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="15.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Separator prefWidth="200.0" />
+                                    <Label prefHeight="38.0" prefWidth="100.0" text="P.O Number :">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbl_po_no" text="( PO NUMBER HERE )">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="15.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Separator prefWidth="200.0" />
+                                    <Label prefHeight="38.0" prefWidth="135.0" text="Tracking Number :">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbl_track" text="( TRACKING NUMBER HERE )">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="15.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Separator prefWidth="200.0" />
+                                    <Label prefHeight="38.0" prefWidth="135.0" text="Reference Number :">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbl_ref_no" prefHeight="21.0" prefWidth="184.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="15.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Separator prefWidth="200.0" />
+                                    <Label prefHeight="38.0" prefWidth="135.0" text="Shipper Address :">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbl_ship_add" prefHeight="21.0" prefWidth="376.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="15.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Separator prefWidth="200.0" />
+                                    <Label prefHeight="38.0" prefWidth="135.0" text="Receiver Address :">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbl_rec_add" prefHeight="21.0" prefWidth="378.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Separator prefWidth="200.0" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <Separator orientation="VERTICAL" prefHeight="557.0" prefWidth="23.0" />
+                              <VBox prefHeight="557.0" prefWidth="201.0">
+                                 <children>
+                                    <Label prefHeight="38.0" prefWidth="185.0" text="Freight :">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="36.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Separator prefWidth="200.0" />
+                                    <Label prefHeight="38.0" prefWidth="100.0" text="Service Type :">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label fx:id="lbl_serv_type">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="15.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Separator prefWidth="200.0" />
+                                    <Label prefHeight="38.0" prefWidth="135.0" text="BOX USED :">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lbl_box">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="15.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Separator prefWidth="200.0" />
+                                    <Label prefHeight="38.0" prefWidth="135.0" text="Weight :">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox>
+                                       <VBox.margin>
+                                          <Insets bottom="15.0" />
+                                       </VBox.margin>
+                                       <children>
+                                          <Label fx:id="lbl_weight" prefHeight="21.0" prefWidth="31.0">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="21.0" prefWidth="28.0" text="Kg.">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <Separator prefWidth="200.0" />
+                                    <Label prefHeight="38.0" prefWidth="135.0" text="Quantity :">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label fx:id="lbl_quantity" prefHeight="21.0" prefWidth="58.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="15.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Separator prefWidth="200.0" />
+                                    <Label fx:id="lbl_weight_total" prefHeight="31.0" prefWidth="173.0" text="Label" visible="false" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox prefHeight="557.0" prefWidth="201.0">
+                                 <children>
+                                    <HBox prefHeight="39.0" prefWidth="171.0" style="-fx-background-color: white;">
+                                       <VBox.margin>
+                                          <Insets bottom="35.0" />
+                                       </VBox.margin>
+                                       <children>
+                                          <Label prefHeight="38.0" prefWidth="40.0" text="= ₱">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="lbl_cost_freight" prefHeight="38.0" prefWidth="160.0" text=" 0.00">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <Separator prefWidth="200.0" />
+                                    <HBox prefHeight="39.0" prefWidth="171.0" style="-fx-background-color: white;">
+                                       <VBox.margin>
+                                          <Insets bottom="35.0" />
+                                       </VBox.margin>
+                                       <children>
+                                          <Label prefHeight="39.0" prefWidth="63.0" text="= ₱">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="lbl_cost_serv_type" prefHeight="39.0" prefWidth="171.0" text="0.00">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </HBox>
+                                    <Separator prefWidth="200.0" />
+                                    <HBox prefHeight="39.0" style="-fx-background-color: white;">
+                                       <VBox.margin>
+                                          <Insets bottom="35.0" />
+                                       </VBox.margin>
+                                       <children>
+                                          <Label prefHeight="42.0" prefWidth="31.0" text="= ₱">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="lbl_cost_box" prefHeight="39.0" prefWidth="130.0" text="0.00">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <Separator prefWidth="200.0" />
+                                    <HBox prefHeight="39.0" style="-fx-background-color: white;">
+                                       <VBox.margin>
+                                          <Insets bottom="35.0" />
+                                       </VBox.margin>
+                                       <children>
+                                          <Label prefHeight="41.0" prefWidth="31.0" text="= ₱">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="lbl_cost_weight" prefHeight="40.0" prefWidth="118.0" text="0.00">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <Separator prefWidth="200.0" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </VBox>
+                              <Separator orientation="VERTICAL" prefHeight="557.0" prefWidth="28.0" />
+                              <HBox prefHeight="527.0" prefWidth="421.0" style="-fx-background-color: #ccffcc;">
+                                 <children>
+                                    <VBox prefHeight="547.0" prefWidth="243.0">
+                                       <children>
+                                          <Label prefHeight="38.0" prefWidth="100.0" text="Sub Total : ">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label text="( Without Taxes and Charges )">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="45.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label prefHeight="38.0" prefWidth="100.0" text="Total Vat 12% :">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label prefHeight="38.0" prefWidth="100.0" text="Charges :">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <JFXButton buttonType="RAISED" onAction="#viewCharges" prefHeight="30.0" prefWidth="137.0" style="-fx-background-color: #34A853;" text="View Charges" textFill="WHITE">
+                                             <VBox.margin>
+                                                <Insets bottom="20.0" />
+                                             </VBox.margin>
+                                             <graphic>
+                                                <FontAwesomeIconView fill="WHITE" glyphName="EYE" size="20" />
+                                             </graphic>
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </JFXButton>
+                                          <Label prefHeight="26.0" prefWidth="135.0" text="TOTAL :">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="60.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <HBox prefHeight="37.0" prefWidth="201.0">
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                             <padding>
+                                                <Insets left="60.0" />
+                                             </padding>
+                                          </HBox>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="557.0" prefWidth="201.0">
+                                       <children>
+                                          <HBox prefHeight="39.0" style="-fx-background-color: white;">
+                                             <VBox.margin>
+                                                <Insets bottom="35.0" top="25.0" />
+                                             </VBox.margin>
+                                             <children>
+                                                <Label prefHeight="42.0" prefWidth="31.0" text="= ₱">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <Label fx:id="lbl_sub_total" prefHeight="40.0" prefWidth="135.0" text="0.00">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <HBox style="-fx-background-color: white;">
+                                             <VBox.margin>
+                                                <Insets bottom="15.0" />
+                                             </VBox.margin>
+                                             <children>
+                                                <Label prefHeight="37.0" prefWidth="30.0" text="= ₱">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lbl_vat" prefHeight="38.0" prefWidth="136.0" text="0.00">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <HBox style="-fx-background-color: white;">
+                                             <children>
+                                                <Label prefHeight="37.0" prefWidth="30.0" text="= ₱">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lbl_charge" prefHeight="37.0" prefWidth="134.0" text="0.00">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets bottom="40.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox prefHeight="39.0" style="-fx-background-color: white;">
+                                             <VBox.margin>
+                                                <Insets bottom="55.0" />
+                                             </VBox.margin>
+                                             <children>
+                                                <Label prefHeight="39.0" prefWidth="38.0" text="= ₱">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lbl_total" prefHeight="41.0" prefWidth="135.0" text="0.00">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="39.0" prefWidth="201.0">
+                                             <children>
+                                                <VBox spacing="10.0">
+                                                   <children>
+                                                      <JFXButton buttonType="RAISED" onAction="#print" prefHeight="30.0" prefWidth="137.0" style="-fx-background-color: #34A853;" text="Print &amp; Save" textFill="WHITE">
+                                                         <graphic>
+                                                            <FontAwesomeIconView fill="WHITE" glyphName="PRINT" size="20" />
+                                                         </graphic>
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </JFXButton>
+                                                      <JFXButton buttonType="RAISED" onAction="#clear" prefHeight="30.0" prefWidth="137.0" style="-fx-background-color: #34A853;" text="Clear" textFill="WHITE">
+                                                         <graphic>
+                                                            <FontAwesomeIconView fill="WHITE" glyphName="ERASER" size="20" />
+                                                         </graphic>
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </JFXButton>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" right="10.0" />
+                                 </HBox.margin>
+                              </HBox>
+                           </children>
+                        </HBox>
+                        <AnchorPane layoutX="226.0" layoutY="10.0" prefHeight="51.0" prefWidth="1144.0" style="-fx-background-color: #34A853;" AnchorPane.leftAnchor="226.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+                           <children>
+                              <FontAwesomeIconView fill="WHITE" glyphName="PLUS" layoutX="6.0" layoutY="38.0" size="40" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
+                              <Label layoutX="50.0" layoutY="10.0" prefHeight="41.0" prefWidth="290.0" text="CREATE PURCHASE ORDER ( P.O )" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <HBox layoutX="320.0" layoutY="21.0" prefHeight="30.0" prefWidth="325.0" />
+                           </children>
+                        </AnchorPane>
+                        <VBox layoutX="1.0" layoutY="3.0" prefHeight="68.0" prefWidth="222.0">
+                           <children>
+                              <HBox>
+                                 <children>
+                                    <Label prefHeight="30.0" prefWidth="71.0" text="Search :">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <TextField fx:id="txt_search" prefHeight="25.0" prefWidth="222.0" promptText="Reference no." />
+                           </children>
+                        </VBox>
+                     </children></AnchorPane>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

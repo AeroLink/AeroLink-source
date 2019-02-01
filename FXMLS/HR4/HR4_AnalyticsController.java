@@ -5,50 +5,52 @@
  */
 package FXMLS.HR4;
 
+import FXMLS.HR4.Model.HR4_GenderChartModel;
 import java.net.URL;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Side;
 import javafx.scene.chart.PieChart;
 
 /**
  * FXML Controller class
  *
- * @author Jaeeeee
+ * @author JaeJae
  */
 public class HR4_AnalyticsController implements Initializable {
-    private ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+    
     @FXML
-    private PieChart pieChart;
+    private PieChart pieChart1;
+    private final ObservableList<PieChart.Data> pie = FXCollections.observableArrayList();
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        this.Piechart();
+    }
+    HR4_GenderChartModel gcm = new HR4_GenderChartModel();
+   public void Piechart() {
 
-    /*pieChartData.clear();
-    try {
-        ResultSet rs = connector.conn.prepareStatement("SELECT * FROM aerolink.tbl_").executeQuery();
-        Double totalPercentage = null;
-        while (rs.next()) {
-            int totalSumPie;
-            totalPercentage = rs.getInt("value") / totalSumPie * 100
-            pieChartData.add(new PieChart.Data(rs.getString("name") + " " + new DecimalFormat("#,###.0").format(totalPercentage) + "%", rs.getInt("value")));
+        pie.clear();
+        List<HashMap> list3x = gcm
+                .groupBy("gender")
+                .get("gender,COUNT(gender) as Total");
+        list3x.forEach((row) -> {
+            pie.add(new PieChart.Data(row.get("gender").toString(),
+                    Double.parseDouble(row.get("Total").toString())));
+        });
+        pieChart1.setData(pie);
+        pieChart1.setLegendSide(Side.RIGHT);
+        pieChart1.setStartAngle(90);
 
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(HR4.AnalyticsController.class
-                    .getName()).log(Level.SEVERE, null, ex);
-        }
-        pieChart.setData(pieChartData);
-
-   } */}
+   }
 }
+
+   

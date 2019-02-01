@@ -7,6 +7,10 @@ package FXMLS.Core2;
 
 import FXMLS.Core2.ClassFiles.SPTable_LoadNA;
 import FXMLS.Core2.Modals.SPviewSPDetailsController;
+import static FXMLS.Core2.Modals.SPviewSPDetailsController.pcountry;
+import static FXMLS.Core2.Modals.SPviewSPDetailsController.peemail;
+import static FXMLS.Core2.Modals.SPviewSPDetailsController.pefn;
+import static FXMLS.Core2.Modals.SPviewSPDetailsController.pemail;
 import Model.Core2.CORE2_ProvRegistration;
 import Synapse.Components.Modal.Modal;
 import Synapse.Form;
@@ -49,13 +53,10 @@ public class ServiceProviderController implements Initializable {
     int Global_Count = 0;
     /* DECLARATION END */
     // dito lalabas yung another scene na tinatawag 
-    private AnchorPane rootPane;
     @FXML
-    private AnchorPane SNrootPane;
+    private AnchorPane SProotPane;
     @FXML
     private JFXButton SPviewR;
-    @FXML
-    private JFXButton SPviewR1;
     @FXML
     private TextField searchP;
 
@@ -94,11 +95,13 @@ public class ServiceProviderController implements Initializable {
         TableColumn<SPTable_LoadNA, String> address = new TableColumn<>("PROVIDER ADDRESS");
         TableColumn<SPTable_LoadNA, String> contact = new TableColumn<>("CONTACT");
         TableColumn<SPTable_LoadNA, String> country = new TableColumn<>("COUNTRY");
+        TableColumn<SPTable_LoadNA, String> status = new TableColumn<>("STATUS");
         name.setCellValueFactory((param) -> param.getValue().provider_name);
         address.setCellValueFactory((param) -> param.getValue().provider_address);
         contact.setCellValueFactory((param) -> param.getValue().provider_contact);
         country.setCellValueFactory((param) -> param.getValue().country);
-        tblOpenDetails.getColumns().addAll(name, address, contact, country);
+        status.setCellValueFactory((param) -> param.getValue().status);
+        tblOpenDetails.getColumns().addAll(name, address, contact, country,status);
     }
 
     public void populateTable() {
@@ -118,7 +121,12 @@ public class ServiceProviderController implements Initializable {
                                     .get("provider_name",
                                             "provider_address",
                                             "provider_contact",
-                                            "country");
+                                            "provider_email",
+                                            "country",
+                                            "status",
+                                            "CONCAT('SP000',id) as code",
+                                            "CONCAT(last_name,',',first_name,' ',middle_name) as fullname",
+                                            "email");
                             Global_Count = count;
                         }
                         return rs;
@@ -144,23 +152,16 @@ public class ServiceProviderController implements Initializable {
             String provider_name = (String) drow.get("provider_name");
             String provider_address = (String) drow.get("provider_address");
             String provider_contact = (String) drow.get("provider_contact");
+            String provider_email = (String) drow.get("provider_email");
             String country = (String) drow.get("country");
-
-            sptbl.add(new SPTable_LoadNA(provider_name, provider_address,provider_contact, country));
+            String status = (String) drow.get("status");
+            String code = (String) drow.get("code");
+            String pefn = (String) drow.get("fullname");
+            String peemail = (String) drow.get("email");
+            
+            sptbl.add(new SPTable_LoadNA(provider_name, provider_address,
+                    provider_contact,provider_email,country,status,code,pefn,peemail));
         }
-    }
-
-    //ito yung pag call ng another scene pero hindi magiging modal 
-    @FXML
-    private void viewR(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/SPviewReport.fxml"));
-        SNrootPane.getChildren().setAll(pane);
-    }
-
-    @FXML
-    private void viewR1(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/SPviewRegistration.fxml"));
-        SNrootPane.getChildren().setAll(pane);
     }
 
     @FXML
@@ -168,7 +169,13 @@ public class ServiceProviderController implements Initializable {
         // sya yung ginamit pang tawag ng data via controller
         FXMLS.Core2.Modals.SPviewSPDetailsController.pname = tblOpenDetails.getSelectionModel().getSelectedItem().provider_name.getValue();
         FXMLS.Core2.Modals.SPviewSPDetailsController.paddress = tblOpenDetails.getSelectionModel().getSelectedItem().provider_address.getValue();
-        
+        FXMLS.Core2.Modals.SPviewSPDetailsController.pemail = tblOpenDetails.getSelectionModel().getSelectedItem().provider_email.getValue();
+        FXMLS.Core2.Modals.SPviewSPDetailsController.pcontact = tblOpenDetails.getSelectionModel().getSelectedItem().provider_contact.getValue();
+        FXMLS.Core2.Modals.SPviewSPDetailsController.pcode = tblOpenDetails.getSelectionModel().getSelectedItem().code.getValue();
+        FXMLS.Core2.Modals.SPviewSPDetailsController.pcountry = tblOpenDetails.getSelectionModel().getSelectedItem().country.getValue();
+        FXMLS.Core2.Modals.SPviewSPDetailsController.pefn = tblOpenDetails.getSelectionModel().getSelectedItem().PEfullname.getValue();
+        FXMLS.Core2.Modals.SPviewSPDetailsController.peemail = tblOpenDetails.getSelectionModel().getSelectedItem().PEemail.getValue();
+
         Modal md = Modal.getInstance(new Form("/FXMLS/Core2/Modals/SPviewSPDetails.fxml").getParent());
         md.open();
         md.getF().getStage().setOnCloseRequest(action -> {
@@ -214,16 +221,27 @@ public class ServiceProviderController implements Initializable {
 
             for (Object d : requestor) {
                 HashMap hm = (HashMap) d;   //exquisite casting
+                hm.get("code");
                 hm.get("provider_name");
                 hm.get("provider_address");
                 hm.get("provider_contact");
+                hm.get("provider_email");
                 hm.get("country");
+                hm.get("status");
+                hm.get("code");
+                hm.get("pefn");
+                hm.get("peemail");
 
                 sptbl.add(new SPTable_LoadNA(
+                        String.valueOf(hm.get("code")), // dapat ganto kapag primary key
                         String.valueOf(hm.get("provider_name")),
                         String.valueOf(hm.get("provider_address")),
                         String.valueOf(hm.get("provider_contact")),
-                        String.valueOf(hm.get("country"))
+                        String.valueOf(hm.get("provider_email")),
+                        String.valueOf(hm.get("country")),
+                        String.valueOf(hm.get("status")),
+                        String.valueOf(hm.get("pefn")),
+                        String.valueOf(hm.get("peemail"))
                 ));
                 tblOpenDetails.setItems(sptbl);
             }
@@ -233,4 +251,10 @@ public class ServiceProviderController implements Initializable {
 
     }
 
+    //ito yung pag call ng another scene pero hindi magiging modal 
+    @FXML
+    private void viewR(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/SPviewReport.fxml"));
+        SProotPane.getChildren().setAll(pane);
+    }
 }

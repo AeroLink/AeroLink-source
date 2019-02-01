@@ -8,7 +8,7 @@ package FXMLS.Log1;
 import FXMLS.Log1.ClassFiles.Log1_ProcRequestsClassFile;
 import FXMLS.Log1.ClassFiles.Log1_SupplierClassfiles;
 import FXMLS.Log1.util.AlertMaker;
-import Model.Log1.Log1_ProcurementRequestModel;
+import Model.Log1.Log1_ProcurementPurchaseRequestModel;
 import Model.Log1.Log1_SupplierModel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -45,29 +45,11 @@ public class ProcurementController implements Initializable {
     @FXML
     private TableColumn<Log1_ProcRequestsClassFile, String> dateRequested_col;
     @FXML
-    private TableColumn<Log1_ProcRequestsClassFile, String> item_col;
-    @FXML
     private TableColumn<Log1_ProcRequestsClassFile, String> requestor_col;
-    @FXML
-    private TableColumn<Log1_ProcRequestsClassFile, String> requestorPosition_col;
-    @FXML
-    private TableColumn<Log1_ProcRequestsClassFile, String> department_col;
     @FXML
     private TableColumn<Log1_ProcRequestsClassFile, String> priorityLevel_col;
     @FXML
-    private TableColumn<Log1_ProcRequestsClassFile, String> amount_col;
-    @FXML
-    private TableColumn<Log1_ProcRequestsClassFile, String> pricePerUnit_col;
-    @FXML
-    private TableColumn<Log1_ProcRequestsClassFile, String> RequestsStatus_col;
-    @FXML
-    private JFXTextField ProcSearch_txt;
-    @FXML
     private JFXButton ApproveProcRequest_btn;
-    @FXML
-    private JFXButton addRequest;
-    @FXML
-    private JFXButton addRequest1;
     @FXML
     private JFXTextField ProcSearch_txt1;
     @FXML
@@ -80,18 +62,20 @@ public class ProcurementController implements Initializable {
     private TableColumn<Log1_SupplierClassfiles, String> contact_col;
     @FXML
     private TableColumn<Log1_SupplierClassfiles, String> Representative_col;
+    @FXML
+    private TableColumn<Log1_ProcRequestsClassFile, String> RequestsBudgetStatus_col;
+    @FXML
+    private TableColumn<Log1_ProcRequestsClassFile, String> RequestsStatus_col1;
+    @FXML
+    private TableColumn<Log1_ProcRequestsClassFile, String> itemRequested_col;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        loadProcurementRequestData();
-        displayProcurementRequestData();
-        ProcSearch_txt.setOnKeyReleased(e -> searchy());
-        callSupplierData();
-        displaySupplierData();
+//        loadProcurementRequestData();
+//        displayProcurementRequestData();
+//        callSupplierData();
+//        displaySupplierData();
     }
     
     public void callSupplierData(){
@@ -124,109 +108,50 @@ public class ProcurementController implements Initializable {
         Representative_col.setCellValueFactory(new PropertyValueFactory<>("SupplierRepresentative"));
     }    
     
-    public void searchy() {
-        Log1_ProcurementRequestModel searchRequest = new Log1_ProcurementRequestModel(); 
-            try{
-            List list_coa = searchRequest.where(new Object[][]{
-            {"RequestID", "like", "%" + ProcSearch_txt.getText() + "%"}
-            }).get();    
-        ObservableList<Log1_ProcRequestsClassFile> requests = FXCollections.observableArrayList();
-            for(Object d : list_coa)
-            {
-                HashMap hm = (HashMap) d;   //exquisite casting
-                
-               requests.add(new Log1_ProcRequestsClassFile(
-                
-                String.valueOf(hm.get("RequestID")),
-                String.valueOf(hm.get("RequestDescription")),
-                String.valueOf(hm.get("Requestor")),
-                String.valueOf(hm.get("RequestorPosition")),
-                String.valueOf(hm.get("RequestDepartment")),
-                String.valueOf(hm.get("RequestPriorityLevel")),
-                String.valueOf(hm.get("RequestQuantity")),
-                String.valueOf(hm.get("RequestPrice")),
-                String.valueOf(hm.get("RequestStatus")),
-                String.valueOf(hm.get("RequestDate"))
-                       
-                ));}
-            ProcRequest_tbl.setItems(requests);
-            
-            }catch(Exception e){
-                e.printStackTrace();
-            } 
-        }
+
     public void loadProcurementRequestData(){
-         Log1_ProcurementRequestModel coa = new Log1_ProcurementRequestModel();
-         ObservableList<Log1_ProcRequestsClassFile> ProcRequests = FXCollections.observableArrayList();
-          
-            List b = coa.get();
-            
-            for(Object d : b)
-                {
-                    //rs = hm
-                HashMap hm = (HashMap) d;   //exquisite casting
-                
-                ProcRequests.add(new Log1_ProcRequestsClassFile(
-                
-                String.valueOf(hm.get("RequestID")),
-                String.valueOf(hm.get("RequestDate")),
-                String.valueOf(hm.get("RequestDescription")),
-                String.valueOf(hm.get("Requestor")),
-                String.valueOf(hm.get("RequestorPosition")),
-                String.valueOf(hm.get("RequestDepartment")),
-                String.valueOf(hm.get("RequestPriorityLevel")),
-                String.valueOf(hm.get("RequestQuantity")),
-                String.valueOf(hm.get("RequestPrice")),
-                String.valueOf(hm.get("RequestStatus"))
-                
-                ));       
-            }
-                ProcRequest_tbl.setItems(ProcRequests);
+//         Log1_ProcurementPurchaseRequestModel coa = new Log1_ProcurementPurchaseRequestModel();
+//         ObservableList<Log1_ProcRequestsClassFile> ProcRequests = FXCollections.observableArrayList();
+//          
+//            List b = coa.get();
+//            
+//            for(Object d : b)
+//                {
+//                    //rs = hm
+//                HashMap hm = (HashMap) d;   //exquisite casting
+//                
+//                ProcRequests.add(new Log1_ProcRequestsClassFile(
+//                
+//                String.valueOf(hm.get("RequestID")),
+//                String.valueOf(hm.get("SupplierID")),
+//                String.valueOf(hm.get("RequestDate")),
+//                String.valueOf(hm.get("RequestDescription")),
+//                String.valueOf(hm.get("Requestor")),
+//                String.valueOf(hm.get("RequestorPosition")),
+//                String.valueOf(hm.get("RequestDepartment")),
+//                String.valueOf(hm.get("RequestPriorityLevel")),
+//                String.valueOf(hm.get("RequestQuantity")),
+//                String.valueOf(hm.get("RequestItemUnit")),
+//                        String.valueOf(hm.get("RequestPricePerUnit")),
+//                        String.valueOf(hm.get("RequestTotalPrice")),
+//                String.valueOf(hm.get("RequestBudget")),
+//                String.valueOf(hm.get("RequestStatus"))
+//                
+//                ));       
+//            }
+//                ProcRequest_tbl.setItems(ProcRequests);
     }
     
     public void displayProcurementRequestData(){
             dateRequested_col.setCellValueFactory(new PropertyValueFactory<>("RequestDate"));
-            item_col.setCellValueFactory(new PropertyValueFactory<>("RequestDescription"));
+            itemRequested_col.setCellValueFactory(new PropertyValueFactory<>("RequestDescription"));
             requestor_col.setCellValueFactory(new PropertyValueFactory<>("Requestor"));
-            requestorPosition_col.setCellValueFactory(new PropertyValueFactory<>("RequestorPosition"));
-            department_col.setCellValueFactory(new PropertyValueFactory<>("RequestDepartment"));
-            priorityLevel_col.setCellValueFactory(new PropertyValueFactory<>("RequestPriorityLevel"));
-            amount_col.setCellValueFactory(new PropertyValueFactory<>("RequestQuantity"));
-            pricePerUnit_col.setCellValueFactory(new PropertyValueFactory<>("RequestPrice"));
-            RequestsStatus_col.setCellValueFactory(new PropertyValueFactory<>("RequestStatus"));
-    }
-    
-    @FXML
-    public void approveRequest(){
-        Log1_ProcRequestsClassFile ifSelectedIsNull = ProcRequest_tbl.getSelectionModel().getSelectedItem();
-        if(ifSelectedIsNull == null){
-            AlertMaker.showErrorMessage("No Request selected","Please select the request you want to approve");
-            return;
-        }
-        Log1_ProcRequestsClassFile selectedforapproval = ProcRequest_tbl.getSelectionModel().getSelectedItem();
-            
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLS/Log1/Procurement/Modal/ProcurementRequestApproval.fxml"));
-            Parent parent;
-            
-//          StockOutWHController controller = (StockOutWHController) loader.getController();
-//          controller.inflateUI(selectedforapproval);
- 
-            parent = loader.load();
-            Stage stage = new Stage(StageStyle.DECORATED);
-            stage.setTitle("Request Approval");
-            stage.setScene(new Scene(parent));
-            stage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(ProcurementController.class.getName()).log(Level.SEVERE, null, ex);
-        }      
+            priorityLevel_col.setCellValueFactory(new PropertyValueFactory<>("RequestPriorityLevel"));;
+            RequestsStatus_col1.setCellValueFactory(new PropertyValueFactory<>("RequestStatus"));
+            RequestsBudgetStatus_col.setCellValueFactory(new PropertyValueFactory<>("RequestBudget"));
     }
 
     @FXML
-    private void addRequest(ActionEvent event) {
-    }
-
-    @FXML
-    private void updateRequest(ActionEvent event) {
+    private void approveRequest(ActionEvent event) {
     }
 }

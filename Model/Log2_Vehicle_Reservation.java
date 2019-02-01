@@ -12,7 +12,7 @@ package Model;
 public class Log2_Vehicle_Reservation extends Synapse.Model{
     
     public Log2_Vehicle_Reservation() {
-        setColumns("purpose","location","typeofvehicle","vehicleid");
+        setColumns("purpose","location");
         this.initTable("aerolink.tbl_log2_reservation");
     }
     

@@ -5,7 +5,10 @@
  */
 package FXMLS.FINANCIAL.CALLER;
 
+import FXMLS.FINANCIAL.FINANCIAL_BUDGET_MANAGEMENTController;
 import Model.Financial.Financial_allocation_model;
+import Synapse.Components.Modal.Modal;
+import Synapse.Form;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
@@ -16,6 +19,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
@@ -26,7 +30,7 @@ import javafx.stage.StageStyle;
 public class BUDGET_NEWALLOCATIONController implements Initializable {
 
     @FXML
-    private JFXComboBox<String> ba_cmbo;
+    private JFXComboBox ba_cmbo;
     @FXML
     private JFXTextField ba_amount_txtfield;
     @FXML
@@ -53,8 +57,8 @@ public class BUDGET_NEWALLOCATIONController implements Initializable {
         {
            String[][] fba_table =
         {
-        {"department" , ba_cmbo.getValue().toString()},
-        {"allocated_amount" , ba_amount_txtfield.getText()}
+        {"ba_department" , ba_cmbo.getValue().toString()},
+        {"ba_amount" , ba_amount_txtfield.getText()}
         };           
            
            
@@ -66,6 +70,9 @@ public class BUDGET_NEWALLOCATIONController implements Initializable {
              alert.showAndWait();
              ba_cmbo.setValue(null);
              ba_amount_txtfield.clear();
+             Stage stage = (Stage) ba_insert_btn.getScene().getWindow();
+             stage.close();
+           
             
         }else{
               Alert alert = new Alert(Alert.AlertType.ERROR);

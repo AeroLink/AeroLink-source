@@ -28,16 +28,21 @@ public class Model {
     private Boolean joined = false;
 
     private String groupBy = "";
+    private String orderBy = "";
 
     public enum JOIN {
         INNER, LEFT, RIGHT
+    }
+
+    public enum Sort {
+        ASC, DESC
     }
 
     private String whereConstruct = "";
 
     private String finalQuery = "SELECT * From ";
 
-    private ArrayList<Object> finalValues = new ArrayList<Object>();
+    private ArrayList<Object> finalValues = new ArrayList<>();
 
     JSONObject json = new JSONObject();
     private ArrayList<Object> whereValues = new ArrayList<>();
@@ -99,6 +104,10 @@ public class Model {
             if (this.where) {
                 this.finalQuery += "WHERE " + this.whereConstruct;
 
+                if (!"".equals(this.orderBy)) {
+                    this.finalQuery += this.orderBy;
+                }
+
                 if (!"".equals(this.groupBy)) {
                     this.finalQuery += this.groupBy;
                 }
@@ -108,6 +117,10 @@ public class Model {
                 }
 
             } else {
+
+                if (!"".equals(this.orderBy)) {
+                    this.finalQuery += this.orderBy;
+                }
 
                 if (!"".equals(this.groupBy)) {
                     this.finalQuery += this.groupBy;
@@ -132,6 +145,9 @@ public class Model {
             if (!Session.offline) {
 
                 if (Session.isConnected) {
+                    if (!refresh) {
+                        System.err.println("Creating Request to API");
+                    }
                     HttpClient.post("{\"A1009\" : \"" + this.finalQuery + "\""
                             + (this.where ? ",\"B1009\" : \"" + Helpers.combine(this.whereValues.toArray(), ",") + "\"" : "") + ",\"refresher\" : " + refresh + " }", (error, obj) -> {
                         if (error) {
@@ -150,7 +166,10 @@ public class Model {
             } else {
 
                 if (Session.INSTANCE.hasConnection()) {
-                    System.out.println(this.finalQuery);
+                    if (!refresh) {
+                        System.out.println(this.finalQuery);
+                        System.err.println("Creating Request to DB Direct");
+                    }
                     this.clear();
                     return R2SL.convert(pst.executeQuery());
                 }
@@ -177,6 +196,10 @@ public class Model {
             if (this.where) {
                 this.finalQuery += "WHERE " + this.whereConstruct;
 
+                if (!"".equals(this.orderBy)) {
+                    this.finalQuery += this.orderBy;
+                }
+
                 if (!"".equals(this.groupBy)) {
                     this.finalQuery += this.groupBy;
                 }
@@ -185,6 +208,11 @@ public class Model {
                     this.Where_PrepareStatementSession();
                 }
             } else {
+
+                if (!"".equals(this.orderBy)) {
+                    this.finalQuery += this.orderBy;
+                }
+
                 if (!"".equals(this.groupBy)) {
                     this.finalQuery += this.groupBy;
                 }
@@ -208,6 +236,9 @@ public class Model {
 
             if (!Session.offline) {
                 if (Session.isConnected) {
+                    if (!refresh) {
+                        System.err.println("Creating Request to API");
+                    }
                     HttpClient.post("{\"A1009\" : \"" + this.finalQuery + "\""
                             + (this.where ? ",\"B1009\" : \"" + Helpers.combine(this.whereValues.toArray(), ",") + "\"" : "") + ",\"refresher\" : " + refresh + " }", (error, obj) -> {
                         if (error) {
@@ -224,8 +255,11 @@ public class Model {
                 }
             } else {
 
-                System.out.println(this.finalQuery);
                 if (Session.INSTANCE.hasConnection()) {
+                    if (!refresh) {
+                        System.out.println(this.finalQuery);
+                        System.err.println("Creating Request to DB Direct");
+                    }
                     this.clear();
                     return R2SL.convert(pst.executeQuery());
                 }
@@ -802,6 +836,19 @@ public class Model {
         return this;
     }
 
+    /**
+     *
+     * Usage : Model.orderBy(column).get();
+     *
+     * @param column
+     * @param sort
+     * @return
+     */
+    public Model orderBy(String column, Sort sort) {
+        this.orderBy += " ORDER BY " + column + " " + sort;
+        return this;
+    }
+
     public void clear() {
         this.whereValues = new ArrayList<>();
         this.whereConstruct = "";
@@ -813,5 +860,7 @@ public class Model {
         this.allowPermission = false;
         this.CurrentPermission = "canAccessSystem";
     }
+
+    
 
 }

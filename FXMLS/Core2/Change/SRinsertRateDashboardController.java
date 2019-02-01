@@ -15,8 +15,8 @@ import Model.Core2.CORE2_itmrate;
 import Model.Core2.CORE2_optional_service;
 import Model.Core2.CORE2_pack_requirements;
 import Model.Core2.CORE2_surcharges;
-import Model.Core2.CORE2_type;
 import com.jfoenix.controls.JFXButton;
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -25,12 +25,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -39,27 +41,26 @@ import javafx.scene.layout.AnchorPane;
  * @author JPEG
  */
 public class SRinsertRateDashboardController implements Initializable {
+
     /* MODEL INSTANTIATE START */
-    CORE2_type type = new CORE2_type();
+//    CORE2_type type = new CORE2_type();
     /* MODEL INSTANTIATE END */
-    
-    /* FOR TABLE START */
+
+ /* FOR TABLE START */
     ObservableList<TableModel_Discount> dis = FXCollections.observableArrayList();
     ObservableList<TableModel_Rate> rat = FXCollections.observableArrayList();
     ObservableList<TableModel_Packrequirements> pac = FXCollections.observableArrayList();
     ObservableList<TableModel_surcharges> sur = FXCollections.observableArrayList();
     ObservableList<TableModel_Oservices> opt = FXCollections.observableArrayList();
     /* FOR TABLE END */
-    
-    /* CONTAINERS,CONTROLS,CUSTOME,MENU START */
+
+ /* CONTAINERS,CONTROLS,CUSTOME,MENU START */
     @FXML
     private TableView<TableModel_Discount> tblDiscount;
     @FXML
     private TableColumn<TableModel_Discount, String> colSub;
     @FXML
     private TableColumn<TableModel_Discount, String> colDis;
-    @FXML
-    private ComboBox cbmType;
     @FXML
     private TableView<TableModel_Rate> tblRate;
     @FXML
@@ -103,7 +104,70 @@ public class SRinsertRateDashboardController implements Initializable {
     /* CONTAINERS,CONTROLS,CUSTOME,MENU END */
     @FXML
     private AnchorPane SRrootPane;
-    
+    // SURCHARGES
+    @FXML
+    private TextField txtSS;
+    @FXML
+    private TextField txtSHWC;
+    @FXML
+    private TextField txtSAC;
+    @FXML
+    private JFXButton btnSurcharges;
+    @FXML
+    private JFXButton btnSurchargesCancel;
+    // OPTIONAL SERVICES
+    @FXML
+    private TextField txtOS;
+    @FXML
+    private TextField txtOSHWC;
+    @FXML
+    private TextField txtOSAC;
+    @FXML
+    private JFXButton btnOptionalServices;
+    @FXML
+    private JFXButton btnOptionalServicesCancel;
+    // DECLARED ITEM
+    @FXML
+    private TextField txtDI;
+    @FXML
+    private TextField txtDIP;
+    @FXML
+    private TextField txtDIQD;
+    @FXML
+    private TextField txtDIHWC;
+    @FXML
+    private TextField txtDIVAT;
+    @FXML
+    private JFXButton btnDeclaredItem;
+    @FXML
+    private JFXButton btnDeclaredItemCancel;
+    // DISCOUNT
+    @FXML
+    private TextField txtDS;
+    @FXML
+    private TextField txtDP;
+    @FXML
+    private JFXButton btnDiscount;
+    @FXML
+    private JFXButton btnDiscountCancel;
+    // 
+    @FXML
+    private TextField txtEST;
+    @FXML
+    private TextField txtESS;
+    @FXML
+    private TextField txtESMW;
+    @FXML
+    private TextField txtESA;
+    @FXML
+    private JFXButton btnExtraService;
+    @FXML
+    private JFXButton btnExtraServiceCancel;
+    @FXML
+    private TextArea TAphilippines;
+    @FXML
+    private TextArea TAsingapore;
+
     /**
      * Initializes the controller class.
      */
@@ -120,11 +184,22 @@ public class SRinsertRateDashboardController implements Initializable {
         loadSurcharges();
         generateOptServ();
         loadOptServices();
-        
-        type.get().stream().forEach(action -> {
-            HashMap row = (HashMap) action;
-            cbmType.getItems().add(row.get("country").toString());
-        });
+        // surcharges
+        btnSurcharges.setOnMouseClicked(e -> InsertSurcharges());
+        btnSurchargesCancel.setOnMouseClicked(e -> CancelSurcharges());
+        // optional services
+        btnOptionalServices.setOnMouseClicked(e -> InsertOptionalservices());
+        btnOptionalServicesCancel.setOnMouseClicked(e -> CancelOptionalservices());
+        // declared item
+        btnDeclaredItem.setOnMouseClicked(e -> InsertDeclaredItem());
+        btnDeclaredItemCancel.setOnMouseClicked(e -> CancelDeclaredItem());
+        // discount
+        btnDiscount.setOnMouseClicked(e -> InsertDiscount());
+        btnDiscountCancel.setOnMouseClicked(e -> CancelDiscount());
+        // extra service
+        btnExtraService.setOnMouseClicked(e -> InsertExtraService());
+        btnExtraServiceCancel.setOnMouseClicked(e -> CancelExtraService());
+
     }
 
     public void generateDiscount() {
@@ -140,25 +215,25 @@ public class SRinsertRateDashboardController implements Initializable {
         colVG.setCellValueFactory(new PropertyValueFactory<>("vat_gst"));
     }
 
-    public void generatePack(){
+    public void generatePack() {
         colTray.setCellValueFactory(new PropertyValueFactory<>("tray"));
         colSize.setCellValueFactory(new PropertyValueFactory<>("size"));
         colMinw.setCellValueFactory(new PropertyValueFactory<>("min_weight"));
         colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
     }
-    
-    public void generateSurcharges(){
+
+    public void generateSurcharges() {
         colSur.setCellValueFactory(new PropertyValueFactory<>("surcharges"));
         colShwc.setCellValueFactory(new PropertyValueFactory<>("hwc"));
         colSac.setCellValueFactory(new PropertyValueFactory<>("add_charge"));
     }
-    
-    public void generateOptServ(){
+
+    public void generateOptServ() {
         colOpt.setCellValueFactory(new PropertyValueFactory<>("optional_service"));
         colOhwc.setCellValueFactory(new PropertyValueFactory<>("hwc"));
         colOac.setCellValueFactory(new PropertyValueFactory<>("add_charge"));
     }
-    
+
     public void loadDiscount() {
         CORE2_discount dc = new CORE2_discount();
         ObservableList<TableModel_Discount> discount = FXCollections.observableArrayList();
@@ -204,7 +279,7 @@ public class SRinsertRateDashboardController implements Initializable {
         }
         tblRate.setItems(rate);
     }
-    
+
     public void loadPack() {
         CORE2_pack_requirements pr = new CORE2_pack_requirements();
         ObservableList<TableModel_Packrequirements> pack = FXCollections.observableArrayList();
@@ -228,7 +303,7 @@ public class SRinsertRateDashboardController implements Initializable {
         }
         tblTray.setItems(pack);
     }
-    
+
     public void loadSurcharges() {
         CORE2_surcharges sc = new CORE2_surcharges();
         ObservableList<TableModel_surcharges> sur = FXCollections.observableArrayList();
@@ -250,7 +325,7 @@ public class SRinsertRateDashboardController implements Initializable {
         }
         tblSur.setItems(sur);
     }
-    
+
     public void loadOptServices() {
         CORE2_optional_service os = new CORE2_optional_service();
         ObservableList<TableModel_Oservices> optserc = FXCollections.observableArrayList();
@@ -273,7 +348,179 @@ public class SRinsertRateDashboardController implements Initializable {
         tblOptional.setItems(optserc);
     }
 
+    // INSERT QUERY para SURCHARGES
+    public void InsertSurcharges() {
+        CORE2_surcharges surcharges = new CORE2_surcharges();
+        // ginawa ko to para mag popup yung else sa loob ng try
+
+        try {
+            String[][] surcharge = {
+                {"surcharges", txtSS.getText()},
+                {"hwc", txtSHWC.getText()},
+                {"add_charge", txtSAC.getText()}
+            };
+            // Data Save kapag kumpleto yung nilagay sa mga JFXTextField
+            if (surcharges.insert(surcharge)) {
+                Helpers.EIS_Response.SuccessResponse("Success", "Data has been Saved!");
+                txtSS.setText("");
+                txtSHWC.setText("");
+                txtSAC.setText("");
+            } else {
+                Helpers.EIS_Response.ErrorResponse("Error", "Data Not Save!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        loadSurcharges();
+    }
+
+    public void CancelSurcharges() {
+        txtSS.setText("");
+        txtSHWC.setText("");
+        txtSAC.setText("");
+    }
+
+    // INSERT QUERY para OPTIONAL SERVICES
+    public void InsertOptionalservices() {
+        CORE2_optional_service optional = new CORE2_optional_service();
+        // ginawa ko to para mag popup yung else sa loob ng try
+
+        try {
+            String[][] option = {
+                {"optional_service", txtOS.getText()},
+                {"hwc", txtOSHWC.getText()},
+                {"add_charge", txtOSAC.getText()}
+            };
+            // Data Save kapag kumpleto yung nilagay sa mga JFXTextField
+            if (optional.insert(option)) {
+                Helpers.EIS_Response.SuccessResponse("Success", "Data has been Saved!");
+                txtOS.setText("");
+                txtOSHWC.setText("");
+                txtOSAC.setText("");
+            } else {
+                Helpers.EIS_Response.ErrorResponse("Error", "Data Not Save!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        loadOptServices();
+    }
+
+    public void CancelOptionalservices() {
+        txtOS.setText("");
+        txtOSHWC.setText("");
+        txtOSAC.setText("");
+    }
+
+    // INSERT QUERY para DECLARED ITEM
+    public void InsertDeclaredItem() {
+        CORE2_itmrate item = new CORE2_itmrate();
+        // ginawa ko to para mag popup yung else sa loob ng try
+
+        try {
+            String[][] declared = {
+                {"dec_items", txtDI.getText()},
+                {"percentage", txtDIP.getText()},
+                {"quantity_desc", txtDIQD.getText()},
+                {"hwc", txtDIHWC.getText()},
+                {"vat_gst", txtDIVAT.getText()}
+            };
+            // Data Save kapag kumpleto yung nilagay sa mga JFXTextField
+            if (item.insert(declared)) {
+                Helpers.EIS_Response.SuccessResponse("Success", "Data has been Saved!");
+                txtDI.setText("");
+                txtDIP.setText("");
+                txtDIQD.setText("");
+                txtDIHWC.setText("");
+                txtDIVAT.setText("");
+            } else {
+                Helpers.EIS_Response.ErrorResponse("Error", "Data Not Save!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        loadRate();
+    }
+
+    public void CancelDeclaredItem() {
+        txtDI.setText("");
+        txtDIP.setText("");
+        txtDIQD.setText("");
+        txtDIHWC.setText("");
+        txtDIVAT.setText("");
+    }
+
+    // INSERT QUERY para DISCOUNT
+    public void InsertDiscount() {
+        CORE2_discount disc = new CORE2_discount();
+        // ginawa ko to para mag popup yung else sa loob ng try
+
+        try {
+            String[][] dis = {
+                {"subject", txtDS.getText()},
+                {"discount", txtDP.getText()}
+            };
+            // Data Save kapag kumpleto yung nilagay sa mga JFXTextField
+            if (disc.insert(dis)) {
+                Helpers.EIS_Response.SuccessResponse("Success", "Data has been Saved!");
+                txtDS.setText("");
+                txtDP.setText("");
+            } else {
+                Helpers.EIS_Response.ErrorResponse("Error", "Data Not Save!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        loadDiscount();
+    }
+
+    public void CancelDiscount() {
+        txtDS.setText("");
+        txtDP.setText("");
+    }
+
+    // INSERT QUERY para EXTRA SERVICES
+    public void InsertExtraService() {
+        CORE2_pack_requirements pr = new CORE2_pack_requirements();
+        // ginawa ko to para mag popup yung else sa loob ng try
+
+        try {
+            String[][] dis = {
+                {"tray", txtEST.getText()},
+                {"size", txtESS.getText()},
+                {"min_weight", txtESMW.getText()},
+                {"amount", txtESA.getText()}
+            };
+            // Data Save kapag kumpleto yung nilagay sa mga JFXTextField
+            if (pr.insert(dis)) {
+                Helpers.EIS_Response.SuccessResponse("Success", "Data has been Saved!");
+                txtEST.setText("");
+                txtESS.setText("");
+                txtESMW.setText("");
+                txtESA.setText("");
+            } else {
+                Helpers.EIS_Response.ErrorResponse("Error", "Data Not Save!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        loadPack();
+    }
+
+    public void CancelExtraService() {
+        txtEST.setText("");
+        txtESS.setText("");
+        txtESMW.setText("");
+        txtESA.setText("");
+    }
+
     @FXML
     private void viewRD(ActionEvent event) {
+    }
+
+    @FXML
+    public void viewAS() throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/SRviewAirlineSchedule.fxml"));
+        SRrootPane.getChildren().setAll(pane);
     }
 }
