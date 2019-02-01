@@ -17,6 +17,7 @@ import com.jfoenix.controls.JFXHamburger;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.Interpolator;
@@ -145,11 +146,14 @@ public class MainDashController implements Initializable {
         btnCancel.getStyleClass().add("btn-danger");
 
         btnSubmitInit.setOnMouseClicked(value -> {
+
+            Session.CurrentRoute = "LoggedOut";
+            
             // get a handle to the stage
             Stage stage = (Stage) btnSubmitInit.getScene().getWindow();
             // do what you have to do
             stage.close();
-            
+
             Session.getPermissions().clear();
             Synapse.Form frm = new Synapse.Form("/FXMLS/Login.fxml");
             frm.open(StageStyle.UNDECORATED, false);

@@ -118,7 +118,7 @@
                                        </font>
                                     </Label>
                                     <TextField fx:id="txtEducAttain" editable="false" layoutX="13.0" layoutY="445.0" prefHeight="25.0" prefWidth="274.0" />
-                                    <Label layoutX="16.0" layoutY="487.0" text="Previous School :">
+                                    <Label layoutX="16.0" layoutY="487.0" text="Last School Attended :">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
@@ -226,7 +226,7 @@
                                     <FontAwesomeIconView glyphName="LIST" styleClass="fontIcon" />
                                  </graphic>
                               </MenuItem>
-                              <MenuItem fx:id="menuER" disable="true" mnemonicParsing="false" text=" View Exam Results">
+                              <MenuItem fx:id="menuER" disable="true" mnemonicParsing="false" text="Apply Exam for this Applicant">
                                  <graphic>
                                     <FontAwesomeIconView glyphName="CLIPBOARD" styleClass="fontIcon" />
                                  </graphic>
