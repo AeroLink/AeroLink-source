@@ -24,11 +24,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.web.HTMLEditor;
 
@@ -40,20 +37,6 @@ import javafx.scene.web.HTMLEditor;
 public class RequesitionController implements Initializable {
 
     @FXML
-    private TextField txtSearchReq;
-    @FXML
-    private JFXButton btnNewRequest;
-    @FXML
-    private TextField txtTitle;
-    @FXML
-    private HTMLEditor txtMessage;
-    @FXML
-    private ListView<?> lstComments;
-    @FXML
-    private TextArea txtReply;
-    @FXML
-    private JFXButton btnReply;
-    @FXML
     private TableView<TableModel> tblListReq;
 
     class TableModel {
@@ -61,11 +44,19 @@ public class RequesitionController implements Initializable {
         SimpleStringProperty RequestID;
         SimpleStringProperty Requestor;
         SimpleStringProperty RequestTitle;
+        SimpleStringProperty RequestDesc;
+        SimpleStringProperty RequestStatus;
+        SimpleStringProperty RequestCreated;
+        SimpleStringProperty RequestUpdated;
 
-        public TableModel(String id, String requestor, String title) {
+        public TableModel(String id, String requestor, String title, String desc, String status, String created_at, String updated_at) {
             this.RequestID = new SimpleStringProperty(id);
             this.Requestor = new SimpleStringProperty(requestor);
+            this.RequestDesc = new SimpleStringProperty(desc);
+            this.RequestStatus = new SimpleStringProperty(status);
             this.RequestTitle = new SimpleStringProperty(title);
+            this.RequestCreated = new SimpleStringProperty(created_at);
+            this.RequestUpdated = new SimpleStringProperty(updated_at);
         }
 
     }
@@ -83,39 +74,30 @@ public class RequesitionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-
-        btnNewRequest.setOnMouseClicked(evt -> {
-            Modal md = Modal.getInstance(new Form("/FXMLS/NewRequest.fxml").getParent());
-            md.open();
-        });
-
         tblListReq.getItems().clear();
         tblListReq.getColumns().removeAll(tblListReq.getColumns());
 
-        TableColumn<TableModel, String> Requestor = new TableColumn<>("Request From");
-        TableColumn<TableModel, String> Title = new TableColumn<>("Request Title");
+        TableColumn<TableModel, String> Title = new TableColumn<>("Request");
+        TableColumn<TableModel, String> Desc = new TableColumn<>("Request Description");
+        TableColumn<TableModel, String> Status = new TableColumn<>("Request Status");
+        TableColumn<TableModel, String> Created = new TableColumn<>("Request Created");
+        TableColumn<TableModel, String> Updated = new TableColumn<>("Request Updated");
 
-        Requestor.setCellValueFactory(value -> value.getValue().Requestor);
         Title.setCellValueFactory(value -> value.getValue().RequestTitle);
+        Desc.setCellValueFactory(value -> value.getValue().RequestDesc);
+        Status.setCellValueFactory(value -> value.getValue().RequestStatus);
+        Created.setCellValueFactory(value -> value.getValue().RequestCreated);
+        Updated.setCellValueFactory(value -> value.getValue().RequestUpdated);
 
-        tblListReq.getColumns().addAll(Requestor, Title);
+        tblListReq.getColumns().addAll(Title, Desc, Status, Created, Updated);
 
         this.renderTable();
 
         tblListReq.setOnMouseClicked( value -> {
-            openRequest(tblListReq.getSelectionModel().getSelectedItem().RequestID.getValue());
+            
         });
     }
 
-    public void openRequest(String id) {
-        List<HashMap> list = req.where("request_id", "=", id).get();
-        
-        list.stream().forEach(v -> {
-            txtMessage.setHtmlText(String.valueOf(v.get("request_content")));
-            txtTitle.setText(String.valueOf(v.get("request_title")));
-        });
-        
-    }
     
     public void renderTable() {
         CompletableFuture.supplyAsync(() -> {
@@ -127,20 +109,19 @@ public class RequesitionController implements Initializable {
                 });
 
                 if (DummyCount != GlobalCount) {
-
-                    List<HashMap> list = employee.where("login_id", "=", Session.pull("user_id").toString())
-                            .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_jobs", "employee_code", "=", "employee_code")
-                            .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "aerolink.tbl_hr4_employee_jobs", "job_id",  true)
-                            .get("aerolink.tbl_hr4_jobs.dept_id", "aerolink.tbl_hr4_employee_jobs.employee_code");
-
-                    req.orWhere(new Object[][]{
-                        {"request_to", "=", "*"},
-                        {"request_to", "=", list.get(0).get("employee_code")}
-                    },true).andWhere("target_dept", "=", list.get(0).get("dept_id").toString()).get().stream().forEach(v -> {
-
+                    
+                    req.where(new Object[][]{
+                        {"requestor_id", "=", Session.pull("employee_code")}
+                    }).get().stream().forEach(v -> {
                         HashMap row = (HashMap) v;
-                        employeeReq.add(new TableModel(row.get("request_id").toString(), row.get("request_from").toString(), row.get("request_title").toString()));
-                       
+                        employeeReq.add(new TableModel(
+                                row.get("request_id").toString(), 
+                                row.get("requestor_id").toString(),
+                                row.get("request").toString(),
+                                row.get("request_description").toString(),
+                                row.get("request_status").toString(),
+                                row.get("created_at").toString(), 
+                                row.get("updated_at").toString()));
                     });
                     
                     tblListReq.getItems().clear();

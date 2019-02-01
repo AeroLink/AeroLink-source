@@ -1,24 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.web.HTMLEditor?>
 
 <AnchorPane prefHeight="979.0" prefWidth="1078.0" stylesheets="@../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.RequesitionController">
    <children>
       <BorderPane prefHeight="459.0" prefWidth="836.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <left>
+         <center>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="453.0" prefWidth="445.0" style="-fx-background-color: #f2f2f2;" BorderPane.alignment="CENTER">
                <children>
                   <Separator layoutX="12.0" layoutY="48.0" prefHeight="0.0" prefWidth="361.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" />
@@ -32,76 +23,9 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <TextField fx:id="txtSearchReq" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="282.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="8.0" />
-               </children>
-            </AnchorPane>
-         </left>
-         <center>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f2f2f2;" BorderPane.alignment="CENTER">
-               <children>
-                  <AnchorPane prefHeight="52.0" prefWidth="529.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <JFXButton fx:id="btnNewRequest" contentDisplay="RIGHT" graphicTextGap="10.0" layoutX="14.0" layoutY="14.0" prefHeight="24.0" prefWidth="123.0" styleClass="btn-primary" text="New Request" AnchorPane.rightAnchor="10.0">
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="PLUS" />
-                           </graphic>
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </JFXButton>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane layoutX="8.0" layoutY="57.0" prefHeight="383.0" prefWidth="513.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="57.0">
-                     <children>
-                        <AnchorPane layoutX="31.0" layoutY="14.0" prefHeight="470.0" prefWidth="603.0" style="-fx-border-color: black; -fx-border-radius: 2%; -fx-background-color: white;" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
-                           <children>
-                              <Label layoutX="14.0" layoutY="-10.0" style="-fx-background-color: white;" text="CONTENT">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="15.0" layoutY="14.0" text="Request Title :" />
-                              <TextField fx:id="txtTitle" layoutX="14.0" layoutY="34.0" prefHeight="25.0" prefWidth="524.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" />
-                              <Label layoutX="17.0" layoutY="63.0" text="Request Message :" />
-                              <HTMLEditor fx:id="txtMessage" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="15.0" layoutY="83.0" prefHeight="371.0" prefWidth="575.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane layoutX="15.0" layoutY="497.0" prefHeight="269.0" prefWidth="603.0" style="-fx-border-color: black; -fx-border-radius: 2%; -fx-background-color: white;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="497.0">
-                           <children>
-                              <Label layoutX="14.0" layoutY="-10.0" style="-fx-background-color: white;" text="Comments">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </Label>
-                              <VBox layoutX="2.0" layoutY="14.0" prefHeight="255.0" prefWidth="601.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="13.0">
-                                 <children>
-                                    <ListView fx:id="lstComments" prefHeight="271.0" prefWidth="577.0" />
-                                    <AnchorPane prefHeight="107.0" prefWidth="577.0">
-                                       <children>
-                                          <TextArea fx:id="txtReply" layoutX="1.0" layoutY="29.0" prefHeight="38.0" prefWidth="576.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
-                                          <Label layoutX="5.0" layoutY="11.0" text="Reply to the message:" />
-                                          <JFXButton fx:id="btnReply" contentDisplay="RIGHT" graphicTextGap="10.0" layoutX="5.0" layoutY="74.0" prefHeight="11.0" prefWidth="132.0" styleClass="btn-primary" stylesheets="@../Assets/css/MainPanel.css" text="Send Reply " AnchorPane.leftAnchor="5.0">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                             <graphic>
-                                                <FontAwesomeIconView fill="WHITE" glyphName="PAPER_PLANE" />
-                                             </graphic>
-                                          </JFXButton>
-                                       </children>
-                                    </AnchorPane>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </AnchorPane>
-                     </children>
-                  </AnchorPane>
                </children>
             </AnchorPane>
          </center>
-         <top>
-            <AnchorPane prefHeight="6.0" prefWidth="836.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER" />
-         </top>
       </BorderPane>
    </children>
 </AnchorPane>
