@@ -49,9 +49,7 @@ public class CM_RequestSkillController implements Initializable {
         HR4_Jobs jobs = new HR4_Jobs();
         HR4_Departments dept = new HR4_Departments();
         try {
-            List c = jobs.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "dept","=", "dept_id")
-                    .where(new Object[][]{{"dept.dept_name","=",cbox_dept.getSelectionModel().getSelectedItem().toString()}})
-                    .get();
+            List c = jobs.get();
             //"concat(substring(title,0,2), job_id) as job_id, title"
             for (Object job : c) {
                 HashMap hm1 = (HashMap) job;
@@ -62,8 +60,8 @@ public class CM_RequestSkillController implements Initializable {
                 cbox_job_position.getItems().add("J" + j_id + " - " + sjobs);
 
             }
-            
-              List d = dept.get();
+
+            List d = dept.get();
             //"concat(substring(title,0,2), job_id) as job_id, title"
             for (Object depts : d) {
                 HashMap hm2 = (HashMap) depts;
@@ -71,7 +69,7 @@ public class CM_RequestSkillController implements Initializable {
                 String j_id = String.valueOf(hm2.get("id"));
                 String sjobs = (String) hm2.get("dept_name");
 
-                cbox_dept.getItems().add(sjobs);
+                cbox_dept.getItems().add("DEPT00" + j_id + " - " + sjobs);
 
             }
         } catch (Exception e) {
@@ -88,6 +86,7 @@ public class CM_RequestSkillController implements Initializable {
 
             try {
                 String[][] skill_req = {
+                    {"dept_id", cbox_dept.getSelectionModel().getSelectedItem().toString().substring(6).split(" - ")[0]},
                     {"job_id", cbox_job_position.getSelectionModel().getSelectedItem().toString().substring(1).split(" - ")[0]},
                     {"reason", txt_reason.getText()},
                     {"requested_by", Session.pull("employee_code").toString()}
@@ -100,10 +99,10 @@ public class CM_RequestSkillController implements Initializable {
                 System.err.println(e);
             }
 
-        }else{
-               Alert saved = new Alert(Alert.AlertType.ERROR);
-                saved.setContentText("One or More fields are empty");
-                saved.showAndWait();
+        } else {
+            Alert saved = new Alert(Alert.AlertType.ERROR);
+            saved.setContentText("One or More fields are empty");
+            saved.showAndWait();
         }
     }
 }
