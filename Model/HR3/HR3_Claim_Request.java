@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FXMLS.HR3;
+package Model.HR3;
 
 /**
  *
- * @author BlackMoon
+ * @author my
  */
-class HR3_Shiftings {
-    
+public class HR3_Claim_Request extends Synapse.Model {
+  
+
+    public HR3_Claim_Request() {
+        this.initTable("tbl_hr3_claim_request");
+    }
 }

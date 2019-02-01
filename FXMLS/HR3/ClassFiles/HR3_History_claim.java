@@ -11,14 +11,10 @@ import javafx.beans.property.SimpleStringProperty;
  *
  * @author my
  */
-public class Reimbursement_RequestClass {
-   public SimpleStringProperty or_no;
+public class HR3_History_claim {
+  /*  public SimpleStringProperty or_no;
     public SimpleStringProperty date;
     public SimpleStringProperty department;
-    public SimpleStringProperty recieved;
-    public SimpleStringProperty expenses;
-    public SimpleStringProperty particulars;
-    public SimpleStringProperty cash_returned;
     public SimpleStringProperty total_amount;
 
     public Reimbursement_RequestClass(String a, String b, String c, String d, String e, String f, String g, String h ) {
@@ -32,5 +28,5 @@ public class Reimbursement_RequestClass {
         this.cash_returned = new SimpleStringProperty(g);
         this.total_amount = new SimpleStringProperty(h);
         
-    }
+    }*/
 }

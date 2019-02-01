@@ -7,16 +7,17 @@ package Model.HR3;
 
 /**
  *
- * @author BlackMoon
+ * @author my
  */
-public class HR3_Shifting extends Synapse.Model{
+public class HR3_Leave_Balance extends Synapse.Model{
      
-     public HR3_Shifting()
+     public HR3_Leave_Balance()
          {
-             setColumns("id","employee_code","date","schedule","reason","attachment");
-             this.initTable("tbl_hr3_shifting_request");
+             setColumns("id","employee_code","leave_id","leave_name","leave_taken","leave_balance");
+             this.initTable("tbl_hr3_leave_balance");
              
              
          }
-
+    
+    
 }
