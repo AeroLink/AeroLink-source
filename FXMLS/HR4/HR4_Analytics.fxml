@@ -1,50 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTabPane?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="686.0" prefWidth="1203.0" style="-fx-background-color: 000;" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR4.HR4_AnalyticsController">
+<AnchorPane id="AnchorPane" prefHeight="686.0" prefWidth="1347.0" style="-fx-background-color: 000;" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR4.HR4_AnalyticsController">
    <children>
       <BorderPane prefHeight="686.0" prefWidth="1203.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
             <AnchorPane prefHeight="44.0" prefWidth="1203.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label layoutX="47.0" layoutY="14.0" text="HR Analytics">
+                  <Label layoutX="47.0" layoutY="14.0" text="HR Analytics" textFill="#01c21e">
                      <font>
                         <Font name="Arial" size="18.0" />
                      </font>
                   </Label>
-                  <FontAwesomeIconView glyphName="BAR_CHART" layoutX="20.0" layoutY="30.0" size="20" />
+                  <FontAwesomeIconView fill="#01c21e" glyphName="BAR_CHART" layoutX="20.0" layoutY="30.0" size="20" />
                </children>
             </AnchorPane>
          </top>
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox layoutX="179.0" layoutY="158.0" prefHeight="642.0" prefWidth="1203.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <AnchorPane prefHeight="642.0" prefWidth="892.0">
-                           <children>
-                              <VBox layoutX="14.0" layoutY="9.0" prefHeight="623.0" prefWidth="868.0">
+                  <JFXTabPane prefHeight="642.0" prefWidth="1203.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <tabs>
+                        <Tab id="tab" styleClass="tab-label" text="Applicant and Trainees Data">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <AnchorPane prefHeight="372.0" prefWidth="868.0">
+                                    <VBox layoutX="126.0" layoutY="116.0" prefHeight="605.0" prefWidth="1203.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <PieChart fx:id="pieChart1" layoutX="14.0" layoutY="24.0" prefHeight="323.0" prefWidth="414.0" />
+                                          <HBox prefHeight="614.0" prefWidth="1203.0">
+                                             <children>
+                                                <AnchorPane prefHeight="605.0" prefWidth="753.0" style="-fx-background-color: WHITE;">
+                                                   <children>
+                                                      <PieChart fx:id="pieChart1" layoutX="14.0" layoutY="14.0" prefHeight="583.0" prefWidth="730.0" style="-fx-background-color: #ffffb3;" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="13.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="605.0" prefWidth="592.0">
+                                                   <children>
+                                                      <VBox layoutX="225.0" layoutY="148.0" prefHeight="605.0" prefWidth="450.0" style="-fx-background-color: WHITE;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <children>
+                                                            <AnchorPane prefHeight="304.0" prefWidth="450.0" style="-fx-background-color: WHITE;">
+                                                               <children>
+                                                                  <PieChart fx:id="pieChart2" layoutX="12.0" layoutY="13.0" prefHeight="278.0" prefWidth="559.0" style="-fx-background-color: #ffffb3;" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="13.0" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane prefHeight="302.0" prefWidth="450.0" style="-fx-background-color: WHITE;">
+                                                               <children>
+                                                                  <PieChart fx:id="pieChart3" layoutX="14.0" layoutY="14.0" prefHeight="276.0" prefWidth="561.0" style="-fx-background-color: #ffffb3;" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="13.0" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </HBox>
                                        </children>
-                                    </AnchorPane>
-                                    <AnchorPane prefHeight="254.0" prefWidth="868.0" />
+                                    </VBox>
                                  </children>
-                              </VBox>
-                           </children>
-                        </AnchorPane>
-                     </children>
-                  </HBox>
+                              </AnchorPane>
+                          </content>
+                        </Tab>
+                        <Tab id="tab" styleClass="tab-label" text="Department Data">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                          </content>
+                        </Tab>
+                     </tabs>
+                  </JFXTabPane>
                </children>
             </AnchorPane>
          </center>

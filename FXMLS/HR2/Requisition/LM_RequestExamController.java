@@ -11,6 +11,7 @@ import Model.HR2_TM_Training_Requisition;
 import Model.HR4_Departments;
 import Model.HR4_Jobs;
 import Synapse.Session;
+import Synapse.STORED_PROC;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;

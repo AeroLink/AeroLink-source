@@ -5,7 +5,7 @@
  */
 package FXMLS.HR4;
 
-import FXMLS.HR4.Model.HR4_GenderChartModel;
+import FXMLS.HR4.Model.HR4_InfoChartModel;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -27,16 +27,23 @@ public class HR4_AnalyticsController implements Initializable {
     @FXML
     private PieChart pieChart1;
     private final ObservableList<PieChart.Data> pie = FXCollections.observableArrayList();
+    @FXML
+    private PieChart pieChart2;
+    @FXML
+    private PieChart pieChart3;
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.Piechart();
+        this.Piechart1();
+        //this.Piechart2();
+        //this.Piechart3();
     }
-    HR4_GenderChartModel gcm = new HR4_GenderChartModel();
-   public void Piechart() {
+    HR4_InfoChartModel gcm = new HR4_InfoChartModel();
+    
+    public void Piechart1() {
 
         pie.clear();
         List<HashMap> list3x = gcm
@@ -47,10 +54,40 @@ public class HR4_AnalyticsController implements Initializable {
                     Double.parseDouble(row.get("Total").toString())));
         });
         pieChart1.setData(pie);
-        pieChart1.setLegendSide(Side.RIGHT);
+        pieChart1.setLegendSide(Side.BOTTOM);
         pieChart1.setStartAngle(90);
 
-   }
+    }/*
+    public void Piechart2() {
+
+        pie.clear();
+        List<HashMap> list3x = gcm
+                .groupBy("gender")
+                .get("gender,COUNT(gender) as Total");
+        list3x.forEach((row) -> {
+            pie.add(new PieChart.Data(row.get("gender").toString(),
+                    Double.parseDouble(row.get("Total").toString())));
+        });
+        pieChart2.setData(pie);
+        pieChart2.setLegendSide(Side.RIGHT);
+        pieChart2.setStartAngle(90);
+
+    }
+    public void Piechart3() {
+
+        pie.clear();
+        List<HashMap> list3x = gcm
+                .groupBy("gender")
+                .get("gender,COUNT(gender) as Total");
+        list3x.forEach((row) -> {
+            pie.add(new PieChart.Data(row.get("gender").toString(),
+                    Double.parseDouble(row.get("Total").toString())));
+        });
+        pieChart3.setData(pie);
+        pieChart3.setLegendSide(Side.BOTTOM);
+        pieChart3.setStartAngle(90);
+
+    }*/
 }
 
    
