@@ -32,6 +32,8 @@ public class LM_RequestExamController implements Initializable {
     private JFXTextArea txt_reason;
     @FXML
     private JFXButton btn_submit;
+    @FXML
+    private JFXComboBox<?> cbox_department;
 
     /**
      * Initializes the controller class.

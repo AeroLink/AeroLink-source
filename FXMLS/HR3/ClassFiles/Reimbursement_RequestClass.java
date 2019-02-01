@@ -5,93 +5,32 @@
  */
 package FXMLS.HR3.ClassFiles;
 
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  *
  * @author my
  */
 public class Reimbursement_RequestClass {
-     String RequestID,Date,Department,Recieve_php,Expenses,Total_Amount,Particulars,Status,Cash_Return,Amount_Cleared;
-    
-    
-    public Reimbursement_RequestClass(String RequestID, String Date, String Department, String Recieve_php,String Expenses, String Total_Amount, String Particulars, String Status, String Cash_Return, String Amount_Cleared){
-        this.RequestID = RequestID;
-        this.Date = Date;
-        this.Department = Department;
-        this.Recieve_php = Recieve_php;
-        this.Expenses = Expenses;
-        this.Total_Amount = Total_Amount;
-        this.Particulars = Particulars;
-        this.Status = Status;
-        this.Cash_Return = Cash_Return;
-        this.Amount_Cleared = Amount_Cleared;
+   public SimpleStringProperty or_no;
+    public SimpleStringProperty date;
+    public SimpleStringProperty department;
+    public SimpleStringProperty recieved;
+    public SimpleStringProperty expenses;
+    public SimpleStringProperty particulars;
+    public SimpleStringProperty cash_returned;
+    public SimpleStringProperty total_amount;
+
+    public Reimbursement_RequestClass(String a, String b, String c, String d, String e, String f, String g, String h ) {
+        //this.ID = new SimpleStringProperty(ID);
+        this.or_no = new SimpleStringProperty(a);
+        this.date = new SimpleStringProperty(b);
+        this.department = new SimpleStringProperty(c);
+        this.recieved = new SimpleStringProperty(d);
+        this.expenses = new SimpleStringProperty(e);
+        this.particulars = new SimpleStringProperty(f);
+        this.cash_returned = new SimpleStringProperty(g);
+        this.total_amount = new SimpleStringProperty(h);
         
-    }
-    public String getRequestID(){
-        return RequestID;
-    }
-    public void setRequestID(String RequestID){
-        this.RequestID = RequestID;
-    }
-    public String getDate(){
-        return Date;
-    }
-    public void Date(String Date){
-        this.Date = Date;
-    
-    }
-   
-    public String getDepartment(){
-        return Department;
-    }
-    public void setDepartment(String Department){
-        this.Department = Department;
-        
-    }
-     public String getRecieve_php(){
-        return Recieve_php;
-    }
-    public void setRecieve_php(String Recieve_php){
-        this.Recieve_php = Recieve_php;
-    }
-    public String getExpenses(){
-        return Expenses;
-    }
-    public void setExpenses(String Expenses){
-        this.Expenses = Expenses;
-    }
-    public String getTotal_Amount(){
-        return Total_Amount;
-        
-    }
-    
-    public void setTotal_Amount(String Total_Amount){
-        this.Total_Amount = Total_Amount;
-    }
-    public String getParticulars(){
-        return Particulars;
-    }
-    public void setParticulars(String Particulars){
-        this.Particulars = Particulars;
-    }
-    
-    public String getStatus(){
-        return Status;
-    }
-    public void setStatus(String Status){
-        this.Status = Status;
-    }
-    public String getCash_Return(){
-        return Cash_Return;
-        
-    }
-    
-    public void setCash_Return(String Cash_Return){
-        this.Cash_Return = Cash_Return;
-    }
-    public String getAmount_Cleared(){
-        return Amount_Cleared;
-    }
-    public void setAmount_Cleared(String Amount_Cleared){
-        this.Amount_Cleared = Amount_Cleared;
     }
 }

@@ -15,8 +15,10 @@ public class Financial_allocation_model extends Synapse.Model{
     public Financial_allocation_model(){
     setColumns("ba_id",
             "ba_date",
+            "ba_no",
            "ba_department",
-            "ba_amount");
+            "ba_amount",
+            "ba_status");
     this.initTable("tbl_finance_budgetallocation");
    
 }

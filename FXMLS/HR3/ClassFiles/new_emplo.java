@@ -5,37 +5,26 @@
  */
 package FXMLS.HR3.ClassFiles;
 
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  *
  * @author my
  */
 public class new_emplo {
-    String Id,  Name, Position;
     
-      public new_emplo(String Id, String Name, String Position){
-       this.Id = Id;
-        this.Name = Name;
-         this.Position = Position;
-      }
-      
-      public String getId(){
-            return Id;
-        }
-      public void setId(String Id){
-        this.Id = Id;
-    }
-      
-         public String getName(){
-            return Name;
-        }
-      public void setName(String Name){
-        this.Name = Name;
-    }
-      
-         public String getPosition(){
-            return Position;
-        }
-      public void setPosition(String Position){
-        this.Position = Position;
-    }
+     public SimpleStringProperty employee_code;
+     public SimpleStringProperty name;
+     public SimpleStringProperty position;
+     
+   
+     
+     public new_emplo( String employee_code, String name, String position) {
+        //this.ID = new SimpleStringProperty(ID);
+        this.employee_code = new SimpleStringProperty(employee_code);
+        this.name = new SimpleStringProperty(name);
+        this.position = new SimpleStringProperty(position);
+        
+       
+}
 }

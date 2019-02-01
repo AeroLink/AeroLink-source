@@ -13,11 +13,12 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class TM_DefaultTrainings {
     
-    public SimpleStringProperty dt_id, job_title, training_title;
+    public SimpleStringProperty dt_id, job_title, training_title, trainor;
     
-    public TM_DefaultTrainings(String dt_id, String job_title, String training_title){
+    public TM_DefaultTrainings(String dt_id, String job_title, String training_title, String trainor){
         this.dt_id = new SimpleStringProperty(dt_id);
         this.training_title = new SimpleStringProperty(training_title);
         this.job_title = new SimpleStringProperty(job_title);
+        this.trainor = new SimpleStringProperty(trainor);
     }
 }
