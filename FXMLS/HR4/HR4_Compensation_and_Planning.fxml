@@ -60,8 +60,10 @@
                               <AnchorPane prefHeight="59.0" prefWidth="1163.0" BorderPane.alignment="CENTER">
                                  <children>
                                     <ComboBox fx:id="loans_cbx" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="265.0" />
-                                    <Button layoutX="954.0" layoutY="25.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="195.0" styleClass="btn-primary" text="Edit Salary Adjustment" />
-                                    <FontAwesomeIconView fill="WHITE" glyphName="EDIT" layoutX="973.0" layoutY="44.0" size="14" />
+                                    <Button layoutX="954.0" layoutY="25.0" mnemonicParsing="false" onAction="#EditSalaryBtn" prefHeight="27.0" prefWidth="195.0" styleClass="btn-primary" text="Edit Salary Adjustment" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="14.0" />
+                                    <FontAwesomeIconView fill="WHITE" glyphName="EDIT" layoutX="973.0" layoutY="44.0" size="14" AnchorPane.bottomAnchor="12.7265625" AnchorPane.rightAnchor="176.0" />
+                                    <Button layoutX="758.0" layoutY="26.0" mnemonicParsing="false" onMouseClicked="#OtherDeducBtn" prefHeight="25.0" prefWidth="185.0" styleClass="btn-primary" text="Add Other Deduction" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="26.0" />
+                                    <FontAwesomeIconView fill="WHITE" glyphName="PLUS" layoutX="776.0" layoutY="43.0" AnchorPane.bottomAnchor="14.051339149475098" AnchorPane.rightAnchor="377.5714282989502" />
                                  </children></AnchorPane>
                            </top>
                            <center>

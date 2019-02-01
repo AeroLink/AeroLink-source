@@ -26,8 +26,8 @@ public class Main extends Application {
     }
     
     public static void main(String[] args) {
-      /*  System.loadLibrary(org.opencv.core.Core.NATIVE_LIBRARY_NAME);
-        */launch(args);
+       //System.loadLibrary(org.opencv.core.Core.NATIVE_LIBRARY_NAME);
+        launch(args);
     }
 
 }

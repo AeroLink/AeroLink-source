@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="298.0" prefWidth="357.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR4.Modals.HR4_PayrollRequisitionController">
+   <children>
+      <Label layoutX="97.0" layoutY="14.0" text="PAYROLL REQUISITION">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="11.0" layoutY="76.0" text="PAYROLL CODE:">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="271.0" layoutY="258.0" prefHeight="26.0" prefWidth="76.0" styleClass="btn-primary" text="Send">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </JFXButton>
+      <FontAwesomeIconView fill="WHITE" glyphName="SEND" layoutX="277.0" layoutY="275.0" />
+      <JFXTextField fx:id="pc" focusColor="BLACK" layoutX="153.0" layoutY="70.0" prefHeight="27.0" prefWidth="148.0">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <Label layoutX="13.0" layoutY="118.0" text="PAYROLL DATE:">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="pd" layoutX="153.0" layoutY="111.0" prefHeight="27.0" prefWidth="184.0">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <Label layoutX="13.0" layoutY="163.0" text="TOTAL SALARIES:">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="ts" focusColor="BLACK" layoutX="159.0" layoutY="157.0" prefHeight="27.0" prefWidth="177.0">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+      <Label layoutX="11.0" layoutY="207.0" text="DEPARTMENT:">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="dpt" layoutX="130.0" layoutY="201.0" prefHeight="27.0" prefWidth="184.0">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </JFXTextField>
+   </children>
+</AnchorPane>

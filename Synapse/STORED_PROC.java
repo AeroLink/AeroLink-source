@@ -56,7 +56,7 @@ public class STORED_PROC {
             System.err.println("[Values] : -> " + Helpers.combine(values.toArray(), ","));
 
             if (Session.offline) {
-                CallableStatement call = Session.INSTANCE.getConnection().prepareCall(query);
+                CallableStatement call = Session.INSTANCE.getConnection().prepareCall("{" + query + "}");
 
                 for (int i = 1; i <= values.size(); i++) {
                     call.setObject(i, values.get(i - 1));
@@ -83,7 +83,7 @@ public class STORED_PROC {
 
         return null;
     }
-
+    
     public static List executeCall(String PROC_NAME) {
 
         try {
@@ -93,7 +93,7 @@ public class STORED_PROC {
             System.out.println("[SQL QUERY] : -> " + query);
 
             if (Session.offline) {
-                CallableStatement call = Session.INSTANCE.getConnection().prepareCall(query);
+                CallableStatement call = Session.INSTANCE.getConnection().prepareCall("{" + query + "}");
                 return R2SL.convert(call.executeQuery());
             } else {
                 if (Session.isConnected) {
