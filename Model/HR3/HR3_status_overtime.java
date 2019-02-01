@@ -3,12 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FXMLS.HR3.ClassFiles;
+package Model.HR3;
 
 /**
  *
  * @author my
  */
-public class NewClass {
+public class HR3_status_overtime extends Synapse.Model {
+
+    public HR3_status_overtime() {
+        
+                this.initTable("tbl_hr3_overime_status");
+          
+    }
     
 }

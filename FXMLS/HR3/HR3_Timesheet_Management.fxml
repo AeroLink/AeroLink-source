@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR3.HR3_Timesheet_ManagementController">
+   <center>
+      <JFXTabPane stylesheets="@../../Assets/css/MainPanel.css">
+         <tabs>
+          <Tab id="tab" text="TimeSheet Records">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="692.0" prefWidth="1375.0">
+                     <children>
+                        <JFXTabPane layoutY="25.0" prefHeight="695.0" prefWidth="1375.0">
+                           <tabs>
+                              <Tab id="tab" text="Attendance Records">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TableView fx:id="tbl_attendance_records" layoutX="29.0" layoutY="72.0" prefHeight="477.0" prefWidth="1318.0" style="-fx-background-color: light blue;" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="71.0">
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                          </TableView>
+                                          <Label text="Search" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="42.0">
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Department" AnchorPane.leftAnchor="334.0" AnchorPane.topAnchor="42.0">
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField prefHeight="27.0" prefWidth="216.0" AnchorPane.leftAnchor="91.0" AnchorPane.topAnchor="36.0" />
+                                          <ComboBox layoutX="378.0" layoutY="34.0" prefHeight="27.0" prefWidth="208.0" AnchorPane.leftAnchor="436.0" AnchorPane.topAnchor="36.0" />
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </Tab>
+                              <Tab id="tab" text="Leave Records">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1375.0">
+                                       <children>
+                                          <TableView fx:id="tbl_leave_records" layoutX="29.0" layoutY="71.0" prefHeight="477.0" prefWidth="1318.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="71.0">
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                             <columns>
+                                                <TableColumn prefWidth="75.0" text="Employee ID" />
+                                                <TableColumn prefWidth="75.0" text="Employee Name" />
+                                                <TableColumn prefWidth="75.0" text="Position" />
+                                                <TableColumn prefWidth="75.0" text="Department" />
+                                                <TableColumn prefWidth="75.0" text="Date" />
+                                                <TableColumn prefWidth="75.0" text="Type of Leave" />
+                                                <TableColumn prefWidth="75.0" text="Leave Balance" />
+                                             </columns>
+                                          </TableView>
+                                          <Label layoutX="29.0" layoutY="42.0" text="Search" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="42.0">
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="334.0" layoutY="42.0" text="Department" AnchorPane.leftAnchor="334.0" AnchorPane.topAnchor="42.0">
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField layoutX="91.0" layoutY="36.0" prefHeight="27.0" prefWidth="216.0" AnchorPane.leftAnchor="91.0" AnchorPane.topAnchor="36.0" />
+                                          <ComboBox layoutX="436.0" layoutY="36.0" prefHeight="27.0" prefWidth="208.0" AnchorPane.leftAnchor="436.0" AnchorPane.rightAnchor="731.0" AnchorPane.topAnchor="36.0" />
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </Tab>
+                           </tabs>
+                        </JFXTabPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab id="tab" text="Daily Time Record">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="1375.0" style="-fx-background-color: white;">
+                     <children>
+                        <TableView fx:id="tbl_time_record" layoutY="67.0" prefHeight="514.0" prefWidth="1318.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="67.0">
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <Label layoutX="38.0" layoutY="34.0" text="Search">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="414.0" layoutY="34.0" text="Department">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="106.0" layoutY="30.0" prefHeight="27.0" prefWidth="216.0" />
+                        <ComboBox layoutX="517.0" layoutY="30.0" prefHeight="27.0" prefWidth="208.0" AnchorPane.leftAnchor="517.0" AnchorPane.topAnchor="30.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+         </tabs>
+      </JFXTabPane>
+   </center>
+</BorderPane>

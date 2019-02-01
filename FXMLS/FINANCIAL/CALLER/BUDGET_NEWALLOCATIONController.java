@@ -30,7 +30,7 @@ import javafx.stage.StageStyle;
 public class BUDGET_NEWALLOCATIONController implements Initializable {
 
     @FXML
-    private JFXComboBox<String> ba_cmbo;
+    private JFXComboBox ba_cmbo;
     @FXML
     private JFXTextField ba_amount_txtfield;
     @FXML

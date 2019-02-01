@@ -185,7 +185,6 @@ public class FINANCIAL_DISBURSEMENTController implements Initializable {
     Financial_disbursement_voucher fdv = new Financial_disbursement_voucher();
     public void loadDisbursementVoucher(){
          CompletableFuture.supplyAsync(() -> {
-
             while (Session.CurrentRoute.equals("id_disbursement")) {
                 
                 try {
@@ -312,7 +311,7 @@ public class FINANCIAL_DISBURSEMENTController implements Initializable {
 
                         disbursement_tbl.getItems();
                             List b = drm.where(new Object[][]{
-                             {"dr_status","=","Pending"}
+                             {"dr_status","=","Unpaid"}
                     }).get();
                             request(b);
                             

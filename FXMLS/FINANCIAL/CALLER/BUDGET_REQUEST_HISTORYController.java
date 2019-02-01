@@ -45,7 +45,7 @@ public class BUDGET_REQUEST_HISTORYController implements Initializable {
    
     ObservableList<String> fs = FXCollections.observableArrayList("Approved", "Declined");
     @FXML
-    private Label countlbl;
+    private Label no;
     
     
     /**
@@ -54,15 +54,15 @@ public class BUDGET_REQUEST_HISTORYController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-       
+     
+        
         combobc_filter.setItems(fs);
         AddTableColumn_RequestHistory();
         LoadRequestHistory();
-        
-         
-          int d = requestHistory_tbl.getItems().size();
-          countlbl.setText(String.valueOf(d));
-        
+      
+           int a = requestHistory_tbl.getItems().size();
+           no.setText(String.valueOf(a));
+          
     }    
     
     long DummyCount = 0;
@@ -72,9 +72,9 @@ public class BUDGET_REQUEST_HISTORYController implements Initializable {
     ObservableList<Budget_Request_classfile> brc = FXCollections.observableArrayList();
     Financial_budget_request fbr = new Financial_budget_request();
     
+
     
-    
-       public void AddTableColumn_RequestHistory() {
+    public void AddTableColumn_RequestHistory() {
 
         requestHistory_tbl.getItems().clear();
         requestHistory_tbl.getColumns().removeAll(requestHistory_tbl.getColumns());
@@ -107,39 +107,17 @@ public class BUDGET_REQUEST_HISTORYController implements Initializable {
     
 
     public void LoadRequestHistory(){
-             CompletableFuture.supplyAsync(() -> {
-            while (Session.CurrentRoute.equals("id_budget")) {
-                
-                try {
-                    fbr.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
-                        DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
-                    });
-             requestHistory_tbl.getItems();
-                    if (DummyCount != GlobalCount) {
-                            List b = fbr.where(new Object[][]{
+            try{
+                 List b = fbr.where(new Object[][]{
                              {"budget_status","=","Approved" }
                     }).orWhere("budget_status","=","Declined" ).get();
                             requestHistory(b);
-                     {
-                    }
-                    requestHistory_tbl.setItems(brc);
-                        GlobalCount = DummyCount;
-                    }
-                    Thread.sleep(3000);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(BUDGET_REQUEST_HISTORYController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            }catch(Exception e){
+                 System.err.println(e);
             }
 
-            return 0;
-        }, Session.SessionThreads);
-
      }
-    
-    
-    
-    
-     private void requestHistory(List req){
+    private void requestHistory(List req){
          
         requestHistory_tbl.getItems().clear();
         try {
@@ -157,7 +135,6 @@ public class BUDGET_REQUEST_HISTORYController implements Initializable {
                 hm.get("budget_amount");
                 hm.get("budget_status");
                 hm.get("budget_reason");
-
                 
                brc.add(new Budget_Request_classfile(
                             String.valueOf(hm.get("budget_id")),
