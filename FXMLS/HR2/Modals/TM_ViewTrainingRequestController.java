@@ -13,6 +13,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -90,12 +91,13 @@ public class TM_ViewTrainingRequestController implements Initializable {
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "emp", "=", "requested_by")
                     .where(new Object[][]{
                 {"aerolink.tbl_hr2_training_requisition.tr_id", "=", TM_ViewTrainingReqClassModal.tr_id},
-                {"aerolink.tbl_hr2_training_requisition.isDeleted", "<>", "0"}})
+                {"aerolink.tbl_hr2_training_requisition.isDeleted", "=", "0"}})
                     .get("aerolink.tbl_hr2_training_requisition.tr_id,training_title,no_of_participants,total_hours,"
                             + "concat(emp.firstname,' ',emp.middlename,' ',emp.lastname) as requested_by,"
                             + "from_day, to_day, reason, concat('S00',rs.req_status_id,' - ',rs.req_status)as status");
             Data(training_req_archive);
 
+            System.err.println(Arrays.asList(training_req_archive.toArray()));
         } catch (Exception e) {
             System.out.println(e);
         }

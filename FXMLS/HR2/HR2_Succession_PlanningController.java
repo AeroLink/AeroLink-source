@@ -88,7 +88,7 @@ public class HR2_Succession_PlanningController implements Initializable {
         HR4_Jobs jobs = new HR4_Jobs();
         List jv_data = jobs.join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_limit", "job_id", "j_limit", "=", "job_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "d", "=", "dept_id")
-                .where(new Object[][]{{"j_limit.jobOpen", "!=", "0"}})
+                .where(new Object[][]{{"j_limit.isPosted", "=", "1"}})
                 .get("d.dept_name as department,aerolink.tbl_hr4_jobs.title");
         JV(jv_data);
     }
