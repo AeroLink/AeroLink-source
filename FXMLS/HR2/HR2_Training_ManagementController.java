@@ -152,13 +152,17 @@ public class HR2_Training_ManagementController implements Initializable {
     @FXML
     private TableView<TM_DefaultTrainings> tbl_default_trainings;
     @FXML
-    private TableColumn<TM_DefaultTrainings, String> col_jp;
-    @FXML
-    private TableColumn<TM_DefaultTrainings, String> col_training_title;
-    @FXML
-    private JFXComboBox cbox_filter_jp;
-    @FXML
     private JFXButton btn_add_training;
+    @FXML
+    private TableColumn<TM_DefaultTrainings, String> col_t_jp;
+    @FXML
+    private TableColumn<TM_DefaultTrainings, String> col_t_training_title;
+    @FXML
+    private TableColumn<TM_DefaultTrainings, String> col_t_trainor;
+    @FXML
+    private JFXComboBox<?> cbox_filter_t_jp;
+    @FXML
+    private JFXComboBox<?> cbox_filter_t_trainor;
 
     /**
      * Initializes the controller class.
@@ -519,6 +523,7 @@ public class HR2_Training_ManagementController implements Initializable {
     public void LoadFacilities() {
         try {
             HR2_Temp_Facilities facilities = new HR2_Temp_Facilities();
+            
             List f = facilities.join(Model.JOIN.INNER, "aerolink.tbl_log1_AssetBuilding", "BuildingID", "ab", "=", "BuildingID")
                     .where(new Object[][]{{"FacilityType", "=", "training"}})
                     .get("FacilityID, FacilityName, FacilityStatus, FacilityRoomNumber, FacilityCapacity, ab.BuildingName");
@@ -593,8 +598,8 @@ public class HR2_Training_ManagementController implements Initializable {
 
     public void ForColumns() {
         //for tbl_default_trainings
-        col_jp.setCellValueFactory((TableColumn.CellDataFeatures<TM_DefaultTrainings, String> param) -> param.getValue().job_title);
-        col_training_title.setCellValueFactory((TableColumn.CellDataFeatures<TM_DefaultTrainings, String> param) -> param.getValue().training_title);
+        col_t_jp.setCellValueFactory((TableColumn.CellDataFeatures<TM_DefaultTrainings, String> param) -> param.getValue().job_title);
+        col_t_training_title.setCellValueFactory((TableColumn.CellDataFeatures<TM_DefaultTrainings, String> param) -> param.getValue().training_title);
         //for tbl_mngmt
         col_tm_dept.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().dept_name);
         col_tm_jp.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().title);

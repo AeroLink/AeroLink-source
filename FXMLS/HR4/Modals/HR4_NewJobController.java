@@ -37,7 +37,7 @@ public class HR4_NewJobController implements Initializable {
     HR4_Classification classification = new HR4_Classification();
     HR4_Jobs jobs = new HR4_Jobs();
     HR4_JobLimits jobLimit = new HR4_JobLimits();
-    
+
     @FXML
     private JFXTextField txtJobTitle;
     @FXML
@@ -82,25 +82,20 @@ public class HR4_NewJobController implements Initializable {
 
     @FXML
     private void submitJob(ActionEvent event) {
-        
+
         int job_id = jobs.insert(new Object[][]{
             {"dept_id", cboDept.getSelectionModel().getSelectedItem().toString().split(" - ")[0]},
             {"classification_id", cboClass.getSelectionModel().getSelectedItem().toString().split(" - ")[0]},
             {"designation_id", cboDes.getSelectionModel().getSelectedItem().toString().split(" - ")[0]},
             {"title", txtJobTitle.getText()},
-            {"description", txtJobDesc.getText()}
+            {"description", txtJobDesc.getText()},
+            {"population_limit", 1}
         }, true);
-        
-        jobLimit.insert(new Object[][] {
-            {"job_id", job_id},
-            {"job_limit", 10}
-        });
-        
-        if(job_id != 0) {
+
+        if (job_id != 0) {
             Helpers.EIS_Response.SuccessResponse("Successfully Saved", txtJobTitle.getText() + " is successfuly saved");
         }
-        
-        
+
     }
 
 }
