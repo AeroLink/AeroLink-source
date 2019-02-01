@@ -115,7 +115,7 @@ public class TM_RequestTrainingController implements Initializable {
                     {"from_day", txt_from_day.getValue().toString()},
                     {"to_day", txt_to_day.getValue().toString()},
                     {"reason", txt_reason.getText()},
-                    {"employee_code", Session.pull("employee_code").toString()},
+                    {"requested_by", Session.pull("employee_code").toString()},
                     {"request_id", rq_id}
                 };
                 rs.insert(skill_req);
