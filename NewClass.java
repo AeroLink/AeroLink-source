@@ -60,7 +60,11 @@ public class NewClass {
             });
         }
 
-        List list = STORED_PROC.executeCall("getAllEmployees");
+        List list = STORED_PROC.executeCall("EIS_CreateRequest", new Object[][] {
+            {"request", 45},
+            {"request_description", 51},
+            {"requestor_id", 6}
+        });
 
         System.err.println(Arrays.asList(list.toArray()));
     }

@@ -8,6 +8,7 @@ package FXMLS.HR2.Requisition;
 import Model.HR2_CM_Skill_Requisition;
 import Model.HR2_LM_Exam_Request;
 import Model.HR4_Jobs;
+import Synapse.STORED_PROC;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
@@ -41,8 +42,8 @@ public class LM_RequestExamController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         selectJobs();
-    }    
-    
+    }
+
     public void selectJobs() {
         HR4_Jobs jobs = new HR4_Jobs();
 
@@ -64,7 +65,6 @@ public class LM_RequestExamController implements Initializable {
 
     }
 
-
     @FXML
     public void SubmitRequest() {
 
@@ -84,10 +84,10 @@ public class LM_RequestExamController implements Initializable {
                 System.err.println(e);
             }
 
-        }else{
-               Alert saved = new Alert(Alert.AlertType.ERROR);
-                saved.setContentText("One or More fields are empty");
-                saved.showAndWait();
+        } else {
+            Alert saved = new Alert(Alert.AlertType.ERROR);
+            saved.setContentText("One or More fields are empty");
+            saved.showAndWait();
         }
     }
 }
