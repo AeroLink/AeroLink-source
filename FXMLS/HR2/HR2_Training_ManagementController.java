@@ -496,7 +496,6 @@ public class HR2_Training_ManagementController implements Initializable {
         ObservableList<TM_TrainingRequisition_Class> t_requests = FXCollections.observableArrayList();
         t_requests.clear();
         try {
-
             for (Object d : a) {
                 HashMap hm1 = (HashMap) d;
 
