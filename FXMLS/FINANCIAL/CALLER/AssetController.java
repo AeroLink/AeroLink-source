@@ -67,6 +67,7 @@ ObservableList<String> cmbbx_stats = FXCollections.observableArrayList("Collecte
         {"ast_description",astDesc.getText()},
         {"ast_amount",astAmount.getText()},
         {"ast_status",combbox.getValue().toString()},
+        {"ast_status2","CollectedAsset"},
         {"ast_type","Asset Sales"}
         };           
            

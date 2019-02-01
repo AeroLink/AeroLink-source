@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="647.0" prefWidth="295.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="647.0" prefWidth="295.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.FINANCIAL.CALLER.BUDGET_DENOMINATIONController">
    <children>
       <AnchorPane prefHeight="647.0" prefWidth="361.0" style="-fx-border-color: #34a853;">
          <children>
@@ -115,7 +115,7 @@
                </columnResizePolicy>
             </TableView>
             <DatePicker layoutX="11.0" layoutY="472.0" promptText="Search by Date" />
-            <Label layoutX="158.0" layoutY="34.0" text="0">
+            <Label fx:id="salesforToday_label" layoutX="158.0" layoutY="34.0" text="0">
                <font>
                   <Font size="15.0" />
                </font>
