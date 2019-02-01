@@ -67,7 +67,7 @@ public class TM_RequestTrainingController implements Initializable {
             for (Object d : c) {
                 HashMap hm1 = (HashMap) d;
                 //RS
-                cbox_department.getItems().add("DEPT00" + hm1.get("id") + hm1.get("dept_name"));
+                cbox_department.getItems().add("DEPT00" + hm1.get("id") + " - " + hm1.get("dept_name"));
 
             }
 
@@ -75,7 +75,7 @@ public class TM_RequestTrainingController implements Initializable {
             for (Object td : tm_dept) {
                 HashMap hm3 = (HashMap) td;
                 //RS
-                cbox_job_position.getItems().add("J" + hm3.get("job_id") + hm3.get("title"));
+                cbox_job_position.getItems().add("J" + hm3.get("job_id") + " - " + hm3.get("title"));
 
             }
 
