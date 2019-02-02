@@ -124,7 +124,7 @@
             <Font name="Lato Bold" size="14.0" />
          </font>
       </Label>
-      <JFXButton fx:id="btn_submit" layoutX="201.0" layoutY="544.0" prefHeight="31.0" prefWidth="118.0" styleClass="btn-primary" text="Submit">
+      <JFXButton fx:id="btn_submit" layoutX="201.0" layoutY="544.0" onAction="#Submit" prefHeight="31.0" prefWidth="118.0" styleClass="btn-primary" text="Submit">
          <font>
             <Font name="Lato Regular" size="14.0" />
          </font>
