@@ -8,6 +8,8 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -33,38 +35,50 @@
                                               <Font size="10.0" />
                                           </font>
                                       </Label>
-                                      <JFXButton fx:id="closeBtn" layoutX="604.0" layoutY="15.0" onAction="#btnClose" prefHeight="26.0" prefWidth="28.0" style="-fx-background-color: #EA4335;" styleClass="btn-rounded" stylesheets="@../Assets/css/MainPanel.css" text=" " AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="15.0">
-                                          <graphic>
-                                              <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" wrappingWidth="1.4285717010498047" />
-                                          </graphic>
-                                      </JFXButton>
-                                      <JFXButton fx:id="btnRight" layoutX="563.0" layoutY="15.0" onMouseClicked="#pullRight" prefHeight="26.0" prefWidth="28.0" style="-fx-background-color: #34A853;" styleClass="btn-rounded" stylesheets="@../Assets/css/MainPanel.css" text=" " AnchorPane.rightAnchor="58.0" AnchorPane.topAnchor="15.0">
-                                          <graphic>
-                                              <FontAwesomeIconView fill="WHITE" glyphName="COG" wrappingWidth="1.4285717010498047" />
-                                          </graphic>
-                                          <contextMenu>
-                                              <ContextMenu fx:id="contextM">
-                                                  <items>
-                                                      <MenuItem fx:id="userManagement" mnemonicParsing="false" text="User Management" />
-                                                      <MenuItem fx:id="importAndExport" mnemonicParsing="false" text="Import and Export" />
-                                                  </items>
-                                              </ContextMenu>
-                                          </contextMenu>
-                                      </JFXButton>
+                              <HBox alignment="CENTER_RIGHT" layoutX="477.6000061035156" layoutY="14.0" prefHeight="26.0" prefWidth="281.0" AnchorPane.rightAnchor="10.0">
+                                 <children>
+                                    <JFXButton fx:id="btnRx1" contentDisplay="RIGHT" graphicTextGap="7.0" onMouseClicked="#pullRight" prefHeight="26.0" prefWidth="157.0" style="-fx-background-color: #34A853;" stylesheets="@../Assets/css/MainPanel.css" text="0 Notifications" textFill="WHITE">
+                                       <graphic>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="BELL" wrappingWidth="1.4285717010498047" />
+                                       </graphic>
+                                    </JFXButton>
+                                    <Pane prefHeight="26.0" prefWidth="12.0" />
+                                    <JFXButton fx:id="btnRx" onMouseClicked="#pullRight" prefHeight="26.0" prefWidth="28.0" style="-fx-background-color: #34A853;" styleClass="btn-rounded" stylesheets="@../Assets/css/MainPanel.css" text=" ">
+                                       <graphic>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="COMMENT" wrappingWidth="1.4285717010498047" />
+                                       </graphic>
+                                       <contextMenu>
+                                          <ContextMenu fx:id="contextM1">
+                                             <items>
+                                                <MenuItem fx:id="userManagement1" mnemonicParsing="false" text="User Management" />
+                                                <MenuItem fx:id="importAndExport1" mnemonicParsing="false" text="Import and Export" />
+                                             </items>
+                                          </ContextMenu>
+                                       </contextMenu>
+                                    </JFXButton>
+                                    <Pane prefHeight="26.0" prefWidth="11.0" />
+                                            <JFXButton fx:id="btnRight" onMouseClicked="#pullRight" prefHeight="26.0" prefWidth="28.0" style="-fx-background-color: #34A853;" styleClass="btn-rounded" stylesheets="@../Assets/css/MainPanel.css" text=" ">
+                                                <graphic>
+                                                    <FontAwesomeIconView fill="WHITE" glyphName="COG" wrappingWidth="1.4285717010498047" />
+                                                </graphic>
+                                                <contextMenu>
+                                                    <ContextMenu fx:id="contextM">
+                                                        <items>
+                                                            <MenuItem fx:id="userManagement" mnemonicParsing="false" text="User Management" />
+                                                            <MenuItem fx:id="importAndExport" mnemonicParsing="false" text="Import and Export" />
+                                                        </items>
+                                                    </ContextMenu>
+                                                </contextMenu>
+                                            </JFXButton>
+                                    <Pane prefHeight="26.0" prefWidth="12.0" />
+                                            <JFXButton fx:id="closeBtn" onAction="#btnClose" prefHeight="26.0" prefWidth="28.0" style="-fx-background-color: #EA4335;" styleClass="btn-rounded" stylesheets="@../Assets/css/MainPanel.css" text=" ">
+                                                <graphic>
+                                                    <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" wrappingWidth="1.4285717010498047" />
+                                                </graphic>
+                                            </JFXButton>
+                                 </children>
+                              </HBox>
                               <JFXHamburger fx:id="Drawer" layoutX="14.0" layoutY="17.0" />
-                              <JFXButton fx:id="btnRx" layoutX="521.0" layoutY="15.0" onMouseClicked="#pullRight" prefHeight="26.0" prefWidth="28.0" style="-fx-background-color: #34A853;" styleClass="btn-rounded" stylesheets="@../Assets/css/MainPanel.css" text=" " AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="15.0">
-                                 <graphic>
-                                    <FontAwesomeIconView fill="WHITE" glyphName="COMMENT" wrappingWidth="1.4285717010498047" />
-                                 </graphic>
-                                 <contextMenu>
-                                    <ContextMenu fx:id="contextM1">
-                                       <items>
-                                          <MenuItem fx:id="userManagement1" mnemonicParsing="false" text="User Management" />
-                                          <MenuItem fx:id="importAndExport1" mnemonicParsing="false" text="Import and Export" />
-                                       </items>
-                                    </ContextMenu>
-                                 </contextMenu>
-                              </JFXButton>
                                   </children>
                               </AnchorPane>
                         <AnchorPane prefHeight="21.0" prefWidth="649.0" style="-fx-background-color: #34A853;" />

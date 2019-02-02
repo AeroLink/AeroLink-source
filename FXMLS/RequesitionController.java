@@ -105,7 +105,6 @@ public class RequesitionController implements Initializable {
             while (Session.CurrentRoute.equals("requisitions")) {
                 req.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(row -> {
                     DummyCount = Long.parseLong(((HashMap) row).get("chk").toString());
-                    System.err.println(DummyCount);
                 });
 
                 if (DummyCount != GlobalCount) {

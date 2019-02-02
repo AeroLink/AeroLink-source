@@ -754,6 +754,7 @@ public class HR1_RecruitmentController implements Initializable {
                             .hideAfter(Duration.seconds(3))
                             .position(Pos.BOTTOM_RIGHT);
                     nBuilder.show();
+                    dialog.close();
                 }
             });
         });
