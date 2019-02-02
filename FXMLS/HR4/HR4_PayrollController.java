@@ -264,7 +264,7 @@ public class HR4_PayrollController implements Initializable {
                                         fc.c.getValue(),
                                         fc.d.getValue(),
                                         fc.e.getValue());
-                                Modal lq = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_PayrollRequisition.fxml").getParent());
+                                Modal lq = Modal.getInstance(new Form("/FXMLS/FINANCIAL/CALLER/BUDGET_REQUESTFORM.fxml").getParent());
                                 lq.open();
                             });
                             btn.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
