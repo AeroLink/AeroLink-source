@@ -99,6 +99,7 @@
                                        <columns>
                                           <TableColumn fx:id="col_dept" prefWidth="75.0" text="Department" />
                                           <TableColumn fx:id="col_jp" prefWidth="75.0" text="Job Position" />
+                                          <TableColumn fx:id="col_status" prefWidth="75.0" text="Status" />
                                        </columns>
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
