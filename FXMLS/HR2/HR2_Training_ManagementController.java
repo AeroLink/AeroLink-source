@@ -179,7 +179,7 @@ public class HR2_Training_ManagementController implements Initializable {
         int d = tbl_training_req.getItems().size();
         lbl_training_req_notif.setText(String.valueOf(d));
         DisplayDataInCB();
-        cbox_tm_dept.getSelectionModel().selectedItemProperty().addListener(listener -> {
+       /* cbox_tm_dept.getSelectionModel().selectedItemProperty().addListener(listener -> {
             searchTM_Dept();
         });
         cbox_tm_trainor.getSelectionModel().selectedItemProperty().addListener(listener -> {
@@ -190,11 +190,12 @@ public class HR2_Training_ManagementController implements Initializable {
         });
         cbox_hs_trainor.getSelectionModel().selectedItemProperty().addListener(listener -> {
             searchHS_Trainor();
-        });
+        });*/
     }
+
     //add training
     @FXML
-    public void AddTrainingModal(){
+    public void AddTrainingModal() {
         Modal atm = Modal.getInstance(new Form("/FXMLS/HR2/Modals/TM_AddTraining.fxml").getParent());
         atm.open();
     }
@@ -217,7 +218,7 @@ public class HR2_Training_ManagementController implements Initializable {
                 HashMap hm3 = (HashMap) td;
                 //RS
                 cbox_tm_dept.getItems().add(hm3.get("dept_name"));
-               
+
             }
             List trainors = emp.get();
             for (Object tjp : trainors) {
@@ -232,7 +233,7 @@ public class HR2_Training_ManagementController implements Initializable {
                 //RS
                 cbox_hs_trainor.getItems().add(hm5.get("employee_code") + " - " + hm5.get("firstname") + " " + hm5.get("middlename") + " " + hm5.get("lastname"));
             }
-             List job_title = j.get();
+            List job_title = j.get();
             for (Object jt : job_title) {
                 HashMap hm6 = (HashMap) jt;
                 //RS
@@ -245,10 +246,11 @@ public class HR2_Training_ManagementController implements Initializable {
     }
 
     public void searchTM_Dept() {
-        HR2_TM_Training_Requisition tr = new HR2_TM_Training_Requisition();
+        /*      HR2_TM_Training_Requisition tr = new HR2_TM_Training_Requisition();
         List training_req = tr.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "dept", "=", "dept_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
-                .join(Model.JOIN.INNER, "aerolink.tbl_hr2_request_status", "req_status_id", "rs", "=", "req_status_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_eis_requisition", "request_id", "rs", "=", "request_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_eis_request_status", "req_status_id", "=", "rs", "request_status", true)
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr2_trainingInfo", "tr_id", "ti", "=", "tr_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "=", "ti", "trainor", true)
                 .where(new Object[][]{
@@ -258,7 +260,7 @@ public class HR2_Training_ManagementController implements Initializable {
                 .orderBy("aerolink.tbl_hr2_training_requisition.date_requested", Model.Sort.ASC)
                 .get("aerolink.tbl_hr4_employee_profiles.employee_code, aerolink.tbl_hr2_training_requisition.tr_id,dept.dept_name,j.title,training_title,no_of_participants,"
                         + "concat(aerolink.tbl_hr4_employee_profiles.firstname,' ',aerolink.tbl_hr4_employee_profiles.middlename,' ',aerolink.tbl_hr4_employee_profiles.lastname) as trainor,"
-                        + "from_day, to_day, rs.req_status_id, rs.req_status");
+                        + "from_day, to_day, rs.request_status_id, rs.req_status");
 
         DisplayTrainingM(training_req);
     }
@@ -267,7 +269,8 @@ public class HR2_Training_ManagementController implements Initializable {
         HR2_TM_Training_Requisition tr = new HR2_TM_Training_Requisition();
         List training_req = tr.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "dept", "=", "dept_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
-                .join(Model.JOIN.INNER, "aerolink.tbl_hr2_request_status", "req_status_id", "rs", "=", "req_status_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_eis_requisition", "request_id", "rs", "=", "request_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_eis_request_status", "req_status_id", "=", "rs", "request_status", true)
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr2_trainingInfo", "tr_id", "ti", "=", "tr_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "=", "ti", "trainor", true)
                 .where(new Object[][]{
@@ -277,7 +280,7 @@ public class HR2_Training_ManagementController implements Initializable {
                 .orderBy("aerolink.tbl_hr2_training_requisition.date_requested", Model.Sort.ASC)
                 .get("aerolink.tbl_hr4_employee_profiles.employee_code, aerolink.tbl_hr2_training_requisition.tr_id,dept.dept_name,j.title,training_title,no_of_participants,"
                         + "concat(aerolink.tbl_hr4_employee_profiles.firstname,' ',aerolink.tbl_hr4_employee_profiles.middlename,' ',aerolink.tbl_hr4_employee_profiles.lastname) as trainor,"
-                        + "from_day, to_day, rs.req_status_id, rs.req_status");
+                        + "from_day, to_day, rs.request_status_id, rs.req_status");
 
         DisplayTrainingM(training_req);
     }
@@ -286,7 +289,8 @@ public class HR2_Training_ManagementController implements Initializable {
         HR2_TM_Training_Requisition tr = new HR2_TM_Training_Requisition();
         List training_req_archive = tr.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "dept", "=", "dept_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
-                .join(Model.JOIN.INNER, "aerolink.tbl_hr2_request_status", "req_status_id", "rs", "=", "req_status_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_eis_requisition", "request_id", "rs", "=", "request_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_eis_request_status", "req_status_id", "=", "rs", "request_status", true)
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr2_trainingInfo", "tr_id", "ti", "=", "tr_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "=", "ti", "trainor", true)
                 .where(new Object[][]{
@@ -295,7 +299,7 @@ public class HR2_Training_ManagementController implements Initializable {
                 .orderBy("aerolink.tbl_hr4_employee_profiles.employee_code, aerolink.tbl_hr2_training_requisition.date_requested", Model.Sort.ASC)
                 .get("aerolink.tbl_hr2_training_requisition.tr_id,dept.dept_name,j.title,training_title,no_of_participants,"
                         + "concat(aerolink.tbl_hr4_employee_profiles.firstname,' ',aerolink.tbl_hr4_employee_profiles.middlename,' ',aerolink.tbl_hr4_employee_profiles.lastname) as trainor,"
-                        + "from_day, to_day, rs.req_status_id, rs.req_status");
+                        + "from_day, to_day, rs.request_status_id, rs.req_status");
 
         DisplayHistoryOfTraining(training_req_archive);
     }
@@ -304,7 +308,8 @@ public class HR2_Training_ManagementController implements Initializable {
         HR2_TM_Training_Requisition tr = new HR2_TM_Training_Requisition();
         List training_req = tr.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "dept", "=", "dept_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
-                .join(Model.JOIN.INNER, "aerolink.tbl_hr2_request_status", "req_status_id", "rs", "=", "req_status_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_eis_requisition", "request_id", "rs", "=", "request_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_eis_request_status", "req_status_id", "=", "rs", "request_status", true)
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr2_trainingInfo", "tr_id", "ti", "=", "tr_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "=", "ti", "trainor", true)
                 .where(new Object[][]{
@@ -313,9 +318,9 @@ public class HR2_Training_ManagementController implements Initializable {
                 .orderBy("aerolink.tbl_hr2_training_requisition.date_requested", Model.Sort.ASC)
                 .get("aerolink.tbl_hr4_employee_profiles.employee_code, aerolink.tbl_hr2_training_requisition.tr_id,dept.dept_name,j.title,training_title,no_of_participants,"
                         + "concat(aerolink.tbl_hr4_employee_profiles.firstname,' ',aerolink.tbl_hr4_employee_profiles.middlename,' ',aerolink.tbl_hr4_employee_profiles.lastname) as trainor,"
-                        + "from_day, to_day, rs.req_status_id, rs.req_status");
+                        + "from_day, to_day, rs.request_status_id, rs.req_status");
 
-        DisplayHistoryOfTraining(training_req);
+        DisplayHistoryOfTraining(training_req*/
     }
 
     //tbl_default_trainings
@@ -333,7 +338,7 @@ public class HR2_Training_ManagementController implements Initializable {
             System.err.println(e);
         }
     }
-    
+
     public void DisplayDefaultTrainings(List m) {
         ObservableList<TM_DefaultTrainings> DTrainings = FXCollections.observableArrayList();
         DTrainings.clear();
@@ -366,16 +371,17 @@ public class HR2_Training_ManagementController implements Initializable {
             HR2_TM_Training_Requisition tr = new HR2_TM_Training_Requisition();
             List training_req = tr.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "dept", "=", "dept_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
-                    .join(Model.JOIN.INNER, "aerolink.tbl_hr2_request_status", "req_status_id", "rs", "=", "req_status_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr2_trainingInfo", "tr_id", "ti", "=", "tr_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "=", "ti", "trainor", true)
+                    .join(Model.JOIN.INNER, "aerolink.tbl_eis_requisition", "request_id", "rs", "=", "request_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_eis_request_status", "req_status_id", "=", "rs", "request_status", true)
                     .where(new Object[][]{
-                {"rs.req_status_id", "<>", "3"},
+                {"aerolink.tbl_eis_request_status.req_status_id", "<>", "3"},
                 {"ti.isDeleted", "<>", "1"}})
                     .orderBy("aerolink.tbl_hr2_training_requisition.date_requested", Model.Sort.ASC)
                     .get("ti.t_id, aerolink.tbl_hr4_employee_profiles.employee_code,aerolink.tbl_hr2_training_requisition.tr_id,dept.dept_name,j.title,training_title,no_of_participants,"
                             + "aerolink.tbl_hr4_employee_profiles.employee_code, concat(aerolink.tbl_hr4_employee_profiles.firstname,' ',aerolink.tbl_hr4_employee_profiles.middlename,' ',aerolink.tbl_hr4_employee_profiles.lastname) as trainor,"
-                            + "from_day, to_day, rs.req_status_id, rs.req_status");
+                            + "from_day, to_day, aerolink.tbl_eis_request_status.req_status_id, aerolink.tbl_eis_request_status.req_status");
 
             DisplayTrainingM(training_req);
         } catch (Exception e) {
@@ -390,14 +396,15 @@ public class HR2_Training_ManagementController implements Initializable {
             HR2_TM_Training_Requisition tr = new HR2_TM_Training_Requisition();
             List training_req_archive = tr.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "dept", "=", "dept_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
-                    .join(Model.JOIN.INNER, "aerolink.tbl_hr2_request_status", "req_status_id", "rs", "=", "req_status_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_eis_requisition", "request_id", "rs", "=", "request_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_eis_request_status", "req_status_id", "=", "rs", "request_status", true)
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr2_trainingInfo", "tr_id", "ti", "=", "tr_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "=", "ti", "trainor", true)
                     .where(new Object[][]{{"ti.isDeleted", "<>", "0"}})
                     .orderBy("aerolink.tbl_hr4_employee_profiles.employee_code, aerolink.tbl_hr2_training_requisition.date_requested", Model.Sort.ASC)
                     .get("ti.t_id,aerolink.tbl_hr2_training_requisition.tr_id,dept.dept_name,j.title,training_title,no_of_participants,"
                             + "concat(aerolink.tbl_hr4_employee_profiles.firstname,' ',aerolink.tbl_hr4_employee_profiles.middlename,' ',aerolink.tbl_hr4_employee_profiles.lastname) as trainor,"
-                            + "from_day, to_day, rs.req_status_id, rs.req_status");
+                            + "from_day, to_day, aerolink.tbl_eis_request_status.req_status_id, aerolink.tbl_eis_request_status.req_status");
 
             DisplayHistoryOfTraining(training_req_archive);
         } catch (Exception e) {
@@ -486,13 +493,14 @@ public class HR2_Training_ManagementController implements Initializable {
             HR2_TM_Training_Requisition tr = new HR2_TM_Training_Requisition();
             List training_req = tr.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "dept", "=", "dept_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
-                    .join(Model.JOIN.INNER, "aerolink.tbl_hr2_request_status", "req_status_id", "rs", "=", "req_status_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_eis_requisition", "request_id", "rs", "=", "request_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_eis_request_status", "req_status_id", "=", "rs", "request_status", true)
                     .where(new Object[][]{
-                {"rs.req_status_id", "=", "3"},
+                {"aerolink.tbl_eis_request_status.req_status_id", "=", "3"},
                 {"aerolink.tbl_hr2_training_requisition.isDeleted", "<>", "1"}
             })
                     .orderBy("aerolink.tbl_hr2_training_requisition.date_requested", Model.Sort.ASC)
-                    .get("tr_id,dept.dept_name, j.title,date_requested,rs.req_status_id,rs.req_status");
+                    .get("tr_id,dept.dept_name, j.title,date_requested,aerolink.tbl_eis_request_status.req_status_id,aerolink.tbl_eis_request_status.req_status");
 
             DisplayTrainingReq(training_req);
         } catch (Exception e) {
@@ -531,7 +539,7 @@ public class HR2_Training_ManagementController implements Initializable {
     public void LoadFacilities() {
         try {
             HR2_Temp_Facilities facilities = new HR2_Temp_Facilities();
-            
+
             List f = facilities.join(Model.JOIN.INNER, "aerolink.tbl_log1_AssetBuilding", "BuildingID", "ab", "=", "BuildingID")
                     .where(new Object[][]{{"FacilityType", "=", "training"}})
                     .get("FacilityID, FacilityName, FacilityStatus, FacilityRoomNumber, FacilityCapacity, ab.BuildingName");
