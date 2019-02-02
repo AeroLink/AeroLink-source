@@ -36,6 +36,17 @@
                                                 <Font name="Lato Bold" size="22.0" />
                                              </font>
                                           </Label>
+                                          <JFXButton fx:id="btn_set_skills" buttonType="RAISED" layoutX="562.0" layoutY="17.0" styleClass="btn-primary" text="Set Skills" AnchorPane.rightAnchor="10.0">
+                                             <font>
+                                                <Font name="Roboto Black" size="15.0" />
+                                             </font>
+                                             <graphic>
+                                                <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="15.0" />
+                                             </graphic>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </JFXButton>
                                        </children>
                                     </AnchorPane>
                                  </top>
@@ -66,13 +77,10 @@
                                                 <Font name="Lato Semibold" size="15.0" />
                                              </font>
                                           </JFXTextField>
-                                          <JFXButton fx:id="btn_set_skills" buttonType="RAISED" layoutX="563.0" layoutY="-1.0" styleClass="btn-primary" text="Set Skills" AnchorPane.rightAnchor="9.0">
+                                          <JFXButton fx:id="btn_refresh" buttonType="RAISED" layoutX="567.0" layoutY="25.0" prefHeight="31.0" prefWidth="91.0" styleClass="btn-primary" text="Refresh" AnchorPane.rightAnchor="15.0">
                                              <font>
                                                 <Font name="Roboto Black" size="15.0" />
                                              </font>
-                                             <graphic>
-                                                <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="15.0" />
-                                             </graphic>
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>

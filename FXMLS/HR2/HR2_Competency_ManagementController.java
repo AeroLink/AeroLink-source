@@ -97,6 +97,8 @@ public class HR2_Competency_ManagementController implements Initializable {
     private Label lbl_req_countTable;
     @FXML
     private TableColumn<CM_Skill_RequisitionClass, String> col_status;
+    @FXML
+    private JFXButton btn_refresh;
 
     /**
      * Initializes the controller class.
@@ -123,6 +125,9 @@ public class HR2_Competency_ManagementController implements Initializable {
 
         int d = tbl_req_skill.getItems().size();
         lbl_req_countTable.setText(String.valueOf(d));
+        btn_refresh.setOnAction(e->{
+            loadData();
+        });
 
     }
 
