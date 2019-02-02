@@ -37,7 +37,7 @@
                                       </Label>
                               <HBox alignment="CENTER_RIGHT" layoutX="477.6000061035156" layoutY="14.0" prefHeight="26.0" prefWidth="281.0" AnchorPane.rightAnchor="10.0">
                                  <children>
-                                    <JFXButton fx:id="btnRx1" contentDisplay="RIGHT" graphicTextGap="7.0" onMouseClicked="#pullRight" prefHeight="26.0" prefWidth="157.0" style="-fx-background-color: #34A853;" stylesheets="@../Assets/css/MainPanel.css" text="0 Notifications" textFill="WHITE">
+                                    <JFXButton fx:id="btnNotification" contentDisplay="RIGHT" graphicTextGap="7.0" onMouseClicked="#pullRight" prefHeight="26.0" prefWidth="157.0" style="-fx-background-color: #34A853;" stylesheets="@../Assets/css/MainPanel.css" text="0 Notifications" textFill="WHITE">
                                        <graphic>
                                           <FontAwesomeIconView fill="WHITE" glyphName="BELL" wrappingWidth="1.4285717010498047" />
                                        </graphic>

@@ -762,7 +762,7 @@ public class HR1_RecruitmentController implements Initializable {
         btncc.setOnMouseClicked(value -> {
             dialog.close();
         });
-
+ 
         layout.setActions(btn, new JFXButton(), btncc);
         dialog.show();
 
