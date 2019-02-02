@@ -9,6 +9,7 @@ import Model.HR2_CM_Skill_Requisition;
 import Model.HR4_Departments;
 import Model.HR4_Jobs;
 import Synapse.Model;
+import Synapse.STORED_PROC;
 import Synapse.Session;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -77,6 +78,7 @@ public class CM_RequestSkillController implements Initializable {
         }
 
     }
+    String rq_id = "";
 
     @FXML
     public void SubmitRequest() {
@@ -84,25 +86,40 @@ public class CM_RequestSkillController implements Initializable {
         if (!cbox_job_position.getValue().toString().isEmpty() || !txt_reason.getText().isEmpty()) {
             HR2_CM_Skill_Requisition rs = new HR2_CM_Skill_Requisition();
 
+            List<HashMap> list = STORED_PROC.executeCall("EIS_CreateRequest", new Object[][]{
+                {"request", "Skill Request"},
+                {"request_description", txt_reason.getText()},
+                {"requestor_id", Session.pull("employee_code")}
+            });
+
+            list.stream().forEach((HashMap e) -> {
+                rq_id = e.get("id").toString();
+
+            });
+
             try {
                 String[][] skill_req = {
                     {"dept_id", cbox_dept.getSelectionModel().getSelectedItem().toString().substring(6).split(" - ")[0]},
                     {"job_id", cbox_job_position.getSelectionModel().getSelectedItem().toString().substring(1).split(" - ")[0]},
                     {"reason", txt_reason.getText()},
-                    {"requested_by", Session.pull("employee_code").toString()}
-                };
-                rs.insert(skill_req);
-                Alert saved = new Alert(Alert.AlertType.INFORMATION);
-                saved.setContentText("Saved");
-                saved.showAndWait();
-            } catch (Exception e) {
+                    {"requested_by", Session.pull("employee_code").toString()},
+                    {"request_id", rq_id}
+            };
+            rs.insert(skill_req);
+            Alert saved = new Alert(Alert.AlertType.INFORMATION);
+            saved.setContentText("Saved");
+            saved.showAndWait();
+        }catch (Exception e) {
                 System.err.println(e);
             }
 
-        } else {
-            Alert saved = new Alert(Alert.AlertType.ERROR);
-            saved.setContentText("One or More fields are empty");
-            saved.showAndWait();
-        }
     }
+
+    
+        else {
+            Alert saved = new Alert(Alert.AlertType.ERROR);
+        saved.setContentText("One or More fields are empty");
+        saved.showAndWait();
+    }
+}
 }

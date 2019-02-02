@@ -5,10 +5,14 @@
  */
 package FXMLS.HR2.Modals;
 
+import FXMLS.HR2.ClassFiles.HR2_CM_Skills_Class_for_Modal;
 import FXMLS.HR2.ClassFiles.TM_ViewTrainingReqClassModal;
+import Model.HR2_CM_Skill_Requisition;
 import Model.HR2_RequestStatus;
+import Model.HR2_TM_TrainingInfo;
 import Model.HR2_TM_Training_Requisition;
 import Synapse.Model;
+import Synapse.STORED_PROC;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
@@ -16,9 +20,12 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 
 /**
@@ -114,5 +121,48 @@ public class TM_ViewTrainingRequestController implements Initializable {
             lbl_req_by.setText(((HashMap) row).get("requested_by").toString());
             cbox_status.setValue(((HashMap) row).get("status").toString());
         });
+    }
+
+    String rq_id = "";
+
+    @FXML
+    public void Submit() {
+        try {
+
+            Alert update = new Alert(Alert.AlertType.CONFIRMATION);
+            update.setContentText("Are you sure you want to update this data?");
+            Optional<ButtonType> rs = update.showAndWait();
+
+            if (rs.get() == ButtonType.OK) {
+                HR2_TM_Training_Requisition training_req = new HR2_TM_Training_Requisition();
+                HR2_TM_TrainingInfo training_info = new HR2_TM_TrainingInfo();
+                Boolean tr = training_req.where(new Object[][]{
+                    {"tr_id", "=", TM_ViewTrainingReqClassModal.tr_id}
+                }).update(new Object[][]{
+                    {"req_status_id", cbox_status.getSelectionModel().getSelectedItem().toString().substring(3).split(" - ")[0]}
+                }).executeUpdate();
+
+                training_req.where(new Object[][]{
+                    {"tr_id", "=", TM_ViewTrainingReqClassModal.tr_id}
+                }).get().stream().forEach(e -> {
+                    rq_id = ((HashMap) e).get("request_id").toString();
+                });
+
+                STORED_PROC.executeCall("EIS_updateRequestStatus", new Object[][]{
+                    {"request_id", rq_id},
+                    {"request_status", 1} //1 kapag approved, 2 kapag denied, 3 on process
+                });
+                
+                String[][] training_status = {
+                            {"tr_id",TM_ViewTrainingReqClassModal.tr_id}
+                        };
+                 training_info.insert(training_status);
+                Alert dropnotif = new Alert(Alert.AlertType.INFORMATION);
+                dropnotif.setContentText("Successfully added to Training Status");
+                dropnotif.showAndWait();
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }
