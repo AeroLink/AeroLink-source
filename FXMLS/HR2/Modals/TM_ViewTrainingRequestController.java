@@ -5,6 +5,7 @@
  */
 package FXMLS.HR2.Modals;
 
+import FXMLS.HR2.ClassFiles.CM_SkillReq_ModalClass;
 import FXMLS.HR2.ClassFiles.HR2_CM_Skills_Class_for_Modal;
 import FXMLS.HR2.ClassFiles.TM_ViewTrainingReqClassModal;
 import Model.HR2_CM_Skill_Requisition;
@@ -94,14 +95,15 @@ public class TM_ViewTrainingRequestController implements Initializable {
             HR2_TM_Training_Requisition tr = new HR2_TM_Training_Requisition();
             List training_req_archive = tr.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "dept", "=", "dept_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
-                    .join(Model.JOIN.INNER, "aerolink.tbl_hr2_request_status", "req_status_id", "rs", "=", "req_status_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "emp", "=", "requested_by")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_eis_requisition", "request_id", "rs", "=", "request_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_eis_request_status", "req_status_id", "=", "rs", "request_status", true)
                     .where(new Object[][]{
                 {"aerolink.tbl_hr2_training_requisition.tr_id", "=", TM_ViewTrainingReqClassModal.tr_id},
                 {"aerolink.tbl_hr2_training_requisition.isDeleted", "=", "0"}})
                     .get("aerolink.tbl_hr2_training_requisition.tr_id,training_title,no_of_participants,total_hours,"
                             + "concat(emp.firstname,' ',emp.middlename,' ',emp.lastname) as requested_by,"
-                            + "from_day, to_day, reason, concat('S00',rs.req_status_id,' - ',rs.req_status)as status");
+                            + "from_day, to_day, reason, concat('S00',aerolink.tbl_eis_request_status.req_status_id,' - ',aerolink.tbl_eis_request_status.req_status)as status");
             Data(training_req_archive);
 
             System.err.println(Arrays.asList(training_req_archive.toArray()));
@@ -136,11 +138,17 @@ public class TM_ViewTrainingRequestController implements Initializable {
             if (rs.get() == ButtonType.OK) {
                 HR2_TM_Training_Requisition training_req = new HR2_TM_Training_Requisition();
                 HR2_TM_TrainingInfo training_info = new HR2_TM_TrainingInfo();
-                Boolean tr = training_req.where(new Object[][]{
+
+                /*   Boolean tr = training_req.where(new Object[][]{
                     {"tr_id", "=", TM_ViewTrainingReqClassModal.tr_id}
                 }).update(new Object[][]{
                     {"req_status_id", cbox_status.getSelectionModel().getSelectedItem().toString().substring(3).split(" - ")[0]}
-                }).executeUpdate();
+                }).executeUpdate();*/
+                List<HashMap> s = training_req.where(new Object[][]{{"tr_id", "=", TM_ViewTrainingReqClassModal.tr_id}}).get();
+
+                s.stream().forEach((HashMap hash) -> {
+                    rq_id = hash.get("request_id").toString();
+                });
 
                 training_req.where(new Object[][]{
                     {"tr_id", "=", TM_ViewTrainingReqClassModal.tr_id}
@@ -150,13 +158,13 @@ public class TM_ViewTrainingRequestController implements Initializable {
 
                 STORED_PROC.executeCall("EIS_updateRequestStatus", new Object[][]{
                     {"request_id", rq_id},
-                    {"request_status", 1} //1 kapag approved, 2 kapag denied, 3 on process
+                    {"request_status", cbox_status.getSelectionModel().getSelectedItem().toString().substring(3).split(" - ")[0]} //1 kapag approved, 2 kapag denied, 3 on process
                 });
-                
+
                 String[][] training_status = {
-                            {"tr_id",TM_ViewTrainingReqClassModal.tr_id}
-                        };
-                 training_info.insert(training_status);
+                    {"tr_id", TM_ViewTrainingReqClassModal.tr_id}
+                };
+                training_info.insert(training_status);
                 Alert dropnotif = new Alert(Alert.AlertType.INFORMATION);
                 dropnotif.setContentText("Successfully added to Training Status");
                 dropnotif.showAndWait();
