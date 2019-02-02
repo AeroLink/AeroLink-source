@@ -3,16 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FXMLS.HR3;
+package Model.HR3;
 
 /**
  *
  * @author my
  */
-class evt {
+public class HR3_dummy_reord_Schedule extends Synapse.Model {
+  
 
-    static int getKeyCode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public HR3_dummy_reord_Schedule() {
+        this.initTable("tbl_hr3_CreatingSchedule");
     }
     
 }

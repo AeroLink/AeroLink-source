@@ -5,15 +5,14 @@
  */
 package Model.HR3;
 
-import static Synapse.Model.setColumns;
 /**
  *
- * @author BlackMoon
+ * @author my
  */
-public class HR_RequestLeaves extends Synapse.Model {
-  
-
-    public HR_RequestLeaves() {
-        this.initTable("tbl_hr3_leave");
+public class HR3_Schedule_Recordss extends Synapse.Model{
+    public HR3_Schedule_Recordss()
+    {
+    setColumns("id","employee_code","mon","tues","wed","thurs","fri");
+    this.initTable("tbl_hr3_weekdays");
     }
 }

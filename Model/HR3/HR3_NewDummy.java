@@ -5,15 +5,13 @@
  */
 package Model.HR3;
 
-import static Synapse.Model.setColumns;
 /**
  *
- * @author BlackMoon
+ * @author my
  */
-public class HR_RequestLeaves extends Synapse.Model {
-  
+public class HR3_NewDummy extends Synapse.Model {
 
-    public HR_RequestLeaves() {
-        this.initTable("tbl_hr3_leave");
+    public HR3_NewDummy() {
+        this.initTable("tbl_hr3_newemplo_dummy");
     }
 }
