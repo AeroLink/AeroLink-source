@@ -18,7 +18,7 @@
          <items>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <TableView layoutY="97.0" prefHeight="569.0" prefWidth="1150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="125.0">
+                  <TableView layoutY="97.0" prefHeight="569.0" prefWidth="1150.0" stylesheets="@../../../Assets/css/pom.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="125.0">
                      <columns>
                         <TableColumn prefWidth="592.9999694824219" text="PACKAGE NO." />
                         <TableColumn prefWidth="432.0" text="STATUS" />

@@ -90,7 +90,7 @@ public class ServiceNetworkController implements Initializable {
         assign.setCellValueFactory((TableColumn.CellDataFeatures<SNTable_branch, String> param) -> param.getValue().personnel_assign);
         address.setCellValueFactory((TableColumn.CellDataFeatures<SNTable_branch, String> param) -> param.getValue().address);
         country.setCellValueFactory((TableColumn.CellDataFeatures<SNTable_branch, String> param) -> param.getValue().country);
-        tblBranch.getColumns().addAll(code, assign, address,country);
+        tblBranch.getColumns().addAll(code, assign, address, country);
     }
 
     // dito isinasagawa yung pag query and etc or inner|left join

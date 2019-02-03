@@ -25,7 +25,8 @@ public class Log1_AssetVehiclesClassfiles {
     public SimpleStringProperty VehicleFuelType;
     public SimpleStringProperty VehicleUsability;
     public SimpleStringProperty VehicleStatus;
-    public SimpleStringProperty AssetCategory;
+    public SimpleStringProperty PriceUpdatedAt;
+    public SimpleStringProperty CurrentPrice;
     
     public Log1_AssetVehiclesClassfiles(
             String VehicleID,
@@ -41,7 +42,9 @@ public class Log1_AssetVehiclesClassfiles {
             String VehiclePurchasedPrice,
             String VehicleFuelType,
             String VehicleUsability,
-            String VehicleStatus
+            String VehicleStatus,
+            String PriceUpdatedAt,
+            String CurrentPrice
     ){
         this.VehicleID = new SimpleStringProperty(VehicleID);
         this.BuildingName = new SimpleStringProperty(BuildingName);
@@ -56,11 +59,15 @@ public class Log1_AssetVehiclesClassfiles {
         this.VehicleFuelType = new SimpleStringProperty(VehicleFuelType);
         this.VehicleUsability = new SimpleStringProperty(VehicleUsability);
         this.VehicleStatus = new SimpleStringProperty(VehicleStatus);
-        this.AssetCategory = new SimpleStringProperty(AssetCategory);
+        this.PriceUpdatedAt = new SimpleStringProperty(PriceUpdatedAt);
+        this.CurrentPrice = new SimpleStringProperty(CurrentPrice);
     }
     
-    public String getAssetCategory(){
-        return AssetCategory.get();
+    public String getPriceUpdatedAt(){
+        return PriceUpdatedAt.get();
+    }
+    public String getCurrentPrice(){
+        return CurrentPrice.get();
     }
 
     public String getVehicleID() {

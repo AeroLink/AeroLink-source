@@ -7,6 +7,7 @@ package FXMLS.FINANCIAL;
 
 import FXMLS.FINANCIAL.CLASSFILES.Disbursement_Voucher_classfile;
 import FXMLS.FINANCIAL.CLASSFILES.Disbursement_request_classfile;
+import FXMLS.FINANCIAL.CLASSFILES.disbursement_tbl_received_classfile;
 import FXMLS.FINANCIAL.STATIC.CLASFILES.Finance_CreateVoucher;
 import Model.Financial.Financial_budget_request;
 import Model.Financial.Financial_disbursement_request_model;
@@ -38,6 +39,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseButton;
+import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
@@ -50,39 +52,31 @@ public class FINANCIAL_DISBURSEMENTController implements Initializable {
     @FXML
     private TableView<Disbursement_request_classfile> disbursement_tbl;
     @FXML
-    private Label daterequest_label;
-    @FXML
-    private Label department_label;
-    @FXML
-    private Label claimant_label;
-    @FXML
-    private TextArea description_txtarea;
-    @FXML
-    private Label amount_label;
-    @FXML
-    private JFXButton dv_btn;
-    @FXML
-    private Label reqno_label;
-    @FXML
-    private Label prioritylvl_label;
-    @FXML
-    private Label status_label;
-    @FXML
-    private Label dr_id_label;
-    @FXML
     private TableView<Disbursement_Voucher_classfile> dv_tbl;
     @FXML
     private JFXTextField srch_name_txt;
     @FXML
-    private DatePicker srch_date;
-    @FXML
     private ContextMenu contextMenu;
     @FXML
     private MenuItem Voucher_menuItem;
+    @FXML
+    private JFXButton notification_button;
+    @FXML
+    public Label notification_label;
+    @FXML
+    public TableView<disbursement_tbl_received_classfile> tbl_received;
+    @FXML
+    private JFXButton print;
+    @FXML
+    private JFXButton receivd_btn;
+    @FXML
+    private Label labelid;
 
     /**
      * Initializes the controller class.
      */
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -97,8 +91,133 @@ public class FINANCIAL_DISBURSEMENTController implements Initializable {
         
          disbursement_tbl.setContextMenu(contextMenu);
          Voucher_menuItem.setOnAction(value -> viewingVoucher());
+         
+         addtblcolreceived();
+         loadtblreceived();
+         
+           int a = tbl_received.getItems().size();
+           notification_label.setText(String.valueOf(a));
+         
+         notification_button.setOnMouseClicked(e ->OpenNotificationButton());
+        // print.setOnMouseClicked(e ->refresh());
+         receivd_btn.setOnMouseClicked(e -> updateReceived());
+         
+         dv_tbl.setOnMouseClicked(e ->{
+        Disbursement_Voucher_classfile dvc = dv_tbl.getSelectionModel().getSelectedItem();
+        labelid.setText(dvc.getDno());
+        
+         });
     }    
    
+    public void updateReceived(){
+            Financial_disbursement_voucher fdvs = new Financial_disbursement_voucher();
+         try{
+             if(fdvs.update(new Object[][]{
+                 {"dv_received_by","Received"}
+             }).where(new Object[][]{
+                 {"dv_id","=",labelid.getText()}
+             }).executeUpdate()){
+                 
+             Alert alert = new Alert(Alert.AlertType.INFORMATION);
+             alert.initStyle(StageStyle.UNDECORATED);
+             alert.setTitle("Received");
+             alert.setContentText("Received"); 
+             alert.showAndWait();
+             }else{
+             Alert alert = new Alert(Alert.AlertType.INFORMATION);
+             alert.initStyle(StageStyle.UNDECORATED);
+             alert.setTitle("Error");
+             alert.setContentText("ERROR"); 
+             alert.showAndWait();
+             }
+             
+         }catch (Exception e){
+             System.out.print(e);
+         }
+        
+        
+        
+    }
+    
+    
+    
+    
+    /*
+    public void refresh(){
+       try{
+          List rs = fdv1.where("dv_received_by","=","Received")
+                        .andWhere("dv_status2", "=", "None").get();
+                            receivedCol(rs);
+          int a = tbl_received.getItems().size();
+           notification_label.setText(String.valueOf(a));
+           
+                            
+    }catch(Exception e){
+        System.err.println(e);
+    }
+    }
+    
+    */
+    public void OpenNotificationButton(){
+        
+    Modal md = Modal.getInstance(new Form("/FXMLS/FINANCIAL/CALLER/Disbursement_Notification.fxml").getParent());
+    md.open();
+    
+    }
+    
+    
+    
+    
+    int total4=0;
+    ObservableList<disbursement_tbl_received_classfile> rcrc = FXCollections.observableArrayList();
+    Financial_disbursement_voucher fdv1 = new Financial_disbursement_voucher();
+   
+    public void addtblcolreceived(){
+        tbl_received.getItems().clear();
+        tbl_received.getColumns().removeAll(tbl_received.getColumns());
+        
+        TableColumn<disbursement_tbl_received_classfile, String> drno = new TableColumn<>("Disbursement No");
+       
+        drno.setCellValueFactory((TableColumn.CellDataFeatures<disbursement_tbl_received_classfile, String> param) -> param.getValue().status);
+        
+        tbl_received.getColumns().addAll(drno);
+        
+    }
+    public void loadtblreceived(){
+        try{
+          List rs = fdv1.where("dv_received_by","=","Received")
+                        .andWhere("dv_status2", "=", "None").get();
+                            receivedCol(rs);
+         
+           
+                            
+    }catch(Exception e){
+        System.err.println(e);
+    }
+        
+    }
+    private int receivedCol(List rc){
+         tbl_received.getItems().clear();
+        try {
+              for(Object d : rc)
+            {
+                HashMap hm = (HashMap) d;   //exquisite casting
+             rcrc.add(new disbursement_tbl_received_classfile(
+                            String.valueOf(hm.get("dv_received_by")),
+                            String.valueOf(hm.get("dv_disbursed_status"))
+                ) );   
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        tbl_received.setItems(rcrc);
+        return 0;
+        
+    }
+    
+    
+    
     public void viewingVoucher() {
         
         Finance_CreateVoucher.id = disbursement_tbl.getSelectionModel().getSelectedItem().drID.getValue();
@@ -161,14 +280,16 @@ public class FINANCIAL_DISBURSEMENTController implements Initializable {
         dv_tbl.getItems().clear();
         dv_tbl.getColumns().removeAll(dv_tbl.getColumns());
         
+        TableColumn<Disbursement_Voucher_classfile, String> drno = new TableColumn<>("Disbursement No");
         TableColumn<Disbursement_Voucher_classfile, String> dreq = new TableColumn<>("Date Request");
         TableColumn<Disbursement_Voucher_classfile, String> de = new TableColumn<>("Department");
         TableColumn<Disbursement_Voucher_classfile, String> des = new TableColumn<>("Description");
         TableColumn<Disbursement_Voucher_classfile, String> c = new TableColumn<>("Claimant");
         TableColumn<Disbursement_Voucher_classfile, String> a = new TableColumn<>("Amount");
-        TableColumn<Disbursement_Voucher_classfile, String> rb = new TableColumn<>("Received By.");
         TableColumn<Disbursement_Voucher_classfile, String> drel = new TableColumn<>("Date Released");
+        TableColumn<Disbursement_Voucher_classfile, String> rb = new TableColumn<>("Status");
        
+         drno.setCellValueFactory((TableColumn.CellDataFeatures<Disbursement_Voucher_classfile, String> param) -> param.getValue().no);
         dreq.setCellValueFactory((TableColumn.CellDataFeatures<Disbursement_Voucher_classfile, String> param) -> param.getValue().dvdreq);
         de.setCellValueFactory((TableColumn.CellDataFeatures<Disbursement_Voucher_classfile, String> param) -> param.getValue().dvdep);
         des.setCellValueFactory((TableColumn.CellDataFeatures<Disbursement_Voucher_classfile, String> param) -> param.getValue().dvdes);
@@ -177,7 +298,7 @@ public class FINANCIAL_DISBURSEMENTController implements Initializable {
         rb.setCellValueFactory((TableColumn.CellDataFeatures<Disbursement_Voucher_classfile, String> param) -> param.getValue().dvreceivedby);
         drel.setCellValueFactory((TableColumn.CellDataFeatures<Disbursement_Voucher_classfile, String> param) -> param.getValue().dvdatereleased);
         
-        dv_tbl.getColumns().addAll(dreq,de,des,c,a,rb,drel);
+        dv_tbl.getColumns().addAll(drno,dreq,de,des,c,a,drel,rb);
     
     }
     
@@ -185,7 +306,6 @@ public class FINANCIAL_DISBURSEMENTController implements Initializable {
     Financial_disbursement_voucher fdv = new Financial_disbursement_voucher();
     public void loadDisbursementVoucher(){
          CompletableFuture.supplyAsync(() -> {
-
             while (Session.CurrentRoute.equals("id_disbursement")) {
                 
                 try {
@@ -196,13 +316,14 @@ public class FINANCIAL_DISBURSEMENTController implements Initializable {
                     if (DummyCount != GlobalCount) {
 
                         dv_tbl.getItems();
-                            List b = fdv.get("budget_date_req as budget_date_req",
+                            List b = fdv.get("dv_id",
+                                    "budget_date_req as budget_date_req",
                                     "dv_department as dv_department",
                                     "dv_description as dv_description",
                                     "dv_claimant as dv_claimant",
                                     "dv_amount as dv_amount",
-                                    "dv_received_by as dv_received_by",
-                                    "CONCAT(dv_disbursed_status, ' - ', dv_date_released) as dv_date_released");
+                                    "CONCAT(dv_disbursed_status, ' - ', dv_date_released) as dv_date_released",
+                                    "dv_received_by as dv_received_by");
                             VoucherRecord(b);
                      {
                          
@@ -240,13 +361,14 @@ public class FINANCIAL_DISBURSEMENTController implements Initializable {
                 hm.get("dv_date_released");
                 
                dvc.add(new Disbursement_Voucher_classfile(
+                        String.valueOf(hm.get("dv_id")),
                             String.valueOf(hm.get("budget_date_req")),
                             String.valueOf(hm.get("dv_department")),
                             String.valueOf(hm.get("dv_description")),
                             String.valueOf(hm.get("dv_claimant")),
                             String.valueOf(hm.get("dv_amount")),
-                            String.valueOf(hm.get("dv_received_by")),
-                            String.valueOf(hm.get("dv_date_released"))
+                            String.valueOf(hm.get("dv_date_released")),
+                            String.valueOf(hm.get("dv_received_by"))
                 ) );   
             }
         } catch (Exception e) {
@@ -258,7 +380,7 @@ public class FINANCIAL_DISBURSEMENTController implements Initializable {
      
     }
     
-  
+    
     
     
      public void AddtableColumn_disbursementrequest(){
@@ -274,7 +396,7 @@ public class FINANCIAL_DISBURSEMENTController implements Initializable {
         TableColumn<Disbursement_request_classfile, String> drdes = new TableColumn<>("Description");
         TableColumn<Disbursement_request_classfile, String> dramnt = new TableColumn<>("Amount");
         TableColumn<Disbursement_request_classfile, String> drstat = new TableColumn<>("Status");
-       
+                                                     
         
         drreqno.setCellValueFactory((TableColumn.CellDataFeatures<Disbursement_request_classfile, String> param) -> param.getValue().drReqno);
         drdatereq.setCellValueFactory((TableColumn.CellDataFeatures<Disbursement_request_classfile, String> param) -> param.getValue().drDatereq);
@@ -312,7 +434,7 @@ public class FINANCIAL_DISBURSEMENTController implements Initializable {
 
                         disbursement_tbl.getItems();
                             List b = drm.where(new Object[][]{
-                             {"dr_status","=","Pending"}
+                             {"dr_status","=","Unpaid"}
                     }).get();
                             request(b);
                             

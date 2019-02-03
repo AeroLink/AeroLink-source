@@ -9,15 +9,17 @@ import FXMLS.HR1.ClassFiles.HR1_EditJobSelection;
 import FXMLS.HR1.ClassFiles.HR1_PostJobSelection;
 import FXMLS.HR1.ClassFiles.TableModel_jLimit;
 import FXMLS.HR1.ClassFiles.TableModel_jPosted;
+import Model.HR1.HR1_Applicants;
 import Model.HR1.JobPosting;
 import Model.HR1.JobVacancy;
-import Model.HR4_JobLimits;
 import Synapse.Model;
+import Synapse.STORED_PROC;
 import Synapse.Session;
 import Synapse.SysDialog;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXToggleButton;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
@@ -39,6 +41,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.ContextMenu;
@@ -52,6 +55,8 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import org.controlsfx.control.MaskerPane;
 import org.controlsfx.control.Notifications;
@@ -127,8 +132,6 @@ public class HR1_RecruitmentController implements Initializable {
     private JFXButton btnExport;
     @FXML
     private JFXCheckBox chkFilterPostings;
-    @FXML
-    private JFXToggleButton switchPostingStatusPostings;
     @FXML
     private JFXToggleButton switchEmpStatusPostings;
     @FXML
@@ -279,6 +282,8 @@ public class HR1_RecruitmentController implements Initializable {
 
         pieChart.setData(pieList);
         pieFullPart.setData(pieList_FullPart);
+        pieJobs.setLegendVisible(true);
+        pieJobs.setLegendSide(Side.BOTTOM);
         pieJobs.setData(pieList_Jobs);
 
     }
@@ -581,10 +586,11 @@ public class HR1_RecruitmentController implements Initializable {
 
                         if (chkFilterPostings.isSelected()) {
                             list = jp.where(new Object[][]{
-                                {"status", "=", (switchEmpStatusPostings.isSelected() ? "Full Time" : "Part Time")}
+                                {"status", "=", (switchEmpStatusPostings.isSelected() ? "Full Time" : "Part Time")},
+                                {"isDeleted", "=", 0}
                             }).get();
                         } else {
-                            list = jp.get();
+                            list = jp.where(new Object[][]{{"isDeleted", "=", 0}}).get();
                         }
 
                         list.stream().forEach(row -> {
@@ -685,26 +691,80 @@ public class HR1_RecruitmentController implements Initializable {
     }
 
     public void unpostJob(String posting_id, String vacancy_id) {
-        JobPosting jp = new JobPosting();
 
-        Boolean p = jp.where(new Object[][]{
-            {"id", "=", posting_id}
-        }).delete().executeUpdate();
+        HR1_Applicants hr1PivotApp = new HR1_Applicants(true);
 
-        if (p) {
-            HR4_JobLimits jL = new HR4_JobLimits();
+        int count_application = Integer.parseInt(String.valueOf(hr1PivotApp.where(new Object[][]{{"jobPosted_id", "=", posting_id}, {"status", "<", 99}}).get().stream().count()));
 
-            jL.where(new Object[][]{
-                {"id", "=", vacancy_id}
-            }).update(new Object[][]{
-                {"isPosted", 0}
-            }).executeUpdate();
-
-            Helpers.EIS_Response.SuccessResponseSB("Success", "Job was successfully Close and unposted");
+        if (count_application > 0) {
+            HaltWarningApplicants(count_application, posting_id, vacancy_id);
         } else {
+            List<HashMap> list = STORED_PROC.executeCall("HR1_UnpostJob", new Object[][]{
+                {"posting_id", posting_id},
+                {"vacancy_id", vacancy_id},
+                {"trigger", 0}
+            });
 
-            Helpers.EIS_Response.ErrorResponseSB("Success", "Transaction Failed when unposting the job.");
+            list.stream().forEach((HashMap e) -> {
+                if (e.get("id").toString().equals("0")) {
+                    Notifications nBuilder = Notifications.create()
+                            .title("Success")
+                            .text("Transaction Complete!")
+                            .hideAfter(Duration.seconds(3))
+                            .position(Pos.BOTTOM_RIGHT);
+                    nBuilder.show();
+                }
+            });
         }
+    }
+
+    public void HaltWarningApplicants(int count, String posting_id, String vacancy_id) {
+
+        JFXDialogLayout layout = new JFXDialogLayout();
+        layout.setHeading(new Text("Wait!"));
+
+        VBox vbox = new VBox(
+                new Label("This job has " + count + " " + (count > 1 ? "applications" : "application") + ", Proceeding this action will automatically deny all applications in it!\n"),
+                new Label("Are you sure you want to continue?"),
+                new Label("")
+        );
+
+        layout.setBody(vbox);
+
+        JFXButton btn = new JFXButton("Submit");
+        JFXButton btncc = new JFXButton("Cancel");
+
+        btn.getStyleClass().add("btn-primary");
+        btncc.getStyleClass().add("btn-danger");
+
+        JFXDialog dialog = new JFXDialog(spane, layout, JFXDialog.DialogTransition.TOP);
+
+        btn.setOnMouseClicked(value -> {
+            List<HashMap> list = STORED_PROC.executeCall("HR1_UnpostJob", new Object[][]{
+                {"posting_id", posting_id},
+                {"vacancy_id", vacancy_id},
+                {"trigger", 1}
+            });
+
+            list.stream().forEach((HashMap e) -> {
+                if (e.get("id").toString().equals("0")) {
+                    Notifications nBuilder = Notifications.create()
+                            .title("Success")
+                            .text("Transaction Complete!")
+                            .hideAfter(Duration.seconds(3))
+                            .position(Pos.BOTTOM_RIGHT);
+                    nBuilder.show();
+                    dialog.close();
+                }
+            });
+        });
+
+        btncc.setOnMouseClicked(value -> {
+            dialog.close();
+        });
+ 
+        layout.setActions(btn, new JFXButton(), btncc);
+        dialog.show();
 
     }
 

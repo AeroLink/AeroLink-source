@@ -6,9 +6,11 @@
 package FXMLS.HR4;
 
 import FXMLS.HR4.ClassFiles.HR4_EmpInfoClass;
+import FXMLS.HR4.ClassFiles.HR4_EmpInfoFillClass;
 import FXMLS.HR4.Model.HR4_EmployeeInfo;
 import FXMLS.HR4.Filler.HR4_MIZ;
 import FXMLS.HR4.ClassFiles.TableModel_Jobs;
+import FXMLS.HR4.Filler.HR4_EmpInfoFill;
 import FXMLS.HR4.Model.HR4_ClassificationModel;
 import FXMLS.HR4.Model.HR4_InfoChartModel;
 import java.net.URL;
@@ -350,7 +352,9 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         job_id.setCellValueFactory((TableColumn.CellDataFeatures<HR4_EmpInfoClass, String> param) -> param.getValue().job_id);
         dept_id.setCellValueFactory((TableColumn.CellDataFeatures<HR4_EmpInfoClass, String> param) -> param.getValue().dept_id);
         status_id.setCellValueFactory((TableColumn.CellDataFeatures<HR4_EmpInfoClass, String> param) -> param.getValue().status_id);
+
         /*TableColumn<HR4_EmpInfoClass, Void> addButton = new TableColumn("More Options");
+
         Callback<TableColumn<HR4_EmpInfoClass, Void>, TableCell<HR4_EmpInfoClass, Void>> cellFactory
                 = new Callback<TableColumn<HR4_EmpInfoClass, Void>, TableCell<HR4_EmpInfoClass, Void>>() {
             @Override
@@ -363,14 +367,23 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
                         try {
                             btn.setOnAction(e
                                     -> {
-                                HR4_EmpInfoClass fc = (HR4_EmpInfoClass) getTableRow().getItem();
+                                HR4_EmpInfoFillClass fc = (HR4_EmpInfoFillClass) getTableRow().getItem();
 
-                                HR4_NewPayrollFill2.SendRequest(
+                                HR4_EmpInfoFill.CreateNew(
                                         fc.a.getValue(),
                                         fc.b.getValue(),
                                         fc.c.getValue(),
                                         fc.d.getValue(),
-                                        fc.e.getValue());
+                                        fc.e.getValue(),
+                                        fc.f.getValue(),
+                                        fc.g.getValue(),
+                                        fc.h.getValue(),
+                                        fc.i.getValue(),
+                                        fc.j.getValue(),
+                                        fc.k.getValue(),
+                                        fc.l.getValue(),
+                                        fc.m.getValue(),
+                                        fc.n.getValue());
                                 Modal lq = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_InfoCHC.fxml").getParent());
                                 lq.open();
                             });

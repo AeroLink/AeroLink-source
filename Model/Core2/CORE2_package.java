@@ -9,9 +9,10 @@ package Model.Core2;
  *
  * @author jpeg
  */
-public class CORE2_package extends Synapse.Model{
-    public CORE2_package(){
-        this.initTable("tbl_core2_package1");
-        setColumns("package_no","ref_no","ship_name","list_item","note");
+public class CORE2_package extends Synapse.Model {
+
+    public CORE2_package() {
+        this.initTable("tbl_core2_package");
+        setColumns("package_no", "ref_no", "ship_name", "list_item", "item_value", "weight", "note", "status");
     }
 }

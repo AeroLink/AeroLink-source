@@ -46,7 +46,7 @@
                     <content>
                       <AnchorPane prefHeight="611.0" prefWidth="1370.0">
                            <children>
-                              <TableView fx:id="tblGuidelines" layoutY="216.0" prefHeight="500.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                              <TableView fx:id="tblGuidelines" layoutY="216.0" prefHeight="500.0" prefWidth="1370.0" stylesheets="@../../../Assets/css/pom.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                  <columns>
                                     <TableColumn prefWidth="451.0" text="GUIDELINES" />
                                  </columns>
@@ -85,7 +85,7 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="tblTAC" prefHeight="500.0" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                              <TableView fx:id="tblTAC" prefHeight="500.0" prefWidth="450.0" stylesheets="@../../../Assets/css/pom.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                  <columns>
                                     <TableColumn prefWidth="451.0" text="TERMS &amp; CONDITION" />
                                  </columns>
@@ -124,7 +124,7 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1370.0">
                            <children>
-                              <TableView fx:id="tblPS" prefHeight="500.0" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                              <TableView fx:id="tblPS" prefHeight="500.0" prefWidth="450.0" stylesheets="@../../../Assets/css/pom.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                  <columns>
                                     <TableColumn prefWidth="451.0" text="PACKAGE SORTING" />
                                  </columns>
@@ -163,7 +163,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1370.0">
                            <children>
-                              <TableView fx:id="tblPI" layoutX="-4.0" layoutY="49.0" prefHeight="500.0" prefWidth="1378.0" stylesheets="@../../../Assets/css/MainPanel.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                              <TableView fx:id="tblPI" layoutX="-4.0" layoutY="49.0" prefHeight="500.0" prefWidth="1378.0" stylesheets="@../../../Assets/css/pom.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                  <columns>
                                     <TableColumn prefWidth="451.0" text="PROHIBITED ITEMS" />
                                  </columns>

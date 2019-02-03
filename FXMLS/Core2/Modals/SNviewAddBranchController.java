@@ -5,13 +5,16 @@
  */
 package FXMLS.Core2.Modals;
 
+import Model.Core2.CORE2_Cities;
 import Model.Core2.CORE2_Branch;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -23,13 +26,15 @@ import javafx.scene.layout.AnchorPane;
  */
 public class SNviewAddBranchController implements Initializable {
 
+    CORE2_Cities city = new CORE2_Cities();
+
     public static Boolean modalOpen = true;
     @FXML
     private AnchorPane SNrootPane;
     @FXML
     private TextField txtRegion;
     @FXML
-    private TextField txtCity;
+    private ComboBox txtCity;
     @FXML
     private TextField txtBarangay;
     @FXML
@@ -64,13 +69,18 @@ public class SNviewAddBranchController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         submit.setOnMouseClicked(e -> Insert());
-    }    
-    
+        
+        city.get().stream().forEach(action -> {
+            HashMap row = (HashMap) action;
+            txtCity.getItems().add(row.get("city_name").toString());
+        });
+    }
+
     public void Insert() {
         CORE2_Branch brch = new CORE2_Branch();
         // ginawa ko to para mag popup yung else sa loob ng try
         String txtR = txtRegion.getText();
-        String txtC = txtCity.getText();
+        String txtC = txtCity.getSelectionModel().getSelectedItem().toString();
         String txtB = txtBarangay.getText();
         String txtS = txtStreet.getText();
         String txtA = txtAddress.getText();
@@ -84,7 +94,7 @@ public class SNviewAddBranchController implements Initializable {
             String[][] sn = {
                 {"country", lblCountry.getText()},
                 {"region", txtRegion.getText()},
-                {"city", txtCity.getText()},
+                {"city", txtCity.getSelectionModel().getSelectedItem().toString()},
                 {"barangay", txtBarangay.getText()},
                 {"street", txtStreet.getText()},
                 {"address", txtAddress.getText()},
@@ -102,7 +112,7 @@ public class SNviewAddBranchController implements Initializable {
                 Helpers.EIS_Response.SuccessResponse("Success", "Data has been Saved!");
                 lblCountry.setText("");
                 txtRegion.setText("");
-                txtCity.setText("");
+//                txtCity.setText("");
                 txtBarangay.setText("");
                 txtStreet.setText("");
                 txtAddress.setText("");
@@ -111,12 +121,12 @@ public class SNviewAddBranchController implements Initializable {
                 txtEmail.setText("");
                 txtCellNumber.setText("");
                 txtManager.setText("");
-                
+
             } else {
                 // Not Inserted kapag hindi kumpleto oh walang nilagay sa mga JFXTextField
-                if ((txtR.isEmpty()||txtC.isEmpty()||txtB.isEmpty()||txtS.isEmpty()
-                        ||txtA.isEmpty()||txtP.isEmpty()||txtZ.isEmpty()||txtE.isEmpty()
-                        ||txtCN.isEmpty()||txtM.isEmpty())) {
+                if ((txtR.isEmpty() || txtC.isEmpty() || txtB.isEmpty() || txtS.isEmpty()
+                        || txtA.isEmpty() || txtP.isEmpty() || txtZ.isEmpty() || txtE.isEmpty()
+                        || txtCN.isEmpty() || txtM.isEmpty())) {
                     Helpers.EIS_Response.ErrorResponse("Error", "Data Not Save!");
                 }
             }
@@ -124,7 +134,7 @@ public class SNviewAddBranchController implements Initializable {
             e.printStackTrace();
         }
     }
-    
+
 }
 
 //tblOpenJobs.getSelectionModel().getSelectedItem().job_title.getValue()

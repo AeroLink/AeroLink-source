@@ -26,12 +26,12 @@
                      <children>
                         <AnchorPane layoutY="1.0" prefHeight="40.0" prefWidth="1370.0" styleClass="card" stylesheets="@../../Assets/css/card.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <Label layoutX="586.0" layoutY="-1.0" prefHeight="40.0" prefWidth="207.0" text="SCHEDULE &amp; RATES" textFill="#34a853" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0">
+                              <Label layoutX="586.0" layoutY="-1.0" prefHeight="40.0" prefWidth="422.0" text="SCHEDULE DASHBOARD &amp; MANAGEMENT" textFill="#34a853" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0">
                                  <font>
                                     <Font name="Arial Bold" size="20.0" />
                                  </font>
                               </Label>
-                              <JFXButton fx:id="SRviewRD" buttonType="RAISED" ellipsisString="" layoutX="1048.0" layoutY="5.0" onAction="#viewRD" prefHeight="30.0" prefWidth="170.0" ripplerFill="WHITE" style="-fx-background-color: #34a853;" text="RATE DASHBOARD" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+                              <JFXButton fx:id="SRviewRD" buttonType="RAISED" ellipsisString="" layoutX="1048.0" layoutY="5.0" onAction="#viewRD" prefHeight="30.0" prefWidth="243.0" ripplerFill="WHITE" style="-fx-background-color: #34a853;" text="RATE DASHBOARD MANAGEMENT" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
                                  <graphic>
                                     <FontAwesomeIconView fill="WHITE" glyphName="DASHBOARD" size="20" />
                                  </graphic>
@@ -39,17 +39,9 @@
                                     <Font name="Arial" size="12.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton buttonType="RAISED" ellipsisString="" layoutX="1007.0" layoutY="7.0" onAction="#viewAS" prefHeight="30.0" prefWidth="170.0" ripplerFill="WHITE" style="-fx-background-color: #34a853;" text="AIRLINE SCHEDULE" textFill="WHITE" AnchorPane.topAnchor="5.0">
-                                 <graphic>
-                                    <FontAwesomeIconView fill="WHITE" glyphName="PLANE" onDragDetected="#viewAS" size="20" />
-                                 </graphic>
-                                 <font>
-                                    <Font name="Arial" size="12.0" />
-                                 </font>
-                              </JFXButton>
                            </children>
                         </AnchorPane>
-                        <TableView layoutX="227.0" layoutY="124.0" prefHeight="614.0" prefWidth="1148.0" AnchorPane.bottomAnchor="-48.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="124.0">
+                        <TableView layoutX="227.0" layoutY="124.0" prefHeight="614.0" prefWidth="1148.0" stylesheets="@../../Assets/css/pom.css" AnchorPane.bottomAnchor="-48.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="124.0">
                           <columns>
                             <TableColumn prefWidth="75.0" text="SLOT NO." />
                             <TableColumn prefWidth="75.0" text="PACKAGE NO." />

@@ -12,20 +12,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="713.0" prefWidth="993.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="713.0" prefWidth="993.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.FINANCIAL.FINANCIAL_GENERAL_LEDGERController">
    <children>
       <AnchorPane prefHeight="21.0" prefWidth="993.0" style="-fx-background-color: #34a853;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Label layoutX="7.0" layoutY="1.0" text="General Ledger" textFill="WHITE">
+            <Label layoutX="40.0" layoutY="2.0" text="General Ledger" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="15.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Label>
+            <FontAwesomeIconView fill="WHITE" glyphName="BOOK" layoutX="15.0" layoutY="22.0" size="20" />
          </children>
       </AnchorPane>
-      <JFXTabPane layoutX="-2.0" layoutY="20.0" prefHeight="693.0" prefWidth="993.0" stylesheets="@../../Assets/css/MainPanel.css" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0">
+      <JFXTabPane layoutX="-2.0" layoutY="31.0" prefHeight="682.0" prefWidth="993.0" stylesheets="@../../Assets/css/MainPanel.css" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0">
          <tabs>
-            <Tab id="tab" text="General Ledger">
+            <Tab id="tab" text="Ledger Accounts">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -52,9 +53,14 @@
                                  </font>
                               </Label>
                               <JFXComboBox focusColor="#34a853" layoutX="164.0" layoutY="23.0" prefHeight="25.0" prefWidth="107.0" promptText="Code No" unFocusColor="#34a853" />
+                              <JFXButton fx:id="coa_btn" layoutX="785.0" layoutY="9.0" prefHeight="32.0" prefWidth="160.0" style="-fx-background-color: #34a853;" text="Chart of Accounts" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </JFXButton>
                            </children>
                         </AnchorPane>
-                        <AnchorPane layoutX="14.0" layoutY="119.0" prefHeight="35.0" prefWidth="972.0" style="-fx-background-color: #34a853;" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="7.0">
+                        <AnchorPane layoutX="14.0" layoutY="122.0" prefHeight="35.0" prefWidth="1026.0" style="-fx-background-color: #34a853;" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="-47.0">
                            <children>
                               <Label layoutX="35.0" layoutY="7.0" text="Ledger" textFill="WHITE">
                                  <font>
@@ -94,7 +100,12 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab id="tab" text="Adjustment Entries">
+            <Tab id="tab" text="Adjusting Entries">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+            <Tab id="tab" text="Adjusted Trial Balance">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
@@ -131,6 +142,11 @@
                            </columnResizePolicy>
                         </TableView>
                      </children></AnchorPane>
+              </content>
+            </Tab>
+            <Tab id="tab" text="Post Closing Trial Balance">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
             </Tab>
          </tabs>

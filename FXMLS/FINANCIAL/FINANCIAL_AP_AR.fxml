@@ -5,6 +5,7 @@
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -20,20 +21,23 @@
    <children>
       <AnchorPane prefHeight="23.0" prefWidth="993.0" style="-fx-background-color: #34a853;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Label layoutX="8.0" layoutY="3.0" text="Accounts Payable &amp; Accounts Receivable" textFill="WHITE">
+            <Label layoutX="46.0" layoutY="3.0" text="Accounts Payable &amp; Accounts Receivable" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="15.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Label>
+            <FontAwesomeIconView fill="WHITE" glyphName="MONEY" layoutX="14.0" layoutY="25.0" size="20" />
+            <FontAwesomeIconView fill="#d30000" glyphName="LONG_ARROW_UP" layoutX="17.0" layoutY="18.0" size="15" />
+            <FontAwesomeIconView fill="#c8ffbe" glyphName="LONG_ARROW_DOWN" layoutX="27.0" layoutY="19.0" size="15" />
          </children>
       </AnchorPane>
-      <JFXTabPane layoutX="-2.0" layoutY="23.0" prefHeight="691.0" prefWidth="993.0" stylesheets="@../../Assets/css/MainPanel.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="2.0">
+      <JFXTabPane layoutX="-2.0" layoutY="30.0" prefHeight="684.0" prefWidth="991.0" stylesheets="@../../Assets/css/MainPanel.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="2.0">
          <tabs>
             <Tab id="tab" text="AP/AR Tracking">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <AnchorPane layoutX="5.0" layoutY="53.0" prefHeight="24.0" prefWidth="360.0" style="-fx-background-color: #34a853;" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="626.0">
+                        <AnchorPane layoutX="5.0" layoutY="53.0" prefHeight="24.0" prefWidth="290.0" style="-fx-background-color: #34a853;" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="696.0">
                            <children>
                               <Label layoutX="9.0" layoutY="4.0" text="Accounts Receivable" textFill="WHITE">
                                  <font>
@@ -42,7 +46,7 @@
                               </Label>
                            </children>
                         </AnchorPane>
-                        <AnchorPane layoutX="383.0" layoutY="53.0" prefHeight="24.0" prefWidth="611.0" style="-fx-background-color: #34a853;" AnchorPane.rightAnchor="-3.0">
+                        <AnchorPane layoutX="383.0" layoutY="53.0" prefHeight="24.0" prefWidth="677.0" style="-fx-background-color: #34a853;" AnchorPane.rightAnchor="-3.0">
                            <children>
                               <Label layoutX="9.0" layoutY="4.0" text="Accounts Payable" textFill="WHITE">
                                  <font>
@@ -51,17 +55,17 @@
                               </Label>
                            </children>
                         </AnchorPane>
-                        <Separator layoutX="373.0" layoutY="53.0" orientation="VERTICAL" prefHeight="607.0" prefWidth="7.0" AnchorPane.rightAnchor="612.0" />
+                        <Separator layoutX="304.0" layoutY="53.0" orientation="VERTICAL" prefHeight="607.0" prefWidth="7.0" AnchorPane.rightAnchor="680.0" />
                         <JFXButton fx:id="pom_btn" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="73.0" style="-fx-background-color: #34a853;" text="POM" textFill="WHITE" />
                         <JFXButton fx:id="asset_btn" layoutX="108.0" layoutY="14.0" prefHeight="25.0" prefWidth="73.0" style="-fx-background-color: #34a853;" text="Asset" textFill="WHITE" />
-                        <JFXComboBox fx:id="comboboxSales" layoutX="310.0" layoutY="14.0" prefHeight="25.0" prefWidth="158.0" promptText="Sales Status" AnchorPane.rightAnchor="625.0" />
-                        <JFXTabPane layoutX="7.0" layoutY="89.0" prefHeight="506.0" prefWidth="358.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="626.0">
+                        <JFXComboBox fx:id="comboboxSales" layoutX="310.0" layoutY="14.0" prefHeight="25.0" prefWidth="158.0" promptText="Sales Status" visible="false" AnchorPane.rightAnchor="625.0" />
+                        <JFXTabPane layoutX="7.0" layoutY="89.0" prefHeight="562.0" prefWidth="290.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="694.0">
                            <tabs>
                               <Tab id="tab" text="Uncollected Accounts">
                                 <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="358.0">
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="304.0">
                                        <children>
-                                          <TableView fx:id="ar_tbl" layoutX="-335.0" prefHeight="429.0" prefWidth="358.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <TableView fx:id="ar_tbl" layoutX="-335.0" prefHeight="433.0" prefWidth="358.0" AnchorPane.bottomAnchor="92.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <columns>
                                               <TableColumn prefWidth="75.0" text="C1" />
                                               <TableColumn prefWidth="75.0" text="C2" />
@@ -75,7 +79,7 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="ar_total_lbl" layoutX="284.0" layoutY="440.0" text="0">
+                                          <Label fx:id="ar_total_lbl" layoutX="246.0" layoutY="440.0" text="0">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
@@ -84,11 +88,11 @@
                                     </AnchorPane>
                                 </content>
                               </Tab>
-                              <Tab id="tab" text="Posting">
+                              <Tab id="tab" text="Transactions">
                                 <content>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="307.0">
                                        <children>
-                                          <TableView fx:id="arPosting_tbl" layoutX="48.0" layoutY="35.0" prefHeight="434.0" prefWidth="358.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <TableView fx:id="arPosting_tbl" layoutX="48.0" layoutY="35.0" prefHeight="469.0" prefWidth="358.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <columns>
                                               <TableColumn prefWidth="75.0" text="C1" />
                                               <TableColumn prefWidth="75.0" text="C2" />
@@ -110,13 +114,13 @@
                               </Tab>
                            </tabs>
                         </JFXTabPane>
-                        <JFXTabPane layoutX="385.0" layoutY="89.0" prefHeight="502.0" prefWidth="603.0" AnchorPane.rightAnchor="3.0">
+                        <JFXTabPane layoutX="385.0" layoutY="89.0" prefHeight="561.0" prefWidth="670.0" AnchorPane.rightAnchor="3.0">
                            <tabs>
                               <Tab id="tab" text="Unpaid Accounts">
                                 <content>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TableView fx:id="ap_tbl" prefHeight="299.0" prefWidth="509.0" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <TableView fx:id="ap_tbl" prefHeight="434.0" prefWidth="603.0" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <columns>
                                                 <TableColumn fx:id="dateCol" prefWidth="75.0" text="c1" />
                                                 <TableColumn fx:id="deptCol" prefWidth="75.0" text="c2" />
@@ -140,9 +144,9 @@
                                        </children></AnchorPane>
                                 </content>
                               </Tab>
-                              <Tab id="tab" text="Posting">
+                              <Tab id="tab" text="Transactions">
                                 <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="448.0">
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="493.0" prefWidth="603.0">
                                        <children>
                                           <TableView fx:id="apPosting_tbl" layoutX="102.0" layoutY="68.0" prefHeight="465.0" prefWidth="603.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <columns>
@@ -152,12 +156,29 @@
                                              <columnResizePolicy>
                                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                              </columnResizePolicy>
+                                             <contextMenu>
+                                                <ContextMenu fx:id="APcontexmenu">
+                                                  <items>
+                                                      <MenuItem fx:id="APmenuitem" mnemonicParsing="false" text="Post to Journal" />
+                                                  </items>
+                                                </ContextMenu>
+                                             </contextMenu>
                                           </TableView>
                                        </children></AnchorPane>
                                 </content>
                               </Tab>
                            </tabs>
                         </JFXTabPane>
+                        <Label fx:id="invoiceid" layoutX="385.0" layoutY="10.0" text="invoiceid" visible="false" />
+                        <Label fx:id="date" layoutX="385.0" layoutY="31.0" text="date" visible="false" />
+                        <Label fx:id="firstname" layoutX="450.0" layoutY="10.0" text="firstname" visible="false" />
+                        <Label fx:id="lastname" layoutX="450.0" layoutY="31.0" text="lastname" visible="false" />
+                        <Label fx:id="description" layoutX="520.0" layoutY="10.0" text="description" visible="false" />
+                        <Label fx:id="amount" layoutX="520.0" layoutY="31.0" text="amount" visible="false" />
+                        <Label fx:id="status" layoutX="639.0" layoutY="10.0" text="status" visible="false" />
+                        <Label fx:id="typestatus" layoutX="595.0" layoutY="31.0" text="typestatus" visible="false" />
+                        <Label fx:id="journalstatus" layoutX="694.0" layoutY="10.0" text="journalstatus" visible="false" />
+                        <Label fx:id="id_ast" layoutX="338.0" layoutY="10.0" text="id_ast" visible="false" />
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -260,6 +281,11 @@
                            </children>
                         </AnchorPane>
                      </children></AnchorPane>
+              </content>
+            </Tab>
+            <Tab id="tab">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
             </Tab>
          </tabs>

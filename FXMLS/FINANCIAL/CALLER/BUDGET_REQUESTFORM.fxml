@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="325.0" prefWidth="410.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.FINANCIAL.CALLER.BUDGET_REQUESTFORMController">
+<AnchorPane id="AnchorPane" prefHeight="346.0" prefWidth="411.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.FINANCIAL.CALLER.BUDGET_REQUESTFORMController">
    <children>
-      <AnchorPane layoutX="3.0" layoutY="3.0" prefHeight="21.0" prefWidth="403.0" style="-fx-background-color: #34a853;">
+      <AnchorPane layoutX="4.0" layoutY="47.0" prefHeight="12.0" prefWidth="403.0" style="-fx-background-color: #34a853;">
          <children>
             <Label layoutX="23.0" layoutY="1.0" text="Request Form" textFill="WHITE">
                <font>
@@ -23,21 +23,43 @@
             <FontAwesomeIconView fill="WHITE" glyphName="FILE" layoutX="7.0" layoutY="15.0" />
          </children>
       </AnchorPane>
-      <Label layoutX="190.0" layoutY="42.0" text="Aerolink" textFill="#333633">
+      <Label layoutX="185.0" layoutY="13.0" text="Aerolink" textFill="#333633">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Label>
-      <JFXTextField fx:id="requestor" focusColor="#34a853" labelFloat="true" layoutX="13.0" layoutY="100.0" maxWidth="383.0" minWidth="157.0" onKeyTyped="#requestor_limit" prefHeight="31.0" prefWidth="383.0" promptText="Name of Requestor" unFocusColor="#34a853" />
-      <JFXComboBox fx:id="department" layoutX="19.0" layoutY="154.0" prefHeight="25.0" prefWidth="193.0" promptText="Choose Department" />
-      <JFXTextArea fx:id="description" focusColor="#34a853" layoutX="18.0" layoutY="197.0" maxWidth="383.0" minWidth="346.0" prefHeight="55.0" prefWidth="383.0" promptText="Description" unFocusColor="#34a853" />
-      <JFXTextField fx:id="amount" focusColor="#34a853" labelFloat="true" layoutX="18.0" layoutY="274.0" maxWidth="195.0" minWidth="137.0" prefHeight="31.0" prefWidth="137.0" promptText="Amount" unFocusColor="#34a853" />
-      <JFXButton fx:id="submit_btn" layoutX="308.0" layoutY="277.0" prefHeight="25.0" prefWidth="83.0" style="-fx-background-color: #34a853;" text="Submit" textFill="WHITE" />
-      <FontAwesomeIconView fill="WHITE" glyphName="SEND" layoutX="314.0" layoutY="294.0" />
-      <ImageView fitHeight="41.0" fitWidth="59.0" layoutX="133.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="41.0" fitWidth="59.0" layoutX="132.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../Assets/1920%20x%201080.png" />
          </image>
       </ImageView>
-      <JFXComboBox fx:id="prioritylevel" layoutX="221.0" layoutY="154.0" prefHeight="25.0" prefWidth="174.0" promptText="Priority Level" />
+      <AnchorPane layoutX="4.0" layoutY="71.0" prefHeight="272.0" prefWidth="403.0" style="-fx-border-color: #34a853;">
+         <children>
+            <JFXTextField fx:id="requestor" focusColor="#34a853" labelFloat="true" layoutX="119.0" layoutY="22.0" maxWidth="383.0" minWidth="121.0" onKeyTyped="#requestor_limit" prefHeight="31.0" prefWidth="121.0" promptText="Firstname" unFocusColor="#34a853">
+               <font>
+                  <Font size="14.0" />
+               </font></JFXTextField>
+            <JFXComboBox fx:id="department" layoutX="17.0" layoutY="77.0" prefHeight="25.0" prefWidth="256.0" promptText="Choose Department" />
+            <JFXComboBox fx:id="prioritylevel" layoutX="287.0" layoutY="77.0" prefHeight="25.0" prefWidth="100.0" promptText="Priority Level" />
+            <JFXTextArea fx:id="description" focusColor="#34a853" layoutX="16.0" layoutY="136.0" maxWidth="383.0" minWidth="346.0" prefHeight="55.0" prefWidth="371.0" promptText="Description" unFocusColor="#34a853">
+               <font>
+                  <Font size="14.0" />
+               </font></JFXTextArea>
+            <JFXTextField fx:id="amount" focusColor="#34a853" labelFloat="true" layoutX="17.0" layoutY="205.0" maxWidth="195.0" minWidth="137.0" prefHeight="31.0" prefWidth="137.0" promptText="Amount" unFocusColor="#34a853">
+               <font>
+                  <Font size="14.0" />
+               </font></JFXTextField>
+            <JFXButton fx:id="submit_btn" layoutX="304.0" layoutY="219.0" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: #34a853;" text="Submit" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="SEND" text="" wrappingWidth="18.0" />
+               </graphic>
+            </JFXButton>
+            <JFXTextField fx:id="lastname" focusColor="#34a853" labelFloat="true" layoutX="268.0" layoutY="22.0" maxWidth="383.0" minWidth="121.0" onKeyTyped="#requestor_limit" prefHeight="31.0" prefWidth="121.0" promptText="Lastname" unFocusColor="#34a853">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXComboBox fx:id="combo_emp" layoutX="14.0" layoutY="25.0" prefHeight="25.0" prefWidth="92.0" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

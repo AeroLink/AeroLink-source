@@ -79,7 +79,8 @@ public class RouteConfig {
         
         //HR2 Request Forms
         {"0xreq_hr2_skill", "/FXMLS/HR2/Requisition/CM_RequestSkill.fxml", "canAccessSystem"}, //canAccessSystem permission for testing
-        {"0xreq_hr2_training", "/FXMLS/HR2/Requisition/LM_RequestExam.fxml", "canAccessSystem"}
+        {"0xreq_hr2_exam", "/FXMLS/HR2/Requisition/LM_RequestExam.fxml", "canAccessSystem"},
+        {"0xreq_hr2_training", "/FXMLS/HR2/Requisition/TM_RequestTraining.fxml", "canAccessSystem"}
             
     };
 

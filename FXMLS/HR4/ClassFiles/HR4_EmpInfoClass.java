@@ -39,7 +39,5 @@ public class HR4_EmpInfoClass extends RecursiveTreeObject{
      }
     public void setSelect(CheckBox Select){
         this.Select = Select;
-        
-    
     }
 }
