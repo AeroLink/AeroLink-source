@@ -82,6 +82,14 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </TableView>
+                        <JFXButton layoutX="522.0" layoutY="13.0" onAction="#loadTrainingRequests" styleClass="btn-primary" text="Refresh">
+                           <font>
+                              <Font name="Lato Regular" size="15.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
                      </children></AnchorPane>
                </content>
                <graphic />

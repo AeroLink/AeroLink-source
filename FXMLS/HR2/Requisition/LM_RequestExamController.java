@@ -79,23 +79,36 @@ public class LM_RequestExamController implements Initializable {
         }
 
     }
-
+    String rq_id = "";
     @FXML
     public void SubmitRequest() {
 
         if (!cbox_position.getValue().toString().isEmpty() || !txt_reason.getText().isEmpty()) {
             HR2_LM_Exam_Request rs = new HR2_LM_Exam_Request();
+            
+            
+            List<HashMap> list = STORED_PROC.executeCall("EIS_CreateRequest", new Object[][]{
+                {"request", "Exam Request"},
+                {"request_description", txt_reason.getText()},
+                {"requestor_id", Session.pull("employee_code")}
+            });
+
+            list.stream().forEach((HashMap e) -> {
+                rq_id = e.get("id").toString();
+
+            });
 
             try {
                 String[][] skill_req = {
                     {"dept_id", cbox_department.getSelectionModel().getSelectedItem().toString().substring(6).split(" - ")[0]},
                     {"job_id", cbox_position.getSelectionModel().getSelectedItem().toString().substring(1).split(" - ")[0]},
                     {"reason", txt_reason.getText()},
-                    {"requested_by", Session.pull("employee_code").toString()}
+                    {"requested_by", Session.pull("employee_code").toString()},
+                    {"request_id", rq_id}
                 };
                 rs.insert(skill_req);
                 Alert saved = new Alert(Alert.AlertType.INFORMATION);
-                saved.setContentText("Saved");
+                saved.setContentText("Data Submitted");
                 saved.showAndWait();
             } catch (Exception e) {
                 System.err.println(e);
