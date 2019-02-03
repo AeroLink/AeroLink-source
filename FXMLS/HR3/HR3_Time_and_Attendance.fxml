@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR3.HR3_Time_and_AttendanceController">
+   <center>
+      <JFXTabPane stylesheets="@../../Assets/css/MainPanel.css">
+         <tabs>
+          <Tab id="tab" text="Attendance Monitoring">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="1375.0">
+                     <children>
+                        <AnchorPane prefHeight="720.0" prefWidth="1375.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <TitledPane animated="false" layoutX="22.0" layoutY="86.0" prefHeight="319.0" prefWidth="320.0" text="Employee Log-In Support">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <JFXTextField fx:id="txtid" labelFloat="true" layoutX="40.0" layoutY="67.0" maxWidth="288.0" minWidth="201.0" onKeyReleased="#txtIDR" prefHeight="31.0" prefWidth="250.0" promptText="Employee ID" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+                                          <JFXPasswordField fx:id="txtname" layoutX="30.0" layoutY="134.0" maxWidth="259.0" minWidth="259.0" prefHeight="28.0" prefWidth="259.0" promptText="Password" />
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </TitledPane>
+                              <AnchorPane layoutX="356.0" layoutY="62.0" prefHeight="541.0" prefWidth="999.0" style="-fx-background-color: transparent;" />
+                              <TableView fx:id="tablemonitoring" layoutX="373.0" layoutY="86.0" prefHeight="498.0" prefWidth="963.0">
+                                <columns>
+                                  <TableColumn fx:id="b_id" prefWidth="86.0" text="ID" />
+                                  <TableColumn fx:id="b_name" prefWidth="225.0" text="Employee Name" />
+                                    <TableColumn fx:id="b_date" minWidth="5.0" prefWidth="188.0" text="Date In" />
+                                    <TableColumn minWidth="0.0" prefWidth="317.0" text="A.M / P.M">
+                                       <columns>
+                                          <TableColumn fx:id="b_in" prefWidth="138.0" text="Time-In" />
+                                          <TableColumn fx:id="b_out" prefWidth="155.0" text="Time-Out" />
+                                       </columns>
+                                    </TableColumn>
+                                    <TableColumn fx:id="b_works" minWidth="0.0" prefWidth="170.0" text="Date Out" />
+                                    <TableColumn fx:id="b_time" minWidth="0.0" prefWidth="0.0" text="ElapseTime" />
+                                    <TableColumn fx:id="b_over" minWidth="0.0" prefWidth="0.0" text="Overtime" />
+                                    <TableColumn fx:id="b_under" minWidth="0.0" prefWidth="0.0" text="Undertime" />
+                                </columns>
+                              </TableView>
+                              <JFXTextField fx:id="txtsearch" labelFloat="true" layoutX="373.0" layoutY="47.0" maxWidth="230.0" minWidth="230.0" prefHeight="31.0" prefWidth="230.0" promptText="Search Employee" />
+                              <Button fx:id="btn_save" disable="true" layoutX="54.0" layoutY="304.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="125.0" style="-fx-background-color: #00b359;" text="Login" textFill="WHITE" AnchorPane.leftAnchor="54.0" AnchorPane.rightAnchor="1196.0">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="btn_save2" disable="true" layoutX="182.0" layoutY="304.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="125.0" style="-fx-background-color: red;" text="Log-Out" textFill="WHITE">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab id="tab" text="Attendance Report">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="1375.0">
+                     <children>
+                        <TitledPane animated="false" layoutX="881.0" layoutY="308.0" prefHeight="303.0" prefWidth="482.0" text="Information">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <JFXTextField fx:id="o_code" editable="false" labelFloat="true" layoutX="25.0" layoutY="41.0" maxWidth="206.0" minWidth="206.0" prefHeight="28.0" prefWidth="206.0" promptText="Employee Code" />
+                                    <JFXTextField fx:id="o_date" editable="false" labelFloat="true" layoutX="25.0" layoutY="101.0" maxWidth="196.0" minWidth="196.0" prefHeight="28.0" prefWidth="196.0" promptText="Date" />
+                                    <JFXTextField fx:id="o_overtime" editable="false" labelFloat="true" layoutX="25.0" layoutY="154.0" maxWidth="192.0" minWidth="192.0" prefHeight="28.0" prefWidth="192.0" promptText="Overtime Hours" />
+                                    <JFXTextField fx:id="o_reason" editable="false" labelFloat="true" layoutX="25.0" layoutY="212.0" maxWidth="189.0" minWidth="189.0" prefHeight="28.0" prefWidth="189.0" promptText="Reason" />
+                                    <JFXComboBox fx:id="o_status" disable="true" layoutX="260.0" layoutY="44.0" prefHeight="22.0" prefWidth="196.0" promptText="Status" />
+                                    <Button fx:id="o_btn_save" disable="true" layoutX="260.0" layoutY="94.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="196.0" style="-fx-background-color: green;" text="Submit" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="o_btn_cancel" disable="true" layoutX="260.0" layoutY="137.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="195.0" style="-fx-background-color: red;" text="Cancel" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </TitledPane>
+                        <TableView layoutX="14.0" layoutY="73.0" prefHeight="538.0" prefWidth="839.0">
+                          <columns>
+                            <TableColumn prefWidth="192.0" text="Employee Name" />
+                            <TableColumn prefWidth="177.0" text="Working Hours" />
+                              <TableColumn prefWidth="234.0" text="A.M / P.M">
+                                 <columns>
+                                    <TableColumn text="Time-In" />
+                                    <TableColumn prefWidth="70.0" text="Time-Out" />
+                                 </columns>
+                              </TableColumn>
+                              <TableColumn prefWidth="154.0" text="Hours Worked" />
+                              <TableColumn prefWidth="164.0" text="Status" />
+                          </columns>
+                        </TableView>
+                        <Label layoutX="14.0" layoutY="21.0" text="Daily-Performance Report">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="table_overtime" layoutX="881.0" layoutY="73.0" prefHeight="231.0" prefWidth="481.0">
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy></TableView>
+                        <Label layoutX="880.0" layoutY="21.0" text="Overtime Request">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                        </Label>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+         </tabs>
+      </JFXTabPane>
+   </center>
+</BorderPane>

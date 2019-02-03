@@ -12,8 +12,6 @@ package Model;
 public class HR2_TM_TrainingInfo extends Synapse.Model{
     
     public HR2_TM_TrainingInfo(){
-        setColumns("tr_id","trainor","start_time","end_time","type_of_training_id","facility_id","budget_id"
-        ,"vehicle_id");
         this.initTable("aerolink.tbl_hr2_trainingInfo");
     }
     

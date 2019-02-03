@@ -13,6 +13,8 @@ import FXMLS.HR4.Model.HR4_PHModel;
 import FXMLS.HR4.Model.HR4_SSSModel;
 import FXMLS.HR4.Model.HR4_SalaryModel;
 import FXMLS.HR4.Model.HR4_TaxModel;
+import Synapse.Components.Modal.Modal;
+import Synapse.Form;
 import Synapse.Model;
 import Synapse.Session;
 import java.net.URL;
@@ -29,11 +31,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -41,7 +46,7 @@ import javafx.scene.control.TableView;
  * @author JaeJae
  */
 public class HR4_Compensation_and_PlanningController implements Initializable {
-
+    Boolean searchStatus = false;
     @FXML
     private TableView<HR4_SalaryClass> tbl_salary;
     @FXML
@@ -122,8 +127,6 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
                     });
 
                     if (DummyCount != GlobalCount) {
-
-                        tri_tbl.getItems();
                             List rs = sssmodel
                                     .get(
                                             "CONCAT(rocmin,' - ',rocmax) as roc",
@@ -153,7 +156,7 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
 
     public void AddJobToTable(List rs) {
         obj.clear();
-        tri_tbl.refresh();
+        tri_tbl.getItems().clear();
 
         for (Object row : rs) {
             HashMap crow = (HashMap) row;
@@ -196,24 +199,23 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
         //</editor-fold>
         //tri_tbl.getColumns().addAll(mbs_min,mbs_max,monthly_premium_min,monthly_premium_max,ee_share_min,ee_share_max,er_share_min,er_share_max);
     }
-        
+    long DummyCount1 = 0;
+    long GlobalCount1 = 0;
     public void populateTable1() {
         CompletableFuture.supplyAsync(() -> {
 
             while (Session.CurrentRoute.equals("hr4cnp")) {
                 try {
                     phmodel.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
-                        DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
+                        DummyCount1 = Long.parseLong(((HashMap) e).get("chk").toString());
                     });
 
-                    if (DummyCount != GlobalCount) {
-
-                        tri_tbl.getItems().removeAll(obj1);
+                    if (DummyCount1 != GlobalCount1) {
                             List rs = phmodel
                                     .get(
                                             "");
                         AddJobToTable(rs);
-                        GlobalCount = DummyCount;
+                        GlobalCount1 = DummyCount1;
                     }
 
                     Thread.sleep(3000);
@@ -229,7 +231,7 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
 
     public void AddJobToTable1(List rs) {
         obj1.clear();
-
+        //tri_tbl.setItems().clear();
         for (Object row : rs) {
             HashMap crow = (HashMap) row;
             String mbs_min = String.valueOf(crow.get("mbs_min"));
@@ -242,7 +244,7 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
             String er_share_max = (String) crow.get("er_share_max");
             obj1.add(new HR4_PHClass(mbs_min,mbs_max,monthly_premium_min,monthly_premium_max,ee_share_min,ee_share_max,er_share_min,er_share_max));
         }
-       // tri_tbl.setItems(obj1);
+        //tri_tbl.setItems(obj1);
     }
     public void generateTable2() {
 
@@ -265,24 +267,23 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
         //</editor-fold>
         //tri_tbl.getColumns().addAll(min,max,basic_amount,additional_rate,of_excess_over,total_tax);
     }
-        
+    long DummyCount2 = 0;
+    long GlobalCount2 = 0;
     public void populateTable2() {
         CompletableFuture.supplyAsync(() -> {
 
             while (Session.CurrentRoute.equals("hr4cnp")) {
                 try {
                     taxmodel.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
-                        DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
+                        DummyCount2 = Long.parseLong(((HashMap) e).get("chk").toString());
                     });
 
-                    if (DummyCount != GlobalCount) {
-
-                        tri_tbl.getItems().removeAll(obj2);
+                    if (DummyCount2 != GlobalCount2) {
                             List rs = taxmodel
                                     .get(
                                             "");
                         AddJobToTable(rs);
-                        GlobalCount = DummyCount;
+                        GlobalCount2 = DummyCount2;
                     }
 
                     Thread.sleep(3000);
@@ -298,6 +299,7 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
 
     public void AddJobToTable2(List rs) {
         obj2.clear();
+        //tri_tbl.setItems(obj2);
 
         for (Object row : rs) {
             HashMap crow = (HashMap) row;
@@ -338,20 +340,19 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
         //</editor-fold>
         tbl_salary.getColumns().addAll(salary_grade,step1,step2,step3,step4,step5,step6,step7,step8);
     }
-        
+    long DummyCount3 = 0;
+    long GlobalCount3 = 0;
     public void populateSalaryGrade() {
         CompletableFuture.supplyAsync(() -> {
 
             while (Session.CurrentRoute.equals("hr4cnp")) {
                 try {
                     salarymodel.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
-                        DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
+                        DummyCount3 = Long.parseLong(((HashMap) e).get("chk").toString());
                     });
 
-                    if (DummyCount != GlobalCount) {
-
-                        tbl_salary.getItems().removeAll(obj3);
-                            List rs = salarymodel
+                    if (DummyCount3 != GlobalCount3){   
+                        List rs = salarymodel
                                     .get(
                                             "salary_grade",
                                             "step1",
@@ -363,12 +364,13 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
                                             "step7",
                                             "step8");
                         AddSalaryGrade(rs);
-                        GlobalCount = DummyCount;
+                        GlobalCount3 = DummyCount3;
                     }
 
                     Thread.sleep(3000);
                 } catch (InterruptedException ex) {
-                    Logger.getLogger(HR4_Core_Human_Capital_ManagementController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(HR4_Core_Human_Capital_ManagementController.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
@@ -379,7 +381,7 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
 
     public void AddSalaryGrade(List rs) {
         obj3.clear();
-
+        tbl_salary.getItems().clear();
         for (Object row : rs) {
             HashMap crow = (HashMap) row;
             String salary_grade = String.valueOf(crow.get("salary_grade"));
@@ -394,6 +396,18 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
             obj3.add(new HR4_SalaryClass(salary_grade,step1,step2,step3,step4,step5,step6,step7,step8));
         }
             tbl_salary.setItems(obj3);
+    }
+
+    @FXML
+    private void OtherDeducBtn(MouseEvent event) {
+        Modal md = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_OtherDeduc.fxml").getParent());
+        md.open();
+    }
+
+    @FXML
+    private void EditSalaryBtn(ActionEvent event) {
+        Modal md = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_Settings.fxml").getParent());
+        md.open();
     }
     
 }

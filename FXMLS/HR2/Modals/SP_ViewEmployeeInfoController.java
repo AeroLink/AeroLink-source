@@ -86,6 +86,12 @@ public class SP_ViewEmployeeInfoController implements Initializable {
     private Label lbl_employee_code;
     @FXML
     private JFXButton btn_req_promotion;
+    @FXML
+    private JFXComboBox cbox_select_position;
+    @FXML
+    private Label lbl_exam_taken;
+    @FXML
+    private Label lbl_training_taken;
 
     /**
      * Initializes the controller class.
@@ -95,12 +101,48 @@ public class SP_ViewEmployeeInfoController implements Initializable {
         lbl_fullname.setText(SP_Employee_Info_Modal.fullname);
         lbl_position.setText(SP_Employee_Info_Modal.title);
         populateLabels();
+        selectJobs();
+
+    }
+    public void selectJobs() {
+        HR4_Jobs jobs = new HR4_Jobs();
+
+        try {
+            List c = jobs.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department","id","dept","=","dept_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_classifications","id","c","=","classification_id")
+                    .orderBy("c.class_level", Model.Sort.ASC)
+                    .where(new Object[][]{{"dept.dept_name","=",lbl_department.getText()}})
+                    .get();
+            //"concat(substring(title,0,2), job_id) as job_id, title"
+            for (Object d : c) {
+                HashMap hm1 = (HashMap) d;
+                //RS
+                String j_id = String.valueOf(hm1.get("job_id"));
+                String sjobs = (String) hm1.get("title");
+
+                cbox_select_position.getItems().add("J" + j_id + " - " + sjobs);
+
+            }
+        }catch(Exception e)
+        {
+            System.out.println(e);
+        }
 
     }
     @FXML
     public void RequestPromotion(){
         Modal req_promotion = Modal.getInstance(new Form("/FXMLS/HR2/Modals/SP_RequestPromotion.fxml").getParent());
         req_promotion.open();
+    }
+    @FXML
+    public void ExamTaken(){
+        Modal exam_taken = Modal.getInstance(new Form("/FXMLS/HR2/Modals/SP_Employee_Exam_Taken.fxml").getParent());
+        exam_taken.open();
+    }
+    @FXML
+     public void TrainingTaken(){
+        Modal training_taken = Modal.getInstance(new Form("/FXMLS/HR2/Modals/SP_Employee_Training_Taken.fxml").getParent());
+        training_taken.open();
     }
     public void populateLabels() {
         VT_HR2 vthr2 = new VT_HR2();

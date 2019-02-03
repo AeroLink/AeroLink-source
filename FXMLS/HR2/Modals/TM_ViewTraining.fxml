@@ -78,11 +78,6 @@
             <Font name="Roboto Medium" size="16.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txt_edit_budget" focusColor="#838383" layoutX="364.0" layoutY="452.0" maxWidth="443.0" minWidth="154.0" prefHeight="25.0" prefWidth="154.0" unFocusColor="#aeaeae">
-         <font>
-            <Font name="Roboto Medium" size="12.0" />
-         </font>
-      </JFXTextField>
       <JFXButton fx:id="btn_submit" layoutX="564.0" layoutY="527.0" onAction="#UpdateData" prefHeight="31.0" prefWidth="141.0" styleClass="btn-primary" text="Submit" textFill="WHITE">
          <font>
             <Font name="Roboto Medium" size="15.0" />
@@ -197,5 +192,10 @@
             <Font name="Roboto Medium" size="12.0" />
          </font>
       </JFXTextField>
+      <JFXComboBox fx:id="cbox_edit_budget" layoutX="365.0" layoutY="452.0" prefHeight="25.0" prefWidth="161.0" promptText="Select...">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXComboBox>
    </children>
 </AnchorPane>

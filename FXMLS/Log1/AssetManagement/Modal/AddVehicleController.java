@@ -140,7 +140,6 @@ public class AddVehicleController implements Initializable {
             try{
                 String[][] landAsset_table ={
                     {"BuildingID", buildingID_txt.getText()},
-                    {"AssetCategory", "Vehicle"},
                     {"VehicleType", VehicleType_txt.getText()},
                     {"VehicleModel", VehicleModel_txt.getText()},
                     {"VehicleColor", VehicleColor_txt.getText()},
@@ -151,7 +150,8 @@ public class AddVehicleController implements Initializable {
                     {"VehiclePurchasedPrice",PurchasedPrize_txt.getText()},
                     {"VehicleFuelType",fuelType_txt.getText()},
                     {"VehicleUsability",radioButtonLabel_txt.getText()},
-                    {"VehicleStatus","Not in used"}
+                    {"CurrentPice",PurchasedPrize_txt.getText()},
+                    {"VehicleStatus", "Not in used"}
                 };
                 String[][] AssetForTotal = {
                     {"AssetName", VehicleType_txt.getText()},

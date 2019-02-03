@@ -17,7 +17,10 @@ public class SOPTable_package_information {
     public SimpleStringProperty ref_no;
     public SimpleStringProperty ship_name;
     public SimpleStringProperty list_item;
+    public SimpleStringProperty item_value;
+    public SimpleStringProperty weight;
     public SimpleStringProperty note;
+    public SimpleStringProperty status;
 //    public SimpleStringProperty rec_name;
 //    public SimpleStringProperty CompleteAddress;
 //    public SimpleStringProperty rec_contact;
@@ -28,7 +31,7 @@ public class SOPTable_package_information {
 //    public SimpleStringProperty book_date;
 
     public SOPTable_package_information(String package_no, String ref_no, String ship_name,String list_item,
-            String note
+            String item_value, String weight,String note,String status
 //            ,String rec_name,String CompleteAddress,String rec_contact,String serv_type,String box,
 //            String quantity,String status,String book_date
     ) {
@@ -36,7 +39,10 @@ public class SOPTable_package_information {
         this.ref_no = new SimpleStringProperty(ref_no);
         this.ship_name = new SimpleStringProperty(ship_name);
         this.list_item = new SimpleStringProperty(list_item);
+        this.item_value = new SimpleStringProperty(item_value);
+        this.weight = new SimpleStringProperty(weight);
         this.note = new SimpleStringProperty(note);
+        this.status = new SimpleStringProperty(status);
 //        this.rec_name = new SimpleStringProperty(rec_name);
 //        this.CompleteAddress = new SimpleStringProperty(CompleteAddress);
 //        this.rec_contact = new SimpleStringProperty(rec_contact);

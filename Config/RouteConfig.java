@@ -45,7 +45,7 @@ public class RouteConfig {
         //Logistic1
         {"log1AM", "/FXMLS/Log1/AssetManagement.fxml", "can_access_log1_AssetManagement"},
         {"log1Proc", "/FXMLS/Log1/Procurement.fxml", "can_access_log1_Procurement"},
-        {"log1WM", "/FXMLS/Log1/WarehouseManagement.fxml", "can_access_log1_WarehouseManagement"},
+        {"log1WM", "/FXMLS/Log1/Warehousing.fxml", "can_access_log1_WarehouseManagement"},
         {"log1MRO", "/FXMLS/Log1/MaintenanceRepairOH.fxml", "can_access_log1_MaintenanceRepairOverhaul"},
         //Logistic2
         {"log2vp", "/FXMLS/Log2/Log2_Vendor_Portal.fxml", "can_access_hr1_socialrecog"},
@@ -79,7 +79,8 @@ public class RouteConfig {
         
         //HR2 Request Forms
         {"0xreq_hr2_skill", "/FXMLS/HR2/Requisition/CM_RequestSkill.fxml", "canAccessSystem"}, //canAccessSystem permission for testing
-        {"0xreq_hr2_training", "/FXMLS/HR2/Requisition/LM_RequestExam.fxml", "canAccessSystem"}
+        {"0xreq_hr2_exam", "/FXMLS/HR2/Requisition/LM_RequestExam.fxml", "canAccessSystem"},
+        {"0xreq_hr2_training", "/FXMLS/HR2/Requisition/TM_RequestTraining.fxml", "canAccessSystem"}
             
     };
 

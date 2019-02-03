@@ -14,7 +14,7 @@ import Synapse.Model;
 public class Requests extends Model{
 
     public Requests() {
-        this.initTable("tbl_requisition");
+        this.initTable("tbl_eis_requisition");
     }
     
     

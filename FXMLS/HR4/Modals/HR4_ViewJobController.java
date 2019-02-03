@@ -6,7 +6,7 @@
 package FXMLS.HR4.Modals;
 
 import FXMLS.HR4.ClassFiles.HR4_EmpInfoClass;
-import FXMLS.HR4.ClassFiles.HR4_MIZ;
+import FXMLS.HR4.Filler.HR4_MIZ;
 import Model.HR4_Classification;
 import Model.HR4_Departments;
 import Model.HR4_Designation;

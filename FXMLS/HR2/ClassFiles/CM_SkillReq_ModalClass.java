@@ -13,12 +13,14 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class CM_SkillReq_ModalClass {
 
-    public static String sr_id, dept_name, title;
+    public static String sr_id, dept_name, title, rid, rn;
 
-    public static void initSkillReq(String sid, String dn, String jt) {
+    public static void initSkillReq(String sid, String dn, String jt, String req_status_id, String req_status) {
         sr_id = sid;
         dept_name = dn;
         title = jt;
+        rid = req_status_id;
+        rn = req_status;
     }
 
 }

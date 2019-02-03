@@ -7,9 +7,11 @@ package FXMLS.FINANCIAL.CALLER;
 
 import FXMLS.FINANCIAL.CLASSFILES.Budget_Request_classfile;
 import Model.Financial.Financial_budget_request;
+import Synapse.Model;
 import Synapse.Session;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +26,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -45,7 +48,9 @@ public class BUDGET_REQUEST_HISTORYController implements Initializable {
    
     ObservableList<String> fs = FXCollections.observableArrayList("Approved", "Declined");
     @FXML
-    private Label countlbl;
+    private Label no;
+    @FXML
+    private JFXTextField searchbar;
     
     
     /**
@@ -54,16 +59,84 @@ public class BUDGET_REQUEST_HISTORYController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-       
-        combobc_filter.setItems(fs);
+     combobc_filter.setItems(fs);
+       /* combobc_filter.getSelectionModel().selectedItemProperty().addListener(listener -> {
+            LoadRequestHistory();
+        });*/
+        //combobc_filter.setItems(fs);
         AddTableColumn_RequestHistory();
         LoadRequestHistory();
-        
-         
-          int d = requestHistory_tbl.getItems().size();
-          countlbl.setText(String.valueOf(d));
-        
+      
+           int a = requestHistory_tbl.getItems().size();
+           no.setText(String.valueOf(a));
+           
+           searchbar.setOnKeyReleased(e ->search());
+  
+        //  weabo1();
     }    
+    /*
+    
+    
+     public void weabo1() {
+       Financial_budget_request fbr4 = new Financial_budget_request();
+        try {
+            List bo2 = fbr4.get();
+            for (Object bo : bo2) {
+                HashMap ka = (HashMap) bo;
+                combobc_filter.getItems().add(ka.get("budget_status"));
+            }
+
+                combobc_filter.getSelectionModel().selectFirst();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+     }
+    */
+    
+    ObservableList<Budget_Request_classfile> brc1 = FXCollections.observableArrayList();
+    private void sertsbar(List s){
+       
+        requestHistory_tbl.getItems().clear();
+        try {
+              for(Object d : s)
+            {
+               HashMap hm = (HashMap) d;  
+               brc1.add(new Budget_Request_classfile(
+                            String.valueOf(hm.get("budget_id")),
+                            String.valueOf(hm.get("budget_date_request")),
+                            String.valueOf(hm.get("budget_department")),
+                            String.valueOf(hm.get("budget_firstname")),
+                            String.valueOf(hm.get("budget_description")),
+                            String.valueOf(hm.get("budget_priority_lvl")),
+                            String.valueOf(hm.get("budget_amount")),
+                            String.valueOf(hm.get("budget_status")),
+                            String.valueOf(hm.get("budget_approvedby")),
+                            String.valueOf(hm.get("budget_reason"))
+                ) );   
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        requestHistory_tbl.setItems(brc1);
+    }
+    public void search(){
+        
+    Financial_budget_request fbr1 = new Financial_budget_request();
+         
+        try {
+            List listSkills = fbr1.where(new Object[][]{
+                {"budget_id", "Like", searchbar.getText()}
+            }).get();
+            sertsbar(listSkills);
+            requestHistory_tbl.refresh();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+    
+    
     
     long DummyCount = 0;
     long GlobalCount = 0;
@@ -72,7 +145,7 @@ public class BUDGET_REQUEST_HISTORYController implements Initializable {
     ObservableList<Budget_Request_classfile> brc = FXCollections.observableArrayList();
     Financial_budget_request fbr = new Financial_budget_request();
     
-    
+
     
        public void AddTableColumn_RequestHistory() {
 
@@ -107,70 +180,47 @@ public class BUDGET_REQUEST_HISTORYController implements Initializable {
     
 
     public void LoadRequestHistory(){
-             CompletableFuture.supplyAsync(() -> {
-            while (Session.CurrentRoute.equals("id_budget")) {
-                
-                try {
-                    fbr.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
-                        DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
-                    });
-             requestHistory_tbl.getItems();
-                    if (DummyCount != GlobalCount) {
-                            List b = fbr.where(new Object[][]{
-                             {"budget_status","=","Approved" }
-                    }).orWhere("budget_status","=","Declined" ).get();
+            try{ 
+                List b = fbr.where(new Object[][]{
+                            {"budget_status", "=", "Approved"}
+                        }).orWhere("budget_status","=","Declined")
+                          .get();
                             requestHistory(b);
-                     {
-                    }
-                    requestHistory_tbl.setItems(brc);
-                        GlobalCount = DummyCount;
-                    }
-                    Thread.sleep(3000);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(BUDGET_REQUEST_HISTORYController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            }catch(Exception e){
+                 System.err.println(e);
             }
 
-            return 0;
-        }, Session.SessionThreads);
-
      }
-    
-    
-    
-    
-     private void requestHistory(List req){
+    private void requestHistory(List req){
          
         requestHistory_tbl.getItems().clear();
         try {
              
-              for(Object d : req)
-            {
+                for (Object d : req) {
                 HashMap hm = (HashMap) d;   //exquisite casting
-                
+
                 hm.get("budget_id");
                 hm.get("budget_date_request");
                 hm.get("budget_department");
-                hm.get("budget_requestor");
+                hm.get("budget_firstname");
                 hm.get("budget_description");
-                hm.get("budget_priority_lvlment");
+                hm.get("budget_priority_lvl");
                 hm.get("budget_amount");
                 hm.get("budget_status");
                 hm.get("budget_reason");
 
-                
-               brc.add(new Budget_Request_classfile(
-                            String.valueOf(hm.get("budget_id")),
-                            String.valueOf(hm.get("budget_date_request")),
-                            String.valueOf(hm.get("budget_department")),
-                            String.valueOf(hm.get("budget_requestor")),
-                            String.valueOf(hm.get("budget_description")),
-                            String.valueOf(hm.get("budget_priority_lvl")),
-                            String.valueOf(hm.get("budget_amount")),
-                            String.valueOf(hm.get("budget_status")),
-                            String.valueOf(hm.get("budget_approvedby")),
-                            String.valueOf(hm.get("budget_reason"))
-                ) );   
+                brc.add(new Budget_Request_classfile(
+                        String.valueOf(hm.get("budget_id")),
+                        String.valueOf(hm.get("budget_date_request")),
+                        String.valueOf(hm.get("budget_department")),
+                        String.valueOf(hm.get("budget_firstname")),
+                        String.valueOf(hm.get("budget_description")),
+                        String.valueOf(hm.get("budget_priority_lvl")),
+                        String.valueOf(hm.get("budget_amount")),
+                        String.valueOf(hm.get("budget_status")),
+                        String.valueOf(hm.get("budget_approvedby")),
+                        String.valueOf(hm.get("budget_reason"))
+                ));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -184,34 +234,28 @@ public class BUDGET_REQUEST_HISTORYController implements Initializable {
     private void FilterStatus(ActionEvent event) {
                   Financial_budget_request fbrs = new Financial_budget_request();
         try {
-
-            List listreq = fbrs.where(new Object[][]{
-                {"budget_status", "=", combobc_filter.getSelectionModel().getSelectedItem().toString()}
-            }).get();
-
-            requestHistory(listreq);
+         List b = fbrs.where("budget_status", "=", combobc_filter.getSelectionModel().getSelectedItem().toString())
+                 .get();
+          requestHistory(b);
      
         } catch (Exception e) {
             System.out.println(e);
         }
-
-        
     }
 
     @FXML
     private void resetbtn(ActionEvent event) {
          Financial_budget_request fbrs = new Financial_budget_request();
-        try {
-
-            List b = fbrs.where(new Object[][]{
-                    {"budget_status","=","Approved" }
-                    }).orWhere("budget_status","=","Declined" ).get();
-                            requestHistory(b);
-     
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
+       
+  try{ 
+                List ba = fbrs.where(new Object[][]{
+                            {"budget_status", "=", "Approved"}
+                        }).orWhere("budget_status","=","Declined")
+                          .get();
+                            sertsbar(ba);
+            }catch(Exception e){
+                 System.err.println(e);
+            }
         
         
         

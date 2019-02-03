@@ -75,6 +75,12 @@ public class StandardOperationalProcedureController implements Initializable {
     private ContextMenu contextMenu;
     @FXML
     private MenuItem menuVPD;
+    @FXML
+    private TextField TFvalue;
+    @FXML
+    private TextField TFweight;
+    @FXML
+    private TextField TFstatus;
 
     /**
      * Initializes the controller class.
@@ -114,6 +120,7 @@ public class StandardOperationalProcedureController implements Initializable {
         tblViewSN.getColumns().addAll(ref_no, ship_name);
     }
 
+
     // para sa search
     public void populate() {
         Thread th = new Thread(new Task() {
@@ -127,8 +134,6 @@ public class StandardOperationalProcedureController implements Initializable {
                         List rs = new ArrayList<>();
                         if (count != Global_Count) {
                             rs = bk
-                                    //.join(Model.JOIN.LEFT, "aerolink.tbl_core1_customer_details", "customer_id", "cid", "=", "customer_id")
-                                    //.join(Model.JOIN.LEFT, "aerolink.tbl_core1_package_details", "customer_id1", "pid", "=", "customer_id")
                                     .where(new Object[][]{{"status", "=", "Pending"}})
                                     .get("ref_no", "ship_name");
                             Global_Count = count;
@@ -211,31 +216,6 @@ public class StandardOperationalProcedureController implements Initializable {
         try {
             for (Object d : requestor) {
                 HashMap hm = (HashMap) d;   //exquisite casting
-                hm.get("book_no");
-                hm.get("ref_no");
-                hm.get("ship_name");
-                hm.get("ship_address");
-                hm.get("ship_brgy");
-                hm.get("ship_city");
-                hm.get("ship_province");
-                hm.get("ship_zip");
-                hm.get("ship_email");
-                hm.get("ship_contact");
-                hm.get("rec_name");
-                hm.get("rec_address");
-                hm.get("rec_brgy");
-                hm.get("rec_city");
-                hm.get("rec_province");
-                hm.get("rec_zip");
-                hm.get("rec_contact");
-                hm.get("serv_type");
-                hm.get("box");
-                hm.get("quantity");
-                hm.get("insurance");
-                hm.get("liability");
-                hm.get("status");
-                hm.get("book_date");
-
                 booked.add(new BOOKING_info(
                         String.valueOf(hm.get("book_no")),
                         String.valueOf(hm.get("ref_no")),
@@ -276,13 +256,11 @@ public class StandardOperationalProcedureController implements Initializable {
         TableColumn<SOPTable_package_information, String> package_no = new TableColumn<>("PACKAGE NUMBER");
         TableColumn<SOPTable_package_information, String> ref_no = new TableColumn<>("REFERENCE NUMBER");
         TableColumn<SOPTable_package_information, String> ship_name = new TableColumn<>("SHIPPER NAME");
-//        TableColumn<SOPTable_package_information, String> book_date = new TableColumn<>("BOOK DATE");
-//        TableColumn<SOPTable_package_information, String> status = new TableColumn<>("STATUS");
+
         package_no.setCellValueFactory((TableColumn.CellDataFeatures<SOPTable_package_information, String> param) -> param.getValue().package_no);
         ref_no.setCellValueFactory((TableColumn.CellDataFeatures<SOPTable_package_information, String> param) -> param.getValue().ref_no);
         ship_name.setCellValueFactory((TableColumn.CellDataFeatures<SOPTable_package_information, String> param) -> param.getValue().ship_name);
-//        book_date.setCellValueFactory((TableColumn.CellDataFeatures<SOPTable_package_information, String> param) -> param.getValue().book_date);
-//        status.setCellValueFactory((TableColumn.CellDataFeatures<SOPTable_package_information, String> param) -> param.getValue().status);
+
         tblPackage.getColumns().addAll(package_no, ref_no, ship_name);// book_date, status
     }
 
@@ -305,16 +283,10 @@ public class StandardOperationalProcedureController implements Initializable {
                                             "ref_no",
                                             "ship_name",
                                             "list_item",
-                                            "note"
-                                    //                                            ,"bk.rec_name",
-                                    //                                            "CONCAT(bk.rec_province,',',bk.rec_brgy,' ',bk.rec_address,','bk.city,','bk.zip) as address",
-                                    //                                            "bk.rec_contact",
-                                    //                                            "bk.serv_type",
-                                    //                                            "bk.box",
-                                    //                                            "bk.quantity",
-                                    //                                            "bk.status",
-                                    //                                            "bk.book_date"
-                                    );
+                                            "item_value",
+                                            "weight",
+                                            "note",
+                                            "status");
                             Global_Count = count;
                         }
                         return rs;
@@ -342,19 +314,12 @@ public class StandardOperationalProcedureController implements Initializable {
             String ref_no = (String) drow.get("ref_no");
             String ship_name = (String) drow.get("ship_name");
             String list_item = (String) drow.get("list_item");
+            String item_value = String.valueOf(drow.get("item_value"));
+            String weight = (String) drow.get("weight");
             String note = (String) drow.get("note");
-//            String rec_name = (String) drow.get("rec_name");
-//            String CompleteAddress = (String) drow.get("CompleteAddress");
-//            String rec_contact = (String) drow.get("rec_contact");
-//            String serv_type = (String) drow.get("serv_type");
-//            String box = (String) drow.get("box");
-//            String quantity = (String) drow.get("quantity");
-//            String status = (String) drow.get("status");
-//            String book_date = (String) drow.get("book_date");
-
+            String status = (String) drow.get("status");
             spi.add(new SOPTable_package_information(package_no, ref_no, ship_name,
-                    list_item, note
-            //                    rec_name,CompleteAddress,rec_contact,serv_type,box,quantity,status,book_date
+                    list_item, item_value, weight, note, status
             ));
         }
     }
@@ -366,7 +331,10 @@ public class StandardOperationalProcedureController implements Initializable {
                 {"ref_no", tblViewSN.getSelectionModel().getSelectedItem().ref_no.getValue()},
                 {"ship_name", tblViewSN.getSelectionModel().getSelectedItem().ship_name.getValue()},
                 {"list_item", TAitem.getText()},
-                {"note", TAnotes.getText()}
+                {"item_value", TFvalue.getText()},
+                {"weight", TFweight.getText()},
+                {"note", TAnotes.getText()},
+                {"status", TFstatus.getText()}
             };
             // Data Save kapag kumpleto yung nilagay sa mga JFXTextField
             if (pack.insert(pk)) {
@@ -375,6 +343,8 @@ public class StandardOperationalProcedureController implements Initializable {
                 tblViewSN.getSelectionModel().getSelectedItem().ship_name.getValue();
                 TAitem.setText("");
                 TAnotes.setText("");
+                TFvalue.setText("");
+                TFweight.setText("");
             } else {
                 // Not Inserted kapag hindi kumpleto oh walang nilagay sa mga JFXTextField
 //                if ((txtR.isEmpty()||txtC.isEmpty()||txtB.isEmpty()||txtS.isEmpty()
@@ -411,6 +381,10 @@ public class StandardOperationalProcedureController implements Initializable {
     private void viewPackDetails(ActionEvent event) {
         FXMLS.Core2.Modals.SOPviewPackageDetailController.packno = tblPackage.getSelectionModel().getSelectedItem().package_no.getValue();
         FXMLS.Core2.Modals.SOPviewPackageDetailController.pack = tblPackage.getSelectionModel().getSelectedItem().list_item.getValue();
+        FXMLS.Core2.Modals.SOPviewPackageDetailController.note = tblPackage.getSelectionModel().getSelectedItem().note.getValue();
+        FXMLS.Core2.Modals.SOPviewPackageDetailController.value = tblPackage.getSelectionModel().getSelectedItem().item_value.getValue();
+        FXMLS.Core2.Modals.SOPviewPackageDetailController.weight = tblPackage.getSelectionModel().getSelectedItem().weight.getValue();
+        FXMLS.Core2.Modals.SOPviewPackageDetailController.status = tblPackage.getSelectionModel().getSelectedItem().status.getValue();
 
         Modal md = Modal.getInstance(new Form("/FXMLS/Core2/Modals/SOPviewPackageDetail.fxml").getParent());
         md.open();

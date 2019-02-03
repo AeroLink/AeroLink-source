@@ -20,6 +20,8 @@ public class Log1_AssetLandClassfiles {
         public SimpleStringProperty LandPurchasedDate;
         public SimpleStringProperty AssetCategory;
         public SimpleStringProperty LandStatus;
+        public SimpleStringProperty LandCurrentPrice;
+        public SimpleStringProperty LandPriceUpdated;
         
         public Log1_AssetLandClassfiles(
                 String LandID,
@@ -29,7 +31,9 @@ public class Log1_AssetLandClassfiles {
                 String LandAddress,
                 String LandPricePerSqMeters,
                 String LandPurchasedDate,
-                String LandStatus
+                String LandStatus,
+                String LandCurrentPrice,
+                String LandPriceUpdated
                 
             )
         {
@@ -41,6 +45,8 @@ public class Log1_AssetLandClassfiles {
             this.LandPurchasedDate = new SimpleStringProperty(LandPurchasedDate);
             this.AssetCategory = new SimpleStringProperty(AssetCategory);
             this.LandStatus = new SimpleStringProperty(LandStatus);
+            this.LandCurrentPrice = new SimpleStringProperty(LandCurrentPrice);
+            this.LandPriceUpdated = new SimpleStringProperty(LandPriceUpdated);
         }
         
     public String getAssetCategory(){
@@ -73,5 +79,11 @@ public class Log1_AssetLandClassfiles {
     
     public String getLandStatus(){
         return LandStatus.get();
+    }
+    public String getLandCurrentPrice(){
+        return LandCurrentPrice.get();
+    }
+    public String getLandPriceUpdated(){
+        return LandPriceUpdated.get();
     }
 }

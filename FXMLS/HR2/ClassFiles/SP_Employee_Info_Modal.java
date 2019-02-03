@@ -11,9 +11,11 @@ package FXMLS.HR2.ClassFiles;
  */
 public class SP_Employee_Info_Modal {
     
-    public static String fullname,title;
-    public static void init_EmpInfo(String f, String t)
+    public static String employee_code, fullname,title;
+    
+    public static void init_EmpInfo(String ec, String f, String t)
     {
+        employee_code = ec;
         fullname = f;
         title = t;
 
