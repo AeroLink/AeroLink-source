@@ -352,7 +352,9 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         job_id.setCellValueFactory((TableColumn.CellDataFeatures<HR4_EmpInfoClass, String> param) -> param.getValue().job_id);
         dept_id.setCellValueFactory((TableColumn.CellDataFeatures<HR4_EmpInfoClass, String> param) -> param.getValue().dept_id);
         status_id.setCellValueFactory((TableColumn.CellDataFeatures<HR4_EmpInfoClass, String> param) -> param.getValue().status_id);
-        TableColumn<HR4_EmpInfoClass, Void> addButton = new TableColumn("More Options");
+
+        /*TableColumn<HR4_EmpInfoClass, Void> addButton = new TableColumn("More Options");
+
         Callback<TableColumn<HR4_EmpInfoClass, Void>, TableCell<HR4_EmpInfoClass, Void>> cellFactory
                 = new Callback<TableColumn<HR4_EmpInfoClass, Void>, TableCell<HR4_EmpInfoClass, Void>>() {
             @Override
@@ -408,7 +410,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         };
 
         addButton.setCellFactory(cellFactory);
-        tbl_chc.getColumns().add(addButton);
+        tbl_chc.getColumns().add(addButton);*/
         //</editor-fold>
         tbl_chc.getColumns()
         .addAll(employee_code, fnn, job_id, dept_id, status_id);
