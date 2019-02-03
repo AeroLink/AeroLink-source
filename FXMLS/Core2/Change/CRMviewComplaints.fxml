@@ -52,10 +52,10 @@
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <TableView fx:id="tblOpenQA" editable="true" layoutX="558.0" layoutY="14.0" prefHeight="566.0" prefWidth="800.0" style="-fx-border-color: #34a853;" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="15.0">
+                                    <TableView fx:id="tblOpenQA" editable="true" layoutX="558.0" layoutY="14.0" prefHeight="566.0" prefWidth="800.0" style="-fx-border-color: #34a853;" stylesheets="@../../../Assets/css/pom.css" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="15.0">
                                        <columns>
-                                          <TableColumn fx:id="colQuestion" prefWidth="75.0" text="QUESTION" />
-                                          <TableColumn fx:id="colAnswer" editable="false" prefWidth="75.0" text="ANSWER" />
+                                          <TableColumn prefWidth="75.0" text="QUESTION" />
+                                          <TableColumn editable="false" prefWidth="75.0" text="ANSWER" />
                                        </columns>
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -115,7 +115,7 @@
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <TableView fx:id="tblNotification" layoutY="10.0" prefHeight="601.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0">
+                                    <TableView fx:id="tblNotification" layoutY="10.0" prefHeight="601.0" prefWidth="1370.0" stylesheets="@../../../Assets/css/pom.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0">
                                        <columns>
                                           <TableColumn prefWidth="75.0" text="NOTIFICATIONS" />
                                        </columns>
@@ -138,7 +138,7 @@
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <TableView fx:id="tblCase" layoutX="66.0" layoutY="58.0" prefHeight="553.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="58.0">
+                                    <TableView fx:id="tblCase" layoutX="66.0" layoutY="58.0" prefHeight="553.0" prefWidth="1370.0" stylesheets="@../../../Assets/css/pom.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="58.0">
                                       <columns>
                                         <TableColumn prefWidth="75.0" text="CASE NUMBER" />
                                         <TableColumn prefWidth="75.0" text="EMPLOYEE ID" />

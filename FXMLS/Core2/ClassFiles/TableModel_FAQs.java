@@ -23,15 +23,5 @@ public class TableModel_FAQs {
         this.question = new SimpleStringProperty(question);
         this.answer = new SimpleStringProperty(answer);
     }
-   
-    public String getId(){
-        return id.get();
-    }
-    
-    public String getQuestion(){
-        return question.get();
-    }
-    public String getAnswer(){
-        return answer.get();
-    }
+
 }

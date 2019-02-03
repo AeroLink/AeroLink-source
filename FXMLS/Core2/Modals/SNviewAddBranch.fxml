@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -32,7 +33,6 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtCity" layoutX="366.0" layoutY="39.0" prefHeight="40.0" prefWidth="298.0" />
                   <Label layoutX="366.0" layoutY="19.0" text="City">
                      <font>
                         <Font size="14.0" />
@@ -116,6 +116,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
+                  <ComboBox fx:id="txtCity" editable="true" layoutX="366.0" layoutY="39.0" prefHeight="40.0" prefWidth="300.0" />
                </children>
             </AnchorPane>
          </center>
