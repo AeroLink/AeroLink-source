@@ -5,7 +5,7 @@
  */
 package FXMLS.HR4.Modals;
 
-import Synapse.DB;
+import Synapse.RAW;
 import com.jfoenix.controls.JFXButton;
 import java.io.File;
 import java.net.URL;
@@ -80,25 +80,25 @@ public class HR4_NewEmployeeController implements Initializable {
         cboGender.getItems().addAll("Male", "Female");
         cboGender.getSelectionModel().selectFirst();
         
-        new DB("tbl_hr1_suffix").get().stream().forEach(action -> {
+        new RAW("tbl_hr1_suffix").get().stream().forEach(action -> {
             cboSuffix.getItems().add( "SFX0" + ( (HashMap) action ).get("id").toString() + " - " + ( (HashMap) action ).get("suffix_name").toString() );
         });
         
         cboSuffix.getSelectionModel().selectFirst();
         
-        new DB("tbl_hr1_civil_status").get().stream().forEach(action -> {
+        new RAW("tbl_hr1_civil_status").get().stream().forEach(action -> {
             cboCivilStatus.getItems().add( "CV0" + ( (HashMap) action ).get("id").toString() + " - " + ( (HashMap) action ).get("civil_status").toString() );
         });
         
         cboCivilStatus.getSelectionModel().selectFirst();
         
-        new DB("tbl_hr4_employeeTypes").get().stream().forEach(action -> {
+        new RAW("tbl_hr4_employeeTypes").get().stream().forEach(action -> {
             cboType.getItems().add( "TY0" + ( (HashMap) action ).get("type_id").toString() + " - " + ( (HashMap) action ).get("type_name").toString() );
         });
         
         cboType.getSelectionModel().selectFirst();
         
-        new DB("tbl_hr4_employeeStatus").get().stream().forEach(action -> {
+        new RAW("tbl_hr4_employeeStatus").get().stream().forEach(action -> {
             cboStatus.getItems().add( "STATS0" + ( (HashMap) action ).get("status_id").toString() + " - " + ( (HashMap) action ).get("status_name").toString() );
         });
         

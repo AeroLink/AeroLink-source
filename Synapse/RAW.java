@@ -9,9 +9,9 @@ package Synapse;
  *
  * @author BlackMoon
  */
-public class DB extends Model{
+public class RAW extends Model{
 
-    public DB(String table) {
+    public RAW(String table) {
         this.initTable(table);
     }
     
