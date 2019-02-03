@@ -136,7 +136,11 @@ public class HR1_Applicant_ManagementController implements Initializable {
 
         Modal md = Modal.getInstance(new Form("/FXMLS/HR1/Modals/HR1_ViewApplicant.fxml").getParent());
         md.open();
-        md.getF().getStage().setOnCloseRequest(event -> this.PopulateTable());
+        md.getF().getStage().setOnCloseRequest(event -> {
+            this.PopulateTable();
+            tblOpenJobs.getSelectionModel().selectFirst();
+            this.renderApplicants();
+        });
 
     }
 
