@@ -7,12 +7,11 @@ package Model.Core2;
 
 /**
  *
- * @author JPEG
+ * @author jpeg
  */
-public class CORE2_FAQs extends Synapse.Model{
-    
-    public CORE2_FAQs(){
-        this.initTable("tbl_core2_faqs");
+public class CORE2_SR_SLrates extends Synapse.Model {
+
+    public CORE2_SR_SLrates() {
+        this.initTable("tbl_core2_SR_south_luzon_rate");
     }
-    
 }

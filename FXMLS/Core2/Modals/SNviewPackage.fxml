@@ -15,7 +15,7 @@
          <items>
             <AnchorPane prefHeight="335.0" prefWidth="600.0">
                <children>
-                  <TableView layoutX="-21.0" layoutY="40.0" prefHeight="350.0" prefWidth="789.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+                  <TableView layoutX="-21.0" layoutY="40.0" prefHeight="350.0" prefWidth="789.0" stylesheets="@../../../Assets/css/pom.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
                      <columns>
                         <TableColumn prefWidth="75.0" text="PACKAGE DETAILS" />
                      </columns>

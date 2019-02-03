@@ -6,12 +6,17 @@
 package FXMLS.Core2;
 
 import FXMLS.Core2.DesperadoDBConn;
+import Model.Core2.CORE1_Book;
+import Model.Core2.CORE2_Branch;
+import Synapse.Model;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,24 +35,21 @@ import javafx.scene.control.Label;
  * @author JPEG
  */
 public class DashboardController implements Initializable {
+    CORE2_Branch branch = new CORE2_Branch();
+    CORE1_Book customer = new CORE1_Book();
     /* DECLARATION START */
     int Global_Count = 0;
     /* DECLARATION END */
-    
-    ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
+
+    //ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
     ObservableList<PieChart.Data> data1 = FXCollections.observableArrayList();
-//    Connection conn = null;
-//    PreparedStatement pst = null;
-//    ResultSet rs = null;
+
+    private final ObservableList<PieChart.Data> pie = FXCollections.observableArrayList();
 
     @FXML
     private PieChart PieChart;
     @FXML
     private PieChart PieChart1;
-    @FXML
-    private BarChart<String, Double> BarChart;
-    @FXML
-    private BarChart<?, ?> BarChart2;
 //    private Connection connex;
     @FXML
     private Label branchCount;
@@ -58,22 +60,36 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        pieOne();
+        //pieOne();
         pieTwo();
+        this.chart();   //tawagin mo yung class para labasan
 //        BarChart();
     }
 
-    private void pieOne() {
-        data.add(new PieChart.Data("Analyn", 10));
-        data.add(new PieChart.Data("Mikee", 20));
-        data.add(new PieChart.Data("Princess", 20));
-        data.add(new PieChart.Data("Peter", 10));
-        data.add(new PieChart.Data("Romano", 40));
-        PieChart.setData(data);
-        PieChart.setLegendSide(Side.BOTTOM);
+    public void chart() {
+        pie.clear();    //name ng observable List
+        List<HashMap> list3x = customer //model
+                .groupBy("status")
+                .get("status, COUNT(status) as total");
+        list3x.forEach((row) -> {
+            pie.add(new PieChart.Data(row.get("status").toString(), Double.parseDouble(row.get("total").toString())));
+        });
+        PieChart.setData(pie);
+        PieChart.setLegendSide(Side.LEFT);
         PieChart.setStartAngle(90);
-
     }
+
+//    private void pieOne() {
+//        data.add(new PieChart.Data("Analyn", 10));
+//        data.add(new PieChart.Data("Mikee", 20));
+//        data.add(new PieChart.Data("Princess", 20));
+//        data.add(new PieChart.Data("Peter", 10));
+//        data.add(new PieChart.Data("Romano", 40));
+//        PieChart.setData(data);
+//        PieChart.setLegendSide(Side.BOTTOM);
+//        PieChart.setStartAngle(90);
+//
+//    }
 
     private void pieTwo() {
         data1.add(new PieChart.Data("L", 10));
@@ -86,42 +102,5 @@ public class DashboardController implements Initializable {
         PieChart1.setLegendSide(Side.BOTTOM);
         PieChart1.setStartAngle(90);
     }
-
-//    private void BarChart() {
-//        String query = "select branch_code, branch_location from aerolink.tbl_core2_add_branch";
-//        XYChart.Series<String, Double> series = new XYChart.Series<>();
-//
-//        try {
-//            connex = connectDB();
-//            pst = conn.prepareStatement(query);
-//            rs = pst.executeQuery();
-//            
-//            
-//            
-//            ResultSet rs = connex.createStatement().executeQuery(query);
-//            while (rs.next()) {
-//                series.getData().add(new XYChart.Data<>(rs.getString(1), rs.getDouble(2)));
-//            }
-//            BarChart.getData().add(series);
-//
-//        } catch (Exception e) {
-//        }
-//    }
-//
-//    private Connection connectDB() throws ClassNotFoundException {
-//        Connection conn = null;
-//        try {
-//            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-//            conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=AeroLink", "core", "core");
-//
-//            if (conn != null) {
-//                System.out.println("Database Successfully connected");
-//            }
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return conn;
-//    }
 
 }

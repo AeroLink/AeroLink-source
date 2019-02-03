@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -28,15 +29,31 @@ public class SOPviewPackageDetailController implements Initializable {
     private Label lblpacknumber;
     @FXML
     private TextArea TApackage;
+    @FXML
+    private TextArea TAnotes;
+    @FXML
+    private TextField TFvalue;
+    @FXML
+    private TextField TFweight;
+    @FXML
+    private TextField TFstatus;
 
     public static String packno = "";
     public static String pack = "";
+    public static String note = "";
+    public static String value = "";
+    public static String weight = "";
+    public static String status = "";
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         lblpacknumber.setText(packno);
         TApackage.setText(pack);
+        TAnotes.setText(note);
+        TFvalue.setText(value);
+        TFweight.setText(weight);
+        TFstatus.setText(status);
     }
 
 }
