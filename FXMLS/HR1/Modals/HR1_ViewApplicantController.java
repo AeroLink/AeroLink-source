@@ -279,13 +279,15 @@ public class HR1_ViewApplicantController implements Initializable {
 
             if (Integer.parseInt(StageID.getValue()) >= 2) {
                 menuER.setDisable(false);
+            }
 
-                checkExam();
+            if (Integer.parseInt(StageID.getValue()) < 2 || Integer.parseInt(StageID.getValue()) > 2) {
+                panelExamResult.setVisible(false);
             }
 
             if (Integer.parseInt(StageID.getValue()) == 2) {
                 panelExamResult.setVisible(true);
-                btnSubmit.setDisable(true);
+                checkExam();
             }
 
             if (Integer.parseInt(StageID.getValue()) >= 5) {
@@ -323,30 +325,45 @@ public class HR1_ViewApplicantController implements Initializable {
 
     public void checkExam() {
         CompletableFuture.supplyAsync(() -> {
-            while (StageID.getValue().equals("2")) {
+
+            while (true) {
                 exam_result.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(row -> {
                     DummyC = Long.parseLong(((HashMap) row).get("chk").toString());
                 });
 
                 if (GlobalC != DummyC) {
-                    List<HashMap> exr = exam_result.where(new Object[][]{
+                    List<HashMap> count = exam_result.where(new Object[][]{
                         {"applicant_id", "=", HR1_Applicant.app_id}
-                    }).get();
+                    }).groupBy("applicant_id").get("COUNT(*) as cox");
 
-                    exr.stream().forEach(e -> {
-                        if (e.get("isTaken").toString().equals("0")) {
-                            Platform.runLater(() -> {
-                                lblExamResult.setText("Exam was not yet taken by the applicant");
-                                btnSubmit.setDisable(true);
-                            });
-                        } else {
-                            Platform.runLater(() -> {
-                                lblExamResult.setText("The Applicant got " + e.get("score").toString() + "% of score");
-                                txtPercentage.setText(e.get("score").toString());
-                                btnSubmit.setDisable(false);
-                            });
-                        }
-                    });
+                    if (Integer.parseInt(count.get(0).get("cox").toString()) > 0) {
+                        List<HashMap> exr = exam_result.where(new Object[][]{
+                            {"applicant_id", "=", HR1_Applicant.app_id}
+                        }).get();
+
+                        exr.stream().forEach(e -> {
+                            if (e.get("isTaken").toString().equals("0")) {
+                                Platform.runLater(() -> {
+                                    panelExamResult.setVisible(true);
+                                    lblExamResult.setText("Exam was not yet taken by the applicant");
+                                    btnSubmit.setDisable(true);
+                                });
+                            } else {
+                                Platform.runLater(() -> {
+                                    panelExamResult.setVisible(true);
+                                    lblExamResult.setText("The Applicant got " + e.get("score").toString() + "% of score");
+                                    txtPercentage.setText(e.get("score").toString());
+                                    btnSubmit.setDisable(false);
+                                });
+                            }
+                        });
+                    } else {
+
+                        Platform.runLater(() -> {
+                            lblExamResult.setText("Please, Apply an Examination for the Applicant : 'Workflow Procedures > Apply an examination' ");
+                            btnSubmit.setDisable(true);
+                        });
+                    }
 
                     GlobalC = DummyC;
                 }
@@ -357,7 +374,7 @@ public class HR1_ViewApplicantController implements Initializable {
                     Logger.getLogger(HR1_ViewApplicantController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            return null;
+
         }, Session.SessionThreads);
     }
     String jid = "";
@@ -1023,16 +1040,20 @@ public class HR1_ViewApplicantController implements Initializable {
                 {"job_id", real_jobID}
             });
 
-            jv.update(new Object[][]{
-                {"jobOpen", returnPositions},
-                {"isPosted", (returnPositions <= 0 ? 0 : 1)}
-            }).where(new Object[][]{
-                {"id", "=", job_id}
-            }).executeUpdate();
-
             if (returnPositions <= 0) {
+
                 jp.delete().where(new Object[][]{
                     {"id", "=", HR1_Applicant.jobPosted_id}
+                }).executeUpdate();
+
+                jv.delete().where(new Object[][]{
+                    {"id", "=", job_id}
+                }).executeUpdate();
+
+            } else {
+                jv.update(new Object[][]{
+                    {"jobOpen", returnPositions},}).where(new Object[][]{
+                    {"id", "=", job_id}
                 }).executeUpdate();
             }
 
