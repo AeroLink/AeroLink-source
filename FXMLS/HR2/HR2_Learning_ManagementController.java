@@ -11,6 +11,7 @@ import FXMLS.HR2.ClassFiles.HR2_LMClass_For_AddQuestion_Modal;
 import FXMLS.HR2.ClassFiles.HR2_LM_AddExamModalClass;
 import FXMLS.HR2.ClassFiles.HR2_LM_CourseOutlineModal;
 import FXMLS.HR2.ClassFiles.LM_ExaRequestClass;
+import FXMLS.HR2.ClassFiles.LM_ViewExamRequest;
 import Model.HR2_Courses;
 import Model.HR2_Examination;
 import Model.HR2_LM_Exam_Request;
@@ -36,6 +37,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -79,8 +81,6 @@ public class HR2_Learning_ManagementController implements Initializable {
     @FXML
     private TableView<LM_ExaRequestClass> tbl_exam_requests;
     @FXML
-    private TableColumn<LM_ExaRequestClass, String> col_req_exam;
-    @FXML
     private TableColumn<LM_ExaRequestClass, String> col_req_jp;
     @FXML
     private TableColumn<LM_ExaRequestClass, String> col_req_reason;
@@ -88,6 +88,10 @@ public class HR2_Learning_ManagementController implements Initializable {
     private JFXComboBox cbox_dept;
     @FXML
     private TableColumn<LM_ExaRequestClass, String> col_req_status;
+    @FXML
+    private TableColumn<LM_ExaRequestClass, String> col_req_dept;
+    @FXML
+    private Label lbl_training_req_notif;
 
     /**
      * Initializes the controller class.
@@ -104,10 +108,9 @@ public class HR2_Learning_ManagementController implements Initializable {
         });
         ExamRequest();
         loadJobsInComboBox();
-
-        /*    if(!cbox_job_title.getValue().toString().isEmpty()){
-            btn_add_job.setDisable(false);
-        }*/
+        DisplayExamRequestsInCols();
+        int d = tbl_exam_requests.getItems().size();
+        lbl_training_req_notif.setText(String.valueOf(d));
     }
 
     public void loadJobsInComboBox() {
@@ -117,11 +120,8 @@ public class HR2_Learning_ManagementController implements Initializable {
 
             for (Object d : c) {
                 HashMap hm1 = (HashMap) d;
-                //RS
-                String j_id = String.valueOf(hm1.get("job_id"));
-                String sjobs = (String) hm1.get("title");
 
-                cbox_job_title.getItems().add("J" + j_id + " - " + sjobs);
+                cbox_job_title.getItems().add("J" + hm1.get("job_id") + " - " + hm1.get("title"));
             }
         } catch (Exception ex) {
             System.out.println(ex);
@@ -159,6 +159,64 @@ public class HR2_Learning_ManagementController implements Initializable {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+    public void DisplayExamRequestsInCols() {
+        col_req_dept.setCellValueFactory((TableColumn.CellDataFeatures<LM_ExaRequestClass, String> param) -> param.getValue().dept_id);
+        col_req_jp.setCellValueFactory((TableColumn.CellDataFeatures<LM_ExaRequestClass, String> param) -> param.getValue().job_id);
+        col_req_reason.setCellValueFactory((TableColumn.CellDataFeatures<LM_ExaRequestClass, String> param) -> param.getValue().reason);
+        col_req_status.setCellValueFactory((TableColumn.CellDataFeatures<LM_ExaRequestClass, String> param) -> param.getValue().status);
+        TableColumn<LM_ExaRequestClass, Void> addButton = new TableColumn("View Action");
+
+        Callback<TableColumn<LM_ExaRequestClass, Void>, TableCell<LM_ExaRequestClass, Void>> cellFactory
+                = new Callback<TableColumn<LM_ExaRequestClass, Void>, TableCell<LM_ExaRequestClass, Void>>() {
+            @Override
+            public TableCell<LM_ExaRequestClass, Void> call(final TableColumn<LM_ExaRequestClass, Void> param) {
+
+                final TableCell<LM_ExaRequestClass, Void> cell = new TableCell<LM_ExaRequestClass, Void>() {
+                    private final Button btn = new Button("View");
+
+                    {
+                        try {
+                            btn.setOnAction(e
+                                    -> {
+
+                                LM_ExaRequestClass exam_req = (LM_ExaRequestClass) getTableRow().getItem();
+
+                                LM_ViewExamRequest.initExam_Request(
+                                        exam_req.er_id.getValue(),
+                                        exam_req.dept_id.getValue(),
+                                        exam_req.job_id.getValue(),
+                                        exam_req.reason.getValue(),
+                                        exam_req.status.getValue(),
+                                        exam_req.status_id.getValue());
+                                Modal lq = Modal.getInstance(new Form("/FXMLS/HR2/Modals/LM_View_Exam_Request.fxml").getParent());
+                                lq.open();
+                            });
+                            btn.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
+                            btn.setCursor(javafx.scene.Cursor.HAND);
+                        } catch (Exception ex) {
+                            System.out.println(ex);
+                        }
+
+                    }
+
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+
+        };
+
+        addButton.setCellFactory(cellFactory);
+        tbl_exam_requests.getColumns().add(addButton);
     }
 
     public void DisplayExamRequest(List exam_req) {
