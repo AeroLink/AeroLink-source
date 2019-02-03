@@ -38,9 +38,9 @@ public class RouteConfig {
         {"hr3lm", "/FXMLS/HR3/HR3_Leave_Management.fxml", "can_access_HR3_Leave_Management"},
         {"hr3tm", "/FXMLS/HR3/HR3_Timesheet_Management.fxml", "can_access_HR3_Timesheet_Management"},
         //HR4
-        {"hr4analytics", "/FXMLS/HR4/HR4_Analytics.fxml", "can_access_hr1_socialrecog"},
-        {"hr4payroll", "/FXMLS/HR4/HR4_Payroll.fxml", "can_access_hr1_socialrecog"},
-        {"hr4cnp", "/FXMLS/HR4/HR4_Compensation_and_Planning.fxml", "can_access_hr1_socialrecog"},
+        {"hr4analytics", "/FXMLS/HR4/HR4_Analytics.fxml", "can_access_hr4_analytics"},
+        {"hr4payroll", "/FXMLS/HR4/HR4_Payroll.fxml", "can_access_hr4_payroll"},
+        {"hr4cnp", "/FXMLS/HR4/HR4_Compensation_and_Planning.fxml", "can_access_hr4_compensation_and_planning"},
         {"hr4chc", "/FXMLS/HR4/HR4_Core_Human_Capital_Management.fxml", "can_access_hr4_corehumancapital"},
         //Logistic1
         {"log1AM", "/FXMLS/Log1/AssetManagement.fxml", "can_access_log1_AssetManagement"},
@@ -79,7 +79,8 @@ public class RouteConfig {
         
         //HR2 Request Forms
         {"0xreq_hr2_skill", "/FXMLS/HR2/Requisition/CM_RequestSkill.fxml", "canAccessSystem"}, //canAccessSystem permission for testing
-        {"0xreq_hr2_training", "/FXMLS/HR2/Requisition/LM_RequestExam.fxml", "canAccessSystem"}
+        {"0xreq_hr2_exam", "/FXMLS/HR2/Requisition/LM_RequestExam.fxml", "canAccessSystem"},
+        {"0xreq_hr2_training", "/FXMLS/HR2/Requisition/TM_RequestTraining.fxml", "canAccessSystem"}
             
     };
 

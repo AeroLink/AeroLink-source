@@ -12,24 +12,35 @@ import javafx.beans.property.SimpleStringProperty;
  * @author my
  */
 public class Leave_ManagementRequestClass {
-     public SimpleStringProperty ID;
-     public SimpleStringProperty employee_code;
-     public SimpleStringProperty leave_id;
-     public SimpleStringProperty Range_of_leave;
-     public SimpleStringProperty Date_Start;
-     public SimpleStringProperty Date_End;
-     public SimpleStringProperty leave_name;
-   
-     
-     public Leave_ManagementRequestClass(String ID, String employee_code, String leave_id, String Range_of_leave, String Date_Start, String Date_End, String leave_name) {
-        this.ID = new SimpleStringProperty(ID);
-        this.employee_code = new SimpleStringProperty(employee_code);
-        this.leave_id = new SimpleStringProperty(leave_id);
-        this.Range_of_leave = new SimpleStringProperty(Range_of_leave);
-        this.Date_Start = new SimpleStringProperty(Date_Start);
-        this.Date_End = new SimpleStringProperty(Date_End);
-        this.leave_name = new SimpleStringProperty(leave_name);
-       
-}
-     
+
+    // public SimpleStringProperty ID;
+    public SimpleStringProperty employee_code;
+    public SimpleStringProperty employee_name;
+    public SimpleStringProperty position;
+    public SimpleStringProperty department;
+    public SimpleStringProperty leave_name;
+    public SimpleStringProperty range_leave;
+    public SimpleStringProperty date;
+    public SimpleStringProperty date_start;
+    public SimpleStringProperty date_end;
+    public SimpleStringProperty reason;
+    public SimpleStringProperty attachment;
+
+    public Leave_ManagementRequestClass(String a,String a1,String a2,String a3, String b,String c, String d,String e,String f,String g,String h) {
+        //this.ID = new SimpleStringProperty(ID);
+        this.employee_code = new SimpleStringProperty(a);
+        this.employee_name = new SimpleStringProperty(a1);
+        this.position = new SimpleStringProperty(a2);
+        this.department = new SimpleStringProperty(a3);
+        this.leave_name = new SimpleStringProperty(b);
+        this.range_leave = new SimpleStringProperty(c);
+        this.date = new SimpleStringProperty(d);
+        this.date_start = new SimpleStringProperty(e);
+        this.date_end = new SimpleStringProperty(f);
+        this.reason = new SimpleStringProperty(g);
+        this.attachment = new SimpleStringProperty(h);
+        
+
+    }
+
 }

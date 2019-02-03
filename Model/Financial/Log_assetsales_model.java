@@ -20,10 +20,12 @@ public class Log_assetsales_model extends Synapse.Model{
                 "ast_lastname",
                 "ast_description",
                 "ast_amount",
+                "ast_pom_ast_amount",
                 "ast_quantity",
                 "ast_quantity",
                 "ast_status",
                 "ast_type",
+                "ast_status2",
                 "journal_status");
         this.initTable("tbl_finance_asset_po_sales_report");
     

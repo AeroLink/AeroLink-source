@@ -53,6 +53,7 @@ public class loginController {
                     UserPermissions up = new UserPermissions();
 
                     Session.putIfNotExist("user_id", hash.get("id").toString());
+                    Session.putIfNotExist("employee_code", hash.get("employee_code").toString());
 
                     List listPermissions = up
                             .join(Model.JOIN.INNER, "aerolink.tbl_users", "id", "=", "user_id")
@@ -75,9 +76,12 @@ public class loginController {
             List<HashMap> res = user.where(new Object[][]{
                 {"username", "=", u}
 
-            }).get("id", "username", "password");
+            }).get("id", "username", "password", "employee_code");
 
             UserPermissions up = new UserPermissions();
+
+            Session.putIfNotExist("user_id", res.get(0).get("id").toString());
+            Session.putIfNotExist("employee_code", res.get(0).get("employee_code").toString());
 
             List listPermissions = up
                     .join(Model.JOIN.INNER, "aerolink.tbl_users", "id", "=", "user_id")

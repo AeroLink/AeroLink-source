@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="400.0" stylesheets="@../../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Log1.AssetManagement.Modal.AddVehicleController">
+<AnchorPane id="AnchorPane" prefHeight="560.0" prefWidth="425.0" stylesheets="@../../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Log1.AssetManagement.Modal.AddVehicleController">
    <children>
       <TitledPane animated="false" collapsible="false" text="Register Vehicle" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <content>
@@ -28,7 +28,7 @@
                   <GridPane prefHeight="575.0" prefWidth="398.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="221.0" minWidth="0.0" prefWidth="0.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="378.0" minWidth="10.0" prefWidth="378.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="403.0" minWidth="10.0" prefWidth="403.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -99,7 +99,7 @@
                            <children>
                               <VBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="292.0">
                                  <children>
-                                    <Label text="Year Bought:">
+                                    <Label text="Year Purchased:">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font></Label>
@@ -161,17 +161,17 @@
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font></Label>
-                              <ComboBox fx:id="building_combox" prefHeight="25.0" prefWidth="380.0" />
+                              <ComboBox fx:id="building_combox" prefHeight="25.0" prefWidth="417.0" />
                            </children>
                         </VBox>
                         <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                        <Label fx:id="radioButtonLabel_txt" prefHeight="6.0" prefWidth="28.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                        <Label fx:id="radioButtonLabel_txt" prefHeight="6.0" prefWidth="28.0" text="Label" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="8">
                            <font>
                               <Font size="2.0" />
                            </font>
                         </Label>
-                        <Label fx:id="buildingID_txt" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                        <Label fx:id="AssetVehicleCount_txt" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <Label fx:id="buildingID_txt" text="Label" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <Label fx:id="AssetVehicleCount_txt" disable="true" text="Label" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                      </children>
                   </GridPane>
                   <HBox alignment="CENTER" layoutY="475.0" prefHeight="530.0" prefWidth="398.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="470.0">

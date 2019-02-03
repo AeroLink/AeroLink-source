@@ -6,10 +6,13 @@
 package FXMLS.HR4;
 
 import FXMLS.HR4.ClassFiles.HR4_EmpInfoClass;
+import FXMLS.HR4.ClassFiles.HR4_EmpInfoFillClass;
 import FXMLS.HR4.Model.HR4_EmployeeInfo;
-import FXMLS.HR4.ClassFiles.HR4_MIZ;
+import FXMLS.HR4.Filler.HR4_MIZ;
 import FXMLS.HR4.ClassFiles.TableModel_Jobs;
+import FXMLS.HR4.Filler.HR4_EmpInfoFill;
 import FXMLS.HR4.Model.HR4_ClassificationModel;
+import FXMLS.HR4.Model.HR4_InfoChartModel;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -37,6 +40,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.geometry.Side;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
@@ -70,8 +75,6 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
     @FXML
     private JFXButton btnNewDept;
     @FXML
-    private JFXTextField Search_Job;
-    @FXML
     private TableView<HR4_EmpInfoClass> tbl_chc;
     @FXML
     private ComboBox statcb;
@@ -79,6 +82,16 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
     private ComboBox ckasscb;
     @FXML
     private JFXTextField srch1;
+    @FXML
+    private JFXTextField Search_Job;
+    @FXML
+    private PieChart pieChartGender;
+    private final ObservableList<PieChart.Data> pie = FXCollections.observableArrayList();
+    @FXML
+    private PieChart pieChartDept;
+    private final ObservableList<PieChart.Data> piee = FXCollections.observableArrayList();
+    @FXML
+    private PieChart pieChartAge;
 
     /**
      * Initializes the controller class.
@@ -106,12 +119,12 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         tbl_jobs.setContextMenu(contextMenuJobs);
         //SearchOfJob
 
-        Search_Job.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-            if (!Search_Job.getText().equals("")) {
-                searchStatus = true;
-                SearchJOB();
-            }
-        });
+        //Search_Job.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+          //  if (!Search_Job.getText().equals("")) {
+            //    searchStatus = true;
+              //  SearchJOB();
+            //}
+        //});
         ///////2ndobj
 
         obj1.addListener((ListChangeListener.Change<? extends Object> c) -> {
@@ -124,7 +137,10 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         srch1.setOnMouseClicked(event -> Search());
 
         this.generateTable1();
-        this.populateTable1();
+        this.populateTable1();        
+        this.Piechart1(); 
+        this.Piechart2();
+
 
     }
 
@@ -158,7 +174,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         }
     }
 
-    public void SearchJOB() {
+    /*public void SearchJOB() {
 
         tbl_jobs.getItems().clear();
         List rs = jobs
@@ -175,6 +191,55 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
                         "tblC.class_name as classification",
                         "tblDD.designation as designation");
         this.AddJobToTable(rs);
+    }*/
+    HR4_InfoChartModel gcm = new HR4_InfoChartModel();
+    
+    public void Piechart1() {
+
+        pie.clear();
+        List<HashMap> list3x = gcm
+                .groupBy("gender")
+                .get("gender,COUNT(gender) as Total");
+        list3x.forEach((row) -> {
+            pie.add(new PieChart.Data(row.get("gender").toString(),
+                    Double.parseDouble(row.get("Total").toString())));
+        });
+        pieChartGender.setData(pie);
+        pieChartGender.setLegendSide(Side.BOTTOM);
+        pieChartGender.setStartAngle(90);
+
+    }
+    public void Piechart2() {
+        HR4_Jobs jobs = new HR4_Jobs();
+        piee.clear();
+        List<HashMap> list3x = jobs.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "=", "dept_id")
+                .groupBy("dept_name")
+                .get("dept_name, COUNT(dept_name) as Total");
+        list3x.forEach((row) -> {
+            piee.add(new PieChart.Data(row.get("dept_name").toString(),
+                    Double.parseDouble(row.get("Total").toString())));
+        
+        });
+        pieChartDept.setData(piee);
+        pieChartDept.setLegendSide(Side.BOTTOM);
+        pieChartDept.setStartAngle(90);
+
+    }
+    public void Piechart3() {
+        HR4_Jobs jobs = new HR4_Jobs();
+        piee.clear();
+        List<HashMap> list3x = jobs.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "=", "dept_id")
+                .groupBy("dept_name")
+                .get("dept_name, COUNT(dept_name) as Total");
+        list3x.forEach((row) -> {
+            piee.add(new PieChart.Data(row.get("dept_name").toString(),
+                    Double.parseDouble(row.get("Total").toString())));
+        
+        });
+        pieChartDept.setData(piee);
+        pieChartDept.setLegendSide(Side.BOTTOM);
+        pieChartDept.setStartAngle(90);
+
     }
 
     public void Search() {
@@ -232,7 +297,6 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "tblD", "=", "dept_id")
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_classifications", "id", "tblC", "=", "classification_id")
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_designations", "id", "tblDD", "=", "designation_id")
-                                .where(new Object[][]{{"tblC.class_name", "=", ckasscb.getSelectionModel().getSelectedItem().toString()}})
                                 .get(
                                         "job_id",
                                         "title",
@@ -281,7 +345,6 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         TableColumn<HR4_EmpInfoClass, String> job_id = new TableColumn<>("Position");
         TableColumn<HR4_EmpInfoClass, String> dept_id = new TableColumn<>("Department");
         TableColumn<HR4_EmpInfoClass, String> status_id = new TableColumn<>("Status");
-        TableColumn More = new TableColumn<>("More Options");
 
         //<editor-fold defaultstate="collapsed" desc="Cell value factories">
         employee_code.setCellValueFactory((TableColumn.CellDataFeatures<HR4_EmpInfoClass, String> param) -> param.getValue().employee_code);
@@ -289,44 +352,66 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         job_id.setCellValueFactory((TableColumn.CellDataFeatures<HR4_EmpInfoClass, String> param) -> param.getValue().job_id);
         dept_id.setCellValueFactory((TableColumn.CellDataFeatures<HR4_EmpInfoClass, String> param) -> param.getValue().dept_id);
         status_id.setCellValueFactory((TableColumn.CellDataFeatures<HR4_EmpInfoClass, String> param) -> param.getValue().status_id);
-
-        More.setSortable(false);
-
-        More.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<HR4_EmpInfoClass, Boolean>, ObservableValue<Boolean>>() {
+        TableColumn<HR4_EmpInfoClass, Void> addButton = new TableColumn("More Options");
+        Callback<TableColumn<HR4_EmpInfoClass, Void>, TableCell<HR4_EmpInfoClass, Void>> cellFactory
+                = new Callback<TableColumn<HR4_EmpInfoClass, Void>, TableCell<HR4_EmpInfoClass, Void>>() {
             @Override
-            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<HR4_EmpInfoClass, Boolean> param) {
-                return new SimpleBooleanProperty(param.getValue() != null);
-            }
-        });
+            public TableCell<HR4_EmpInfoClass, Void> call(final TableColumn<HR4_EmpInfoClass, Void> param) {
 
-        More.setCellFactory(new Callback<TableColumn<HR4_EmpInfoClass, Boolean>, TableCell<HR4_EmpInfoClass, Boolean>>() {
-            @Override
-            public TableCell<HR4_EmpInfoClass, Boolean> call(TableColumn<HR4_EmpInfoClass, Boolean> param) {
-                return new TableCell<HR4_EmpInfoClass, Boolean>() {
-                    private final Button btnMore = new Button("More");
+                final TableCell<HR4_EmpInfoClass, Void> cell = new TableCell<HR4_EmpInfoClass, Void>() {
+                    private final Button btn = new Button("Request");
 
                     {
-                        btnMore.setOnAction(value -> {
-                            Modal md = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_InfoCHC.fxml").getParent());
-                            md.open();
-                        });
+                        try {
+                            btn.setOnAction(e
+                                    -> {
+                                HR4_EmpInfoFillClass fc = (HR4_EmpInfoFillClass) getTableRow().getItem();
+
+                                HR4_EmpInfoFill.CreateNew(
+                                        fc.a.getValue(),
+                                        fc.b.getValue(),
+                                        fc.c.getValue(),
+                                        fc.d.getValue(),
+                                        fc.e.getValue(),
+                                        fc.f.getValue(),
+                                        fc.g.getValue(),
+                                        fc.h.getValue(),
+                                        fc.i.getValue(),
+                                        fc.j.getValue(),
+                                        fc.k.getValue(),
+                                        fc.l.getValue(),
+                                        fc.m.getValue(),
+                                        fc.n.getValue());
+                                Modal lq = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_InfoCHC.fxml").getParent());
+                                lq.open();
+                            });
+                            btn.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
+                            btn.setCursor(javafx.scene.Cursor.HAND);
+                        } catch (Exception ex) {
+                            System.out.println(ex);
+                        }
+
                     }
 
-                    public void updateItem(Boolean item, boolean empty) {
+                    public void updateItem(Void item, boolean empty) {
                         super.updateItem(item, empty);
                         if (empty) {
                             setGraphic(null);
                         } else {
-                            setGraphic(btnMore);
+                            setGraphic(btn);
                         }
                     }
                 };
+                return cell;
             }
 
-        });
+        };
+
+        addButton.setCellFactory(cellFactory);
+        tbl_chc.getColumns().add(addButton);
         //</editor-fold>
         tbl_chc.getColumns()
-                .addAll(employee_code, fnn, job_id, dept_id, status_id, More);
+        .addAll(employee_code, fnn, job_id, dept_id, status_id);
     }
     /*
     

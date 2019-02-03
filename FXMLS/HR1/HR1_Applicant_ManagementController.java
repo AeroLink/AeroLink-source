@@ -174,7 +174,9 @@ public class HR1_Applicant_ManagementController implements Initializable {
                     if (DummyCount != GlobalCount) {
 
                         tblOpenJobs.getItems().clear();
-                        jobPostings.get().stream().forEach(row -> {
+                        jobPostings.where(new Object[][]{
+                            {"isDeleted", "=", 0}
+                        }).get().stream().forEach(row -> {
 
                             HashMap current = (HashMap) row;
 
@@ -361,7 +363,7 @@ public class HR1_Applicant_ManagementController implements Initializable {
                     (action.get("lastname").toString() + ", "
                     + action.get("firstname").toString() + " "
                     + (action.get("suffix_name").toString().equals("None") ? "" : action.get("suffix_name").toString()) + " "
-                    + action.get("middlename").toString()),
+                    + (action.get("middlename").toString().equals("NO MNAME") ? "" : action.get("middlename").toString())),
                     action.get("email").toString(),
                     action.get("educAttain").toString(),
                     action.get("prevSchool").toString(),

@@ -26,6 +26,18 @@ import javax.swing.JOptionPane;
  */
 public class NewClass {
 
+    
+    /*
+        Code Library
+    
+        1. Update Requisition Status
+            
+            STORED_PROC.executeCall("EIS_updateRequestStatus", new Object[][]{
+                {"request_id", request_id_galingDB},
+                {"request_status", 1} //1 kapag approved, 2 kapag denied, 3 on process
+            });
+    */
+    
     public static void main(String[] args) {
 
         Session.HttpURL = DatabaseConfig.HttpURL;
@@ -60,7 +72,11 @@ public class NewClass {
             });
         }
 
-        List list = STORED_PROC.executeCall("getAllEmployees");
+        List list = STORED_PROC.executeCall("EIS_CreateRequest", new Object[][] {
+            {"request", 45},
+            {"request_description", 51},
+            {"requestor_id", 6}
+        });
 
         System.err.println(Arrays.asList(list.toArray()));
     }

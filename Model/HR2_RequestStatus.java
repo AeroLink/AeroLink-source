@@ -13,7 +13,7 @@ public class HR2_RequestStatus extends Synapse.Model{
     
     public HR2_RequestStatus(){
         setColumns("req_status","req_status");
-        this.initTable("tbl_hr2_request_status");
+        this.initTable("tbl_eis_request_status");
     }
     
 }

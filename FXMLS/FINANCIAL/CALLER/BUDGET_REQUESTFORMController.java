@@ -37,12 +37,16 @@ public class BUDGET_REQUESTFORMController implements Initializable {
     @FXML private JFXButton submit_btn;
     @FXML private JFXComboBox<String> prioritylevel;
 
-      ObservableList<String> level = FXCollections.observableArrayList("","Urgent","Good");
+      ObservableList<String> level = FXCollections.observableArrayList("","Urgent","Emergency");
       ObservableList<String> chooseDept = FXCollections.observableArrayList("",
                                                                             "Human Resource - Training Management",
                                                                             "Human Resource - Payroll",
                                                                             "Human Resource - Reimbursement",
                                                                             "Logistic - Procurement");
+    @FXML
+    private JFXTextField lastname;
+    @FXML
+    private JFXComboBox<?> combo_emp;
      
     
     /**
@@ -63,13 +67,13 @@ public class BUDGET_REQUESTFORMController implements Initializable {
         {
            String[][] b_tbl =
         {
-        {"budget_requestor",requestor.getText()},
+        {"budget_firstname",requestor.getText()},
+        {"budget_lastname",lastname.getText()},
         {"budget_description",description.getText()},
         {"budget_priority_lvl",prioritylevel.getValue()},
         {"budget_amount",amount.getText()},
-        {"budget_department",department.getValue()}
+        {"budget_department",department.getValue()},
         };           
-           
            
         if(fbr.insert(b_tbl)){
          Alert alert = new Alert(Alert.AlertType.INFORMATION);

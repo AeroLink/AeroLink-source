@@ -64,6 +64,7 @@ ObservableList<String> cmbbx_stats = FXCollections.observableArrayList("Collecte
                     {"ast_description",des_txt.getText()},
                     {"ast_amount",amount_txt.getText()},
                     {"ast_type","Collection Sales"},
+                    {"ast_status2","Collected"},
                     {"ast_status",stats.getValue().toString()}
             };
              arm.insert(insertPO);
