@@ -190,11 +190,7 @@
                         </Label>
                         <AnchorPane fx:id="panelExamResult" layoutX="10.0" layoutY="100.0" prefHeight="83.0" prefWidth="528.0" style="-fx-background-color: #388E3C; -fx-background-radius: 2%;" visible="false">
                            <children>
-                              <Label fx:id="lblExamResult" layoutX="14.0" layoutY="27.0" text="Test Result" textFill="WHITE">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Label>
+                              <Label fx:id="lblExamResult" layoutX="14.0" layoutY="27.0" text="Please, Apply an Examination for the Applicant : 'Workflow Procedures &gt; Apply an examination'" textFill="WHITE" />
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="jobOfferPane" layoutX="10.0" layoutY="102.0" prefHeight="64.0" prefWidth="492.0" visible="false" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
