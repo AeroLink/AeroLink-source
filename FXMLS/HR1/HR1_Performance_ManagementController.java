@@ -163,6 +163,7 @@ public class HR1_Performance_ManagementController implements Initializable {
 //            ));
 //
 //        });
+    //PerfMove
         empJob.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "=", "employee_code")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employees", "employee_code", "=", "employee_code")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "job_id")
