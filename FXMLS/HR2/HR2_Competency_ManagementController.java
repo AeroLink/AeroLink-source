@@ -13,7 +13,7 @@ import FXMLS.HR2.ClassFiles.HR2_CoursesClass;
 import FXMLS.HR2.ClassFiles.HR2_LM_AddExamModalClass;
 import FXMLS.HR2.ClassFiles.HR2_LM_CourseOutlineModal;
 import FXMLS.HR2.ClassFiles.HR4_Jobs_Class;
-import FXMLS.HR4.ClassFiles.HR4_MIZ;
+import FXMLS.HR4.Filler.HR4_MIZ;
 import Model.HR2_CM_Pivot;
 import Model.HR2_CM_Skill_Requisition;
 import Model.HR2_CM_Skills;

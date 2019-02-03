@@ -5,8 +5,8 @@
  */
 package FXMLS.HR4.Modals;
 
-import FXMLS.HR4.ClassFiles.HR4_NewPayrollFill;
-import FXMLS.HR4.ClassFiles.HR4_NewPayrollFill2;
+import FXMLS.HR4.Filler.HR4_NewPayrollFill;
+import FXMLS.HR4.Filler.HR4_NewPayrollFill2;
 import FXMLS.HR4.HR4_Core_Human_Capital_ManagementController;
 import FXMLS.HR4.Model.HR4_NewPayrollModel;
 import Synapse.Model;

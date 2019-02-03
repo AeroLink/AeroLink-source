@@ -6,9 +6,11 @@
 package FXMLS.HR4;
 
 import FXMLS.HR4.ClassFiles.HR4_EmpInfoClass;
+import FXMLS.HR4.ClassFiles.HR4_EmpInfoFillClass;
 import FXMLS.HR4.Model.HR4_EmployeeInfo;
-import FXMLS.HR4.ClassFiles.HR4_MIZ;
+import FXMLS.HR4.Filler.HR4_MIZ;
 import FXMLS.HR4.ClassFiles.TableModel_Jobs;
+import FXMLS.HR4.Filler.HR4_EmpInfoFill;
 import FXMLS.HR4.Model.HR4_ClassificationModel;
 import FXMLS.HR4.Model.HR4_InfoChartModel;
 import java.net.URL;
@@ -343,7 +345,6 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         TableColumn<HR4_EmpInfoClass, String> job_id = new TableColumn<>("Position");
         TableColumn<HR4_EmpInfoClass, String> dept_id = new TableColumn<>("Department");
         TableColumn<HR4_EmpInfoClass, String> status_id = new TableColumn<>("Status");
-        TableColumn More = new TableColumn<>("More Options");
 
         //<editor-fold defaultstate="collapsed" desc="Cell value factories">
         employee_code.setCellValueFactory((TableColumn.CellDataFeatures<HR4_EmpInfoClass, String> param) -> param.getValue().employee_code);
@@ -351,44 +352,66 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         job_id.setCellValueFactory((TableColumn.CellDataFeatures<HR4_EmpInfoClass, String> param) -> param.getValue().job_id);
         dept_id.setCellValueFactory((TableColumn.CellDataFeatures<HR4_EmpInfoClass, String> param) -> param.getValue().dept_id);
         status_id.setCellValueFactory((TableColumn.CellDataFeatures<HR4_EmpInfoClass, String> param) -> param.getValue().status_id);
-
-        More.setSortable(false);
-
-        More.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<HR4_EmpInfoClass, Boolean>, ObservableValue<Boolean>>() {
+        TableColumn<HR4_EmpInfoClass, Void> addButton = new TableColumn("More Options");
+        Callback<TableColumn<HR4_EmpInfoClass, Void>, TableCell<HR4_EmpInfoClass, Void>> cellFactory
+                = new Callback<TableColumn<HR4_EmpInfoClass, Void>, TableCell<HR4_EmpInfoClass, Void>>() {
             @Override
-            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<HR4_EmpInfoClass, Boolean> param) {
-                return new SimpleBooleanProperty(param.getValue() != null);
-            }
-        });
+            public TableCell<HR4_EmpInfoClass, Void> call(final TableColumn<HR4_EmpInfoClass, Void> param) {
 
-        More.setCellFactory(new Callback<TableColumn<HR4_EmpInfoClass, Boolean>, TableCell<HR4_EmpInfoClass, Boolean>>() {
-            @Override
-            public TableCell<HR4_EmpInfoClass, Boolean> call(TableColumn<HR4_EmpInfoClass, Boolean> param) {
-                return new TableCell<HR4_EmpInfoClass, Boolean>() {
-                    private final Button btnMore = new Button("More");
+                final TableCell<HR4_EmpInfoClass, Void> cell = new TableCell<HR4_EmpInfoClass, Void>() {
+                    private final Button btn = new Button("Request");
 
                     {
-                        btnMore.setOnAction(value -> {
-                            Modal md = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_InfoCHC.fxml").getParent());
-                            md.open();
-                        });
+                        try {
+                            btn.setOnAction(e
+                                    -> {
+                                HR4_EmpInfoFillClass fc = (HR4_EmpInfoFillClass) getTableRow().getItem();
+
+                                HR4_EmpInfoFill.CreateNew(
+                                        fc.a.getValue(),
+                                        fc.b.getValue(),
+                                        fc.c.getValue(),
+                                        fc.d.getValue(),
+                                        fc.e.getValue(),
+                                        fc.f.getValue(),
+                                        fc.g.getValue(),
+                                        fc.h.getValue(),
+                                        fc.i.getValue(),
+                                        fc.j.getValue(),
+                                        fc.k.getValue(),
+                                        fc.l.getValue(),
+                                        fc.m.getValue(),
+                                        fc.n.getValue());
+                                Modal lq = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_InfoCHC.fxml").getParent());
+                                lq.open();
+                            });
+                            btn.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
+                            btn.setCursor(javafx.scene.Cursor.HAND);
+                        } catch (Exception ex) {
+                            System.out.println(ex);
+                        }
+
                     }
 
-                    public void updateItem(Boolean item, boolean empty) {
+                    public void updateItem(Void item, boolean empty) {
                         super.updateItem(item, empty);
                         if (empty) {
                             setGraphic(null);
                         } else {
-                            setGraphic(btnMore);
+                            setGraphic(btn);
                         }
                     }
                 };
+                return cell;
             }
 
-        });
+        };
+
+        addButton.setCellFactory(cellFactory);
+        tbl_chc.getColumns().add(addButton);
         //</editor-fold>
         tbl_chc.getColumns()
-                .addAll(employee_code, fnn, job_id, dept_id, status_id, More);
+        .addAll(employee_code, fnn, job_id, dept_id, status_id);
     }
     /*
     

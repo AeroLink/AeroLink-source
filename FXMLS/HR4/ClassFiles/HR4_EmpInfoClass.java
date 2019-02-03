@@ -23,7 +23,6 @@ public class HR4_EmpInfoClass extends RecursiveTreeObject{
     public StringProperty job_id;
     public StringProperty dept_id;
     public StringProperty status_id;
-    private Button More;
     private CheckBox Select;
     
     
@@ -34,20 +33,11 @@ public class HR4_EmpInfoClass extends RecursiveTreeObject{
         this.job_id = new SimpleStringProperty(job_id);
         this.dept_id = new SimpleStringProperty(dept_id);
         this.status_id = new SimpleStringProperty(status_id);
-        this.More = new Button("More");
     }
     public CheckBox getSelect(){
          return Select;
      }
     public void setSelect(CheckBox Select){
         this.Select = Select;
-        
-    }
-     public Button getMore(){
-         return More;
-     }
-    public void setMore(Button More){
-        this.More = More;
-        
     }
 }
