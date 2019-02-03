@@ -113,6 +113,8 @@ public class FINANCIAL_AP_ARController implements Initializable {
     private ContextMenu APcontexmenu;
     @FXML
     private MenuItem APmenuitem;
+    @FXML
+    private JFXButton view_coa_btn;
 
     
     @Override
@@ -170,6 +172,14 @@ public class FINANCIAL_AP_ARController implements Initializable {
      
      });
     }   
+    
+    
+    public void viewCOA(){
+         Modal md = Modal.getInstance(new Form("/FXMLS/FINANCIAL/CALLER/PurchaseOrder.fxml").getParent());
+         md.open();
+    }
+    
+    
     Financial_entries fe1 = new Financial_entries();
     public void apPostingtoLedger(){
         Financial_disbursement_request_model lam1 = new Financial_disbursement_request_model();
@@ -210,8 +220,6 @@ public class FINANCIAL_AP_ARController implements Initializable {
             e.printStackTrace();
                }
     }
-    
-    
     Financial_entries fe = new Financial_entries();
     ObservableList<APAR_Entries_classfile> aec = FXCollections.observableArrayList();
     public void AddtableEntries(){
