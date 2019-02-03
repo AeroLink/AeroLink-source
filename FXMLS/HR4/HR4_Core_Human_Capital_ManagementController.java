@@ -353,7 +353,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         dept_id.setCellValueFactory((TableColumn.CellDataFeatures<HR4_EmpInfoClass, String> param) -> param.getValue().dept_id);
         status_id.setCellValueFactory((TableColumn.CellDataFeatures<HR4_EmpInfoClass, String> param) -> param.getValue().status_id);
 
-        /*TableColumn<HR4_EmpInfoClass, Void> addButton = new TableColumn("More Options");
+        TableColumn<HR4_EmpInfoClass, Void> addButton = new TableColumn("More Options");
 
         Callback<TableColumn<HR4_EmpInfoClass, Void>, TableCell<HR4_EmpInfoClass, Void>> cellFactory
                 = new Callback<TableColumn<HR4_EmpInfoClass, Void>, TableCell<HR4_EmpInfoClass, Void>>() {
@@ -410,64 +410,11 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         };
 
         addButton.setCellFactory(cellFactory);
-        tbl_chc.getColumns().add(addButton);*/
+        tbl_chc.getColumns().add(addButton);
         //</editor-fold>
         tbl_chc.getColumns()
         .addAll(employee_code, fnn, job_id, dept_id, status_id);
     }
-    /*
-    
-    System.err.println("a");
-                        Modal md = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_InfoCHC.fxml").getParent());
-                        md.open();
-    
-    TableColumn<HR2_ExaminationClass, Void> listOfQuestions = new TableColumn("List of Questions");
-
-        Callback<TableColumn<HR2_ExaminationClass, Void>, TableCell<HR2_ExaminationClass, Void>> cellFactory
-                = new Callback<TableColumn<HR2_ExaminationClass, Void>, TableCell<HR2_ExaminationClass, Void>>() {
-            @Override
-            public TableCell<HR2_ExaminationClass, Void> call(final TableColumn<HR2_ExaminationClass, Void> param) {
-
-                final TableCell<HR2_ExaminationClass, Void> cell = new TableCell<HR2_ExaminationClass, Void>() {
-                    private final Button btn_q_list = new Button("List of Questions");
-
-                    {
-                        try {
-                            btn_q_list.setOnAction(e
-                                    -> {
-                                HR2_LMClass_For_AddQuestion_Modal.initCourseTitle(
-                                        tbl_exam.getSelectionModel().getSelectedItem().exam_id.get(),
-                                        tbl_exam.getSelectionModel().getSelectedItem().exam_name.get(),
-                                        tbl_exam.getSelectionModel().getSelectedItem().exam_desc.get(),
-                                        tbl_exam.getSelectionModel().getSelectedItem().id.get());
-                                Modal md = Modal.getInstance(new Form("/FXMLS/HR2/Modals/List_Of_Questions.fxml").getParent());
-                                md.open();
-                            });
-                            btn_q_list.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
-                            btn_q_list.setCursor(javafx.scene.Cursor.HAND);
-                        } catch (Exception ex) {
-                            System.out.println(ex);
-                        }
-
-                    }
-
-                    public void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            setGraphic(btn_q_list);
-                        }
-                    }
-                };
-                return cell;
-            }
-
-        };
-
-        listOfQuestions.setCellFactory(cellFactory);
-        tbl_exam.getColumns().add(listOfQuestions);
-     */
 
     long DummyCount = 0;
     long GlobalCount = 0;

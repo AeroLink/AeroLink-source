@@ -68,8 +68,6 @@ public class HR4_PayrollController implements Initializable {
     ObservableList<HR4_NewPayrollMainClass> obj1 = FXCollections.observableArrayList();
     ObservableList<HR4_NewPayrollClass> obj2 = FXCollections.observableArrayList();
     ExecutorService e = Executors.newFixedThreadPool(1);
-    long DummyCount = 0;
-    long GlobalCount = 0;
     @FXML
     private TableView<HR4_NewPayrollMainClass> tbl_ps;
     @FXML
@@ -181,7 +179,8 @@ public class HR4_PayrollController implements Initializable {
         tlb_eer1.getColumns()
         .addAll(payroll_code,employee_code,Fullname,job_id,dept_id);
    }
-        
+   long DummyCount = 0;
+   long GlobalCount = 0;
    public void populateTable1(){
        CompletableFuture.supplyAsync(() -> {
 
@@ -192,8 +191,6 @@ public class HR4_PayrollController implements Initializable {
                     });
 
                     if (DummyCount != GlobalCount) {
-
-                        tbl_ps.getItems();
                             List rs = npmm
                                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "tblD", "=", "dept_id")
                                     .get(   
@@ -215,7 +212,7 @@ public class HR4_PayrollController implements Initializable {
    }
    public void AddToTable1(List rs){
         obj1.clear();
-        tbl_ps.refresh();
+        tbl_ps.getItems().clear();
 
         for (Object row : rs) {
             HashMap crow = (HashMap) row;
@@ -297,25 +294,25 @@ public class HR4_PayrollController implements Initializable {
         tbl_eer.getColumns()
         .addAll(payroll_code,start_date,end_date,total_salaries,dept_id);
    }
+   long DummyCount1 = 0;
+   long GlobalCount1 = 0;
    public void populateTable2(){
        CompletableFuture.supplyAsync(() -> {
 
             while (Session.CurrentRoute.equals("hr4payroll")) {
                 try {
                     npm.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
-                        DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
+                        DummyCount1 = Long.parseLong(((HashMap) e).get("chk").toString());
                     });
 
-                    if (DummyCount != GlobalCount) {
-
-                        tbl_eer.getItems();
+                    if (DummyCount1 != GlobalCount1) {
                             List rs = npm
                                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "tblD", "=", "dept_id")
                                     .get(   
                                         "payroll_code","start_date","end_date","total_salaries","tblD.dept_name as dept_id"    
                                             );
                         AddToTable2(rs);
-                        GlobalCount = DummyCount;
+                        GlobalCount1 = DummyCount1;
                     }
 
                     Thread.sleep(3000);
@@ -330,7 +327,7 @@ public class HR4_PayrollController implements Initializable {
    }
    public void AddToTable2(List rs){
         obj2.clear();
-        tbl_eer.refresh();
+        tbl_eer.getItems().clear();
 
         for (Object row : rs) {
             HashMap crow = (HashMap) row;
