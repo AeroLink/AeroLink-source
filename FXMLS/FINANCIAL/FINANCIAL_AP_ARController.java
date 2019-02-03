@@ -514,7 +514,10 @@ public class FINANCIAL_AP_ARController implements Initializable {
                            ap_tbl.getItems();
                             List b = fbr.where("dr_status","=","Unpaid").get();
                             Ap(b);  
-                          
+                            totalAP();
+                             
+                     
+
                     ap_tbl.setItems(brc);
                         GlobalCount = DummyCount;
                     }
