@@ -170,11 +170,12 @@ public class TM_ViewTrainingController implements Initializable {
         HR2_TM_Training_Requisition tmtrc = new HR2_TM_Training_Requisition();
 
         List training_data = tmtrc.join(Model.JOIN.INNER, "aerolink.tbl_hr2_trainingInfo", "tr_id", "ti", "=", "tr_id")
-                .join(Model.JOIN.INNER, "aerolink.tbl_hr2_request_status", "req_status_id", "rs", "=", "req_status_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "emp", "=", "requested_by")
+                .join(Model.JOIN.INNER, "aerolink.tbl_eis_requisition", "request_id", "rs", "=", "request_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_eis_request_status", "req_status_id", "=", "rs", "request_status", true)
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr2_type_of_training", "type_of_training_id", "=", "ti", "type_of_training_id", true)
                 .where(new Object[][]{{"aerolink.tbl_hr2_training_requisition.tr_id", "=", HR2_TM_ViewTrainingInfo_Modal.tr_id}})
-                .get("aerolink.tbl_hr2_training_requisition.tr_id,aerolink.tbl_hr2_training_requisition.training_title,aerolink.tbl_hr2_training_requisition.total_hours, reason, concat('S00',rs.req_status_id,' - ',rs.req_status)as request_status,"
+                .get("aerolink.tbl_hr2_training_requisition.tr_id,aerolink.tbl_hr2_training_requisition.training_title,aerolink.tbl_hr2_training_requisition.total_hours, reason, concat('S00',aerolink.tbl_eis_request_status.req_status_id,' - ',aerolink.tbl_eis_request_status.req_status)as request_status,"
                         + "concat(emp.employee_code,' - ',emp.firstname,' ',emp.middlename,' ',emp.lastname) as requested_by,"
                         + "date_requested,concat(emp.employee_code,' - ',emp.firstname,' ',emp.middlename,' ',emp.lastname) as trainor, ti.start_time, ti.end_time,"
                         + "CONCAT('TM',aerolink.tbl_hr2_type_of_training.type_of_training_id,' - ',aerolink.tbl_hr2_type_of_training.type_of_training) as type_of_training");
@@ -191,9 +192,10 @@ public class TM_ViewTrainingController implements Initializable {
             txt_req_by.setText(((HashMap) row).get("requested_by").toString());
             txt_date_requested.setText(((HashMap) row).get("date_requested").toString());
             //   cbox_edit_trainor.setValue(((HashMap) row).get("trainor").toString());
-            //txt_from_time.setValue(LocalTime.parse(((HashMap) row).get("start_time").toString()));
-            // txt_to_time.setValue(LocalTime.parse(((HashMap) row).get("end_time").toString()));
+            txt_from_time.setValue(LocalTime.parse(((HashMap) row).get("start_time").toString()));
+            txt_to_time.setValue(LocalTime.parse(((HashMap) row).get("end_time").toString()));
             cbox_edit_type.setValue(((HashMap) row).get("type_of_training").toString());
+            cbox_edit_status.setValue(((HashMap) row).get("request_status").toString());
             //  cbox_edit_v.setValue(((HashMap) row).get("vehicle").toString());
             //  txt_edit_budget.setText(((HashMap) row).get("budget_cost").toString());
         });

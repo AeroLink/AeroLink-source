@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.MenuItem?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="603.0" prefWidth="1024.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR4.HR4_Core_Human_Capital_ManagementController">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1024.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR4.HR4_Core_Human_Capital_ManagementController">
    <children>
       <AnchorPane prefHeight="586.0" prefWidth="673.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -67,21 +68,10 @@
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <BorderPane layoutX="434.0" layoutY="240.0" prefHeight="568.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <top>
-                                    <AnchorPane prefHeight="97.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
-                                       <children>
-                                          <JFXButton buttonType="RAISED" contentDisplay="CENTER" layoutX="890.0" layoutY="58.0" prefHeight="25.0" prefWidth="120.0" styleClass="btn-primary" text="Print Report" textAlignment="CENTER" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
-                                          <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" layoutX="902.0" layoutY="75.0" AnchorPane.bottomAnchor="20.051339149475098" AnchorPane.rightAnchor="110.8571424484253" />
-                                          <JFXTextField fx:id="srch1" focusColor="#45a840" labelFloat="true" layoutX="41.0" layoutY="54.0" maxWidth="210.0" minWidth="171.0" prefHeight="31.0" prefWidth="187.0" promptText="Search" />
-                                          <FontAwesomeIconView fill="#2ea432" glyphName="SEARCH" layoutX="29.0" layoutY="73.0" />
-                                          <ComboBox fx:id="statcb" layoutX="241.0" layoutY="62.0" prefHeight="25.0" prefWidth="129.0" />
-                                       </children>
-                                    </AnchorPane>
-                                 </top>
                                  <center>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <TableView fx:id="tbl_chc" layoutX="479.0" layoutY="121.0" prefHeight="471.0" prefWidth="1024.0" stylesheets="@../../Assets/css/pom.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <TableView fx:id="tbl_chc" layoutX="470.0" layoutY="-9.0" prefHeight="566.0" prefWidth="554.0" stylesheets="@../../Assets/css/pom.css" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="470.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-9.0">
                                             <columns>
                                               <TableColumn prefWidth="75.0" text="C1" />
                                               <TableColumn prefWidth="75.0" text="C2" />
@@ -90,6 +80,13 @@
                                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                              </columnResizePolicy>
                                           </TableView>
+                                          <PieChart fx:id="pieChartGender" layoutX="255.0" layoutY="425.0" prefHeight="202.0" prefWidth="209.0" title="No.s of People by Gender" />
+                                          <PieChart fx:id="pieChartAge" layoutX="36.0" layoutY="425.0" prefHeight="201.0" prefWidth="209.0" style="-fx-border-color: black;" />
+                                          <PieChart fx:id="pieChartDept" layoutX="32.0" layoutY="74.0" prefHeight="338.0" prefWidth="431.0" title="No.s of People by Department" />
+                                          <ComboBox fx:id="statcb" layoutX="243.0" layoutY="20.0" prefHeight="29.0" prefWidth="212.0" />
+                                          <JFXTextField fx:id="srch1" focusColor="#45a840" labelFloat="true" layoutX="43.0" layoutY="13.0" maxWidth="351.0" minWidth="148.0" prefHeight="31.0" prefWidth="168.0" promptText="Search" />
+                                          <FontAwesomeIconView fill="#2ea432" glyphName="SEARCH" layoutX="32.0" layoutY="32.0" text="" />
+                                          <JFXButton layoutX="403.0" layoutY="523.0" styleClass="btn-primary" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="403.0" />
                                        </children>
                                     </AnchorPane>
                                  </center>

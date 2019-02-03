@@ -5,6 +5,7 @@
  */
 package Model.HR3;
 
+import static Synapse.Model.setColumns;
 /**
  *
  * @author BlackMoon

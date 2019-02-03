@@ -14,6 +14,6 @@ public class HR2_LM_Exam_Request extends Synapse.Model {
     public HR2_LM_Exam_Request() {
         setColumns("er_id", "job_id", "reason",
                 "requested_by", "date_requested", "req_status_id","isDeleted");
-        this.initTable("tbl_hr2_exam_requisition");
+        this.initTable("aerolink.tbl_hr2_exam_requisition");
     }
 }

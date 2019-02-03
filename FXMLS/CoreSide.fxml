@@ -523,7 +523,7 @@
                                             <children>
                                                 <AnchorPane prefHeight="40.0" prefWidth="235.0" style="-fx-background-color: #34A853;">
                                                     <children>
-                                                        <Label text="LOGSITICS MODULE" textFill="WHITE" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
+                                                        <Label text="LOGISTICS MODULE" textFill="WHITE" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
                                                             <font>
                                                                 <Font name="Segoe UI Semibold" size="18.0" />
                                                             </font>
@@ -845,6 +845,18 @@
                                     <AnchorPane layoutX="11.0" layoutY="86.0" />
                                     <AnchorPane layoutX="11.0" layoutY="122.0" />
                                     <AnchorPane layoutX="11.0" layoutY="50.0" />
+                                    <AnchorPane>
+                                       <children>
+                                          <JFXButton id="0xreq_hr2_exam" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="[ HR2 ] Request Examination" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                             <graphic>
+                                                <FontAwesomeIconView fill="#34a853" glyphName="ENVELOPE" size="25" styleClass="fontIcon" />
+                                             </graphic>
+                                          </JFXButton>
+                                       </children>
+                                    </AnchorPane>
                                  </children>
                               </VBox>
                            </children>
