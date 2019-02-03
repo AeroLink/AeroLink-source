@@ -14,21 +14,23 @@ import javafx.beans.property.StringProperty;
  */
 public class TableModel_table2 {
 
-    public StringProperty Department;
-    public StringProperty Employee_Name;
+    public StringProperty id;
+    public StringProperty employee_code;
+    public StringProperty employee_name;
     public StringProperty Ratings;
-    public StringProperty Award;
-    public StringProperty Reward;
-    public StringProperty Remarks;
-    public StringProperty Date_Posted;
+    public StringProperty award_id;
+    public StringProperty reward_id;
+    public StringProperty remarks;
+    public StringProperty date_Posted;
 
-    public TableModel_table2(String Department, String Employee_Name, String Ratings, String Award, String Reward, String Remarks, String Date_Posted) {
-        this.Department = new SimpleStringProperty(Department);
-        this.Employee_Name = new SimpleStringProperty(Employee_Name);
+    public TableModel_table2(String Department,String Employee_code, String Employee_name, String Ratings, String Award, String Reward, String Remarks, String Date_Posted) {
+        this.id = new SimpleStringProperty(Department);
+        this.employee_code = new SimpleStringProperty(Employee_code);
+        this.employee_name = new SimpleStringProperty(Employee_name);
         this.Ratings = new SimpleStringProperty(Ratings);
-        this.Award = new SimpleStringProperty(Award);
-        this.Reward = new SimpleStringProperty(Reward);
-        this.Remarks = new SimpleStringProperty(Remarks);
-        this.Date_Posted = new SimpleStringProperty(Date_Posted);
+        this.award_id = new SimpleStringProperty(Award);
+        this.reward_id = new SimpleStringProperty(Reward);
+        this.remarks = new SimpleStringProperty(Remarks);
+        this.date_Posted = new SimpleStringProperty(Date_Posted);
     }
 }

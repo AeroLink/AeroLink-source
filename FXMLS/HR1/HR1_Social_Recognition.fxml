@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR1.HR1_Social_RecognitionController">
+<AnchorPane stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR1.HR1_Social_RecognitionController">
    <children>
       <StackPane prefHeight="720.0" prefWidth="1375.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -169,7 +169,7 @@
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
                                                 </JFXButton>
-                                                <JFXButton buttonType="RAISED" cancelButton="true" layoutX="189.0" layoutY="590.0" prefHeight="34.0" prefWidth="138.0" style="-fx-background-color: #f14a4a;" text="Cancel" textFill="WHITE" AnchorPane.leftAnchor="189.0" AnchorPane.rightAnchor="10.0">
+                                                <JFXButton buttonType="RAISED" cancelButton="true" layoutX="189.0" layoutY="590.0" onAction="#btnUpdateClear" prefHeight="34.0" prefWidth="138.0" style="-fx-background-color: #f14a4a;" text="Cancel" textFill="WHITE" AnchorPane.leftAnchor="189.0" AnchorPane.rightAnchor="10.0">
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
