@@ -124,11 +124,9 @@ public class BUDGET_REQUEST_HISTORYController implements Initializable {
         
     Financial_budget_request fbr1 = new Financial_budget_request();
          
-        
         try {
-
             List listSkills = fbr1.where(new Object[][]{
-                {"budget_id", "=", searchbar.getText()}
+                {"budget_id", "Like", searchbar.getText()}
             }).get();
             sertsbar(listSkills);
             requestHistory_tbl.refresh();

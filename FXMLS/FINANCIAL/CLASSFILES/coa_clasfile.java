@@ -22,10 +22,11 @@ public class coa_clasfile {
         
         public coa_clasfile(String coaid,String code_no,String account_title){
             
-            
+             
             this.cid = new SimpleStringProperty(coaid); 
             this.code = new SimpleStringProperty(code_no); 
             this.acc_title = new SimpleStringProperty(account_title);
+            
         }
             
              public String getCoaid(){

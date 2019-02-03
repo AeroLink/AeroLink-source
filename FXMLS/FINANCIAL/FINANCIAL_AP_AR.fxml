@@ -218,10 +218,13 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <JFXButton buttonType="RAISED" layoutX="369.0" layoutY="359.0" prefHeight="31.0" prefWidth="170.0" style="-fx-background-color: #34a853;" text="Chart of Accounts" textFill="WHITE" AnchorPane.rightAnchor="452.0">
+                        <JFXButton fx:id="view_coa_btn" buttonType="RAISED" layoutX="369.0" layoutY="359.0" prefHeight="31.0" prefWidth="170.0" style="-fx-background-color: #34a853;" text="View COA" textFill="WHITE" AnchorPane.rightAnchor="452.0">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="EYE" size="15" />
+                           </graphic>
                         </JFXButton>
                         <JFXButton buttonType="RAISED" layoutX="810.0" layoutY="610.0" prefHeight="31.0" prefWidth="170.0" style="-fx-background-color: #34a853;" text="Post to Ledger" textFill="WHITE" AnchorPane.rightAnchor="11.0">
                            <font>
