@@ -76,15 +76,6 @@ public class FINANCIAL_AP_ARController implements Initializable {
     @FXML
     private JFXButton asset_btn;
     @FXML
-<<<<<<< HEAD
-    private JFXComboBox salesStatus_cmbbx;
-    @FXML
-    private JFXComboBox journalStatus_cmbbx;
-
-    ObservableList<String> salesstats = FXCollections.observableArrayList("Collected", "Uncollected");
-    ObservableList<String> journalstats = FXCollections.observableArrayList("Not Posted", "Posted");
-
-=======
     private JFXComboBox comboboxSales;
     
     ObservableList<String> s = FXCollections.observableArrayList("Uncollected","Collected");
@@ -124,27 +115,11 @@ public class FINANCIAL_AP_ARController implements Initializable {
     private MenuItem APmenuitem;
 
     
->>>>>>> f8a2b6a07730b48b5953ff7dc0e4035946173d7b
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
         AddtableColumn_AP();
         loadtable_ap();
-<<<<<<< HEAD
-
-        salesStatus_cmbbx.setItems(salesstats);
-        AddtableColumn_AR();
-        Loadtable_Ar();
-
-        pom_btn.setOnMouseClicked(e -> openPOM());
-        asset_btn.setOnMouseClicked(e -> openAsset());
-        // totalAP();
-        //totalAR();
-
-    }
-
-    private void Ar(List arr) {
-=======
         
         
       comboboxSales.setItems(s);
@@ -466,7 +441,6 @@ public class FINANCIAL_AP_ARController implements Initializable {
     double total1 = 0;
     
    private void Ar(List arr){
->>>>>>> f8a2b6a07730b48b5953ff7dc0e4035946173d7b
         ar_tbl.getItems().clear();
         try {
             for (Object d : arr) {
@@ -479,16 +453,6 @@ public class FINANCIAL_AP_ARController implements Initializable {
                 hm.get("ast_status");
                 hm.get("journal_status");
                 ars.add(new AR_classfile(
-<<<<<<< HEAD
-                        String.valueOf(hm.get("ast_date")),
-                        String.valueOf(hm.get("ast_id")),
-                        String.valueOf(hm.get("ast_description")),
-                        String.valueOf(hm.get("ast_amount")),
-                        String.valueOf(hm.get("ast_status")),
-                        String.valueOf(hm.get("journal_status"))
-                ));
-
-=======
                             String.valueOf(hm.get("ast_date")),
                             String.valueOf(hm.get("ast_id")),
                             String.valueOf(hm.get("ast_firstname")),
@@ -500,7 +464,6 @@ public class FINANCIAL_AP_ARController implements Initializable {
                             String.valueOf(hm.get("journal_status"))
                 ) );   
                  
->>>>>>> f8a2b6a07730b48b5953ff7dc0e4035946173d7b
             }
 
         } catch (Exception e) {
@@ -508,35 +471,12 @@ public class FINANCIAL_AP_ARController implements Initializable {
         }
 
         ar_tbl.setItems(ars);
-<<<<<<< HEAD
-
-    }
-
-    public void openAsset() {
-        Modal md = Modal.getInstance(new Form("/FXMLS/FINANCIAL/CALLER/Asset.fxml").getParent());
-        md.open();
-
-    }
-
-    public void openPOM() {
-        Modal md = Modal.getInstance(new Form("/FXMLS/FINANCIAL/CALLER/PurchaseOrder.fxml").getParent());
-        md.open();
-    }
-
-    Log_assetsales_model arm = new Log_assetsales_model();
-    ObservableList<AR_classfile> ars = FXCollections.observableArrayList();
-    double total1 = 0;
-
-    public void Loadtable_Ar() {
-        CompletableFuture.supplyAsync(() -> {
-=======
    
        
      }
     
    public void Loadtable_Ar(){
        CompletableFuture.supplyAsync(() -> {
->>>>>>> f8a2b6a07730b48b5953ff7dc0e4035946173d7b
             while (Session.CurrentRoute.equals("id_apr")) {
                 try {
                     arm.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
@@ -544,21 +484,6 @@ public class FINANCIAL_AP_ARController implements Initializable {
                     });
                     ar_tbl.getItems();
                     if (DummyCount != GlobalCount) {
-<<<<<<< HEAD
-                        List b = arm.where(new Object[][]{
-                            {"ast_status", "=", "Uncollected"}
-                        }).get();
-                        Ar(b);
-                        for (int i = 0; i < ar_tbl.getItems().size(); i++) {
-                            int amount = Integer.parseInt(ar_tbl.getItems().get(i).arAmount.getValue());
-                            total1 = total1 + amount;
-                        }
-                        ar_total_lbl.setText(String.valueOf(total1));
-                        {
-                        }
-                        ar_tbl.setItems(ars);
-                        GlobalCount = DummyCount;
-=======
                             List b = arm.where(new Object[][]{
                              {"ast_status","=","Uncollected" }
                     }).get();
@@ -574,7 +499,6 @@ public class FINANCIAL_AP_ARController implements Initializable {
                          
                     ar_tbl.setItems(ars);
                     GlobalCount = DummyCount;
->>>>>>> f8a2b6a07730b48b5953ff7dc0e4035946173d7b
                     }
                     Thread.sleep(3000);
                 } catch (InterruptedException ex) {
@@ -583,17 +507,10 @@ public class FINANCIAL_AP_ARController implements Initializable {
             }
             return 0;
         }, Session.SessionThreads);
-<<<<<<< HEAD
-
-    }
-
-    public void AddtableColumn_AR() {
-=======
                    
    }
   
    public void AddtableColumn_AR(){
->>>>>>> f8a2b6a07730b48b5953ff7dc0e4035946173d7b
         ar_tbl.getItems().clear();
         ar_tbl.getColumns().removeAll(ar_tbl.getColumns());
 
@@ -602,53 +519,12 @@ public class FINANCIAL_AP_ARController implements Initializable {
         TableColumn<AR_classfile, String> des = new TableColumn<>("Description");
         TableColumn<AR_classfile, String> am = new TableColumn<>("Amount");
         TableColumn<AR_classfile, String> st = new TableColumn<>("Status");
-<<<<<<< HEAD
-        TableColumn<AR_classfile, String> js = new TableColumn<>("Journal Status");
-
-=======
        
->>>>>>> f8a2b6a07730b48b5953ff7dc0e4035946173d7b
         d.setCellValueFactory((TableColumn.CellDataFeatures<AR_classfile, String> param) -> param.getValue().arDate);
         in.setCellValueFactory((TableColumn.CellDataFeatures<AR_classfile, String> param) -> param.getValue().arInvoiceno);
         des.setCellValueFactory((TableColumn.CellDataFeatures<AR_classfile, String> param) -> param.getValue().arDescription);
         am.setCellValueFactory((TableColumn.CellDataFeatures<AR_classfile, String> param) -> param.getValue().arAmount);
         st.setCellValueFactory((TableColumn.CellDataFeatures<AR_classfile, String> param) -> param.getValue().arStatus);
-<<<<<<< HEAD
-        js.setCellValueFactory((TableColumn.CellDataFeatures<AR_classfile, String> param) -> param.getValue().arJournalStatus);
-
-        ar_tbl.getColumns().addAll(d, in, des, am, st, js);
-    }
-
-    public void AddtableColumn_AP() {
-
-        ap_tbl.getItems().clear();
-        ap_tbl.getColumns().removeAll(ap_tbl.getColumns());
-        TableColumn<AP_classfile, String> apd = new TableColumn<>("Date");
-        TableColumn<AP_classfile, String> apin = new TableColumn<>("Invoice No");
-        TableColumn<AP_classfile, String> apde = new TableColumn<>("Department");
-        TableColumn<AP_classfile, String> apa = new TableColumn<>("Amount");
-        TableColumn<AP_classfile, String> aps = new TableColumn<>("Status");
-        TableColumn<AP_classfile, String> apjs = new TableColumn<>("Journal Status");
-
-        apd.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apDate);
-        apin.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apinvoice);
-        apde.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apDepartment);
-        apa.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apAmount);
-        aps.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apStatus);
-        apjs.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apJournalStatus);
-
-        ap_tbl.getColumns().addAll(apd, apin, apde, apa, aps, apjs);
-
-    }
-
-    long DummyCount = 0;
-    long GlobalCount = 0;
-    int Global_Count = 0;
-    ExecutorService e = Executors.newFixedThreadPool(1);
-    ObservableList<AP_classfile> brc = FXCollections.observableArrayList();
-    Financial_disbursement_request_model fbr = new Financial_disbursement_request_model();
-
-=======
         
         ar_tbl.getColumns().addAll(d,in,des,am,st);
     }
@@ -662,7 +538,6 @@ public class FINANCIAL_AP_ARController implements Initializable {
     ExecutorService e = Executors.newFixedThreadPool(1);   
     ObservableList<AP_classfile> brc = FXCollections.observableArrayList();
     Financial_disbursement_request_model fbr = new Financial_disbursement_request_model();
->>>>>>> f8a2b6a07730b48b5953ff7dc0e4035946173d7b
     double total2 = 0;
 
     public void totalAP() {
@@ -672,11 +547,6 @@ public class FINANCIAL_AP_ARController implements Initializable {
         }
         total_label.setText(String.valueOf(total2));
     }
-<<<<<<< HEAD
-
-    public void loadtable_ap() {
-        CompletableFuture.supplyAsync(() -> {
-=======
     public void AddtableColumn_AP(){
         
         ap_tbl.getItems().clear();
@@ -698,24 +568,12 @@ public class FINANCIAL_AP_ARController implements Initializable {
     }
     public void loadtable_ap(){
           CompletableFuture.supplyAsync(() -> {
->>>>>>> f8a2b6a07730b48b5953ff7dc0e4035946173d7b
             while (Session.CurrentRoute.equals("id_apr")) {
                 try {
                     fbr.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
                         DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
                     });
                     if (DummyCount != GlobalCount) {
-<<<<<<< HEAD
-                        ap_tbl.getItems();
-                        List b = fbr.where("dr_status", "=", "Pending").get();
-                        Ap(b);
-                        totalAP();
-
-                        {
-
-                        }
-                        ap_tbl.setItems(brc);
-=======
                            ap_tbl.getItems();
                             List b = fbr.where("dr_status","=","Unpaid").get();
                             Ap(b);  
@@ -724,7 +582,6 @@ public class FINANCIAL_AP_ARController implements Initializable {
                      
 
                     ap_tbl.setItems(brc);
->>>>>>> f8a2b6a07730b48b5953ff7dc0e4035946173d7b
                         GlobalCount = DummyCount;
                     }
                     Thread.sleep(3000);
@@ -736,18 +593,9 @@ public class FINANCIAL_AP_ARController implements Initializable {
             return 0;
         }, Session.SessionThreads);
 
-<<<<<<< HEAD
-    }
-
-    private int Ap(List app) {
-
-        ap_tbl.getItems().clear();
-
-=======
      }
     private int Ap(List app){
         ap_tbl.getItems().clear();
->>>>>>> f8a2b6a07730b48b5953ff7dc0e4035946173d7b
         try {
             for (Object d : app) {
                 HashMap hm = (HashMap) d;   //exquisite casting
@@ -756,17 +604,6 @@ public class FINANCIAL_AP_ARController implements Initializable {
                 hm.get("dr_description");
                 hm.get("dr_amount");
                 hm.get("dr_status");
-<<<<<<< HEAD
-
-                brc.add(new AP_classfile(
-                        String.valueOf(hm.get("dr_daterequest")),
-                        String.valueOf(hm.get("dr_id")),
-                        String.valueOf(hm.get("dr_department")),
-                        String.valueOf(hm.get("dr_amount")),
-                        String.valueOf(hm.get("dr_status")),
-                        String.valueOf(hm.get("dr_journal_status"))
-                ));
-=======
                 
                brc.add(new AP_classfile(
                             String.valueOf(hm.get("dr_daterequest")),
@@ -778,7 +615,6 @@ public class FINANCIAL_AP_ARController implements Initializable {
                             String.valueOf(hm.get("dr_requestor"))
                             
                 ) );                 
->>>>>>> f8a2b6a07730b48b5953ff7dc0e4035946173d7b
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -853,14 +689,8 @@ public class FINANCIAL_AP_ARController implements Initializable {
         } catch (Exception e) {
             System.out.println(e);
         }
-<<<<<<< HEAD
-         */
-    }
-
-=======
 
         apPosting_tbl.setItems(brc5);
         return 0;
     }
->>>>>>> f8a2b6a07730b48b5953ff7dc0e4035946173d7b
 }
