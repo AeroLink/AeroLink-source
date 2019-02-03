@@ -188,6 +188,13 @@ public class HR1_ViewApplicantController implements Initializable {
         xInit();
     }
 
+    public void closeWind() {
+        // get a handle to the stage
+        Stage stage = (Stage) lblAppFull.getScene().getWindow();
+        // do what you have to do
+        stage.close();
+    }
+
     public void xInit() {
         lblAppFull.setText(HR1_Applicant.fullname);
         jobTitle.setText("Applying for " + HR1_Applicant.job_title);
@@ -236,8 +243,8 @@ public class HR1_ViewApplicantController implements Initializable {
                     {"app_id", "=", HR1_Applicant.app_id}
                 }).executeUpdate();
 
-                Helpers.EIS_Response.SuccessResponse("Success", "Applicant was successfully evaluated");
-                xInit();
+                Helpers.EIS_Response.SuccessResponse("Success", "Applicant was successfully evaluated.. This window will be close for update.");
+                closeWind();
             }
         });
 
@@ -272,8 +279,8 @@ public class HR1_ViewApplicantController implements Initializable {
             if (Integer.parseInt(StageID.getValue()) >= 2) {
                 menuER.setDisable(false);
             }
-            
-            if(Integer.parseInt(StageID.getValue()) == 2) {
+
+            if (Integer.parseInt(StageID.getValue()) == 2) {
                 panelExamResult.setVisible(true);
                 btnSubmit.setDisable(true);
                 checkExam();
@@ -288,7 +295,7 @@ public class HR1_ViewApplicantController implements Initializable {
                     btnOfferAccepted.setVisible(true);
                     btnOfferDeclined.setVisible(true);
                 }
-                
+
                 paneRatings.setVisible(false);
                 jobOfferPane.setVisible(true);
                 menuJobOffer.setDisable(false);
@@ -334,10 +341,10 @@ public class HR1_ViewApplicantController implements Initializable {
                             btnSubmit.setDisable(false);
                         }
                     });
-                    
+
                     GlobalC = DummyC;
                 }
-                
+
                 try {
                     TimeUnit.SECONDS.sleep(2);
                 } catch (InterruptedException ex) {
@@ -640,7 +647,8 @@ public class HR1_ViewApplicantController implements Initializable {
 
                     Helpers.EIS_Response.SuccessResponse("Success", "Applicant was successfully transfered to Initial Interview Stage");
                     dialog.close();
-
+                    closeWind();
+                            
                 }
             } else {
                 Helpers.EIS_Response.ErrorResponse("Halt!", "You could not select date before the current date \n" + LocalDate.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
