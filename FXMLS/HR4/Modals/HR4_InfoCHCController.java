@@ -5,7 +5,9 @@
  */
 package FXMLS.HR4.Modals;
 
+import FXMLS.HR4.Filler.HR4_EmpInfoFill;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -73,7 +75,26 @@ public class HR4_InfoCHCController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
+        
+        
+        
+        
+        //For 201 file
+        ec.setText(HR4_EmpInfoFill.a);
+        ln.setText(HR4_EmpInfoFill.b);
+        fn.setText(HR4_EmpInfoFill.c);
+        mn.setText(HR4_EmpInfoFill.d);
+        suffix.setText(HR4_EmpInfoFill.e);
+        gender.setText(HR4_EmpInfoFill.f);
+        cs.setText(HR4_EmpInfoFill.g);
+        wei.setText(HR4_EmpInfoFill.h);
+        hei.setText(HR4_EmpInfoFill.i);
+        cont_no.setText(HR4_EmpInfoFill.j);
+        email.setText(HR4_EmpInfoFill.k);
+        adds.setText(HR4_EmpInfoFill.l);
+        dob.setValue(LocalDate.parse(HR4_EmpInfoFill.m));
+        pob.setValue(LocalDate.parse(HR4_EmpInfoFill.n));
     }    
     
 }
