@@ -39,7 +39,7 @@
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></JFXComboBox>
-                        <JFXButton fx:id="btn_add_training" buttonType="RAISED" layoutX="483.0" layoutY="24.0" onAction="#AddTrainingModal" prefHeight="25.0" prefWidth="103.0" styleClass="btn-primary" text="Add Training" AnchorPane.rightAnchor="14.0">
+                        <JFXButton fx:id="btn_add_training" buttonType="RAISED" layoutX="400.0" layoutY="23.0" onAction="#AddTrainingModal" prefHeight="25.0" prefWidth="103.0" styleClass="btn-primary" text="Add Training" AnchorPane.rightAnchor="97.0">
                            <font>
                               <Font name="Lato Bold" size="14.0" />
                            </font>
@@ -52,6 +52,14 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </JFXComboBox>
+                        <JFXButton fx:id="btn_dt_refresh" buttonType="RAISED" layoutX="497.0" layoutY="23.0" onAction="#AddTrainingModal" prefHeight="28.0" prefWidth="83.0" styleClass="btn-primary" text="Refresh" AnchorPane.rightAnchor="2.0">
+                           <font>
+                              <Font name="Lato Bold" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
                      </children>
                   </AnchorPane>
               </content>
@@ -234,6 +242,33 @@
                            </cursor>
                         </JFXComboBox>
                      </children></AnchorPane>
+              </content>
+            </Tab>
+            <Tab id="tab" text="Budget">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tbl_budget_req" layoutX="-2.0" layoutY="65.0" prefHeight="291.0" prefWidth="600.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="65.0">
+                          <columns>
+                            <TableColumn fx:id="col_req_title" prefWidth="75.0" text="Request Title" />
+                            <TableColumn fx:id="col_priority_level" prefWidth="75.0" text="Priority Level" />
+                              <TableColumn fx:id="col_req_amount" prefWidth="75.0" text="Amount" />
+                              <TableColumn fx:id="col_req_budget_status" prefWidth="75.0" text="Status" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <JFXButton fx:id="btn_req_budget" layoutX="470.0" layoutY="20.0" styleClass="btn-primary" text="Request Budget" AnchorPane.rightAnchor="11.0">
+                           <font>
+                              <Font name="Lato Regular" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
               </content>
             </Tab>
          </tabs>

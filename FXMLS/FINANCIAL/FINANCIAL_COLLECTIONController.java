@@ -28,6 +28,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
@@ -56,6 +57,8 @@ public class FINANCIAL_COLLECTIONController implements Initializable {
     private Label totalAsset_label;
     @FXML
     private TableView<col_totalasset_classfile> col_asset_tbl;
+    @FXML
+    private DatePicker datepickersrch;
 
     /**
      * Initializes the controller class.
@@ -71,7 +74,54 @@ public class FINANCIAL_COLLECTIONController implements Initializable {
       
       addColTotalAst();
       loadColTotalAst();
+      
+      datepickersrch.setOnAction(e ->datesearch());
+      
     }    
+    
+    
+    private int srch(List sr){
+         collection_tbl.getItems().clear();
+        try {
+              for(Object d : sr)
+            {
+                HashMap hm = (HashMap) d;   //exquisite casting
+               cc.add(new Collection_classfile(
+                            String.valueOf(hm.get("ast_date")),
+                            String.valueOf(hm.get("ast_id")),
+                            String.valueOf(hm.get("ast_description")),
+                            String.valueOf(hm.get("ast_amount")),
+                            String.valueOf(hm.get("ast_pom_ast_amount")),
+                            String.valueOf(hm.get("ast_type")),
+                            String.valueOf(hm.get("ast_status2"))
+                ) );   
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        collection_tbl.setItems(cc);
+        return 0;
+       
+    }
+    public void datesearch(){
+      Log_assetsales_model arm = new Log_assetsales_model();
+      String SearchText = datepickersrch.getEditor().toString().equals("") ? "[a-z]" : datepickersrch.getEditor().toString();
+        
+        try {
+
+            List src = arm.where(new Object[][]{
+                {"ast_date", "=", "%" + SearchText +"%"}
+            }).get();
+            srch(src);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    
+    
+    
     public int total =0;
     public void total(){
         for(int i  = 0; i<col_total_tbl.getItems().size(); i++){

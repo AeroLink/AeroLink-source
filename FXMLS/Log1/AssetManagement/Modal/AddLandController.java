@@ -99,6 +99,10 @@ public class AddLandController implements Initializable {
         
         Boolean flag = Area.isEmpty() || Address.isEmpty() || YearBought.isEmpty() ||
                 pricePerSqMeters.isEmpty() || LandName.isEmpty();
+        int x = Integer.parseInt(Area_txt.getText());
+        int y = Integer.parseInt(pricePerSqMeters_txt.getText());
+        
+        String ans = String.valueOf(x*y);
         
         Log1_AssetLandModel assetLand = new Log1_AssetLandModel();
         Log1_AssetTotalizationModel AT = new Log1_AssetTotalizationModel();
@@ -111,7 +115,8 @@ public class AddLandController implements Initializable {
                     {"LandPricePerSqMeters", pricePerSqMeters_txt.getText()},
                     {"LandPurchasedDate", yearBought_txt.getText()},
                     {"LandStatus",radioButtonLabel.getText()},
-                    {"AssetCategory", "Land"}
+                    {"LandCurrentPrice",ans},
+                    {"LandPriceUpdated","0"}
                 };
                 String[][] AssetForTotal = {
                     {"AssetName", LandName_txt.getText()},
@@ -125,8 +130,8 @@ public class AddLandController implements Initializable {
                 };
                 if(assetLand.insert(landAsset_table)&&AT.insert(AssetForTotal)){
                     AlertMaker.showSimpleAlert("Saved", ""+ LandName_txt.getText() +" has been registered to assets");
-                    int x=Integer.parseInt(AssetLandCount_txt.getText());
-                    String answer=String.valueOf(x+1);
+                    int z=Integer.parseInt(AssetLandCount_txt.getText());
+                    String answer=String.valueOf(z+1);
                     assetCount.update(new Object[][]{
                         {"AssetLand",answer}
                     }).where(new Object[][]{

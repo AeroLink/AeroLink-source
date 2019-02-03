@@ -46,7 +46,6 @@ public class BUDGET_DECLINEController implements Initializable {
 
 
     
-    
     public void UpdateRequest(){
          Financial_budget_request budreq = new Financial_budget_request();
          try{

@@ -42,7 +42,7 @@
             <FontAwesomeIconView fill="WHITE" glyphName="PRINT" wrappingWidth="15.000007212162018" />
          </graphic>
       </JFXButton>
-      <JFXTextField focusColor="#34a853" layoutX="48.0" layoutY="51.0" promptText="Search Request No" unFocusColor="#34a853" />
-      <Label fx:id="no" layoutX="498.0" layoutY="55.0" text="Label" />
+      <JFXTextField fx:id="searchbar" focusColor="#34a853" layoutX="48.0" layoutY="51.0" promptText="Search Request No" unFocusColor="#34a853" />
+      <Label fx:id="no" layoutX="498.0" layoutY="55.0" text="Label" visible="false" />
    </children>
 </AnchorPane>

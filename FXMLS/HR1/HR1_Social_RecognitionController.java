@@ -201,7 +201,9 @@ public class HR1_Social_RecognitionController implements Initializable {
         ObservableList<TableModel_AwardTable> list = FXCollections.observableArrayList();
         award.get().stream().forEach(action -> {
             HashMap row = (HashMap) action;
-            list.add(new TableModel_AwardTable(row.get("award_name").toString(), row.get("award_description").toString(), row.get("date_added").toString()));
+            list.add(new TableModel_AwardTable(row.get("award_name").toString(),
+                    row.get("award_description").toString(), 
+                    row.get("date_added").toString()));
         });
 
         tbl_award.getItems().clear();

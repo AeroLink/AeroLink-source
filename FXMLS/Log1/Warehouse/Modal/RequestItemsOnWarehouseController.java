@@ -5,7 +5,7 @@
  */
 package FXMLS.Log1.Warehouse.Modal;
 
-import FXMLS.Log1.ClassFiles.Log1_fullInventoryList;
+//import FXMLS.Log1.ClassFiles.Log1_fullInventoryList;
 import FXMLS.Log1.util.AlertMaker;
 import Model.Log1.Log1_WarehouseRequestItemModel;
 import Model.Log1.Log1_WarehouseItemsModel;
@@ -48,12 +48,12 @@ public class RequestItemsOnWarehouseController implements Initializable {
     @FXML
     private JFXButton cancel_btn;
     @FXML
-    private TableView<Log1_fullInventoryList> selectItemforRequest_tbl;
-    @FXML
-    private TableColumn<Log1_fullInventoryList, String> Item_col;
-    @FXML
-    private TableColumn<Log1_fullInventoryList, String> status_col;
-    @FXML
+//    private TableView<Log1_fullInventoryList> selectItemforRequest_tbl;
+//    @FXML
+//    private TableColumn<Log1_fullInventoryList, String> Item_col;
+//    @FXML
+//    private TableColumn<Log1_fullInventoryList, String> status_col;
+//    @FXML
     private Label itemID_txt;
     @FXML
     private DatePicker DateRequested_txt;
@@ -67,7 +67,7 @@ public class RequestItemsOnWarehouseController implements Initializable {
         Request_btn.setOnAction(e ->saveItemType());
         cancel_btn.setOnAction(e ->close());
         callWarehouseItems();
-        displayWarehouseItem();
+//        displayWarehouseItem();
     }
 
     public void close(){
@@ -112,11 +112,11 @@ public class RequestItemsOnWarehouseController implements Initializable {
         destination_txt.setText("");
     }
 
-    @FXML
-    private void selectItemToRequestAction(MouseEvent event) {
-        itemID_txt.setText(selectItemforRequest_tbl.getSelectionModel().getSelectedItem().getItemID());
-        itemRequested_txt.setText(selectItemforRequest_tbl.getSelectionModel().getSelectedItem().getItemDescription());
-    }
+//    @FXML
+//    private void selectItemToRequestAction(MouseEvent event) {
+//        itemID_txt.setText(selectItemforRequest_tbl.getSelectionModel().getSelectedItem().getItemID());
+//        itemRequested_txt.setText(selectItemforRequest_tbl.getSelectionModel().getSelectedItem().getItemDescription());
+//    }
     
     public void callWarehouseItems(){
 //         Log1_WarehouseItemsModel coa = new Log1_WarehouseItemsModel();
@@ -154,8 +154,8 @@ public class RequestItemsOnWarehouseController implements Initializable {
 //        selectItemforRequest_tbl.setItems(ItemsXD);
     }
     
-    public void displayWarehouseItem(){
-        Item_col.setCellValueFactory(new PropertyValueFactory<>("ItemDescription"));
-        status_col.setCellValueFactory(new PropertyValueFactory<>("Status"));
-    }
+//    public void displayWarehouseItem(){
+//        Item_col.setCellValueFactory(new PropertyValueFactory<>("ItemDescription"));
+//        status_col.setCellValueFactory(new PropertyValueFactory<>("Status"));
+//    }
 }

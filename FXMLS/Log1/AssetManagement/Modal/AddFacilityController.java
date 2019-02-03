@@ -4,8 +4,10 @@ import FXMLS.Log1.util.AlertMaker;
 import Model.Log1.Log1_AssetBuildingModel;
 import Model.Log1.Log1_AssetCountModel;
 import Model.Log1.Log1_AssetFacilityModel;
+import Model.Log1.Log1_AssetLandModel;
 import Model.Log1.Log1_AssetTotalizationModel;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -38,6 +40,10 @@ public class AddFacilityController implements Initializable {
     private Label buildingID_txt;
     @FXML
     private Label AssetFacilityCount_txt;
+    @FXML
+    private JFXTextField buildingAddress_txt;
+    @FXML
+    private Label LandID_txt;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -48,6 +54,7 @@ public class AddFacilityController implements Initializable {
         cancel_btn.setOnAction(e-> clearFields());
         loadAssetFacilityCount();
         AssetFacilityCount_txt.setVisible(false);
+        getLandAddress();
     }
     
     public void loadBuildingToCombox(){
@@ -73,7 +80,24 @@ public class AddFacilityController implements Initializable {
             buildingID_txt.setText(( 
                 String.valueOf(hm.get("BuildingID"))
             ));
+            LandID_txt.setText((
+                String.valueOf(hm.get("LandID"))
+            ));
+            getLandAddress();
+        }
+    }
+    
+    public void getLandAddress(){
+        Log1_AssetLandModel land = new Log1_AssetLandModel();
+        List list_coa = land.where(new Object[][]{
+           {"LandID", "=", LandID_txt.getText()}
+        }).get();
+        for(Object d : list_coa){
+            HashMap hm = (HashMap) d;
             
+            buildingAddress_txt.setText((
+                String.valueOf(hm.get("LandAddress"))
+            ));
         }
     }
     
@@ -108,8 +132,7 @@ public class AddFacilityController implements Initializable {
                     {"FacilityRoomNumber", roomNumber_txt.getText()},
                     {"BuildingID", buildingID_txt.getText()},
                     {"FacilityCapacity", capacity_txt.getText()},
-                    {"FacilityStatus", "Vacant"},
-                    {"AssetCategory", "Facility"}
+                    {"FacilityStatus", "Vacant"}
                 };
                 String[][] AssetForTotal = {
                     {"AssetName", facilityName_txt.getText()},
