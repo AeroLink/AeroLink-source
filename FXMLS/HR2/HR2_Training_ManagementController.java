@@ -553,6 +553,7 @@ public class HR2_Training_ManagementController implements Initializable {
     }
 
     //for tbl_training_req
+    @FXML
     public void loadTrainingRequests() {
 
         try {

@@ -10,8 +10,10 @@ import FXMLS.HR2.ClassFiles.HR2_ExaminationClass;
 import FXMLS.HR2.ClassFiles.HR2_LMClass_For_AddQuestion_Modal;
 import FXMLS.HR2.ClassFiles.HR2_LM_AddExamModalClass;
 import FXMLS.HR2.ClassFiles.HR2_LM_CourseOutlineModal;
+import FXMLS.HR2.ClassFiles.LM_ExaRequestClass;
 import Model.HR2_Courses;
 import Model.HR2_Examination;
+import Model.HR2_LM_Exam_Request;
 import Model.HR4_Jobs;
 import Synapse.Components.Modal.Modal;
 import Synapse.Form;
@@ -74,6 +76,18 @@ public class HR2_Learning_ManagementController implements Initializable {
     private JFXComboBox cbox_job_title;
     @FXML
     private JFXButton btn_add_job;
+    @FXML
+    private TableView<LM_ExaRequestClass> tbl_exam_requests;
+    @FXML
+    private TableColumn<LM_ExaRequestClass, String> col_req_exam;
+    @FXML
+    private TableColumn<LM_ExaRequestClass, String> col_req_jp;
+    @FXML
+    private TableColumn<LM_ExaRequestClass, String> col_req_reason;
+    @FXML
+    private JFXComboBox cbox_dept;
+    @FXML
+    private TableColumn<LM_ExaRequestClass, String> col_req_status;
 
     /**
      * Initializes the controller class.
@@ -88,7 +102,7 @@ public class HR2_Learning_ManagementController implements Initializable {
         tbl_courses.setOnMouseClicked(e -> {
             populateExam();
         });
-
+        ExamRequest();
         loadJobsInComboBox();
 
         /*    if(!cbox_job_title.getValue().toString().isEmpty()){
@@ -124,33 +138,52 @@ public class HR2_Learning_ManagementController implements Initializable {
                     .where(new Object[][]{{"aerolink.tbl_hr2_courses.isDeleted", "<>", "1"}})
                     .get("aerolink.tbl_hr2_courses.course_id", "j.title as job_title");
             Data(courses);
-
-            /* CompletableFuture.supplyAsync(() -> {
-                while (Session.CurrentRoute.equals("learning_management")) {
-                    c.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(row -> {
-                        DummyCount = Long.parseLong(((HashMap) row).get("chk").toString());
-                    });
-
-                    if (DummyCount != GlobalCount) {
-
-                  
-
-                        GlobalCount = DummyCount;
-                    }
-
-                    try {
-                        Thread.sleep(3000);
-                    } catch (InterruptedException ex) {
-                        //Logger.getLogger(HR2_Competency_ManagementController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-
-                return 0;
-            }, Session.SessionThreads);*/
         } catch (Exception e) {
             System.out.println(e);
         }
 
+    }
+
+    @FXML
+    public void ExamRequest() {
+        try {
+            HR2_LM_Exam_Request lmer = new HR2_LM_Exam_Request();
+
+            List exam_req = lmer.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "dept", "=", "dept_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_eis_requisition", "request_id", "rs", "=", "request_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_eis_request_status", "req_status_id", "=", "rs", "request_status", true)
+                    .where(new Object[][]{{"aerolink.tbl_hr2_exam_requisition.isDeleted", "<>", "1"}})
+                    .get("er_id", "dept.dept_name,jobs.title,reason,aerolink.tbl_eis_request_status.req_status_id,aerolink.tbl_eis_request_status.req_status");
+            DisplayExamRequest(exam_req);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void DisplayExamRequest(List exam_req) {
+        ObservableList<LM_ExaRequestClass> er = FXCollections.observableArrayList();
+        er.clear();
+        try {
+            for (Object e : exam_req) {
+
+                HashMap hm = (HashMap) e;
+                System.out.println("[Loading Course Data ID] : " + String.valueOf(hm.get("course_id")));
+                er.add(
+                        new LM_ExaRequestClass(
+                                String.valueOf(hm.get("er_id")),
+                                String.valueOf(hm.get("dept_name")),
+                                String.valueOf(hm.get("title")),
+                                String.valueOf(hm.get("reason")),
+                                String.valueOf(hm.get("req_status_id")),
+                                String.valueOf(hm.get("req_status"))));
+
+            }
+            tbl_exam_requests.setItems(er);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     public void Data(List b) {

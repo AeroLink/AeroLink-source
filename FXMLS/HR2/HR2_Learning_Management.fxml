@@ -107,12 +107,21 @@
                                   <TableColumn fx:id="col_req_exam" prefWidth="75.0" text="Department" />
                                   <TableColumn fx:id="col_req_jp" prefWidth="75.0" text="Job Position" />
                                     <TableColumn fx:id="col_req_reason" prefWidth="75.0" text="Reason" />
+                                    <TableColumn fx:id="col_req_status" prefWidth="75.0" text="Status" />
                                 </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                               </TableView>
                               <JFXComboBox fx:id="cbox_dept" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="210.0" promptText="Select Department" />
+                              <JFXButton buttonType="RAISED" layoutX="1278.0" layoutY="49.0" onAction="#ExamRequest" prefHeight="29.0" prefWidth="83.0" styleClass="btn-primary" text="Refresh" AnchorPane.rightAnchor="12.0">
+                                 <font>
+                                    <Font name="Lato Regular" size="15.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
                            </children>
                         </AnchorPane>
                     </content>
