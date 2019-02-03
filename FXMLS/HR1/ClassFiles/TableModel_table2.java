@@ -21,7 +21,7 @@ public class TableModel_table2 {
     public StringProperty award_id;
     public StringProperty reward_id;
     public StringProperty remarks;
-    public StringProperty date_Posted;
+    public StringProperty date_posted;
 
     public TableModel_table2(String Department,String Employee_code, String Employee_name, String Ratings, String Award, String Reward, String Remarks, String Date_Posted) {
         this.id = new SimpleStringProperty(Department);
@@ -31,6 +31,6 @@ public class TableModel_table2 {
         this.award_id = new SimpleStringProperty(Award);
         this.reward_id = new SimpleStringProperty(Reward);
         this.remarks = new SimpleStringProperty(Remarks);
-        this.date_Posted = new SimpleStringProperty(Date_Posted);
+        this.date_posted = new SimpleStringProperty(Date_Posted);
     }
 }
