@@ -51,7 +51,6 @@ public class TM_AddTrainingController implements Initializable {
     private JFXComboBox cbox_type_of_training;
     @FXML
     private JFXTextField txt_limit_participants;
-    private JFXComboBox cbox_venue;
     @FXML
     private JFXComboBox cbox_facility;
     @FXML
