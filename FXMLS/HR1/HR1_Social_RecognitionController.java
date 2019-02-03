@@ -14,6 +14,7 @@ import FXMLS.HR1.ClassFiles.TableModel_tableUE;
 import Model.HR1.HR1_PerformanceGrade;
 import Model.HR1.HR1_SC_Award;
 import Model.HR1.HR1_SC_Reward;
+import Model.HR1.HR1_SC_Update;
 import Model.HR4.HR4_Employee;
 import Model.HR4_Departments;
 import Model.HR4_Jobs;
@@ -47,7 +48,9 @@ public class HR1_Social_RecognitionController implements Initializable {
     HR4_Employee employees = new HR4_Employee();
     HR4_Employee empJob = new HR4_Employee("job");
     HR4_Jobs jobs = new HR4_Jobs();
-
+      
+    HR1_SC_Update update = new HR1_SC_Update();
+    
     HR1_SC_Award award = new HR1_SC_Award();
 
     HR1_SC_Reward reward = new HR1_SC_Reward();
@@ -107,15 +110,29 @@ public class HR1_Social_RecognitionController implements Initializable {
 
         Object[] x = {"productivity", "qualityofwork", "Initiative", "teamwork", "problemsolving", "attendance"};
 
-        Department11.getItems().addAll(x);
-
+         award.get().stream().forEach(action -> {
+            HashMap row = (HashMap) action;
+        awardcategory.getItems().add(row.get("award_name").toString());
+         });
+         
+         reward.get().stream().forEach(action -> {
+            HashMap row = (HashMap) action;
+        rewardcategory.getItems().add(row.get("reward_name").toString());
+         });
+         
+        
         this.generateTable();
         this.renderTable();
         this.renderRewardTable();
+        
+        
 
     }
+    
 
     public void generateTable() {
+       
+        //
 
         tbl_award.getColumns().removeAll(tbl_award.getColumns());
 
@@ -154,32 +171,33 @@ public class HR1_Social_RecognitionController implements Initializable {
         Employee_Code.setCellValueFactory(value -> value.getValue().Employee_Code);
         Employee_Name.setCellValueFactory(value -> value.getValue().Employee_Name);
         Ratings.setCellValueFactory(value -> value.getValue().Ratings);
-
-        table1.getColumns().addAll(Department, Employee_Code, Employee_Name, Ratings);
-
         
-        //
+        table1.getColumns().addAll(Department, Employee_Code, Employee_Name, Ratings);
+     //
         table2.getColumns().removeAll(table2.getColumns());
 
-        TableColumn<TableModel_table2, String> Department1 = new TableColumn<>("Department");
-        TableColumn<TableModel_table2, String> Employee_Code1 = new TableColumn<>("Employee_code");
-        TableColumn<TableModel_table2, String> Employee_Name1 = new TableColumn<>("Employee_Name");
+        TableColumn<TableModel_table2, String> id = new TableColumn<>("Department");
+        TableColumn<TableModel_table2, String> employee_code = new TableColumn<>("Employee_code");
+        TableColumn<TableModel_table2, String> employee_name = new TableColumn<>("Employee_Name");
         TableColumn<TableModel_table2, String> Ratings1 = new TableColumn<>("Ratings");
-        TableColumn<TableModel_table2, String> Award1 = new TableColumn<>("Employee_Award");
-        TableColumn<TableModel_table2, String> Reward1 = new TableColumn<>("Employee_Reward");
-        TableColumn<TableModel_table2, String> Remarks1 = new TableColumn<>("Employee_Remarks");
-        TableColumn<TableModel_table2, String> Date_Posted1 = new TableColumn<>("Date_Posted");
+        TableColumn<TableModel_table2, String> award_id = new TableColumn<>("Employee_Award");
+        TableColumn<TableModel_table2, String> reward_id = new TableColumn<>("Employee_Reward");
+        TableColumn<TableModel_table2, String> remarks = new TableColumn<>("Employee_Remarks");
+        TableColumn<TableModel_table2, String> date_Posted = new TableColumn<>("Date_Posted");
 
-        Department1.setCellValueFactory(value -> value.getValue().Department);
-        Employee_Name1.setCellValueFactory(value -> value.getValue().Employee_Name);
+        id.setCellValueFactory(value -> value.getValue().id);
+        employee_code.setCellValueFactory(value -> value.getValue().employee_code);
+        employee_name.setCellValueFactory(value -> value.getValue().employee_name);
         Ratings1.setCellValueFactory(value -> value.getValue().Ratings);
-        Award1.setCellValueFactory(value -> value.getValue().Award);
-        Reward1.setCellValueFactory(value -> value.getValue().Reward);
-        Remarks1.setCellValueFactory(value -> value.getValue().Remarks);
-        Date_Posted1.setCellValueFactory(value -> value.getValue().Date_Posted);
+        award_id.setCellValueFactory(value -> value.getValue().award_id);
+        reward_id.setCellValueFactory(value -> value.getValue().reward_id);
+        remarks.setCellValueFactory(value -> value.getValue().remarks);
+        date_Posted.setCellValueFactory(value -> value.getValue().date_Posted);
 
-        table2.getColumns().addAll(Department1,Employee_Code1, Employee_Name1, Ratings1, Award1, Reward1, Remarks1, Date_Posted1);
-
+        table2.getColumns().addAll(id,employee_code, employee_name, Ratings1, award_id, reward_id, remarks, date_Posted);
+        
+        //
+       
         tblUE.getColumns().removeAll(tblUE.getColumns());
         
         TableColumn<TableModel_tableUE, String> xDepartment = new TableColumn<>("Department");
@@ -341,9 +359,48 @@ public class HR1_Social_RecognitionController implements Initializable {
         dateadded.setValue(null);
     }
 
+    @FXML
+    private void btnUpdateClear(ActionEvent event) {
+         
+            Dept1.setText("");
+            empid.setText("");
+            empname.setText("");
+            empname1.setText("");
+            remarks.setText("");
+            dateadded.setValue(null);
+    }
     //public void renderTableDepartment
 
     @FXML
     private void btnUpdate(ActionEvent event) {
+        if (update.insert(new Object[][]{
+            {"id",Dept1.getText()},
+            {"employee_code", empid.getText()},
+            {"employee_name", empname.getText()},
+            {"ratings", empname1.getText()},
+            {"award_id", awardcategory.getSelectionModel().getSelectedItem().toString()},
+            {"reward_id", rewardcategory.getSelectionModel().getSelectedItem().toString()},
+            {"remarks", remarks.getText()},
+            {"Date_added", dateadded.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE)}
+        })) {
+
+            Helpers.EIS_Response.SuccessResponse("Success", "Update Successfuly");
+
+            this.renderRewardTable();
+            
+            Dept1.setText("");
+            empid.setText("");
+            empname.setText("");
+            empname1.setText("");
+            awardcategory.setValue("");
+            rewardcategory.setValue("");
+            remarks.setText("");
+            dateadded.setValue(null);
+        }
     }
+    
+   
+    
+    
+    
 }
