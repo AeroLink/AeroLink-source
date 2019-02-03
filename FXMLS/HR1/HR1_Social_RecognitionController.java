@@ -35,6 +35,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -54,6 +55,7 @@ public class HR1_Social_RecognitionController implements Initializable {
     HR1_SC_Award award = new HR1_SC_Award();
 
     HR1_SC_Reward reward = new HR1_SC_Reward();
+   
     @FXML
     private TableView<TableModel_AwardTable> tbl_award;
     @FXML
@@ -72,6 +74,7 @@ public class HR1_Social_RecognitionController implements Initializable {
     private JFXDatePicker dateadded;
     @FXML
     private JFXComboBox awardcategory;
+    
     @FXML
     private JFXTextField Dept1;
     @FXML
@@ -103,14 +106,16 @@ public class HR1_Social_RecognitionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+         
         dept.get().stream().forEach(action -> {
             HashMap row = (HashMap) action;
             Department1.getItems().add(row.get("dept_name").toString());
         });
 
-        Object[] x = {"productivity", "qualityofwork", "Initiative", "teamwork", "problemsolving", "attendance"};
-
-         award.get().stream().forEach(action -> {
+      Object[] x = {"productivity", "qualityofwork", "Initiative", "teamwork", "problemsolving", "attendance"};
+        Department11.getItems().addAll(x);
+        
+        award.get().stream().forEach(action -> {
             HashMap row = (HashMap) action;
         awardcategory.getItems().add(row.get("award_name").toString());
          });
@@ -132,6 +137,14 @@ public class HR1_Social_RecognitionController implements Initializable {
 
     public void generateTable() {
        
+        //
+        table1.setOnMouseClicked((MouseEvent event) -> {
+
+            Dept1.setText(table1.getSelectionModel().getSelectedItem().Department.getValue());
+            empid.setText(table1.getSelectionModel().getSelectedItem().Employee_Code.getValue());
+            empname.setText(table1.getSelectionModel().getSelectedItem().Employee_Name.getValue());
+            empname1.setText(table1.getSelectionModel().getSelectedItem().Ratings.getValue());
+        });
         //
 
         tbl_award.getColumns().removeAll(tbl_award.getColumns());
@@ -192,7 +205,7 @@ public class HR1_Social_RecognitionController implements Initializable {
         award_id.setCellValueFactory(value -> value.getValue().award_id);
         reward_id.setCellValueFactory(value -> value.getValue().reward_id);
         remarks.setCellValueFactory(value -> value.getValue().remarks);
-        date_Posted.setCellValueFactory(value -> value.getValue().date_Posted);
+        date_Posted.setCellValueFactory(value -> value.getValue().date_posted);
 
         table2.getColumns().addAll(id,employee_code, employee_name, Ratings1, award_id, reward_id, remarks, date_Posted);
         
@@ -371,7 +384,9 @@ public class HR1_Social_RecognitionController implements Initializable {
             remarks.setText("");
             dateadded.setValue(null);
     }
-    //public void renderTableDepartment
+   
+    
+//public void renderTableDepartment
 
     @FXML
     private void btnUpdate(ActionEvent event) {
@@ -383,7 +398,7 @@ public class HR1_Social_RecognitionController implements Initializable {
             {"award_id", awardcategory.getSelectionModel().getSelectedItem().toString()},
             {"reward_id", rewardcategory.getSelectionModel().getSelectedItem().toString()},
             {"remarks", remarks.getText()},
-            {"Date_added", dateadded.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE)}
+            {"date_posted", dateadded.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE)}
         })) {
 
             Helpers.EIS_Response.SuccessResponse("Success", "Update Successfuly");
@@ -398,11 +413,7 @@ public class HR1_Social_RecognitionController implements Initializable {
             rewardcategory.setValue("");
             remarks.setText("");
             dateadded.setValue(null);
-        }
+        
     }
-    
-   
-    
-    
-    
+}
 }
