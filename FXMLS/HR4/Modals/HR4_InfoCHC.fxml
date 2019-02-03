@@ -306,7 +306,7 @@
                               </AnchorPane>
                               <AnchorPane prefHeight="535.0" prefWidth="456.0">
                                  <children>
-                                    <TableView fx:id="tbl_fb" layoutX="90.0" layoutY="103.0" prefHeight="535.0" prefWidth="451.0" stylesheets="@../../../Assets/css/pom.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-39.0" AnchorPane.topAnchor="0.0">
+                                    <TableView fx:id="tbl_fb" layoutX="90.0" layoutY="103.0" prefHeight="535.0" prefWidth="451.0" stylesheets="@../../../Assets/css/MainPanel.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-39.0" AnchorPane.topAnchor="0.0">
                                       <columns>
                                         <TableColumn prefWidth="75.0" text="C1" />
                                         <TableColumn prefWidth="75.0" text="C2" />
@@ -423,7 +423,7 @@
                               </VBox>
                               <AnchorPane prefHeight="535.0" prefWidth="474.0">
                                  <children>
-                                    <TableView fx:id="tbl_educ" layoutX="-1.0" layoutY="74.0" prefHeight="535.0" prefWidth="1265.0" stylesheets="@../../../Assets/css/pom.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <TableView fx:id="tbl_educ" layoutX="-1.0" layoutY="74.0" prefHeight="535.0" prefWidth="1265.0" stylesheets="@../../../Assets/css/MainPanel.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                       <columns>
                                         <TableColumn prefWidth="75.0" text="C1" />
                                         <TableColumn prefWidth="75.0" text="C2" />
@@ -535,7 +535,7 @@
                               </AnchorPane>
                               <AnchorPane prefHeight="535.0" prefWidth="467.0">
                                  <children>
-                                    <TableView fx:id="tbl_sems" layoutX="78.0" layoutY="79.0" prefHeight="535.0" prefWidth="467.0" stylesheets="@../../../Assets/css/pom.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <TableView fx:id="tbl_sems" layoutX="78.0" layoutY="79.0" prefHeight="535.0" prefWidth="467.0" stylesheets="@../../../Assets/css/MainPanel.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                       <columns>
                                         <TableColumn prefWidth="75.0" text="C1" />
                                         <TableColumn prefWidth="75.0" text="C2" />
@@ -646,7 +646,7 @@
                               </AnchorPane>
                               <AnchorPane prefHeight="535.0" prefWidth="473.0">
                                  <children>
-                                    <TableView fx:id="tbl_works" layoutX="107.0" layoutY="106.0" prefHeight="535.0" prefWidth="473.0" stylesheets="@../../../Assets/css/pom.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <TableView fx:id="tbl_works" layoutX="107.0" layoutY="106.0" prefHeight="535.0" prefWidth="473.0" stylesheets="@../../../Assets/css/MainPanel.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                       <columns>
                                         <TableColumn prefWidth="75.0" text="C1" />
                                         <TableColumn prefWidth="75.0" text="C2" />
@@ -742,7 +742,7 @@
                                     </AnchorPane>
                                  </children>
                               </VBox>
-                              <TableView prefHeight="535.0" prefWidth="473.0" stylesheets="@../../../Assets/css/pom.css">
+                              <TableView prefHeight="535.0" prefWidth="473.0" stylesheets="@../../../Assets/css/MainPanel.css">
                                 <columns>
                                   <TableColumn prefWidth="75.0" text="C1" />
                                   <TableColumn prefWidth="75.0" text="C2" />
@@ -826,7 +826,7 @@
                                     </AnchorPane>
                                  </children>
                               </VBox>
-                              <TableView fx:id="tbl_awards" prefHeight="535.0" prefWidth="472.0" stylesheets="@../../../Assets/css/pom.css">
+                              <TableView fx:id="tbl_awards" prefHeight="535.0" prefWidth="472.0" stylesheets="@../../../Assets/css/MainPanel.css">
                                 <columns>
                                   <TableColumn prefWidth="75.0" text="C1" />
                                   <TableColumn prefWidth="75.0" text="C2" />
@@ -930,7 +930,7 @@
                                     </AnchorPane>
                                  </children>
                               </VBox>
-                              <TableView fx:id="tbl_govs" prefHeight="535.0" prefWidth="467.0" stylesheets="@../../../Assets/css/pom.css">
+                              <TableView fx:id="tbl_govs" prefHeight="535.0" prefWidth="467.0" stylesheets="@../../../Assets/css/MainPanel.css">
                                 <columns>
                                   <TableColumn prefWidth="75.0" text="C1" />
                                   <TableColumn prefWidth="75.0" text="C2" />

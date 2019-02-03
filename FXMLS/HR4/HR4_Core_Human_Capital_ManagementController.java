@@ -53,7 +53,7 @@ import javafx.util.Callback;
 /**
  * FXML Controller class
  *
- * @author Lei
+ * @author Jae
  */
 public class HR4_Core_Human_Capital_ManagementController implements Initializable {
 
@@ -76,13 +76,11 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
     private JFXButton btnNewDept;
     @FXML
     private TableView<HR4_EmpInfoClass> tbl_chc;
-    @FXML
-    private ComboBox statcb;
-    @FXML
-    private ComboBox ckasscb;
-    @FXML
-    private JFXTextField srch1;
-    @FXML
+    //private ComboBox statcb;
+    //@FXML
+    //private ComboBox ckasscb;
+    //private JFXTextField srch1;
+   // @FXML
     private JFXTextField Search_Job;
     @FXML
     private PieChart pieChartGender;
@@ -90,8 +88,6 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
     @FXML
     private PieChart pieChartDept;
     private final ObservableList<PieChart.Data> piee = FXCollections.observableArrayList();
-    @FXML
-    private PieChart pieChartAge;
     @FXML
     private JFXButton btnNewEmployee;
 
@@ -102,10 +98,8 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
     public void initialize(URL url, ResourceBundle rb) {
         // TODO -> TRYING TO ENTER THE QUANTUM REALM (https://youtu.be/nN6VR92V70M)
         //For Jobs
-        weabo();
-        weabo1();
 
-        statcb.getSelectionModel().selectedItemProperty().addListener(listener -> {
+        /*statcb.getSelectionModel().selectedItemProperty().addListener(listener -> {
             GlobalCount = 0;
             DummyCount = 0;
         });
@@ -114,7 +108,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
             GlobalCount2 = 0;
             DummyCount2 = 0;
         });
-
+*/
         this.generateTable();
         this.populateTable();
 
@@ -132,10 +126,10 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
             tbl_chc.setItems(obj1);
         });
 
-        srch1.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-            Search();
-        });
-        srch1.setOnMouseClicked(event -> Search());
+        //srch1.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+         //   Search();
+        //});
+        //srch1.setOnMouseClicked(event -> Search());
 
         this.generateTable1();
         this.populateTable1();
@@ -149,7 +143,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
 
     }
 
-    public void weabo1() {
+    /*public void weabo1() {
         HR4_ClassificationModel cc = new HR4_ClassificationModel();
         try {
             List bo2 = cc.get();
@@ -177,7 +171,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         } catch (Exception e) {
             System.out.println(e);
         }
-    }
+    }*/
 
     /*public void SearchJOB() {
 
@@ -232,23 +226,6 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
 
     }
 
-    public void Piechart3() {
-        HR4_Jobs jobs = new HR4_Jobs();
-        piee.clear();
-        List<HashMap> list3x = jobs.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "=", "dept_id")
-                .groupBy("dept_name")
-                .get("dept_name, COUNT(dept_name) as Total");
-        list3x.forEach((row) -> {
-            piee.add(new PieChart.Data(row.get("dept_name").toString(),
-                    Double.parseDouble(row.get("Total").toString())));
-
-        });
-        pieChartDept.setData(piee);
-        pieChartDept.setLegendSide(Side.BOTTOM);
-        pieChartDept.setStartAngle(90);
-
-    }
-
     public void Search() {
 
         tbl_chc.getItems().clear();
@@ -258,8 +235,8 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "tblD", "job_id", true)
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "=", "aerolink.tbl_hr4_jobs", "dept_id", true)
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employeeStatus", "status_id", "st", "=", "status_id")
-                .where(new Object[][]{{"tblDD.lastname", "like", "%" + srch1.getText() + "%"}
-        })
+                //.where(new Object[][]{{"tblDD.lastname", "like", "%" + srch1.getText() + "%"}
+       // })
                 .get(
                         "tblD.employee_code",
                         "CONCAT(tblDD.lastname,', ',tblDD.firstname,' ',tblDD.middlename,'.') as fnn",
@@ -368,29 +345,16 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
             public TableCell<HR4_EmpInfoClass, Void> call(final TableColumn<HR4_EmpInfoClass, Void> param) {
 
                 final TableCell<HR4_EmpInfoClass, Void> cell = new TableCell<HR4_EmpInfoClass, Void>() {
-                    private final Button btn = new Button("Request");
+                    private final Button btn = new Button("More information");
 
                     {
                         try {
                             btn.setOnAction(e
                                     -> {
-                                HR4_EmpInfoFillClass fc = (HR4_EmpInfoFillClass) getTableRow().getItem();
+                                HR4_EmpInfoClass fc = (HR4_EmpInfoClass) getTableRow().getItem();
 
-                                HR4_EmpInfoFill.CreateNew(
-                                        fc.a.getValue(),
-                                        fc.b.getValue(),
-                                        fc.c.getValue(),
-                                        fc.d.getValue(),
-                                        fc.e.getValue(),
-                                        fc.f.getValue(),
-                                        fc.g.getValue(),
-                                        fc.h.getValue(),
-                                        fc.i.getValue(),
-                                        fc.j.getValue(),
-                                        fc.k.getValue(),
-                                        fc.l.getValue(),
-                                        fc.m.getValue(),
-                                        fc.n.getValue());
+                                HR4_EmpInfoFill.Tripk(
+                                        fc.employee_code.getValue());
                                 Modal lq = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_InfoCHC.fxml").getParent());
                                 lq.open();
                             });
@@ -453,8 +417,8 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "tblD", "job_id", true)
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "=", "aerolink.tbl_hr4_jobs", "dept_id", true)
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employeeStatus", "status_id", "st", "=", "status_id")
-                                .where(new Object[][]{{"st.status_name", "=", statcb.getSelectionModel().getSelectedItem().toString()}
-                        })
+                                //.where(new Object[][]{{"st.status_name", "=", statcb.getSelectionModel().getSelectedItem().toString()}
+                                //})
                                 .get(
                                         "tblD.employee_code",
                                         "CONCAT(tblDD.lastname,', ',tblDD.firstname,' ',tblDD.middlename,'.') as fnn",

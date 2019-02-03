@@ -16,6 +16,7 @@ import Synapse.Components.Modal.Modal;
 import Synapse.Form;
 import Synapse.Model;
 import Synapse.Session;
+import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -61,6 +62,8 @@ public class HR4_NewPayrollController implements Initializable {
     @FXML
     private TextField lbl_dpt;
     Boolean searchStatus = false;
+    @FXML
+    private JFXButton OKBtn;
     
     
     @Override

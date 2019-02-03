@@ -253,7 +253,7 @@ public class HR4_PayrollController implements Initializable {
                         try {
                             btn.setOnAction(e
                                     -> {
-                                HR4_NewPayrollClass fc = (HR4_NewPayrollClass) getTableRow().getItem();
+                            HR4_NewPayrollClass fc = (HR4_NewPayrollClass) getTableRow().getItem();
 
                                 HR4_NewPayrollFill2.SendRequest(
                                         fc.a.getValue(),
@@ -397,6 +397,12 @@ public class HR4_PayrollController implements Initializable {
 
     @FXML
     private void dltbtn(ActionEvent event) {
+    }
+
+    @FXML
+    private void OpenSettings(ActionEvent event) {
+        Modal md = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_PayrollSettings.fxml").getParent());
+        md.open();
     }
 }
 
