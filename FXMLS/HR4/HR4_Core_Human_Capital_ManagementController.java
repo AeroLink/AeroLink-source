@@ -92,6 +92,8 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
     private final ObservableList<PieChart.Data> piee = FXCollections.observableArrayList();
     @FXML
     private PieChart pieChartAge;
+    @FXML
+    private JFXButton btnNewEmployee;
 
     /**
      * Initializes the controller class.
@@ -120,13 +122,12 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         //SearchOfJob
 
         //Search_Job.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-          //  if (!Search_Job.getText().equals("")) {
-            //    searchStatus = true;
-              //  SearchJOB();
-            //}
+        //  if (!Search_Job.getText().equals("")) {
+        //    searchStatus = true;
+        //  SearchJOB();
+        //}
         //});
         ///////2ndobj
-
         obj1.addListener((ListChangeListener.Change<? extends Object> c) -> {
             tbl_chc.setItems(obj1);
         });
@@ -137,10 +138,14 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         srch1.setOnMouseClicked(event -> Search());
 
         this.generateTable1();
-        this.populateTable1();        
-        this.Piechart1(); 
+        this.populateTable1();
+        this.Piechart1();
         this.Piechart2();
 
+        btnNewEmployee.setOnAction(e -> {
+            Modal lqx = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_NewEmployee.fxml").getParent());
+            lqx.open();
+        });
 
     }
 
@@ -193,7 +198,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         this.AddJobToTable(rs);
     }*/
     HR4_InfoChartModel gcm = new HR4_InfoChartModel();
-    
+
     public void Piechart1() {
 
         pie.clear();
@@ -209,6 +214,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         pieChartGender.setStartAngle(90);
 
     }
+
     public void Piechart2() {
         HR4_Jobs jobs = new HR4_Jobs();
         piee.clear();
@@ -218,13 +224,14 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         list3x.forEach((row) -> {
             piee.add(new PieChart.Data(row.get("dept_name").toString(),
                     Double.parseDouble(row.get("Total").toString())));
-        
+
         });
         pieChartDept.setData(piee);
         pieChartDept.setLegendSide(Side.BOTTOM);
         pieChartDept.setStartAngle(90);
 
     }
+
     public void Piechart3() {
         HR4_Jobs jobs = new HR4_Jobs();
         piee.clear();
@@ -234,7 +241,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         list3x.forEach((row) -> {
             piee.add(new PieChart.Data(row.get("dept_name").toString(),
                     Double.parseDouble(row.get("Total").toString())));
-        
+
         });
         pieChartDept.setData(piee);
         pieChartDept.setLegendSide(Side.BOTTOM);
@@ -413,7 +420,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         tbl_chc.getColumns().add(addButton);
         //</editor-fold>
         tbl_chc.getColumns()
-        .addAll(employee_code, fnn, job_id, dept_id, status_id);
+                .addAll(employee_code, fnn, job_id, dept_id, status_id);
     }
 
     long DummyCount = 0;

@@ -219,7 +219,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <TableView fx:id="tblUE" layoutX="10.0" layoutY="34.0" prefHeight="574.0" prefWidth="492.0" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="34.0">
+                                                <TableView fx:id="tblUE" layoutX="10.0" layoutY="34.0" prefHeight="587.0" prefWidth="492.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="34.0">
                                                    <columnResizePolicy>
                                                       <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                                    </columnResizePolicy>
