@@ -18,6 +18,7 @@ import Model.Financial.Financial_entries;
 import Model.Financial.users_tbl;
 import Synapse.Components.Modal.Modal;
 import Synapse.Form;
+import Synapse.Model;
 import Synapse.Session;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -49,6 +50,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import static javax.management.Query.MINUS;
 
 /**
  * FXML Controller class
@@ -170,10 +172,7 @@ public class FINANCIAL_BUDGET_MANAGEMENTController implements Initializable {
            pendingreq_label.setText(String.valueOf(a));
     }
  
-    
-
-    
-      ObservableList<Pendingbudget_classfile> op = FXCollections.observableArrayList();
+    ObservableList<Pendingbudget_classfile> op = FXCollections.observableArrayList();
     Financial_budget_request p = new Financial_budget_request();
     public void addpendingtable(){
          pendingno_tbl.getItems().clear();
@@ -195,7 +194,7 @@ public class FINANCIAL_BUDGET_MANAGEMENTController implements Initializable {
         System.err.println(e);
     }
     }
-   private int pend(List pendings){
+    private int pend(List pendings){
          pendingno_tbl.getItems().clear();
         try {
               for(Object d : pendings)
@@ -328,15 +327,25 @@ public class FINANCIAL_BUDGET_MANAGEMENTController implements Initializable {
                         DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
                     });
                     budgetrequest_tbl.getItems();
-                    if (DummyCount != GlobalCount) {
-                        List b = fbr.where(new Object[][]{
-                            {"budget_status", "=", "Pending"}
-                        }).get();
-                        request(b);
-
+                    
+                    List b = fbr.where(new Object [][]{
+                        {"budget_status","=","Pending"}
+                        }).get("budget_id as budget_id",
+                               "budget_date_request as budget_date_request",
+                               "budget_department as budget_department",
+                               "CONCAT(budget_firstname,', ',budget_lastname) as  budget_firstname",
+                               "budget_description",
+                               "budget_priority_lvl",
+                               "budget_amount",
+                               "budget_status");
+                         request(b);
+                 int a = pendingno_tbl.getItems().size();
+           pendingreq_label.setText(String.valueOf(a));
+                         
+                         
                         budgetrequest_tbl.setItems(brc);
                         GlobalCount = DummyCount;
-                    }
+                    
                     Thread.sleep(3000);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(FINANCIAL_BUDGET_MANAGEMENTController.class.getName()).log(Level.SEVERE, null, ex);
@@ -349,7 +358,6 @@ public class FINANCIAL_BUDGET_MANAGEMENTController implements Initializable {
     }
 
     private void request(List req) {
-
         budgetrequest_tbl.getItems().clear();
         try {
 
@@ -359,9 +367,9 @@ public class FINANCIAL_BUDGET_MANAGEMENTController implements Initializable {
                 hm.get("budget_id");
                 hm.get("budget_date_request");
                 hm.get("budget_department");
-                hm.get("budget_requestor");
+                hm.get("budget_firstname");
                 hm.get("budget_description");
-                hm.get("budget_priority_lvlment");
+                hm.get("budget_priority_lvl");
                 hm.get("budget_amount");
                 hm.get("budget_status");
                 hm.get("budget_reason");
@@ -370,7 +378,7 @@ public class FINANCIAL_BUDGET_MANAGEMENTController implements Initializable {
                         String.valueOf(hm.get("budget_id")),
                         String.valueOf(hm.get("budget_date_request")),
                         String.valueOf(hm.get("budget_department")),
-                        String.valueOf(hm.get("budget_requestor")),
+                        String.valueOf(hm.get("budget_firstname")),
                         String.valueOf(hm.get("budget_description")),
                         String.valueOf(hm.get("budget_priority_lvl")),
                         String.valueOf(hm.get("budget_amount")),
@@ -400,13 +408,10 @@ public class FINANCIAL_BUDGET_MANAGEMENTController implements Initializable {
     public void updateRequest() {
         Financial_disbursement_request_model drm = new Financial_disbursement_request_model();
         Financial_budget_request fbrr = new Financial_budget_request();
-
         try {
-
             if (fbrr.update(new Object[][]{
                 {"budget_status", "Approved"},
                 {"budget_approvedby", "Admin"}
-
             }).where(new Object[][]{
                 {"budget_id", "=", label_id.getText()}
             }).executeUpdate()) {
@@ -422,14 +427,19 @@ public class FINANCIAL_BUDGET_MANAGEMENTController implements Initializable {
                             {"dr_budget_status", "Approved"}
                         };
                 drm.insert(insertodisbursement);
+                 int a = pendingno_tbl.getItems().size();
+                 pendingreq_label.setText(String.valueOf(a));
+
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.initStyle(StageStyle.UNDECORATED);
                 alert.setTitle("Approved");
                 alert.setContentText("Request Approved, and has been send to Disbursement");
                 alert.showAndWait();
-
+                
                 approved_btn.setDisable(true);
                 declined_btn.setDisable(true);
+                
+                
             } else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.initStyle(StageStyle.UNDECORATED);
@@ -481,8 +491,9 @@ public class FINANCIAL_BUDGET_MANAGEMENTController implements Initializable {
                     if (DummyCount != GlobalCount) {
 
                         allocation_tbl.getItems();
-                        List b = fam.get("ba_department as ba_department",
-                                            "ba_amount as ba_amount");
+                        List b = fam
+                                .get("ba_department as ba_department",
+                                        "ba_amount as ba_amount");
                         alloc(b);
                       
                         allocation_tbl.setItems(fac);

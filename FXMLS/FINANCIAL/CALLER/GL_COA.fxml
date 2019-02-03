@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="410.0" prefWidth="397.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.FINANCIAL.CALLER.GL_COAController">
+   <children>
+      <AnchorPane layoutX="-2.0" prefHeight="38.0" prefWidth="403.0" style="-fx-background-color: #34a853;">
+         <children>
+            <Label layoutX="14.0" layoutY="16.0" text="Chart of Accounts" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <BorderPane layoutX="16.0" layoutY="135.0" prefHeight="267.0" prefWidth="373.0">
+         <bottom>
+            <TableView fx:id="tbl_coa" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn prefWidth="75.0" text="C1" />
+                <TableColumn prefWidth="75.0" text="C2" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </bottom>
+         <left>
+            <JFXTextField fx:id="code_no" focusColor="#34a853" labelFloat="true" prefHeight="25.0" prefWidth="161.0" promptText="Code no" unFocusColor="#34a853" BorderPane.alignment="CENTER" />
+         </left>
+         <right>
+            <JFXTextField fx:id="account_title" focusColor="#34a853" labelFloat="true" prefHeight="25.0" prefWidth="169.0" promptText="Account Title" unFocusColor="#34a853" BorderPane.alignment="CENTER" />
+         </right>
+      </BorderPane>
+      <HBox layoutX="187.0" layoutY="69.0" prefHeight="56.0" prefWidth="206.0">
+         <children>
+            <JFXButton fx:id="update_btn" buttonType="RAISED" disable="true" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: #34a853;" text="Update" textFill="WHITE">
+               <HBox.margin>
+                  <Insets right="30.0" />
+               </HBox.margin>
+            </JFXButton>
+            <JFXButton fx:id="save_btn" buttonType="RAISED" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: #34a853;" text="Save" textFill="WHITE">
+               <HBox.margin>
+                  <Insets right="30.0" />
+               </HBox.margin>
+            </JFXButton>
+         </children>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </HBox>
+      <Label fx:id="labelid" layoutX="135.0" layoutY="69.0" text="Label" visible="false" />
+   </children>
+</AnchorPane>

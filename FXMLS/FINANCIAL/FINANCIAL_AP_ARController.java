@@ -8,10 +8,6 @@ package FXMLS.FINANCIAL;
 import FXMLS.FINANCIAL.CLASSFILES.APAR_Entries_classfile;
 import FXMLS.FINANCIAL.CLASSFILES.AP_classfile;
 import FXMLS.FINANCIAL.CLASSFILES.AR_classfile;
-import FXMLS.FINANCIAL.CLASSFILES.Budget_Request_classfile;
-import FXMLS.FINANCIAL.STATIC.CLASFILES.Finance_Entries;
-import Model.Financial.Financial_ar_model;
-import Model.Financial.Financial_budget_request;
 import Model.Financial.Financial_disbursement_request_model;
 import Model.Financial.Financial_entries;
 import Model.Financial.Log_assetsales_model;
@@ -20,7 +16,6 @@ import Synapse.Form;
 import Synapse.Session;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -110,6 +105,10 @@ public class FINANCIAL_AP_ARController implements Initializable {
     private Label journalstatus;
     @FXML
     private Label id_ast;
+    @FXML
+    private ContextMenu APcontexmenu;
+    @FXML
+    private MenuItem APmenuitem;
 
     
     @Override
@@ -129,8 +128,8 @@ public class FINANCIAL_AP_ARController implements Initializable {
         AddtableAPposting();
         LoadAPposting();
           
-      AddtableEntries();
-      LoadEntriesTable();
+        AddtableEntries();
+        LoadEntriesTable();
         pom_btn.setOnMouseClicked(e ->openPOM());
         asset_btn.setOnMouseClicked(e ->openAsset());
       // comboboxSales.setOnAction(e ->FilterStatus());
@@ -149,10 +148,64 @@ public class FINANCIAL_AP_ARController implements Initializable {
       typestatus.setText(ar.getTypestatus());
               
       });
+     apPosting_tbl.setContextMenu(APcontexmenu);
+     APmenuitem.setOnAction(e -> apPostingtoLedger());
      
      
+     apPosting_tbl.setOnMouseClicked(e -> {
+     AP_classfile ap = apPosting_tbl.getSelectionModel().getSelectedItem();
+     invoiceid.setText(ap.getInvoice());
+     date.setText(ap.getDate());
+     firstname.setText(ap.getDescription());
+     lastname.setText(ap.getAmount());
+     description.setText(ap.getJs());
+     amount.setText(ap.getStatus());
+     status.setText(ap.getName());
+     
+     
+     
+     });
     }   
-
+    Financial_entries fe1 = new Financial_entries();
+    public void apPostingtoLedger(){
+        Financial_disbursement_request_model lam1 = new Financial_disbursement_request_model();
+        
+        lam1.update(new Object[][]{
+                {"dr_journal_status","Posted"}
+                }).where(new Object[][]{
+                {"dr_id","=",invoiceid.getText()}
+                }).executeUpdate();
+          try
+        {
+           String[][] entries_tbl =
+        {
+        {"InvoiceEntries" ,        invoiceid.getText()},
+        {"DateEntries" ,           date.getText()},
+        {"FirstnameEntries" ,   status.getText()},
+        {"DescriptionEntries" ,    firstname.getText() },
+        {"AmountEntries" ,         lastname.getText()  },
+        {"JournalStatusEntries" ,  description.getText() },
+        {"StatusEntries" ,         amount.getText() },
+        
+        };
+        if(fe1.insert(entries_tbl)){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+             alert.initStyle(StageStyle.UNDECORATED);
+             alert.setTitle("Posted");
+             alert.setContentText("Posted"); 
+             alert.showAndWait();
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+             alert.initStyle(StageStyle.UNDECORATED);
+             alert.setTitle("Fail");
+             alert.setContentText("Failed"); 
+             alert.showAndWait();
+        }
+            }catch(Exception e)
+               {
+            e.printStackTrace();
+               }
+    }
     
     
     Financial_entries fe = new Financial_entries();
@@ -186,7 +239,13 @@ public class FINANCIAL_AP_ARController implements Initializable {
                     });
                      tbl_entries.getItems();
                      if (DummyCount != GlobalCount) {
-                         List b = fe.where("AccountStatus","=","Pending").get();
+                         List b = fe.where("AccountStatus","=","Pending")
+                                  .get("e_id as e_id",
+                                       "DateEntries as DateEntries",
+                                       "CONCAT(FirstnameEntries,', ',LastnameEntries) as FirstnameEntries",
+                                       "DescriptionEntries as DescriptionEntries",
+                                       "AmountEntries as AmountEntries",
+                                       "AccountStatus as AccountStatus");
                          
                          Entries(b);
                          tbl_entries.setItems(aec);
@@ -490,17 +549,17 @@ public class FINANCIAL_AP_ARController implements Initializable {
         ap_tbl.getColumns().removeAll(ap_tbl.getColumns());
         TableColumn<AP_classfile, String> apd = new TableColumn<>("Date");
         TableColumn<AP_classfile, String> apin = new TableColumn<>("Invoice No");
-        TableColumn<AP_classfile, String> apde = new TableColumn<>("Department");
+        TableColumn<AP_classfile, String> apdes = new TableColumn<>("Description");
         TableColumn<AP_classfile, String> apa = new TableColumn<>("Amount");
         TableColumn<AP_classfile, String> aps = new TableColumn<>("Status");
        
         apd.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apDate);
         apin.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apinvoice);
-        apde.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apDepartment);
+        apdes.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apDescription);
         apa.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apAmount);
         aps.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apStatus);
         
-        ap_tbl.getColumns().addAll(apd,apin,apde,apa,aps);
+        ap_tbl.getColumns().addAll(apd,apin,apdes,apa,aps);
     
     }
     public void loadtable_ap(){
@@ -539,17 +598,18 @@ public class FINANCIAL_AP_ARController implements Initializable {
                 HashMap hm = (HashMap) d;   //exquisite casting
                 hm.get("dr_daterequest");
                 hm.get("dr_id");
-                hm.get("dr_department");
+                hm.get("dr_description");
                 hm.get("dr_amount");
                 hm.get("dr_status");
                 
                brc.add(new AP_classfile(
                             String.valueOf(hm.get("dr_daterequest")),
                              String.valueOf(hm.get("dr_id")),
-                            String.valueOf(hm.get("dr_department")),
+                            String.valueOf(hm.get("dr_description")),
                             String.valueOf(hm.get("dr_amount")),
                             String.valueOf(hm.get("dr_status")),
-                            String.valueOf(hm.get("dr_journal_status"))
+                            String.valueOf(hm.get("dr_journal_status")),
+                            String.valueOf(hm.get("dr_requestor"))
                             
                 ) );                 
             }
@@ -569,19 +629,19 @@ public class FINANCIAL_AP_ARController implements Initializable {
         apPosting_tbl.getColumns().removeAll(apPosting_tbl.getColumns());
         TableColumn<AP_classfile, String> apd = new TableColumn<>("Date");
         TableColumn<AP_classfile, String> apin = new TableColumn<>("Invoice No");
-        TableColumn<AP_classfile, String> apde = new TableColumn<>("Department");
+        TableColumn<AP_classfile, String> apdes = new TableColumn<>("Description");
         TableColumn<AP_classfile, String> apa = new TableColumn<>("Amount");
         TableColumn<AP_classfile, String> aps = new TableColumn<>("Status");
         TableColumn<AP_classfile, String> apjs = new TableColumn<>("Journal Status");
        
         apd.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apDate);
         apin.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apinvoice);
-        apde.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apDepartment);
+        apdes.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apDescription);
         apa.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apAmount);
         aps.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apStatus);
         apjs.setCellValueFactory((TableColumn.CellDataFeatures<AP_classfile, String> param) -> param.getValue().apJournalStatus);
         
-        apPosting_tbl.getColumns().addAll(apd,apin,apde,apa,aps,apjs);
+        apPosting_tbl.getColumns().addAll(apd,apin,apdes,apa,aps,apjs);
     }
     public void LoadAPposting(){
          CompletableFuture.supplyAsync(() -> {
@@ -592,8 +652,7 @@ public class FINANCIAL_AP_ARController implements Initializable {
                     });
                     if (DummyCount != GlobalCount) {
                            apPosting_tbl.getItems();
-                            List b = fbr5.where("dr_status","=","Unpaid")
-                                    .orWhere("dr_status","=","Released").get();
+                            List b = fbr5.where("dr_journal_status","=","Not Posted").get();
                                     apPosting(b);  
                          apPosting_tbl.setItems(brc5);
                          GlobalCount = DummyCount;
@@ -613,18 +672,15 @@ public class FINANCIAL_AP_ARController implements Initializable {
               for(Object d : apPost)
             {
                 HashMap hm = (HashMap) d;   //exquisite casting
-                hm.get("dr_daterequest");
-                hm.get("dr_id");
-                hm.get("dr_department");
-                hm.get("dr_amount");
-                hm.get("dr_status");
+                
                brc5.add(new AP_classfile(
                             String.valueOf(hm.get("dr_daterequest")),
                             String.valueOf(hm.get("dr_id")),
-                            String.valueOf(hm.get("dr_department")),
+                            String.valueOf(hm.get("dr_description")),
                             String.valueOf(hm.get("dr_amount")),
                             String.valueOf(hm.get("dr_status")),
-                            String.valueOf(hm.get("dr_journal_status"))
+                            String.valueOf(hm.get("dr_journal_status")),
+                            String.valueOf(hm.get("dr_requestor"))
                 ) );                 
             }
         } catch (Exception e) {
