@@ -23,6 +23,7 @@ public class Log1_WarehouseRequestItemClassfiles {
     public SimpleStringProperty RequestPurpose;
     public SimpleStringProperty RequestPriorityLevel;
     public SimpleStringProperty DateRequested;
+    public SimpleStringProperty RequestStatus;
     
     public Log1_WarehouseRequestItemClassfiles(
             String RequestID,
@@ -35,7 +36,8 @@ public class Log1_WarehouseRequestItemClassfiles {
             String RequestQuantity,
             String RequestPurpose,
             String RequestPriorityLevel,
-            String DateRequested
+            String DateRequested,
+            String RequestStatus
     ){
         this.RequestID = new SimpleStringProperty(RequestID);
         this.ItemID = new SimpleStringProperty(ItemID);
@@ -48,8 +50,12 @@ public class Log1_WarehouseRequestItemClassfiles {
         this.RequestPurpose = new SimpleStringProperty(RequestPurpose);
         this.RequestPriorityLevel = new SimpleStringProperty(RequestPriorityLevel);
         this.DateRequested = new SimpleStringProperty(DateRequested);
+        this.RequestStatus = new SimpleStringProperty(RequestStatus);
     }
 
+    public String getRequestStatus(){
+        return RequestStatus.get();
+    }
     public String getItemID(){
         return ItemID.get();
     }
