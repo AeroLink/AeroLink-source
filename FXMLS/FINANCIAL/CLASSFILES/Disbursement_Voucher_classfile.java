@@ -12,27 +12,33 @@ import javafx.beans.property.SimpleStringProperty;
  * @author Gilbert
  */
 public class Disbursement_Voucher_classfile {
+             public SimpleStringProperty no;
           public SimpleStringProperty dvdreq;
           public SimpleStringProperty dvdep;
           public SimpleStringProperty dvdes;
           public SimpleStringProperty dvclaimant;
-          public SimpleStringProperty dvamount; 
-          public SimpleStringProperty dvreceivedby; 
+          public SimpleStringProperty dvamount;
           public SimpleStringProperty dvdatereleased;
+          public SimpleStringProperty dvreceivedby; 
         
-public Disbursement_Voucher_classfile(String dreq,String dep,
+public Disbursement_Voucher_classfile(String dno,String dreq,String dep,
         String des,
         String claimant,
         String amount,
-        String receivedby,
-        String datereleased){
+        String datereleased,
+        String receivedby){
             
+            this.no = new SimpleStringProperty(dno); 
           this.dvdreq = new SimpleStringProperty(dreq); 
           this.dvdep = new SimpleStringProperty(dep); 
           this.dvdes = new SimpleStringProperty(des); 
           this.dvclaimant = new SimpleStringProperty(claimant); 
           this.dvamount = new SimpleStringProperty(amount);
-          this.dvreceivedby = new SimpleStringProperty(receivedby);
           this.dvdatereleased = new SimpleStringProperty(datereleased);
+          this.dvreceivedby = new SimpleStringProperty(receivedby);
 }
+        public String getDno(){
+            return no.get();
+        }
+
 }

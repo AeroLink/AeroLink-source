@@ -20,14 +20,16 @@
    <children>
       <AnchorPane layoutY="-1.0" prefHeight="22.0" prefWidth="993.0" style="-fx-background-color: #34a853;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Label layoutX="9.0" layoutY="2.0" text="Collection" textFill="WHITE">
+            <Label layoutX="39.0" layoutY="3.0" text="Collection" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="15.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Label>
+            <FontAwesomeIconView fill="WHITE" glyphName="INBOX" layoutX="14.0" layoutY="29.0" size="20" />
+            <FontAwesomeIconView fill="WHITE" glyphName="ARROW_DOWN" layoutX="15.0" layoutY="19.0" size="15" />
          </children>
       </AnchorPane>
-      <JFXTabPane layoutX="-2.0" layoutY="23.0" prefHeight="690.0" prefWidth="993.0" stylesheets="@../../Assets/css/MainPanel.css" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0">
+      <JFXTabPane layoutX="-2.0" layoutY="31.0" prefHeight="682.0" prefWidth="993.0" stylesheets="@../../Assets/css/MainPanel.css" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0">
          <tabs>
             <Tab id="tab" text="Sales Record">
               <content>
@@ -123,7 +125,7 @@
                         <DatePicker layoutX="560.0" layoutY="290.0" prefHeight="37.0" prefWidth="174.0" promptText="Search by Date" AnchorPane.rightAnchor="259.0" />
                         <JFXButton layoutX="809.0" layoutY="198.0" prefHeight="25.0" prefWidth="170.0" style="-fx-background-color: #34a853;" text="Send Annual Budget" textFill="WHITE" AnchorPane.rightAnchor="14.0" />
                         <JFXButton fx:id="denomination_btn" layoutX="629.0" layoutY="198.0" prefHeight="25.0" prefWidth="170.0" style="-fx-background-color: #34a853;" text="Denomination" textFill="WHITE" AnchorPane.rightAnchor="194.0" />
-                        <DatePicker layoutX="220.0" layoutY="59.0" promptText="Date" />
+                        <DatePicker fx:id="datepickersrch" layoutX="220.0" layoutY="59.0" promptText="Date" />
                         <TableView fx:id="col_total_tbl" layoutX="407.0" layoutY="51.0" prefHeight="45.0" prefWidth="144.0" visible="false" AnchorPane.rightAnchor="442.0">
                           <columns>
                             <TableColumn prefWidth="75.0" text="C1" />

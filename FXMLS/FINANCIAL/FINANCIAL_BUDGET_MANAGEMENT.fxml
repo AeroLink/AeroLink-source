@@ -16,14 +16,15 @@
    <children>
       <AnchorPane prefHeight="22.0" prefWidth="993.0" style="-fx-background-color: #34a853;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Label layoutX="14.0" layoutY="1.0" text="Budget Management" textFill="WHITE">
+            <Label layoutX="45.0" layoutY="2.0" text="Budget Management" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Label>
+            <FontAwesomeIconView fill="WHITE" glyphName="BAR_CHART" layoutX="13.0" layoutY="24.0" size="20" />
          </children>
       </AnchorPane>
-      <JFXTabPane layoutY="22.0" prefHeight="692.0" prefWidth="993.0" stylesheets="@../../Assets/css/MainPanel.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <JFXTabPane layoutY="32.0" prefHeight="682.0" prefWidth="993.0" stylesheets="@../../Assets/css/MainPanel.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <tabs>
             <Tab id="tab" text="Budget Plan">
               <content>
@@ -31,8 +32,8 @@
                      <children>
                         <AnchorPane layoutX="7.0" layoutY="41.0" prefHeight="246.0" prefWidth="981.0" style="-fx-border-color: #34a853;" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="5.0">
                            <children>
-                              <PieChart fx:id="Piechart1" layoutX="8.0" layoutY="7.0" prefHeight="231.0" prefWidth="391.0" style="-fx-border-color: #34a853;" title="Allocated Budget" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="583.0" />
-                              <PieChart fx:id="disbursebudget_piechart" layoutX="403.0" layoutY="7.0" prefHeight="231.0" prefWidth="571.0" style="-fx-border-color: #34a853;" title="Disbursement Chart" AnchorPane.rightAnchor="7.0" />
+                              <PieChart fx:id="Piechart1" layoutX="8.0" layoutY="7.0" prefHeight="231.0" prefWidth="391.0" style="-fx-background-color: #cadaca;" title="Allocated Budget" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="583.0" />
+                              <PieChart fx:id="disbursebudget_piechart" layoutX="403.0" layoutY="7.0" prefHeight="231.0" prefWidth="571.0" style="-fx-background-color: #cadaca;" title="Disbursement Chart" AnchorPane.rightAnchor="7.0" />
                            </children>
                         </AnchorPane>
                         <TableView fx:id="allocation_tbl" layoutX="357.0" layoutY="366.0" prefHeight="283.0" prefWidth="356.0" AnchorPane.leftAnchor="357.0" AnchorPane.rightAnchor="280.0">
@@ -126,7 +127,7 @@
                                     <Font name="System Bold" size="20.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="pendingreq_label" layoutX="127.0" layoutY="1.0" prefHeight="30.0" prefWidth="9.0" text="1" textFill="WHITE">
+                              <Label fx:id="pendingreq_label" layoutX="127.0" layoutY="1.0" prefHeight="30.0" prefWidth="9.0" text="1" textFill="WHITE" visible="false">
                                  <font>
                                     <Font name="System Bold" size="20.0" />
                                  </font>

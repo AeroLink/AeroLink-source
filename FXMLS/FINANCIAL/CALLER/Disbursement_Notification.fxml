@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.FINANCIAL.CALLER.Disbursement_NotificationController">
+   <children>
+      <AnchorPane layoutX="3.0" layoutY="2.0" prefHeight="32.0" prefWidth="594.0" style="-fx-background-color: #34a853;">
+         <children>
+            <Label layoutX="38.0" prefHeight="32.0" prefWidth="161.0" text="Received Notification" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <FontAwesomeIconView fill="WHITE" glyphName="BELL" layoutX="14.0" layoutY="22.0" size="15" />
+         </children>
+      </AnchorPane>
+      <TableView fx:id="received_tbl" layoutY="36.0" prefHeight="337.0" prefWidth="600.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <JFXButton fx:id="okay_btn" layoutX="241.0" layoutY="374.0" prefHeight="25.0" prefWidth="114.0" style="-fx-background-color: #34a853;" text="Okay" textFill="WHITE" />
+   </children>
+</AnchorPane>
