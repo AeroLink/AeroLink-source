@@ -163,15 +163,15 @@ public class HR1_Performance_ManagementController implements Initializable {
 //            ));
 //
 //        });
-    //PerfMove
+        //PerfMove32
         empJob.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "=", "employee_code")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employees", "employee_code", "=", "employee_code")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "job_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "=", "aerolink.tbl_hr4_jobs", "dept_id", true)
                 .where(new Object[][]{
-                    {"dept_name", "=", cboDept.getSelectionModel().getSelectedItem().toString()},
-                    {"status_id", "=", 1}
-                }).get()
+            {"dept_name", "=", cboDept.getSelectionModel().getSelectedItem().toString()},
+            {"status_id", "=", 1}
+        }).get()
                 .stream().forEach(action -> {
 
                     HashMap row = (HashMap) action;
