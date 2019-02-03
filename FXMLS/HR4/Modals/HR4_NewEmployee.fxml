@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="459.0" prefWidth="891.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXTabPane layoutX="212.0" layoutY="200.0" prefHeight="400.0" prefWidth="841.0" side="LEFT" stylesheets="@../../../Assets/css/tabCSS.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <tabs>
+            <Tab id="tab">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="881.0">
+                     <children>
+                        <AnchorPane layoutX="148.0" layoutY="137.0" prefHeight="43.0" prefWidth="853.0" style="-fx-background-color: #34A853;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label layoutX="9.0" layoutY="8.0" text="PERSONAL INFORMATION" textFill="WHITE">
+                                 <font>
+                                    <Font name="Segoe UI Semibold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <ImageView fitHeight="134.0" fitWidth="168.0" layoutX="11.0" layoutY="281.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../Assets/img_avatar4.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="12.0" layoutY="55.0" text="First Name">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="12.0" layoutY="77.0" prefHeight="25.0" prefWidth="213.0" />
+                        <Label layoutX="235.0" layoutY="55.0" text="Last Name">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="235.0" layoutY="77.0" prefHeight="25.0" prefWidth="213.0" />
+                        <Label layoutX="457.0" layoutY="55.0" text="Middle Name">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="457.0" layoutY="77.0" prefHeight="25.0" prefWidth="213.0" />
+                        <Label layoutX="679.0" layoutY="55.0" text="Suffix">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <ComboBox layoutX="679.0" layoutY="77.0" prefWidth="150.0" />
+                        <Label layoutX="12.0" layoutY="111.0" text="Date of Birth">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <DatePicker layoutX="10.0" layoutY="130.0" prefHeight="25.0" prefWidth="214.0" />
+                        <Label layoutX="235.0" layoutY="110.0" text="Place of Birth">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="234.0" layoutY="131.0" prefHeight="25.0" prefWidth="213.0" />
+                        <Label layoutX="679.0" layoutY="111.0" text="Gender">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <ComboBox layoutX="679.0" layoutY="131.0" prefWidth="150.0" />
+                        <Label layoutX="457.0" layoutY="110.0" text="Civil Status">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <ComboBox layoutX="458.0" layoutY="131.0" prefHeight="25.0" prefWidth="210.0" />
+                        <Label layoutX="9.0" layoutY="169.0" text="Height [cms]">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="9.0" layoutY="191.0" prefHeight="25.0" prefWidth="217.0" />
+                        <Label layoutX="233.0" layoutY="170.0" text="Weight [kg]">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="233.0" layoutY="192.0" prefHeight="25.0" prefWidth="213.0" />
+                        <Label layoutX="679.0" layoutY="170.0" text="Contact Number">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="457.0" layoutY="192.0" prefHeight="25.0" prefWidth="213.0" />
+                        <Label layoutX="458.0" layoutY="169.0" text="Email Address">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="679.0" layoutY="191.0" prefHeight="25.0" prefWidth="152.0" />
+                        <Label layoutX="11.0" layoutY="223.0" text="Complete Address">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="11.0" layoutY="245.0" prefHeight="25.0" prefWidth="823.0" />
+                        <AnchorPane layoutX="149.0" layoutY="281.0" prefHeight="169.0" prefWidth="687.0" AnchorPane.leftAnchor="149.0" AnchorPane.rightAnchor="13.0">
+                           <children>
+                              <AnchorPane prefHeight="32.0" prefWidth="687.0" style="-fx-background-color: #34A853;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Label layoutX="9.0" layoutY="8.0" text="JOB INFORMATION" textFill="WHITE">
+                                       <font>
+                                          <Font name="Segoe UI Semibold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                        <JFXButton layoutX="9.0" layoutY="422.0" prefHeight="25.0" prefWidth="136.0" styleClass="btn-primary" text="Upload a Photo" />
+                     </children></AnchorPane>
+              </content>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="USER" size="30" styleClass="fontIcon" />
+               </graphic>
+            </Tab>
+            <Tab id="tab">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane layoutX="148.0" layoutY="137.0" prefHeight="43.0" prefWidth="853.0" style="-fx-background-color: #34A853;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label layoutX="9.0" layoutY="8.0" text="FAMILY BACKGROUND" textFill="WHITE">
+                                 <font>
+                                    <Font name="Segoe UI Semibold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="GROUP" size="30" styleClass="fontIcon" />
+               </graphic>
+            </Tab>
+            <Tab id="tab">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane layoutX="148.0" layoutY="137.0" prefHeight="43.0" prefWidth="853.0" style="-fx-background-color: #34A853;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label layoutX="9.0" layoutY="8.0" text="EDUCATIONAL ATTAINTMENT" textFill="WHITE">
+                                 <font>
+                                    <Font name="Segoe UI Semibold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="PENCIL" size="30" styleClass="fontIcon" />
+               </graphic>
+            </Tab>
+            <Tab id="tab">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane layoutX="148.0" layoutY="137.0" prefHeight="43.0" prefWidth="853.0" style="-fx-background-color: #34A853;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label layoutX="9.0" layoutY="8.0" text="TRAINING AND SEMINARS" textFill="WHITE">
+                                 <font>
+                                    <Font name="Segoe UI Semibold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+               <graphic>
+                  <MaterialDesignIconView glyphName="SWORD" size="30" styleClass="fontIcon" />
+               </graphic>
+            </Tab>
+            <Tab id="tab">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane layoutX="148.0" layoutY="137.0" prefHeight="43.0" prefWidth="853.0" style="-fx-background-color: #34A853;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label layoutX="9.0" layoutY="8.0" text="WORK EXPERIENCE" textFill="WHITE">
+                                 <font>
+                                    <Font name="Segoe UI Semibold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+               <graphic>
+                  <MaterialDesignIconView glyphName="ACCOUNT_STAR_VARIANT" size="30" styleClass="fontIcon" />
+               </graphic>
+            </Tab>
+            <Tab id="tab">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane layoutX="148.0" layoutY="137.0" prefHeight="43.0" prefWidth="853.0" style="-fx-background-color: #34A853;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label layoutX="9.0" layoutY="8.0" text="CERTIFICATIONS" textFill="WHITE">
+                                 <font>
+                                    <Font name="Segoe UI Semibold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+               <graphic>
+                  <MaterialDesignIconView glyphName="CERTIFICATE" size="30" styleClass="fontIcon" />
+               </graphic>
+            </Tab>
+            <Tab id="tab">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane layoutX="148.0" layoutY="137.0" prefHeight="43.0" prefWidth="853.0" style="-fx-background-color: #34A853;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label layoutX="9.0" layoutY="8.0" text="ACADEMIC AWARDS" textFill="WHITE">
+                                 <font>
+                                    <Font name="Segoe UI Semibold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+               <graphic>
+                  <MaterialDesignIconView glyphName="CARDS_OUTLINE" size="30" styleClass="fontIcon" />
+               </graphic>
+            </Tab>
+            <Tab id="tab">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane layoutX="148.0" layoutY="137.0" prefHeight="43.0" prefWidth="853.0" style="-fx-background-color: #34A853;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label layoutX="9.0" layoutY="8.0" text="GOVERNMENT IDs" textFill="WHITE">
+                                 <font>
+                                    <Font name="Segoe UI Semibold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+               <graphic>
+                  <MaterialDesignIconView glyphName="ACCOUNT_CARD_DETAILS" size="30" styleClass="fontIcon" />
+               </graphic>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+   </children>
+</AnchorPane>
