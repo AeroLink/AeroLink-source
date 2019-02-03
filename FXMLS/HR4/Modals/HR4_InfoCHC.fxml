@@ -1,280 +1,951 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXTextArea?>
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="711.0" prefWidth="909.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR4.Modals.HR4_InfoCHCController">
+<AnchorPane id="AnchorPane" prefHeight="564.0" prefWidth="943.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR4.Modals.HR4_InfoCHCController">
    <children>
-      <BorderPane prefHeight="646.0" prefWidth="909.0" style="-fx-background-color: #ebebe0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <top>
-            <AnchorPane prefHeight="223.0" prefWidth="909.0" style="-fx-background-color: #ebebe0;" BorderPane.alignment="CENTER">
-               <children>
-                  <HBox layoutX="7.0" layoutY="36.0" prefHeight="181.0" prefWidth="896.0">
+      <TabPane prefHeight="539.0" prefWidth="970.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab fx:id="tbl_pers" text="Personal Information">
+            <content>
+              <AnchorPane id="tab" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-label">
                      <children>
-                        <AnchorPane prefHeight="181.0" prefWidth="215.0" style="-fx-background-color: white; -fx-border-color: black;" />
-                        <AnchorPane prefHeight="181.0" prefWidth="313.0" style="-fx-background-color: white;">
-                           <children>
-                              <Label layoutX="14.0" layoutY="41.0" text="Queral, Arjale Jayrie G.">
-                                 <font>
-                                    <Font name="Arial Italic" size="20.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="14.0" layoutY="67.0" text="EDITOR">
-                                 <font>
-                                    <Font name="Arial Bold" size="15.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="14.0" layoutY="13.0" text="EMP0901800">
-                                 <font>
-                                    <Font name="Arial Bold" size="24.0" />
-                                 </font>
-                              </Label>
-                              <Button layoutX="10.0" layoutY="150.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="63.0" style="-fx-border-color: black;" styleClass="btn-rounded" text="Upload" />
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane prefHeight="181.0" prefWidth="170.0" style="-fx-background-color: white;">
-                           <children>
-                              <Label layoutX="6.0" layoutY="14.0" text="Date Hired:">
-                                 <font>
-                                    <Font name="Arial Bold" size="15.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="8.0" layoutY="38.0" text="2019-01-09">
-                                 <font>
-                                    <Font name="Arial" size="13.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="2.0" layoutY="91.0" text="Department:">
-                                 <font>
-                                    <Font name="Arial Bold" size="15.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="3.0" layoutY="117.0" text="IT/Digital Media">
-                                 <font>
-                                    <Font name="Arial" size="13.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane prefHeight="181.0" prefWidth="196.0" style="-fx-background-color: white;">
-                           <children>
-                              <Label layoutX="5.0" layoutY="14.0" text="Designation:">
-                                 <font>
-                                    <Font name="Arial Bold" size="15.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="5.0" layoutY="91.0" text="Employee Type:">
-                                 <font>
-                                    <Font name="Arial Bold" size="15.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="6.0" layoutY="39.0" text="Office">
-                                 <font>
-                                    <Font name="Arial" size="13.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="5.0" layoutY="116.0" text="Part Time">
-                                 <font>
-                                    <Font name="Arial" size="13.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </AnchorPane>
-                     </children>
-                  </HBox>
-                  <Label layoutX="8.0" layoutY="14.0" text="Employee Information">
-                     <font>
-                        <Font name="Arial Bold Italic" size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-         </top>
-         <center>
-            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-               <children>
-                  <AnchorPane prefHeight="348.0" prefWidth="909.0" style="-fx-background-color: #ebebe0;">
-                     <children>
-                        <Label layoutX="7.0" layoutY="5.0" text="General Information:">
-                           <font>
-                              <Font name="Arial Bold Italic" size="14.0" />
-                           </font>
-                        </Label>
-                        <VBox layoutX="7.0" layoutY="24.0" prefHeight="317.0" prefWidth="296.0">
-                           <children>
-                              <AnchorPane prefHeight="27.0" prefWidth="319.0" style="-fx-background-color: white;">
+                        <BorderPane layoutX="71.0" layoutY="102.0" prefHeight="535.0" prefWidth="943.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <center>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <Label layoutX="6.0" layoutY="5.0" text="Last Name:">
-                                       <font>
-                                          <Font name="Arial Bold" size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER_RIGHT" layoutX="115.0" layoutY="4.0" prefHeight="17.0" prefWidth="169.0" text="Queral">
-                                       <font>
-                                          <Font name="Arial" size="13.0" />
-                                       </font>
-                                    </Label>
+                                    <GridPane layoutX="-5.0" layoutY="-7.0" prefHeight="342.0" prefWidth="943.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="-5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="-7.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="465.33331298828125" minWidth="10.0" prefWidth="37.33333206176758" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="667.0" minWidth="10.0" prefWidth="132.6666717529297" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="667.0" minWidth="10.0" prefWidth="272.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="667.0" minWidth="10.0" prefWidth="76.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="667.0" minWidth="10.0" prefWidth="137.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="667.0" minWidth="10.0" prefWidth="263.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="667.0" minWidth="10.0" prefWidth="30.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints maxHeight="237.6666717529297" minHeight="10.0" prefHeight="230.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="170.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="201.0" minHeight="10.0" prefHeight="38.666656494140625" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="176.0" minHeight="0.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="156.66665649414062" minHeight="10.0" prefHeight="31.666656494140625" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="156.66665649414062" minHeight="10.0" prefHeight="34.333343505859375" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="156.66665649414062" minHeight="10.0" prefHeight="31.33331298828125" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="156.66665649414062" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="156.66665649414062" minHeight="3.333343505859375" prefHeight="33.333343505859375" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="156.66665649414062" minHeight="5.0" prefHeight="31.33331298828125" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="156.66665649414062" minHeight="10.0" prefHeight="40.66668701171875" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <AnchorPane prefHeight="228.0" prefWidth="340.0">
+                                             <children>
+                                                <ImageView fitHeight="215.0" fitWidth="231.0" layoutX="38.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="38.0" AnchorPane.rightAnchor="75.56826782226562" AnchorPane.topAnchor="6.0">
+                                                   <image>
+                                                      <Image url="@../../../Assets/img_avatar4.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <JFXButton layoutX="259.0" layoutY="188.0" prefHeight="34.0" prefWidth="65.0" styleClass="btn-primary" text="Upload" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="259.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="188.0" />
+                                             </children>
+                                          </AnchorPane>
+                                          <Label text="Last Name :" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                             <font>
+                                                <Font name="Segoe UI Light Italic" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="ln" alignment="CENTER_RIGHT" disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField fx:id="fn" alignment="CENTER_RIGHT" disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField fx:id="mn" alignment="CENTER_RIGHT" disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField fx:id="suffix" alignment="CENTER_RIGHT" disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField fx:id="gender" alignment="CENTER_RIGHT" disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="7">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </TextField>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5">
+                                             <children>
+                                                <JFXButton layoutX="25.0" layoutY="12.0" prefHeight="29.0" prefWidth="236.0" styleClass="btn-primary" text="Edit Information" />
+                                                <JFXButton layoutX="27.0" layoutY="47.0" prefHeight="25.0" prefWidth="234.0" styleClass="btn-primary" text="Save Changes" />
+                                                <FontAwesomeIconView fill="WHITE" glyphName="EDIT" layoutX="84.0" layoutY="31.0" />
+                                                <FontAwesomeIconView fill="WHITE" glyphName="SAVE" layoutX="89.0" layoutY="64.0" text="" />
+                                             </children>
+                                          </AnchorPane>
+                                          <Label text="First Name:" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                             <font>
+                                                <Font name="Segoe UI Light Italic" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Middle Name :" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                             <font>
+                                                <Font name="Segoe UI Light Italic" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Suffix :" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                             <font>
+                                                <Font name="Segoe UI Light Italic" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Gender :" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                                             <font>
+                                                <Font name="Segoe UI Light Italic" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Weight :" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                                             <font>
+                                                <Font name="Segoe UI Light Italic" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Height :" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                                             <font>
+                                                <Font name="Segoe UI Light Italic" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Contact Number :" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                                             <font>
+                                                <Font name="Segoe UI Light Italic" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Email :" GridPane.columnIndex="4" GridPane.rowIndex="5">
+                                             <font>
+                                                <Font name="Segoe UI Light Italic" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Address :" GridPane.columnIndex="4" GridPane.rowIndex="6">
+                                             <font>
+                                                <Font name="Segoe UI Light Italic" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Civil Status :" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                                             <font>
+                                                <Font name="Segoe UI Light Italic" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="cs" alignment="CENTER_RIGHT" disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="8">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField fx:id="wei" alignment="CENTER_RIGHT" GridPane.columnIndex="2" GridPane.rowIndex="9">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField fx:id="hei" alignment="CENTER_RIGHT" disable="true" editable="false" GridPane.columnIndex="5" GridPane.rowIndex="3">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField fx:id="cont_no" alignment="CENTER_RIGHT" disable="true" editable="false" GridPane.columnIndex="5" GridPane.rowIndex="4">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField fx:id="email" alignment="CENTER_RIGHT" disable="true" editable="false" GridPane.columnIndex="5" GridPane.rowIndex="5">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField fx:id="adds" alignment="CENTER_RIGHT" disable="true" editable="false" GridPane.columnIndex="5" GridPane.rowIndex="6">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </TextField>
+                                          <Label text="Date of Birth :" GridPane.columnIndex="4" GridPane.rowIndex="7">
+                                             <font>
+                                                <Font name="Segoe UI Light Italic" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Place of Birth :" GridPane.columnIndex="4" GridPane.rowIndex="8">
+                                             <font>
+                                                <Font name="Segoe UI Light Italic" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <DatePicker fx:id="dob" prefHeight="25.0" prefWidth="266.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+                                          <DatePicker fx:id="pob" prefHeight="25.0" prefWidth="273.0" GridPane.columnIndex="5" GridPane.rowIndex="8" />
+                                          <Label text="Employee Code :" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <font>
+                                                <Font name="Segoe UI Light Italic" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="ec" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="306.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                             <font>
+                                                <Font name="Arial Bold" size="15.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </GridPane>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="399.0" style="-fx-background-color: white;">
-                                 <children>
-                                    <Label layoutX="6.0" layoutY="5.0" text="First Name:">
-                                       <font>
-                                          <Font name="Arial Bold" size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER_RIGHT" layoutX="115.0" layoutY="4.0" prefHeight="17.0" prefWidth="169.0" text="Arjale Jayrie">
-                                       <font>
-                                          <Font name="Arial" size="13.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane layoutX="10.0" layoutY="37.0" prefHeight="27.0" prefWidth="399.0" style="-fx-background-color: white;">
-                                 <children>
-                                    <Label layoutX="6.0" layoutY="5.0" text="Middle Initial:">
-                                       <font>
-                                          <Font name="Arial Bold" size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER_RIGHT" layoutX="115.0" layoutY="4.0" prefHeight="17.0" prefWidth="169.0" text="G.">
-                                       <font>
-                                          <Font name="Arial" size="13.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane layoutX="10.0" layoutY="64.0" prefHeight="27.0" prefWidth="399.0" style="-fx-background-color: white;">
-                                 <children>
-                                    <Label layoutX="6.0" layoutY="5.0" text="Suffix:">
-                                       <font>
-                                          <Font name="Arial Bold" size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER_RIGHT" layoutX="115.0" layoutY="4.0" prefHeight="17.0" prefWidth="169.0">
-                                       <font>
-                                          <Font name="Arial" size="13.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane layoutX="10.0" layoutY="91.0" prefHeight="27.0" prefWidth="399.0" style="-fx-background-color: white;">
-                                 <children>
-                                    <Label layoutX="6.0" layoutY="5.0" text="Gender:">
-                                       <font>
-                                          <Font name="Arial Bold" size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER_RIGHT" layoutX="115.0" layoutY="4.0" prefHeight="17.0" prefWidth="169.0" text="Male">
-                                       <font>
-                                          <Font name="Arial" size="13.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane layoutX="10.0" layoutY="118.0" prefHeight="27.0" prefWidth="399.0" style="-fx-background-color: white;">
-                                 <children>
-                                    <Label layoutX="6.0" layoutY="5.0" text="Civil Status:">
-                                       <font>
-                                          <Font name="Arial Bold" size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER_RIGHT" layoutX="115.0" layoutY="4.0" prefHeight="17.0" prefWidth="169.0" text="Single">
-                                       <font>
-                                          <Font name="Arial" size="13.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane layoutX="10.0" layoutY="145.0" prefHeight="27.0" prefWidth="399.0" style="-fx-background-color: white;">
-                                 <children>
-                                    <Label layoutX="6.0" layoutY="5.0" text="Date of Birth:">
-                                       <font>
-                                          <Font name="Arial Bold" size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER_RIGHT" layoutX="115.0" layoutY="4.0" prefHeight="17.0" prefWidth="169.0" text="1997-09-30">
-                                       <font>
-                                          <Font name="Arial" size="13.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane layoutX="10.0" layoutY="172.0" prefHeight="27.0" prefWidth="399.0" style="-fx-background-color: white;">
-                                 <children>
-                                    <Label layoutX="6.0" layoutY="5.0" text="Place of Birth:">
-                                       <font>
-                                          <Font name="Arial Bold" size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER_RIGHT" layoutX="115.0" layoutY="4.0" prefHeight="17.0" prefWidth="169.0" text="QC General Hospital">
-                                       <font>
-                                          <Font name="Arial" size="13.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane layoutX="10.0" layoutY="199.0" prefHeight="27.0" prefWidth="399.0" style="-fx-background-color: white;">
-                                 <children>
-                                    <Label layoutX="6.0" layoutY="5.0" text="Height:">
-                                       <font>
-                                          <Font name="Arial Bold" size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER_RIGHT" layoutX="115.0" layoutY="4.0" prefHeight="17.0" prefWidth="169.0" text="5'6&quot;">
-                                       <font>
-                                          <Font name="Arial" size="13.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane layoutX="10.0" layoutY="226.0" prefHeight="27.0" prefWidth="399.0" style="-fx-background-color: white;">
-                                 <children>
-                                    <Label layoutX="6.0" layoutY="5.0" text="Weight:">
-                                       <font>
-                                          <Font name="Arial Bold" size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER_RIGHT" layoutX="115.0" layoutY="4.0" prefHeight="17.0" prefWidth="169.0" text="175 pounds">
-                                       <font>
-                                          <Font name="Arial" size="13.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane layoutX="10.0" layoutY="253.0" prefHeight="48.0" prefWidth="296.0" style="-fx-background-color: white;">
-                                 <children>
-                                    <Label layoutX="6.0" layoutY="5.0" text="Height:">
-                                       <font>
-                                          <Font name="Arial Bold" size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <JFXTextArea focusColor="WHITE" layoutX="70.0" layoutY="-1.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="41.0" prefWidth="217.0" text="Blk.197 Lot 6 Bernice st., St. Martha, Loma De Gato, Marilao, Bulacan." unFocusColor="WHITE">
-                                       <font>
-                                          <Font name="Arial" size="13.0" />
-                                       </font>
-                                    </JFXTextArea>
-                                 </children>
-                              </AnchorPane>
-                           </children>
-                        </VBox>
-                        <VBox layoutX="310.0" layoutY="24.0" prefHeight="130.0" prefWidth="309.0" style="-fx-background-color: white;" />
-                        <Label layoutX="309.0" layoutY="5.0" text="Contact Information">
-                           <font>
-                              <Font name="Arial Bold Italic" size="14.0" />
-                           </font>
-                        </Label>
+                           </center>
+                        </BorderPane>
                      </children>
                   </AnchorPane>
-               </children>
-            </VBox>
-         </center>
-      </BorderPane>
+            </content>
+          </Tab>
+          <Tab text="Family Background">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <HBox layoutX="287.0" layoutY="151.0" prefHeight="535.0" prefWidth="943.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <AnchorPane prefHeight="535.0" prefWidth="492.0">
+                                 <children>
+                                    <GridPane layoutX="1.0" layoutY="15.0" prefHeight="439.0" prefWidth="531.0" AnchorPane.bottomAnchor="81.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="15.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="126.33332824707031" minWidth="8.99999475479126" prefWidth="33.66666603088379" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="257.00000524520874" minWidth="10.0" prefWidth="186.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="328.9999694824219" minWidth="10.0" prefWidth="247.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.66665649414062" minWidth="10.0" prefWidth="44.666656494140625" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label text="Full Name:" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <font>
+                                                <Font name="Segoe UI Light Italic" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Relationship:" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                             <font>
+                                                <Font name="Segoe UI Light Italic" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Emergency Contact:" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                             <font>
+                                                <Font name="Segoe UI Light Italic" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Contact Number:" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                             <font>
+                                                <Font name="Segoe UI Light Italic" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField alignment="CENTER_RIGHT" disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField alignment="CENTER_RIGHT" disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField alignment="CENTER_RIGHT" disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField alignment="CENTER_RIGHT" disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                    </GridPane>
+                                    <JFXButton buttonType="RAISED" layoutX="247.0" layoutY="457.0" prefHeight="30.0" prefWidth="225.0" styleClass="btn-primary" text="Create New Profile" />
+                                    <JFXButton buttonType="RAISED" layoutX="248.0" layoutY="491.0" prefHeight="30.0" prefWidth="225.0" styleClass="btn-primary" text="Save Changes" />
+                                    <Label layoutX="22.0" layoutY="11.0" text="Family Background">
+                                       <font>
+                                          <Font name="Arial Bold" size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <JFXButton buttonType="RAISED" layoutX="13.0" layoutY="491.0" prefHeight="30.0" prefWidth="225.0" styleClass="btn-danger" text="Delete Profile" />
+                                    <JFXButton layoutX="13.0" layoutY="456.0" prefHeight="30.0" prefWidth="225.0" styleClass="btn-primary" text="Edit Profile" />
+                                    <FontAwesomeIconView fill="WHITE" glyphName="EDIT" layoutX="75.0" layoutY="477.0" size="15" />
+                                    <FontAwesomeIconView fill="WHITE" glyphName="PLUS" layoutX="292.0" layoutY="479.0" size="15" />
+                                    <FontAwesomeIconView fill="WHITE" glyphName="TRASH" layoutX="71.0" layoutY="511.0" size="15" />
+                                    <FontAwesomeIconView fill="WHITE" glyphName="SAVE" layoutX="304.0" layoutY="510.0" size="15" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="535.0" prefWidth="456.0">
+                                 <children>
+                                    <TableView fx:id="tbl_fb" layoutX="90.0" layoutY="103.0" prefHeight="535.0" prefWidth="451.0" stylesheets="@../../../Assets/css/pom.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-39.0" AnchorPane.topAnchor="0.0">
+                                      <columns>
+                                        <TableColumn prefWidth="75.0" text="C1" />
+                                        <TableColumn prefWidth="75.0" text="C2" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Educational Attainment">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <HBox layoutX="143.0" layoutY="209.0" prefHeight="535.0" prefWidth="943.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <VBox prefHeight="535.0" prefWidth="489.0">
+                                 <children>
+                                    <AnchorPane prefHeight="53.0" prefWidth="479.0">
+                                       <children>
+                                          <JFXButton layoutX="277.0" layoutY="5.0" prefHeight="36.0" prefWidth="196.0" styleClass="btn-primary" text="Settings">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </JFXButton>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="GEAR" layoutX="331.0" layoutY="29.0" size="15" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="391.0" prefWidth="500.0">
+                                       <children>
+                                          <GridPane layoutX="172.0" layoutY="211.0" prefHeight="391.0" prefWidth="489.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="153.3333282470703" minWidth="1.3333282470703125" prefWidth="26.333333492279053" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="318.6666717529297" minWidth="10.0" prefWidth="147.6666717529297" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="390.0" minWidth="10.0" prefWidth="297.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="378.3333435058594" minWidth="10.0" prefWidth="17.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <TextField disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="Arial" size="15.0" />
+                                                   </font>
+                                                </TextField>
+                                                <TextField disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font name="Arial" size="15.0" />
+                                                   </font>
+                                                </TextField>
+                                                <TextField disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font name="Arial" size="15.0" />
+                                                   </font>
+                                                </TextField>
+                                                <Label text="Education Level:" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="Segoe UI Light Italic" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="School:" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font name="Segoe UI Light Italic" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Course:" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font name="Segoe UI Light Italic" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Year:" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                   <font>
+                                                      <Font name="Segoe UI Light Italic" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                                   <font>
+                                                      <Font name="Arial" size="15.0" />
+                                                   </font>
+                                                </TextField>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="93.0" prefWidth="431.0">
+                                       <children>
+                                          <JFXButton buttonType="RAISED" layoutX="246.0" layoutY="16.0" prefHeight="30.0" prefWidth="225.0" styleClass="btn-primary" text="Create New" />
+                                          <JFXButton buttonType="RAISED" layoutX="13.0" layoutY="15.0" prefHeight="30.0" prefWidth="225.0" styleClass="btn-primary" text="Edit Profile:" />
+                                          <JFXButton buttonType="RAISED" layoutX="13.0" layoutY="51.0" prefHeight="30.0" prefWidth="225.0" styleClass="btn-danger" text="Delete" />
+                                          <JFXButton buttonType="RAISED" layoutX="246.0" layoutY="51.0" prefHeight="30.0" prefWidth="225.0" styleClass="btn-primary" text="Save Changes" />
+                                          <FontAwesomeIconView fill="WHITE" glyphName="EDIT" layoutX="76.0" layoutY="34.0" size="15" />
+                                          <FontAwesomeIconView fill="WHITE" glyphName="TRASH" layoutX="88.0" layoutY="70.0" size="15" />
+                                          <FontAwesomeIconView fill="WHITE" glyphName="PLUS" layoutX="309.0" layoutY="34.0" size="15" />
+                                          <FontAwesomeIconView fill="WHITE" glyphName="SAVE" layoutX="301.0" layoutY="70.0" size="15" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </VBox>
+                              <AnchorPane prefHeight="535.0" prefWidth="474.0">
+                                 <children>
+                                    <TableView fx:id="tbl_educ" layoutX="-1.0" layoutY="74.0" prefHeight="535.0" prefWidth="1265.0" stylesheets="@../../../Assets/css/pom.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <columns>
+                                        <TableColumn prefWidth="75.0" text="C1" />
+                                        <TableColumn prefWidth="75.0" text="C2" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Trainings and Seminars">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <HBox layoutX="293.0" layoutY="196.0" prefHeight="535.0" prefWidth="943.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <AnchorPane prefHeight="535.0" prefWidth="474.0">
+                                 <children>
+                                    <VBox layoutX="205.0" layoutY="47.0" prefHeight="535.0" prefWidth="474.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <AnchorPane prefHeight="51.0" prefWidth="474.0" />
+                                          <AnchorPane prefHeight="393.0" prefWidth="474.0">
+                                             <children>
+                                                <GridPane layoutX="4.0" layoutY="92.0" prefHeight="393.0" prefWidth="474.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                  <columnConstraints>
+                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="111.0" minWidth="10.0" prefWidth="16.333335876464844" />
+                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="224.33333110809326" minWidth="10.0" prefWidth="169.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.0" minWidth="10.0" prefWidth="264.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.66668701171875" minWidth="10.0" prefWidth="21.0" />
+                                                  </columnConstraints>
+                                                  <rowConstraints>
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                  </rowConstraints>
+                                                   <children>
+                                                      <Label text="Title:" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                         <font>
+                                                            <Font name="Segoe UI Light Italic" size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Duration:" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                         <font>
+                                                            <Font name="Segoe UI Light Italic" size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Type:" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                         <font>
+                                                            <Font name="Segoe UI Light Italic" size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Conducted By:" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                         <font>
+                                                            <Font name="Segoe UI Light Italic" size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                         <font>
+                                                            <Font name="Arial" size="15.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                                         <font>
+                                                            <Font name="Arial" size="15.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                                         <font>
+                                                            <Font name="Arial" size="15.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                                         <font>
+                                                            <Font name="Arial" size="15.0" />
+                                                         </font>
+                                                      </TextField>
+                                                   </children>
+                                                </GridPane>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="89.0" prefWidth="474.0">
+                                             <children>
+                                                <JFXButton buttonType="RAISED" layoutX="10.0" layoutY="14.0" prefHeight="30.0" prefWidth="225.0" styleClass="btn-primary" text="Edit Profile" />
+                                                <JFXButton buttonType="RAISED" layoutX="241.0" layoutY="13.0" prefHeight="30.0" prefWidth="225.0" styleClass="btn-primary" text="Create New" />
+                                                <JFXButton buttonType="RAISED" layoutX="9.0" layoutY="49.0" prefHeight="30.0" prefWidth="225.0" styleClass="btn-danger" text="Delete" />
+                                                <JFXButton buttonType="RAISED" layoutX="241.0" layoutY="49.0" prefHeight="30.0" prefWidth="225.0" styleClass="btn-primary" text="Save Changes" />
+                                                <FontAwesomeIconView fill="WHITE" glyphName="PLUS" layoutX="302.0" layoutY="33.0" size="15" />
+                                                <FontAwesomeIconView fill="WHITE" glyphName="SAVE" layoutX="297.0" layoutY="68.0" size="15" />
+                                                <FontAwesomeIconView fill="WHITE" glyphName="EDIT" layoutX="74.0" layoutY="32.0" size="15" />
+                                                <FontAwesomeIconView fill="WHITE" glyphName="TRASH" layoutX="83.0" layoutY="69.0" size="15" />
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="535.0" prefWidth="467.0">
+                                 <children>
+                                    <TableView fx:id="tbl_sems" layoutX="78.0" layoutY="79.0" prefHeight="535.0" prefWidth="467.0" stylesheets="@../../../Assets/css/pom.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <columns>
+                                        <TableColumn prefWidth="75.0" text="C1" />
+                                        <TableColumn prefWidth="75.0" text="C2" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Work Experience">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <HBox layoutX="136.0" layoutY="31.0" prefHeight="535.0" prefWidth="943.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <AnchorPane prefHeight="535.0" prefWidth="469.0">
+                                 <children>
+                                    <VBox layoutX="251.0" layoutY="108.0" prefHeight="535.0" prefWidth="469.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <AnchorPane prefHeight="47.0" prefWidth="469.0" />
+                                          <AnchorPane prefHeight="380.0" prefWidth="469.0">
+                                             <children>
+                                                <GridPane layoutX="47.0" layoutY="165.0" prefHeight="378.0" prefWidth="469.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                  <columnConstraints>
+                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="111.33332824707031" minWidth="10.0" prefWidth="12.666664123535156" />
+                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="222.33333587646484" minWidth="10.0" prefWidth="164.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="292.3333282470703" minWidth="10.0" prefWidth="269.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="36.333343505859375" minWidth="10.0" prefWidth="21.33331298828125" />
+                                                  </columnConstraints>
+                                                  <rowConstraints>
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                  </rowConstraints>
+                                                   <children>
+                                                      <Label text="Duration :" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                         <font>
+                                                            <Font name="Segoe UI Light Italic" size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Position :" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                         <font>
+                                                            <Font name="Segoe UI Light Italic" size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField alignment="CENTER_RIGHT" disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                         <font>
+                                                            <Font name="Arial" size="15.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField alignment="CENTER_RIGHT" disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                                         <font>
+                                                            <Font name="Arial" size="15.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField alignment="CENTER_RIGHT" disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                                         <font>
+                                                            <Font name="Arial" size="15.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField alignment="CENTER_RIGHT" disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                                         <font>
+                                                            <Font name="Arial" size="15.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <Label text="Company :" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                         <font>
+                                                            <Font name="Segoe UI Light Italic" size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Employment Status :" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                         <font>
+                                                            <Font name="Segoe UI Light Italic" size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </GridPane>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="113.0" prefWidth="469.0">
+                                             <children>
+                                                <JFXButton buttonType="RAISED" layoutX="8.0" layoutY="36.0" prefHeight="30.0" prefWidth="225.0" styleClass="btn-primary" text="Edit Profile" />
+                                                <JFXButton buttonType="RAISED" layoutX="8.0" layoutY="72.0" prefHeight="30.0" prefWidth="225.0" styleClass="btn-danger" text="Delete" />
+                                                <JFXButton buttonType="RAISED" layoutX="238.0" layoutY="37.0" prefHeight="30.0" prefWidth="225.0" styleClass="btn-primary" text="Create New" />
+                                                <JFXButton buttonType="RAISED" layoutX="238.0" layoutY="72.0" prefHeight="30.0" prefWidth="225.0" styleClass="btn-primary" text="Save Changes" />
+                                                <FontAwesomeIconView fill="WHITE" glyphName="EDIT" layoutX="73.0" layoutY="56.0" size="15" />
+                                                <FontAwesomeIconView fill="WHITE" glyphName="TRASH" layoutX="86.0" layoutY="92.0" size="15" />
+                                                <FontAwesomeIconView fill="WHITE" glyphName="PLUS" layoutX="301.0" layoutY="57.0" size="15" />
+                                                <FontAwesomeIconView fill="WHITE" glyphName="SAVE" layoutX="294.0" layoutY="92.0" size="15" />
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="535.0" prefWidth="473.0">
+                                 <children>
+                                    <TableView fx:id="tbl_works" layoutX="107.0" layoutY="106.0" prefHeight="535.0" prefWidth="473.0" stylesheets="@../../../Assets/css/pom.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <columns>
+                                        <TableColumn prefWidth="75.0" text="C1" />
+                                        <TableColumn prefWidth="75.0" text="C2" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="tbl_certs" text="Certifications">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <HBox layoutX="372.0" layoutY="242.0" prefHeight="535.0" prefWidth="943.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <VBox prefHeight="535.0" prefWidth="475.0">
+                                 <children>
+                                    <AnchorPane prefHeight="44.0" prefWidth="473.0" />
+                                    <AnchorPane prefHeight="376.0" prefWidth="473.0">
+                                       <children>
+                                          <GridPane layoutX="85.0" layoutY="143.0" prefHeight="375.0" prefWidth="473.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="103.0" minWidth="10.0" prefWidth="13.666666984558105" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="223.3333330154419" minWidth="10.0" prefWidth="170.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="277.6666564941406" minWidth="10.0" prefWidth="266.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="98.33334350585938" minWidth="10.0" prefWidth="17.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <TextField alignment="CENTER_RIGHT" disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="Arial" size="15.0" />
+                                                   </font>
+                                                </TextField>
+                                                <TextField alignment="CENTER_RIGHT" disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font name="Arial" size="15.0" />
+                                                   </font>
+                                                </TextField>
+                                                <TextField alignment="CENTER_RIGHT" disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font name="Arial" size="15.0" />
+                                                   </font>
+                                                </TextField>
+                                                <Label text="Certificate Title :" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="Segoe UI Light Italic" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Date Acquired :" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font name="Segoe UI Light Italic" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Date Expired :" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font name="Segoe UI Light Italic" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="117.0" prefWidth="473.0">
+                                       <children>
+                                          <JFXButton buttonType="RAISED" layoutX="10.0" layoutY="40.0" prefHeight="30.0" prefWidth="225.0" styleClass="btn-primary" text="Edit Profile" />
+                                          <JFXButton buttonType="RAISED" layoutX="10.0" layoutY="75.0" prefHeight="30.0" prefWidth="225.0" styleClass="btn-danger" text="Delete" />
+                                          <JFXButton buttonType="RAISED" layoutX="240.0" layoutY="40.0" prefHeight="30.0" prefWidth="225.0" styleClass="btn-primary" text="Create New" />
+                                          <JFXButton buttonType="RAISED" layoutX="240.0" layoutY="75.0" prefHeight="30.0" prefWidth="225.0" styleClass="btn-primary" text="Save Changes" />
+                                          <FontAwesomeIconView fill="#f5f4f4" glyphName="EDIT" layoutX="74.0" layoutY="59.0" size="15" />
+                                          <FontAwesomeIconView fill="#f5f4f4" glyphName="PLUS" layoutX="304.0" layoutY="61.0" size="15" />
+                                          <FontAwesomeIconView fill="#f5f4f4" glyphName="TRASH" layoutX="88.0" layoutY="95.0" size="15" />
+                                          <FontAwesomeIconView fill="#f5f4f4" glyphName="SAVE" layoutX="297.0" layoutY="96.0" size="15" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </VBox>
+                              <TableView prefHeight="535.0" prefWidth="473.0" stylesheets="@../../../Assets/css/pom.css">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" text="C1" />
+                                  <TableColumn prefWidth="75.0" text="C2" />
+                                </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Academic Awards">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <HBox layoutX="238.0" layoutY="141.0" prefHeight="535.0" prefWidth="943.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <VBox prefHeight="535.0" prefWidth="473.0">
+                                 <children>
+                                    <AnchorPane prefHeight="45.0" prefWidth="472.0" />
+                                    <AnchorPane prefHeight="384.0" prefWidth="472.0">
+                                       <children>
+                                          <GridPane layoutX="95.0" layoutY="146.0" prefHeight="382.0" prefWidth="472.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="111.33333587646484" minWidth="8.666669368743896" prefWidth="11.333335876464844" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="227.3333306312561" minWidth="10.0" prefWidth="164.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="281.0" minWidth="10.0" prefWidth="273.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="102.0" minWidth="10.0" prefWidth="12.666656494140625" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <Label text="Title :" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="Segoe UI Light Italic" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Date Awarded :" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font name="Segoe UI Light Italic" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField alignment="CENTER_RIGHT" disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="Arial" size="15.0" />
+                                                   </font>
+                                                </TextField>
+                                                <TextField alignment="CENTER_RIGHT" disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font name="Arial" size="15.0" />
+                                                   </font>
+                                                </TextField>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="112.0" prefWidth="472.0">
+                                       <children>
+                                          <JFXButton buttonType="RAISED" layoutX="9.0" layoutY="34.0" prefHeight="30.0" prefWidth="225.0" styleClass="btn-primary" text="Edit Profile" />
+                                          <JFXButton buttonType="RAISED" layoutX="9.0" layoutY="69.0" prefHeight="30.0" prefWidth="225.0" styleClass="btn-danger" text="Delete" />
+                                          <JFXButton buttonType="RAISED" layoutX="238.0" layoutY="34.0" prefHeight="30.0" prefWidth="225.0" styleClass="btn-primary" text="Create New" />
+                                          <JFXButton buttonType="RAISED" layoutX="239.0" layoutY="69.0" prefHeight="30.0" prefWidth="225.0" styleClass="btn-primary" text="Save Changes" />
+                                          <FontAwesomeIconView layoutX="302.0" layoutY="53.0" />
+                                          <FontAwesomeIconView layoutX="296.0" layoutY="88.0" />
+                                          <FontAwesomeIconView layoutX="73.0" layoutY="53.0" />
+                                          <FontAwesomeIconView layoutX="79.0" layoutY="88.0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </VBox>
+                              <TableView fx:id="tbl_awards" prefHeight="535.0" prefWidth="472.0" stylesheets="@../../../Assets/css/pom.css">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" text="C1" />
+                                  <TableColumn prefWidth="75.0" text="C2" />
+                                </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Government IDs">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <HBox layoutX="68.0" layoutY="81.0" prefHeight="535.0" prefWidth="943.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <VBox prefHeight="535.0" prefWidth="479.0">
+                                 <children>
+                                    <AnchorPane prefHeight="42.0" prefWidth="478.0" />
+                                    <AnchorPane prefHeight="395.0" prefWidth="478.0">
+                                       <children>
+                                          <GridPane layoutX="115.0" layoutY="99.0" prefHeight="391.0" prefWidth="478.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="232.33334350585938" minWidth="10.0" prefWidth="36.33333969116211" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="450.9999942779541" minWidth="10.0" prefWidth="182.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="450.9999942779541" minWidth="10.0" prefWidth="251.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="450.9999942779541" minWidth="10.0" prefWidth="34.66668701171875" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <Label text="SSS No. :" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="Segoe UI Light Italic" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="TIN No. :" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font name="Segoe UI Light Italic" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Pag ibig:" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font name="Segoe UI Light Italic" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Phil Health:" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                   <font>
+                                                      <Font name="Segoe UI Light Italic" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField alignment="CENTER_RIGHT" disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="Arial" size="15.0" />
+                                                   </font>
+                                                </TextField>
+                                                <TextField alignment="CENTER_RIGHT" disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font name="Arial" size="15.0" />
+                                                   </font>
+                                                </TextField>
+                                                <TextField alignment="CENTER_RIGHT" disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font name="Arial" size="15.0" />
+                                                   </font>
+                                                </TextField>
+                                                <TextField alignment="CENTER_RIGHT" disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                                   <font>
+                                                      <Font name="Arial" size="15.0" />
+                                                   </font>
+                                                </TextField>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="111.0" prefWidth="478.0">
+                                       <children>
+                                          <JFXButton buttonType="RAISED" layoutX="10.0" layoutY="30.0" prefHeight="30.0" prefWidth="225.0" styleClass="btn-primary" text="Edit Profile" />
+                                          <JFXButton buttonType="RAISED" layoutX="10.0" layoutY="65.0" prefHeight="30.0" prefWidth="225.0" styleClass="btn-danger" text="Delete" />
+                                          <JFXButton buttonType="RAISED" layoutX="242.0" layoutY="30.0" prefHeight="30.0" prefWidth="225.0" styleClass="btn-primary" text="Create New" />
+                                          <JFXButton buttonType="RAISED" layoutX="242.0" layoutY="65.0" prefHeight="30.0" prefWidth="225.0" styleClass="btn-primary" text="Save Changes" />
+                                          <FontAwesomeIconView fill="WHITE" glyphName="SAVE" layoutX="298.0" layoutY="85.0" size="15" />
+                                          <FontAwesomeIconView fill="WHITE" glyphName="PLUS" layoutX="304.0" layoutY="51.0" size="15" />
+                                          <FontAwesomeIconView fill="WHITE" glyphName="EDIT" layoutX="73.0" layoutY="52.0" size="15" />
+                                          <FontAwesomeIconView fill="WHITE" glyphName="TRASH" layoutX="86.0" layoutY="84.0" size="15" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </VBox>
+                              <TableView fx:id="tbl_govs" prefHeight="535.0" prefWidth="467.0" stylesheets="@../../../Assets/css/pom.css">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" text="C1" />
+                                  <TableColumn prefWidth="75.0" text="C2" />
+                                </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
    </children>
 </AnchorPane>

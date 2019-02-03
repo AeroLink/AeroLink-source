@@ -7,7 +7,7 @@ package FXMLS.HR2.Modals;
 
 import FXMLS.HR2.ClassFiles.HR2_CM_Skills_Class;
 import FXMLS.HR2.ClassFiles.HR2_CM_Skills_Class_for_Modal;
-import FXMLS.HR4.ClassFiles.HR4_MIZ;
+import FXMLS.HR4.Filler.HR4_MIZ;
 import Model.HR2_CM_Pivot;
 import Model.HR2_CM_Skills;
 import Model.HR4_Jobs;
