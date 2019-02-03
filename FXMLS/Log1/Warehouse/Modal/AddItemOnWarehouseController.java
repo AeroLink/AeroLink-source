@@ -2,7 +2,7 @@
 package FXMLS.Log1.Warehouse.Modal;
 
 import FXMLS.Log1.ClassFiles.Log1_SupplierClassfiles;
-import FXMLS.Log1.ClassFiles.Log1_fullInventoryList;
+//import FXMLS.Log1.ClassFiles.Log1_fullInventoryList;
 import FXMLS.Log1.util.AlertMaker;
 import FXMLS.Log1.util.Log1Util;
 import Model.Log1.Log1_WarehouseActivityLogModel;
@@ -212,20 +212,20 @@ public class AddItemOnWarehouseController implements Initializable {
         disposalDate_datepick.getEditor().setText("");
     }
     
-    public void displaySelectedIndex(Log1_fullInventoryList item){
-        itemID_txt.setText(item.getItemID());
-        itemDescription_txt.setText(item.getItemDescription());
-        itemType_combox.setValue(item.getItemType());
-        itemLoc_txt.setText(item.getItemLocation());
-        itemUnit_combox.setValue(item.getItemUnit());
-        unitPrice_txt.setText(item.getUnitPrice());
-        quantityStocked_txt.setText(item.getStockQuantity());
-        reorderQuantity_txt.setText(item.getCriticalQuantity());
-        disposalDate_datepick.getEditor().setText(item.getDisposalDate());
-        cantDoBooleanSoFuckThisShit.setText(item.getStatus());
-        
-        ifForUpdate = Boolean.TRUE;
-    }
+//    public void displaySelectedIndex(Log1_fullInventoryList item){
+//        itemID_txt.setText(item.getItemID());
+//        itemDescription_txt.setText(item.getItemDescription());
+//        itemType_combox.setValue(item.getItemType());
+//        itemLoc_txt.setText(item.getItemLocation());
+//        itemUnit_combox.setValue(item.getItemUnit());
+//        unitPrice_txt.setText(item.getUnitPrice());
+//        quantityStocked_txt.setText(item.getStockQuantity());
+//        reorderQuantity_txt.setText(item.getCriticalQuantity());
+//        disposalDate_datepick.getEditor().setText(item.getDisposalDate());
+//        cantDoBooleanSoFuckThisShit.setText(item.getStatus());
+//        
+//        ifForUpdate = Boolean.TRUE;
+//    }
     
     private void useUpdateMethod() {
         Log1_WarehouseItemsModel wh = new Log1_WarehouseItemsModel();

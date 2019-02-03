@@ -84,16 +84,6 @@
                                                 <BorderPane prefHeight="35.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <right>
                                                       <HBox alignment="CENTER_RIGHT" spacing="7.0" BorderPane.alignment="CENTER_LEFT">
-                                                         <children>
-                                                            <JFXButton prefHeight="30.0" prefWidth="158.0" styleClass="btn-primary" text="Walk in Request" textAlignment="CENTER">
-                                                               <graphic>
-                                                                  <FontAwesomeIconView fill="WHITE" glyphName="PENCIL" size="15" styleClass="glyph-icon" />
-                                                               </graphic>
-                                                               <font>
-                                                                  <Font name="System Bold" size="14.0" />
-                                                               </font>
-                                                            </JFXButton>
-                                                         </children>
                                                          <BorderPane.margin>
                                                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                          </BorderPane.margin>

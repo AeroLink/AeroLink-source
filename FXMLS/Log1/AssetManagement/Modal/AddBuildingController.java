@@ -7,6 +7,7 @@ import Model.Log1.Log1_AssetCountModel;
 import Model.Log1.Log1_AssetLandModel;
 import Model.Log1.Log1_AssetTotalizationModel;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -35,13 +36,18 @@ public class AddBuildingController implements Initializable {
     @FXML
     private TextArea buildingDescription_txt;
     @FXML
-    private TextField LandAddress_txt;
-    @FXML
     private ComboBox selectLand_combox;
     @FXML
     private Label LandID_txt;
     @FXML
     private Label AssetBuildingCount_txt;
+    @FXML
+    private JFXTextField AddressOfLand_txt;
+    
+        String Name = buildingName_txt.getText();
+        String Address = BuildingYearBuilt_txt.getText();
+        String Contact = buildingContact_txt.getText();
+        String Area = buildingDescription_txt.getText();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -53,10 +59,7 @@ public class AddBuildingController implements Initializable {
         AssetBuildingCount_txt.setVisible(false);
     }    
     public void saveBuilding(){
-        String Name = buildingName_txt.getText();
-        String Address = BuildingYearBuilt_txt.getText();
-        String Contact = buildingContact_txt.getText();
-        String Area = buildingDescription_txt.getText();
+        
         
         Boolean flag = Name.isEmpty() || Address.isEmpty() || Contact.isEmpty() ||
                 Area.isEmpty();
@@ -76,8 +79,7 @@ public class AddBuildingController implements Initializable {
                     {"BuildingName", buildingName_txt.getText()},
                     {"BuildingDescription", buildingDescription_txt.getText()},
                     {"BuildingContact", buildingContact_txt.getText()},
-                    {"BuildingYearBuilt", BuildingYearBuilt_txt.getText()},
-                    {"AssetCategory", "Building"},
+                    {"BuildingYearBuilt", BuildingYearBuilt_txt.getText()}
                 };
                 String[][] AssetForTotal = {
                     {"AssetName", buildingName_txt.getText()},
@@ -120,7 +122,7 @@ public class AddBuildingController implements Initializable {
          buildingDescription_txt.setText("");
          buildingContact_txt.setText("");
          selectLand_combox.setValue("");
-         LandAddress_txt.setText("");
+         AddressOfLand_txt.setText("");
          BuildingYearBuilt_txt.setText("");
     }
     
@@ -193,7 +195,7 @@ public class AddBuildingController implements Initializable {
             
                 HashMap hm = (HashMap) d;   //exquisite casting
                 
-                LandAddress_txt.setText(( 
+                AddressOfLand_txt.setText(( 
                     String.valueOf(hm.get("LandAddress"))
                 )); 
                 LandID_txt.setText((

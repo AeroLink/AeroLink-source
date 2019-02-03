@@ -249,9 +249,7 @@ public class FINANCIAL_AP_ARController implements Initializable {
                             Ap(b);  
                             totalAP();
                              
-                     {
-                         
-                    }
+                     
                     ap_tbl.setItems(brc);
                         GlobalCount = DummyCount;
                     }
