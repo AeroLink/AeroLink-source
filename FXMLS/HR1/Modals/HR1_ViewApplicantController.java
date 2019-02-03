@@ -40,6 +40,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
@@ -278,12 +279,13 @@ public class HR1_ViewApplicantController implements Initializable {
 
             if (Integer.parseInt(StageID.getValue()) >= 2) {
                 menuER.setDisable(false);
+
+                checkExam();
             }
 
             if (Integer.parseInt(StageID.getValue()) == 2) {
                 panelExamResult.setVisible(true);
                 btnSubmit.setDisable(true);
-                checkExam();
             }
 
             if (Integer.parseInt(StageID.getValue()) >= 5) {
@@ -333,12 +335,16 @@ public class HR1_ViewApplicantController implements Initializable {
 
                     exr.stream().forEach(e -> {
                         if (e.get("isTaken").toString().equals("0")) {
-                            lblExamResult.setText("Exam was not yet taken by the applicant");
-                            btnSubmit.setDisable(true);
+                            Platform.runLater(() -> {
+                                lblExamResult.setText("Exam was not yet taken by the applicant");
+                                btnSubmit.setDisable(true);
+                            });
                         } else {
-                            lblExamResult.setText("The Applicant got " + e.get("score").toString() + "% of score");
-                            txtPercentage.setText(e.get("score").toString());
-                            btnSubmit.setDisable(false);
+                            Platform.runLater(() -> {
+                                lblExamResult.setText("The Applicant got " + e.get("score").toString() + "% of score");
+                                txtPercentage.setText(e.get("score").toString());
+                                btnSubmit.setDisable(false);
+                            });
                         }
                     });
 
@@ -648,7 +654,7 @@ public class HR1_ViewApplicantController implements Initializable {
                     Helpers.EIS_Response.SuccessResponse("Success", "Applicant was successfully transfered to Initial Interview Stage");
                     dialog.close();
                     closeWind();
-                            
+
                 }
             } else {
                 Helpers.EIS_Response.ErrorResponse("Halt!", "You could not select date before the current date \n" + LocalDate.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
