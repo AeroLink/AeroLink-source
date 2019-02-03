@@ -56,8 +56,8 @@ public class TM_ViewFacilityDetailsController implements Initializable {
             HR2_Temp_Facilities facilities = new HR2_Temp_Facilities();
             List f = facilities.join(Model.JOIN.INNER, "aerolink.tbl_log1_AssetBuilding", "BuildingID", "ab", "=", "BuildingID")
                     .where(new Object[][]{{"FacilityID", "=", TM_FacilityDetailsClass_for_Modal.facID}})
-                    .get("FacilityID, FacilityName, aerolink.tbl_log1_AssetFacility.AssetCategory, FacilityStatus, "
-                            + "FacilityRoomNumber, FacilityCapacity, ab.BuildingName, ab.BuildingDescription, ab.BuildingContact, ab.BuildingYearBuilt");
+                    .get("FacilityID, FacilityName, FacilityStatus, "
+                            + "FacilityRoomNumber, FacilityDimension, ab.BuildingName, ab.BuildingDescription, ab.BuildingContact, ab.BuildingYearBuilt");
                f.stream().forEach(row -> {
            
             lbl_building_desc.setText(((HashMap) row).get("BuildingDescription").toString());
