@@ -141,6 +141,14 @@
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></JFXComboBox>
+                        <JFXButton fx:id="btn_training_status_refresh" layoutX="527.0" layoutY="42.0" onAction="#loadTrainingMngmt" styleClass="btn-primary" text="Refresh" AnchorPane.rightAnchor="5.0">
+                           <font>
+                              <Font name="Lato Regular" size="15.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
                      </children>
                   </AnchorPane>
               </content>
@@ -241,6 +249,14 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </JFXComboBox>
+                        <JFXButton layoutX="527.0" layoutY="37.0" onAction="#loadHistoryOfTraining" styleClass="btn-primary" text="Refresh" AnchorPane.rightAnchor="5.0">
+                           <font>
+                              <Font name="Lato Regular" size="15.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
                      </children></AnchorPane>
               </content>
             </Tab>

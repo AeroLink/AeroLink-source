@@ -4,17 +4,17 @@
  * and open the template in the editor.
  */
 package FXMLS.HR2.ClassFiles;
-    
+
 /**
  *
  * @author EdenRamoneda
  */
-public class TM_ViewParticipantsClass {
+public class TM_DT_ViewParticipantsModalClass {
+    public static String dt_id, job_id;
     
-    public static String job_position;
-    
-    public static void getJobPosition(String jp){
-        job_position = jp;
+    public static void init_TM_DT_ViewParticipantsModalClass(String dtid, String jid){
+        dt_id = dtid;
+        job_id = jid;
     }
     
 }

@@ -14,6 +14,7 @@ import FXMLS.HR2.ClassFiles.HR2_Temp_VehicleClass;
 import FXMLS.HR2.ClassFiles.HR2_TrainingReq_Class;
 import FXMLS.HR2.ClassFiles.HR4_Jobs_Class;
 import FXMLS.HR2.ClassFiles.TM_AssetFacilities;
+import FXMLS.HR2.ClassFiles.TM_DT_ViewParticipantsModalClass;
 import FXMLS.HR2.ClassFiles.TM_DefaultTrainings;
 import FXMLS.HR2.ClassFiles.TM_FacilityDetailsClass_for_Modal;
 import FXMLS.HR2.ClassFiles.TM_Request_BudgetClass;
@@ -179,6 +180,8 @@ public class HR2_Training_ManagementController implements Initializable {
     private TableColumn<TM_Request_BudgetClass, String> col_req_budget_status;
     @FXML
     private JFXButton btn_dt_refresh;
+    @FXML
+    private JFXButton btn_training_status_refresh;
 
     /**
      * Initializes the controller class.
@@ -200,7 +203,13 @@ public class HR2_Training_ManagementController implements Initializable {
             req_b.open();
         });
         LoadBudget();
-         cbox_tm_dept.getSelectionModel().selectedItemProperty().addListener(listener -> {
+        cbox_filter_t_jp.getSelectionModel().selectedItemProperty().addListener(listener -> {
+            searchDT_Jobs();
+        });
+        cbox_filter_t_trainor.getSelectionModel().selectedItemProperty().addListener(listener -> {
+            searchDT_Trainor();
+        });
+        cbox_tm_dept.getSelectionModel().selectedItemProperty().addListener(listener -> {
             searchTM_Dept();
         });
         cbox_tm_trainor.getSelectionModel().selectedItemProperty().addListener(listener -> {
@@ -267,6 +276,34 @@ public class HR2_Training_ManagementController implements Initializable {
             System.out.println(e);
         }
 
+    }
+
+    public void searchDT_Jobs() {
+        HR2_TM_DefaultTrainings dt = new HR2_TM_DefaultTrainings();
+        List defTrainings = dt.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "emp", "=", "trainor")
+                .where(new Object[][]{
+            {"j.title", "=", cbox_filter_t_jp.getSelectionModel().getSelectedItem().toString()},
+            {"aerolink.tbl_hr2_default_trainings.isDeleted", "<>", "1"}
+        })
+                .orderBy("j.title", Model.Sort.ASC)
+                .get("dt_id, j.title, training_title, CONCAT(emp.firstname,' ',emp.middlename,' ',emp.lastname)as emp_trainor");
+
+        DisplayDefaultTrainings(defTrainings);
+    }
+
+    public void searchDT_Trainor() {
+        HR2_TM_DefaultTrainings dt = new HR2_TM_DefaultTrainings();
+        List defTrainings = dt.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "j", "=", "job_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "emp", "=", "trainor")
+                .where(new Object[][]{
+            {"emp.employee_code", "=", cbox_filter_t_trainor.getSelectionModel().getSelectedItem().toString().split(" - ")[0]},
+            {"aerolink.tbl_hr2_default_trainings.isDeleted", "<>", "1"}
+        })
+                .orderBy("j.title", Model.Sort.ASC)
+                .get("dt_id, j.title, training_title, CONCAT(emp.firstname,' ',emp.middlename,' ',emp.lastname)as emp_trainor");
+
+        DisplayDefaultTrainings(defTrainings);
     }
 
     public void searchTM_Dept() {
@@ -392,6 +429,7 @@ public class HR2_Training_ManagementController implements Initializable {
     }
 
     //for training mngmt.
+    @FXML
     public void loadTrainingMngmt() {
 
         try {
@@ -417,6 +455,7 @@ public class HR2_Training_ManagementController implements Initializable {
 
     }
 
+    @FXML
     public void loadHistoryOfTraining() {
 
         try {
@@ -673,6 +712,52 @@ public class HR2_Training_ManagementController implements Initializable {
         col_t_jp.setCellValueFactory((TableColumn.CellDataFeatures<TM_DefaultTrainings, String> param) -> param.getValue().job_title);
         col_t_training_title.setCellValueFactory((TableColumn.CellDataFeatures<TM_DefaultTrainings, String> param) -> param.getValue().training_title);
         col_t_trainor.setCellValueFactory((TableColumn.CellDataFeatures<TM_DefaultTrainings, String> param) -> param.getValue().trainor);
+        TableColumn<TM_DefaultTrainings, Void> col_btn_viewP = new TableColumn("View Action");
+
+        Callback<TableColumn<TM_DefaultTrainings, Void>, TableCell<TM_DefaultTrainings, Void>> cellViewParticipants
+                = new Callback<TableColumn<TM_DefaultTrainings, Void>, TableCell<TM_DefaultTrainings, Void>>() {
+            @Override
+            public TableCell<TM_DefaultTrainings, Void> call(final TableColumn<TM_DefaultTrainings, Void> param) {
+
+                final TableCell<TM_DefaultTrainings, Void> cellBtn_VP = new TableCell<TM_DefaultTrainings, Void>() {
+                    private final Button btn_view_participants = new Button("View Participants");
+
+                    {
+                        try {
+                            btn_view_participants.setOnAction(e
+                                    -> {
+
+                                TM_DefaultTrainings td = (TM_DefaultTrainings) getTableRow().getItem();
+                                TM_DT_ViewParticipantsModalClass.init_TM_DT_ViewParticipantsModalClass(
+                                        td.dt_id.getValue(),
+                                        td.job_title.getValue());
+                                Modal lq = Modal.getInstance(new Form("/FXMLS/HR2/Modals/TM_DT_ViewParticipants.fxml").getParent());
+                                lq.open();
+                            });
+                            btn_view_participants.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
+                            btn_view_participants.setCursor(javafx.scene.Cursor.HAND);
+                        } catch (Exception ex) {
+                            System.out.println(ex);
+                        }
+
+                    }
+
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn_view_participants);
+                        }
+                    }
+                };
+                return cellBtn_VP;
+            }
+
+        };
+
+        col_btn_viewP.setCellFactory(cellViewParticipants);
+        tbl_default_trainings.getColumns().add(col_btn_viewP);
         //for tbl_mngmt
         col_tm_dept.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().dept_name);
         col_tm_jp.setCellValueFactory((TableColumn.CellDataFeatures<HR2_TrainingReq_Class, String> param) -> param.getValue().title);
@@ -921,6 +1006,7 @@ public class HR2_Training_ManagementController implements Initializable {
                     -> {
 
                 HR2_TM_ViewTrainingInfo_Modal.init_Trainings(
+                        tbl_training_mngmt.getSelectionModel().getSelectedItem().t_id.getValue(),
                         tbl_training_mngmt.getSelectionModel().getSelectedItem().tr_id.getValue(),
                         tbl_training_mngmt.getSelectionModel().getSelectedItem().dept_name.getValue(),
                         tbl_training_mngmt.getSelectionModel().getSelectedItem().title.getValue(),
@@ -967,6 +1053,7 @@ public class HR2_Training_ManagementController implements Initializable {
                     -> {
 
                 HR2_TM_ViewTrainingInfo_Modal.init_Trainings(
+                        tbl_history_of_trainings.getSelectionModel().getSelectedItem().t_id.getValue(),
                         tbl_history_of_trainings.getSelectionModel().getSelectedItem().tr_id.getValue(),
                         tbl_history_of_trainings.getSelectionModel().getSelectedItem().dept_name.getValue(),
                         tbl_history_of_trainings.getSelectionModel().getSelectedItem().title.getValue(),
