@@ -9,9 +9,9 @@ package Synapse;
  *
  * @author BlackMoon
  */
-public class RAW extends Model{
+public class rawQuery extends Synapse.Model{
 
-    public RAW(String table) {
+    public rawQuery(String table) {
         this.initTable(table);
     }
     

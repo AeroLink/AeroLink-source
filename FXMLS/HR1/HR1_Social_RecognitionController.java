@@ -112,6 +112,9 @@ public class HR1_Social_RecognitionController implements Initializable {
         this.generateTable();
         this.renderTable();
         this.renderRewardTable();
+        
+        ObservableList<String> status = FXCollections.observableArrayList("Name", "Declined");
+        awardcategory.setItems(status);
 
     }
 

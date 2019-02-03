@@ -56,8 +56,8 @@ public class LM_View_Exam_RequestController implements Initializable {
             for (Object d : c) {
                 HashMap hm1 = (HashMap) d;
                 cbox_position.getItems().add("S00" + hm1.get("req_status_id") + " - " + hm1.get("req_status"));
-
             }
+            
         } catch (Exception e) {
             System.out.println(e);
         }
