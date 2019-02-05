@@ -43,7 +43,6 @@ public class HR4_PayrollRequisitionController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    
         pc.setText(HR4_NewPayrollFill2.jae);
         pd.setText(HR4_NewPayrollFill2.jae1 + "-" + HR4_NewPayrollFill2.jae2);
         ts.setText(HR4_NewPayrollFill2.jae3);

@@ -3,17 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Synapse;
+package Model.HR1;
 
 /**
  *
- * @author BlackMoon
+ * @author Raven
  */
-public class RAW extends Model{
-
-    public RAW(String table) {
-        this.initTable(table);
+public class HR1_SC_Update extends Synapse.Model{
+    public HR1_SC_Update() {
+    
+        this.initTable("tbl_hr1_sc_awardees");
     }
-    
-    
 }
