@@ -90,8 +90,8 @@ public class TM_RequestTrainingController implements Initializable {
     @FXML
     public void SubmitRequest() {
 
-        if (!cbox_department.getValue().toString().isEmpty() || !cbox_job_position.getValue().toString().isEmpty() || 
-            !txt_training_title.getText().isEmpty() || !txt_no_of_participants.getText().isEmpty() || !txt_total_hours.getText().isEmpty() 
+        if (!cbox_department.getValue().toString().isEmpty() || !cbox_job_position.getValue().toString().isEmpty()
+                || !txt_training_title.getText().isEmpty() || !txt_no_of_participants.getText().isEmpty() || !txt_total_hours.getText().isEmpty()
                 || !txt_from_day.getValue().toString().isEmpty() || !txt_to_day.getValue().toString().isEmpty() || !txt_reason.getText().isEmpty()) {
             HR2_TM_Training_Requisition rs = new HR2_TM_Training_Requisition();
 
@@ -122,6 +122,15 @@ public class TM_RequestTrainingController implements Initializable {
                 Alert saved = new Alert(Alert.AlertType.INFORMATION);
                 saved.setContentText("Data Successfully Submitted");
                 saved.showAndWait();
+                cbox_department.setValue(null);
+                cbox_job_position.setValue(null);
+                txt_training_title.setText("");
+                txt_no_of_participants.setText("");
+                txt_no_of_participants.setText("");
+                txt_total_hours.setText("");
+                txt_from_day.setValue(null);
+                txt_to_day.setValue(null);
+                txt_reason.setText(null);
             } catch (Exception e) {
                 System.err.println(e);
             }
