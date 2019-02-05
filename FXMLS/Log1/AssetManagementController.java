@@ -44,12 +44,12 @@ import javafx.scene.text.Text;
 
 public class AssetManagementController implements Initializable {
     
-    ObservableList<String> selectAssetType = FXCollections.observableArrayList("Land","Building","Facility","Vehicle","Equipment");
-    ObservableList<String> AllAssetForViewing = FXCollections.observableArrayList("Land","Building","Facility","Vehicle","Equipment","Supplies");
+        ObservableList<String> selectAssetType = FXCollections.observableArrayList("Land","Building","Facility","Vehicle","Equipment");
+        ObservableList<String> AllAssetForViewing = FXCollections.observableArrayList("Land","Building","Facility","Vehicle","Equipment","Supplies");
     ObservableList<String> AssetForDisposal = FXCollections.observableArrayList("Equipment","Vehicle","Supply");
     
     Log1_AssetCountModel assetCount = new Log1_AssetCountModel();
-    
+        
     @FXML
     private AnchorPane registrationForm_pane;
     @FXML
