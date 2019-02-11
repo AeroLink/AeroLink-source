@@ -98,17 +98,17 @@ public class Facility_Reservation_infoController implements Initializable {
     public void displayinfo(){
         
         
-        String query = "Select * from aerolink.admin_facility_reservation as aafr inner join aerolink.admin_facility as aaf on aafr.Facility_ID = aaf.Facility_ID where aafr.Facility_Reservation_ID = ?";
+        String query = "Select * from aerolink.admin_facility_reservation as aafr inner join aerolink.tbl_log1_AssetFacility as atla on aafr.FacilityID = atla.FacilityID inner join aerolink.admin_facility_reservation_facility as aarfa on aafr.FacilityID = aarfa.FacilityID where aafr.Facility_Reservation_ID = ? ";
         try{
          pst = con.prepareStatement(query);
          pst.setString(1, foriddisplay.getText());
          
          rs = pst.executeQuery();
          while(rs.next()){
-             facilityidentity.setText(rs.getString("Facility_ID"));
+             facilityidentity.setText(rs.getString("FacilityID"));
              cap.setText(rs.getString("Capacity"));
-             loc.setText(rs.getString("Location"));
-             facilityn.setText("Facility_Name");
+             loc.setText(rs.getString("FacilityRoomNumber"));
+             facilityn.setText("FacilityName");
              rby.setText(rs.getString("Reserved_By"));
              ppose.setText("Purpose");
              sdate.setValue(rs.getDate("Start_Date").toLocalDate());
@@ -159,12 +159,14 @@ public class Facility_Reservation_infoController implements Initializable {
        
      }
      
+    @FXML
      public void cancelrequest(){
          String query = "update aerolink.admin_facility_reservation set Status = 'Canceled' where Facility_Reservation_ID = ? "; 
          AlertBox.confirm("Alert", "This Request will be Cancel",foriddisplay,query);
     
      }
      
+    @FXML
      public void close(){
          AlertBox.close(btndone);
      }

@@ -663,18 +663,6 @@
                                                 </AnchorPane>
                                                 <AnchorPane>
                                                     <children>
-                                                        <JFXButton id="adminlegal" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Legal Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                            <font>
-                                                                <Font size="14.0" />
-                                                            </font>
-                                                            <graphic>
-                                                                <FontAwesomeIconView fill="#34a853" glyphName="LEGAL" size="25" styleClass="fontIcon" />
-                                                            </graphic>
-                                                        </JFXButton>
-                                                    </children>
-                                                </AnchorPane>
-                                                <AnchorPane>
-                                                    <children>
                                                         <JFXButton id="admindoc" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Document Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                             <font>
                                                                 <Font size="14.0" />
@@ -705,6 +693,18 @@
                                                             </font>
                                                             <graphic>
                                                                 <FontAwesomeIconView fill="#34a853" glyphName="COLUMNS" size="25" styleClass="fontIcon" />
+                                                            </graphic>
+                                                        </JFXButton>
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane>
+                                                    <children>
+                                                        <JFXButton id="adminlegal" alignment="BOTTOM_LEFT" graphicTextGap="10.0" onAction="#triggerButton" prefHeight="25.0" prefWidth="273.0" ripplerFill="#34a853" text="Legal Management" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <font>
+                                                                <Font size="14.0" />
+                                                            </font>
+                                                            <graphic>
+                                                                <FontAwesomeIconView fill="#34a853" glyphName="LEGAL" size="25" styleClass="fontIcon" />
                                                             </graphic>
                                                         </JFXButton>
                                                     </children>
@@ -845,6 +845,8 @@
                                     <AnchorPane layoutX="11.0" layoutY="86.0" />
                                     <AnchorPane layoutX="11.0" layoutY="122.0" />
                                     <AnchorPane layoutX="11.0" layoutY="50.0" />
+                                    <AnchorPane />
+                                    <AnchorPane />
                                  </children>
                               </VBox>
                            </children>

@@ -17,7 +17,6 @@ import Synapse.Form;
 import Synapse.Session;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;

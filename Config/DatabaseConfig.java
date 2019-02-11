@@ -20,9 +20,20 @@ public class DatabaseConfig {
 
     //if offline mode
     public static Boolean offline = true;
-    public static String IP = "127.0.0.1"; //NS558185\AEROLINKSQL
-    public static String PORT = "1433";//1443
+        public static String IP = "139.99.62.2"; //NS558185\AEROLINKSQL
+    public static String PORT = "8420";//1443
     public static String DATABASE = "AeroLink";
-    public static String USER = "core";//core
-    public static String PASSWORD = "core";//core
+    public static String USER = "sa";//core
+    public static String PASSWORD = "PYWETgMDWTaS834fo9ijGkENpl43yrFtXpcJ9ovB0$yPS38";//core
+
+
+
+
+
+
+
+
+
+
+
 }

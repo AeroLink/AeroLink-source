@@ -26,6 +26,13 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import FXMLS.Administrative.AlertBox;
+import FXMLS.Administrative.Visitor_CardController;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -52,6 +59,8 @@ public class CoreSideController implements Initializable {
     private Tab FINANCE;
     @FXML
     private Label SessionUsername;
+    @FXML
+    private Tab FINANCE1;
 
     /**
      * Initializes the controller class.
@@ -128,5 +137,9 @@ public class CoreSideController implements Initializable {
         }
 
     }
+
+  
+    
+  
 
 }
