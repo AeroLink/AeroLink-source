@@ -5,16 +5,26 @@
  */
 package FXMLS.Log2.fm.modals;
 
+import FXMLS.Log2.DBconfig;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -38,7 +48,13 @@ public class Log2_Fleet_Management_DispatchController implements Initializable {
     private File file; 
     @FXML
     private ImageView attachimage;
-   
+    @FXML
+    private JFXButton btnsubmitattach;
+    @FXML
+    private JFXTextField pathfile;
+    private Connection con = DBconfig.con();
+    private PreparedStatement pst = null;
+    private ResultSet rs = null;
     /**
      * Initializes the controller class.
      */
@@ -83,6 +99,39 @@ public class Log2_Fleet_Management_DispatchController implements Initializable {
 
     };
         
+    public void insert() {
+  
+         try{
+             String insert = "insert into aerolink.tbl_log2_attachment values(?)";
+             pst = con.prepareStatement(insert);
+             
+            File f = new File(""+pathfile.getText());
+            FileInputStream fs = new FileInputStream(f);
+            pst.setBinaryStream(1, fs);
+            pst.execute();
+            
+            
+           Alert saved = new Alert(Alert.AlertType.INFORMATION);
+           saved.setContentText("Saved");   
+           saved.showAndWait();
+           
+         }catch(FileNotFoundException | SQLException ex){
+            
+         }
+         
+    }
     
+    public void open() throws IOException{
+            FileChooser fc = new FileChooser();
+            FileChooser.ExtensionFilter exf1 = new FileChooser.ExtensionFilter("PNG Files", "*.png");
+            fc.getExtensionFilters().add(exf1);
+            File f = fc.showOpenDialog(null);
+            pathfile.setText(""+f);
+                 BufferedImage bufferedImage = ImageIO.read(f);
+                Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+                attachimage.setImage(image);
+           
+    
+    }
     
 }

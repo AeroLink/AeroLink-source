@@ -11,16 +11,15 @@ import static Synapse.Model.setColumns;
  *
  * @author Randelle
  */
-public class Log2_reservationform extends Synapse.Model {
-    
-     public Log2_reservationform(String path){
-         switch (path) {
-            case "reservation":
-                this.initTable("tbl_log2_vr_reservation");
+public class Log2_vd extends Synapse.Model {
+
+    public Log2_vd(String path) {
+        switch (path) {
+            case "vd":
+                this.initTable("aerolink.tbl_log2_vd_listofreservation");
                 break;
             default:
                 break;
         }
     }
-    
 }
