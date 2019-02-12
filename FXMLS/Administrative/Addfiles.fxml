@@ -34,6 +34,6 @@
       </Label>
       <JFXComboBox fx:id="addbox" layoutX="183.0" layoutY="76.0" prefHeight="25.0" prefWidth="185.0" />
       <JFXTextField fx:id="addpathtxt" layoutX="30.0" layoutY="123.0" prefHeight="25.0" prefWidth="297.0" />
-      <FontAwesomeIconView fill="#00b359" glyphName="FOLDER" layoutX="340.0" layoutY="146.0" onDragDetected="#opendialog" size="30" />
+      <FontAwesomeIconView fill="#00b359" glyphName="FOLDER" layoutX="340.0" layoutY="146.0" onMouseClicked="#opendialog" size="30" />
    </children>
 </AnchorPane>
