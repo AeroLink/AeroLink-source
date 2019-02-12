@@ -5,22 +5,19 @@
  */
 package Model.Log2;
 
-import static Synapse.Model.setColumns;
-
 /**
  *
  * @author Randelle
  */
-public class Log2_reservationform extends Synapse.Model {
-    
-     public Log2_reservationform(String path){
-         switch (path) {
-            case "reservation":
-                this.initTable("tbl_log2_vr_reservation");
+public class Log2_vm extends Synapse.Model {
+
+ public Log2_vm(String path) {
+        switch (path) {
+            case "vm":
+                this.initTable("aerolink.tbl_log2_vm");
                 break;
             default:
                 break;
         }
-    }
-    
+    }    
 }

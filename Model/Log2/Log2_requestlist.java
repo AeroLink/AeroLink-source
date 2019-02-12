@@ -5,18 +5,16 @@
  */
 package Model.Log2;
 
-import static Synapse.Model.setColumns;
-
 /**
  *
  * @author Randelle
  */
-public class Log2_reservationform extends Synapse.Model {
+public class Log2_requestlist extends Synapse.Model {
     
-     public Log2_reservationform(String path){
+      public Log2_requestlist(String path){
          switch (path) {
-            case "reservation":
-                this.initTable("tbl_log2_vr_reservation");
+            case "requestlist":
+                this.initTable("tbl_log2_document_tracking_request");
                 break;
             default:
                 break;

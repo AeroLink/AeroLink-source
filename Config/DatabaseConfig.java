@@ -17,15 +17,16 @@ public class DatabaseConfig {
 
     public static String PROVIDER = "mssql";
     public static String schema = "aerolink"; //will be change if you were using mssql
-    public static String HttpURL = "http://192.168.1.2:8423/api/";
+    public static String HttpURL = "http://127.0.0.1:8423/api/";
     public static String key = "$2a$10$0S0Q9s6rrlAnabpLXoaWyuG5lgdQGMciIdSgxMzSULZW0e9vaCDke";
 
     //if offline mode
     public static Boolean offline = true;
-    public static String IP = "127.0.0.1"; //NS558185\AEROLINKSQL
-    public static String PORT = "1433";//1443
+    public static String IP = "139.99.62.2"; //"127.0.0.1"; //NS558185\AEROLINKSQL
+    public static String PORT = "8420";//1443
     public static String DATABASE = "AeroLink";
     public static String USER = "sa";//core
-    public static String PASSWORD = "randelle";//core
+    public static String PASSWORD = "PYWETgMDWTaS834fo9ijGkENpl43yrFtXpcJ9ovB0$yPS38";//core
    
 }
+    
