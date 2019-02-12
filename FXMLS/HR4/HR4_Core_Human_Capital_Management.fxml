@@ -4,16 +4,20 @@
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="603.0" prefWidth="1024.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR4.HR4_Core_Human_Capital_ManagementController">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1024.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR4.HR4_Core_Human_Capital_ManagementController">
    <children>
       <AnchorPane prefHeight="586.0" prefWidth="673.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -67,21 +71,10 @@
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <BorderPane layoutX="434.0" layoutY="240.0" prefHeight="568.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <top>
-                                    <AnchorPane prefHeight="97.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
-                                       <children>
-                                          <JFXButton buttonType="RAISED" contentDisplay="CENTER" layoutX="890.0" layoutY="58.0" prefHeight="25.0" prefWidth="120.0" styleClass="btn-primary" text="Print Report" textAlignment="CENTER" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
-                                          <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" layoutX="902.0" layoutY="75.0" AnchorPane.bottomAnchor="20.051339149475098" AnchorPane.rightAnchor="110.8571424484253" />
-                                          <JFXTextField fx:id="srch1" focusColor="#45a840" labelFloat="true" layoutX="41.0" layoutY="54.0" maxWidth="210.0" minWidth="171.0" prefHeight="31.0" prefWidth="187.0" promptText="Search" />
-                                          <FontAwesomeIconView fill="#2ea432" glyphName="SEARCH" layoutX="29.0" layoutY="73.0" />
-                                          <ComboBox fx:id="statcb" layoutX="241.0" layoutY="62.0" prefHeight="25.0" prefWidth="129.0" />
-                                       </children>
-                                    </AnchorPane>
-                                 </top>
                                  <center>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <TableView fx:id="tbl_chc" layoutX="479.0" layoutY="121.0" prefHeight="471.0" prefWidth="1024.0" stylesheets="@../../Assets/css/pom.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <TableView fx:id="tbl_chc" layoutX="470.0" layoutY="-9.0" prefHeight="566.0" prefWidth="554.0" stylesheets="@../../Assets/css/pom.css" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="470.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-9.0">
                                             <columns>
                                               <TableColumn prefWidth="75.0" text="C1" />
                                               <TableColumn prefWidth="75.0" text="C2" />
@@ -90,6 +83,22 @@
                                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                              </columnResizePolicy>
                                           </TableView>
+                                          <PieChart fx:id="pieChartGender" layoutX="28.0" layoutY="67.0" prefHeight="265.0" prefWidth="273.0" title="No.s of People by Gender" />
+                                          <PieChart fx:id="pieChartDept" layoutX="28.0" layoutY="333.0" prefHeight="338.0" prefWidth="431.0" title="No.s of People by Department" />
+                                          <JFXButton fx:id="btnNewEmployee" layoutX="308.0" layoutY="67.0" prefHeight="31.0" prefWidth="146.0" styleClass="btn-primary" text="New Employee" AnchorPane.leftAnchor="308.0" AnchorPane.topAnchor="67.0" />
+                                          <FontAwesomeIconView fill="WHITE" glyphName="PLUS" layoutX="324.0" layoutY="88.0" size="15" />
+                                          <AnchorPane layoutX="17.0" layoutY="8.0" prefHeight="53.0" prefWidth="446.0" style="-fx-border-color: black; -fx-border-radius: 3%;" AnchorPane.leftAnchor="17.0" AnchorPane.topAnchor="8.0">
+                                             <children>
+                                                <Label layoutX="14.0" layoutY="14.0" text="Search:">
+                                                   <font>
+                                                      <Font name="Arial Italic" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField layoutX="77.0" layoutY="12.0" prefHeight="25.0" prefWidth="183.0" />
+                                                <ComboBox layoutX="269.0" layoutY="12.0" prefHeight="25.0" prefWidth="165.0" />
+                                             </children>
+                                          </AnchorPane>
+                                          <JFXButton layoutX="307.0" layoutY="105.0" prefHeight="31.0" prefWidth="147.0" styleClass="btn-danger" />
                                        </children>
                                     </AnchorPane>
                                  </center>

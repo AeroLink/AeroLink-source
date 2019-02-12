@@ -10,12 +10,10 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -38,14 +36,10 @@ public class AssetController implements Initializable {
     private JFXTextArea astDesc;
     @FXML
     private JFXTextField astAmount;
-    @FXML
     private JFXTextField astQuantity;
-    @FXML
     private Label astTotal_label;
     @FXML
     private JFXButton save_btn;
-    @FXML
-    private JFXButton compute_btn;
     @FXML
     private JFXComboBox combbox;
     
@@ -70,9 +64,8 @@ ObservableList<String> cmbbx_stats = FXCollections.observableArrayList("Collecte
         {"ast_lastname",astLname.getText()},
         {"ast_description",astDesc.getText()},
         {"ast_amount",astAmount.getText()},
-        {"ast_quantity",astQuantity.getText()},
-        {"ast_total_amount",astTotal_label.getText()},
         {"ast_status",combbox.getValue().toString()},
+        {"ast_status2","CollectedAsset"},
         {"ast_type","Asset Sales"}
         };           
            
@@ -82,10 +75,8 @@ ObservableList<String> cmbbx_stats = FXCollections.observableArrayList("Collecte
              alert.setTitle("Save");
              alert.setContentText("Saved"); 
              alert.showAndWait();
-             save_btn.setDisable(true);
-             Stage stage =(Stage) astTotal_label.getScene().getWindow();
+             Stage stage =(Stage) save_btn.getScene().getWindow();
              stage.close();
-              
         }else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.initStyle(StageStyle.UNDECORATED);
@@ -102,18 +93,6 @@ ObservableList<String> cmbbx_stats = FXCollections.observableArrayList("Collecte
     
   
 
-    @FXML
-    private void ComputeAmount(ActionEvent event) {
-        int quantity = Integer.parseInt(astQuantity.getText());
-        int amount = Integer.parseInt(astAmount.getText());
-            String total = String.valueOf(quantity * amount);
-            astTotal_label.setText(total);
-            
-            
-             save_btn.setDisable(false);
-             
-            
-    }
     
     
 }

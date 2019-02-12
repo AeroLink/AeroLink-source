@@ -19,7 +19,7 @@
                <children>
                   <AnchorPane layoutY="1.0" prefHeight="40.0" prefWidth="1370.0" styleClass="card" stylesheets="@../../Assets/css/card.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Label layoutX="586.0" layoutY="-1.0" prefHeight="40.0" prefWidth="305.0" text="MONITORING &amp; FORWARDING" textFill="#34a853" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0">
+                        <Label layoutX="586.0" layoutY="-1.0" prefHeight="40.0" prefWidth="305.0" text="ACCOUNT MANAGEMENT" textFill="#34a853" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0">
                            <font>
                               <Font name="Arial Bold" size="20.0" />
                            </font>
@@ -31,7 +31,7 @@
                         </JFXButton>
                      </children>
                   </AnchorPane>
-                  <TableView fx:id="tblOpenDetails" layoutX="127.0" layoutY="116.0" prefHeight="582.0" prefWidth="1368.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="116.0">
+                  <TableView fx:id="tblOpenDetails" layoutX="127.0" layoutY="116.0" prefHeight="582.0" prefWidth="1368.0" stylesheets="@../../Assets/css/pom.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="116.0">
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>

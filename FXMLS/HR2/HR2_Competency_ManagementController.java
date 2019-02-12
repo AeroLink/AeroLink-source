@@ -13,7 +13,7 @@ import FXMLS.HR2.ClassFiles.HR2_CoursesClass;
 import FXMLS.HR2.ClassFiles.HR2_LM_AddExamModalClass;
 import FXMLS.HR2.ClassFiles.HR2_LM_CourseOutlineModal;
 import FXMLS.HR2.ClassFiles.HR4_Jobs_Class;
-import FXMLS.HR4.ClassFiles.HR4_MIZ;
+import FXMLS.HR4.Filler.HR4_MIZ;
 import Model.HR2_CM_Pivot;
 import Model.HR2_CM_Skill_Requisition;
 import Model.HR2_CM_Skills;
@@ -95,6 +95,10 @@ public class HR2_Competency_ManagementController implements Initializable {
     private JFXComboBox cbox_filter_dept;
     @FXML
     private Label lbl_req_countTable;
+    @FXML
+    private TableColumn<CM_Skill_RequisitionClass, String> col_status;
+    @FXML
+    private JFXButton btn_refresh;
 
     /**
      * Initializes the controller class.
@@ -110,10 +114,10 @@ public class HR2_Competency_ManagementController implements Initializable {
             Modal set_skill_modal = Modal.getInstance(new Form("/FXMLS/HR2/Modals/Modal_SetSkills.fxml").getParent());
             set_skill_modal.open();
         });
-         cbox_filter_dept.getSelectionModel().selectedItemProperty().addListener(listener -> {
+        cbox_filter_dept.getSelectionModel().selectedItemProperty().addListener(listener -> {
             SearchSkillReq();
         });
- /*  cbox_filter_status.getSelectionModel().selectedItemProperty().addListener(listener -> {
+        /*  cbox_filter_status.getSelectionModel().selectedItemProperty().addListener(listener -> {
             displaySkillReq();
         });*/
         txt_search_job.setOnKeyReleased(e -> SearchJob());
@@ -141,6 +145,7 @@ public class HR2_Competency_ManagementController implements Initializable {
 
     }
 
+    @FXML
     public void loadData() {
 
         try {
@@ -190,6 +195,7 @@ public class HR2_Competency_ManagementController implements Initializable {
             List c = cm_pivot.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr2_skillset", "skill_id", "s", "=", "skill_id")
                     .where(new Object[][]{{"jobs.title", "like", "%" + txt_search_job.getText() + "%"}, {"s.isDeleted", "<>", "1"}})
+                    .orderBy("jobs.title", Model.Sort.ASC)
                     .get("jobs.title", "jobs.description", "s.skill_id", "s.skill", "s.skill_description");
 
             Data(c);
@@ -229,12 +235,12 @@ public class HR2_Competency_ManagementController implements Initializable {
 
     //For TBL_Requisition
     public void SearchSkillReq() {
-        try{
-          HR2_CM_Skill_Requisition skill_req = new HR2_CM_Skill_Requisition();
+        try {
+            HR2_CM_Skill_Requisition skill_req = new HR2_CM_Skill_Requisition();
             List sr = skill_req.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "dept", "=", "dept_id")
                     .where(new Object[][]{
-                    {"dept.dept_name", "=", cbox_filter_dept.getSelectionModel()
+                {"dept.dept_name", "=", cbox_filter_dept.getSelectionModel()
                     .getSelectedItem().toString()},
                 /*  {"rs.req_status", "=", cbox_filter_status.getSelectionModel()
                     .getSelectedItem().toString()},*/
@@ -249,19 +255,23 @@ public class HR2_Competency_ManagementController implements Initializable {
         }
     }
 
+    @FXML
     public void displaySkillReq() {
         try {
             HR2_CM_Skill_Requisition skill_req = new HR2_CM_Skill_Requisition();
             List sr = skill_req.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "dept", "=", "dept_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_eis_requisition", "request_id", "rs", "=", "request_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_eis_request_status", "req_status_id", "=", "rs", "request_status", true)
                     .where(new Object[][]{
                 /*    {"dept.dept_name", "=", cbox_filter_dept.getSelectionModel()
                     .getSelectedItem().toString()},*/
                 /*  {"rs.req_status", "=", cbox_filter_status.getSelectionModel()
                     .getSelectedItem().toString()},*/
+                {"aerolink.tbl_eis_request_status.req_status_id","=","3"},
                 {"aerolink.tbl_hr2_skill_requisition.isDeleted", "<>", "1"}})
                     .orderBy("aerolink.tbl_hr2_skill_requisition.date_requested", Model.Sort.ASC)
-                    .get("aerolink.tbl_hr2_skill_requisition.sr_id,dept.dept_name, jobs.title");
+                    .get("aerolink.tbl_hr2_skill_requisition.sr_id,dept.dept_name, jobs.title", "aerolink.tbl_eis_request_status.req_status_id", "aerolink.tbl_eis_request_status.req_status");
 
             Req_Skill_Data(sr);
 
@@ -282,8 +292,10 @@ public class HR2_Competency_ManagementController implements Initializable {
                 s_req.add(
                         new CM_Skill_RequisitionClass(
                                 String.valueOf(hm1.get("sr_id")),
+                                String.valueOf(hm1.get("title")),
                                 String.valueOf(hm1.get("dept_name")),
-                                String.valueOf(hm1.get("title"))
+                                String.valueOf(hm1.get("req_status_id")),
+                                String.valueOf(hm1.get("req_status"))
                         ));
             }
 
@@ -305,6 +317,7 @@ public class HR2_Competency_ManagementController implements Initializable {
         //tbl_req_skill_Req
         col_dept.setCellValueFactory((TableColumn.CellDataFeatures<CM_Skill_RequisitionClass, String> param) -> param.getValue().dept_name);
         col_jp.setCellValueFactory((TableColumn.CellDataFeatures<CM_Skill_RequisitionClass, String> param) -> param.getValue().title);
+        col_status.setCellValueFactory((TableColumn.CellDataFeatures<CM_Skill_RequisitionClass, String> param) -> param.getValue().req_status);
         TableColumn<CM_Skill_RequisitionClass, Void> ViewDetails = new TableColumn("View Action");
 
         Callback<TableColumn<CM_Skill_RequisitionClass, Void>, TableCell<CM_Skill_RequisitionClass, Void>> cellFactory
@@ -324,7 +337,9 @@ public class HR2_Competency_ManagementController implements Initializable {
                                 CM_SkillReq_ModalClass.initSkillReq(
                                         s_reqs.sr_id.getValue(),
                                         s_reqs.dept_name.getValue(),
-                                        s_reqs.title.getValue());
+                                        s_reqs.title.getValue(),
+                                        s_reqs.req_status_id.getValue(),
+                                        s_reqs.req_status.getValue());
 
                                 Modal md = Modal.getInstance(new Form("/FXMLS/HR2/Modals/CM_Skill_Req_Details.fxml").getParent());
                                 md.open();
@@ -440,7 +455,7 @@ public class HR2_Competency_ManagementController implements Initializable {
 
     public void DropData() {
         Alert update = new Alert(Alert.AlertType.CONFIRMATION);
-        update.setContentText("Are you sure you want to update this data?");
+        update.setContentText("Are you sure you want to Archive this data?");
         Optional<ButtonType> rs = update.showAndWait();
 
         if (rs.get() == ButtonType.OK) {
@@ -451,7 +466,7 @@ public class HR2_Competency_ManagementController implements Initializable {
             }).update(new Object[][]{
                 {"isDeleted", "1"},}).executeUpdate();
             Alert dropnotif = new Alert(Alert.AlertType.INFORMATION);
-            dropnotif.setContentText(tbl_jobs.getSelectionModel().getSelectedItem().Skill.get() + " Successfully Dropped");
+            dropnotif.setContentText(tbl_jobs.getSelectionModel().getSelectedItem().Skill.get() + " Successfully Archived");
             dropnotif.showAndWait();
             loadData();
         }

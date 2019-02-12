@@ -1,259 +1,275 @@
 package FXMLS.Log1;
 
-import FXMLS.Log1.ClassFiles.Log1_fullInventoryList;
-import FXMLS.Log1.Warehouse.Modal.AddItemOnWarehouseController;
-import FXMLS.Log1.Warehouse.Modal.AddStockWHController;
-import FXMLS.Log1.Warehouse.Modal.StockOutWHController;
+
+import FXMLS.Log1.ClassFiles.Log1_WarehouseItemsClassfiles;
+import FXMLS.Log1.ClassFiles.Log1_WarehouseRequestItemClassfiles;
 import FXMLS.Log1.util.AlertMaker;
 import FXMLS.Log1.util.Log1Util;
 import Model.Log1.Log1_WarehouseItemsModel;
+import Model.Log1.Log1_WarehouseRequestItem;
 import Synapse.Model;
-import java.io.IOException;
+import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.TitledPane;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javafx.scene.layout.VBox;
 
 public class WarehouseManagementController implements Initializable {
-
-    long DummyCount = 0;
-    long GlobalCount = 0;
     
-    private TableView<Log1_fullInventoryList> ItemWH_tbl;
-    private TableColumn<Log1_fullInventoryList, String> ItemDescript_col2;
-    private TableColumn<Log1_fullInventoryList, String> ItemType_col3;
-    private TableColumn<Log1_fullInventoryList, String> itemLoc_col4;
-    private TableColumn<Log1_fullInventoryList, String> itemUnit_col5;
-    private TableColumn<Log1_fullInventoryList, String> price_col6;
-    private TableColumn<Log1_fullInventoryList, String> Stock_col7;
-    private TableColumn<Log1_fullInventoryList, String> reorderLevle_col8;
-    private TableColumn<Log1_fullInventoryList, String> status_col11;
-    private TableColumn<Log1_fullInventoryList, String> supp_col;
-    private TextField whSearch_txt;
+    Log1_WarehouseItemsModel model = new Log1_WarehouseItemsModel();
+    ObservableList<Log1_WarehouseItemsClassfiles> table = FXCollections.observableArrayList(); 
+    Log1_WarehouseRequestItem model2 = new Log1_WarehouseRequestItem();
+    ObservableList<Log1_WarehouseRequestItemClassfiles> table2 = FXCollections.observableArrayList(); 
+    
     @FXML
     private Label itemID_txt;
     @FXML
     private Label supplierID_txt;
+    @FXML
+    private TextField itemName_txt;
+    @FXML
+    private TextField itemLocation_txt;
+    @FXML
+    private TextField itemUnit_txt;
+    @FXML
+    private TextField itemStock_txt;
+    @FXML
+    private TextField itemCriticalLevel_txt;
+    @FXML
+    private DatePicker itemExpDate_txt;
+    @FXML
+    private TextField itemPurchasedPrice_txt;
+    @FXML
+    private JFXButton saveItem_btn;
+    @FXML
+    private JFXButton cancel_btn;
+    @FXML
+    private Label itemID_txt1;
+    @FXML
+    private Label supplierID_txt1;
+    @FXML
+    private TextField itemBrando_txt;
+    @FXML
+    private TableView<Log1_WarehouseItemsClassfiles> item_tbl;
+    @FXML
+    private VBox requestList_window;
+    @FXML
+    private TableView<Log1_WarehouseRequestItemClassfiles> request_tbl;
+    @FXML
+    private TitledPane requestDetails_pane;
+    @FXML
+    private JFXButton ReviewRequest_btn;
+    @FXML
+    private Label rRequestor_txt;
+    @FXML
+    private Label rRequestTitle_txt;
+    @FXML
+    private Label rLocation_txt;
+    @FXML
+    private Label rItem_txt;
+    @FXML
+    private Label rUnit_txt;
+    @FXML
+    private Label rQuantity_txt;
+    @FXML
+    private Label rDateRequested_txt;
+    @FXML
+    private Label rPrioritylvl_txt;
+    @FXML
+    private Label rPurpose_txt;
+    @FXML
+    private JFXButton cancelRequestViewing_btn;
+    @FXML
+    private JFXButton viewRequestForm_btn;
+    @FXML
+    private Label ritemID_txt;
+    @FXML
+    private TableView<Log1_WarehouseItemsClassfiles> checkItem_tbl;
+    @FXML
+    private JFXButton approveReq_txt;
+    @FXML
+    private JFXButton declineReq_txt;
+    @FXML
+    private JFXButton checkItem_btn;
+    @FXML
+    private TitledPane requestItemDetails_pane;
 
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-//        callWarehouseItems();
-//        displayWarehouseItem();
-//        whSearch_txt.setOnKeyReleased(e -> searchItem());
+        saveItem_btn.setOnMouseClicked(e->AddItem());
+        renderItemTable();
+        loadItemData();
+        renderRequestTable();
+        loadRequestData();
+        ReviewRequest_btn.setOnMouseClicked(e->selectRequestForReviewing());
+        cancelRequestViewing_btn.setOnMouseClicked(e->cancelRequestViewing());
+        viewRequestForm_btn.setOnMouseClicked(e->viewRequestformpetmalu());
+        renderItemTableForChecking();
+        checkItem_btn.setOnMouseClicked(e->checkItemAvailability());
     }
     
-    //search functionality
+    public void viewRequestformpetmalu(){
+        Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/WarehouseRequisition.fxml"),
+                 "Request Form", null);
+    }
     
-    public void searchItem() {
-//        Log1_WarehouseItemsModel searchItem = new Log1_WarehouseItemsModel(); 
-//
-//            try{
-//            List list_coa = searchItem.join(Model.JOIN.INNER, "aerolink.tbl_log1_suppliers", 
-//                    "SupplierID", "=", "SupplierID").where(new Object[][]{
-//            {"ItemDescription", "like", "%" + whSearch_txt.getText() + "%"}
-//            }).get();    
-//            ObservableList<Log1_fullInventoryList> items = FXCollections.observableArrayList();
-//            for(Object d : list_coa)
-//            {
-//                HashMap hm = (HashMap) d;   //exquisite casting
-//                
-//               items.add(new Log1_fullInventoryList(
-//                
-//                String.valueOf(hm.get("ItemID")),
-//                String.valueOf(hm.get("SupplierID")),
-//                String.valueOf(hm.get("SupplierName")),
-//                String.valueOf(hm.get("ItemDescription")),
-//                String.valueOf(hm.get("ItemType")),
-//                String.valueOf(hm.get("ItemLocation")),
-//                String.valueOf(hm.get("ItemUnit")),
-//                String.valueOf(hm.get("UnitPrice")),
-//                String.valueOf(hm.get("StockQuantity")),
-//                String.valueOf(hm.get("CriticalQuantity")),
-//                String.valueOf(hm.get("DisposalDate")),
-//                String.valueOf(hm.get("Status"))
-//                       
-//                ));}
-//            ItemWH_tbl.setItems(items);
-//            
-//            }catch(Exception e){
-//                e.printStackTrace();
-//            } 
+    public void AddItem(){
+        String item = itemID_txt.getText();
+        String brand = itemBrando_txt.getText();
+        String loc = itemLocation_txt.getText();
+        String unit = itemUnit_txt.getText();
+        String stock = itemStock_txt.getText();
+        String critlvl = itemCriticalLevel_txt.getText();
+        String price = itemPurchasedPrice_txt.getText();    
+        
+        
+        Boolean flag = item.isEmpty() || brand.isEmpty() || loc.isEmpty()
+            || unit.isEmpty() || stock.isEmpty() || critlvl.isEmpty() ||
+            price.isEmpty();
+    
+        if(!flag){
+            try{
+                String [][] tbl={
+                    {"ItemName", itemName_txt.getText()},
+                    {"ItemBrand", itemBrando_txt.getText()},
+                    {"ItemLocation", itemLocation_txt.getText()},
+                    {"ItemUnit", itemUnit_txt.getText()},
+                    {"ItemStock", itemStock_txt.getText()},
+                    {"ItemCriticalLevel", itemCriticalLevel_txt.getText()},
+                    {"ItemExpirationDate", itemExpDate_txt.getEditor().getText()},
+                    {"PurchasedPrice", itemPurchasedPrice_txt.getText()},
+                    {"ItemStatus", "Good On Stock"}
+                };
+                if(model.insert(tbl)){
+                    AlertMaker.showSimpleAlert("", ""+ itemName_txt.getText() +" has been registered to Items");
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+            }
         }
-    
-    //fetching data
-    public void callWarehouseItems(){
-//        Log1_WarehouseItemsModel coa = new Log1_WarehouseItemsModel();
-//        ObservableList<Log1_fullInventoryList> ItemsXD = FXCollections.observableArrayList();
-//          
-//
-//        List b = coa.join
-//            (Model.JOIN.INNER, "aerolink.tbl_log1_suppliers", "SupplierID", "=", "SupplierID").where(new Object[][]{
-//            {"ShowInMainWindow", "=", "yes"}
-//            }).get(); 
-//                
-//        
-//        for(Object d : b){//rs = hm
-//            
-//                HashMap hm = (HashMap) d;   //exquisite casting
-//                
-//                ItemsXD.add(new Log1_fullInventoryList( 
-//                    String.valueOf(hm.get("ItemID")),
-//                    String.valueOf(hm.get("SupplierID")),
-//                    String.valueOf(hm.get("SupplierName")),
-//                    String.valueOf(hm.get("ItemDescription")),
-//                    String.valueOf(hm.get("ItemType")),
-//                    String.valueOf(hm.get("ItemLocation")),
-//                    String.valueOf(hm.get("ItemUnit")),
-//                    String.valueOf(hm.get("UnitPrice")),
-//                    String.valueOf(hm.get("StockQuantity")),
-//                    String.valueOf(hm.get("CriticalQuantity")),
-//                    String.valueOf(hm.get("DisposalDate")),
-//                    String.valueOf(hm.get("Status"))
-//                ));       
-//            }
-//                ItemWH_tbl.setItems(ItemsXD);
     }
     
-    //displaying on table column
-    public void displayWarehouseItem(){
-            supp_col.setCellValueFactory(new PropertyValueFactory<>("SupplierName"));
-            ItemDescript_col2.setCellValueFactory(new PropertyValueFactory<>("ItemDescription"));
-            ItemType_col3.setCellValueFactory(new PropertyValueFactory<>("ItemType"));
-            itemLoc_col4.setCellValueFactory(new PropertyValueFactory<>("ItemLocation"));
-            itemUnit_col5.setCellValueFactory(new PropertyValueFactory<>("ItemUnit"));
-            price_col6.setCellValueFactory(new PropertyValueFactory<>("UnitPrice"));
-            Stock_col7.setCellValueFactory(new PropertyValueFactory<>("StockQuantity"));
-            reorderLevle_col8.setCellValueFactory(new PropertyValueFactory<>("CriticalQuantity"));
-            status_col11.setCellValueFactory(new PropertyValueFactory<>("Status"));
-    }
+    public void renderItemTable(){
+        item_tbl.getItems().clear();
+        item_tbl.getColumns().removeAll(item_tbl.getColumns());
 
+        TableColumn<Log1_WarehouseItemsClassfiles, String> item = new TableColumn<>("Item");
+        TableColumn<Log1_WarehouseItemsClassfiles, String> loc = new TableColumn<>("Location");
+        TableColumn<Log1_WarehouseItemsClassfiles, String> unit = new TableColumn<>("Item Unit");
+        TableColumn<Log1_WarehouseItemsClassfiles, String> stock = new TableColumn<>("Stock");
+        TableColumn<Log1_WarehouseItemsClassfiles, String> critlvl = new TableColumn<>("Critical level");
+        TableColumn<Log1_WarehouseItemsClassfiles, String> status = new TableColumn<>("Status");
+
+        item.setCellValueFactory((param) -> param.getValue().ItemName);
+        loc.setCellValueFactory(param -> param.getValue().ItemLocation);
+        unit.setCellValueFactory(param -> param.getValue().ItemUnit);
+        stock.setCellValueFactory(param -> param.getValue().ItemStock);
+        critlvl.setCellValueFactory(param -> param.getValue().ItemCriticalLevel);
+        status.setCellValueFactory(param -> param.getValue().ItemStatus);
+
+        item_tbl.getColumns().addAll(item, loc, unit, stock, critlvl, status);
+    }
+    public void loadItemData(){
+        List b = model.get();
+            
+            for(Object d : b)
+                {
+                    //rs = hm
+                HashMap hm = (HashMap) d;   //exquisite casting
+                
+                table.add(new Log1_WarehouseItemsClassfiles(
+                
+                String.valueOf(hm.get("ItemID")),
+                String.valueOf(hm.get("ItemName")),
+                String.valueOf(hm.get("ItemBrand")),
+                String.valueOf(hm.get("ItemLocation")),
+                String.valueOf(hm.get("ItemUnit")),
+                String.valueOf(hm.get("ItemStock")),
+                String.valueOf(hm.get("ItemCriticalLevel")),
+                String.valueOf(hm.get("ItemExpirationDate")),
+                String.valueOf(hm.get("PurchasedPrice")),
+                String.valueOf(hm.get("ItemStatus"))
+                ));       
+        }
+        item_tbl.getItems().clear();
+        item_tbl.setItems(table);
+    }
+    
+    public void renderRequestTable(){
+        request_tbl.getItems().clear();
+        request_tbl.getColumns().removeAll(request_tbl.getColumns());
+
+        TableColumn<Log1_WarehouseRequestItemClassfiles, String> title = new TableColumn<>("Request Title");
+        TableColumn<Log1_WarehouseRequestItemClassfiles, String> priority = new TableColumn<>("Priority Level");
+        TableColumn<Log1_WarehouseRequestItemClassfiles, String> date = new TableColumn<>("Date Requested");
+        TableColumn<Log1_WarehouseRequestItemClassfiles, String> stats = new TableColumn<>("Status");
+
+        title.setCellValueFactory((param) -> param.getValue().RequestTitle);
+        priority.setCellValueFactory(param -> param.getValue().RequestPriorityLevel);
+        date.setCellValueFactory(param -> param.getValue().DateRequested);
+        stats.setCellValueFactory(param -> param.getValue().DateRequested);
+
+        request_tbl.getColumns().addAll(title, priority, date, stats);
+    }
+    public void loadRequestData(){
+    Log1_WarehouseRequestItem model2 = new Log1_WarehouseRequestItem();
+    ObservableList<Log1_WarehouseRequestItemClassfiles> table2 = FXCollections.observableArrayList(); 
+        
+    List b = model2.join(Model.JOIN.INNER, "aerolink.tbl_log1_WarehouseItems", "ItemID", "=", "ItemID")
+                .where(new Object[][]{
+                    {"RequestStatus", "=", "Pending"}
+                }).get();
+            
+            for(Object d : b)
+                {
+                    //rs = hm
+                HashMap hm = (HashMap) d;   //exquisite casting
+                
+                table2.add(new Log1_WarehouseRequestItemClassfiles(
+                
+                String.valueOf(hm.get("RequestID")),
+                String.valueOf(hm.get("ItemID")),
+                String.valueOf(hm.get("ItemName")),
+                String.valueOf(hm.get("ItemUnit")),
+                String.valueOf(hm.get("Requestor")),
+                String.valueOf(hm.get("RequestTitle")),
+                String.valueOf(hm.get("RequestLocation")),
+                String.valueOf(hm.get("RequestQuantity")),
+                String.valueOf(hm.get("RequestPurpose")),
+                String.valueOf(hm.get("RequestPriorityLevel")),
+                String.valueOf(hm.get("DateRequested")),
+                String.valueOf(hm.get("RequestStatus"))
+                ));       
+        }
+        request_tbl.getItems().clear();
+        request_tbl.setItems(table2);
+    }
+    
     @FXML
     private void handleMenuStockIn(ActionEvent event) {
-        Log1_fullInventoryList selectedForEdit = ItemWH_tbl.getSelectionModel().getSelectedItem();
-        if(selectedForEdit == null){
-            AlertMaker.showErrorMessage("No Item selected","Please select an Item");
-            return;
-        } 
-        Log1_fullInventoryList selectedForAddStock = ItemWH_tbl.getSelectionModel().getSelectedItem();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/AddStockWH.fxml"));
-            Parent parent = loader.load();
-            
-            AddStockWHController controller = (AddStockWHController) loader.getController();
-            controller.inflateUI(selectedForAddStock);
-            
-            Stage stage = new Stage(StageStyle.DECORATED);
-            stage.setTitle("Add Stock");
-            stage.setScene(new Scene(parent));
-            stage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(WarehouseManagementController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
-
     @FXML
     private void handleMenuStockOut(ActionEvent event) {
-        Log1_fullInventoryList selectedForEdit = ItemWH_tbl.getSelectionModel().getSelectedItem();
-        if(selectedForEdit == null){
-            AlertMaker.showErrorMessage("No Item selected","Please select an Item");
-            return;
-        } 
-        Log1_fullInventoryList selectedForAddStock = ItemWH_tbl.getSelectionModel().getSelectedItem();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/StockOutWH.fxml"));
-            Parent parent = loader.load();
-            
-            StockOutWHController controller = (StockOutWHController) loader.getController();
-            controller.inflateUI(selectedForAddStock);
-            
-            Stage stage = new Stage(StageStyle.DECORATED);
-            stage.setTitle("Take out Stock");
-            stage.setScene(new Scene(parent));
-            stage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(WarehouseManagementController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
-
-    @FXML
-    private void addNewItemAction(ActionEvent event) {
-        Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/AddItemOnWarehouse.fxml"),
-                 "Add New Item", null);
-    }
-
-    //edit data details
     @FXML
     private void updateItemAction(ActionEvent event) {
-       Log1_fullInventoryList selectedForEdit = ItemWH_tbl.getSelectionModel().getSelectedItem();
-        if(selectedForEdit == null){
-            AlertMaker.showErrorMessage("No Item selected","Please select an Item");
-            return;
-        } 
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/AddItemOnWarehouse.fxml"));
-            Parent parent = loader.load();
-            
-            AddItemOnWarehouseController controller = (AddItemOnWarehouseController) loader.getController();
-            controller.displaySelectedIndex(selectedForEdit);
-            
-            Stage stage = new Stage(StageStyle.DECORATED);
-            stage.setTitle("Update Item Details");
-            stage.setScene(new Scene(parent));
-            stage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(WarehouseManagementController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void handleActivityLogAction(ActionEvent event) {
-        Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/WarehouseActivityLog.fxml"),
-                 "Activity Log", null);
-    }
-
-    private void handleRequestsViewAction(ActionEvent event) {
-        Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/ViewRequestItems.fxml"),
-                 "Requested items by other department", null);
-    }
-
-    private void requestToProcure(ActionEvent event) {
-        Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/PurchaseRequestWarehouse.fxml"),
-                 "Request to Procurement", null);
-    }
-
-    private void handleViewCountReportAction(ActionEvent event) {
-        Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/WarehouseCountReport.fxml"),
-                 "Count Report", null);
-    }
-
-    private void showRequestedStocks(ActionEvent event) {
-        Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/ViewRequestedStocks.fxml"),
-                 "Requested Stocks", null);
-    }
-
-    private void RequestItemOnWarehouseAction(ActionEvent event) {
-        Log1Util.loadWindow(getClass().getResource("/FXMLS/Log1/Warehouse/Modal/RequestItemsOnWarehouse.fxml"),
-                 "Requested Items", null);
     }
 
     @FXML
@@ -263,4 +279,95 @@ public class WarehouseManagementController implements Initializable {
     @FXML
     private void quantityTimesPrice(KeyEvent event) {
     }
+
+    @FXML
+    private void selectDepartmentRequests(MouseEvent event) {
+        ReviewRequest_btn.setDisable(false);
+    }
+    public void selectRequestForReviewing(){
+        requestDetails_pane.setDisable(false);
+        requestList_window.setDisable(true);
+        rItem_txt.setText(request_tbl.getSelectionModel().getSelectedItem().getItemName());
+        rDateRequested_txt.setText(request_tbl.getSelectionModel().getSelectedItem().getDateRequested());
+        rRequestor_txt.setText(request_tbl.getSelectionModel().getSelectedItem().getRequestor());        
+        rRequestTitle_txt.setText(request_tbl.getSelectionModel().getSelectedItem().getRequestTitle());
+        rLocation_txt.setText(request_tbl.getSelectionModel().getSelectedItem().getRequestLocation());
+        rUnit_txt.setText(request_tbl.getSelectionModel().getSelectedItem().getItemUnit());
+        rQuantity_txt.setText(request_tbl.getSelectionModel().getSelectedItem().getRequestQuantity());
+        rPrioritylvl_txt.setText(request_tbl.getSelectionModel().getSelectedItem().getRequestPriorityLevel());
+        rPurpose_txt.setText(request_tbl.getSelectionModel().getSelectedItem().getRequestPurpose());
+        ritemID_txt.setText(request_tbl.getSelectionModel().getSelectedItem().getItemID());
+        
+    }
+    public void cancelRequestViewing(){
+        rItem_txt.setText("");
+        rDateRequested_txt.setText("");
+        rRequestor_txt.setText("");
+        rRequestTitle_txt.setText(""); 
+        rLocation_txt.setText("");
+        rUnit_txt.setText("");
+        rQuantity_txt.setText("");
+        rPrioritylvl_txt.setText("");
+        rPurpose_txt.setText("");
+        ritemID_txt.setText("");
+        requestDetails_pane.setDisable(true);
+        requestList_window.setDisable(false);
+        requestItemDetails_pane.setDisable(true);
+        checkItem_tbl.setDisable(true);
+    }
+
+    private void checkItemAvailability() {
+        ObservableList<Log1_WarehouseItemsClassfiles> items = FXCollections.observableArrayList();
+        Log1_WarehouseItemsModel searchItem = new Log1_WarehouseItemsModel();
+        
+        List b = searchItem.where(new Object[][]{
+            {"ItemID", "=", ritemID_txt.getText()}
+        }).get();
+            
+            for(Object d : b)
+                {
+                    //rs = hm
+                HashMap hm = (HashMap) d;   //exquisite casting
+                
+                items.add(new Log1_WarehouseItemsClassfiles(
+                
+                String.valueOf(hm.get("ItemID")),
+                String.valueOf(hm.get("ItemName")),
+                String.valueOf(hm.get("ItemBrand")),
+                String.valueOf(hm.get("ItemLocation")),
+                String.valueOf(hm.get("ItemUnit")),
+                String.valueOf(hm.get("ItemStock")),
+                String.valueOf(hm.get("ItemCriticalLevel")),
+                String.valueOf(hm.get("ItemExpirationDate")),
+                String.valueOf(hm.get("PurchasedPrice")),
+                String.valueOf(hm.get("ItemStatus"))
+                ));       
+        }
+        checkItem_tbl.setItems(items);
+        approveReq_txt.setDisable(false);
+        declineReq_txt.setDisable(false);
+    }
+    public void renderItemTableForChecking(){
+        checkItem_tbl.getItems().clear();
+        checkItem_tbl.getColumns().removeAll(checkItem_tbl.getColumns());
+
+        TableColumn<Log1_WarehouseItemsClassfiles, String> item = new TableColumn<>("Item");
+        TableColumn<Log1_WarehouseItemsClassfiles, String> loc = new TableColumn<>("Location");
+        TableColumn<Log1_WarehouseItemsClassfiles, String> unit = new TableColumn<>("Item Unit");
+        TableColumn<Log1_WarehouseItemsClassfiles, String> stock = new TableColumn<>("Stock");
+        TableColumn<Log1_WarehouseItemsClassfiles, String> critlvl = new TableColumn<>("Critical level");
+        TableColumn<Log1_WarehouseItemsClassfiles, String> status = new TableColumn<>("Status");
+
+        item.setCellValueFactory((param) -> param.getValue().ItemName);
+        loc.setCellValueFactory(param -> param.getValue().ItemLocation);
+        unit.setCellValueFactory(param -> param.getValue().ItemUnit);
+        stock.setCellValueFactory(param -> param.getValue().ItemStock);
+        critlvl.setCellValueFactory(param -> param.getValue().ItemCriticalLevel);
+        status.setCellValueFactory(param -> param.getValue().ItemStatus);
+
+        checkItem_tbl.getColumns().addAll(item, loc, unit, stock, critlvl, status);
+    }
+
+    
+  
 }

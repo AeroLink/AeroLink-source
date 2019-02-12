@@ -9,20 +9,22 @@ import FXMLS.HR1.ClassFiles.HR1_EditJobSelection;
 import FXMLS.HR1.ClassFiles.HR1_PostJobSelection;
 import FXMLS.HR1.ClassFiles.TableModel_jLimit;
 import FXMLS.HR1.ClassFiles.TableModel_jPosted;
+import Model.HR1.HR1_Applicants;
 import Model.HR1.JobPosting;
 import Model.HR1.JobVacancy;
 import Synapse.Model;
+import Synapse.STORED_PROC;
 import Synapse.Session;
 import Synapse.SysDialog;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXDialogLayout;
+import com.jfoenix.controls.JFXToggleButton;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -33,13 +35,13 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.ContextMenu;
@@ -52,11 +54,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.util.Callback;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.util.Duration;
 import org.controlsfx.control.MaskerPane;
-import org.controlsfx.control.SegmentedBar;
+import org.controlsfx.control.Notifications;
 import org.controlsfx.control.StatusBar;
 import org.controlsfx.control.textfield.CustomTextField;
 
@@ -71,20 +74,20 @@ public class HR1_RecruitmentController implements Initializable {
 
     public static BooleanProperty refresher;
 
-    ObservableList<TableModel_jLimit> observableList = FXCollections.observableArrayList();
-    ObservableList<PieChart.Data> pieList = FXCollections.observableArrayList();
+    private final ObservableList<PieChart.Data> pieList = FXCollections.observableArrayList();
+    private final ObservableList<PieChart.Data> pieList_FullPart = FXCollections.observableArrayList();
+    private final ObservableList<PieChart.Data> pieList_Jobs = FXCollections.observableArrayList();
     ObservableList<TableModel_jPosted> observablePosting = FXCollections.observableArrayList();
 
     long GlobalCount = 0;
     long DummyCount = 0;
+    int incrementItem = 1;
+
     Thread th;
 
     Label statusLabel = new Label("");
 
     JobPosting jp = new JobPosting();
-
-    Object[][] objFilter;
-
     @FXML
     private TableView<TableModel_jLimit> tblOpenJobs;
     @FXML
@@ -96,7 +99,7 @@ public class HR1_RecruitmentController implements Initializable {
     @FXML
     private JFXButton btnSearch;
     @FXML
-    private JFXTextField txtSearchPostings;
+    private CustomTextField txtSearchPostings;
     @FXML
     private JFXButton btnSearchPostings;
     @FXML
@@ -112,15 +115,29 @@ public class HR1_RecruitmentController implements Initializable {
     @FXML
     private StatusBar statusBar;
     @FXML
-    private JFXCheckBox rdoPosted;
-    @FXML
-    private JFXCheckBox rdoPending;
-    @FXML
-    private JFXCheckBox rdoFullTime;
-    @FXML
-    private JFXCheckBox rdoPartTime;
-    @FXML
     private PieChart pieChart;
+    @FXML
+    private PieChart pieFullPart;
+    @FXML
+    private PieChart pieJobs;
+    @FXML
+    private JFXCheckBox chkFilter;
+    @FXML
+    private JFXToggleButton switchPostingStatus;
+    @FXML
+    private JFXToggleButton switchEmpStatus;
+    @FXML
+    private JFXButton btnRefresh;
+    @FXML
+    private JFXButton btnExport;
+    @FXML
+    private JFXCheckBox chkFilterPostings;
+    @FXML
+    private JFXToggleButton switchEmpStatusPostings;
+    @FXML
+    private JFXButton btnRefreshPostings;
+    @FXML
+    private JFXButton btnExportPostings;
 
     /**
      * Initializes the controller class.
@@ -134,6 +151,7 @@ public class HR1_RecruitmentController implements Initializable {
         //Loading mask
         maskpane.setText("Loading Data, Please Wait ... ");
 
+        this.chartStats();
         //statusbar
         //refresher
         refresher = new SimpleBooleanProperty();
@@ -153,10 +171,6 @@ public class HR1_RecruitmentController implements Initializable {
             this.viewModalPostJob(tblOpenJobs.getSelectionModel().getSelectedItem());
         });
 
-        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
-            Search();
-        });
-
         btnSearch.setOnMouseClicked(event -> Search());
 
         //Posting
@@ -164,51 +178,172 @@ public class HR1_RecruitmentController implements Initializable {
         this.populatePostingTable();
 
         tblPostingJobs.setContextMenu(this.contextPostingsJobs);
-        menuPosting.setOnAction(event -> viewModalEditJob());
+        menuPosting.setOnAction(event -> viewModalEditJob(tblPostingJobs.getSelectionModel().getSelectedItem()));
 
+        chkFilter.setOnAction(a -> {
+            if (chkFilter.isSelected()) {
+                switchEmpStatus.setDisable(false);
+                switchPostingStatus.setDisable(false);
+            } else {
+                switchEmpStatus.setDisable(true);
+                switchPostingStatus.setDisable(true);
+            }
+        });
+
+        switchEmpStatus.setOnAction(v -> {
+            Notifications nBuilder = Notifications.create()
+                    .title("[ JOB Vacancies ] Toggled!")
+                    .text("Now Filtered to Employement Status : " + (switchEmpStatus.isSelected() ? "Full Time" : "Part Time"))
+                    .hideAfter(Duration.seconds(2))
+                    .position(Pos.BOTTOM_RIGHT);
+
+            nBuilder.showInformation();
+        });
+
+        switchPostingStatus.setOnAction(v -> {
+            Notifications nBuilder = Notifications.create()
+                    .title("[ JOB Vacancies ] Toggled!")
+                    .text("[ JOB Vacancies ] Now Filtered to Posting Status : " + (switchPostingStatus.isSelected() ? "Posted" : "Pending"))
+                    .hideAfter(Duration.seconds(2))
+                    .position(Pos.BOTTOM_RIGHT);
+
+            nBuilder.showInformation();
+        });
+
+        btnRefresh.setOnAction(ac -> {
+            GlobalCount = 0;
+            Notifications nBuilder = Notifications.create()
+                    .title("Wait!")
+                    .text("The table [ JOB Vacancies ] will refreshed in 2 seconds")
+                    .hideAfter(Duration.seconds(2))
+                    .position(Pos.BOTTOM_RIGHT);
+
+            nBuilder.showInformation();
+        });
+
+        chkFilterPostings.setOnAction(a -> {
+            if (chkFilterPostings.isSelected()) {
+                switchEmpStatusPostings.setDisable(false);
+            } else {
+                switchEmpStatusPostings.setDisable(true);
+            }
+        });
+
+        switchEmpStatusPostings.setOnAction(v -> {
+            Notifications nBuilder = Notifications.create()
+                    .title("[ JOB Postings ] Toggled!")
+                    .text("Now Filtered to Employement Status : " + (switchEmpStatusPostings.isSelected() ? "Full Time" : "Part Time"))
+                    .hideAfter(Duration.seconds(2))
+                    .position(Pos.BOTTOM_RIGHT);
+
+            nBuilder.showInformation();
+        });
+
+        btnRefreshPostings.setOnAction(ac -> {
+            jpCount = 0;
+            Notifications nBuilder = Notifications.create()
+                    .title("Wait!")
+                    .text("The table [ JOB Postings ] will refreshed in 2 seconds")
+                    .hideAfter(Duration.seconds(2))
+                    .position(Pos.BOTTOM_RIGHT);
+
+            nBuilder.showInformation();
+        });
+
+        //XSSFWorkbook wb = new XSSFWorkbook();
     }
 
     public void chartStats() {
-        
+
         pieList.clear();
-        List<HashMap> list = jobVacancy.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "job_id").get("IIF(isPosted = 0, 'Pending', 'Posted' ) as PostedStatus, COUNT(isPosted) as total");
-        for(HashMap row : list ){
+        pieList_FullPart.clear();
+        pieList_Jobs.clear();
+
+        List<HashMap> list = jobVacancy.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "job_id")
+                .groupBy("isPosted")
+                .get("IIF(isPosted = 0, 'Pending', 'Posted' ) as PostedStatus, COUNT(isPosted) as total");
+        list.forEach((row) -> {
             pieList.add(new PieChart.Data(row.get("PostedStatus").toString(), Double.parseDouble(row.get("total").toString())));
-        }
-        
+        });
+
+        List<HashMap> list2x = jobVacancy.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "job_id")
+                .groupBy("status_type")
+                .get("IIF(status_type = 0, 'Full Time', 'Part Time' ) as PostedStatus, COUNT(status_type) as total");
+        list2x.forEach((row) -> {
+            pieList_FullPart.add(new PieChart.Data(row.get("PostedStatus").toString(), Double.parseDouble(row.get("total").toString())));
+        });
+
+        List<HashMap> list3x = jobVacancy.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "job_id")
+                .groupBy("title")
+                .get("title, COUNT(title) as total");
+        list3x.forEach((row) -> {
+            pieList_Jobs.add(new PieChart.Data(row.get("title").toString(), Double.parseDouble(row.get("total").toString())));
+        });
+
         pieChart.setData(pieList);
-       
+        pieFullPart.setData(pieList_FullPart);
+        pieJobs.setLegendVisible(true);
+        pieJobs.setLegendSide(Side.BOTTOM);
+        pieJobs.setData(pieList_Jobs);
+
     }
 
     public void Search() {
-        if (txtSearch.textProperty().getValue().isEmpty()) {
-            populateTable();
-        } else {
-            tblOpenJobs.getItems().removeAll(tblOpenJobs.getItems());
-            generateTable();
 
-            jobVacancy
-                    .join(Model.JOIN.INNER,
-                            "aerolink.tbl_hr4_jobs", "job_id", "=", "job_id")
+        Platform.runLater(() -> {
+            statusBar.setText("Loading ...");
+            statusBar.setProgress(0);
+        });
+
+        ObservableList<TableModel_jLimit> observableList = FXCollections.observableArrayList();
+        tblOpenJobs.getItems().clear();
+
+        List<HashMap> list;
+        if (chkFilter.isSelected()) {
+            list = jobVacancy.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "job_id")
                     .where(new Object[][]{
-                {"jobOpen", "<>", "0"}, {"title", "like", "%" + txtSearch.getText() + "%"}
-            })
-                    .get()
-                    .stream()
-                    .forEach(row -> {
-                        HashMap current_row = (HashMap) row;
-                        String id = current_row.get("id").toString();
-                        String job_id = current_row.get("job_id").toString();
-                        String job_open = current_row.get("jobOpen").toString();
-                        String job_title = current_row.get("title").toString();
-                        String salaryS = current_row.get("salary").toString();
-                        String status = current_row.get("isPosted").toString().equals("0") ? "Pending" : "Posted";
-                        String OpenDate = current_row.get("created_at").toString();
-                        String eS = current_row.get("status_type").toString().equals("0") ? "Full Time" : "Part Time";
-                        observableList.add(new TableModel_jLimit(id, job_id, job_open, job_title, status, OpenDate, salaryS, eS));
-                    });
+                {"isPosted", "=", (switchPostingStatus.isSelected() ? 1 : 0)},
+                {"status_type", "=", (switchEmpStatus.isSelected() ? 0 : 1)},
+                {"title", "like", "%" + txtSearch.getText() + "%"}
+            }).get();
+        } else {
+            list = jobVacancy.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "job_id")
+                    .where(new Object[][]{{"title", "like", "%" + txtSearch.getText() + "%"}})
+                    .get();
+        }
 
-            tblOpenJobs.setItems(observableList);
+        final int totalResultSet = list.size();
+
+        list.stream().forEach((HashMap current_row) -> {
+            String id = current_row.get("id").toString();
+            String job_id = current_row.get("job_id").toString();
+            String job_open = current_row.get("jobOpen").toString();
+            String job_title = current_row.get("title").toString();
+            String status = current_row.get("isPosted").toString().equals("0") ? "Pending" : "Posted";
+            String OpenDate = current_row.get("created_at").toString();
+            String eS = current_row.get("status_type").toString().equals("0") ? "Full Time" : "Part Time";
+            String salary = current_row.get("salary").toString();
+            observableList.add(new TableModel_jLimit(id, job_id, job_open, job_title, status, OpenDate, salary, eS));
+            statusBar.setProgress(Double.parseDouble(String.valueOf((incrementItem / totalResultSet))));
+            incrementItem += 1;
+        });
+
+        if (incrementItem >= totalResultSet) {
+            Platform.runLater(() -> {
+                GlobalCount = DummyCount;
+                tblOpenJobs.setItems(observableList);
+                tblOpenJobs.getSelectionModel().selectFirst();
+                Notifications nBuilder = Notifications.create()
+                        .title("Success")
+                        .text("Search Complete, " + String.valueOf(totalResultSet) + " results found. ")
+                        .hideAfter(Duration.seconds(2))
+                        .position(Pos.BOTTOM_RIGHT);
+
+                nBuilder.showConfirm();
+                statusBar.setText("Status : Data Load Complete, " + String.valueOf(totalResultSet) + " results found. ");
+                statusBar.setProgress(0);
+            });
+
         }
 
     }
@@ -223,57 +358,7 @@ public class HR1_RecruitmentController implements Initializable {
         TableColumn<TableModel_jLimit, String> status = new TableColumn<>("Posting Status");
         TableColumn<TableModel_jLimit, String> openDate = new TableColumn<>("Open Date");
         TableColumn<TableModel_jLimit, String> salary = new TableColumn<>("Salary");
-        TableColumn<TableModel_jLimit, String> empStatus = new TableColumn<>("empStatus");
-
-        TableColumn btnAction = new TableColumn<>(" ");
-
-        btnAction.setSortable(false);
-
-        btnAction.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TableModel_jLimit, Boolean>, ObservableValue<Boolean>>() {
-            @Override
-            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<TableModel_jLimit, Boolean> param) {
-                return new SimpleBooleanProperty(param.getValue() != null);
-            }
-        });
-
-        btnAction.setCellFactory(new Callback<TableColumn<TableModel_jLimit, Boolean>, TableCell<TableModel_jLimit, Boolean>>() {
-            @Override
-            public TableCell<TableModel_jLimit, Boolean> call(TableColumn<TableModel_jLimit, Boolean> param) {
-
-                //return new Synapse.Components.MenuButtonCell<TableModel_jLimit>().create("Actions", PostJob);
-                return new TableCell<TableModel_jLimit, Boolean>() {
-
-                    FontAwesomeIconView f = new FontAwesomeIconView(FontAwesomeIcon.COGS);
-                    private final MenuButton btn = new MenuButton("Actions", f);
-
-                    {
-                        f.getStyleClass().add("fontIconTable");
-                        btn.getStyleClass().add("btnTable");
-
-                        MenuItem PostJob = new MenuItem("Post this Job");
-                        FontAwesomeIconView fx = new FontAwesomeIconView(FontAwesomeIcon.PAPER_PLANE_ALT);
-                        fx.getStyleClass().add("fontIconMenu");
-                        PostJob.setGraphic(fx);
-                        PostJob.setOnAction(event -> {
-                            TableModel_jLimit jLimit = (TableModel_jLimit) getTableRow().getItem();
-                            viewModalPostJob(jLimit);
-                        });
-
-                        btn.getItems().add(PostJob);
-
-                    }
-
-                    @Override
-                    protected void updateItem(Boolean t, boolean empty) {
-                        super.updateItem(t, empty);
-                        if (!empty) {
-                            setGraphic(btn);
-                        }
-                    }
-
-                };
-            }
-        });
+        TableColumn<TableModel_jLimit, String> empStatus = new TableColumn<>("Employee Status");
 
         job_title.setCellValueFactory((TableColumn.CellDataFeatures<TableModel_jLimit, String> param) -> param.getValue().job_title);
         job_open.setCellValueFactory((TableColumn.CellDataFeatures<TableModel_jLimit, String> param) -> param.getValue().job_open);
@@ -282,7 +367,47 @@ public class HR1_RecruitmentController implements Initializable {
         salary.setCellValueFactory(param -> param.getValue().salary);
         empStatus.setCellValueFactory(param -> param.getValue().empStatus);
 
-        tblOpenJobs.getColumns().addAll(status, job_title, job_open, openDate, empStatus, salary, btnAction);
+        TableColumn<TableModel_jLimit, Boolean> btnAction = new TableColumn<>("Actions");
+
+        btnAction.setSortable(false);
+
+        btnAction.setCellFactory((TableColumn<TableModel_jLimit, Boolean> param) -> new TableCell<TableModel_jLimit, Boolean>() {
+
+            FontAwesomeIconView f = new FontAwesomeIconView(FontAwesomeIcon.COGS);
+            private final MenuButton btn = new MenuButton("Actions", f);
+
+            {
+                f.getStyleClass().add("fontIconTable");
+                btn.getStyleClass().add("btnTable");
+
+                MenuItem PostJob = new MenuItem("Post this Job");
+                FontAwesomeIconView fx = new FontAwesomeIconView(FontAwesomeIcon.PAPER_PLANE_ALT);
+                fx.getStyleClass().add("fontIconMenu");
+                PostJob.setGraphic(fx);
+                PostJob.setOnAction(event -> {
+                    TableModel_jLimit jLimit = (TableModel_jLimit) getTableRow().getItem();
+                    viewModalPostJob(jLimit);
+                });
+
+                btn.getItems().add(PostJob);
+
+            }
+
+            @Override
+            protected void updateItem(Boolean t, boolean empty) {
+                super.updateItem(t, empty);
+                if (!empty) {
+                    setGraphic(btn);
+                } else {
+                    setGraphic(null);
+                }
+            }
+
+        });
+
+        btnAction.setCellValueFactory((TableColumn.CellDataFeatures<TableModel_jLimit, Boolean> param) -> new SimpleBooleanProperty(false));
+
+        tblOpenJobs.getColumns().addAll(status, job_title, job_open, empStatus, salary, openDate, btnAction);
 
     }
 
@@ -305,7 +430,54 @@ public class HR1_RecruitmentController implements Initializable {
         publish_date.setCellValueFactory(param -> param.getValue().publish_on);
         expire_date.setCellValueFactory(param -> param.getValue().until);
 
-        tblPostingJobs.getColumns().addAll(job_title, status, salary, publish_date, expire_date, postingDate);
+        TableColumn<TableModel_jPosted, Boolean> btnAction = new TableColumn<>("Actions");
+
+        btnAction.setSortable(false);
+
+        btnAction.setCellFactory((TableColumn<TableModel_jPosted, Boolean> param) -> new TableCell<TableModel_jPosted, Boolean>() {
+
+            FontAwesomeIconView f = new FontAwesomeIconView(FontAwesomeIcon.COGS);
+            private final MenuButton btn = new MenuButton("Actions", f);
+
+            {
+                f.getStyleClass().add("fontIconTable");
+                btn.getStyleClass().add("btnTable");
+
+                MenuItem EditJob = new MenuItem("Edit this Job");
+                FontAwesomeIconView fx = new FontAwesomeIconView(FontAwesomeIcon.PENCIL);
+                fx.getStyleClass().add("fontIconMenu");
+                EditJob.setGraphic(fx);
+                EditJob.setOnAction(event -> {
+                    TableModel_jPosted jLimit = (TableModel_jPosted) getTableRow().getItem();
+                    viewModalEditJob(jLimit);
+                });
+
+                MenuItem CloseJob = new MenuItem("Unpost this Job");
+                FontAwesomeIconView fxClose = new FontAwesomeIconView(FontAwesomeIcon.CLOSE);
+                fxClose.getStyleClass().add("fontIconMenu");
+                CloseJob.setGraphic(fxClose);
+                CloseJob.setOnAction(event -> {
+                    TableModel_jPosted jLimit = (TableModel_jPosted) getTableRow().getItem();
+                    unpostJob(jLimit.id.getValue(), jLimit.jPosted_id.getValue());
+                });
+
+                btn.getItems().addAll(EditJob, CloseJob);
+
+            }
+
+            @Override
+            protected void updateItem(Boolean t, boolean empty) {
+                super.updateItem(t, empty);
+                if (!empty) {
+                    setGraphic(btn);
+                } else {
+                    setGraphic(null);
+                }
+            }
+
+        });
+
+        tblPostingJobs.getColumns().addAll(job_title, status, salary, publish_date, expire_date, postingDate, btnAction);
     }
 
     public void populateTable() {
@@ -322,19 +494,31 @@ public class HR1_RecruitmentController implements Initializable {
                     jobVacancy.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(row -> {
                         DummyCount = Long.parseLong(((HashMap) row).get("chk").toString());
                     });
+
                     if (GlobalCount != DummyCount) {
+
                         Platform.runLater(() -> {
                             statusBar.setText("Loading ...");
                             statusBar.setProgress(0);
                         });
 
-                        tblOpenJobs.getItems().removeAll(tblOpenJobs.getItems());
+                        ObservableList<TableModel_jLimit> observableList = FXCollections.observableArrayList();
+                        tblOpenJobs.getItems().clear();
 
-                        List<HashMap> list = jobVacancy.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "job_id").get();
+                        List<HashMap> list;
+                        if (chkFilter.isSelected()) {
+                            list = jobVacancy.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "job_id")
+                                    .where(new Object[][]{
+                                {"isPosted", "=", (switchPostingStatus.isSelected() ? 1 : 0)},
+                                {"status_type", "=", (switchEmpStatus.isSelected() ? 0 : 1)}
+                            }).get();
+                        } else {
+                            list = jobVacancy.join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "job_id").get();
+                        }
 
-                        int totalResultSet = list.size();
-                        int incrementItem = 1;
-                        for (HashMap current_row : list) {
+                        final int totalResultSet = list.size();
+
+                        list.stream().forEach((HashMap current_row) -> {
                             String id = current_row.get("id").toString();
                             String job_id = current_row.get("job_id").toString();
                             String job_open = current_row.get("jobOpen").toString();
@@ -346,15 +530,23 @@ public class HR1_RecruitmentController implements Initializable {
                             observableList.add(new TableModel_jLimit(id, job_id, job_open, job_title, status, OpenDate, salary, eS));
                             statusBar.setProgress(Double.parseDouble(String.valueOf((incrementItem / totalResultSet))));
                             incrementItem += 1;
-                        }
+                        });
 
                         if (incrementItem >= totalResultSet) {
-
-                            tblOpenJobs.setItems(observableList);
-                            GlobalCount = DummyCount;
                             Platform.runLater(() -> {
+                                GlobalCount = DummyCount;
+                                tblOpenJobs.setItems(observableList);
+                                tblOpenJobs.getSelectionModel().selectFirst();
+                                Notifications nBuilder = Notifications.create()
+                                        .title("Success")
+                                        .text("Data Load Complete, " + String.valueOf(totalResultSet) + " results found. ")
+                                        .hideAfter(Duration.seconds(2))
+                                        .position(Pos.BOTTOM_RIGHT);
+
+                                nBuilder.showConfirm();
                                 statusBar.setText("Status : Data Load Complete, " + String.valueOf(totalResultSet) + " results found. ");
                                 statusBar.setProgress(0);
+                                chartStats();
                             });
 
                         }
@@ -390,36 +582,48 @@ public class HR1_RecruitmentController implements Initializable {
                     if (totalCount != jpCount) {
                         tblPostingJobs.getItems().clear();
 
-                        jp.get()
-                                .stream()
-                                .forEach(row -> {
-                                    HashMap hash = (HashMap) row;
-                                    String id = hash.get("id").toString();
-                                    String jPosted = hash.get("jobPosted_id").toString();
-                                    String salary = hash.get("salary").toString();
-                                    String status = hash.get("status").toString();
-                                    String publish_on = hash.get("publish_on").toString();
-                                    String until = hash.get("until").toString();
-                                    String c = hash.get("created_at").toString();
-                                    String title = hash.get("title").toString();
-                                    observablePosting.add(new TableModel_jPosted(
-                                            id,
-                                            jPosted,
-                                            salary,
-                                            status,
-                                            publish_on,
-                                            until,
-                                            c,
-                                            title
-                                    ));
+                        List<HashMap> list;
 
-                                });
+                        if (chkFilterPostings.isSelected()) {
+                            list = jp.where(new Object[][]{
+                                {"status", "=", (switchEmpStatusPostings.isSelected() ? "Full Time" : "Part Time")},
+                                {"isDeleted", "=", 0}
+                            }).get();
+                        } else {
+                            list = jp.where(new Object[][]{{"isDeleted", "=", 0}}).get();
+                        }
 
-                        tblPostingJobs.setItems(observablePosting);
-                        jpCount = totalCount;
+                        list.stream().forEach(row -> {
+                            HashMap hash = (HashMap) row;
+                            String id = hash.get("id").toString();
+                            String jPosted = hash.get("jobPosted_id").toString();
+                            String salary = hash.get("salary").toString();
+                            String status = hash.get("status").toString();
+                            String publish_on = hash.get("publish_on").toString();
+                            String until = hash.get("until").toString();
+                            String c = hash.get("created_at").toString();
+                            String title = hash.get("title").toString();
+                            observablePosting.add(new TableModel_jPosted(
+                                    id,
+                                    jPosted,
+                                    salary,
+                                    status,
+                                    publish_on,
+                                    until,
+                                    c,
+                                    title
+                            ));
+
+                        });
+
+                        Platform.runLater(() -> {
+                            tblPostingJobs.setItems(observablePosting);
+                            tblPostingJobs.getSelectionModel().selectFirst();
+                            jpCount = totalCount;
+                        });
                     }
 
-                    Thread.sleep(3000);
+                    TimeUnit.SECONDS.sleep(2);
                 } catch (Exception ex) {
                     System.err.println("Exception Postings -> " + ex.getMessage());
                 }
@@ -439,10 +643,6 @@ public class HR1_RecruitmentController implements Initializable {
         if (e.getButton() == MouseButton.SECONDARY) {
             this.contextPostingsJobs.show(tblPostingJobs, e.getX(), e.getY());
         }
-    }
-
-    private void btnPostAJob(ActionEvent event) {
-        this.viewModalPostJob(tblOpenJobs.getSelectionModel().getSelectedItem());
     }
 
     public void viewModalPostJob(TableModel_jLimit j) {
@@ -469,9 +669,8 @@ public class HR1_RecruitmentController implements Initializable {
         }
     }
 
-    public void viewModalEditJob() {
+    public void viewModalEditJob(TableModel_jPosted tb) {
         try {
-            TableModel_jPosted tb = tblPostingJobs.getSelectionModel().getSelectedItem();
             HR1_EditJobSelection.id = tb.id.getValue();
             HR1_EditJobSelection.jPosted = tb.jPosted_id.getValue();
             HR1_EditJobSelection.salary = tb.salary.getValue();
@@ -491,9 +690,82 @@ public class HR1_RecruitmentController implements Initializable {
         }
     }
 
-    @FXML
-    private void btnEditPost(ActionEvent event) {
-        this.viewModalEditJob();
+    public void unpostJob(String posting_id, String vacancy_id) {
+
+        HR1_Applicants hr1PivotApp = new HR1_Applicants(true);
+
+        int count_application = Integer.parseInt(String.valueOf(hr1PivotApp.where(new Object[][]{{"jobPosted_id", "=", posting_id}, {"status", "<", 99}}).get().stream().count()));
+
+        if (count_application > 0) {
+            HaltWarningApplicants(count_application, posting_id, vacancy_id);
+        } else {
+            List<HashMap> list = STORED_PROC.executeCall("HR1_UnpostJob", new Object[][]{
+                {"posting_id", posting_id},
+                {"vacancy_id", vacancy_id},
+                {"trigger", 0}
+            });
+
+            list.stream().forEach((HashMap e) -> {
+                if (e.get("id").toString().equals("0")) {
+                    Notifications nBuilder = Notifications.create()
+                            .title("Success")
+                            .text("Transaction Complete!")
+                            .hideAfter(Duration.seconds(3))
+                            .position(Pos.BOTTOM_RIGHT);
+                    nBuilder.show();
+                }
+            });
+        }
+    }
+
+    public void HaltWarningApplicants(int count, String posting_id, String vacancy_id) {
+
+        JFXDialogLayout layout = new JFXDialogLayout();
+        layout.setHeading(new Text("Wait!"));
+
+        VBox vbox = new VBox(
+                new Label("This job has " + count + " " + (count > 1 ? "applications" : "application") + ", Proceeding this action will automatically deny all applications in it!\n"),
+                new Label("Are you sure you want to continue?"),
+                new Label("")
+        );
+
+        layout.setBody(vbox);
+
+        JFXButton btn = new JFXButton("Submit");
+        JFXButton btncc = new JFXButton("Cancel");
+
+        btn.getStyleClass().add("btn-primary");
+        btncc.getStyleClass().add("btn-danger");
+
+        JFXDialog dialog = new JFXDialog(spane, layout, JFXDialog.DialogTransition.TOP);
+
+        btn.setOnMouseClicked(value -> {
+            List<HashMap> list = STORED_PROC.executeCall("HR1_UnpostJob", new Object[][]{
+                {"posting_id", posting_id},
+                {"vacancy_id", vacancy_id},
+                {"trigger", 1}
+            });
+
+            list.stream().forEach((HashMap e) -> {
+                if (e.get("id").toString().equals("0")) {
+                    Notifications nBuilder = Notifications.create()
+                            .title("Success")
+                            .text("Transaction Complete!")
+                            .hideAfter(Duration.seconds(3))
+                            .position(Pos.BOTTOM_RIGHT);
+                    nBuilder.show();
+                    dialog.close();
+                }
+            });
+        });
+
+        btncc.setOnMouseClicked(value -> {
+            dialog.close();
+        });
+ 
+        layout.setActions(btn, new JFXButton(), btncc);
+        dialog.show();
+
     }
 
 }

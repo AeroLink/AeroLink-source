@@ -9,6 +9,38 @@ and open the template in the editor.
     Author     : ARIELLECIAS
 */
 
+.notif-violet {
+    -fx-background-color: #512DA8;
+    -fx-text-fill: white;
+}
+
+.notif-blue {
+    -fx-background-color: #1976D2;
+    -fx-text-fill: white;
+}
+
+.notif-green {
+    -fx-background-color: #388E3C;
+    -fx-text-fill: white;
+}
+
+.notif-red {
+    -fx-background-color: #D32F2F;
+    -fx-text-fill: white;
+}
+
+.notif-yellow {
+    -fx-background-color: #FFA000;
+    -fx-text-fill: white;
+}
+
+.notif-orange {
+    -fx-background-color: #E64A19;
+    -fx-text-fill: white;
+}
+
+
+
 .titled-pane
 {
 -fx-background-color:  #34a853;
@@ -23,7 +55,6 @@ and open the template in the editor.
     -fx-padding: 0;
     -fx-font-size: 0;
 }
- 
 
 
 .btn-primary{

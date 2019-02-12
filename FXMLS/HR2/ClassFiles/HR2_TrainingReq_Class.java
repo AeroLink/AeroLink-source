@@ -13,14 +13,15 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class HR2_TrainingReq_Class {
 
-    public SimpleStringProperty tr_id, dept_name, title, training_title, no_of_participants, employee_code, trainor,
+    public SimpleStringProperty tr_id, t_id, dept_name, title, training_title, no_of_participants, employee_code, trainor,
             from_day, to_day, reason, request_status_id, request_status, requested_by, date_requested;
 
-    public HR2_TrainingReq_Class(String tr_id, String dept_id, String job_id, String training_title,
+    public HR2_TrainingReq_Class(String tr_id, String t_id, String dept_id, String job_id, String training_title,
             String no_of_participants, String employee_code, String trainor, String from_day, String to_day, String reason,
             String request_status_id, String request_status, String requested_by, String date_requested) {
 
         this.tr_id = new SimpleStringProperty(tr_id);
+        this.t_id = new SimpleStringProperty(t_id);
         this.dept_name = new SimpleStringProperty(dept_id);
         this.title = new SimpleStringProperty(job_id);
         this.training_title = new SimpleStringProperty(training_title);

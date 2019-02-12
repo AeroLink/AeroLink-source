@@ -19,6 +19,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.concurrent.CompletableFuture;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -41,7 +42,6 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
  * @author Onodera
  */
 public class Document_ManagementController implements Initializable {
-
     
     private Connection con = DBconnection.con();
     private PreparedStatement pst = null;

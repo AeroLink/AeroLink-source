@@ -7,6 +7,7 @@ package FXMLS.Log2.fm.modals;
 
 import FXMLS.HR3.ClassFiles.HR3_tpLeaves;
 import FXMLS.Log2.ClassFiles.Log2_Fleet_Management_Details;
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -24,6 +25,10 @@ public class Log2_Fleet_Management_VehicleModelController implements Initializab
 
     @FXML
     private TableView<Log2_Fleet_Management_Details> tbldetails;
+    @FXML
+    private JFXTextField txt_detailsvmodel;
+    @FXML
+    private JFXTextField txt_detailsplateno;
     /**
      * Initializes the controller class.
      */

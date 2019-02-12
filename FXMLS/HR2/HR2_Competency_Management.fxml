@@ -36,6 +36,17 @@
                                                 <Font name="Lato Bold" size="22.0" />
                                              </font>
                                           </Label>
+                                          <JFXButton fx:id="btn_set_skills" buttonType="RAISED" layoutX="562.0" layoutY="17.0" styleClass="btn-primary" text="Set Skills" AnchorPane.rightAnchor="10.0">
+                                             <font>
+                                                <Font name="Roboto Black" size="15.0" />
+                                             </font>
+                                             <graphic>
+                                                <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="15.0" />
+                                             </graphic>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </JFXButton>
                                        </children>
                                     </AnchorPane>
                                  </top>
@@ -66,13 +77,10 @@
                                                 <Font name="Lato Semibold" size="15.0" />
                                              </font>
                                           </JFXTextField>
-                                          <JFXButton fx:id="btn_set_skills" buttonType="RAISED" layoutX="563.0" layoutY="-1.0" styleClass="btn-primary" text="Set Skills" AnchorPane.rightAnchor="9.0">
+                                          <JFXButton fx:id="btn_refresh" buttonType="RAISED" layoutX="567.0" layoutY="25.0" onAction="#loadData" prefHeight="31.0" prefWidth="91.0" styleClass="btn-primary" text="Refresh" AnchorPane.rightAnchor="15.0">
                                              <font>
                                                 <Font name="Roboto Black" size="15.0" />
                                              </font>
-                                             <graphic>
-                                                <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="15.0" />
-                                             </graphic>
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
@@ -99,6 +107,7 @@
                                        <columns>
                                           <TableColumn fx:id="col_dept" prefWidth="75.0" text="Department" />
                                           <TableColumn fx:id="col_jp" prefWidth="75.0" text="Job Position" />
+                                          <TableColumn fx:id="col_status" prefWidth="75.0" text="Status" />
                                        </columns>
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -107,6 +116,11 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </TableView>
+                                    <JFXButton buttonType="RAISED" layoutX="568.0" layoutY="49.0" onAction="#displaySkillReq" prefHeight="29.0" prefWidth="95.0" styleClass="btn-primary" text="Refresh" AnchorPane.rightAnchor="10.0">
+                                       <font>
+                                          <Font name="Lato Bold" size="15.0" />
+                                       </font>
+                                    </JFXButton>
                                  </children>
                               </AnchorPane>
                            </children>
@@ -118,7 +132,6 @@
                               <Label fx:id="lbl_req_countTable" layoutX="1.0" layoutY="6.0" prefHeight="12.0" prefWidth="7.0" style="-fx-text-fill: #fff; -fx-background-color: #ff1a1a;" text="0" AnchorPane.bottomAnchor="14.0">
                                  <styleClass>
                                     <String fx:value="btn-rounded" />
-                                    <String fx:value="btnTable" />
                                     <String fx:value="btn-danger" />
                                  </styleClass>
                               </Label>

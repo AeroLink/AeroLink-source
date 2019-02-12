@@ -3,12 +3,14 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTimePicker?>
-<?import javafx.geometry.Insets?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -20,22 +22,21 @@
 
 <AnchorPane id="AnchorPane" prefHeight="830.0" prefWidth="990.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Log2.Log2_Fleet_ManagementController">
    <children>
-      <JFXTabPane prefHeight="830.0" prefWidth="990.0" stylesheets="@../../Assets/css/MainPanel.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <JFXTabPane fx:id="fleettab" prefHeight="830.0" prefWidth="990.0" stylesheets="@../../Assets/css/MainPanel.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <tabs>
-          <Tab id="tab" styleClass="tab-label" text="Request Delivery">
+          <Tab id="tab" styleClass="tab-label" text="Request Scheduling">
                <content>
                   <AnchorPane prefHeight="775.0" prefWidth="969.0" style="-fx-background-color: white;">
                      <children>
-                        <Label layoutX="16.0" layoutY="68.0" text="Request List">
+                        <Label layoutX="13.0" layoutY="14.0" text="Request List">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <TableView fx:id="tblreq" layoutX="14.0" layoutY="103.0" prefHeight="398.0" prefWidth="568.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="408.0">
+                        <TableView fx:id="tblreq" layoutX="11.0" layoutY="49.0" prefHeight="552.0" prefWidth="568.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="411.0">
                            <columns>
                               <TableColumn fx:id="requestdept" prefWidth="75.0" text="Department" />
                               <TableColumn fx:id="requestitemname" prefWidth="75.0" text="Item Name" />
-                              <TableColumn fx:id="requesttypeoftransaction" prefWidth="75.0" text="Type of transaction" />
                               <TableColumn fx:id="requestsize" prefWidth="75.0" text="Size" />
                               <TableColumn fx:id="requestquantity" prefWidth="75.0" text="Quantity" />
                               <TableColumn fx:id="requestdestination" prefWidth="75.0" text="Destination" />
@@ -54,9 +55,9 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <AnchorPane layoutX="588.0" layoutY="103.0" prefHeight="598.0" prefWidth="387.0" style="-fx-border-color: #34a853; -fx-border-width: 2px; -fx-border-radius: 10px;" AnchorPane.rightAnchor="8.0">
+                        <AnchorPane fx:id="anchorinfo" layoutX="585.0" layoutY="49.0" prefHeight="559.0" prefWidth="387.0" style="-fx-border-color: #34a853; -fx-border-width: 2px; -fx-border-radius: 10px;" AnchorPane.rightAnchor="11.0">
                            <children>
-                              <GridPane layoutX="19.0" layoutY="14.0" prefHeight="508.0" prefWidth="343.0">
+                              <GridPane fx:id="gridpane" layoutX="19.0" layoutY="14.0" prefHeight="508.0" prefWidth="343.0">
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -80,7 +81,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <Label text="Item name &amp; Size" GridPane.rowIndex="1">
+                                    <Label text="Item Name" GridPane.rowIndex="1">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -120,7 +121,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <Label text="Time" GridPane.rowIndex="10">
+                                    <Label text="Time" GridPane.rowIndex="9">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -130,72 +131,42 @@
                                     <JFXTextField fx:id="schedquantity" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                     <JFXTextField fx:id="scheddestination" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                     <JFXTextField fx:id="scheddeparture" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                    <JFXTextField fx:id="schedvcapacity" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                                    <JFXComboBox fx:id="schedvehicle" prefHeight="25.0" prefWidth="171.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                    <JFXComboBox fx:id="schedvtype" prefHeight="25.0" prefWidth="171.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                    <JFXTextField fx:id="schedvcapacity" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                    <JFXComboBox fx:id="schedvehicle" onAction="#vehiclemodel" prefHeight="25.0" prefWidth="171.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <JFXComboBox fx:id="schedvtype" onAction="#vehiclemodel1" prefHeight="25.0" prefWidth="171.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                                     <JFXComboBox fx:id="scheddriver" prefHeight="25.0" prefWidth="171.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                                    <JFXTimePicker fx:id="schedtime" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                                    <JFXTimePicker fx:id="schedtime" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                                     <Label GridPane.rowIndex="9" />
-                                    <JFXButton style="-fx-background-color: #34a843 #34a843;" text="Choose" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="9">
-                                       <GridPane.margin>
-                                          <Insets left="60.0" />
-                                       </GridPane.margin>
-                                       <padding>
-                                          <Insets bottom="8.0" left="20.0" right="20.0" top="8.0" />
-                                       </padding>
+                                    <JFXButton fx:id="btnsubmit" onMouseClicked="#deleterow" prefHeight="25.0" prefWidth="175.0" style="-fx-background-color: #34a843;" text="Submit" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
                                     </JFXButton>
                                  </children>
                               </GridPane>
-                              <JFXButton fx:id="btnsubmit" layoutX="215.0" layoutY="545.0" prefHeight="25.0" prefWidth="175.0" style="-fx-background-color: #34a843;" text="Submit" textFill="WHITE">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </JFXButton>
                            </children>
                         </AnchorPane>
-                        <JFXButton layoutX="444.0" layoutY="509.0" prefHeight="39.0" prefWidth="144.0" style="-fx-background-color: #34a853;" text="Schedule" textFill="WHITE" AnchorPane.rightAnchor="402.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </JFXButton>
-                        <Label layoutX="619.0" layoutY="68.0" text="Scheduling" AnchorPane.rightAnchor="253.0">
+                        <Label layoutX="616.0" layoutY="14.0" text="Scheduling" AnchorPane.rightAnchor="256.0">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <AnchorPane layoutY="14.0" prefHeight="39.0" prefWidth="982.0" style="-fx-background-color: #34a853;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="8.0">
-                           <children>
-                              <Label layoutX="20.0" layoutY="10.0" prefHeight="26.0" prefWidth="185.0" text="Request Delivery" textFill="WHITE">
-                                 <font>
-                                    <Font size="25.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </AnchorPane>
+                        <JFXTextField fx:id="vehicleid" layoutX="844.0" layoutY="19.0" opacity="0.0" />
                      </children>
                   </AnchorPane>
                </content>
             </Tab>
-          <Tab id="tab" styleClass="tab-label" text="Inbound &amp; Outbound Delivery">
+          <Tab id="tab" fx:id="inboundout" styleClass="tab-label" text="Inbound &amp; Outbound Delivery">
                <content>
                   <AnchorPane prefHeight="775.0" prefWidth="1035.0" style="-fx-background-color: white;">
                      <children>
-                        <JFXTabPane layoutY="44.0" prefHeight="751.0" prefWidth="990.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0">
+                        <JFXTabPane prefHeight="751.0" prefWidth="990.0" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <tabs>
-                            <Tab id="tab" styleClass="label-tab" text="Inbound ">
-                                 <content>
-                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                            <Tab id="tab" styleClass="label-tab" text="Outbound">
+                            <Tab id="tab" fx:id="outbound2" styleClass="label-tab" text="Outbound">
                                  <content>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                        <children>
-                                          <TableView fx:id="tblob" layoutX="10.0" layoutY="23.0" prefHeight="232.0" prefWidth="970.0" style="-fx-border-radius: 10px; -fx-border-color: #34a853;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="500.0">
-                                             <columns>
-                                                <TableColumn prefWidth="75.0" text="Vehicle Model" />
-                                                <TableColumn prefWidth="75.0" text="Plate no." />
-                                             </columns>
+                                          <TableView fx:id="tblob" layoutX="10.0" layoutY="54.0" prefHeight="201.0" prefWidth="950.0" style="-fx-border-radius: 10px; -fx-border-color: #34a853;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
                                              <columnResizePolicy>
                                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                              </columnResizePolicy>
@@ -207,23 +178,159 @@
                                                 </ContextMenu>
                                              </contextMenu>
                                           </TableView>
-                                          <JFXButton layoutX="320.0" layoutY="287.0" onMouseClicked="#btnview" style="-fx-background-color: #34a853;" text="View" textFill="WHITE" />
-                                          <JFXButton layoutX="428.0" layoutY="287.0" onMouseClicked="#btndispatch" style="-fx-background-color: #34a853;" text="Dispatch" textFill="WHITE" />
+                                          <JFXButton layoutX="876.0" layoutY="260.0" onMouseClicked="#btndispatch" style="-fx-background-color: #34a853;" text="Dispatch" textFill="WHITE">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font></JFXButton>
+                                          <AnchorPane layoutX="92.0" layoutY="340.0" prefHeight="236.0" prefWidth="950.0" style="-fx-border-color: #34a853; -fx-border-radius: 10px;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                                             <children>
+                                                <TableView fx:id="tbl_dispatched" layoutX="58.0" layoutY="73.0" prefHeight="145.0" prefWidth="491.0">
+                                                   <columns>
+                                                      <TableColumn prefWidth="75.0" text="Vehicle Model" />
+                                                      <TableColumn prefWidth="75.0" text="Plate No" />
+                                                      <TableColumn prefWidth="75.0" text="Remarks" />
+                                                   </columns>
+                                                   <columnResizePolicy>
+                                                      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                   </columnResizePolicy></TableView>
+                                                <JFXButton layoutX="449.0" layoutY="36.0" onMouseClicked="#btn_deliveryrecord" style="-fx-background-color: #34a853;" text="Delivery Record" textFill="WHITE" />
+                                                <Label layoutX="643.0" layoutY="36.0" text="Vehicle Model :">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="643.0" layoutY="102.0" text="Plate no. : ">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="643.0" layoutY="164.0" text="Remarks :">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <JFXTextField fx:id="txt_vmodel" layoutX="797.0" layoutY="37.0" />
+                                                <JFXTextField fx:id="txt_plateno" layoutX="797.0" layoutY="103.0" />
+                                                <JFXComboBox fx:id="combo_remarks" layoutX="797.0" layoutY="165.0" prefHeight="25.0" prefWidth="139.0" />
+                                                <JFXButton layoutX="884.0" layoutY="197.0" style="-fx-background-color: #34a853;" text="Update" textFill="WHITE" />
+                                                <Label layoutX="21.0" layoutY="14.0" text="Dispatched">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                             </children></AnchorPane>
+                                          <Label layoutX="22.0" layoutY="269.0" text="Note : " textFill="RED">
+                                             <font>
+                                                <Font name="System Bold Italic" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="86.0" layoutY="269.0" text="&quot;Right click to view details&quot;">
+                                             <font>
+                                                <Font name="System Italic" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Separator layoutX="21.0" layoutY="5.0" prefHeight="36.0" prefWidth="34.0" />
+                                          <Label layoutX="57.0" layoutY="5.0" text="Dispatching">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <Separator layoutX="166.0" layoutY="5.0" prefHeight="36.0" prefWidth="804.0" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="10.0" />
                                        </children>
                                     </AnchorPane>
                                  </content>
                               </Tab>
+                            <Tab id="tab" styleClass="label-tab" text="Inbound ">
+                                 <content>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <AnchorPane layoutX="31.0" layoutY="361.0" prefHeight="226.0" prefWidth="970.0" style="-fx-border-color: #34a853; -fx-border-radius: 10px;" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                             <children>
+                                                <GridPane layoutX="39.0" layoutY="19.0" prefHeight="183.0" prefWidth="385.0">
+                                                  <columnConstraints>
+                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="185.0" minWidth="10.0" prefWidth="147.666748046875" />
+                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="237.333251953125" minWidth="10.0" prefWidth="237.333251953125" />
+                                                  </columnConstraints>
+                                                  <rowConstraints>
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                  </rowConstraints>
+                                                   <children>
+                                                      <Label text="Item Name">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Quantity" GridPane.rowIndex="1">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Date of Deliverery" GridPane.rowIndex="2">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <JFXTextField fx:id="txtinbounditemname" GridPane.columnIndex="1" />
+                                                      <JFXTextField fx:id="txtinboundquantity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                      <JFXTextField fx:id="txtinbounddate" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                   </children>
+                                                </GridPane>
+                                                <GridPane layoutX="497.0" layoutY="17.0" prefHeight="168.0" prefWidth="385.0">
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="185.0" minWidth="10.0" prefWidth="147.666748046875" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="237.333251953125" minWidth="10.0" prefWidth="237.333251953125" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints maxHeight="85.33331298828125" minHeight="10.0" prefHeight="58.6666259765625" vgrow="SOMETIMES" />
+                                                      <RowConstraints maxHeight="124.3333740234375" minHeight="10.0" prefHeight="124.3333740234375" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
+                                                   <children>
+                                                      <Label text="Remarks">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Reason" GridPane.rowIndex="1">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <JFXComboBox prefHeight="34.0" prefWidth="237.0" GridPane.columnIndex="1" />
+                                                      <JFXTextArea prefHeight="70.0" prefWidth="238.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                   </children>
+                                                </GridPane>
+                                                <JFXButton layoutX="809.0" layoutY="206.0" prefHeight="39.0" prefWidth="77.0" style="-fx-background-color: #34a853;" text="Save" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </JFXButton>
+                                             </children>
+                                          </AnchorPane>
+                                          <Separator layoutX="29.0" layoutY="23.0" prefHeight="36.0" prefWidth="34.0" />
+                                          <Label layoutX="67.0" layoutY="25.0" text="Supplier Delivery">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <Separator layoutX="232.0" layoutY="22.0" prefHeight="36.0" prefWidth="752.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="10.0" />
+                                          <TableView fx:id="tblinbound" layoutX="31.0" layoutY="62.0" prefHeight="268.0" prefWidth="928.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                            <columns>
+                                              <TableColumn fx:id="iitemname" prefWidth="75.0" text="Item Name" />
+                                              <TableColumn fx:id="iquantity" prefWidth="75.0" text="Quantity" />
+                                                <TableColumn fx:id="idateofdelivery" prefWidth="75.0" text="Date of Delivery" />
+                                                <TableColumn fx:id="istatus" prefWidth="75.0" text="Status" />
+                                            </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                          </TableView>
+                                       </children></AnchorPane>
+                                 </content>
+                              </Tab>
                            </tabs>
                         </JFXTabPane>
-                        <AnchorPane layoutX="-1.0" prefHeight="43.0" prefWidth="990.0" style="-fx-background-color: #34a853;" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0">
-                           <children>
-                              <Label layoutX="22.0" layoutY="7.0" text="Inbound &amp; Outbound" textFill="WHITE">
-                                 <font>
-                                    <Font size="25.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </AnchorPane>
                      </children>
                   </AnchorPane>
                </content>
@@ -232,15 +339,21 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <AnchorPane prefHeight="43.0" prefWidth="990.0" style="-fx-background-color: #34a853;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                           <children>
-                              <Label layoutX="22.0" layoutY="7.0" text="Reports" textFill="WHITE">
-                                 <font>
-                                    <Font size="25.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </AnchorPane>
+                        <TableView fx:id="tblreports" layoutX="20.0" layoutY="139.0" prefHeight="241.0" prefWidth="900.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <FontAwesomeIconView glyphName="SEARCH" layoutX="904.0" layoutY="119.0" size="35.0" wrappingWidth="23.142857551574707" AnchorPane.rightAnchor="62.85714244842529" />
+                        <FontAwesomeIconView glyphName="PRINT" layoutX="944.0" layoutY="118.0" onMouseClicked="#printreports" size="35.0" wrappingWidth="23.142857551574707" AnchorPane.rightAnchor="22.857142448425293" />
+                        <JFXTextField fx:id="searchtxt" layoutX="697.0" layoutY="88.0" onKeyReleased="#searchrep" prefHeight="33.0" prefWidth="183.0" promptText="SEARCH" AnchorPane.rightAnchor="110.0" />
+                        <Label layoutX="45.0" layoutY="42.0" text="Delivery Report">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Separator layoutX="4.0" layoutY="50.0" prefHeight="15.0" prefWidth="33.0" />
+                        <Separator layoutX="204.0" layoutY="51.0" prefHeight="12.0" prefWidth="200.0" AnchorPane.leftAnchor="195.0" AnchorPane.rightAnchor="20.0" />
                      </children></AnchorPane>
               </content>
             </Tab>

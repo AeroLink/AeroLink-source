@@ -43,7 +43,7 @@
                         </JFXButton>
                      </children>
                   </AnchorPane>
-                  <TableView fx:id="tblCustomer" layoutX="6.0" layoutY="98.0" prefHeight="593.0" prefWidth="1368.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+                  <TableView fx:id="tblCustomer" layoutX="6.0" layoutY="98.0" prefHeight="593.0" prefWidth="1368.0" stylesheets="@../../Assets/css/pom.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>

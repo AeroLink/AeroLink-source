@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="602.0" prefWidth="979.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR4.Modals.HR4_NewPayrollController">
+   <children>
+      <BorderPane layoutX="111.0" layoutY="28.0" prefHeight="602.0" prefWidth="979.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <HBox prefHeight="43.0" prefWidth="979.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane prefHeight="43.0" prefWidth="269.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="12.0" text="Payroll Code:">
+                           <font>
+                              <Font name="Arial Italic" size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="lbl_pc" disable="true" editable="false" layoutX="111.0" layoutY="10.0" prefHeight="25.0" prefWidth="146.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="43.0" prefWidth="207.0">
+                     <children>
+                        <Label layoutX="6.0" layoutY="13.0" text="Start Date:">
+                           <font>
+                              <Font name="Arial Italic" size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="lbl_sd" disable="true" editable="false" layoutX="83.0" layoutY="9.0" prefHeight="25.0" prefWidth="109.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="43.0" prefWidth="210.0">
+                     <children>
+                        <Label layoutX="12.0" layoutY="11.0" text="End Date:">
+                           <font>
+                              <Font name="Arial Italic" size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="lbl_ed" disable="true" editable="false" layoutX="84.0" layoutY="9.0" prefHeight="25.0" prefWidth="112.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="43.0" prefWidth="293.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="12.0" text="Department:">
+                           <font>
+                              <Font name="Arial Italic" size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="lbl_dpt" disable="true" editable="false" layoutX="103.0" layoutY="9.0" prefHeight="25.0" prefWidth="173.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+         </top>
+         <center>
+            <TableView fx:id="tbl_payroll_emp" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../../Assets/css/pom.css" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn prefWidth="75.0" text="C1" />
+                <TableColumn prefWidth="75.0" text="C2" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </center>
+         <bottom>
+            <HBox prefHeight="45.0" prefWidth="979.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane prefHeight="45.0" prefWidth="980.0">
+                     <children>
+                        <JFXButton fx:id="OKBtn" buttonType="RAISED" layoutX="890.0" layoutY="9.0" prefHeight="25.0" prefWidth="66.0" styleClass="btn-primary" text="OK" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="24.0" />
+                        <FontAwesomeIconView fill="WHITE" glyphName="THUMBS_UP" layoutX="900.0" layoutY="24.0" AnchorPane.bottomAnchor="19.051339149475098" AnchorPane.rightAnchor="68.8571424484253" />
+                        <JFXButton buttonType="RAISED" layoutX="814.0" layoutY="9.0" styleClass="btn-primary" text="Select All" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="101.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>

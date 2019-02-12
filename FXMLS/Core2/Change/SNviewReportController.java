@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -73,5 +74,6 @@ public class SNviewReportController implements Initializable {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Dashboard.fxml"));
         SNrootPane.getChildren().setAll(pane);
     }
+
     
 }

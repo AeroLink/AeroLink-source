@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.net.URL?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SplitPane?>
@@ -36,7 +37,7 @@
                         </JFXButton>
                      </children>
                   </AnchorPane>
-                  <TableView layoutX="571.0" layoutY="88.0" prefHeight="576.0" prefWidth="816.0" styleClass="card" stylesheets="@../../../Assets/css/card.css" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="80.0">
+                  <TableView layoutX="571.0" layoutY="88.0" prefHeight="576.0" prefWidth="816.0" styleClass="card" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="80.0">
                     <columns>
                       <TableColumn prefWidth="75.0" text="PROVIDER" />
                       <TableColumn prefWidth="75.0" text="PACKAGE NO" />
@@ -47,6 +48,10 @@
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
+                     <stylesheets>
+                        <URL value="@../../../Assets/css/card.css" />
+                        <URL value="@../../../Assets/css/pom.css" />
+                     </stylesheets>
                   </TableView>
                   <JFXButton buttonType="RAISED" layoutX="1241.0" layoutY="50.0" prefHeight="29.0" prefWidth="99.0" style="-fx-background-color: RED;" text="Print" textFill="WHITE" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="50.0">
                      <graphic>

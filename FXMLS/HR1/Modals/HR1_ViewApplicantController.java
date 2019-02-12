@@ -8,17 +8,21 @@ package FXMLS.HR1.Modals;
 import FXMLS.HR1.ClassFiles.HR1_Applicant;
 import FXMLS.HR1.ClassFiles.HR1_GenerateEC;
 import FXMLS.HR1.ClassFiles.TableModel_Schedules;
+import Model.HR1.HR1_AppExam;
 import Model.HR1.HR1_AppStages;
 import Model.HR1.HR1_Applicants;
 import Model.HR1.HR1_JobOffers;
 import Model.HR1.JobPosting;
 import Model.HR1.JobVacancy;
+import Model.HR2_Examination;
 import Model.HR4.HR4_Employee;
 import Model.UserPermissions;
 import Model.Users;
 import Synapse.Components.Modal.Modal;
 import Synapse.Form;
 import Synapse.Model;
+import Synapse.STORED_PROC;
+import Synapse.Session;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
@@ -30,7 +34,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
@@ -39,6 +49,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -56,6 +67,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -162,6 +175,10 @@ public class HR1_ViewApplicantController implements Initializable {
     private TextArea txtpath;
     @FXML
     private MenuItem menuHiring;
+    @FXML
+    private AnchorPane panelExamResult;
+    @FXML
+    private Label lblExamResult;
 
     /**
      * Initializes the controller class.
@@ -169,6 +186,17 @@ public class HR1_ViewApplicantController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        xInit();
+    }
+
+    public void closeWind() {
+        // get a handle to the stage
+        Stage stage = (Stage) lblAppFull.getScene().getWindow();
+        // do what you have to do
+        stage.close();
+    }
+
+    public void xInit() {
         lblAppFull.setText(HR1_Applicant.fullname);
         jobTitle.setText("Applying for " + HR1_Applicant.job_title);
         txtEducAttain.setText(HR1_Applicant.educAttain);
@@ -216,8 +244,8 @@ public class HR1_ViewApplicantController implements Initializable {
                     {"app_id", "=", HR1_Applicant.app_id}
                 }).executeUpdate();
 
-                Helpers.EIS_Response.SuccessResponse("Success", "Applicant was successfully evaluated");
-
+                Helpers.EIS_Response.SuccessResponse("Success", "Applicant was successfully evaluated.. This window will be close for update.");
+                closeWind();
             }
         });
 
@@ -253,6 +281,15 @@ public class HR1_ViewApplicantController implements Initializable {
                 menuER.setDisable(false);
             }
 
+            if (Integer.parseInt(StageID.getValue()) < 2 || Integer.parseInt(StageID.getValue()) > 2) {
+                panelExamResult.setVisible(false);
+            }
+
+            if (Integer.parseInt(StageID.getValue()) == 2) {
+                panelExamResult.setVisible(true);
+                checkExam();
+            }
+
             if (Integer.parseInt(StageID.getValue()) >= 5) {
 
                 if (j.where(new Object[][]{{"app_id", "=", HR1_Applicant.app_id}}).get().stream().count() == 0) {
@@ -261,8 +298,8 @@ public class HR1_ViewApplicantController implements Initializable {
                 } else {
                     btnOfferAccepted.setVisible(true);
                     btnOfferDeclined.setVisible(true);
-
                 }
+
                 paneRatings.setVisible(false);
                 jobOfferPane.setVisible(true);
                 menuJobOffer.setDisable(false);
@@ -279,6 +316,189 @@ public class HR1_ViewApplicantController implements Initializable {
 
         menuHiring.setOnAction(value -> this.Hiring());
         menuEC.setOnAction(value -> this.ECGen());
+        menuER.setOnAction(value -> this.generateExam());
+    }
+
+    long DummyC = 0;
+    long GlobalC = 0;
+    ExamResult exam_result = new ExamResult();
+
+    public void checkExam() {
+        CompletableFuture.supplyAsync(() -> {
+
+            while (true) {
+                exam_result.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(row -> {
+                    DummyC = Long.parseLong(((HashMap) row).get("chk").toString());
+                });
+
+                if (GlobalC != DummyC) {
+                    List<HashMap> count = exam_result.where(new Object[][]{
+                        {"applicant_id", "=", HR1_Applicant.app_id}
+                    }).groupBy("applicant_id").get("COUNT(*) as cox");
+
+                    if (Integer.parseInt(count.get(0).get("cox").toString()) > 0) {
+                        List<HashMap> exr = exam_result.where(new Object[][]{
+                            {"applicant_id", "=", HR1_Applicant.app_id}
+                        }).get();
+
+                        exr.stream().forEach(e -> {
+                            if (e.get("isTaken").toString().equals("0")) {
+                                Platform.runLater(() -> {
+                                    panelExamResult.setVisible(true);
+                                    lblExamResult.setText("Exam was not yet taken by the applicant");
+                                    btnSubmit.setDisable(true);
+                                });
+                            } else {
+                                Platform.runLater(() -> {
+                                    panelExamResult.setVisible(true);
+                                    lblExamResult.setText("The Applicant got " + e.get("score").toString() + "% of score");
+                                    txtPercentage.setText(e.get("score").toString());
+                                    btnSubmit.setDisable(false);
+                                });
+                            }
+                        });
+                    } else {
+
+                        Platform.runLater(() -> {
+                            lblExamResult.setText("Please, Apply an Examination for the Applicant : 'Workflow Procedures > Apply an examination' ");
+                            btnSubmit.setDisable(true);
+                        });
+                    }
+
+                    GlobalC = DummyC;
+                }
+
+                try {
+                    TimeUnit.SECONDS.sleep(2);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(HR1_ViewApplicantController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        }, Session.SessionThreads);
+    }
+    String jid = "";
+    int rjid = 0;
+
+    public void generateExam() {
+        JFXDialogLayout layout = new JFXDialogLayout();
+        layout.setHeading(new Text("Apply Examination!"));
+        ComboBox<String> combo = new ComboBox();
+        JobPosting jp = new JobPosting();
+
+        jp.where(new Object[][]{
+            {"id", "=", HR1_Applicant.jobPosted_id}
+        }).get().stream().forEach(action -> {
+            jid = ((HashMap) action).get("jobPosted_id").toString();
+        });
+
+        JobVacancy jv = new JobVacancy();
+
+        jv.where(new Object[][]{
+            {"id", "=", jid}
+        }).get().stream().forEach(action -> {
+            HashMap row = (HashMap) action;
+            rjid = (Integer.parseInt(row.get("job_id").toString()));
+        });
+
+        HR2_Examination exams = new HR2_Examination();
+        List<HashMap> list = exams.join(Model.JOIN.INNER, "aerolink.tbl_hr2_courses", "course_id", "=", "course_id").where(new Object[][]{
+            {"aerolink.tbl_hr2_courses.job_id", "=", rjid}
+        }).get();
+
+        list.stream().forEach((HashMap e) -> {
+            combo.getItems().add("EXAM00" + e.get("exam_id").toString() + " - " + e.get("exam_name").toString());
+        });
+
+        combo.getSelectionModel().selectFirst();
+
+        VBox vbox = new VBox(
+                new Label("Please choose an exam that you want to apply for the applicant " + HR1_Applicant.fullname),
+                new Label(""),
+                new Label("You could change the exam of the applicant as long as it wasn't already taken and already have a score"),
+                new Label(""),
+                combo
+        );
+
+        layout.setBody(vbox);
+
+        JFXButton btn = new JFXButton("Submit");
+        JFXButton btncc = new JFXButton("Cancel");
+
+        btn.getStyleClass().add("btn-primary");
+        btncc.getStyleClass().add("btn-danger");
+
+        JFXDialog dialog = new JFXDialog(spane, layout, JFXDialog.DialogTransition.TOP);
+
+        btn.setOnMouseClicked(value -> {
+            HR1_AppExam appEx = new HR1_AppExam();
+            String examID = combo.getSelectionModel().getSelectedItem().split(" - ")[0].replace("EXAM00", "");
+
+            appEx.where(new Object[][]{
+                {"applicant_id", "=", HR1_Applicant.app_id}
+            }).get("COUNT(*) as c").stream().forEach(e -> {
+                HashMap hash = (HashMap) e;
+                if (hash.get("c").toString().equals("0")) {
+                    Boolean f = appEx.insert(new Object[][]{
+                        {"exam_id", examID},
+                        {"applicant_id", HR1_Applicant.app_id}
+                    });
+
+                    if (f) {
+                        Notifications nBuilder = Notifications.create()
+                                .title("Success")
+                                .text("Exam was applied successfully")
+                                .hideAfter(Duration.seconds(5))
+                                .position(Pos.CENTER);
+
+                        nBuilder.showConfirm();
+                        dialog.close();
+                    }
+                } else {
+                    appEx.where(new Object[][]{
+                        {"isTaken", "=", 1},
+                        {"applicant_id", "=", HR1_Applicant.app_id}
+                    }).get("COUNT(*) as c").stream().forEach(ex -> {
+                        HashMap hashx = (HashMap) ex;
+
+                        if (hashx.get("c").toString().equals("0")) {
+                            Boolean f = appEx.where(new Object[][]{
+                                {"applicant_id", "=", HR1_Applicant.app_id}
+                            }).update(new Object[][]{
+                                {"exam_id", examID},}).executeUpdate();
+
+                            if (f) {
+                                Notifications nBuilder = Notifications.create()
+                                        .title("Success")
+                                        .text("Exam was applied successfully")
+                                        .hideAfter(Duration.seconds(5))
+                                        .position(Pos.CENTER);
+
+                                nBuilder.showConfirm();
+                                dialog.close();
+                            }
+                        } else {
+                            Notifications nBuilder = Notifications.create()
+                                    .title("Success")
+                                    .text("Applicant has already taken the exam")
+                                    .hideAfter(Duration.seconds(2))
+                                    .position(Pos.CENTER);
+
+                            nBuilder.showError();
+                        }
+
+                    });
+                }
+            });
+
+        });
+
+        btncc.setOnMouseClicked(value -> {
+            dialog.close();
+        });
+
+        layout.setActions(btn, new JFXButton(), btncc);
+        dialog.show();
     }
 
     public void OpeningStages(String id) {
@@ -450,6 +670,7 @@ public class HR1_ViewApplicantController implements Initializable {
 
                     Helpers.EIS_Response.SuccessResponse("Success", "Applicant was successfully transfered to Initial Interview Stage");
                     dialog.close();
+                    closeWind();
 
                 }
             } else {
@@ -697,6 +918,7 @@ public class HR1_ViewApplicantController implements Initializable {
     String job_id = "";
     int returnPositions = 0;
     int real_jobID = 0;
+
     @FXML
     private void btnSubmitHire(ActionEvent event) {
         this.Hiring();
@@ -818,16 +1040,20 @@ public class HR1_ViewApplicantController implements Initializable {
                 {"job_id", real_jobID}
             });
 
-            jv.update(new Object[][]{
-                {"jobOpen", returnPositions},
-                {"isPosted", (returnPositions <= 0 ? 0 : 1)}
-            }).where(new Object[][]{
-                {"id", "=", job_id}
-            }).executeUpdate();
-            
             if (returnPositions <= 0) {
+
                 jp.delete().where(new Object[][]{
                     {"id", "=", HR1_Applicant.jobPosted_id}
+                }).executeUpdate();
+
+                jv.delete().where(new Object[][]{
+                    {"id", "=", job_id}
+                }).executeUpdate();
+
+            } else {
+                jv.update(new Object[][]{
+                    {"jobOpen", returnPositions},}).where(new Object[][]{
+                    {"id", "=", job_id}
                 }).executeUpdate();
             }
 
@@ -861,6 +1087,14 @@ public class HR1_ViewApplicantController implements Initializable {
         });
 
         Helpers.EIS_Response.SuccessResponse("Success", "Employee Contract " + fileName + " Generated");
+
+    }
+
+    class ExamResult extends Synapse.Model {
+
+        public ExamResult() {
+            this.initTable("tbl_hr1_applicant_exam");
+        }
 
     }
 }

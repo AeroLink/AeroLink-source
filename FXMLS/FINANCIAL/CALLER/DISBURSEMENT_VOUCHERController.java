@@ -76,7 +76,7 @@ public class DISBURSEMENT_VOUCHERController implements Initializable {
            try
            {
                 if(fbr.update(new Object[][]{
-                {"dr_status","Disbursed"}})
+                {"dr_status","Released"}})
                 .where(new Object[][]{
                 {"dr_id","=",dr_id_label.getText()}
                 }).executeUpdate())

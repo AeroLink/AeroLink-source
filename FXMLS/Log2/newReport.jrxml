@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d093ede6-02e9-49f5-a61a-fc7528bb2742">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="delivery_no" class="java.lang.String"/>
+	<field name="vehicle_model" class="java.lang.String"/>
+	<field name="date_delivered" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="196" y="5" width="196" height="20" uuid="80be1e42-7930-4c55-ae77-a4e0fb7b2b96"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Vehicle Model]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="5" width="185" height="20" uuid="b08643eb-0743-4607-be2c-a96924758885"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Delivery No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="416" y="5" width="117" height="20" uuid="4feade71-abbf-4aa6-b3b2-182b4c26d427"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Date Delivered]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="43" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="5" width="185" height="20" uuid="c4b2ef06-1b1e-4d3e-a74a-788e79e5fcac"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{delivery_no}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="196" y="5" width="196" height="20" uuid="eb5fd506-962b-4f7c-a459-41f470d68084"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vehicle_model}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="416" y="5" width="117" height="20" uuid="09810548-994a-46ec-9a21-2a674d48e37f"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date_delivered}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

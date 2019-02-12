@@ -14,12 +14,12 @@
             <AnchorPane prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #34A853;" BorderPane.alignment="CENTER">
                <children>
                   <FontAwesomeIconView fill="WHITE" glyphName="CODE" layoutX="26.0" layoutY="29.0" size="40" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
-                  <Label fx:id="providercode" layoutX="58.0" layoutY="16.0" prefWidth="228.0" text="SERVICE PROVIDER CODE" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="58.0" AnchorPane.topAnchor="16.0">
+                  <Label fx:id="providercode" layoutX="58.0" layoutY="16.0" prefWidth="228.0" text="SERVICE PROVIDER CODE" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="58.0" AnchorPane.topAnchor="15.0">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="58.0" layoutY="1.0" text="Provider Code" textFill="WHITE" AnchorPane.topAnchor="3.0">
+                  <Label layoutX="58.0" layoutY="1.0" text="Provider Code" textFill="WHITE" AnchorPane.topAnchor="2.0">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

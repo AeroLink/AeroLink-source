@@ -113,13 +113,4 @@ public class ScheduleRatesController implements Initializable {
         SRrootPane.getChildren().setAll(pane);
     }
 
-//    private void viewAL(ActionEvent event) throws IOException{
-//        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/SRviewAirlineSchedule.fxml"));
-//        SRrootPane.getChildren().setAll(pane);
-//    }
-    @FXML
-    public void viewAS() throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/Change/SRviewAirlineSchedule.fxml"));
-        SRrootPane.getChildren().setAll(pane);
-    }
 }

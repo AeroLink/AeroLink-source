@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="66dc6f2d-84f2-4504-a45a-14a8ba342e13">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="Table Dataset 1" uuid="3203760d-6903-43cc-b67d-c8cde5298403"/>
+	<field name="bcode" class="java.lang.String"/>
+	<field name="bcountry" class="java.lang.String"/>
+	<field name="bcity" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="83" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="88" height="79" uuid="2cfd9a3b-b962-4c95-8270-22387a4439ea"/>
+				<imageExpression><![CDATA["C:\\AeroLink\\Staging\\src\\Assets\\300 x 300.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="88" y="4" width="159" height="55" uuid="3ecc1fc2-c536-440e-b98b-6586f3e130ad"/>
+				<textElement>
+					<font size="40"/>
+				</textElement>
+				<text><![CDATA[AeroLink]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="88" y="59" width="159" height="20" uuid="cfa92570-4fc8-4765-abed-179210c5156e"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Freight Management System]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="447" y="4" width="108" height="45" uuid="41e28dd1-9f25-4bf3-9b8a-021ed672ec20"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Codabar" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA["1234"]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<staticText>
+				<reportElement x="447" y="49" width="108" height="20" uuid="5741eab9-544d-4738-aa84-f1c3d9195fa9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Bar Code]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="33" y="15" width="100" height="20" uuid="777c2c66-bf6b-450b-a334-d5104a4531db"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Branch Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="228" y="15" width="100" height="20" uuid="95075b1b-bbe0-44d7-b971-d7e3ecb4d1b9"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Country]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="428" y="15" width="100" height="20" uuid="c6e3948d-4402-4bbc-88de-c0f9cc231673"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[City]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="34" width="550" height="1" uuid="225362d3-ba8a-4af3-a596-855942479bcc"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<textField>
+				<reportElement x="33" y="0" width="100" height="20" uuid="c545d921-37a4-415a-9289-73d0861cf788"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{bcode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="228" y="0" width="100" height="20" uuid="4dfa236f-350d-403b-9d55-2e75b4c0c426"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{bcountry}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="428" y="0" width="100" height="20" uuid="e2f0d76c-43bc-4def-b8ef-31b1d1d0ac25"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{bcity}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

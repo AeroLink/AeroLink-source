@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="362.0" prefWidth="630.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR4.Modals.HR4_PayrollSettingsController">
+   <children>
+      <BorderPane layoutX="100.0" layoutY="65.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="44.0" prefWidth="512.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="40.0" layoutY="11.0" text="Configuration">
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font>
+                  </Label>
+                  <FontAwesomeIconView glyphName="GEARS" layoutX="14.0" layoutY="28.0" size="18" />
+                  <JFXButton fx:id="UpdateBtn" buttonType="RAISED" layoutX="521.0" layoutY="9.0" prefHeight="25.0" prefWidth="95.0" styleClass="btn-primary" text="Update" />
+                  <JFXButton fx:id="EditBtn" buttonType="RAISED" layoutX="447.0" layoutY="9.0" prefHeight="25.0" prefWidth="69.0" styleClass="btn-primary" text="Edit" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="EDIT" layoutX="456.0" layoutY="26.0" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="GEARS" layoutX="532.0" layoutY="25.0" />
+               </children>
+            </AnchorPane>
+         </top>
+         <center>
+            <AnchorPane prefHeight="301.0" prefWidth="630.0" BorderPane.alignment="CENTER">
+               <children>
+                  <GridPane alignment="BOTTOM_LEFT" layoutY="-1.0" prefHeight="270.0" prefWidth="630.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="123.0" minWidth="10.0" prefWidth="26.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="204.0" minWidth="10.0" prefWidth="201.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="181.0" minWidth="10.0" prefWidth="85.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.0" minWidth="10.0" prefWidth="21.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="266.0" minWidth="10.0" prefWidth="195.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="84.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.0" minWidth="10.0" prefWidth="28.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <TextField fx:id="a" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="b" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="c" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font></TextField>
+                        <TextField fx:id="d" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font></TextField>
+                        <TextField fx:id="e" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font></TextField>
+                        <TextField fx:id="f" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font></TextField>
+                        <TextField fx:id="g" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="7">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font></TextField>
+                        <TextField fx:id="h" disable="true" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font></TextField>
+                        <TextField fx:id="i" disable="true" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font></TextField>
+                        <TextField fx:id="j" disable="true" GridPane.columnIndex="5" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font></TextField>
+                        <Label alignment="CENTER" contentDisplay="CENTER" text="COLA :" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Segoe UI Light Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="OVERTIME :" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Segoe UI Light Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="SPECIAL HOLIDAY" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="Segoe UI Light Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="SPECIAL HOLIDAY OT :" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="Segoe UI Light Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="REGULAR HOLIDAY :" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                           <font>
+                              <Font name="Segoe UI Light Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="REGULAR HOLIDAY OT :" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                           <font>
+                              <Font name="Segoe UI Light Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="DOUBLE HOLIDAY :" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                           <font>
+                              <Font name="Segoe UI Light Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="DOUBLE HOLIDAY OT :" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Segoe UI Light Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="NIGHT DIFFERENTIALS :" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Segoe UI Light Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="SPECIAL HOLIDAYS NS :" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="Segoe UI Light Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="REGULAR HOLIDAYS NS :" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="Segoe UI Light Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="DOUBLE HOLIDAYS NS :" GridPane.columnIndex="4" GridPane.rowIndex="5">
+                           <font>
+                              <Font name="Segoe UI Light Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="k" disable="true" GridPane.columnIndex="5" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="l" disable="true" GridPane.columnIndex="5" GridPane.rowIndex="5">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

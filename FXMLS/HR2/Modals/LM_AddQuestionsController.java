@@ -116,49 +116,38 @@ public class LM_AddQuestionsController implements Initializable {
                 if (rdo[i].isSelected()) {
                     QuestID = new HR2_Assessment().insert(new String[][]{
                         {"question", txt_add_question.getText()},
-                        {"exam_id", lbl_course_title.getText().toString().substring(6).toString().split(" - ")[0]},
+                        {"exam_id", HR2_LMClass_For_AddQuestion_Modal.exam_id},
                         {"choice_id", String.valueOf(al)},
                         {"isDeleted", "0"}
-                }, true);
-            }
-            //     System.err.println(String.valueOf(rdo[i].isSelected()));
+                    }, true);
+                }
 
-            for (Object obj : id_list) {
-                courses.update(new Object[][]{
-                    {"question_id", QuestID}
-                }).where(new Object[][]{
-                    {"choice_id", "=", obj}
-                }).executeUpdate();
+                for (Object obj : id_list) {
+                    courses.update(new Object[][]{
+                        {"question_id", QuestID}
+                    }).where(new Object[][]{
+                        {"choice_id", "=", obj}
+                    }).executeUpdate();
+                }
             }
-
             Alert saved = new Alert(Alert.AlertType.INFORMATION);
             saved.setContentText("Question Added");
             saved.showAndWait();
-
-            /*  if (rdo[i].isSelected()) {
-
-                    Alert saved = new Alert(Alert.AlertType.INFORMATION);
-                    saved.setContentText("Question Added");
-                    saved.showAndWait();
-                } else {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setContentText("Please Select correct answer for this question");
-                    alert.showAndWait();
-                }*/
+            txt_add_question.setText("");
+            c.selectToggle(null);
+            txt_option1.setText("");
+            txt_option2.setText("");
+            txt_option3.setText("");
+            txt_option4.setText("");
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("ERROR" + e);
+            alert.showAndWait();
         }
     }
-    catch (Exception e
 
-    
-        ) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setContentText("ERROR" + e);
-        alert.showAndWait();
-    }
-}
-
-@FXML
-        public void OpenFile1() {
+    @FXML
+    public void OpenFile1() {
         stage = (Stage) AnchorPane1.getScene().getWindow();
         file = addImage.showOpenDialog(stage);
         addImage.setInitialDirectory(new File("C:\\Users\\EdenRamoneda\\Documents\\NetBeansProjects\\Staging\\src\\FXMLS\\HR2\\Images"));
@@ -172,7 +161,7 @@ public class LM_AddQuestionsController implements Initializable {
     }
 
     @FXML
-        public void OpenFile2() {
+    public void OpenFile2() {
         stage = (Stage) AnchorPane1.getScene().getWindow();
         file = addImage.showOpenDialog(stage);
         addImage.setInitialDirectory(new File("C:\\Users\\EdenRamoneda\\Documents\\NetBeansProjects\\Staging\\src\\FXMLS\\HR2\\Images"));
@@ -186,7 +175,7 @@ public class LM_AddQuestionsController implements Initializable {
     }
 
     @FXML
-        public void OpenFile3() {
+    public void OpenFile3() {
         stage = (Stage) AnchorPane1.getScene().getWindow();
         file = addImage.showOpenDialog(stage);
         addImage.setInitialDirectory(new File("C:\\Users\\EdenRamoneda\\Documents\\NetBeansProjects\\Staging\\src\\FXMLS\\HR2\\Images"));
@@ -200,7 +189,7 @@ public class LM_AddQuestionsController implements Initializable {
     }
 
     @FXML
-        public void OpenFile4() {
+    public void OpenFile4() {
         stage = (Stage) AnchorPane1.getScene().getWindow();
         file = addImage.showOpenDialog(stage);
         addImage.setInitialDirectory(new File("C:\\Users\\EdenRamoneda\\Documents\\NetBeansProjects\\Staging\\src\\FXMLS\\HR2\\Images"));
@@ -212,5 +201,7 @@ public class LM_AddQuestionsController implements Initializable {
             n.showAndWait();
         }
     }
+    
+    
 
 }

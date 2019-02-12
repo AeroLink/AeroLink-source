@@ -17,6 +17,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -26,13 +27,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import FXMLS.Administrative.AlertBox;
-import FXMLS.Administrative.Visitor_CardController;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -123,8 +118,16 @@ public class CoreSideController implements Initializable {
     public void triggerButton(ActionEvent event) {
 
         if (!Session.getPermissions().contains(Route.routePermission.get(((JFXButton) event.getSource()).getId()))) {
-            Modal md = Modal.getInstance(new Form("/FXMLS/Deny.fxml").getParent());
-            md.open();
+//            Modal md = Modal.getInstance(new Form("/FXMLS/Deny.fxml").getParent());
+//            md.open();
+
+            Notifications nBuilder = Notifications.create()
+                    .title("Access Denied")
+                    .text("Unable to access this module due to lack of permission")
+                    .hideAfter(Duration.seconds(3))
+                    .position(Pos.CENTER);
+
+            nBuilder.showError();
         } else {
             String nav_id = ((JFXButton) event.getSource()).getId();
             Session.CurrentRoute = nav_id;
