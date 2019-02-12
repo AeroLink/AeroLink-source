@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="325.0" prefWidth="432.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.FINANCIAL.CALLER.DISBURSEMENT_VOUCHERController">
+   <children>
+      <AnchorPane layoutX="49.0" prefHeight="41.0" prefWidth="381.0" style="-fx-background-color: #34a853;">
+         <children>
+            <Label layoutX="31.0" layoutY="1.0" prefHeight="39.0" prefWidth="109.0" text="Create Voucher" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <FontAwesomeIconView fill="WHITE" glyphName="PLUS" layoutX="14.0" layoutY="25.0" />
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="39.0" fitWidth="36.0" layoutX="5.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Assets/300%20x%20300.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="reqno_lbl" layoutX="14.0" layoutY="215.0" text="None" visible="false">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="16.0" layoutY="149.0" text="Date Request:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="17.0" layoutY="61.0" text="Department:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="16.0" layoutY="187.0" text="Description:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="16.0" layoutY="105.0" text="Claimant:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="266.0" layoutY="149.0" text="Amount:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="datereq_lbl" layoutX="131.0" layoutY="149.0" text="None">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="dep_lbl" layoutX="131.0" layoutY="61.0" text="None">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="claimant_lbl" layoutX="131.0" layoutY="105.0" text="None">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="amount_lbl" layoutX="348.0" layoutY="149.0" text="None">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <JFXTextArea fx:id="desc_txtarea" editable="false" focusColor="#34a853" layoutX="129.0" layoutY="197.0" maxWidth="370.0" minWidth="252.0" prefHeight="73.0" prefWidth="285.0" unFocusColor="#34a853" />
+      <JFXButton fx:id="disburse_btn" buttonType="RAISED" layoutX="319.0" layoutY="287.0" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #34a853;" text="Disburse" textFill="WHITE">
+         <graphic>
+            <FontAwesomeIconView fill="WHITE" glyphName="SEND" size="10" wrappingWidth="14.0" />
+         </graphic>
+      </JFXButton>
+      <Label fx:id="status_lbl" layoutX="14.0" layoutY="249.0" text="None" visible="false">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="priority_lbl" layoutX="14.0" layoutY="279.0" text="None" visible="false">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="dr_id_label" layoutX="76.0" layoutY="217.0" text="drid" visible="false" />
+   </children>
+</AnchorPane>

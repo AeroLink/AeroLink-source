@@ -38,14 +38,14 @@ public class RouteConfig {
         {"hr3lm", "/FXMLS/HR3/HR3_Leave_Management.fxml", "can_access_HR3_Leave_Management"},
         {"hr3tm", "/FXMLS/HR3/HR3_Timesheet_Management.fxml", "can_access_HR3_Timesheet_Management"},
         //HR4
-        {"hr4analytics", "/FXMLS/HR4/HR4_Analytics.fxml", "can_access_hr1_socialrecog"},
-        {"hr4payroll", "/FXMLS/HR4/HR4_Payroll.fxml", "can_access_hr1_socialrecog"},
-        {"hr4cnp", "/FXMLS/HR4/HR4_Compensation_and_Planning.fxml", "can_access_hr1_socialrecog"},
+        {"hr4analytics", "/FXMLS/HR4/HR4_Analytics.fxml", "can_access_hr4_analytics"},
+        {"hr4payroll", "/FXMLS/HR4/HR4_Payroll.fxml", "can_access_hr4_payroll"},
+        {"hr4cnp", "/FXMLS/HR4/HR4_Compensation_and_Planning.fxml", "can_access_hr4_compensation_and_planning"},
         {"hr4chc", "/FXMLS/HR4/HR4_Core_Human_Capital_Management.fxml", "can_access_hr4_corehumancapital"},
         //Logistic1
         {"log1AM", "/FXMLS/Log1/AssetManagement.fxml", "can_access_log1_AssetManagement"},
         {"log1Proc", "/FXMLS/Log1/Procurement.fxml", "can_access_log1_Procurement"},
-        {"log1WM", "/FXMLS/Log1/WarehouseManagement.fxml", "can_access_log1_WarehouseManagement"},
+        {"log1WM", "/FXMLS/Log1/Warehousing.fxml", "can_access_log1_WarehouseManagement"},
         {"log1MRO", "/FXMLS/Log1/MaintenanceRepairOH.fxml", "can_access_log1_MaintenanceRepairOverhaul"},
         //Logistic2
         {"log2vp", "/FXMLS/Log2/Log2_Vendor_Portal.fxml", "can_Access_Log2_Vendor_Portal"},
@@ -60,11 +60,11 @@ public class RouteConfig {
         {"core2SOP", "/FXMLS/Core2/StandardOperationalProcedure.fxml", "can_access_core2_sop"},
         {"core2CRM", "/FXMLS/Core2/CustomerRelationshipManagement.fxml", "can_access_core2_crm"},
         //Core1   
-        {"core1_booking", "/FXMLS/core1/Core1_booking.fxml", "can_access_hr1_socialrecog"},
-        {"core1pom", "/FXMLS/core1/Core1_pom.fxml", "can_access_hr1_socialrecog"},
-        {"core1consol", "/FXMLS/core1/Core1_consol.fxml", "can_access_hr1_socialrecog"},
-        {"core1mawb", "/FXMLS/core1/Core1_mawb.fxml", "can_access_hr1_socialrecog"},
-        {"core1sf", "/FXML/core1/Core1_shipment.fxml", "can_access_hr1_socialrecog"},
+        {"core1_booking", "/FXMLS/Core1_Main/booking_main.fxml", "can_access_core1_booking"},
+        {"core1pom", "/FXMLS/Core1_Main/po_management.fxml", "can_access_core1_pom"},
+        {"core1consol", "/FXMLS/Core1_Main/consolidation_deconsolidation.fxml", "can_access_core1_consol"},
+        {"core1mawb", "/FXMLS/Core1_Main/mawb_hawb.fxml", "can_access_core1_mawb"},
+        {"core1sf", "/FXMLS/Core1_Main/shipment_files.fxml", "can_access_core1_shipment"},
         //Legal Management
         {"adminlegal", "/FXMLS/Administrative/Legal_Management.fxml", "can_access_admin_legal_management"},
         {"admindoc", "/FXMLS/Administrative/Document_Management.fxml", "can_access_admin_document_management"},
@@ -79,7 +79,8 @@ public class RouteConfig {
         
         //HR2 Request Forms
         {"0xreq_hr2_skill", "/FXMLS/HR2/Requisition/CM_RequestSkill.fxml", "canAccessSystem"}, //canAccessSystem permission for testing
-        {"0xreq_hr2_training", "/FXMLS/HR2/Requisition/LM_RequestExam.fxml", "canAccessSystem"}
+        {"0xreq_hr2_exam", "/FXMLS/HR2/Requisition/LM_RequestExam.fxml", "canAccessSystem"},
+        {"0xreq_hr2_training", "/FXMLS/HR2/Requisition/TM_RequestTraining.fxml", "canAccessSystem"}
             
     };
 

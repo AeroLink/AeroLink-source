@@ -7,6 +7,8 @@ package FXMLS.Core2.Change;
 
 import FXMLS.Core2.ClassFiles.TableModel_FAQs;
 import FXMLS.Core2.ClassFiles.TableModel_WebQuestion;
+import FXMLS.Core2.ClassFiles.CRMTable_customer_cases;
+import Model.Core2.CORE2_Customer_Service;
 import Model.Core2.CORE2_FAQs;
 import Model.Core2.Core2_WebQuestion;
 import Synapse.Components.Modal.Modal;
@@ -56,20 +58,20 @@ public class CRMviewComplaintsController implements Initializable {
     int Global_Count = 0;
     /* DECLARATION END */
 
-    @FXML
-    private TableView<TableModel_WebQuestion> tblNotification;
     ObservableList<TableModel_WebQuestion> tblwq = FXCollections.observableArrayList();
-    Core2_WebQuestion wq = new Core2_WebQuestion();
-
-    CORE2_FAQs faqs = new CORE2_FAQs();
+    ObservableList<CRMTable_customer_cases> tblcases = FXCollections.observableArrayList();
     ObservableList<TableModel_FAQs> tbl1 = FXCollections.observableArrayList();
 
+    CORE2_FAQs qa = new CORE2_FAQs();
+    Core2_WebQuestion wq = new Core2_WebQuestion();
+    CORE2_Customer_Service cs = new CORE2_Customer_Service();
+
+    @FXML
+    private TableView<CRMTable_customer_cases> tblCase;
+    @FXML
+    private TableView<TableModel_WebQuestion> tblNotification;
     @FXML
     private TableView<TableModel_FAQs> tblOpenQA;
-    @FXML
-    private TableColumn<TableModel_FAQs, String> colQuestion;
-    @FXML
-    private TableColumn<TableModel_FAQs, String> colAnswer;
     @FXML
     private TextField question;
     @FXML
@@ -90,6 +92,10 @@ public class CRMviewComplaintsController implements Initializable {
     private MenuItem ctmReply;
     @FXML
     private AnchorPane CRMrootPane;
+    @FXML
+    private ContextMenu contextMenu;
+    @FXML
+    private MenuItem viewIssue;
 
     /**
      * Initializes the controller class.
@@ -98,8 +104,6 @@ public class CRMviewComplaintsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         submit.setOnMouseClicked(e -> Insert());
-        GenerateQA();
-        LoadQA();
 
         tblOpenQA.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
@@ -110,23 +114,43 @@ public class CRMviewComplaintsController implements Initializable {
                         tb.answer.getValue());
             }
         });
-
+        // for online complaints
         tblwq.addListener((ListChangeListener.Change<? extends Object> c) -> {
             tblNotification.setItems(tblwq);
         });
+        // for case
+        tblcases.addListener((ListChangeListener.Change<? extends Object> c) -> {
+            tblCase.setItems(tblcases);
+        });
+        // for case
+        tbl1.addListener((ListChangeListener.Change<? extends Object> c) -> {
+            tblOpenQA.setItems(tbl1);
+        });
+        // for online complaints 
         this.generateTableColumn();
         this.populateTable();
+        // for case
+        this.generateCase();
+        this.populateCase();
+        // for FAQs
+        this.GenerateQA();
+        this.populateTableFAQ();
     }
 
+    // for faq's
     public void GenerateQA() {
-//        TableColumn<TableModel_FAQs, String> question = new TableColumn<>("QUESTION");
-//        TableColumn<TableModel_FAQs, String> answer = new TableColumn<>("ANSWER");
-//        question.setCellValueFactory(value -> value.getValue().question);
-//        answer.setCellValueFactory(value -> value.getValue().answer);
-        colQuestion.setCellValueFactory(new PropertyValueFactory<>("question"));
-        colAnswer.setCellValueFactory(new PropertyValueFactory<>("answer"));
+        tblOpenQA.getItems().clear();
+        tblOpenQA.getColumns().removeAll(tblOpenQA.getColumns());
+
+        TableColumn<TableModel_FAQs, String> colQuestion = new TableColumn<>("QUESTION");
+        TableColumn<TableModel_FAQs, String> colAnswer = new TableColumn<>("ANSWER");
+        
+        colQuestion.setCellValueFactory((TableColumn.CellDataFeatures<TableModel_FAQs, String> param) -> param.getValue().question);
+        colAnswer.setCellValueFactory((TableColumn.CellDataFeatures<TableModel_FAQs, String> param) -> param.getValue().answer);
+        tblOpenQA.getColumns().addAll(colQuestion, colAnswer);
     }
 
+    // for online complaints
     public void generateTableColumn() {
         tblNotification.getItems().clear();
         tblNotification.getColumns().removeAll(tblNotification.getColumns());
@@ -136,26 +160,56 @@ public class CRMviewComplaintsController implements Initializable {
         tblNotification.getColumns().addAll(notif);
     }
 
-    //  select ng data para sa table lang
-    public void LoadQA() {
-        CORE2_FAQs qa = new CORE2_FAQs();
-        ObservableList<TableModel_FAQs> complaints = FXCollections.observableArrayList();
-        List b = qa.get();
+    // for customer service
+    public void generateCase() {
+        tblCase.getItems().clear();
+        tblCase.getColumns().removeAll(tblCase.getColumns());
 
-        for (Object d : b) {
-            HashMap hm = (HashMap) d;
-            hm.get("id");
-            hm.get("question");
-            hm.get("answer");
+        TableColumn<CRMTable_customer_cases, String> case_no = new TableColumn<>("CASE NUMBER");
+        TableColumn<CRMTable_customer_cases, String> emp_id = new TableColumn<>("EMPLOYEE ID");
+        TableColumn<CRMTable_customer_cases, String> ref_no = new TableColumn<>("REFERENCE NUMBER");
+        TableColumn<CRMTable_customer_cases, String> category = new TableColumn<>("CATEGORY");
+        TableColumn<CRMTable_customer_cases, String> date = new TableColumn<>("DATE ISSUE");
+        TableColumn<CRMTable_customer_cases, String> lvl = new TableColumn<>("LEVEL");
+        TableColumn<CRMTable_customer_cases, String> status = new TableColumn<>("STATUS");
+        case_no.setCellValueFactory((TableColumn.CellDataFeatures<CRMTable_customer_cases, String> param) -> param.getValue().case_no);
+        emp_id.setCellValueFactory((TableColumn.CellDataFeatures<CRMTable_customer_cases, String> param) -> param.getValue().emp_id);
+        ref_no.setCellValueFactory((TableColumn.CellDataFeatures<CRMTable_customer_cases, String> param) -> param.getValue().ref_no);
+        category.setCellValueFactory((TableColumn.CellDataFeatures<CRMTable_customer_cases, String> param) -> param.getValue().category);
+        date.setCellValueFactory((TableColumn.CellDataFeatures<CRMTable_customer_cases, String> param) -> param.getValue().date);
+        lvl.setCellValueFactory((TableColumn.CellDataFeatures<CRMTable_customer_cases, String> param) -> param.getValue().lvl);
+        status.setCellValueFactory((TableColumn.CellDataFeatures<CRMTable_customer_cases, String> param) -> param.getValue().status);
+        tblCase.getColumns().addAll(case_no, emp_id, ref_no, category, date, lvl, status);
+    }
 
-            complaints.add(
-                    new TableModel_FAQs(
-                            String.valueOf("id"),
-                            String.valueOf(hm.get("question")),
-                            String.valueOf(hm.get("answer"))
-                    ));
-        }
-        tblOpenQA.setItems(complaints);
+    // dito isinasagawa yung pag query and etc or inner|left join
+    public void populateTableFAQ() {
+        Thread th = new Thread(new Task() {
+            @Override
+            protected Object call() throws Exception {
+                while (true) {
+                    CompletableFuture.supplyAsync(() -> {
+                        List list = qa.get(("COUNT(*) as total"));
+                        return Integer.parseInt(((HashMap) list.get(0)).get("total").toString());
+                    }).thenApply((count) -> {
+                        List rs = new ArrayList<>();
+                        if (count != Global_Count) {
+                            rs = qa
+                                    .get("fid", "question", "answer");
+                            Global_Count = count;
+                        }
+                        return rs;
+                    }).thenAccept((rs) -> {
+                        if (!rs.isEmpty()) {
+                            AddTableFAQ(rs);
+                        }
+                    });
+                    Thread.sleep(3000);
+                }
+            }
+        });
+        th.setDaemon(true);
+        th.start();
     }
 
     // dito isinasagawa yung pag query and etc or inner|left join
@@ -173,13 +227,45 @@ public class CRMviewComplaintsController implements Initializable {
                             rs = wq
                                     //.join(Model.JOIN.LEFT, "aerolink.tbl_core1_customer_details", "customer_id", "cid", "=", "customer_id") 
                                     // yung nasa baba nito ayan yung query na select baka malito kayo eh 
-                                    .get("CONCAT(email,' - ',created_at) as notif","name","comment");
+                                    .get("CONCAT(email,' - ',created_at) as notif", "name", "comment");
                             Global_Count = count;
                         }
                         return rs;
                     }).thenAccept((rs) -> {
                         if (!rs.isEmpty()) {
                             AddTable(rs);
+                        }
+                    });
+                    Thread.sleep(3000);
+                }
+            }
+        });
+        th.setDaemon(true);
+        th.start();
+    }
+
+    // dito isinasagawa yung pag query and etc or inner|left join
+    public void populateCase() {
+        Thread th = new Thread(new Task() {
+            @Override
+            protected Object call() throws Exception {
+                while (true) {
+                    CompletableFuture.supplyAsync(() -> {
+                        List list = cs.get(("COUNT(*) as total"));
+                        return Integer.parseInt(((HashMap) list.get(0)).get("total").toString());
+                    }).thenApply((count) -> {
+                        List rs = new ArrayList<>();
+                        if (count != Global_Count) {
+                            rs = cs
+                                    //.join(Model.JOIN.LEFT, "aerolink.tbl_core1_customer_details", "customer_id", "cid", "=", "customer_id") 
+                                    // yung nasa baba nito ayan yung query na select baka malito kayo eh 
+                                    .get("CONCAT('0000',case_no) as case_no", "ref_no", "emp_id", "category", "date", "lvl", "status", "issue");
+                            Global_Count = count;
+                        }
+                        return rs;
+                    }).thenAccept((rs) -> {
+                        if (!rs.isEmpty()) {
+                            AddTableCase(rs);
                         }
                     });
                     Thread.sleep(3000);
@@ -217,8 +303,8 @@ public class CRMviewComplaintsController implements Initializable {
             e.printStackTrace();
         }
         // para sa realty update ng data
-        GenerateQA();
-        LoadQA();
+//        GenerateQA();
+//        LoadQA();
     }
 
     @FXML // Modal sya
@@ -226,7 +312,7 @@ public class CRMviewComplaintsController implements Initializable {
         FXMLS.Core2.Modals.CRMviewComplaintsReplyController.email = tblNotification.getSelectionModel().getSelectedItem().email.getValue();
         FXMLS.Core2.Modals.CRMviewComplaintsReplyController.name = tblNotification.getSelectionModel().getSelectedItem().name.getValue();
         FXMLS.Core2.Modals.CRMviewComplaintsReplyController.comment = tblNotification.getSelectionModel().getSelectedItem().comment.getValue();
-        
+
         Modal md = Modal.getInstance(new Form("/FXMLS/Core2/Modals/CRMviewComplaintsReply.fxml").getParent());
         md.open();
         md.getF().getStage().setOnCloseRequest(action -> {
@@ -261,11 +347,11 @@ public class CRMviewComplaintsController implements Initializable {
         JFXButton btnCancel = new JFXButton("Cancel");
 
         btnSubmit.setOnMouseClicked(event -> {
-            if (faqs.update(new Object[][]{
+            if (qa.where(new Object[][]{
+                {"fid", "=", id}
+            }).update(new Object[][]{
                 {"question", txtQ.getText()},
                 {"answer", txtA.getText()}
-            }).where(new Object[][]{
-                {"id", "=", id}
             }).executeUpdate()) {
                 Helpers.EIS_Response.SuccessResponse("Success", "Data was updated successfully");
                 dialog.close();
@@ -284,6 +370,21 @@ public class CRMviewComplaintsController implements Initializable {
     }
 
     // need sya para lumabas yung result sa tableview ez LAWGIC
+    public void AddTableFAQ(List rs) {
+        tbl1.clear();
+
+        for (Object row : rs) {
+            HashMap drow = (HashMap) row;
+
+            String id = String.valueOf(drow.get("fid"));
+            String question = (String) drow.get("question");
+            String answer = (String) drow.get("answer");
+
+            tbl1.add(new TableModel_FAQs(id, question, answer));
+        }
+    }
+
+    // need sya para lumabas yung result sa tableview ez LAWGIC
     public void AddTable(List rs) {
         tblwq.clear();
 
@@ -293,8 +394,28 @@ public class CRMviewComplaintsController implements Initializable {
             String email = (String) drow.get("notif");
             String name = (String) drow.get("name");
             String comment = (String) drow.get("comment");
-            
-            tblwq.add(new TableModel_WebQuestion(email,name,comment));
+
+            tblwq.add(new TableModel_WebQuestion(email, name, comment));
+        }
+    }
+
+    // need sya para lumabas yung result sa tableview ez LAWGIC
+    public void AddTableCase(List rs) {
+        tblcases.clear();
+
+        for (Object row : rs) {
+            HashMap trow = (HashMap) row;
+
+            String case_no = (String) trow.get("case_no");
+            String ref_no = (String) trow.get("ref_no");
+            String emp_id = (String) trow.get("emp_id");
+            String category = (String) trow.get("category");
+            String date = (String) trow.get("date");
+            String lvl = (String) trow.get("lvl");
+            String status = (String) trow.get("status");
+            String issue = (String) trow.get("issue");
+
+            tblcases.add(new CRMTable_customer_cases(case_no, ref_no, emp_id, category, date, lvl, status, issue));
         }
     }
 
@@ -308,6 +429,30 @@ public class CRMviewComplaintsController implements Initializable {
     private void viewMonitoring(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLS/Core2/CustomerRelationshipManagement.fxml"));
         CRMrootPane.getChildren().setAll(pane);
+    }
+
+    @FXML
+    private void viewAddCase(ActionEvent event) {
+        Modal md = Modal.getInstance(new Form("/FXMLS/Core2/Modals/CRMaddCase.fxml").getParent());
+        md.open();
+        md.getF().getStage().setOnCloseRequest(action -> {
+            FXMLS.Core2.Modals.CRMaddCaseController.modalOpen = false;
+        });
+    }
+
+    @FXML
+    private void viewIssue(ActionEvent event) {
+        FXMLS.Core2.Modals.CRMviewIssueController.issue = tblCase.getSelectionModel().getSelectedItem().issue.getValue();
+
+        Modal md = Modal.getInstance(new Form("/FXMLS/Core2/Modals/CRMviewIssue.fxml").getParent());
+        md.open();
+        md.getF().getStage().setOnCloseRequest(action -> {
+            FXMLS.Core2.Modals.CRMviewIssueController.modalOpen = false;
+        });
+    }
+
+    @FXML
+    private void viewSearch(ActionEvent event) {
     }
 
 }

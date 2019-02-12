@@ -67,10 +67,6 @@ public class HR2_View_ChoicesController implements Initializable {
     private JFXButton btn_edit;
     @FXML
     private Label lbl_c;
-    @FXML
-    private ContextMenu contextMenu_Choices;
-    @FXML
-    private MenuItem dropChoice;
 
     /**
      * Initializes the controller class.
@@ -132,39 +128,10 @@ public class HR2_View_ChoicesController implements Initializable {
 
     @FXML
     public void EditQuestionModal() {
-        HR2_LM_EditQuestion_for_Modal.init_Question(lbl_c.getText(),
+        HR2_LM_EditQuestion_for_Modal.init_Question(
+                lbl_c.getText(),
                 txt_question.getText());
         Modal updateQ = Modal.getInstance(new Form("/FXMLS/HR2/Modals/LM_EditQuestion.fxml").getParent());
         updateQ.open();
-
-    }
-
-    @FXML
-    public void ContextMenuDrop(MouseEvent event) {
-
-        if (event.getButton() == MouseButton.SECONDARY) {
-            contextMenu_Choices.show(tbl_choices, event.getX(), event.getSceneY());
-            dropChoice.setOnAction(e -> DropChoice());
-        }
-    }
-
-    public void DropChoice() {
-        Alert update = new Alert(Alert.AlertType.CONFIRMATION);
-        update.setContentText("Are you sure you want to drop this choice?");
-        Optional<ButtonType> rs = update.showAndWait();
-
-        if (rs.get() == ButtonType.OK) {
-            HR2_Evaluation c = new HR2_Evaluation();
-
-            Boolean a = c.where(new Object[][]{
-                {"choice_id", "=", tbl_choices.getSelectionModel().getSelectedItem().choice_id.get()}
-            }).update(new Object[][]{
-                {"isDeleted", "1"}
-            }).executeUpdate();
-            Alert dropnotif = new Alert(Alert.AlertType.INFORMATION);
-            dropnotif.setContentText("Choice Successfully Dropped");
-            dropnotif.showAndWait();
-            loadData();
-        }
     }
 }

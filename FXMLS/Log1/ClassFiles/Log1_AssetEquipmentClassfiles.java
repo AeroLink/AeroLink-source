@@ -1,55 +1,63 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package FXMLS.Log1.ClassFiles;
 
 import javafx.beans.property.SimpleStringProperty;
 
-/**
- *
- * @author Crenz
- */
 public class Log1_AssetEquipmentClassfiles {
     public SimpleStringProperty EquipmentID;
     public SimpleStringProperty BuildingName;
+    public SimpleStringProperty EquipmentRoomNumber;
     public SimpleStringProperty EquipmentName;
     public SimpleStringProperty EquipmentType;
-    public SimpleStringProperty EquipmentLocation;
-    public SimpleStringProperty EquipmentModelNumber;
-    public SimpleStringProperty EquipmentSerialNumber;
-    public SimpleStringProperty EquipmentWarrantyDate;
-    public SimpleStringProperty EquipmentPrice;
+    public SimpleStringProperty EquipmentBrand;
+    public SimpleStringProperty EquipmentPurchasedPrice;
+    public SimpleStringProperty EquipmentPurchasedDate;
+    public SimpleStringProperty EquipmentLifeSpan;
+    public SimpleStringProperty EquipmentWarranty;
+    public SimpleStringProperty CurrentPrice;
+    public SimpleStringProperty PriceUpdatedAt;
     
     public Log1_AssetEquipmentClassfiles(
-            String ID,
-            String bName,
-            String Name,
-            String Type,
-            String Location,
-            String ModelNumber,
-            String SerialNumber,
-            String Date,
-            String Price
+            String Eid,
+            String BuildingName,
+            String EquipmentName,
+            String EquipmentRoomNumber,
+            String EquipmentType,
+            String EquipmentBrand,
+            String EquipmentPurchasedPrice,
+            String EquipmentPurchasedDate,
+            String EquipmentLifeSpan,
+            String EquipmentWarranty,
+            String CurrentPrice,
+            String PriceUpdatedAt
     ){
-        this.EquipmentID = new SimpleStringProperty(ID);
-        this.BuildingName = new SimpleStringProperty(bName);
-        this.EquipmentName = new SimpleStringProperty(Name);
-        this.EquipmentType = new SimpleStringProperty(Type);
-        this.EquipmentLocation = new SimpleStringProperty(Location);
-        this.EquipmentModelNumber = new SimpleStringProperty(ModelNumber);
-        this.EquipmentSerialNumber = new SimpleStringProperty(SerialNumber);
-        this.EquipmentWarrantyDate = new SimpleStringProperty(Date);
-        this.EquipmentPrice = new SimpleStringProperty(Price);
+        this.EquipmentID = new SimpleStringProperty(Eid);
+        this.BuildingName = new SimpleStringProperty(BuildingName);
+        this.EquipmentRoomNumber = new SimpleStringProperty(EquipmentRoomNumber);
+        this.EquipmentName = new SimpleStringProperty(EquipmentName);
+        this.EquipmentType = new SimpleStringProperty(EquipmentType);
+        this.EquipmentBrand = new SimpleStringProperty(EquipmentBrand);
+        this.EquipmentPurchasedPrice = new SimpleStringProperty(EquipmentPurchasedPrice);
+        this.EquipmentPurchasedDate = new SimpleStringProperty(EquipmentPurchasedDate);
+        this.EquipmentLifeSpan = new SimpleStringProperty(EquipmentLifeSpan);
+        this.EquipmentWarranty = new SimpleStringProperty(EquipmentWarranty);
+        this.CurrentPrice = new SimpleStringProperty(CurrentPrice);
+        this.PriceUpdatedAt = new SimpleStringProperty(PriceUpdatedAt);
     }
-
-    public String getBuildingName() {
-        return BuildingName.get();
+    
+    public String getCurrentPrice(){
+        return CurrentPrice.get();
+    }
+    
+    public String getPriceUpdateAt(){
+        return PriceUpdatedAt.get();
     }
 
     public String getEquipmentID() {
         return EquipmentID.get();
+    }
+
+    public String getEquipmentRoomNumber() {
+        return EquipmentRoomNumber.get();
     }
 
     public String getEquipmentName() {
@@ -60,23 +68,23 @@ public class Log1_AssetEquipmentClassfiles {
         return EquipmentType.get();
     }
 
-    public String getEquipmentLocation() {
-        return EquipmentLocation.get();
+    public String getEquipmentBrand() {
+        return EquipmentBrand.get();
     }
 
-    public String getEquipmentModelNumber() {
-        return EquipmentModelNumber.get();
+    public String getEquipmentPurchasedPrice() {
+        return EquipmentPurchasedPrice.get();
     }
 
-    public String getEquipmentSerialNumber() {
-        return EquipmentSerialNumber.get();
+    public String getEquipmentPurchasedDate() {
+        return EquipmentPurchasedDate.get();
     }
 
-    public String getEquipmentWarrantyDate() {
-        return EquipmentWarrantyDate.get();
+    public String getEquipmentLifeSpan() {
+        return EquipmentLifeSpan.get();
     }
 
-    public String getEquipmentPrice() {
-        return EquipmentPrice.get();
+    public String getEquipmentWarranty() {
+        return EquipmentWarranty.get();
     }
 }

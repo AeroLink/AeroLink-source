@@ -88,7 +88,7 @@ public class HR2_Succession_PlanningController implements Initializable {
         HR4_Jobs jobs = new HR4_Jobs();
         List jv_data = jobs.join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_limit", "job_id", "j_limit", "=", "job_id")
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "d", "=", "dept_id")
-                .where(new Object[][]{{"j_limit.jobOpen", "!=", "0"}})
+                .where(new Object[][]{{"j_limit.isPosted", "=", "1"}})
                 .get("d.dept_name as department,aerolink.tbl_hr4_jobs.title");
         JV(jv_data);
     }
@@ -121,8 +121,8 @@ public class HR2_Succession_PlanningController implements Initializable {
             for (Object d : c) {
                 HashMap hm1 = (HashMap) d;
                 //RS
-              //  cbox_department.getItems().add("DEPT" + hm1.get("id") + " - " + hm1.get("dept_name"));
-              cbox_department.getItems().add(hm1.get("dept_name"));
+                //  cbox_department.getItems().add("DEPT" + hm1.get("id") + " - " + hm1.get("dept_name"));
+                cbox_department.getItems().add(hm1.get("dept_name"));
 
             }
         } catch (Exception e) {
@@ -136,19 +136,17 @@ public class HR2_Succession_PlanningController implements Initializable {
         try {
 
             HR2_Temp_Employee_Jobs ej = new HR2_Temp_Employee_Jobs();
-                            List sp = ej.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "emp",
-                                    "=", "employee_code")
-                                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
-                                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "=", "jobs", "dept_id",true)
-                                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_classifications", "id", "=", "jobs", "classification_id", true)
-                                    .where(new Object[][]{{"aerolink.tbl_hr4_department.dept_name", "=", cbox_department.getSelectionModel()
-                                .getSelectedItem().toString()}})
-                                    .orderBy("aerolink.tbl_hr4_job_classifications.class_name", Model.Sort.ASC)
-                                    .get("jobs.title as position", "concat(emp.firstname, ' ',emp.middlename, ' ' ,emp.lastname)as employees",
-                                            "aerolink.tbl_hr4_job_classifications.class_name as Classification");
-                            Data(sp);
-                        } 
-        catch(Exception e){
+            List sp = ej.join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "emp","=", "employee_code")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "=", "jobs", "dept_id", true)
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_classifications", "id", "=", "jobs", "classification_id", true)
+                    .where(new Object[][]{{"aerolink.tbl_hr4_department.dept_name", "=", cbox_department.getSelectionModel()
+                .getSelectedItem().toString()}})
+                    .orderBy("aerolink.tbl_hr4_job_classifications.class_level", Model.Sort.ASC)
+                    .get("jobs.title as position", "emp.employee_code","concat(emp.firstname, ' ',emp.middlename, ' ' ,emp.lastname)as employees",
+                            "aerolink.tbl_hr4_job_classifications.class_name as Classification");
+            Data(sp);
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
@@ -163,13 +161,14 @@ public class HR2_Succession_PlanningController implements Initializable {
                 System.out.println(hm);
                 obj.add(
                         new HR2_Organizational_List(
+                                String.valueOf(hm.get("employee_code")),
                                 String.valueOf(hm.get("position")),
                                 String.valueOf(hm.get("employees")),
                                 String.valueOf(hm.get("Classification"))
                         ));
 
             }
-    /*       Collections.sort(b,new Comparator<HashMap<String, String>>() {
+            /*       Collections.sort(b,new Comparator<HashMap<String, String>>() {
                 public int compare(HashMap<String, String> one, HashMap<String, String> two) {
                     return one.get("site_name")
                     .compareTo(two.get("site_name"));
@@ -205,8 +204,11 @@ public class HR2_Succession_PlanningController implements Initializable {
                         try {
                             btn.setOnAction(e
                                     -> {
-                                SP_Employee_Info_Modal.init_EmpInfo(tbl_view_positions.getSelectionModel().getSelectedItem().Fullname.get(),
-                                        tbl_view_positions.getSelectionModel().getSelectedItem().Job_Title.get());
+                                HR2_Organizational_List ol = (HR2_Organizational_List) getTableRow().getItem();
+                                SP_Employee_Info_Modal.init_EmpInfo(
+                                        ol.employee_code.getValue(),
+                                        ol.Fullname.getValue(),
+                                        ol.Job_Title.getValue());
                                 Modal viewEmp = Modal.getInstance(new Form("/FXMLS/HR2/Modals/SP_ViewEmployeeInfo.fxml").getParent());
                                 viewEmp.open();
                             });
@@ -251,7 +253,9 @@ public class HR2_Succession_PlanningController implements Initializable {
                         try {
                             btn.setOnAction(e
                                     -> {
-                                SP_JV_with_Skills_Modal.view_skill(tbl_job_vacancy.getSelectionModel().getSelectedItem().title.get());
+                                HR2_JV_With_Skills_for_SP skills_sp = (HR2_JV_With_Skills_for_SP) getTableRow().getItem();
+                                SP_JV_with_Skills_Modal.view_skill(
+                                        skills_sp.title.get());
                                 Modal viewEmp = Modal.getInstance(new Form("/FXMLS/HR2/Modals/SP_ViewSkills.fxml").getParent());
                                 viewEmp.open();
                             });

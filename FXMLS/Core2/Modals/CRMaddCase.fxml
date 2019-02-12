@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="421.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Core2.Modals.CRMaddCaseController">
+   <children>
+      <BorderPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="40.0" prefWidth="600.0" style="-fx-background-color: #34a853;" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="24.0" layoutY="18.0" prefHeight="40.0" prefWidth="107.0" text="ADD CASE" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </top>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="20.0" layoutY="27.0" text="Reference Number">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtRefNo" layoutX="21.0" layoutY="52.0" prefHeight="40.0" prefWidth="300.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font></TextField>
+                  <Label layoutX="21.0" layoutY="174.0" text="Issue">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="TAissue" layoutX="21.0" layoutY="199.0" prefHeight="129.0" prefWidth="560.0" style="-fx-border-color: #34a853;" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="20.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font></TextArea>
+                  <Label layoutX="22.0" layoutY="101.0" text="Category">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="cbbCategory" layoutX="21.0" layoutY="126.0" prefHeight="40.0" prefWidth="300.0" AnchorPane.leftAnchor="21.0" />
+                  <Label layoutX="331.0" layoutY="101.0" text="Employee ID">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="331.0" layoutY="27.0" text="Date">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="date" editable="false" layoutX="331.0" layoutY="52.0" prefHeight="40.0" prefWidth="250.0" AnchorPane.rightAnchor="20.0" />
+                  <JFXButton fx:id="btnSubmit" buttonType="RAISED" layoutX="503.0" layoutY="339.0" style="-fx-background-color: #34a853;" text="Submit" textFill="WHITE" AnchorPane.rightAnchor="20.0">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="SEND" size="20" />
+                     </graphic>
+                  </JFXButton>
+                  <TextField fx:id="txtEmpID" layoutX="331.0" layoutY="126.0" prefHeight="40.0" prefWidth="250.0" AnchorPane.rightAnchor="20.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="txtLevel" layoutX="21.0" layoutY="334.0" prefHeight="21.0" prefWidth="159.0" text="Level 1" visible="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="txtStatus" layoutX="194.0" layoutY="334.0" prefHeight="21.0" prefWidth="159.0" text="Active" visible="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

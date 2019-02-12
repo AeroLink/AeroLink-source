@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.FINANCIAL.CALLER.PurchaseOrderController">
+   <children>
+      <AnchorPane prefHeight="33.0" prefWidth="600.0" style="-fx-background-color: #34a853;">
+         <children>
+            <Label layoutX="14.0" layoutY="1.0" prefHeight="33.0" prefWidth="109.0" text="Purchase Order" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <JFXTextField fx:id="lname_txt" focusColor="#34a853" labelFloat="true" layoutX="16.0" layoutY="127.0" promptText="Lastname" unFocusColor="#34a853">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="fname_txt" focusColor="#34a853" labelFloat="true" layoutX="197.0" layoutY="127.0" promptText="Firstname" unFocusColor="#34a853">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextArea fx:id="des_txt" focusColor="#34a853" labelFloat="true" layoutX="20.0" layoutY="196.0" maxWidth="565.0" minWidth="349.0" prefHeight="88.0" prefWidth="349.0" promptText="Description" unFocusColor="#34a853">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextArea>
+      <JFXTextField fx:id="amount_txt" alignment="CENTER_RIGHT" focusColor="#34a853" layoutX="381.0" layoutY="192.0" nodeOrientation="RIGHT_TO_LEFT" promptText="0.00" unFocusColor="#34a853">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <ImageView fitHeight="44.0" fitWidth="58.0" layoutX="229.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Assets/300%20x%20300.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="289.0" layoutY="57.0" text="Aerolink">
+         <font>
+            <Font name="System Italic" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="391.0" layoutY="169.0" text="Amount" textFill="#34a853">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="save_btn" layoutX="452.0" layoutY="337.0" prefHeight="25.0" prefWidth="97.0" style="-fx-background-color: #34a853;" text="Save" textFill="WHITE" />
+      <JFXComboBox fx:id="stats" layoutX="389.0" layoutY="249.0" prefHeight="25.0" prefWidth="160.0" promptText="Status" />
+   </children>
+</AnchorPane>

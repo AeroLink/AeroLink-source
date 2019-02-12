@@ -10,7 +10,6 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -20,7 +19,7 @@
          <items>
             <AnchorPane prefHeight="693.0" prefWidth="1368.0">
                <children>
-                  <TableView fx:id="tblPackage" layoutX="532.0" layoutY="108.0" prefHeight="547.0" prefWidth="822.0" AnchorPane.rightAnchor="14.0">
+                  <TableView fx:id="tblPackage" layoutX="532.0" layoutY="108.0" prefHeight="547.0" prefWidth="800.0" stylesheets="@../../Assets/css/pom.css" AnchorPane.rightAnchor="14.0">
                      <columns>
                         <TableColumn prefWidth="451.0" text="PACKAGE NUMBER" />
                         <TableColumn prefWidth="215.0" text="SHIPPER NAME" />
@@ -33,7 +32,7 @@
                      <contextMenu>
                         <ContextMenu fx:id="contextMenu">
                            <items>
-                              <MenuItem fx:id="menuVPD" mnemonicParsing="false" text="View Package Details" />
+                              <MenuItem fx:id="menuVPD" mnemonicParsing="false" onAction="#viewPackDetails" text="View Package Details" />
                            </items>
                         </ContextMenu>
                      </contextMenu>
@@ -79,54 +78,65 @@
                         <Font name="System Italic" size="12.0" />
                      </font>
                   </Label>
-                  <TitledPane collapsible="false" layoutX="11.0" layoutY="108.0" prefHeight="519.0" prefWidth="512.0" stylesheets="@../../Assets/css/MainPanel.css" text="PACKAGING" AnchorPane.leftAnchor="10.0">
+                  <TableView fx:id="tblViewSN" layoutX="11.0" layoutY="90.0" prefHeight="251.0" prefWidth="512.0" style="-fx-border-color: #34a853;" stylesheets="@../../Assets/css/pom.css" AnchorPane.leftAnchor="10.0">
+                    <columns>
+                      <TableColumn prefWidth="148.0" text="REFERENCE NO" />
+                        <TableColumn prefWidth="306.0" text="SHIPPER NAME" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <TextArea fx:id="TAitem" layoutX="14.0" layoutY="382.0" prefHeight="146.0" prefWidth="410.0" style="-fx-border-color: #34a853;" wrapText="true" AnchorPane.leftAnchor="10.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextArea>
+                  <TextArea fx:id="TAnotes" layoutX="10.0" layoutY="559.0" prefHeight="70.0" prefWidth="512.0" style="-fx-border-color: #34a853;" wrapText="true">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextArea>
+                  <JFXButton fx:id="btnSubmit" buttonType="RAISED" layoutX="434.0" layoutY="640.0" style="-fx-background-color: #34a853;" text="Submit" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="SEND" size="20" />
+                     </graphic>
+                  </JFXButton>
+                  <Label layoutX="10.0" layoutY="361.0" text="Declare Item" AnchorPane.leftAnchor="10.0">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
-                     <content>
-                        <AnchorPane prefHeight="316.0" prefWidth="343.0">
-                           <children>
-                              <JFXButton fx:id="btnSubmit" buttonType="RAISED" layoutX="394.0" layoutY="460.0" style="-fx-background-color: #34a853;" text="Submit" textFill="WHITE">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                                 <graphic>
-                                    <FontAwesomeIconView fill="WHITE" glyphName="SEND" size="20" />
-                                 </graphic>
-                              </JFXButton>
-                              <TextArea fx:id="TAitem" layoutX="28.0" layoutY="135.0" prefHeight="197.0" prefWidth="452.0" wrapText="true" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </TextArea>
-                              <Label layoutX="28.0" layoutY="108.0" text="Input Item">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <TextArea fx:id="TAnotes" layoutX="30.0" layoutY="361.0" prefHeight="92.0" prefWidth="452.0" wrapText="true" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </TextArea>
-                              <Label layoutX="28.0" layoutY="332.0" text="Notes:">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <TableView fx:id="tblViewSN" layoutX="30.0" layoutY="7.0" prefHeight="107.0" prefWidth="456.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
-                                <columns>
-                                  <TableColumn prefWidth="148.0" text="REFERENCE NO" />
-                                    <TableColumn prefWidth="306.0" text="SHIPPER NAME" />
-                                </columns>
-                                 <columnResizePolicy>
-                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                 </columnResizePolicy>
-                              </TableView>
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </TitledPane>
+                  </Label>
+                  <Label layoutX="425.0" layoutY="359.0" text="Total Value">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="425.0" layoutY="445.0" text="Weight(KG)">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="11.0" layoutY="538.0" text="Note">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="TFvalue" alignment="CENTER" layoutX="425.0" layoutY="382.0" prefHeight="60.0" prefWidth="100.0" style="-fx-border-color: #34a853;">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="TFweight" alignment="CENTER" layoutX="425.0" layoutY="468.0" prefHeight="60.0" prefWidth="100.0" style="-fx-border-color: #34a853;">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="TFstatus" layoutX="66.0" layoutY="643.0" text="Inspection/Approved" visible="false" />
+                  <Label fx:id="lblStatus" layoutX="259.0" layoutY="640.0" prefHeight="24.0" prefWidth="149.0" />
                </children>
             </AnchorPane>
          </items>

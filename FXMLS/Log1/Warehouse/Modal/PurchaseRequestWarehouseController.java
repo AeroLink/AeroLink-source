@@ -5,7 +5,7 @@
  */
 package FXMLS.Log1.Warehouse.Modal;
 
-import FXMLS.Log1.ClassFiles.Log1_fullInventoryList;
+//import FXMLS.Log1.ClassFiles.Log1_fullInventoryList;
 import FXMLS.Log1.util.AlertMaker;
 import Model.Log1.Log1_ProcurementPurchaseRequestModel;
 import Model.Log1.Log1_WarehouseItemsModel;
@@ -62,12 +62,12 @@ public class PurchaseRequestWarehouseController implements Initializable {
     private Label itemUnit_txt;
     @FXML
     private Label unitPrice_txt;
-    @FXML
-    private TableView<Log1_fullInventoryList> itemRequest_tbl;
-    @FXML
-    private TableColumn<Log1_fullInventoryList, String> item_col1;
-    @FXML
-    private TableColumn<Log1_fullInventoryList, String> status_ool2;
+//    @FXML
+//    private TableView<Log1_fullInventoryList> itemRequest_tbl;
+//    @FXML
+//    private TableColumn<Log1_fullInventoryList, String> item_col1;
+//    @FXML
+//    private TableColumn<Log1_fullInventoryList, String> status_ool2;
     @FXML
     private JFXButton SendRequest_btn;
     @FXML
@@ -81,8 +81,8 @@ public class PurchaseRequestWarehouseController implements Initializable {
     @FXML
     private DatePicker dateToday_txt;
     @FXML
-    private TableColumn<Log1_fullInventoryList, String> Supplier_col;
-    @FXML
+//    private TableColumn<Log1_fullInventoryList, String> Supplier_col;
+//    @FXML
     private Label supplierName_txt;
     @FXML
     private Label supplierID_txt;
@@ -94,23 +94,23 @@ public class PurchaseRequestWarehouseController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         fetchItemData();
-        displayItem();
+//        displayItem();
         PriorityLevel_txt.setItems(PriorLevel);
         SendRequest_btn.setOnMouseClicked(e -> sendRequest());
         cancel_btn.setOnMouseClicked(e -> cancel());
     }
     
-    @FXML
-    private void selectItemToProcure(MouseEvent event) {
-        itemID_txt.setText(itemRequest_tbl.getSelectionModel().getSelectedItem().getItemID());
-        itemDescription_txt.setText(itemRequest_tbl.getSelectionModel().getSelectedItem().getItemDescription());
-        quantity_txt.setText(itemRequest_tbl.getSelectionModel().getSelectedItem().getStockQuantity());
-        reorderLevel_txt.setText(itemRequest_tbl.getSelectionModel().getSelectedItem().getCriticalQuantity());
-        itemUnit_txt.setText(itemRequest_tbl.getSelectionModel().getSelectedItem().getItemUnit());
-        unitPrice_txt.setText(itemRequest_tbl.getSelectionModel().getSelectedItem().getUnitPrice());
-        supplierName_txt.setText(itemRequest_tbl.getSelectionModel().getSelectedItem().getSupplierName());
-        supplierID_txt.setText(itemRequest_tbl.getSelectionModel().getSelectedItem().getSupplierID());
-    }
+//    @FXML
+//    private void selectItemToProcure(MouseEvent event) {
+//        itemID_txt.setText(itemRequest_tbl.getSelectionModel().getSelectedItem().getItemID());
+//        itemDescription_txt.setText(itemRequest_tbl.getSelectionModel().getSelectedItem().getItemDescription());
+//        quantity_txt.setText(itemRequest_tbl.getSelectionModel().getSelectedItem().getStockQuantity());
+//        reorderLevel_txt.setText(itemRequest_tbl.getSelectionModel().getSelectedItem().getCriticalQuantity());
+//        itemUnit_txt.setText(itemRequest_tbl.getSelectionModel().getSelectedItem().getItemUnit());
+//        unitPrice_txt.setText(itemRequest_tbl.getSelectionModel().getSelectedItem().getUnitPrice());
+//        supplierName_txt.setText(itemRequest_tbl.getSelectionModel().getSelectedItem().getSupplierName());
+////        supplierID_txt.setText(itemRequest_tbl.getSelectionModel().getSelectedItem().getSupplierID());
+//    }
     
     public void cancel(){
         Stage stage = (Stage) itemDescription_txt.getScene().getWindow();
@@ -136,41 +136,41 @@ public class PurchaseRequestWarehouseController implements Initializable {
 
     
     public void fetchItemData(){
-        ObservableList<Log1_fullInventoryList> items = FXCollections.observableArrayList();
-        Log1_WarehouseItemsModel searchItem = new Log1_WarehouseItemsModel();
-
-            List b = searchItem.join
-               (Model.JOIN.INNER, "aerolink.tbl_log1_suppliers", "SupplierID", "=", "SupplierID")
-            .where(new Object[][]{
-                {"Status", "=", "Need to Reorder!"}
-            }).get();
-
-        for(Object d : b){
-            HashMap hm = (HashMap) d;
-            items.add(new Log1_fullInventoryList(
-                        
-                String.valueOf(hm.get("ItemID")),
-                String.valueOf(hm.get("SupplierID")),
-                String.valueOf(hm.get("SupplierName")),
-                String.valueOf(hm.get("ItemDescription")),
-                String.valueOf(hm.get("ItemType")),
-                String.valueOf(hm.get("ItemLocation")),
-                String.valueOf(hm.get("ItemUnit")),
-                String.valueOf(hm.get("UnitPrice")),
-                String.valueOf(hm.get("StockQuantity")),
-                String.valueOf(hm.get("CriticalQuantity")),
-                String.valueOf(hm.get("DisposalDate")),
-                String.valueOf(hm.get("Status"))
-            ));
-        }
-        itemRequest_tbl.setItems(items);
+//        ObservableList<Log1_fullInventoryList> items = FXCollections.observableArrayList();
+//        Log1_WarehouseItemsModel searchItem = new Log1_WarehouseItemsModel();
+//
+//            List b = searchItem.join
+//               (Model.JOIN.INNER, "aerolink.tbl_log1_suppliers", "SupplierID", "=", "SupplierID")
+//            .where(new Object[][]{
+//                {"Status", "=", "Need to Reorder!"}
+//            }).get();
+//
+//        for(Object d : b){
+//            HashMap hm = (HashMap) d;
+//            items.add(new Log1_fullInventoryList(
+//                        
+//                String.valueOf(hm.get("ItemID")),
+//                String.valueOf(hm.get("SupplierID")),
+//                String.valueOf(hm.get("SupplierName")),
+//                String.valueOf(hm.get("ItemDescription")),
+//                String.valueOf(hm.get("ItemType")),
+//                String.valueOf(hm.get("ItemLocation")),
+//                String.valueOf(hm.get("ItemUnit")),
+//                String.valueOf(hm.get("UnitPrice")),
+//                String.valueOf(hm.get("StockQuantity")),
+//                String.valueOf(hm.get("CriticalQuantity")),
+//                String.valueOf(hm.get("DisposalDate")),
+//                String.valueOf(hm.get("Status"))
+//            ));
+//        }
+//        itemRequest_tbl.setItems(items);
      }        
-    
-    public void displayItem(){
-            item_col1.setCellValueFactory(new PropertyValueFactory<>("ItemDescription"));
-            status_ool2.setCellValueFactory(new PropertyValueFactory<>("Status"));
-            Supplier_col.setCellValueFactory(new PropertyValueFactory<>("SupplierName"));
-    }
+//    
+//    public void displayItem(){
+//            item_col1.setCellValueFactory(new PropertyValueFactory<>("ItemDescription"));
+//            status_ool2.setCellValueFactory(new PropertyValueFactory<>("Status"));
+//            Supplier_col.setCellValueFactory(new PropertyValueFactory<>("SupplierName"));
+//    }
     
     
     private void sendRequest() {

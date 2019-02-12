@@ -5,75 +5,43 @@
  */
 package FXMLS.HR3.ClassFiles;
 
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  *
  * @author my
  */
 public class Leave_ManagementClass {
-    
-    String ID,Emp_Name,Position,Type_of_Leave,Range_of_Leave,Date_Start,Date_End,Status;
-    
-    
-    public Leave_ManagementClass(String ID, String Emp_Name, String Position, String Type_of_Leave,String Range_of_Leave, String Date_Start,String Date_End,String Status){
-        this.ID = ID;
-        this.Emp_Name = Emp_Name;
-        this.Position = Position;
-        this.Type_of_Leave = Type_of_Leave;
-        this.Range_of_Leave = Range_of_Leave;
-        this.Date_Start = Date_Start;
-        this.Date_End = Date_End;
-        this.Status = Status;
+   // public SimpleStringProperty ID;
+    // public SimpleStringProperty ID;
+    public SimpleStringProperty emp_code;
+    public SimpleStringProperty emp_name;
+    public SimpleStringProperty emp_position;
+    public SimpleStringProperty emp_department;
+    public SimpleStringProperty emp_leave_name;
+    public SimpleStringProperty emp_range_leave;
+    public SimpleStringProperty emp_date;
+    public SimpleStringProperty emp_date_start;
+    public SimpleStringProperty emp_date_end;
+    public SimpleStringProperty emp_reason;
+    public SimpleStringProperty emp_attachment;
+    public SimpleStringProperty emp_status;
+
+    public Leave_ManagementClass(String a,String a1,String a2,String a3, String b,String c, String d,String e,String f,String g,String h, String s) {
+        //this.ID = new SimpleStringProperty(ID);
+        this.emp_code = new SimpleStringProperty(a);
+        this.emp_name = new SimpleStringProperty(a1);
+        this.emp_position = new SimpleStringProperty(a2);
+        this.emp_department = new SimpleStringProperty(a3);
+        this.emp_leave_name = new SimpleStringProperty(b);
+        this.emp_range_leave = new SimpleStringProperty(c);
+        this.emp_date = new SimpleStringProperty(d);
+        this.emp_date_start = new SimpleStringProperty(e);
+        this.emp_date_end = new SimpleStringProperty(f);
+        this.emp_reason = new SimpleStringProperty(g);
+        this.emp_attachment = new SimpleStringProperty(h);
+        this.emp_status = new SimpleStringProperty(s);
         
-    }
-    public String getID(){
-        return ID;
-    }
-    public void setID(String ID){
-        this.ID = ID;
-    }
-    public String getEmp_Name(){
-        return Emp_Name;
-    }
-    public void setEmp_Name(String Emp_Name){
-        this.Emp_Name = Emp_Name;
-    
-    }
-   
-    public String getPosition(){
-        return Position;
-    }
-    public void setPosition(String Position){
-        this.Position = Position;
-        
-    }
-     public String getType_of_Leave(){
-        return Type_of_Leave;
-    }
-    public void setType_of_Leave(String Type_of_Leave){
-        this.Type_of_Leave = Type_of_Leave;
-    }
-    public String getRange_of_Leave(){
-        return Range_of_Leave;
-    }
-    public void setRange_of_Leave(String Range_of_Leave){
-        this.Range_of_Leave = Range_of_Leave;
-    }
-    public String getDate_Start(){
-        return Date_Start;
-    }
-    public void setDate_Start(String Date_Start){
-        this.Date_Start = Date_Start;
-    }
-    public String getDate_End(){
-        return Date_End;
-    }
-    public void setDate_End(String Date_End){
-        this.Date_End = Date_End;
-    }
-     public String getStatus(){
-        return Status;
-    }
-    public void setStatus(String Status){
-        this.Status = Status;
+
     }
 }

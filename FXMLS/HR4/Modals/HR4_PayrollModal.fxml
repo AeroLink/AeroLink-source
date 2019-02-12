@@ -9,13 +9,188 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="579.0" prefWidth="1034.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="FXMLS.HR4.Modals.HR4_PayrollModalController">
+<AnchorPane id="AnchorPane" prefHeight="579.0" prefWidth="1034.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR4.Modals.HR4_PayrollModalController">
    <children>
       <BorderPane layoutX="210.0" layoutY="119.0" prefHeight="579.0" prefWidth="1034.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <HBox prefHeight="371.0" prefWidth="1034.0" BorderPane.alignment="CENTER" />
+            <HBox prefHeight="371.0" prefWidth="1034.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane prefHeight="407.0" prefWidth="274.0">
+                     <children>
+                        <Label layoutX="102.0" layoutY="14.0" prefHeight="17.0" prefWidth="58.0" text="SALARY">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="74.0" text="Basic Salary:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="104.0" text="Total Overtime:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="132.0" text="Tax Computation:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField layoutX="123.0" layoutY="72.0" />
+                        <JFXTextField layoutX="123.0" layoutY="102.0" />
+                        <JFXTextField layoutX="123.0" layoutY="130.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="407.0" prefWidth="219.0">
+                     <children>
+                        <Label layoutX="76.0" layoutY="14.0" text="LOANS">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="71.0" text="SSS:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="117.0" text="PAG-IBIG:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField layoutX="60.0" layoutY="69.0" />
+                        <JFXTextField layoutX="77.0" layoutY="115.0" prefHeight="25.0" prefWidth="118.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="407.0" prefWidth="243.0">
+                     <children>
+                        <Text layoutX="75.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CONTRIBUTIONS">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="26.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SSS:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="28.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PAG-IBIG:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="28.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Withholding Tax:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <JFXTextField layoutX="123.0" layoutY="70.0" />
+                        <JFXTextField layoutX="123.0" layoutY="121.0" />
+                        <JFXTextField layoutX="123.0" layoutY="191.0" />
+                        <Text layoutX="88.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DEDUCTIONS">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="28.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Absences:">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="28.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tardiness:">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="26.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cash Advance:">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Text>
+                        <JFXTextField layoutX="123.0" layoutY="267.0" />
+                        <JFXTextField layoutX="123.0" layoutY="307.0" />
+                        <JFXTextField layoutX="123.0" layoutY="349.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="407.0" prefWidth="530.0">
+                     <children>
+                        <Text layoutX="112.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ATTENDANCE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="23.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Absent:">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="25.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vacation Leave Hrs:">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="25.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sick leave Hrs:">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="23.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Regular Overtime:">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="22.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Day-off on duty Hrs:">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="23.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Regular Holiday Overtime Hrs:">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="24.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Special Holiday Hrs:">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="25.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Special Holiday Overtime Hrs:">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="25.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UnderTime:">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Days:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="159.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Hours:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <JFXTextField layoutX="175.0" layoutY="53.0" />
+                        <JFXTextField layoutX="175.0" layoutY="80.0" prefHeight="22.0" prefWidth="136.0" />
+                        <JFXTextField layoutX="175.0" layoutY="107.0" />
+                        <JFXTextField layoutX="175.0" layoutY="137.0" />
+                        <JFXTextField layoutX="175.0" layoutY="162.0" />
+                        <JFXTextField layoutX="204.0" layoutY="200.0" prefHeight="25.0" prefWidth="105.0" />
+                        <JFXTextField layoutX="176.0" layoutY="228.0" />
+                        <JFXTextField layoutX="175.0" layoutY="284.0" />
+                        <JFXTextField layoutX="81.0" layoutY="334.0" prefHeight="25.0" prefWidth="74.0" />
+                        <JFXTextField layoutX="234.0" layoutY="334.0" prefHeight="25.0" prefWidth="80.0" />
+                        <JFXTextField layoutX="201.0" layoutY="259.0" prefHeight="13.0" prefWidth="111.0" />
+                     </children>
+                  </AnchorPane>
+               </children></HBox>
          </center>
          <top>
             <HBox prefHeight="172.0" prefWidth="1034.0" BorderPane.alignment="CENTER">

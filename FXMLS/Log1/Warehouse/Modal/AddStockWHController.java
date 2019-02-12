@@ -1,7 +1,7 @@
 
 package FXMLS.Log1.Warehouse.Modal;
 
-import FXMLS.Log1.ClassFiles.Log1_fullInventoryList;
+//import FXMLS.Log1.ClassFiles.Log1_fullInventoryList;
 import FXMLS.Log1.util.AlertMaker;
 import Model.Log1.Log1_WarehouseActivityLogModel;
 import Model.Log1.Log1_WarehouseItemsModel;
@@ -47,14 +47,14 @@ public class AddStockWHController implements Initializable {
         addStock_btn.setOnMouseClicked(e -> addStock());
     }    
 
-    public void inflateUI(Log1_fullInventoryList selectedForAddStock) {
-        itemDescript_txt.setText(selectedForAddStock.getItemDescription());
-        stock_txt.setText(selectedForAddStock.getStockQuantity());
-        status_txt.setText(selectedForAddStock.getStatus());
-        itemLoc_txt.setText(selectedForAddStock.getItemLocation());
-        CriticalQuantity_txt.setText(selectedForAddStock.getCriticalQuantity());
-        ItemID_txt.setText(selectedForAddStock.getItemID());
-    }
+//    public void inflateUI(Log1_fullInventoryList selectedForAddStock) {
+//        itemDescript_txt.setText(selectedForAddStock.getItemDescription());
+//        stock_txt.setText(selectedForAddStock.getStockQuantity());
+//        status_txt.setText(selectedForAddStock.getStatus());
+//        itemLoc_txt.setText(selectedForAddStock.getItemLocation());
+//        CriticalQuantity_txt.setText(selectedForAddStock.getCriticalQuantity());
+//        ItemID_txt.setText(selectedForAddStock.getItemID());
+//    }
     public void addStock(){
         String input = addx_txt.getText();
         

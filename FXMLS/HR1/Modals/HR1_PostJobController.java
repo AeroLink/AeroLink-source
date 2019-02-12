@@ -17,7 +17,6 @@ import com.jfoenix.controls.JFXDatePicker;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.net.URL;
 import java.text.NumberFormat;
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -25,7 +24,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.web.HTMLEditor;
@@ -53,12 +51,13 @@ public class HR1_PostJobController implements Initializable {
     private JFXDatePicker dtpPublish;
     @FXML
     private JFXDatePicker dtpExpire;
-    @FXML
     private ComboBox cboStatus;
     @FXML
     private TextField txtSalary;
 
     String htmlText = "";
+    @FXML
+    private TextField txtStatus;
 
     /**
      * Initializes the controller class.
@@ -69,7 +68,15 @@ public class HR1_PostJobController implements Initializable {
         jobID.setId(HR1_PostJobSelection.jobID);
         txtOpen.setText(HR1_PostJobSelection.OpenPos);
         lblJob.setText(HR1_PostJobSelection.jobTitle);
+        txtSalary.setText(HR1_PostJobSelection.salary);
+        txtStatus.setText(HR1_PostJobSelection.status);
 
+        if (txtSalary.getText().isEmpty()) {
+            txtSalary.setText("0");
+        } else {
+            txtSalary.setText(NumberFormat.getInstance().format(Double.parseDouble(txtSalary.getText().replace(",", ""))));
+        }
+        
         HR4_Jobs jobs = new HR4_Jobs();
 
         jobs.where(new Object[][]{
@@ -94,25 +101,6 @@ public class HR1_PostJobController implements Initializable {
 
         txtDesc.setHtmlText(htmlText);
 
-        Object[] cbo = {"Full Time", "Part Time"};
-        cboStatus.getItems().addAll(cbo);
-
-        txtSalary.setOnKeyTyped(value -> {
-            System.err.println(value.getCharacter());
-            if (!Character.isDigit(value.getCharacter().charAt(0))) {
-                value.consume();
-            }
-        });
-
-        txtSalary.setOnKeyReleased(value -> {
-            if (txtSalary.getText().isEmpty()) {
-                txtSalary.setText("0");
-            } else {
-
-                txtSalary.setText(NumberFormat.getInstance().format(Double.parseDouble(txtSalary.getText().replace(",", ""))));
-                txtSalary.end();
-            }
-        });
     }
 
     @FXML
@@ -125,7 +113,7 @@ public class HR1_PostJobController implements Initializable {
                 {"jobPosted_id", HR1_PostJobSelection.id},
                 {"title", lblJob.getText()},
                 {"description", txtDesc.getHtmlText().replace("\"", "'").replace(",", ".").replace("contenteditable='true'", "")},
-                {"status", cboStatus.getSelectionModel().getSelectedItem().toString()},
+                {"status", txtStatus.getText()},
                 {"salary", txtSalary.getText()},
                 {"publish_on", dtpPublish.getValue().toString()},
                 {"until", dtpExpire.getValue().toString()}

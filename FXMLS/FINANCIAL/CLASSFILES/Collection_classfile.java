@@ -14,27 +14,34 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class Collection_classfile{
     
-        public SimpleStringProperty poid;
-        public SimpleStringProperty pono;
-        public SimpleStringProperty podate;
-        public SimpleStringProperty poinvoice;
-        public SimpleStringProperty podescription;
-        public SimpleStringProperty poamount;
-        public SimpleStringProperty potype;
+        public SimpleStringProperty coldate;
+        public SimpleStringProperty colinvoice;
+        public SimpleStringProperty coldescription;
+        public SimpleStringProperty colamount;
+         public SimpleStringProperty assetamount;
+        public SimpleStringProperty coltype;
+         public SimpleStringProperty status2;
         
         
         
         
-        public Collection_classfile(String po_id,
-                String po_no,String po_date,String po_invoice,String po_description,String po_amount,String po_type){
+        public Collection_classfile(
+                String col_date,
+                String col_invoice,
+                String col_description,
+                String col_amount,
+                String assetamount,
+                String col_type,
+                String ast_status2){
             
-            this.poid = new SimpleStringProperty(po_id); 
-            this.pono = new SimpleStringProperty(po_no);
-            this.podate = new SimpleStringProperty(po_date);
-            this.poinvoice = new SimpleStringProperty(po_invoice);
-            this.podescription = new SimpleStringProperty(po_description);
-            this.poamount = new SimpleStringProperty(po_amount);
-            this.potype = new SimpleStringProperty(po_type);
+            this.coldate = new SimpleStringProperty(col_date);
+            this.colinvoice = new SimpleStringProperty(col_invoice);
+            this.coldescription = new SimpleStringProperty(col_description);
+            this.colamount = new SimpleStringProperty(col_amount);
+            this.assetamount = new SimpleStringProperty(assetamount);
+            this.coltype = new SimpleStringProperty(col_type);
+              this.status2 = new SimpleStringProperty(ast_status2);
+            
         }
  
     

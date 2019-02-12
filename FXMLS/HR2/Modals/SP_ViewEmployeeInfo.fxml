@@ -10,50 +10,50 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="627.0" prefWidth="534.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.SP_ViewEmployeeInfoController">
+<AnchorPane id="AnchorPane" prefHeight="726.0" prefWidth="671.0" style="-fx-background-color: #f2f2f2;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR2.Modals.SP_ViewEmployeeInfoController">
    <children>
-      <Pane layoutY="-6.0" prefHeight="43.0" prefWidth="534.0" style="-fx-background-color: #34A853;">
+      <Pane layoutY="-6.0" prefHeight="43.0" prefWidth="675.0" style="-fx-background-color: #34A853;">
          <children>
-            <Label layoutX="185.0" layoutY="9.0" prefHeight="30.0" prefWidth="182.0" text="Employee Details" textFill="WHITE">
+            <Label layoutX="261.0" layoutY="9.0" prefHeight="30.0" prefWidth="182.0" text="Employee Details" textFill="WHITE">
                <font>
                   <Font name="Raleway Bold" size="20.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <ImageView fitHeight="122.0" fitWidth="139.0" layoutX="14.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="139.0" fitWidth="120.0" layoutX="14.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../../Pictures/Camera%20Roll/18193720_253162231818255_689304748896763152_n.jpg" />
          </image>
       </ImageView>
       <Label fx:id="lbl_fullname" layoutX="164.0" layoutY="66.0" prefHeight="30.0" prefWidth="336.0" text="Lee Minho" textAlignment="CENTER">
          <font>
-            <Font name="Raleway SemiBold" size="18.0" />
+            <Font name="Lato Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="162.0" layoutY="129.0" prefHeight="30.0" prefWidth="61.0" text="Position:">
+      <Label layoutX="409.0" layoutY="134.0" prefHeight="30.0" prefWidth="61.0" text="Position:">
          <font>
-            <Font name="Roboto Bold" size="15.0" />
+            <Font name="Lato Bold" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="162.0" layoutY="159.0" prefHeight="30.0" prefWidth="89.0" text="Department: ">
+      <Label layoutX="162.0" layoutY="131.0" prefHeight="30.0" prefWidth="89.0" text="Department: ">
          <font>
-            <Font name="Roboto Bold" size="15.0" />
+            <Font name="Lato Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_position" layoutX="251.0" layoutY="129.0" prefHeight="30.0" prefWidth="249.0" text="None">
+      <Label fx:id="lbl_position" layoutX="472.0" layoutY="134.0" prefHeight="30.0" prefWidth="200.0" text="None">
          <font>
             <Font name="Roboto Regular" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_department" layoutX="251.0" layoutY="159.0" prefHeight="30.0" prefWidth="192.0" text="None">
+      <Label fx:id="lbl_department" layoutX="251.0" layoutY="131.0" prefHeight="30.0" prefWidth="150.0" text="None">
          <font>
             <Font name="Roboto Regular" size="15.0" />
          </font>
       </Label>
       <Label layoutX="162.0" layoutY="99.0" prefHeight="30.0" prefWidth="61.0" text="Gender:">
          <font>
-            <Font name="Roboto Bold" size="15.0" />
+            <Font name="Lato Bold" size="15.0" />
          </font>
       </Label>
       <Label fx:id="lbl_gender" layoutX="251.0" layoutY="99.0" prefHeight="30.0" prefWidth="139.0" text="None">
@@ -61,145 +61,9 @@
             <Font name="Roboto Regular" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="147.0" layoutY="209.0" prefHeight="30.0" prefWidth="89.0" text="Civil Status: ">
-         <font>
-            <Font name="Roboto Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label fx:id="lbl_civil_status" layoutX="147.0" layoutY="239.0" prefHeight="30.0" prefWidth="99.0" text="None">
-         <font>
-            <Font name="Roboto Regular" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="284.0" layoutY="209.0" prefHeight="30.0" prefWidth="128.0" text="Contact Number: ">
-         <font>
-            <Font name="Roboto Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label fx:id="lbl_cn" layoutX="284.0" layoutY="239.0" prefHeight="30.0" prefWidth="120.0" text="None">
-         <font>
-            <Font name="Roboto Regular" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="425.0" layoutY="209.0" prefHeight="30.0" prefWidth="61.0" text="Status: ">
-         <font>
-            <Font name="Roboto Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label fx:id="lbl_status" layoutX="425.0" layoutY="239.0" prefHeight="30.0" prefWidth="89.0" text="None">
-         <font>
-            <Font name="Roboto Regular" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="14.0" layoutY="284.0" prefHeight="30.0" prefWidth="89.0" text="Date Hired: ">
-         <font>
-            <Font name="Roboto Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label fx:id="lbl_date_hired" layoutX="14.0" layoutY="314.0" prefHeight="30.0" prefWidth="110.0" text="None">
-         <font>
-            <Font name="Roboto Regular" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="147.0" layoutY="284.0" prefHeight="30.0" prefWidth="99.0" text="Productivity: ">
-         <font>
-            <Font name="Roboto Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label fx:id="lbl_productivity" layoutX="146.0" layoutY="314.0" prefHeight="30.0" prefWidth="89.0" text="None">
-         <font>
-            <Font name="Roboto Regular" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="283.0" layoutY="284.0" prefHeight="30.0" prefWidth="120.0" text="Quality of Work: ">
-         <font>
-            <Font name="Roboto Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label fx:id="lbl_quality_of_work" layoutX="283.0" layoutY="314.0" prefHeight="30.0" prefWidth="89.0" text="None">
-         <font>
-            <Font name="Roboto Regular" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="425.0" layoutY="284.0" prefHeight="30.0" prefWidth="73.0" text="Initiative:">
-         <font>
-            <Font name="Roboto Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label fx:id="lbl_initiative" layoutX="425.0" layoutY="314.0" prefHeight="30.0" prefWidth="61.0" text="None">
-         <font>
-            <Font name="Roboto Regular" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="13.0" layoutY="357.0" prefHeight="30.0" prefWidth="89.0" text="Teamwork:">
-         <font>
-            <Font name="Roboto Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label fx:id="lbl_teamwork" layoutX="13.0" layoutY="386.0" prefHeight="30.0" prefWidth="61.0" text="None">
-         <font>
-            <Font name="Roboto Regular" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="146.0" layoutY="357.0" prefHeight="30.0" prefWidth="128.0" text="Problem Solving:">
-         <font>
-            <Font name="Roboto Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label fx:id="lbl_problem_solving" layoutX="146.0" layoutY="386.0" prefHeight="30.0" prefWidth="61.0" text="None">
-         <font>
-            <Font name="Roboto Regular" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="283.0" layoutY="357.0" prefHeight="30.0" prefWidth="99.0" text="Attendance:">
-         <font>
-            <Font name="Roboto Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label fx:id="lbl_attendance" layoutX="283.0" layoutY="387.0" prefHeight="30.0" prefWidth="61.0" text="None">
-         <font>
-            <Font name="Roboto Regular" size="15.0" />
-         </font>
-      </Label>
-      <Pane layoutX="13.0" layoutY="449.0" prefHeight="132.0" prefWidth="172.0" style="-fx-border-color: #999966; -fx-background-color: #fff;">
-         <children>
-            <Label layoutX="14.0" prefHeight="30.0" prefWidth="54.0" text="Rating:">
-               <font>
-                  <Font name="Roboto Bold" size="15.0" />
-               </font>
-            </Label>
-            <Label fx:id="lbl_rating" layoutX="14.0" layoutY="30.0" prefHeight="30.0" prefWidth="61.0" text="None">
-               <font>
-                  <Font name="Roboto Regular" size="15.0" />
-               </font>
-            </Label>
-            <Label layoutX="14.0" layoutY="60.0" prefHeight="30.0" prefWidth="73.0" text="Remarks:">
-               <font>
-                  <Font name="Roboto Bold" size="15.0" />
-               </font>
-            </Label>
-            <Label fx:id="lbl_remarks" layoutX="14.0" layoutY="90.0" prefHeight="30.0" prefWidth="61.0" text="None">
-               <font>
-                  <Font name="Roboto Regular" size="15.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-      <JFXButton fx:id="btn_update_position" buttonType="RAISED" layoutX="345.0" layoutY="536.0" onAction="#UpdatePosition" prefHeight="37.0" prefWidth="145.0" style="-fx-background-color: #34A853;" text="Promote" textFill="WHITE">
-         <font>
-            <Font name="Roboto Bold" size="15.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXButton>
-      <JFXComboBox fx:id="jfx_position" layoutX="284.0" layoutY="485.0" prefHeight="30.0" prefWidth="206.0" promptText="Select Position">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></JFXComboBox>
       <Label layoutX="408.0" layoutY="99.0" prefHeight="30.0" prefWidth="46.0" text="Suffix:">
          <font>
-            <Font name="Roboto Bold" size="15.0" />
+            <Font name="Lato Bold" size="15.0" />
          </font>
       </Label>
       <Label fx:id="lbl_suffix" layoutX="459.0" layoutY="99.0" prefHeight="30.0" prefWidth="38.0" text="None">
@@ -207,15 +71,219 @@
             <Font name="Roboto Regular" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="209.0" prefHeight="30.0" prefWidth="120.0" text="Employee Code: ">
+      <Pane layoutX="13.0" layoutY="219.0" prefHeight="281.0" prefWidth="274.0" style="-fx-background-color: #fff; -fx-border-color: #cccccc;">
+         <children>
+            <Label layoutX="7.0" layoutY="37.0" prefHeight="19.0" prefWidth="110.0" text="Employee Code: ">
+               <font>
+                  <Font name="Lato Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbl_employee_code" alignment="CENTER_RIGHT" layoutX="129.0" layoutY="35.0" prefHeight="19.0" prefWidth="139.0" text="None">
+               <font>
+                  <Font name="Lato Regular" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="7.0" layoutY="63.0" prefHeight="19.0" prefWidth="89.0" text="Date Hired: ">
+               <font>
+                  <Font name="Lato Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbl_date_hired" alignment="CENTER_RIGHT" layoutX="129.0" layoutY="63.0" prefHeight="19.0" prefWidth="139.0" text="None">
+               <font>
+                  <Font name="Lato Regular" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbl_cn" alignment="CENTER_RIGHT" layoutX="148.0" layoutY="91.0" prefHeight="12.0" prefWidth="120.0" text="None">
+               <font>
+                  <Font name="Lato Regular" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="6.0" layoutY="88.0" prefHeight="18.0" prefWidth="120.0" text="Contact Number: ">
+               <font>
+                  <Font name="Lato Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbl_civil_status" alignment="CENTER_RIGHT" layoutX="169.0" layoutY="117.0" prefHeight="10.0" prefWidth="99.0" text="None">
+               <font>
+                  <Font name="Lato Regular" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="7.0" layoutY="113.0" prefHeight="0.0" prefWidth="89.0" text="Civil Status: ">
+               <font>
+                  <Font name="Lato Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="7.0" layoutY="134.0" prefHeight="30.0" prefWidth="54.0" text="Status: ">
+               <font>
+                  <Font name="Lato Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbl_status" alignment="CENTER_RIGHT" layoutX="147.0" layoutY="142.0" prefHeight="18.0" prefWidth="120.0" text="None">
+               <font>
+                  <Font name="Lato Regular" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Label layoutX="20.0" layoutY="226.0" prefHeight="19.0" prefWidth="128.0" text="Profile Information">
          <font>
-            <Font name="Roboto Bold" size="15.0" />
+            <Font name="Lato Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_employee_code" layoutX="14.0" layoutY="239.0" prefHeight="30.0" prefWidth="110.0" text="None">
-         <font>
-            <Font name="Roboto Regular" size="15.0" />
-         </font>
-      </Label>
+      <Pane layoutX="304.0" layoutY="219.0" prefHeight="281.0" prefWidth="252.0" style="-fx-background-color: #fff; -fx-border-color: #cccccc;">
+         <children>
+            <Label layoutX="7.0" layoutY="2.0" prefHeight="19.0" prefWidth="150.0" text="Performance Ratings">
+               <font>
+                  <Font name="Lato Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="6.0" layoutY="35.0" prefHeight="11.0" prefWidth="99.0" text="Productivity: ">
+               <font>
+                  <Font name="Lato Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbl_productivity" alignment="CENTER_RIGHT" layoutX="159.0" layoutY="35.0" prefHeight="8.0" prefWidth="89.0" text="0">
+               <font>
+                  <Font name="Lato Regular" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="6.0" layoutY="61.0" prefHeight="18.0" prefWidth="120.0" text="Quality of Work: ">
+               <font>
+                  <Font name="Lato Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbl_quality_of_work" alignment="CENTER_RIGHT" layoutX="159.0" layoutY="61.0" prefHeight="2.0" prefWidth="89.0" text="0">
+               <font>
+                  <Font name="Lato Regular" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="9.0" layoutY="88.0" prefHeight="9.0" prefWidth="73.0" text="Initiative:">
+               <font>
+                  <Font name="Lato Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbl_initiative" alignment="CENTER_RIGHT" layoutX="187.0" layoutY="85.0" prefHeight="11.0" prefWidth="61.0" text="0">
+               <font>
+                  <Font name="Lato Regular" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="6.0" layoutY="114.0" prefHeight="5.0" prefWidth="89.0" text="Teamwork:">
+               <font>
+                  <Font name="Lato Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbl_teamwork" alignment="CENTER_RIGHT" layoutX="187.0" layoutY="111.0" prefHeight="0.0" prefWidth="61.0" text="0">
+               <font>
+                  <Font name="Lato Regular" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="8.0" layoutY="139.0" prefHeight="18.0" prefWidth="110.0" text="Problem Solving:">
+               <font>
+                  <Font name="Lato Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbl_problem_solving" alignment="CENTER_RIGHT" layoutX="187.0" layoutY="136.0" prefHeight="18.0" prefWidth="61.0" text="0">
+               <font>
+                  <Font name="Lato Regular" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="8.0" layoutY="162.0" prefHeight="4.0" prefWidth="99.0" text="Attendance:">
+               <font>
+                  <Font name="Lato Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbl_attendance" alignment="CENTER_RIGHT" layoutX="187.0" layoutY="158.0" prefHeight="0.0" prefWidth="61.0" text="0">
+               <font>
+                  <Font name="Lato Regular" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="195.0" layoutY="518.0" prefHeight="157.0" prefWidth="172.0" style="-fx-border-color: #999966; -fx-background-color: #fff;">
+         <children>
+            <Label layoutX="9.0" layoutY="9.0" prefHeight="18.0" prefWidth="54.0" text="Rating:">
+               <font>
+                  <Font name="Lato Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbl_rating" alignment="CENTER_RIGHT" layoutX="105.0" layoutY="9.0" prefHeight="10.0" prefWidth="61.0" text="0">
+               <font>
+                  <Font name="Lato Regular" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="8.0" layoutY="48.0" prefHeight="18.0" prefWidth="73.0" text="Remark">
+               <font>
+                  <Font name="Lato Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbl_remarks" layoutX="9.0" layoutY="72.0" prefHeight="18.0" prefWidth="61.0" text="None">
+               <font>
+                  <Font name="Lato Regular" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="13.0" layoutY="518.0" prefHeight="157.0" prefWidth="172.0" style="-fx-border-color: #999966; -fx-background-color: #fff;">
+         <children>
+            <Label layoutX="6.0" layoutY="15.0" prefHeight="30.0" prefWidth="89.0" text="Exam Taken: ">
+               <font>
+                  <Font name="Lato Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbl_exam_taken" alignment="CENTER_RIGHT" layoutX="129.0" layoutY="19.0" onMouseClicked="#ExamTaken" prefHeight="19.0" prefWidth="38.0" text="0" textFill="#0387a1">
+               <font>
+                  <Font name="Lato Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Label layoutX="6.0" layoutY="45.0" prefHeight="11.0" prefWidth="110.0" text="Training Taken: ">
+               <font>
+                  <Font name="Lato Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbl_training_taken" alignment="CENTER_RIGHT" layoutX="113.0" layoutY="44.0" onMouseClicked="#TrainingTaken" prefHeight="18.0" prefWidth="54.0" text="0" textFill="#0387a1">
+               <font>
+                  <Font name="Lato Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Label layoutX="6.0" layoutY="94.0" text="*Click the blue link to view">
+               <font>
+                  <Font name="Lato Italic" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="6.0" layoutY="110.0" text=" the details*">
+               <font>
+                  <Font name="Lato Italic" size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="386.0" layoutY="518.0" prefHeight="157.0" prefWidth="214.0" style="-fx-border-color: #999966; -fx-background-color: #fff;">
+         <children>
+            <Label layoutX="25.0" layoutY="6.0" prefHeight="18.0" prefWidth="172.0" text="Position to Promote to: ">
+               <font>
+                  <Font name="Lato Bold" size="15.0" />
+               </font>
+            </Label>
+            <JFXComboBox fx:id="cbox_select_position" layoutX="6.0" layoutY="40.0" prefHeight="25.0" prefWidth="200.0" promptText="Select Position">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXComboBox>
+            <JFXButton fx:id="btn_req_promotion" buttonType="RAISED" layoutX="67.0" layoutY="100.0" onAction="#RequestPromotion" prefHeight="25.0" prefWidth="89.0" style="-fx-background-color: #34A853;" text="Submit" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Bold" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

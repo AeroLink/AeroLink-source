@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
@@ -14,40 +21,23 @@
    <children>
       <AnchorPane prefHeight="23.0" prefWidth="993.0" style="-fx-background-color: #34a853;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Label layoutX="8.0" layoutY="3.0" text="Accounts Payable &amp; Accounts Receivable" textFill="WHITE">
+            <Label layoutX="46.0" layoutY="3.0" text="Accounts Payable &amp; Accounts Receivable" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="15.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Label>
+            <FontAwesomeIconView fill="WHITE" glyphName="MONEY" layoutX="14.0" layoutY="25.0" size="20" />
+            <FontAwesomeIconView fill="#d30000" glyphName="LONG_ARROW_UP" layoutX="17.0" layoutY="18.0" size="15" />
+            <FontAwesomeIconView fill="#c8ffbe" glyphName="LONG_ARROW_DOWN" layoutX="27.0" layoutY="19.0" size="15" />
          </children>
       </AnchorPane>
-      <JFXTabPane layoutX="-2.0" layoutY="23.0" prefHeight="691.0" prefWidth="993.0" stylesheets="@../../Assets/css/MainPanel.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="2.0">
+      <JFXTabPane layoutX="-2.0" layoutY="30.0" prefHeight="684.0" prefWidth="991.0" stylesheets="@../../Assets/css/MainPanel.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="2.0">
          <tabs>
             <Tab id="tab" text="AP/AR Tracking">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="ar_tbl" layoutX="5.0" layoutY="79.0" prefHeight="485.0" prefWidth="361.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="625.0">
-                          <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
-                          </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
-                        <TableView fx:id="ap_tbl" layoutX="383.0" layoutY="79.0" prefHeight="485.0" prefWidth="612.0" AnchorPane.rightAnchor="-4.0">
-                           <columns>
-                              <TableColumn prefWidth="75.0" text="Date" />
-                              <TableColumn prefWidth="75.0" text="Department" />
-                              <TableColumn fx:id="amount_id" prefWidth="75.0" text="Amount" />
-                              <TableColumn prefWidth="75.0" text="Status" />
-                           </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
-                        <AnchorPane layoutX="5.0" layoutY="53.0" prefHeight="24.0" prefWidth="360.0" style="-fx-background-color: #34a853;" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="626.0">
+                        <AnchorPane layoutX="5.0" layoutY="53.0" prefHeight="24.0" prefWidth="290.0" style="-fx-background-color: #34a853;" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="696.0">
                            <children>
                               <Label layoutX="9.0" layoutY="4.0" text="Accounts Receivable" textFill="WHITE">
                                  <font>
@@ -56,7 +46,7 @@
                               </Label>
                            </children>
                         </AnchorPane>
-                        <AnchorPane layoutX="383.0" layoutY="53.0" prefHeight="24.0" prefWidth="611.0" style="-fx-background-color: #34a853;" AnchorPane.rightAnchor="-3.0">
+                        <AnchorPane layoutX="383.0" layoutY="53.0" prefHeight="24.0" prefWidth="677.0" style="-fx-background-color: #34a853;" AnchorPane.rightAnchor="-3.0">
                            <children>
                               <Label layoutX="9.0" layoutY="4.0" text="Accounts Payable" textFill="WHITE">
                                  <font>
@@ -65,36 +55,238 @@
                               </Label>
                            </children>
                         </AnchorPane>
-                        <Label layoutX="388.0" layoutY="589.0" text="Total of Unpaid Accounts:" AnchorPane.rightAnchor="443.0">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Separator layoutX="388.0" layoutY="617.0" prefHeight="0.0" prefWidth="600.0" AnchorPane.rightAnchor="3.0" />
-                        <Label fx:id="total_label" layoutX="653.0" layoutY="589.0" text="0" AnchorPane.rightAnchor="302.0">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                        <Separator layoutX="388.0" layoutY="579.0" prefHeight="0.0" prefWidth="600.0" AnchorPane.rightAnchor="3.0" />
-                        <Separator layoutX="15.0" layoutY="579.0" prefHeight="1.0" prefWidth="348.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="628.0" />
-                        <Separator layoutX="15.0" layoutY="616.0" prefHeight="1.0" prefWidth="344.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="632.0" />
-                        <Label layoutX="21.0" layoutY="589.0" text="Total of Uncollected Accounts">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="323.0" layoutY="589.0" text="0">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                        <Separator layoutX="373.0" orientation="VERTICAL" prefHeight="658.0" prefWidth="5.0" AnchorPane.rightAnchor="612.0" />
-                        <JFXButton layoutX="114.0" layoutY="14.0" />
+                        <Separator layoutX="304.0" layoutY="53.0" orientation="VERTICAL" prefHeight="607.0" prefWidth="7.0" AnchorPane.rightAnchor="680.0" />
+                        <JFXButton fx:id="pom_btn" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="73.0" style="-fx-background-color: #34a853;" text="POM" textFill="WHITE" />
+                        <JFXButton fx:id="asset_btn" layoutX="108.0" layoutY="14.0" prefHeight="25.0" prefWidth="73.0" style="-fx-background-color: #34a853;" text="Asset" textFill="WHITE" />
+                        <JFXComboBox fx:id="comboboxSales" layoutX="310.0" layoutY="14.0" prefHeight="25.0" prefWidth="158.0" promptText="Sales Status" visible="false" AnchorPane.rightAnchor="625.0" />
+                        <JFXTabPane layoutX="7.0" layoutY="89.0" prefHeight="562.0" prefWidth="290.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="694.0">
+                           <tabs>
+                              <Tab id="tab" text="Uncollected Accounts">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="304.0">
+                                       <children>
+                                          <TableView fx:id="ar_tbl" layoutX="-335.0" prefHeight="433.0" prefWidth="358.0" AnchorPane.bottomAnchor="92.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <columns>
+                                              <TableColumn prefWidth="75.0" text="C1" />
+                                              <TableColumn prefWidth="75.0" text="C2" />
+                                            </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                          </TableView>
+                                          <Label layoutX="14.0" layoutY="440.0" text="Total of Uncollected Accounts">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="ar_total_lbl" layoutX="246.0" layoutY="440.0" text="0">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </Tab>
+                              <Tab id="tab" text="Transactions">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="307.0">
+                                       <children>
+                                          <TableView fx:id="arPosting_tbl" layoutX="48.0" layoutY="35.0" prefHeight="469.0" prefWidth="358.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <columns>
+                                              <TableColumn prefWidth="75.0" text="C1" />
+                                              <TableColumn prefWidth="75.0" text="C2" />
+                                            </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                             <contextMenu>
+                                                <ContextMenu fx:id="arContextMenu">
+                                                  <items>
+                                                      <MenuItem fx:id="ARmenuItem" mnemonicParsing="false" text="Post to Journal" />
+                                                  </items>
+                                                </ContextMenu>
+                                             </contextMenu>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </Tab>
+                           </tabs>
+                        </JFXTabPane>
+                        <JFXTabPane layoutX="385.0" layoutY="89.0" prefHeight="561.0" prefWidth="670.0" AnchorPane.rightAnchor="3.0">
+                           <tabs>
+                              <Tab id="tab" text="Unpaid Accounts">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TableView fx:id="ap_tbl" prefHeight="434.0" prefWidth="603.0" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <columns>
+                                                <TableColumn fx:id="dateCol" prefWidth="75.0" text="c1" />
+                                                <TableColumn fx:id="deptCol" prefWidth="75.0" text="c2" />
+                                                <TableColumn fx:id="amount_id" prefWidth="75.0" text="c3" />
+                                                <TableColumn fx:id="statusCol" prefWidth="75.0" text="c4" />
+                                             </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                          </TableView>
+                                          <Label layoutX="13.0" layoutY="441.0" text="Total of Unpaid Accounts:" AnchorPane.rightAnchor="430.0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="total_label" layoutX="293.0" layoutY="441.0" text="0" AnchorPane.rightAnchor="301.0">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children></AnchorPane>
+                                </content>
+                              </Tab>
+                              <Tab id="tab" text="Transactions">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="493.0" prefWidth="603.0">
+                                       <children>
+                                          <TableView fx:id="apPosting_tbl" layoutX="102.0" layoutY="68.0" prefHeight="465.0" prefWidth="603.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <columns>
+                                              <TableColumn prefWidth="75.0" text="C1" />
+                                              <TableColumn prefWidth="75.0" text="C2" />
+                                            </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                             <contextMenu>
+                                                <ContextMenu fx:id="APcontexmenu">
+                                                  <items>
+                                                      <MenuItem fx:id="APmenuitem" mnemonicParsing="false" text="Post to Journal" />
+                                                  </items>
+                                                </ContextMenu>
+                                             </contextMenu>
+                                          </TableView>
+                                       </children></AnchorPane>
+                                </content>
+                              </Tab>
+                           </tabs>
+                        </JFXTabPane>
+                        <Label fx:id="invoiceid" layoutX="385.0" layoutY="10.0" text="invoiceid" visible="false" />
+                        <Label fx:id="date" layoutX="385.0" layoutY="31.0" text="date" visible="false" />
+                        <Label fx:id="firstname" layoutX="450.0" layoutY="10.0" text="firstname" visible="false" />
+                        <Label fx:id="lastname" layoutX="450.0" layoutY="31.0" text="lastname" visible="false" />
+                        <Label fx:id="description" layoutX="520.0" layoutY="10.0" text="description" visible="false" />
+                        <Label fx:id="amount" layoutX="520.0" layoutY="31.0" text="amount" visible="false" />
+                        <Label fx:id="status" layoutX="639.0" layoutY="10.0" text="status" visible="false" />
+                        <Label fx:id="typestatus" layoutX="595.0" layoutY="31.0" text="typestatus" visible="false" />
+                        <Label fx:id="journalstatus" layoutX="694.0" layoutY="10.0" text="journalstatus" visible="false" />
+                        <Label fx:id="id_ast" layoutX="338.0" layoutY="10.0" text="id_ast" visible="false" />
                      </children></AnchorPane>
               </content>
             </Tab>
             <Tab id="tab" text="Journal Entry">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTabPane layoutX="4.0" layoutY="85.0" prefHeight="566.0" prefWidth="356.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="631.0">
+                           <tabs>
+                              <Tab id="tab" text="List of Entries">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TableView fx:id="tbl_entries" layoutX="42.0" layoutY="-8.0" prefHeight="139.0" prefWidth="256.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <columns>
+                                              <TableColumn prefWidth="75.0" text="C1" />
+                                              <TableColumn prefWidth="75.0" text="C2" />
+                                            </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </Tab>
+                           </tabs>
+                        </JFXTabPane>
+                        <DatePicker layoutX="4.0" layoutY="39.0" prefHeight="36.0" prefWidth="174.0" promptText="From" AnchorPane.leftAnchor="4.0" />
+                        <DatePicker layoutX="186.0" layoutY="39.0" prefHeight="36.0" prefWidth="174.0" promptText="To" AnchorPane.leftAnchor="186.0" />
+                        <TableView layoutX="369.0" layoutY="403.0" prefHeight="189.0" prefWidth="613.0" AnchorPane.rightAnchor="9.0">
+                          <columns>
+                            <TableColumn prefWidth="296.0" text="C1" />
+                            <TableColumn prefWidth="301.0" text="C2" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <JFXButton fx:id="view_coa_btn" buttonType="RAISED" layoutX="369.0" layoutY="359.0" prefHeight="31.0" prefWidth="170.0" style="-fx-background-color: #34a853;" text="View COA" textFill="WHITE" AnchorPane.rightAnchor="452.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="EYE" size="15" />
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton buttonType="RAISED" layoutX="810.0" layoutY="610.0" prefHeight="31.0" prefWidth="170.0" style="-fx-background-color: #34a853;" text="Post to Ledger" textFill="WHITE" AnchorPane.rightAnchor="11.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <AnchorPane layoutX="371.0" layoutY="14.0" prefHeight="331.0" prefWidth="609.0" style="-fx-border-color: #34a853;" AnchorPane.rightAnchor="11.0">
+                           <children>
+                              <DatePicker layoutX="21.0" layoutY="13.0" prefHeight="36.0" prefWidth="245.0" promptText="Date" AnchorPane.rightAnchor="345.0" />
+                              <Label layoutX="305.0" layoutY="21.0" text="Reference No." AnchorPane.rightAnchor="210.0">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="465.0" layoutY="21.0" text="None" AnchorPane.rightAnchor="107.0">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField focusColor="#34a853" labelFloat="true" layoutX="320.0" layoutY="224.0" prefHeight="30.0" prefWidth="268.0" promptText="Account Title" unFocusColor="#34a853" AnchorPane.rightAnchor="21.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </JFXTextField>
+                              <JFXComboBox focusColor="#34a853" layoutX="17.0" layoutY="222.0" prefHeight="34.0" prefWidth="270.0" promptText="Code" unFocusColor="#34a853" AnchorPane.rightAnchor="322.0" />
+                              <JFXTextArea focusColor="#34a853" labelFloat="true" layoutX="19.0" layoutY="123.0" prefHeight="70.0" prefWidth="570.0" promptText="Description" unFocusColor="#34a853" AnchorPane.rightAnchor="20.0">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </JFXTextArea>
+                              <JFXTextField focusColor="#34a853" labelFloat="true" layoutX="21.0" layoutY="279.0" prefHeight="25.0" prefWidth="265.0" promptText="Debit" unFocusColor="#34a853" AnchorPane.rightAnchor="323.0" />
+                              <JFXTextField focusColor="#34a853" labelFloat="true" layoutX="319.0" layoutY="278.0" prefHeight="25.0" prefWidth="265.0" promptText="Credit" unFocusColor="#34a853" />
+                              <Label layoutX="20.0" layoutY="77.0" text="Name">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="133.0" layoutY="77.0" text="None">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="741.0" layoutY="357.0" prefHeight="31.0" prefWidth="236.0" style="-fx-border-color: #34a853;" AnchorPane.rightAnchor="14.0">
+                           <children>
+                              <Label layoutX="134.0" layoutY="7.0" text="0.00" AnchorPane.rightAnchor="70.0">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="86.0" layoutY="7.0" text="Balance:" AnchorPane.rightAnchor="162.0">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+            <Tab id="tab">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>

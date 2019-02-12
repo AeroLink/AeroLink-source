@@ -5,6 +5,7 @@
  */
 package FXMLS.FINANCIAL.CALLER;
 
+import FXMLS.FINANCIAL.FINANCIAL_BUDGET_MANAGEMENTController;
 import Model.Financial.Financial_allocation_model;
 import Synapse.Components.Modal.Modal;
 import Synapse.Form;
@@ -29,7 +30,7 @@ import javafx.stage.StageStyle;
 public class BUDGET_NEWALLOCATIONController implements Initializable {
 
     @FXML
-    private JFXComboBox<String> ba_cmbo;
+    private JFXComboBox ba_cmbo;
     @FXML
     private JFXTextField ba_amount_txtfield;
     @FXML
@@ -71,6 +72,7 @@ public class BUDGET_NEWALLOCATIONController implements Initializable {
              ba_amount_txtfield.clear();
              Stage stage = (Stage) ba_insert_btn.getScene().getWindow();
              stage.close();
+           
             
         }else{
               Alert alert = new Alert(Alert.AlertType.ERROR);

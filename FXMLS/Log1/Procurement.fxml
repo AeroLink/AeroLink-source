@@ -2,18 +2,24 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -48,14 +54,14 @@
                                  <center>
                                     <AnchorPane BorderPane.alignment="CENTER">
                                        <children>
-                                          <TableView fx:id="ProcRequest_tbl" prefHeight="600.0" prefWidth="1356.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <TableView fx:id="ProcurementRequest_tbl" prefHeight="600.0" prefWidth="1356.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <columns>
                                                 <TableColumn fx:id="dateRequested_col" prefWidth="139.0" text="Date" />
                                                 <TableColumn fx:id="itemRequested_col" prefWidth="100.0" text="Item" />
                                                 <TableColumn fx:id="requestor_col" prefWidth="140.0" text="Requestor" />
                                                 <TableColumn fx:id="priorityLevel_col" prefWidth="128.0" text="Priority Level" />
-                                                <TableColumn fx:id="RequestsBudgetStatus_col" prefWidth="106.0" text="Budget" />
-                                                <TableColumn fx:id="RequestsStatus_col1" prefWidth="106.0" text="Request Status" />
+                                                <TableColumn fx:id="RequestsStatus_col1" prefWidth="106.0" text="Purpose" />
+                                                <TableColumn fx:id="RequestsStatus_col11" prefWidth="106.0" text="Post to Vendor Portal" />
                                              </columns>
                                              <columnResizePolicy>
                                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -70,61 +76,182 @@
                                           </TableView>
                                        </children>
                                        <BorderPane.margin>
-                                          <Insets bottom="10.0" right="10.0" />
+                                          <Insets bottom="10.0" left="10.0" right="10.0" />
                                        </BorderPane.margin>
                                     </AnchorPane>
                                  </center>
                                  <top>
-                                    <BorderPane BorderPane.alignment="CENTER">
-                                       <right>
-                                          <AnchorPane BorderPane.alignment="CENTER">
-                                             <children>
-                                                <HBox>
+                                    <BorderPane prefHeight="258.0" prefWidth="1370.0" BorderPane.alignment="CENTER">
+                                       <center>
+                                          <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                             <center>
+                                                <AnchorPane prefHeight="223.0" prefWidth="1370.0" BorderPane.alignment="CENTER">
                                                    <children>
-                                                      <JFXButton prefHeight="30.0" prefWidth="154.0" styleClass="btn-primary" text="Walk in Request">
-                                                         <font>
-                                                            <Font name="System Bold" size="13.0" />
-                                                         </font>
-                                                         <graphic>
-                                                            <FontAwesomeIconView fill="WHITE" glyphName="PENCIL" />
-                                                         </graphic>
-                                                      </JFXButton>
-                                                   </children>
-                                                </HBox>
-                                             </children>
-                                             <BorderPane.margin>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </BorderPane.margin>
-                                          </AnchorPane>
-                                       </right>
-                                    </BorderPane>
-                                 </top>
-                                 <left>
-                                    <AnchorPane BorderPane.alignment="CENTER">
-                                       <children>
-                                          <SplitPane orientation="VERTICAL" prefHeight="616.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                            <items>
-                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                                                   <children>
-                                                      <VBox prefHeight="304.0" prefWidth="158.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <HBox layoutX="10.0" layoutY="10.0" spacing="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                                                          <children>
-                                                            <JFXButton fx:id="ApproveProcRequest_btn" onAction="#approveRequest" prefHeight="40.0" prefWidth="160.0" styleClass="btn-primary" text="View Full Details" textFill="WHITE">
-                                                               <VBox.margin>
-                                                                  <Insets left="5.0" right="5.0" top="5.0" />
-                                                               </VBox.margin>
-                                                            </JFXButton>
+                                                            <GridPane hgap="10.0" prefHeight="200.0" prefWidth="1370.0">
+                                                              <columnConstraints>
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                              </columnConstraints>
+                                                              <rowConstraints>
+                                                                  <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints maxHeight="97.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints maxHeight="62.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                              </rowConstraints>
+                                                               <children>
+                                                                  <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                                                                     <children>
+                                                                        <Label text="Item Requested">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="12.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <TextField />
+                                                                     </children>
+                                                                  </VBox>
+                                                                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+                                                                     <children>
+                                                                        <Label text="Item Description:">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="12.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <TextArea prefHeight="200.0" prefWidth="200.0" />
+                                                                     </children>
+                                                                  </VBox>
+                                                                  <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
+                                                                     <children>
+                                                                        <Label text="Item Unit:">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="12.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <TextField />
+                                                                     </children>
+                                                                  </VBox>
+                                                                  <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
+                                                                     <children>
+                                                                        <Label text="Quantity:">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="12.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <TextField />
+                                                                     </children>
+                                                                  </VBox>
+                                                                  <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                                     <children>
+                                                                        <Label text="Priorirty Level:">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="12.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <ComboBox prefHeight="25.0" prefWidth="433.0" />
+                                                                     </children>
+                                                                  </VBox>
+                                                                  <Label text="Request Details">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="12.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                                     <children>
+                                                                        <Label text="Request Purpose:">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="12.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <TextField />
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                            </GridPane>
+                                                            <GridPane hgap="10.0" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="1370.0">
+                                                               <columnConstraints>
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                               </columnConstraints>
+                                                               <rowConstraints>
+                                                                  <RowConstraints minHeight="10.0" prefHeight="5.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                               </rowConstraints>
+                                                               <children>
+                                                                  <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                                                                     <children>
+                                                                        <Label text="Employee Code:">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="12.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <TextField />
+                                                                     </children>
+                                                                  </VBox>
+                                                                  <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+                                                                     <children>
+                                                                        <Label text="Full Name:">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="12.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <TextField />
+                                                                     </children>
+                                                                  </VBox>
+                                                                  <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
+                                                                     <children>
+                                                                        <Label text="Department:">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="12.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <TextField />
+                                                                     </children>
+                                                                  </VBox>
+                                                                  <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
+                                                                     <children>
+                                                                        <Label text="Position:">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="12.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <TextField />
+                                                                     </children>
+                                                                  </VBox>
+                                                                  <Label text="Requestor's Details">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="12.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                                     <children>
+                                                                        <JFXButton buttonType="RAISED" prefHeight="30.0" prefWidth="80.0" styleClass="btn-primary" text="Submit">
+                                                                           <graphic>
+                                                                              <FontAwesomeIconView fill="WHITE" glyphName="PAPER_PLANE" />
+                                                                           </graphic>
+                                                                        </JFXButton>
+                                                                        <JFXButton buttonType="RAISED" layoutX="149.0" layoutY="23.0" prefHeight="30.0" prefWidth="80.0" styleClass="btn-danger" text="Cancel">
+                                                                           <graphic>
+                                                                              <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" />
+                                                                           </graphic>
+                                                                        </JFXButton>
+                                                                     </children>
+                                                                  </HBox>
+                                                               </children>
+                                                            </GridPane>
                                                          </children>
-                                                      </VBox>
+                                                      </HBox>
                                                    </children>
                                                 </AnchorPane>
-                                            </items>
-                                          </SplitPane>
-                                       </children>
-                                       <BorderPane.margin>
-                                          <Insets bottom="10.0" left="5.0" right="5.0" />
-                                       </BorderPane.margin>
-                                    </AnchorPane>
-                                 </left>
+                                             </center>
+                                          </BorderPane>
+                                       </center>
+                                    </BorderPane>
+                                 </top>
                               </BorderPane>
                            </children>
                         </AnchorPane>
@@ -132,15 +259,130 @@
                   </Tab>
                   <Tab id="tab" text="Bidding">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <BorderPane prefHeight="615.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <center>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <VBox prefHeight="615.0" prefWidth="1066.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" spacing="5.0">
+                                                   <children>
+                                                      <FontAwesomeIconView glyphName="LIST" size="20" />
+                                                      <Label text="Selected Item's Suppliers">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                                                   </VBox.margin>
+                                                </HBox>
+                                                <TableView fx:id="ItemSuppliers_tbl" prefHeight="615.0" prefWidth="1066.0">
+                                                  <columns>
+                                                    <TableColumn prefWidth="75.0" text="C1" />
+                                                    <TableColumn prefWidth="75.0" text="C2" />
+                                                  </columns>
+                                                   <columnResizePolicy>
+                                                      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                   </columnResizePolicy>
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" left="10.0" right="10.0" />
+                                                   </VBox.margin>
+                                                </TableView>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
+                                 </center>
+                                 <left>
+                                    <AnchorPane prefHeight="615.0" prefWidth="304.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <VBox prefHeight="615.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" spacing="5.0">
+                                                   <children>
+                                                      <FontAwesomeIconView glyphName="CUBES" size="20" />
+                                                      <Label text="List of Requested Items">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                                                   </VBox.margin>
+                                                </HBox>
+                                                <TableView fx:id="RequestedItemList_tbl" prefHeight="600.0" prefWidth="304.0">
+                                                  <columns>
+                                                    <TableColumn prefWidth="75.0" text="C1" />
+                                                    <TableColumn prefWidth="75.0" text="C2" />
+                                                  </columns>
+                                                   <columnResizePolicy>
+                                                      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                   </columnResizePolicy>
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" left="10.0" right="10.0" />
+                                                   </VBox.margin>
+                                                </TableView>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
+                                 </left>
+                              </BorderPane>
+                           </children></AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab id="tab" text="Suppliers List">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <BorderPane layoutY="-8.0" prefHeight="615.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <center>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <TableView prefHeight="615.0" prefWidth="1370.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
+                                            <columns>
+                                              <TableColumn prefWidth="75.0" text="Supplier Name" />
+                                                <TableColumn prefWidth="75.0" text="Item" />
+                                                <TableColumn prefWidth="75.0" text="Contract Started" />
+                                                <TableColumn prefWidth="75.0" text="Contract End" />
+                                            </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                 </center>
+                                 <top>
+                                    <AnchorPane BorderPane.alignment="CENTER">
+                                       <children>
+                                          <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="1370.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+                                             <children>
+                                                <FontAwesomeIconView glyphName="SEARCH" size="18" />
+                                                <JFXTextField />
+                                                <JFXButton buttonType="RAISED" prefHeight="25.0" prefWidth="97.0" styleClass="btn-primary" text="Search">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </JFXButton>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <BorderPane.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </BorderPane.margin>
+                                    </AnchorPane>
+                                 </top>
+                              </BorderPane>
+                           </children></AnchorPane>
                     </content>
                   </Tab>
                   <Tab id="tab" text="Budget Request">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
-                  </Tab>
-                  <Tab id="tab" text="Awarding">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                     </content>

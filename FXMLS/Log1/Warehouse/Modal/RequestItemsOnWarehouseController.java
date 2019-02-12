@@ -5,7 +5,7 @@
  */
 package FXMLS.Log1.Warehouse.Modal;
 
-import FXMLS.Log1.ClassFiles.Log1_fullInventoryList;
+//import FXMLS.Log1.ClassFiles.Log1_fullInventoryList;
 import FXMLS.Log1.util.AlertMaker;
 import Model.Log1.Log1_WarehouseRequestItemModel;
 import Model.Log1.Log1_WarehouseItemsModel;
@@ -48,12 +48,12 @@ public class RequestItemsOnWarehouseController implements Initializable {
     @FXML
     private JFXButton cancel_btn;
     @FXML
-    private TableView<Log1_fullInventoryList> selectItemforRequest_tbl;
-    @FXML
-    private TableColumn<Log1_fullInventoryList, String> Item_col;
-    @FXML
-    private TableColumn<Log1_fullInventoryList, String> status_col;
-    @FXML
+//    private TableView<Log1_fullInventoryList> selectItemforRequest_tbl;
+//    @FXML
+//    private TableColumn<Log1_fullInventoryList, String> Item_col;
+//    @FXML
+//    private TableColumn<Log1_fullInventoryList, String> status_col;
+//    @FXML
     private Label itemID_txt;
     @FXML
     private DatePicker DateRequested_txt;
@@ -67,7 +67,7 @@ public class RequestItemsOnWarehouseController implements Initializable {
         Request_btn.setOnAction(e ->saveItemType());
         cancel_btn.setOnAction(e ->close());
         callWarehouseItems();
-        displayWarehouseItem();
+//        displayWarehouseItem();
     }
 
     public void close(){
@@ -112,50 +112,50 @@ public class RequestItemsOnWarehouseController implements Initializable {
         destination_txt.setText("");
     }
 
-    @FXML
-    private void selectItemToRequestAction(MouseEvent event) {
-        itemID_txt.setText(selectItemforRequest_tbl.getSelectionModel().getSelectedItem().getItemID());
-        itemRequested_txt.setText(selectItemforRequest_tbl.getSelectionModel().getSelectedItem().getItemDescription());
-    }
+//    @FXML
+//    private void selectItemToRequestAction(MouseEvent event) {
+//        itemID_txt.setText(selectItemforRequest_tbl.getSelectionModel().getSelectedItem().getItemID());
+//        itemRequested_txt.setText(selectItemforRequest_tbl.getSelectionModel().getSelectedItem().getItemDescription());
+//    }
     
     public void callWarehouseItems(){
-         Log1_WarehouseItemsModel coa = new Log1_WarehouseItemsModel();
-         ObservableList<Log1_fullInventoryList> ItemsXD = FXCollections.observableArrayList();
-          
-            List b = coa.join
-        (Model.JOIN.INNER, "aerolink.tbl_log1_suppliers", "SupplierID", "=", "SupplierID").where
-        (new Object [][]{
-            {"Status", "=", "Good on Stock"}
-        }).get();
-
-            for(Object d : b)
-                {
- 
-                    //rs = hm
-                HashMap hm = (HashMap) d;   //exquisite casting
-                
-               ItemsXD.add(new Log1_fullInventoryList(
-                
-                String.valueOf(hm.get("ItemID")),
-                String.valueOf(hm.get("SupplierID")),
-                String.valueOf(hm.get("SupplierName")),
-                String.valueOf(hm.get("ItemDescription")),
-                String.valueOf(hm.get("ItemType")),
-                String.valueOf(hm.get("ItemLocation")),
-                String.valueOf(hm.get("ItemUnit")),
-                String.valueOf(hm.get("UnitPrice")),
-                String.valueOf(hm.get("StockQuantity")),
-                String.valueOf(hm.get("CriticalQuantity")),
-                String.valueOf(hm.get("DisposalDate")),
-                String.valueOf(hm.get("Status"))
-                
-                ));       
-        }
-        selectItemforRequest_tbl.setItems(ItemsXD);
+//         Log1_WarehouseItemsModel coa = new Log1_WarehouseItemsModel();
+//         ObservableList<Log1_fullInventoryList> ItemsXD = FXCollections.observableArrayList();
+//          
+//            List b = coa.join
+//        (Model.JOIN.INNER, "aerolink.tbl_log1_suppliers", "SupplierID", "=", "SupplierID").where
+//        (new Object [][]{
+//            {"Status", "=", "Good on Stock"}
+//        }).get();
+//
+//            for(Object d : b)
+//                {
+// 
+//                    //rs = hm
+//                HashMap hm = (HashMap) d;   //exquisite casting
+//                
+//               ItemsXD.add(new Log1_fullInventoryList(
+//                
+//                String.valueOf(hm.get("ItemID")),
+//                String.valueOf(hm.get("SupplierID")),
+//                String.valueOf(hm.get("SupplierName")),
+//                String.valueOf(hm.get("ItemDescription")),
+//                String.valueOf(hm.get("ItemType")),
+//                String.valueOf(hm.get("ItemLocation")),
+//                String.valueOf(hm.get("ItemUnit")),
+//                String.valueOf(hm.get("UnitPrice")),
+//                String.valueOf(hm.get("StockQuantity")),
+//                String.valueOf(hm.get("CriticalQuantity")),
+//                String.valueOf(hm.get("DisposalDate")),
+//                String.valueOf(hm.get("Status"))
+//                
+//                ));       
+//        }
+//        selectItemforRequest_tbl.setItems(ItemsXD);
     }
     
-    public void displayWarehouseItem(){
-        Item_col.setCellValueFactory(new PropertyValueFactory<>("ItemDescription"));
-        status_col.setCellValueFactory(new PropertyValueFactory<>("Status"));
-    }
+//    public void displayWarehouseItem(){
+//        Item_col.setCellValueFactory(new PropertyValueFactory<>("ItemDescription"));
+//        status_col.setCellValueFactory(new PropertyValueFactory<>("Status"));
+//    }
 }

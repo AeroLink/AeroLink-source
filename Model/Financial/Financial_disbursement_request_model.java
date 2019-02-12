@@ -23,7 +23,8 @@ public class Financial_disbursement_request_model extends Synapse.Model{
                 "dr_prioritylvl",
                 "dr_amount",
                 "dr_budget_status",
-                "dr_status");
+                "dr_status",
+                "dr_journal_status");
         this.initTable("tbl_finance_disbursement_request");
     
 }
