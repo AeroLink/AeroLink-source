@@ -7,18 +7,18 @@ package FXMLS.HR4.Modals;
 
 import FXMLS.HR4.ClassFiles.HR4_EmpInfoClass;
 import FXMLS.HR4.ClassFiles.HR4_NewPayrollClass;
+import FXMLS.HR4.Filler.HR4_NewCompensationFill;
 import FXMLS.HR4.Filler.HR4_NewPayrollFill;
-import FXMLS.HR4.ClassFiles.HR4_PayrollClass;
+import FXMLS.HR4.Filler.HR4_NewPayrollFill2;
 import FXMLS.HR4.HR4_Core_Human_Capital_ManagementController;
 import FXMLS.HR4.Model.HR4_BenefitsModel;
 import FXMLS.HR4.Model.HR4_EmployeeInfo;
-import FXMLS.HR4.Model.HR4_PayrollEmployeeModel;
-import FXMLS.HR4.Model.HR4_PayrollModel;
 import Synapse.Components.Modal.Modal;
 import Synapse.Form;
 import Synapse.Model;
 import Synapse.Session;
-import com.jfoenix.controls.JFXButton;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -27,19 +27,18 @@ import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 
@@ -48,58 +47,101 @@ import javafx.util.Callback;
  *
  * @author Jaeeeee
  */
-public class HR4_NewPayrollController implements Initializable {
-
-    @FXML
-    private TextField lbl_pc;
+public class HR4_AddEmployeeToBenefitsController implements Initializable {
     ObservableList<HR4_EmpInfoClass> obj1 = FXCollections.observableArrayList();
-    HR4_PayrollModel payroll = new HR4_PayrollModel();
     HR4_EmployeeInfo emp = new HR4_EmployeeInfo();
-    long DummyCount = 0;
-    long GlobalCount = 0;
-    ObservableList<HR4_EmpInfoClass> data;
-    @FXML
-    private TableView<HR4_EmpInfoClass> tbl_payroll_emp;
-    Boolean searchStatus = false;
-    @FXML
-    private JFXButton SubmiBtn;
     
-    
+    @FXML
+    private TableView<HR4_EmpInfoClass> tbl_AddBen;
+    @FXML
+    private TextField z;
+    @FXML
+    private TextField b;
+
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        generateTable1();
-        populateTable1();
-        lbl_pc.setText(HR4_NewPayrollFill.jae);
-        SubmiBtn.setOnMouseClicked(e -> BtnAdded());
-        
+        b.setText(HR4_NewCompensationFill.b);
+        z.setText(HR4_NewCompensationFill.z);
+        this.generateTable1();
+        this.populateTable1();
     
-    }
+    }    
+    public void SaveNewBenefits(){
+        /*HR4_BenefitsModel1 bm1 = new HR4_BenefitsModel1();
+        HR4_BenefitsModel bm = new HR4_BenefitsModel();
+        
+        int emp_code = bm1.insert(new Object[][]{
+                {"emp_code", "PAYROLL000"},
+                {"benefits_id", z.getText().toString()},
+                {"balance" , b.getText().toString()},}, true);
+        String PayCode = "PAYROLL000" + id;
+            bm1.update(new Object[][]{
+                {"payroll_code", PayCode}
+            }).where(new Object[][]{
+                {"id", "=", id}
+        }).executeUpdate();*/
+            
+     }
     public void generateTable1() {
 
-        tbl_payroll_emp.getItems().clear();
-        tbl_payroll_emp.getColumns().removeAll(tbl_payroll_emp.getColumns());
-        TableColumn<HR4_EmpInfoClass, String> Select = new TableColumn<>("Select");
+        tbl_AddBen.getItems().clear();
+        tbl_AddBen.getColumns().removeAll(tbl_AddBen.getColumns());
         TableColumn<HR4_EmpInfoClass, String> employee_code = new TableColumn<>("EE/ER Code");
         TableColumn<HR4_EmpInfoClass, String> fnn = new TableColumn<>("Fullname");
         TableColumn<HR4_EmpInfoClass, String> job_id = new TableColumn<>("Position");
         TableColumn<HR4_EmpInfoClass, String> dept_id = new TableColumn<>("Department");
 
         //<editor-fold defaultstate="collapsed" desc="Cell value factories">
-        Select.setCellValueFactory(new PropertyValueFactory<HR4_EmpInfoClass,String>("Select"));
         employee_code.setCellValueFactory((TableColumn.CellDataFeatures<HR4_EmpInfoClass, String> param) -> param.getValue().employee_code);
         fnn.setCellValueFactory((TableColumn.CellDataFeatures<HR4_EmpInfoClass, String> param) -> param.getValue().fnn);
         job_id.setCellValueFactory((TableColumn.CellDataFeatures<HR4_EmpInfoClass, String> param) -> param.getValue().job_id);
         dept_id.setCellValueFactory((TableColumn.CellDataFeatures<HR4_EmpInfoClass, String> param) -> param.getValue().dept_id);
+        TableColumn<HR4_EmpInfoClass, Void> addButton = new TableColumn("More Options");
+        Callback<TableColumn<HR4_EmpInfoClass, Void>, TableCell<HR4_EmpInfoClass, Void>> cellFactory
+                = new Callback<TableColumn<HR4_EmpInfoClass, Void>, TableCell<HR4_EmpInfoClass, Void>>() {
+            @Override
+            public TableCell<HR4_EmpInfoClass, Void> call(final TableColumn<HR4_EmpInfoClass, Void> param) {
+
+            final TableCell<HR4_EmpInfoClass, Void> cell = new TableCell<HR4_EmpInfoClass, Void>() {
+            FontAwesomeIconView f = new FontAwesomeIconView(FontAwesomeIcon.USER_PLUS);
+            private final Button btn = new Button("Add", f);
+            {
+                f.getStyleClass().add("fontIconTable");
+                btn.getStyleClass().add("btnTable");
+                btn.setGraphic(f);
+                btn.setOnAction(event -> {
+                
+                });}
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+
+        };
+        addButton.setCellFactory(cellFactory);
         //</editor-fold>
-        tbl_payroll_emp.getColumns()
-                .addAll(Select, employee_code, fnn, job_id, dept_id);
+        tbl_AddBen.getColumns()
+                .addAll(employee_code, fnn, job_id, dept_id, addButton);
     }
    
 
+    
+    long DummyCount = 0;
+    long GlobalCount = 0;
     public void populateTable1() {
         CompletableFuture.supplyAsync(() -> {
 
-            while (Session.CurrentRoute.equals("hr4payroll")) {
+            while (Session.CurrentRoute.equals("hr4cnp")) {
                 try {
                     emp.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
                         DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
@@ -107,7 +149,7 @@ public class HR4_NewPayrollController implements Initializable {
 
                     if (DummyCount != GlobalCount) {
 
-                        tbl_payroll_emp.getItems();
+                        tbl_AddBen.getItems();
                         List rs = emp
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "tblDD", "=", "employee_code")
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_jobs", "employee_code", "tblD", "=", "employee_code")
@@ -140,7 +182,7 @@ public class HR4_NewPayrollController implements Initializable {
     public void AddJobToTable1(List rs) {
 
         obj1.clear();
-        tbl_payroll_emp.refresh();
+        tbl_AddBen.refresh();
 
         for (Object row : rs) {
             HashMap crow = (HashMap) row;
@@ -152,44 +194,7 @@ public class HR4_NewPayrollController implements Initializable {
             obj1.add(new HR4_EmpInfoClass(employee_code, fnn, job_id, dept_id, status_id));
         }
 
-        tbl_payroll_emp.setItems(obj1);
+        tbl_AddBen.setItems(obj1);
 
-    }
-    public void BtnAdded(){
-        HR4_PayrollEmployeeModel fba = new HR4_PayrollEmployeeModel();
-        for(HR4_EmpInfoClass select : data)
-        {
-            if(select.getSelect().isSelected()){
-                
-          try
-        {
-           String[][] fba_table =
-        {
-        {"payroll_code" , lbl_pc.getText().toString()},
-        {"employee_code", "=", tbl_payroll_emp.getSelectionModel().getSelectedItem().employee_code.get().toString()}};           
-           
-           
-        if(fba.insert(fba_table)){
-         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-             alert.initStyle(StageStyle.UNDECORATED);
-             alert.setTitle("Saved");
-             alert.setContentText("Data has been saved"); 
-             alert.showAndWait();
-            
-        }else{
-             Alert alert = new Alert(Alert.AlertType.ERROR);
-             alert.initStyle(StageStyle.UNDECORATED);
-             alert.setTitle("ERROR");
-             alert.setContentText("PLEASE FILL THE EMPTY FIELDS"); 
-             alert.showAndWait();
-        }
-                                       
-            }catch(Exception e)
-               {
-            e.printStackTrace();
-               }
-    
-            }
-        }
     }
 }

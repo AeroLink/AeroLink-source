@@ -15,12 +15,10 @@ public class HR4_NewPayrollMainClass {
     public SimpleStringProperty a;
     public SimpleStringProperty b;
     public SimpleStringProperty c;
-    public SimpleStringProperty d;
-    public HR4_NewPayrollMainClass(String payroll_code,String start_date,String end_date,String dept_id){
+    public HR4_NewPayrollMainClass(String payroll_code,String start_date,String end_date){
      this.a = new SimpleStringProperty(payroll_code);
      this.b = new SimpleStringProperty(start_date);
      this.c = new SimpleStringProperty(end_date);
-     this.d = new SimpleStringProperty(dept_id);
         
     }
 }

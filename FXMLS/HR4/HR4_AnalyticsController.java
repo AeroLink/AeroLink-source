@@ -5,89 +5,77 @@
  */
 package FXMLS.HR4;
 
-import FXMLS.HR4.Model.HR4_InfoChartModel;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Side;
-import javafx.scene.chart.PieChart;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 
+// POGI SI JUSWA <3 
 /**
  * FXML Controller class
  *
  * @author JaeJae
  */
 public class HR4_AnalyticsController implements Initializable {
-    
+    Button bt = new Button();
+    ChoiceBox<String> cb = new ChoiceBox<>();
     @FXML
-    private PieChart pieChart1;
-    private final ObservableList<PieChart.Data> pie = FXCollections.observableArrayList();
+    private BarChart<?, ?> emp_chart;
     @FXML
-    private PieChart pieChart2;
+    private NumberAxis y;
     @FXML
-    private PieChart pieChart3;
-    
+    private CategoryAxis x;
+    @FXML
+    private BarChart<?, ?> peg_barchart;
+    @FXML
+    private BarChart<?, ?> tag_barchart;
+    @FXML
+    private BarChart<?, ?> pegg_barchart;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.Piechart1();
-        //this.Piechart2();
-        //this.Piechart3();
+        /*cb.getItems().add("Gender");
+        cb.getItems().add("Employees");
+        cb.getItems().add("Trainees");
+        cb.getItems().add("Applicants");
+        cb.getItems().addAll("Passed","Failes","Ongoing");
+        
+        cb.setValue("Gender");
+        bt.setOnAction(e -> getChoice(cb));
+        */
+        
+        XYChart.Series set1 = new XYChart.Series<>();
+        XYChart.Series set2 = new XYChart.Series<>();
+        XYChart.Series set3 = new XYChart.Series<>();
+        XYChart.Series set4 = new XYChart.Series<>();
+        set1.getData().add(new XYChart.Data("Male",3));
+        set1.getData().add(new XYChart.Data("Female",2));
+        set2.getData().add(new XYChart.Data("Approved",5));
+        set2.getData().add(new XYChart.Data("Rejected",2));
+        set2.getData().add(new XYChart.Data("Complete",5));
+        set2.getData().add(new XYChart.Data("On Process",10));
+        set3.getData().add(new XYChart.Data("Passed",5));
+        set3.getData().add(new XYChart.Data("Failed",5));
+        set4.getData().add(new XYChart.Data("Male",20));
+        set4.getData().add(new XYChart.Data("Female",15));
+        emp_chart.getData().addAll(set1);
+        peg_barchart.getData().addAll(set2);
+        pegg_barchart.getData().addAll(set3);
+        tag_barchart.getData().addAll(set4);
+        
     }
-    HR4_InfoChartModel gcm = new HR4_InfoChartModel();
+    /*public void getChoice(ChoiceBox<String> cb){
+        String type = cb.getValue();
+        System.out.println(type);*/
+        
     
-    public void Piechart1() {
-
-        pie.clear();
-        List<HashMap> list3x = gcm
-                .groupBy("gender")
-                .get("gender,COUNT(gender) as Total");
-        list3x.forEach((row) -> {
-            pie.add(new PieChart.Data(row.get("gender").toString(),
-                    Double.parseDouble(row.get("Total").toString())));
-        });
-        pieChart1.setData(pie);
-        pieChart1.setLegendSide(Side.BOTTOM);
-        pieChart1.setStartAngle(90);
-
-    }/*
-    public void Piechart2() {
-
-        pie.clear();
-        List<HashMap> list3x = gcm
-                .groupBy("gender")
-                .get("gender,COUNT(gender) as Total");
-        list3x.forEach((row) -> {
-            pie.add(new PieChart.Data(row.get("gender").toString(),
-                    Double.parseDouble(row.get("Total").toString())));
-        });
-        pieChart2.setData(pie);
-        pieChart2.setLegendSide(Side.RIGHT);
-        pieChart2.setStartAngle(90);
-
-    }
-    public void Piechart3() {
-
-        pie.clear();
-        List<HashMap> list3x = gcm
-                .groupBy("gender")
-                .get("gender,COUNT(gender) as Total");
-        list3x.forEach((row) -> {
-            pie.add(new PieChart.Data(row.get("gender").toString(),
-                    Double.parseDouble(row.get("Total").toString())));
-        });
-        pieChart3.setData(pie);
-        pieChart3.setLegendSide(Side.BOTTOM);
-        pieChart3.setStartAngle(90);
-
-    }*/
 }
-
-   

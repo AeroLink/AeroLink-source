@@ -8,9 +8,12 @@ import FXMLS.HR4.HR4_Core_Human_Capital_ManagementController;
 import FXMLS.HR4.Model.HR4_NewPayrollModel;
 import Synapse.Model;
 import Synapse.Session;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -20,6 +23,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DatePicker;
 import javafx.stage.StageStyle;
 
 /**
@@ -29,58 +33,43 @@ import javafx.stage.StageStyle;
  */
 public class HR4_NewPayrollMainController implements Initializable {
 
-    @FXML
-    private JFXComboBox<?> dept_cb;
-    @FXML
     private JFXDatePicker sd;
-    @FXML
     private JFXDatePicker ed;
     long DummyCount = 0;
     long GlobalCount = 0;
     HR4_NewPayrollModel npm = new HR4_NewPayrollModel();
+    @FXML
+    private JFXButton create_btn;
+    @FXML
+    private DatePicker sds;
+    @FXML
+    private DatePicker eds;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
+       create_btn.setOnMouseClicked(e ->InsertNewPayrollIem());
+        
+        
+        
     }   
     
      public void InsertNewPayrollIem(){
-         HR4_NewPayrollModel fba = new HR4_NewPayrollModel();
+        HR4_NewPayrollModel payroll = new HR4_NewPayrollModel();
+        
+        
+        int id = payroll.insert(new Object[][]{
+                {"payroll_code", "PAYROLL000"},
+                {"start_date" , sds.getValue().toString()},
+                {"end_date" , eds.getValue().toString()},}, true);
+        String PayCode = "PAYROLL000" + id;
+            payroll.update(new Object[][]{
+                {"payroll_code", PayCode}
+            }).where(new Object[][]{
+                {"id", "=", id}
+            }).executeUpdate();
             
-          try
-        {
-           String[][] fba_table =
-        {
-        //{"payroll_code","PAYROLL00" + id},
-        {"dept_id" , dept_cb.getValue().toString()},
-        {"start_date" , sd.getValue().toString()},
-        {"end_date" , ed.getValue().toString()}
-        };           
-           
-           
-        if(fba.insert(fba_table)){
-         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-             alert.initStyle(StageStyle.UNDECORATED);
-             alert.setTitle("Saved");
-             alert.setContentText("Data has been saved"); 
-             alert.showAndWait();
-            
-        }else{
-             Alert alert = new Alert(Alert.AlertType.ERROR);
-             alert.initStyle(StageStyle.UNDECORATED);
-             alert.setTitle("ERROR");
-             alert.setContentText("PLEASE FILL THE EMPTY FIELDS"); 
-             alert.showAndWait();
-        }
-                                       
-            }catch(Exception e)
-               {
-            e.printStackTrace();
-               }
-   
-        }
-    
+     }
 }

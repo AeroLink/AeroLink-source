@@ -13,7 +13,7 @@ import static Synapse.Model.setColumns;
  */
 public class HR4_NewPayrollMainModel extends Synapse.Model{
     public HR4_NewPayrollMainModel(){
-        setColumns("payroll_code","start_date","end_date","dept_id");
+        setColumns("payroll_code","start_date","end_date");
         this.initTable("tbl_hr4_payroll2");
     }
 }
