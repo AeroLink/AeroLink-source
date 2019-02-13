@@ -36,7 +36,7 @@
                               </AnchorPane>
                            </top>
                            <center>
-                              <TableView fx:id="tbl_salary" prefHeight="200.0" prefWidth="200.0" styleClass="text" stylesheets="@../../Assets/css/pom.css" BorderPane.alignment="CENTER">
+                              <TableView fx:id="tbl_salary" prefHeight="200.0" prefWidth="200.0" styleClass="text" stylesheets="@../../Assets/css/MainPanel.css" BorderPane.alignment="CENTER">
                                 <columns>
                                   <TableColumn prefWidth="75.0" text="C1" />
                                   <TableColumn prefWidth="75.0" text="C2" />
@@ -51,7 +51,7 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab id="tab" styleClass="tab-label" text="Salary Adjustment">
+            <Tab id="tab" styleClass="tab-label" text="Salary Deduction">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -59,7 +59,7 @@
                            <top>
                               <AnchorPane prefHeight="59.0" prefWidth="1163.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <ComboBox fx:id="loans_cbx" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="265.0" />
+                                    <ComboBox fx:id="loans_cbx" layoutX="14.0" layoutY="14.0" onAction="#SelectLoans" prefHeight="25.0" prefWidth="265.0" />
                                     <Button layoutX="954.0" layoutY="25.0" mnemonicParsing="false" onAction="#EditSalaryBtn" prefHeight="27.0" prefWidth="195.0" styleClass="btn-primary" text="Edit Salary Adjustment" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="14.0" />
                                     <FontAwesomeIconView fill="WHITE" glyphName="EDIT" layoutX="973.0" layoutY="44.0" size="14" AnchorPane.bottomAnchor="12.7265625" AnchorPane.rightAnchor="176.0" />
                                     <Button layoutX="758.0" layoutY="26.0" mnemonicParsing="false" onMouseClicked="#OtherDeducBtn" prefHeight="25.0" prefWidth="185.0" styleClass="btn-primary" text="Add Other Deduction" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="26.0" />
@@ -67,15 +67,46 @@
                                  </children></AnchorPane>
                            </top>
                            <center>
-                              <TableView fx:id="tri_tbl" prefHeight="446.0" prefWidth="1163.0" stylesheets="@../../Assets/css/pom.css" BorderPane.alignment="CENTER">
-                                <columns>
-                                  <TableColumn prefWidth="75.0" text="C1" />
-                                  <TableColumn prefWidth="75.0" text="C2" />
-                                </columns>
-                                 <columnResizePolicy>
-                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                 </columnResizePolicy>
-                              </TableView>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <TableView fx:id="tbl_sss" layoutX="362.0" layoutY="99.0" prefHeight="524.0" prefWidth="1163.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <columns>
+                                        <TableColumn prefWidth="75.0" text="C1" />
+                                        <TableColumn prefWidth="75.0" text="C2" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                    <TableView fx:id="tbl_ph" prefHeight="524.0" prefWidth="1163.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <columns>
+                                        <TableColumn prefWidth="75.0" text="C1" />
+                                        <TableColumn prefWidth="75.0" text="C2" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                    <TableView fx:id="tbl_wh" prefHeight="524.0" prefWidth="1163.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <columns>
+                                        <TableColumn prefWidth="75.0" text="C1" />
+                                        <TableColumn prefWidth="75.0" text="C2" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                    <TableView fx:id="tbl_pi" prefHeight="524.0" prefWidth="1163.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <columns>
+                                        <TableColumn prefWidth="75.0" text="C1" />
+                                        <TableColumn prefWidth="75.0" text="C2" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
                            </center>
                         </BorderPane>
                      </children>

@@ -76,7 +76,7 @@
                <children>
                   <AnchorPane prefHeight="45.0" prefWidth="980.0">
                      <children>
-                        <JFXButton buttonType="RAISED" layoutX="890.0" layoutY="9.0" prefHeight="25.0" prefWidth="66.0" styleClass="btn-primary" text="OK" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="24.0" />
+                        <JFXButton fx:id="OKBtn" buttonType="RAISED" layoutX="890.0" layoutY="9.0" prefHeight="25.0" prefWidth="66.0" styleClass="btn-primary" text="OK" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="24.0" />
                         <FontAwesomeIconView fill="WHITE" glyphName="THUMBS_UP" layoutX="900.0" layoutY="24.0" AnchorPane.bottomAnchor="19.051339149475098" AnchorPane.rightAnchor="68.8571424484253" />
                         <JFXButton buttonType="RAISED" layoutX="814.0" layoutY="9.0" styleClass="btn-primary" text="Select All" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="101.0" />
                      </children>

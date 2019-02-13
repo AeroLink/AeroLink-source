@@ -48,11 +48,11 @@ public class RouteConfig {
         {"log1WM", "/FXMLS/Log1/Warehousing.fxml", "can_access_log1_WarehouseManagement"},
         {"log1MRO", "/FXMLS/Log1/MaintenanceRepairOH.fxml", "can_access_log1_MaintenanceRepairOverhaul"},
         //Logistic2
-        {"log2vp", "/FXMLS/Log2/Log2_Vendor_Portal.fxml", "can_access_hr1_socialrecog"},
-        {"log2am", "/FXMLS/Log2/Log2_Audit_Management.fxml", "can_access_hr1_socialrecog"},
-        {"log2dt", "/FXMLS/Log2/Log2_Document_Tracking.fxml", "can_access_hr1_socialrecog"},
-        {"log2fm", "/FXMLS/Log2/Log2_Fleet_Management.fxml", "can_access_hr1_socialrecog"},
-        {"log2vr", "/FXMLS/Log2/Log2_Vehicle_Reservation.fxml", "can_access_hr1_socialrecog"},
+        {"log2vp", "/FXMLS/Log2/Log2_Vendor_Portal.fxml", "can_Access_Log2_Vendor_Portal"},
+        {"log2am", "/FXMLS/Log2/Log2_Audit_Management.fxml", "can_Access_Log2_Audit_Management"},
+        {"log2dt", "/FXMLS/Log2/Log2_Document_Tracking.fxml", "can_Access_Log2_Document_Tracking"},
+        {"log2fm", "/FXMLS/Log2/Log2_Fleet_Management.fxml", "can_Access_Log2_Fleet_Management"},
+        {"log2vr", "/FXMLS/Log2/Log2_Vehicle_Reservation.fxml", "can_Access_Log2_Vehicle_Reservation"},
         //Core2    
         {"core2SN", "/FXMLS/Core2/ServiceNetwork.fxml", "can_access_core2_serviceNetwork"},
         {"core2SP", "/FXMLS/Core2/ServiceProvider.fxml", "can_access_core2_serviceProvider"},

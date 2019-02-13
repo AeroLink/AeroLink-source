@@ -16,7 +16,7 @@ public class Log2_reservationform extends Synapse.Model {
      public Log2_reservationform(String path){
          switch (path) {
             case "reservation":
-                this.initTable("tbl_log2_reservationformtbl");
+                this.initTable("tbl_log2_vr_reservation");
                 break;
             default:
                 break;

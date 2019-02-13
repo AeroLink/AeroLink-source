@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
@@ -25,22 +26,22 @@
                            <children>
                               <TableView fx:id="tabledocrequest" layoutX="347.0" layoutY="40.0" prefHeight="304.0" prefWidth="917.0">
                                  <columns>
-                                    <TableColumn fx:id="reqno" prefWidth="152.0" text="Document Request No." />
+                                    <TableColumn fx:id="reqno" prefWidth="152.0" text="Request No." />
                                     <TableColumn fx:id="doctitle" prefWidth="152.0" text="Document Title" />
-                                    <TableColumn fx:id="docdesc" prefWidth="152.0" text="Description" />
+                                    <TableColumn fx:id="docdesc" prefWidth="152.0" text="Purpose" />
                                     <TableColumn fx:id="docrequestor" prefWidth="152.0" text="Requestor" />
                                     <TableColumn fx:id="docdate" prefWidth="152.0" text="Date Request" />
                                     <TableColumn fx:id="docstatus" prefWidth="156.0" text="Status" />
                                  </columns>
                               </TableView>
-                              <AnchorPane fx:id="anchortxt" layoutX="15.0" layoutY="90.0" prefHeight="205.0" prefWidth="323.0" style="-fx-border-width: 1; -fx-border-color: black;">
+                              <AnchorPane fx:id="anchortxt" layoutX="15.0" layoutY="51.0" prefHeight="244.0" prefWidth="323.0" style="-fx-border-width: 1; -fx-border-color: black;">
                                  <children>
-                                    <JFXTextField fx:id="requestedtxt" editable="false" focusColor="BLACK" labelFloat="true" layoutX="15.0" layoutY="152.0" maxWidth="390.0" minWidth="162.0" prefHeight="37.0" prefWidth="261.0" promptText="Request File:" unFocusColor="BLACK">
+                                    <JFXTextField fx:id="requestedtxt" editable="false" focusColor="BLACK" labelFloat="true" layoutX="15.0" layoutY="193.0" maxWidth="390.0" minWidth="162.0" prefHeight="37.0" prefWidth="261.0" promptText="Request File:" unFocusColor="BLACK">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                     </JFXTextField>
-                                    <FontAwesomeIconView fill="#00b359" glyphName="FOLDER" layoutX="285.0" layoutY="178.0" onMouseClicked="#opendialog" size="25" />
+                                    <FontAwesomeIconView fill="#00b359" glyphName="FOLDER" layoutX="285.0" layoutY="219.0" onMouseClicked="#opendialog" size="25" />
                                     <TextField fx:id="txtreqno" editable="false" layoutX="122.0" layoutY="22.0" prefHeight="30.0" prefWidth="174.0">
                                        <font>
                                           <Font size="14.0" />
@@ -71,6 +72,16 @@
                                           <Font size="15.0" />
                                        </font>
                                     </Label>
+                                    <TextField fx:id="txtdesc" layoutX="122.0" layoutY="149.0" prefHeight="30.0" prefWidth="174.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <Label layoutX="14.0" layoutY="154.0" text="Description:">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
                                  </children>
                               </AnchorPane>
                               <Label layoutX="351.0" layoutY="14.0" prefHeight="21.0" prefWidth="150.0" text="Request Table" textFill="#686161">
@@ -80,7 +91,7 @@
                               </Label>
                               <TableView fx:id="tbldocrequest1" layoutX="22.0" layoutY="402.0" prefHeight="494.0" prefWidth="1244.0">
                                  <columns>
-                                    <TableColumn fx:id="requestno" prefWidth="207.0" text="Request No." />
+                                    <TableColumn fx:id="requestno" prefWidth="207.0" text="Document Request No." />
                                     <TableColumn fx:id="documentt" prefWidth="207.0" text="Document Title" />
                                     <TableColumn fx:id="requestby" prefWidth="207.0" text="Request By" />
                                     <TableColumn fx:id="senttime" prefWidth="207.0" text="Sent Time" />
@@ -93,7 +104,7 @@
                                     <Font name="Arial" size="18.0" />
                                  </font>
                               </Label>
-                              <JFXButton fx:id="btnsend" layoutX="22.0" layoutY="311.0" onAction="#approvedrequest" prefHeight="33.0" prefWidth="99.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="SEND" textFill="WHITE">
+                              <JFXButton fx:id="btnsend" layoutX="22.0" layoutY="311.0" onAction="#trackingapproved" prefHeight="33.0" prefWidth="99.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="SEND" textFill="WHITE">
                                  <font>
                                     <Font name="Aparajita" size="15.0" />
                                  </font>
@@ -103,25 +114,21 @@
                                     <Font name="Aparajita" size="15.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="btndispose" layoutX="127.0" layoutY="311.0" onAction="#approvedrequest" prefHeight="33.0" prefWidth="99.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="DISPOSE" textFill="WHITE">
+                              <JFXButton fx:id="btndispose" layoutX="127.0" layoutY="311.0" onAction="#trackingapproved" prefHeight="33.0" prefWidth="99.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="DISPOSE" textFill="WHITE">
                                  <font>
                                     <Font name="Aparajita" size="15.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="btntakephoto14" layoutX="1165.0" layoutY="363.0" prefHeight="33.0" prefWidth="99.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="OPEN" textFill="WHITE">
-                                 <font>
-                                    <Font name="Aparajita" size="15.0" />
-                                 </font>
-                              </JFXButton>
-                              <Label layoutX="22.0" layoutY="58.0" prefHeight="21.0" prefWidth="150.0" text="Request Info" textFill="#686161">
+                              <Label layoutX="22.0" layoutY="19.0" prefHeight="21.0" prefWidth="150.0" text="Request Info" textFill="#686161">
                                  <font>
                                     <Font name="Arial" size="18.0" />
                                  </font>
                               </Label>
+                              <FontAwesomeIconView fx:id="adddocumentes1" fill="#00b359" glyphName="PLUS" layoutX="1276.0" layoutY="28.0" onMouseClicked="#openreq" size="12" />
                            </children></AnchorPane>
                     </content>
                   </Tab>
-                  <Tab text="Unregistered Doc">
+                  <Tab text="Document Registration">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -144,6 +151,7 @@
                                     <Font name="Aparajita" size="15.0" />
                                  </font>
                               </JFXButton>
+                              <FontAwesomeIconView fx:id="adddocumentes" fill="#00b359" glyphName="PLUS" layoutX="1277.0" layoutY="95.0" onMouseClicked="#open" size="12" />
                            </children>
                         </AnchorPane>
                     </content>
@@ -152,19 +160,19 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <JFXTextField fx:id="filesearch" editable="false" focusColor="BLACK" labelFloat="true" layoutX="51.0" layoutY="32.0" maxWidth="272.0" minWidth="162.0" prefHeight="43.0" prefWidth="188.0" promptText="Search:" unFocusColor="BLACK">
+                              <JFXTextField fx:id="filesearch" focusColor="BLACK" labelFloat="true" layoutX="722.0" layoutY="46.0" maxWidth="272.0" minWidth="162.0" onKeyReleased="#search" prefHeight="24.0" prefWidth="188.0" promptText="Search:" unFocusColor="BLACK">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </JFXTextField>
-                              <JFXButton fx:id="btntakephoto" layoutX="824.0" layoutY="456.0" prefHeight="33.0" prefWidth="122.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="RETRIEVED" textFill="WHITE">
+                              <JFXButton fx:id="btntakephoto" layoutX="919.0" layoutY="462.0" onAction="#retrieved" prefHeight="33.0" prefWidth="122.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="RETRIEVED" textFill="WHITE">
                                  <font>
                                     <Font name="Aparajita" size="15.0" />
                                  </font>
                               </JFXButton>
                               <TableView fx:id="documentstable" layoutX="44.0" layoutY="506.0" prefHeight="387.0" prefWidth="997.0">
                                  <columns>
-                                    <TableColumn fx:id="documentid" prefWidth="166.0" text="Document No" />
+                                    <TableColumn fx:id="documentid" prefWidth="166.0" text="Document No." />
                                     <TableColumn fx:id="documentname1" prefWidth="166.0" text="Document Name" />
                                     <TableColumn fx:id="documentcategory1" prefWidth="166.0" text="Category" />
                                     <TableColumn fx:id="storetime" prefWidth="166.0" text="Store Time" />
@@ -177,21 +185,21 @@
                                     <Font name="Arial" size="18.0" />
                                  </font>
                               </Label>
-                              <JFXButton fx:id="btntakephoto2" layoutX="956.0" layoutY="456.0" prefHeight="33.0" prefWidth="75.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="OPEN" textFill="WHITE">
+                              <JFXButton fx:id="btntakephoto2" layoutX="928.0" layoutY="54.0" onAction="#openfile" prefHeight="33.0" prefWidth="113.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="OPEN" textFill="WHITE">
                                  <font>
                                     <Font name="Aparajita" size="15.0" />
                                  </font>
                               </JFXButton>
                               <AnchorPane layoutX="1066.0" prefHeight="961.0" prefWidth="226.0">
                                  <children>
-                                    <TableView fx:id="filescategory" prefHeight="962.0" prefWidth="226.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <TableView fx:id="filescategory" prefHeight="954.0" prefWidth="226.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                       <columns>
                                         <TableColumn fx:id="filecolumncat" editable="false" prefWidth="225.0" sortable="false" text="Document Files Category" />
                                       </columns>
                                     </TableView>
                                  </children>
                               </AnchorPane>
-                              <TableView fx:id="filestable" layoutX="52.0" layoutY="93.0" prefHeight="354.0" prefWidth="989.0">
+                              <TableView fx:id="filestable" layoutX="43.0" layoutY="93.0" prefHeight="354.0" prefWidth="998.0">
                                 <columns>
                                   <TableColumn fx:id="docid3" editable="false" prefWidth="247.25" sortable="false" text="Document ID" />
                                     <TableColumn fx:id="docname3" editable="false" prefWidth="247.25" sortable="false" text="Document Name" />
@@ -199,27 +207,66 @@
                                     <TableColumn fx:id="status3" editable="false" prefWidth="247.25" sortable="false" text="Status" />
                                 </columns>
                               </TableView>
-                           </children>
-                        </AnchorPane>
-                    </content>
-                  </Tab>
-                  <Tab text="Reports">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <TableView fx:id="tablevisitoremployee11" layoutX="43.0" layoutY="41.0" prefHeight="688.0" prefWidth="1175.0">
-                                 <columns>
-                                    <TableColumn fx:id="employeeid11" prefWidth="293.0" text="Request ID" />
-                                    <TableColumn fx:id="name11" prefWidth="293.0" text="Document Name" />
-                                    <TableColumn fx:id="office11" prefWidth="293.0" text="Date Request" />
-                                    <TableColumn fx:id="floor11" prefWidth="293.0" text="Department" />
-                                 </columns>
-                              </TableView>
-                              <JFXButton fx:id="btntakephoto13" layoutX="1098.0" layoutY="750.0" prefHeight="33.0" prefWidth="120.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="PRINT" textFill="WHITE">
+                              <JFXButton fx:id="btntakephoto21" layoutX="797.0" layoutY="462.0" onAction="#openfiles2" prefHeight="33.0" prefWidth="113.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="OPEN" textFill="WHITE">
                                  <font>
                                     <Font name="Aparajita" size="15.0" />
                                  </font>
                               </JFXButton>
+                              <Label layoutX="52.0" layoutY="64.0" prefHeight="21.0" prefWidth="150.0" text="Files Table" textFill="#686161">
+                                 <font>
+                                    <Font name="Arial" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab onSelectionChanged="#tbl_files" text="Reports">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="rtbl_files" layoutX="23.0" layoutY="63.0" onKeyReleased="#search1" prefHeight="390.0" prefWidth="1238.0">
+                                 <columns>
+                                    <TableColumn fx:id="rdocid" prefWidth="247.6" resizable="false" text="Document ID" />
+                                    <TableColumn fx:id="rdocname" prefWidth="247.6" text="Document Name" />
+                                    <TableColumn fx:id="rcategory" prefWidth="247.6" text="Category" />
+                                    <TableColumn fx:id="rtimeadded" prefWidth="247.6" text="Time Added" />
+                                    <TableColumn fx:id="rdateadded" prefWidth="247.6" text="Date Added" />
+                                 </columns>
+                              </TableView>
+                              <Label layoutX="31.0" layoutY="30.0" prefHeight="21.0" prefWidth="150.0" text="Files Table" textFill="#686161">
+                                 <font>
+                                    <Font name="Arial" size="18.0" />
+                                 </font>
+                              </Label>
+                              <FontAwesomeIconView fill="#00b359" glyphName="PRINT" layoutX="1233.0" layoutY="50.0" onMouseClicked="#printfilesdocument" size="30">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></FontAwesomeIconView>
+                              <TableView fx:id="dt_documents_tbl" layoutX="23.0" layoutY="502.0" prefHeight="390.0" prefWidth="1239.0">
+                                 <columns>
+                                    <TableColumn fx:id="dtdocno" prefWidth="206.5" text="Document No." />
+                                    <TableColumn fx:id="dtdocname" prefWidth="206.5" text="Document Name" />
+                                    <TableColumn fx:id="dtdepartment" prefWidth="206.5" text="Department" />
+                                    <TableColumn fx:id="dtcategory" prefWidth="206.5" text="Category" />
+                                    <TableColumn fx:id="dttimestore" prefWidth="206.5" text="Time Stored" />
+                                    <TableColumn fx:id="dtdatestore" prefWidth="206.5" text="Date Stored" />
+                                 </columns>
+                              </TableView>
+                              <FontAwesomeIconView fill="#00b359" glyphName="PRINT" layoutX="1230.0" layoutY="489.0" onMouseClicked="#printtbl_documents" size="30">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></FontAwesomeIconView>
+                              <Label layoutX="29.0" layoutY="476.0" prefHeight="21.0" prefWidth="150.0" text="Documents Table" textFill="#686161">
+                                 <font>
+                                    <Font name="Arial" size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="filesearch1" focusColor="BLACK" labelFloat="true" layoutX="1034.0" layoutY="19.0" maxWidth="272.0" minWidth="162.0" onKeyReleased="#search1" prefHeight="24.0" prefWidth="188.0" promptText="Search:" unFocusColor="BLACK">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXTextField>
                            </children></AnchorPane>
                     </content>
                   </Tab>

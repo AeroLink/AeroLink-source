@@ -14,7 +14,6 @@ public class Log2_outbound extends Synapse.Model {
     public Log2_outbound(String path){
          switch (path) {
             case "outbound":
-                setColumns("id","vehiclemodel","plateno");
                 this.initTable("tbl_log2_outbound");
                 break;
             default:

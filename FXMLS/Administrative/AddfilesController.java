@@ -10,6 +10,8 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -34,6 +36,7 @@ public class AddfilesController implements Initializable {
     private PreparedStatement pst;
     private ResultSet rs;
     private String directory = "";
+    private String directory1 = "src/FXMLS/Administrative/RetrievedFiles/";
     @FXML
     private JFXButton btntoarch;
     @FXML
@@ -55,9 +58,10 @@ public class AddfilesController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         addbox.setItems(addbox1);
     }    
-    
+     
+    @FXML
     public void insertvalue(){
-    
+   
         try{
             String query = "insert into aerolink.admin_document_file values(?,?,?,?,?,?)";
             pst = con.prepareStatement(query);
@@ -81,9 +85,29 @@ public class AddfilesController implements Initializable {
             AlertBox.close(btntoarch);
         }catch(Exception ex){
             AlertBox.display("Alert", "Data Cannot be Empty");
+        }try{
+            String sql = "select * from aerolink.admin_document_file where [Document Name]=  '"+adddocname.getText()+"'";
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            File fn = new File(directory1+adddocname.getText()+"-"+addbox.getSelectionModel().getSelectedItem()+".pdf");
+            FileOutputStream out = new FileOutputStream(fn);
+            
+            while(rs.next()){
+                 InputStream input = rs.getBinaryStream("Document File");
+                 byte[] buffer = new byte[1024];
+                 while(input.read(buffer) > 0){
+                     out.write(buffer);
+                 }
+            }
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
         }
+        
+        
     }
     
+    @FXML
     public void opendialog(){
             FileChooser fc = new FileChooser();
             FileChooser.ExtensionFilter exf1 = new FileChooser.ExtensionFilter("PDF Files", "*.pdf");
@@ -99,6 +123,7 @@ public class AddfilesController implements Initializable {
             }
     }
     
+    @FXML
     public void cancel(){
         AlertBox.close(btntoarch1);
         AlertBox.display("Alert", "Adding Files has been Canceled");
