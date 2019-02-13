@@ -69,6 +69,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  * FXML Controller class
@@ -952,7 +953,8 @@ public class HR1_ViewApplicantController implements Initializable {
 
             int uid = u.insert(new Object[][]{
                 {"username", EmpCode},
-                {"password", Synapse.Crypt.Encrypt(EmpCode)}
+                {"password", Synapse.Crypt.Encrypt(EmpCode)},
+                {"webPass", BCrypt.hashpw(EmpCode, BCrypt.gensalt())}
             }, true);
 
             if (uid != 0) {
@@ -1042,17 +1044,27 @@ public class HR1_ViewApplicantController implements Initializable {
 
             if (returnPositions <= 0) {
 
-                jp.delete().where(new Object[][]{
-                    {"id", "=", HR1_Applicant.jobPosted_id}
-                }).executeUpdate();
+                List<HashMap> list = STORED_PROC.executeCall("HR1_UnpostJob", new Object[][]{
+                    {"posting_id", HR1_Applicant.jobPosted_id},
+                    {"vacancy_id", job_id},
+                    {"trigger", 1}
+                });
 
-                jv.delete().where(new Object[][]{
-                    {"id", "=", job_id}
-                }).executeUpdate();
+                list.stream().forEach((HashMap e) -> {
+                    if (e.get("id").toString().equals("0")) {
+                        Notifications nBuilder = Notifications.create()
+                                .title("Success")
+                                .text("Transaction Complete!")
+                                .hideAfter(Duration.seconds(3))
+                                .position(Pos.BOTTOM_RIGHT);
+                        nBuilder.show();
+                    }
+                });
 
             } else {
                 jv.update(new Object[][]{
-                    {"jobOpen", returnPositions},}).where(new Object[][]{
+                    {"jobOpen", returnPositions}
+                }).where(new Object[][]{
                     {"id", "=", job_id}
                 }).executeUpdate();
             }
