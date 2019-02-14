@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FXMLS.HR4.Filler;
+package FXMLS.HR4.Model;
 
 /**
  *
  * @author Jaeeeee
  */
-public class HR4_NewPayrollFill {
-    public static String jae;
-    public static void CreateNew(String pc){
-        jae = pc;
+public class HR4_BenefitsModel extends Synapse.Model{
+     public HR4_BenefitsModel()
+    {
+        setColumns("id","title","amout","description","days");
+        this.initTable("tbl_hr4_benefits");
     }
 }

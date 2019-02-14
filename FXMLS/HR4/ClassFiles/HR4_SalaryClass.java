@@ -22,7 +22,7 @@ public class HR4_SalaryClass {
     public SimpleStringProperty h;
     public SimpleStringProperty i;
     
-    public HR4_SalaryClass(String salary_grade,String step1,String step2,String step3,String step4,String step5,String step6,String step7,String step8){
+    public HR4_SalaryClass(String salary_grade,String step1,String step2, String step3,String step4,String step5,String step6,String step7,String step8){
         this.a = new SimpleStringProperty(salary_grade);
         this.b = new SimpleStringProperty(step1);
         this.c = new SimpleStringProperty(step2);

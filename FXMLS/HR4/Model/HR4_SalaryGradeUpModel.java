@@ -9,10 +9,12 @@ package FXMLS.HR4.Model;
  *
  * @author Jaeeeee
  */
-public class HR4_PayrollModel extends Synapse.Model{
-    public HR4_PayrollModel()
+public class HR4_SalaryGradeUpModel extends Synapse.Model{
+    public HR4_SalaryGradeUpModel()
     {
-    setColumns("id","payroll_code","start_date","end_date");
-    this.initTable("tbl_hr4_payroll2");
+        setColumns("id","emp_code","grade","status","created_at","updated_at");
+        this.initTable("tbl_hr4_compegrade");
     }
+    
+    
 }
