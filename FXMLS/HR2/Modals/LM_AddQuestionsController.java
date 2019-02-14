@@ -121,7 +121,6 @@ public class LM_AddQuestionsController implements Initializable {
                         {"isDeleted", "0"}
                     }, true);
                 }
-                //     System.err.println(String.valueOf(rdo[i].isSelected()));
 
                 for (Object obj : id_list) {
                     courses.update(new Object[][]{
@@ -130,21 +129,16 @@ public class LM_AddQuestionsController implements Initializable {
                         {"choice_id", "=", obj}
                     }).executeUpdate();
                 }
-
-                /*  if (rdo[i].isSelected()) {
-
-                    Alert saved = new Alert(Alert.AlertType.INFORMATION);
-                    saved.setContentText("Question Added");
-                    saved.showAndWait();
-                } else {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setContentText("Please Select correct answer for this question");
-                    alert.showAndWait();
-                }*/
             }
             Alert saved = new Alert(Alert.AlertType.INFORMATION);
             saved.setContentText("Question Added");
             saved.showAndWait();
+            txt_add_question.setText("");
+            c.selectToggle(null);
+            txt_option1.setText("");
+            txt_option2.setText("");
+            txt_option3.setText("");
+            txt_option4.setText("");
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setContentText("ERROR" + e);
@@ -207,5 +201,7 @@ public class LM_AddQuestionsController implements Initializable {
             n.showAndWait();
         }
     }
+    
+    
 
 }

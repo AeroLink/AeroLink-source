@@ -71,7 +71,7 @@
                         <Font name="System Bold Italic" size="11.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtLimit" disable="true" layoutX="208.0" layoutY="332.0" prefHeight="22.0" prefWidth="184.0" />
+                  <TextField fx:id="txtLimit" disable="true" editable="false" layoutX="208.0" layoutY="332.0" prefHeight="22.0" prefWidth="184.0" />
                   <Label layoutX="210.0" layoutY="314.0" text="Job Position Limit :">
                      <font>
                         <Font name="System Bold Italic" size="11.0" />

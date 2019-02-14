@@ -18,11 +18,13 @@ import java.util.ResourceBundle;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.print.PrinterJob;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javax.imageio.ImageIO;
 
 
@@ -133,14 +135,30 @@ public class Visitor_CardController implements Initializable {
            pst.setString(9, "Checked In");
            pst.execute();
             AlertBox.display("Alert", "Data Succesfully Save");
-            AlertBox.close(btnprint);
             Visitor_ManagementController vmc = new Visitor_ManagementController();
-     
+            vmc.cleartex(btnprint);
+            AlertBox.close(btnprint);
+            
+            
         }catch(Exception ex){
             System.out.print(ex.getMessage());
         }
     
     }
+    
+    public void print(){
+       
+        
+        PrinterJob job = PrinterJob.createPrinterJob();
+        if(job != null && job.showPrintDialog(visitorpassanchor.getScene().getWindow())){
+            boolean success = job.printPage(visitorpassanchor);
+            if(success){
+                job.endJob();
+            }
+        }
+    }
+    
+    
 
     
     

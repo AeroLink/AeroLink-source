@@ -15,6 +15,7 @@ import FXMLS.HR2.ClassFiles.LM_ViewExamRequest;
 import Model.HR2_Courses;
 import Model.HR2_Examination;
 import Model.HR2_LM_Exam_Request;
+import Model.HR4_Departments;
 import Model.HR4_Jobs;
 import Synapse.Components.Modal.Modal;
 import Synapse.Form;
@@ -65,12 +66,6 @@ public class HR2_Learning_ManagementController implements Initializable {
     long DummyCount = 0;
     long GlobalCount = 0;
     @FXML
-    private ContextMenu contextmenu_lm;
-    @FXML
-    private MenuItem c_item_modify;
-    @FXML
-    private MenuItem c_item_drop;
-    @FXML
     private TableView<HR2_ExaminationClass> tbl_exam;
     @FXML
     private TableColumn<HR2_ExaminationClass, String> col_exam_name;
@@ -85,13 +80,13 @@ public class HR2_Learning_ManagementController implements Initializable {
     @FXML
     private TableColumn<LM_ExaRequestClass, String> col_req_reason;
     @FXML
-    private JFXComboBox cbox_dept;
-    @FXML
     private TableColumn<LM_ExaRequestClass, String> col_req_status;
     @FXML
     private TableColumn<LM_ExaRequestClass, String> col_req_dept;
     @FXML
     private Label lbl_training_req_notif;
+    @FXML
+    private JFXComboBox cbox_exam_req_Dept;
 
     /**
      * Initializes the controller class.
@@ -106,6 +101,9 @@ public class HR2_Learning_ManagementController implements Initializable {
         tbl_courses.setOnMouseClicked(e -> {
             populateExam();
         });
+        cbox_exam_req_Dept.getSelectionModel().selectedItemProperty().addListener(listener -> {
+            SearchExamReq();
+        });
         ExamRequest();
         loadJobsInComboBox();
         DisplayExamRequestsInCols();
@@ -115,6 +113,7 @@ public class HR2_Learning_ManagementController implements Initializable {
 
     public void loadJobsInComboBox() {
         HR4_Jobs jobs = new HR4_Jobs();
+        HR4_Departments department = new HR4_Departments();
         try {
             List c = jobs.get();
 
@@ -122,6 +121,13 @@ public class HR2_Learning_ManagementController implements Initializable {
                 HashMap hm1 = (HashMap) d;
 
                 cbox_job_title.getItems().add("J" + hm1.get("job_id") + " - " + hm1.get("title"));
+            }
+              List dept = department.get();
+
+            for (Object depts : dept) {
+                HashMap hm2 = (HashMap) depts;
+
+                cbox_exam_req_Dept.getItems().add(hm2.get("dept_name"));
             }
         } catch (Exception ex) {
             System.out.println(ex);
@@ -143,6 +149,20 @@ public class HR2_Learning_ManagementController implements Initializable {
         }
 
     }
+    
+    public void SearchExamReq() {
+        HR2_LM_Exam_Request lmer = new HR2_LM_Exam_Request();
+
+        List exam_req = lmer.join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "dept", "=", "dept_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_eis_requisition", "request_id", "rs", "=", "request_id")
+                .join(Model.JOIN.INNER, "aerolink.tbl_eis_request_status", "req_status_id", "=", "rs", "request_status", true)
+                .where(new Object[][]{
+                    {"dept.dept_name", "=", cbox_exam_req_Dept.getSelectionModel().getSelectedItem().toString()},
+                    {"aerolink.tbl_hr2_exam_requisition.isDeleted", "<>", "1"}
+                }).get("er_id", "dept.dept_name,jobs.title,reason,aerolink.tbl_eis_request_status.req_status_id,aerolink.tbl_eis_request_status.req_status");
+        DisplayExamRequest(exam_req);
+    }
 
     @FXML
     public void ExamRequest() {
@@ -153,7 +173,10 @@ public class HR2_Learning_ManagementController implements Initializable {
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "jobs", "=", "job_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_eis_requisition", "request_id", "rs", "=", "request_id")
                     .join(Model.JOIN.INNER, "aerolink.tbl_eis_request_status", "req_status_id", "=", "rs", "request_status", true)
-                    .where(new Object[][]{{"aerolink.tbl_hr2_exam_requisition.isDeleted", "<>", "1"}})
+                    .where(new Object[][]{
+                        {"aerolink.tbl_eis_request_status.req_status_id","=","3"},
+                        {"aerolink.tbl_hr2_exam_requisition.isDeleted", "<>", "1"}
+                    })
                     .get("er_id", "dept.dept_name,jobs.title,reason,aerolink.tbl_eis_request_status.req_status_id,aerolink.tbl_eis_request_status.req_status");
             DisplayExamRequest(exam_req);
         } catch (Exception e) {
@@ -265,6 +288,7 @@ public class HR2_Learning_ManagementController implements Initializable {
         }
     }
 
+    @FXML
     public void populateExam() {
 
         try {
@@ -527,20 +551,10 @@ public class HR2_Learning_ManagementController implements Initializable {
 
     }
 
+    @FXML
     public void AddCourseModal() {
         Modal lq = Modal.getInstance(new Form("/FXMLS/HR2/Modals/Add_Courses.fxml").getParent());
         lq.open();
-    }
-
-    @FXML
-    public void viewRow(MouseEvent event) {
-
-        if (event.getButton() == MouseButton.SECONDARY) {
-            contextmenu_lm.show(tbl_courses, event.getX(), event.getSceneY());
-            c_item_modify.setOnAction(e -> OpenModalForEdit());
-            c_item_drop.setOnAction(e -> DropExam());
-        }
-
     }
 
     @FXML
@@ -572,30 +586,4 @@ public class HR2_Learning_ManagementController implements Initializable {
         }
 
     }
-
-    public void OpenModalForEdit() {
-        Modal viewCourse = Modal.getInstance(new Form("/FXMLS/HR2/Modals/LM_ViewCourse.fxml").getParent());
-        viewCourse.open();
-
-    }
-
-    public void DropExam() {
-        Alert update = new Alert(Alert.AlertType.CONFIRMATION);
-        update.setContentText("Are you sure you want to drop this data?");
-        Optional<ButtonType> rs = update.showAndWait();
-
-        if (rs.get() == ButtonType.OK) {
-            HR2_Courses c = new HR2_Courses();
-
-            Boolean a = c.where(new Object[][]{
-                {"course_id", "=", tbl_courses.getSelectionModel().getSelectedItem().course_id.get()}
-            }).update(new Object[][]{
-                {"isDeleted", "1"},}).executeUpdate();
-            Alert dropnotif = new Alert(Alert.AlertType.INFORMATION);
-            dropnotif.setContentText(tbl_courses.getSelectionModel().getSelectedItem().job_title.get() + " Successfully Dropped");
-            dropnotif.showAndWait();
-            loadData();
-        }
-    }
-
 }

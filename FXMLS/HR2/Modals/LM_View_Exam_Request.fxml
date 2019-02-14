@@ -54,8 +54,8 @@
             <Font name="Lato Regular" size="12.0" />
          </font>
       </JFXTextArea>
-      <JFXComboBox fx:id="cbox_position" layoutX="62.0" layoutY="254.0" prefHeight="25.0" prefWidth="266.0" />
-      <JFXButton fx:id="btn_submit" buttonType="RAISED" layoutX="129.0" layoutY="297.0" styleClass="btn-primary" text="Submit">
+      <JFXComboBox fx:id="cbox_status" layoutX="62.0" layoutY="254.0" prefHeight="25.0" prefWidth="266.0" />
+      <JFXButton fx:id="btn_submit" buttonType="RAISED" layoutX="129.0" layoutY="297.0" onAction="#SubmitApproval" prefHeight="28.0" prefWidth="83.0" styleClass="btn-primary" text="Submit">
          <font>
             <Font name="Lato Bold" size="14.0" />
          </font>

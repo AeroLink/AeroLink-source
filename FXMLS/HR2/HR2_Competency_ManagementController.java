@@ -125,9 +125,6 @@ public class HR2_Competency_ManagementController implements Initializable {
 
         int d = tbl_req_skill.getItems().size();
         lbl_req_countTable.setText(String.valueOf(d));
-        btn_refresh.setOnAction(e->{
-            loadData();
-        });
 
     }
 
@@ -148,6 +145,7 @@ public class HR2_Competency_ManagementController implements Initializable {
 
     }
 
+    @FXML
     public void loadData() {
 
         try {
@@ -257,6 +255,7 @@ public class HR2_Competency_ManagementController implements Initializable {
         }
     }
 
+    @FXML
     public void displaySkillReq() {
         try {
             HR2_CM_Skill_Requisition skill_req = new HR2_CM_Skill_Requisition();
@@ -269,6 +268,7 @@ public class HR2_Competency_ManagementController implements Initializable {
                     .getSelectedItem().toString()},*/
                 /*  {"rs.req_status", "=", cbox_filter_status.getSelectionModel()
                     .getSelectedItem().toString()},*/
+                {"aerolink.tbl_eis_request_status.req_status_id","=","3"},
                 {"aerolink.tbl_hr2_skill_requisition.isDeleted", "<>", "1"}})
                     .orderBy("aerolink.tbl_hr2_skill_requisition.date_requested", Model.Sort.ASC)
                     .get("aerolink.tbl_hr2_skill_requisition.sr_id,dept.dept_name, jobs.title", "aerolink.tbl_eis_request_status.req_status_id", "aerolink.tbl_eis_request_status.req_status");

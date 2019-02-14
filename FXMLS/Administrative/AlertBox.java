@@ -5,10 +5,12 @@
  */
 package FXMLS.Administrative;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Optional;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +26,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -96,6 +99,11 @@ public class AlertBox {
          st.close();    
      }
      
+     public static void iconclose(FontAwesomeIconView close){
+         Stage st = (Stage) close.getScene().getWindow();
+         st.close();    
+     }
+     
      
      public void loadfxml(String fxml, Object obj){
          FXMLLoader load = new FXMLLoader();
@@ -121,6 +129,8 @@ public class AlertBox {
          btn.setTooltip(tp);
      }
      
+     
+     
      public void fxmlloader(String text,Pane pane) throws IOException{
        
        AnchorPane  p = FXMLLoader.load(getClass().getResource(text));
@@ -137,26 +147,14 @@ public class AlertBox {
      }  
      }
      
-     public static void warning(Pane p,TextField t,String title,String message){
-          t  = null;
-         for(Node n : p.getChildren()){
-         if(n.getClass().toString().contains("TextField")){
-            t = (TextField)n;
-            
-            }
-         }if(t.getText().equals("")){
-                      a = new Alert(AlertType.INFORMATION);
-                      a.setTitle(title);
-                      a.setHeaderText(null);
-                      a.setContentText(message);
-                      action = a.showAndWait();
-                }
-     }
-     
+    
      
    
+     
     
-    }
+    
+    
+}
 
 
     

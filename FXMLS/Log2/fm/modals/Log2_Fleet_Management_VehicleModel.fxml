@@ -24,8 +24,8 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <JFXTextField layoutX="31.0" layoutY="70.0" prefHeight="25.0" prefWidth="182.0" />
-      <JFXTextField layoutX="346.0" layoutY="68.0" prefHeight="25.0" prefWidth="182.0" />
+      <JFXTextField fx:id="txt_detailsvmodel" layoutX="31.0" layoutY="70.0" prefHeight="25.0" prefWidth="182.0" />
+      <JFXTextField fx:id="txt_detailsplateno" layoutX="346.0" layoutY="68.0" prefHeight="25.0" prefWidth="182.0" />
       <JFXButton layoutX="477.0" layoutY="330.0" style="-fx-background-color: #34a853;" text="Back" textFill="WHITE">
          <font>
             <Font size="15.0" />

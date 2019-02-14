@@ -7,19 +7,19 @@ package FXMLS.Administrative;
 
 /**
  *
- * @author Onodera
+ * @author Onodera-Chan
  */
-public class Visitor_Appointments {
-    private String Appointment_ID;
-    private String Name;
+public class tbl_visitor_appointments {
+      private String appointmentID;
+    private String name;
     private String time;
     private String date;
     private String empname;
     private String status;
 
-    public Visitor_Appointments(String Appointment_ID, String Name, String time, String date, String empname, String status) {
-        this.Appointment_ID = Appointment_ID;
-        this.Name = Name;
+    public tbl_visitor_appointments(String appointmentID, String name, String time, String date, String empname, String status) {
+        this.appointmentID = appointmentID;
+        this.name = name;
         this.time = time;
         this.date = date;
         this.empname = empname;
@@ -27,31 +27,31 @@ public class Visitor_Appointments {
     }
 
     /**
-     * @return the Appointment_ID
+     * @return the appointmentID
      */
-    public String getAppointment_ID() {
-        return Appointment_ID;
+    public String getAppointmentID() {
+        return appointmentID;
     }
 
     /**
-     * @param Appointment_ID the Appointment_ID to set
+     * @param appointmentID the appointmentID to set
      */
-    public void setAppointment_ID(String Appointment_ID) {
-        this.Appointment_ID = Appointment_ID;
+    public void setAppointmentID(String appointmentID) {
+        this.appointmentID = appointmentID;
     }
 
     /**
-     * @return the Name
+     * @return the name
      */
     public String getName() {
-        return Name;
+        return name;
     }
 
     /**
-     * @param Name the Name to set
+     * @param name the name to set
      */
-    public void setName(String Name) {
-        this.Name = Name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
