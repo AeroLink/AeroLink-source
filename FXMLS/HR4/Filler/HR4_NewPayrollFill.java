@@ -10,11 +10,8 @@ package FXMLS.HR4.Filler;
  * @author Jaeeeee
  */
 public class HR4_NewPayrollFill {
-    public static String jae, jae1, jae2, jae3;
-    public static void CreateNew(String pc,String sd, String ed,String dpt){
+    public static String jae;
+    public static void CreateNew(String pc){
         jae = pc;
-        jae1 = sd;
-        jae2 = ed;
-        jae3 = dpt;
     }
 }

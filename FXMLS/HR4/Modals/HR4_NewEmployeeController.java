@@ -5,7 +5,7 @@
  */
 package FXMLS.HR4.Modals;
 
-import Synapse.RAW;
+//import Synapse.RAW;
 import com.jfoenix.controls.JFXButton;
 import java.io.File;
 import java.net.URL;
@@ -77,7 +77,7 @@ public class HR4_NewEmployeeController implements Initializable {
         // TODO
         
         
-        cboGender.getItems().addAll("Male", "Female");
+        /*cboGender.getItems().addAll("Male", "Female");
         cboGender.getSelectionModel().selectFirst();
         
         new RAW("tbl_hr1_suffix").get().stream().forEach(action -> {
@@ -122,14 +122,14 @@ public class HR4_NewEmployeeController implements Initializable {
                 employee_image.setSmooth(true);
                 employee_image.setCache(true);
             }
-        });
+        });*/
     }
 
-    private void setExtFilters(FileChooser chooser) {
+    /*private void setExtFilters(FileChooser chooser) {
         chooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("All Images", "*.*"),
                 new FileChooser.ExtensionFilter("PNG", "*.png")
         );
-    }
+    }*/
 
 }

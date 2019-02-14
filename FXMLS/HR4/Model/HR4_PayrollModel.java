@@ -12,8 +12,7 @@ package FXMLS.HR4.Model;
 public class HR4_PayrollModel extends Synapse.Model{
     public HR4_PayrollModel()
     {
-    setColumns("id","employee_code","job_id","dept_id","classification_id","gross_pay","net_pay","start_date","end_date");
-    this.initTable("tbl_hr4_payroll");
+    setColumns("id","payroll_code","start_date","end_date");
+    this.initTable("tbl_hr4_payroll2");
     }
-    
 }
