@@ -199,14 +199,14 @@
             </Label>
          </children>
       </Pane>
-      <Pane layoutX="195.0" layoutY="518.0" prefHeight="157.0" prefWidth="172.0" style="-fx-border-color: #999966; -fx-background-color: #fff;">
+      <Pane layoutX="14.0" layoutY="518.0" prefHeight="157.0" prefWidth="172.0" style="-fx-border-color: #999966; -fx-background-color: #fff;">
          <children>
-            <Label layoutX="9.0" layoutY="9.0" prefHeight="18.0" prefWidth="54.0" text="Rating:">
+            <Label layoutX="9.0" layoutY="9.0" prefHeight="18.0" prefWidth="54.0" text="Ratings:">
                <font>
                   <Font name="Lato Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lbl_rating" alignment="CENTER_RIGHT" layoutX="105.0" layoutY="9.0" prefHeight="10.0" prefWidth="61.0" text="0">
+            <Label fx:id="lbl_rating" alignment="CENTER_RIGHT" layoutX="105.0" layoutY="9.0" prefHeight="10.0" prefWidth="61.0" text="5">
                <font>
                   <Font name="Lato Regular" size="14.0" />
                </font>
@@ -216,56 +216,16 @@
                   <Font name="Lato Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lbl_remarks" layoutX="9.0" layoutY="72.0" prefHeight="18.0" prefWidth="61.0" text="None">
+            <Label fx:id="lbl_remarks" layoutX="9.0" layoutY="72.0" prefHeight="18.0" prefWidth="61.0" text="Good">
                <font>
                   <Font name="Lato Regular" size="14.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <Pane layoutX="13.0" layoutY="518.0" prefHeight="157.0" prefWidth="172.0" style="-fx-border-color: #999966; -fx-background-color: #fff;">
+      <Pane layoutX="197.0" layoutY="518.0" prefHeight="157.0" prefWidth="214.0" style="-fx-border-color: #999966; -fx-background-color: #fff;">
          <children>
-            <Label layoutX="6.0" layoutY="15.0" prefHeight="30.0" prefWidth="89.0" text="Exam Taken: ">
-               <font>
-                  <Font name="Lato Bold" size="14.0" />
-               </font>
-            </Label>
-            <Label fx:id="lbl_exam_taken" alignment="CENTER_RIGHT" layoutX="129.0" layoutY="19.0" onMouseClicked="#ExamTaken" prefHeight="19.0" prefWidth="38.0" text="0" textFill="#0387a1">
-               <font>
-                  <Font name="Lato Bold" size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Label>
-            <Label layoutX="6.0" layoutY="45.0" prefHeight="11.0" prefWidth="110.0" text="Training Taken: ">
-               <font>
-                  <Font name="Lato Bold" size="14.0" />
-               </font>
-            </Label>
-            <Label fx:id="lbl_training_taken" alignment="CENTER_RIGHT" layoutX="113.0" layoutY="44.0" onMouseClicked="#TrainingTaken" prefHeight="18.0" prefWidth="54.0" text="0" textFill="#0387a1">
-               <font>
-                  <Font name="Lato Bold" size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Label>
-            <Label layoutX="6.0" layoutY="94.0" text="*Click the blue link to view">
-               <font>
-                  <Font name="Lato Italic" size="13.0" />
-               </font>
-            </Label>
-            <Label layoutX="6.0" layoutY="110.0" text=" the details*">
-               <font>
-                  <Font name="Lato Italic" size="13.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-      <Pane layoutX="386.0" layoutY="518.0" prefHeight="157.0" prefWidth="214.0" style="-fx-border-color: #999966; -fx-background-color: #fff;">
-         <children>
-            <Label layoutX="25.0" layoutY="6.0" prefHeight="18.0" prefWidth="172.0" text="Position to Promote to: ">
+            <Label layoutX="25.0" layoutY="6.0" prefHeight="18.0" prefWidth="172.0" text="Recommend Employee">
                <font>
                   <Font name="Lato Bold" size="15.0" />
                </font>

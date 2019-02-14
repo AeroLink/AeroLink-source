@@ -45,8 +45,6 @@ public class BUDGET_REQUESTFORMController implements Initializable {
                                                                             "Logistic - Procurement");
     @FXML
     private JFXTextField lastname;
-    @FXML
-    private JFXComboBox<?> combo_emp;
      
     
     /**
