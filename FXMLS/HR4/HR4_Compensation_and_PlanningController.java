@@ -68,6 +68,7 @@ import javafx.scene.layout.AnchorPane;
  * @author JaeJae
  */
 public class HR4_Compensation_and_PlanningController implements Initializable {
+    String[] StepCbx = {"Step 1","Step 2","Step 3","Step 4","Step 5","Step 6","Step 7","Step 8"};
     ObservableList<HR4_SalaryGradeUpClass> obj = FXCollections.observableArrayList();
     ObservableList<HR4_SalaryClass> obj1 = FXCollections.observableArrayList();
     ObservableList<HR4_BenefitsClass> obj2 = FXCollections.observableArrayList();
@@ -90,9 +91,12 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
     @FXML
     private TextField c;
     @FXML
-    private TextField e;
-    @FXML
     private TextField d;
+    @FXML
+    private ComboBox<String> stepcombobox;
+    @FXML
+    private ComboBox<String> gradecombobox;
+
     
     public void initialize(URL url, ResourceBundle rb) {
     this.generateTable();
@@ -101,6 +105,15 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
     this.populateTable1();
     this.generateTable2();
     this.populateTable2();
+
+    for (String str : StepCbx) {
+        stepcombobox.getItems().add(str);
+    }
+    
+    gradecombobox.getSelectionModel().selectedItemProperty().addListener(listener -> {
+        GlobalCount = 0;
+        DummyCount = 0;
+    });
     
     tbl_salary_up.setOnMouseClicked(e -> {
         HR4_SalaryGradeUpClass r = tbl_salary_up.getSelectionModel().getSelectedItem();

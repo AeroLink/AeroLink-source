@@ -167,8 +167,8 @@
                                                                      </font>
                                                                   </Label>
                                                                   <TextField disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                                                  <ComboBox prefHeight="25.0" prefWidth="278.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                                                  <ComboBox prefHeight="25.0" prefWidth="248.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                                                  <ComboBox fx:id="stepcombobox" prefHeight="25.0" prefWidth="278.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                                                  <ComboBox fx:id="gradecombobox" prefHeight="25.0" prefWidth="248.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                                                                </children>
                                                             </GridPane>
                                                             <JFXButton alignment="CENTER" layoutX="317.0" layoutY="243.0" prefHeight="30.0" prefWidth="145.0" styleClass="btn-primary" text="Update" />

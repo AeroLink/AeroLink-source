@@ -86,7 +86,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
     private TableView<HR4_EmpInfoClass> tbl_chc;
     @FXML
     private ComboBox statcb;
-
+  
     private ComboBox ckasscb;
     @FXML
     private JFXTextField srch1;
