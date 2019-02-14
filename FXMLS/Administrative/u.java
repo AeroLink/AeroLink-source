@@ -14,6 +14,7 @@ import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
+import net.sf.jasperreports.engine.convert.ImageConverter;
 
 /**
  * Provide general purpose methods for handling OpenCV-JavaFX data conversion.
@@ -38,6 +39,7 @@ public final class u
 	{
 		try
 		{
+                        
 			return SwingFXUtils.toFXImage(matToBufferedImage(frame), null);
 		}
 		catch (Exception e)

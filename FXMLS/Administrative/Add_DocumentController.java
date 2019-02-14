@@ -53,7 +53,7 @@ public class Add_DocumentController implements Initializable {
     private JFXTextField txtpathfile;
     
     ObservableList<String> depbox = FXCollections.observableArrayList("HR","Logistics","Core","Administrative");
-    ObservableList<String> categorybox = FXCollections.observableArrayList("201 Files","Contracts","Shipment Files","Legal Records","Procurement Reports","Warehouse Reports","Other Files");
+    ObservableList<String> categorybox = FXCollections.observableArrayList();
     ObservableList<String> typebox = FXCollections.observableArrayList(".pdf");
     @FXML
     private JFXButton btnsubmit;
@@ -63,7 +63,7 @@ public class Add_DocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
      docdep.setItems(depbox);
-     doccategory.setItems(categorybox);
+     category2();
      doctype.setItems(typebox);
      
     }    
@@ -125,11 +125,21 @@ public class Add_DocumentController implements Initializable {
             else{
                AlertBox.display("Alert", "No File Selected");
             }
-            
-            }
-    
-   
+ }
 
-    
-    
+  public void category2(){
+      categorybox.clear();
+        try{
+             String query = "select * from aerolink.admin_document_category where [Category ID] > 2";
+             pst = con.prepareStatement(query);
+             rs = pst.executeQuery();
+             while(rs.next()){
+                 categorybox.add(rs.getString("Category"));
+             }
+             doccategory.setItems(categorybox);
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+      
+  }
 }

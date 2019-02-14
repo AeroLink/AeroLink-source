@@ -108,6 +108,9 @@ public class CM_RequestSkillController implements Initializable {
             rs.insert(skill_req);
             Alert saved = new Alert(Alert.AlertType.INFORMATION);
             saved.setContentText("Data Successfully Submitted");
+            cbox_dept.setValue(null);
+            cbox_job_position.setValue(null);
+            txt_reason.setText(null);
             saved.showAndWait();
         }catch (Exception e) {
                 System.err.println(e);

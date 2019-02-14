@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR1.HR1_Social_RecognitionController">
+<AnchorPane stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR1.HR1_Social_RecognitionController">
    <children>
       <StackPane prefHeight="720.0" prefWidth="1375.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -176,7 +176,7 @@
                                                 </JFXButton>
                                                 <JFXComboBox fx:id="rewardcategory" layoutX="10.0" layoutY="438.0" prefHeight="34.0" prefWidth="301.0" promptText="Choose Reward:" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
                                                 <JFXComboBox fx:id="Department1" layoutX="10.0" layoutY="9.0" prefHeight="34.0" prefWidth="305.0" promptText="Choose Department:" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="9.0" />
-                                                <JFXTextField fx:id="remarks" editable="false" layoutX="10.0" layoutY="497.0" maxWidth="308.0" minWidth="246.0" prefHeight="36.0" prefWidth="306.0" promptText="Remarks:" unFocusColor="BLACK" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                                <JFXTextField fx:id="remarks" layoutX="10.0" layoutY="497.0" maxWidth="308.0" minWidth="246.0" prefHeight="36.0" prefWidth="306.0" promptText="Remarks:" unFocusColor="BLACK" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
@@ -219,7 +219,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <TableView fx:id="tblUE" layoutX="10.0" layoutY="34.0" prefHeight="587.0" prefWidth="492.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="34.0">
+                                                <TableView fx:id="tblUE" layoutX="10.0" layoutY="34.0" prefHeight="574.0" prefWidth="492.0" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="34.0">
                                                    <columnResizePolicy>
                                                       <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                                    </columnResizePolicy>

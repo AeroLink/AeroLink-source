@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d362b631-d6f8-4391-aa29-13e30e51e349">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select [Document ID], [Document Name], Category, [Time Added], [Date Added] from aerolink.admin_document_file]]>
+	</queryString>
+	<field name="documentid" class="java.lang.String"/>
+	<field name="documentname" class="java.lang.String"/>
+	<field name="documentcategory" class="java.lang.String"/>
+	<field name="timeadded" class="java.lang.String"/>
+	<field name="dateadded" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="201" y="11" width="242" height="68" uuid="7bced5c0-1456-4169-a18a-c55b8897ce2d"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Serif" size="48"/>
+				</textElement>
+				<text><![CDATA[File Reports]]></text>
+			</staticText>
+			<image>
+				<reportElement x="106" y="0" width="117" height="79" uuid="ee25bfb3-91fa-45f0-b52f-ce93df0872cb"/>
+				<imageExpression><![CDATA["C:\\Users\\Onodera-Chan\\Documents\\PS2\\LATEST SOURCE\\Staging\\src\\Assets\\300 x 300.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<line>
+				<reportElement x="7" y="36" width="547" height="1" uuid="53409f45-f570-4a2d-8c82-0bdabbf83752"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="0" width="87" height="20" uuid="2ea14d5b-bbb6-494a-b70d-4c5d1e759833"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Document ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="109" y="0" width="114" height="20" uuid="6ca20fb6-d58a-4584-a408-9f2301e40a15"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Document Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="244" y="0" width="114" height="20" uuid="8e626c5b-1ec6-4720-8f47-e94638479008"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Category]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="373" y="0" width="99" height="20" uuid="5aad5246-fcab-4f8a-a9a1-8c136cb50e68"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Time Added]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="472" y="0" width="100" height="20" uuid="989a06b9-af03-4390-941d-7a7935146fa7"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Date Added]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="87" height="20" uuid="d8043410-3b8e-4807-bbd5-79a3bbb64045"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{documentid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="87" y="0" width="157" height="20" uuid="3826e127-df52-46ed-9837-8ef5f313389b"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{documentname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="244" y="0" width="114" height="20" uuid="f2ae0e06-792c-45c0-8b4d-d6b12c1bb98c"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{documentcategory}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="358" y="0" width="114" height="20" uuid="5e3e8649-9d60-44c7-8af1-306a73c05ea5"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{timeadded}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="472" y="0" width="100" height="20" uuid="41fa1be3-b74e-45b9-8c28-f79dc50f8b9b"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dateadded}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="71" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -9,53 +9,62 @@
 
 <AnchorPane id="AnchorPane" fx:id="visitorpassanchor" prefHeight="339.0" prefWidth="780.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Administrative.Visitor_CardController">
    <children>
-      <Label fx:id="txtdest" alignment="CENTER" layoutX="421.0" layoutY="211.0" prefHeight="37.0" prefWidth="280.0">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="captureimg" fitHeight="150.0" fitWidth="150.0" layoutX="36.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
-      <Label layoutX="230.0" layoutY="131.0" prefHeight="37.0" prefWidth="89.0" text="Name:">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" contentDisplay="TOP" layoutX="308.0" layoutY="20.0" prefHeight="70.0" prefWidth="308.0" text="Visitor Pass" underline="true" AnchorPane.leftAnchor="308.0" AnchorPane.rightAnchor="164.0">
-         <font>
-            <Font name="Bodoni MT" size="57.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="qrimg" fitHeight="150.0" fitWidth="150.0" layoutX="36.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="txtname" alignment="CENTER" layoutX="421.0" layoutY="131.0" prefHeight="37.0" prefWidth="280.0">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
-      <Label layoutX="227.0" layoutY="170.0" prefHeight="37.0" prefWidth="185.0" text="Person to Meet:">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
-      <Label fx:id="txtptm" alignment="CENTER" layoutX="421.0" layoutY="170.0" prefHeight="37.0" prefWidth="280.0">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
-      <Label layoutX="226.0" layoutY="211.0" prefHeight="37.0" prefWidth="155.0" text="Destination:">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
-      <Label layoutX="226.0" layoutY="254.0" prefHeight="37.0" prefWidth="114.0" text="Purpose:">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
-      <Label fx:id="txtpurpose" alignment="CENTER" layoutX="421.0" layoutY="248.0" prefHeight="37.0" prefWidth="280.0">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
+      <AnchorPane fx:id="visitorinfopass" layoutX="23.0" layoutY="20.0" prefHeight="265.0" prefWidth="739.0">
+         <children>
+            <Label fx:id="txtdest" alignment="CENTER" layoutX="398.0" layoutY="156.0" prefHeight="37.0" prefWidth="280.0">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="captureimg" fitHeight="150.0" fitWidth="177.0" layoutX="14.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="207.0" layoutY="76.0" prefHeight="37.0" prefWidth="89.0" text="Name:">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="TOP" layoutX="286.0" prefHeight="70.0" prefWidth="308.0" text="Visitor Pass" underline="true">
+               <font>
+                  <Font name="Bodoni MT" size="57.0" />
+               </font>
+            </Label>
+            <Label fx:id="txtname" alignment="CENTER" layoutX="398.0" layoutY="76.0" prefHeight="37.0" prefWidth="280.0">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="204.0" layoutY="115.0" prefHeight="37.0" prefWidth="185.0" text="Person to Meet:">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="txtptm" alignment="CENTER" layoutX="398.0" layoutY="115.0" prefHeight="37.0" prefWidth="280.0">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="203.0" layoutY="156.0" prefHeight="37.0" prefWidth="155.0" text="Destination:">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="203.0" layoutY="199.0" prefHeight="37.0" prefWidth="114.0" text="Purpose:">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="txtpurpose" alignment="CENTER" layoutX="398.0" layoutY="193.0" prefHeight="37.0" prefWidth="280.0">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="companyid" alignment="CENTER" layoutX="678.0" prefHeight="37.0" prefWidth="61.0">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <ImageView fx:id="qrimg" fitHeight="150.0" fitWidth="150.0" layoutX="36.0" layoutY="179.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" />
       <JFXButton fx:id="btnprint" layoutX="521.0" layoutY="297.0" onAction="#printpass" prefHeight="30.0" prefWidth="114.0" style="-fx-background-color: #00b359; -fx-background-radius: 5em;" text="PRINT" textFill="WHITE">
          <font>
             <Font name="Aparajita" size="15.0" />
@@ -71,10 +80,5 @@
             <Image url="@../../Assets/300%20x%20300.png" />
          </image>
       </ImageView>
-      <Label fx:id="companyid" alignment="CENTER" layoutX="701.0" layoutY="20.0" opacity="0.0" prefHeight="37.0" prefWidth="61.0">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

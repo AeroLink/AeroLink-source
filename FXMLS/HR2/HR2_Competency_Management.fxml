@@ -77,7 +77,7 @@
                                                 <Font name="Lato Semibold" size="15.0" />
                                              </font>
                                           </JFXTextField>
-                                          <JFXButton fx:id="btn_refresh" buttonType="RAISED" layoutX="567.0" layoutY="25.0" prefHeight="31.0" prefWidth="91.0" styleClass="btn-primary" text="Refresh" AnchorPane.rightAnchor="15.0">
+                                          <JFXButton fx:id="btn_refresh" buttonType="RAISED" layoutX="567.0" layoutY="25.0" onAction="#loadData" prefHeight="31.0" prefWidth="91.0" styleClass="btn-primary" text="Refresh" AnchorPane.rightAnchor="15.0">
                                              <font>
                                                 <Font name="Roboto Black" size="15.0" />
                                              </font>
@@ -116,6 +116,11 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </TableView>
+                                    <JFXButton buttonType="RAISED" layoutX="568.0" layoutY="49.0" onAction="#displaySkillReq" prefHeight="29.0" prefWidth="95.0" styleClass="btn-primary" text="Refresh" AnchorPane.rightAnchor="10.0">
+                                       <font>
+                                          <Font name="Lato Bold" size="15.0" />
+                                       </font>
+                                    </JFXButton>
                                  </children>
                               </AnchorPane>
                            </children>
