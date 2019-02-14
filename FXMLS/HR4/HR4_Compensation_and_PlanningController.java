@@ -5,18 +5,32 @@
  */
 package FXMLS.HR4;
 
+import FXMLS.HR4.ClassFiles.HR4_BenefitsClass;
+import FXMLS.HR4.ClassFiles.HR4_EmpInfoClass;
+import FXMLS.HR4.ClassFiles.HR4_NewPayrollClass;
 import FXMLS.HR4.ClassFiles.HR4_PHClass;
 import FXMLS.HR4.ClassFiles.HR4_SSSClass;
 import FXMLS.HR4.ClassFiles.HR4_SalaryClass;
+import FXMLS.HR4.ClassFiles.HR4_SalaryGradeUpClass;
 import FXMLS.HR4.ClassFiles.HR4_TaxClass;
+import FXMLS.HR4.ClassFiles.TableModel_Jobs;
+import FXMLS.HR4.Filler.HR4_NewCompensationFill;
+import FXMLS.HR4.Filler.HR4_NewPayrollFill;
+import FXMLS.HR4.Filler.HR4_NewPayrollFill2;
+import FXMLS.HR4.Model.HR4_BenefitsModel;
+import FXMLS.HR4.Model.HR4_NewPayrollModel;
 import FXMLS.HR4.Model.HR4_PHModel;
 import FXMLS.HR4.Model.HR4_SSSModel;
+import FXMLS.HR4.Model.HR4_SalaryGradeUpModel;
 import FXMLS.HR4.Model.HR4_SalaryModel;
 import FXMLS.HR4.Model.HR4_TaxModel;
 import Synapse.Components.Modal.Modal;
 import Synapse.Form;
 import Synapse.Model;
 import Synapse.Session;
+import com.jfoenix.controls.JFXButton;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -28,6 +42,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -38,8 +53,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -49,109 +68,115 @@ import javafx.scene.layout.AnchorPane;
  * @author JaeJae
  */
 public class HR4_Compensation_and_PlanningController implements Initializable {
+    String[] StepCbx = {"Step 1","Step 2","Step 3","Step 4","Step 5","Step 6","Step 7","Step 8"};
+    ObservableList<HR4_SalaryGradeUpClass> obj = FXCollections.observableArrayList();
+    ObservableList<HR4_SalaryClass> obj1 = FXCollections.observableArrayList();
+    ObservableList<HR4_BenefitsClass> obj2 = FXCollections.observableArrayList();
+    HR4_SalaryGradeUpModel sgm = new HR4_SalaryGradeUpModel();
+    HR4_SalaryModel sm = new HR4_SalaryModel();
+    HR4_BenefitsModel bm = new HR4_BenefitsModel();
     Boolean searchStatus = false;
     @FXML
-    private TableView<HR4_SalaryClass> tbl_salary;
-    ObservableList<HR4_SSSClass> sss = FXCollections.observableArrayList();
-    ObservableList<HR4_PHClass> ph = FXCollections.observableArrayList();
-    ObservableList<HR4_TaxClass> wh = FXCollections.observableArrayList();
-    ObservableList<HR4_SalaryClass> obj3 = FXCollections.observableArrayList();
-    HR4_TaxModel taxmodel = new HR4_TaxModel();
-    HR4_SSSModel sssmodel = new HR4_SSSModel();
-    HR4_PHModel phmodel = new HR4_PHModel();
-    HR4_SalaryModel salarymodel = new HR4_SalaryModel();
+    private TableView<HR4_SalaryGradeUpClass> tbl_salary_up;
     @FXML
-    private ComboBox <String>loans_cbx;
+    private TableView<HR4_SalaryClass> tbl_salarygrade;
+    @FXML
+    private TableView<HR4_BenefitsClass> tbl_benefits;
+    @FXML
+    private JFXButton AddNewBenefitsBtn;
+    @FXML
+    private TextField a;
+    @FXML
+    private TextField b;
+    @FXML
+    private TextField c;
+    @FXML
+    private TextField d;
+    @FXML
+    private ComboBox<String> stepcombobox;
+    @FXML
+    private ComboBox<String> gradecombobox;
     
-    ObservableList<String> LoansTypee = FXCollections.observableArrayList("SSS","PhilHealth","WithHolding Tax","Pag Ibig");
-    @FXML
-    private TableView<HR4_SSSClass> tbl_sss;
-    @FXML
-    private TableView<HR4_PHClass> tbl_ph;
-    @FXML
-    private TableView<HR4_TaxClass> tbl_wh;
-    @FXML
-    private TableView<?> tbl_pi;
-    
-    
-    @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.generateSalaryGrade();
-        this.populateSalaryGrade();
-        
-        this.generateTable();
-        this.populateTable();
-        
-        this.generateTable1();
-        this.populateTable1();
-        
-        this.generateTable2();
-        this.populateTable2();
-        loans_cbx.setItems(LoansTypee);
+    this.generateTable();
+    this.populateTable();
+    this.generateTable1();
+    this.populateTable1();
+    this.generateTable2();
+    this.populateTable2();
     
+    for (String str : StepCbx) {
+        stepcombobox.getItems().add(str);
     }
-     public void generateTable() {
+    
+    gradecombobox.getSelectionModel().selectedItemProperty().addListener(listener -> {
+        GlobalCount = 0;
+        DummyCount = 0;
+    });
+    
+    tbl_salary_up.setOnMouseClicked(e -> {
+        HR4_SalaryGradeUpClass r = tbl_salary_up.getSelectionModel().getSelectedItem();
+            a.setText(r.getEmpCode());
+            b.setText(r.getFN());
+            c.setText(r.getJobs());
+            d.setText(r.getDept());
+    });
+    AddNewBenefitsBtn.setOnMouseClicked(e -> BenefitsModal()); 
+    }
+    public void BenefitsModal(){
+        Modal md = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_NewBenefits.fxml").getParent());
+        md.open();
+    }
+    public void generateTable() {
 
-        tbl_sss.getItems().clear();
-        tbl_sss.getColumns().removeAll(tbl_sss.getColumns());
-        TableColumn<HR4_SSSClass, String> roc = new TableColumn<>("Range of Compensation");
-        TableColumn<HR4_SSSClass, String> msc = new TableColumn<>("Monthly Salary Credit");
-        TableColumn<HR4_SSSClass, String> er1 = new TableColumn<>("Employer");
-        TableColumn<HR4_SSSClass, String> ee1 = new TableColumn<>("Employee");
-        TableColumn<HR4_SSSClass, String> total1 = new TableColumn<>("Total");
-        TableColumn<HR4_SSSClass, String> ec_er = new TableColumn<>("Designation");
-        TableColumn<HR4_SSSClass, String> er2 = new TableColumn<>("Employer");
-        TableColumn<HR4_SSSClass, String> ee2 = new TableColumn<>("Employee");
-        TableColumn<HR4_SSSClass, String> total2 = new TableColumn<>("Total");
-        TableColumn<HR4_SSSClass, String> totalcon = new TableColumn<>("Total Contribution");
+        tbl_salary_up.getItems().clear();
+        tbl_salary_up.getColumns().removeAll(tbl_salary_up.getColumns());
+        TableColumn<HR4_SalaryGradeUpClass, String> emp_code = new TableColumn<>("Employee Code");
+        TableColumn<HR4_SalaryGradeUpClass, String> fnn = new TableColumn<>("Full Name");
+        TableColumn<HR4_SalaryGradeUpClass, String> grade = new TableColumn<>("Grade");
+        TableColumn<HR4_SalaryGradeUpClass, String> status = new TableColumn<>("Status");
 
         //<editor-fold defaultstate="collapsed" desc="Cell value factories">
-        roc.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SSSClass, String> param) -> param.getValue().a);
-        msc.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SSSClass, String> param) -> param.getValue().c);
-        er1.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SSSClass, String> param) -> param.getValue().d);
-        ee1.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SSSClass, String> param) -> param.getValue().e);
-        total1.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SSSClass, String> param) -> param.getValue().f);
-        ec_er.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SSSClass, String> param) -> param.getValue().g);
-        er2.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SSSClass, String> param) -> param.getValue().h);
-        ee2.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SSSClass, String> param) -> param.getValue().i);
-        total2.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SSSClass, String> param) -> param.getValue().j);
-        totalcon.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SSSClass, String> param) -> param.getValue().k);
+        emp_code.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SalaryGradeUpClass, String> param) -> param.getValue().a);
+        fnn.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SalaryGradeUpClass, String> param) -> param.getValue().d);
+        grade.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SalaryGradeUpClass, String> param) -> param.getValue().b);
+        status.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SalaryGradeUpClass, String> param) -> param.getValue().c);
 
         //</editor-fold>
-        tbl_sss.getColumns().addAll(roc, msc, er1, ee1, total1, ec_er, er2, ee2, total2, totalcon);
+        tbl_salary_up.getColumns().addAll(emp_code, fnn, grade, status);
     }
-        
     long DummyCount = 0;
     long GlobalCount = 0;
     public void populateTable() {
         CompletableFuture.supplyAsync(() -> {
-
             while (Session.CurrentRoute.equals("hr4cnp")) {
                 try {
-                    sssmodel.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
+                    sgm.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
                         DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
                     });
-
-                    if (DummyCount != GlobalCount) {
-                            List rs = sssmodel
-                                    .get(
-                                            "CONCAT(rocmin,' - ',rocmax) as roc",
-                                            "msc",
-                                            "er1",
-                                            "ee1",
-                                            "total1",
-                                            "ec_er",
-                                            "er2",
-                                            "ee2",
-                                            "total2",
-                                            "totalcon");
+                    if (DummyCount != GlobalCount){    
+                        tbl_salary_up.getItems();
+                        List rs = sgm
+                                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "tblDD", "=", "emp_code")
+                                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_jobs", "employee_code", "tblD", "=", "emp_code")
+                                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "tblD", "job_id", true)
+                                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "=", "aerolink.tbl_hr4_jobs", "dept_id", true)
+                                 .get(
+                                            "tblD.employee_code as emp_code",
+                                            "CONCAT(tblDD.lastname,', ',tblDD.firstname,' ',tblDD.middlename,'.') as fnn",
+                                            "aerolink.tbl_hr4_jobs.title as job_id",
+                                            "aerolink.tbl_hr4_department.dept_name as dept_id",
+                                            "grade",
+                                            "status"
+                                            );
                         AddJobToTable(rs);
                         GlobalCount = DummyCount;
                     }
 
                     Thread.sleep(3000);
                 } catch (InterruptedException ex) {
-                    Logger.getLogger(HR4_Core_Human_Capital_ManagementController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(HR4_Compensation_and_PlanningController.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
@@ -161,167 +186,25 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
     }
 
     public void AddJobToTable(List rs) {
-        sss.clear();
-        tbl_sss.getItems().clear();
-
+        obj.clear();
+        tbl_salary_up.getItems().clear();
         for (Object row : rs) {
             HashMap crow = (HashMap) row;
-            String roc = String.valueOf(crow.get("roc"));
-            String msc = (String) crow.get("msc");
-            String er1 = (String) crow.get("er1");
-            String ee1 = (String) crow.get("ee1");
-            String total1 = (String) crow.get("total1");
-            String ec_er = (String) crow.get("ec_er");
-            String er2 = (String) crow.get("er2");
-            String ee2 = (String) crow.get("ee2");
-            String total2 = (String) crow.get("total2");
-            String totalcon = (String) crow.get("totalcon");
-            sss.add(new HR4_SSSClass(roc, msc, er1, ee1, total1,ec_er,er2,ee2,total2,totalcon));
+            String emp_code = String.valueOf(crow.get("emp_code"));
+            String fnn = (String) crow.get("fnn");
+            String grade = (String) crow.get("grade");
+            String status = (String) crow.get("status");
+            String job_id = (String) crow.get("job_id");
+            String dept_id = (String) crow.get("dept_id");
+            obj.add(new HR4_SalaryGradeUpClass(emp_code, fnn, grade, status, job_id, dept_id));
         }
-        tbl_sss.setItems(sss);
+        tbl_salary_up.setItems(obj);
     }
+    //Salary Grade Table
     public void generateTable1() {
 
-        tbl_ph.getItems().clear();
-        tbl_ph.getColumns().removeAll(tbl_ph.getColumns());
-        TableColumn<HR4_PHClass, String> mbs_min = new TableColumn<>("Monthly Basic Salary(min)");
-        TableColumn<HR4_PHClass, String> mbs_max = new TableColumn<>("Monthly Basic Salary(max)");
-        TableColumn<HR4_PHClass, String> monthly_premium_min = new TableColumn<>("Monthly Premium(min)");
-        TableColumn<HR4_PHClass, String> monthly_premium_max = new TableColumn<>("Monthly Premium(max)");
-        TableColumn<HR4_PHClass, String> ee_share_min = new TableColumn<>("Employee Share(min)");
-        TableColumn<HR4_PHClass, String> ee_share_max = new TableColumn<>("Employee Share(max)");
-        TableColumn<HR4_PHClass, String> er_share_min = new TableColumn<>("Employer Share(min)");
-        TableColumn<HR4_PHClass, String> er_share_max = new TableColumn<>("Employer Share(max)");
-
-        //<editor-fold defaultstate="collapsed" desc="Cell value factories">
-        mbs_min.setCellValueFactory((TableColumn.CellDataFeatures<HR4_PHClass, String> param) -> param.getValue().a);
-        mbs_max.setCellValueFactory((TableColumn.CellDataFeatures<HR4_PHClass, String> param) -> param.getValue().b);
-        monthly_premium_min.setCellValueFactory((TableColumn.CellDataFeatures<HR4_PHClass, String> param) -> param.getValue().c);
-        monthly_premium_max.setCellValueFactory((TableColumn.CellDataFeatures<HR4_PHClass, String> param) -> param.getValue().d);
-        ee_share_min.setCellValueFactory((TableColumn.CellDataFeatures<HR4_PHClass, String> param) -> param.getValue().e);
-        ee_share_max.setCellValueFactory((TableColumn.CellDataFeatures<HR4_PHClass, String> param) -> param.getValue().f);
-        er_share_min.setCellValueFactory((TableColumn.CellDataFeatures<HR4_PHClass, String> param) -> param.getValue().g);
-        er_share_max.setCellValueFactory((TableColumn.CellDataFeatures<HR4_PHClass, String> param) -> param.getValue().h);
-        //</editor-fold>
-        tbl_ph.getColumns().addAll(mbs_min,mbs_max,monthly_premium_min,monthly_premium_max,ee_share_min,ee_share_max,er_share_min,er_share_max);
-    }
-    long DummyCount1 = 0;
-    long GlobalCount1 = 0;
-    public void populateTable1() {
-        CompletableFuture.supplyAsync(() -> {
-
-            while (Session.CurrentRoute.equals("hr4cnp")) {
-                try {
-                    phmodel.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
-                        DummyCount1 = Long.parseLong(((HashMap) e).get("chk").toString());
-                    });
-
-                    if (DummyCount1 != GlobalCount1) {
-                            List rs = phmodel
-                                    .get(
-                                            "mbs_min","mbs_max","monthly_premium_min","monthly_premium_max","ee_share_min","ee_share_max","er_share_min","er_share_max");
-                        AddJobToTable1(rs);
-                        GlobalCount1 = DummyCount1;
-                    }
-
-                    Thread.sleep(3000);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(HR4_Core_Human_Capital_ManagementController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-
-            return 0;
-        }, Session.SessionThreads);
-
-    }
-
-    public void AddJobToTable1(List rs) {
-        ph.clear();
-        tbl_ph.getItems().clear();
-        for (Object row : rs) {
-            HashMap crow = (HashMap) row;
-            String mbs_min = String.valueOf(crow.get("mbs_min"));
-            String mbs_max = (String) crow.get("mbs_max");
-            String monthly_premium_min = (String) crow.get("monthly_premium_min");
-            String monthly_premium_max = (String) crow.get("monthly_premium_max");
-            String ee_share_min = (String) crow.get("ee_share_min");
-            String ee_share_max = (String) crow.get("ee_share_max");
-            String er_share_min = (String) crow.get("er_share_min");
-            String er_share_max = (String) crow.get("er_share_max");
-            ph.add(new HR4_PHClass(mbs_min,mbs_max,monthly_premium_min,monthly_premium_max,ee_share_min,ee_share_max,er_share_min,er_share_max));
-        }
-        tbl_ph.setItems(ph);
-    }
-    public void generateTable2() {
-
-        tbl_wh.getItems().clear();
-        tbl_wh.getColumns().removeAll(tbl_wh.getColumns());
-        TableColumn<HR4_TaxClass, String> min = new TableColumn<>("Min");
-        TableColumn<HR4_TaxClass, String> max = new TableColumn<>("Max");
-        TableColumn<HR4_TaxClass, String> basic_amount = new TableColumn<>("Basic Amount");
-        TableColumn<HR4_TaxClass, String> additional_rate = new TableColumn<>("Additional Rate");
-        TableColumn<HR4_TaxClass, String> of_excess_over = new TableColumn<>("Of Excess Over");
-        TableColumn<HR4_TaxClass, String> total_tax = new TableColumn<>("Total Tax");
-        
-        //<editor-fold defaultstate="collapsed" desc="Cell value factories">
-        min.setCellValueFactory((TableColumn.CellDataFeatures<HR4_TaxClass, String> param) -> param.getValue().a);
-        max.setCellValueFactory((TableColumn.CellDataFeatures<HR4_TaxClass, String> param) -> param.getValue().b);
-        basic_amount.setCellValueFactory((TableColumn.CellDataFeatures<HR4_TaxClass, String> param) -> param.getValue().c);
-        additional_rate.setCellValueFactory((TableColumn.CellDataFeatures<HR4_TaxClass, String> param) -> param.getValue().d);
-        of_excess_over.setCellValueFactory((TableColumn.CellDataFeatures<HR4_TaxClass, String> param) -> param.getValue().e);
-        total_tax.setCellValueFactory((TableColumn.CellDataFeatures<HR4_TaxClass, String> param) -> param.getValue().f);
-        //</editor-fold>
-        tbl_wh.getColumns().addAll(min,max,basic_amount,additional_rate,of_excess_over,total_tax);
-    }
-    long DummyCount2 = 0;
-    long GlobalCount2 = 0;
-    public void populateTable2() {
-        CompletableFuture.supplyAsync(() -> {
-
-            while (Session.CurrentRoute.equals("hr4cnp")) {
-                try {
-                    taxmodel.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
-                        DummyCount2 = Long.parseLong(((HashMap) e).get("chk").toString());
-                    });
-
-                    if (DummyCount2 != GlobalCount2) {
-                            List rs = taxmodel
-                                    .get(
-                                            "min","max","basic_amount","additional_rate","of_excess_over","total_tax");
-                        AddJobToTable2(rs);
-                        GlobalCount2 = DummyCount2;
-                    }
-
-                    Thread.sleep(3000);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(HR4_Core_Human_Capital_ManagementController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-
-            return 0;
-        }, Session.SessionThreads);
-
-    }
-
-    public void AddJobToTable2(List rs) {
-        wh.clear();
-        tbl_wh.getItems().clear();
-        for (Object row : rs) {
-            HashMap crow = (HashMap) row;
-            String min = String.valueOf(crow.get("min"));
-            String max = (String) crow.get("max");
-            String basic_amount = (String) crow.get("basic_amount");
-            String additional_rate = (String) crow.get("additional_rate");
-            String of_excess_over = (String) crow.get("of_excess_over");
-            String total_tax = (String) crow.get("total_tax");
-            wh.add(new HR4_TaxClass(min,max,basic_amount,additional_rate,of_excess_over,total_tax));
-        }
-       tbl_wh.setItems(wh);
-    }
-    public void generateSalaryGrade() {
-
-        tbl_salary.getItems().clear();
-        tbl_salary.getColumns().removeAll(tbl_salary.getColumns());
+        tbl_salarygrade.getItems().clear();
+        tbl_salarygrade.getColumns().removeAll(tbl_salarygrade.getColumns());
         TableColumn<HR4_SalaryClass, String> salary_grade = new TableColumn<>("Salary Grade");
         TableColumn<HR4_SalaryClass, String> step1 = new TableColumn<>("Step 1");
         TableColumn<HR4_SalaryClass, String> step2 = new TableColumn<>("Step 2");
@@ -342,24 +225,23 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
         step6.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SalaryClass, String> param) -> param.getValue().g);
         step7.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SalaryClass, String> param) -> param.getValue().h);
         step8.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SalaryClass, String> param) -> param.getValue().i);
+     
         //</editor-fold>
-        tbl_salary.getColumns().addAll(salary_grade,step1,step2,step3,step4,step5,step6,step7,step8);
+        tbl_salarygrade.getColumns().addAll(salary_grade, step1, step2, step3, step4, step5, step6, step7, step8);
     }
-    long DummyCount3 = 0;
-    long GlobalCount3 = 0;
-    public void populateSalaryGrade() {
+    long DummyCount1 = 0;
+    long GlobalCount1 = 0;
+    public void populateTable1() {
         CompletableFuture.supplyAsync(() -> {
-
             while (Session.CurrentRoute.equals("hr4cnp")) {
                 try {
-                    salarymodel.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
-                        DummyCount3 = Long.parseLong(((HashMap) e).get("chk").toString());
+                    sm.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
+                        DummyCount1 = Long.parseLong(((HashMap) e).get("chk").toString());
                     });
-
-                    if (DummyCount3 != GlobalCount3){   
-                        List rs = salarymodel
-                                    .get(
-                                            "salary_grade",
+                    if (DummyCount1 != GlobalCount1){    
+                        tbl_salarygrade.getItems();
+                        List rs = sm
+                                    .get("salary_grade",
                                             "step1",
                                             "step2",
                                             "step3",
@@ -368,13 +250,13 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
                                             "step6",
                                             "step7",
                                             "step8");
-                        AddSalaryGrade(rs);
-                        GlobalCount3 = DummyCount3;
+                        AddJobToTable1(rs);
+                        GlobalCount1 = DummyCount1;
                     }
 
                     Thread.sleep(3000);
                 } catch (InterruptedException ex) {
-                    Logger.getLogger(HR4_Core_Human_Capital_ManagementController.class
+                    Logger.getLogger(HR4_Compensation_and_PlanningController.class
                             .getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -384,9 +266,9 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
 
     }
 
-    public void AddSalaryGrade(List rs) {
-        obj3.clear();
-        tbl_salary.getItems().clear();
+    public void AddJobToTable1(List rs) {
+        obj1.clear();
+        tbl_salarygrade.getItems().clear();
         for (Object row : rs) {
             HashMap crow = (HashMap) row;
             String salary_grade = String.valueOf(crow.get("salary_grade"));
@@ -398,79 +280,162 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
             String step6 = (String) crow.get("step6");
             String step7 = (String) crow.get("step7");
             String step8 = (String) crow.get("step8");
-            obj3.add(new HR4_SalaryClass(salary_grade,step1,step2,step3,step4,step5,step6,step7,step8));
+            obj1.add(new HR4_SalaryClass(salary_grade,step1,step2,step3,step4,step5,step6,step7,step8));
         }
-            tbl_salary.setItems(obj3);
+        tbl_salarygrade.setItems(obj1);
+    }
+// For Benefits Table
+    public void generateTable2() {
+
+        tbl_benefits.getItems().clear();
+        tbl_benefits.getColumns().removeAll(tbl_benefits.getColumns());
+        TableColumn<HR4_BenefitsClass, String> title = new TableColumn<>("Title");
+        TableColumn<HR4_BenefitsClass, String> amount = new TableColumn<>("Amount");
+        TableColumn<HR4_BenefitsClass, String> description = new TableColumn<>("Description");
+        TableColumn<HR4_BenefitsClass, String> days = new TableColumn<>("Days");
+
+        //<editor-fold defaultstate="collapsed" desc="Cell value factories">
+        title.setCellValueFactory((TableColumn.CellDataFeatures<HR4_BenefitsClass, String> param) -> param.getValue().a);
+        amount.setCellValueFactory((TableColumn.CellDataFeatures<HR4_BenefitsClass, String> param) -> param.getValue().b);
+        description.setCellValueFactory((TableColumn.CellDataFeatures<HR4_BenefitsClass, String> param) -> param.getValue().c);
+        days.setCellValueFactory((TableColumn.CellDataFeatures<HR4_BenefitsClass, String> param) -> param.getValue().d);
+        TableColumn<HR4_BenefitsClass, Boolean> btnAction = new TableColumn<>("Actions");
+
+        btnAction.setSortable(false);
+
+        btnAction.setCellFactory((TableColumn<HR4_BenefitsClass, Boolean> param) -> new TableCell<HR4_BenefitsClass, Boolean>() {
+
+            FontAwesomeIconView f = new FontAwesomeIconView(FontAwesomeIcon.COGS);
+            private final MenuButton btn = new MenuButton("Actions", f);
+            {
+                f.getStyleClass().add("fontIconTable");
+                btn.getStyleClass().add("btnTable");
+                
+                MenuItem Add = new MenuItem("Add Employees");
+                FontAwesomeIconView fx = new FontAwesomeIconView(FontAwesomeIcon.USER);
+                fx.getStyleClass().add("fontIconMenu");
+                Add.setGraphic(fx);
+                Add.setOnAction(event -> {
+                      HR4_BenefitsClass fc = (HR4_BenefitsClass) getTableRow().getItem();
+                      HR4_NewCompensationFill.EditBenefits(
+                    fc.z.getValue(),
+                    fc.a.getValue(),
+                    fc.b.getValue(),
+                    fc.c.getValue(),
+                    fc.d.getValue());
+                Modal lq = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_AddEmployeeToBenefits.fxml").getParent());
+                lq.open();
+                });
+                
+                MenuItem Edit = new MenuItem("Edit");
+                FontAwesomeIconView fx1 = new FontAwesomeIconView(FontAwesomeIcon.EDIT);
+                fx1.getStyleClass().add("fontIconMenu");
+                Edit.setGraphic(fx1);
+                Edit.setOnAction(event -> {
+                    HR4_BenefitsClass fc = (HR4_BenefitsClass) getTableRow().getItem();
+                    HR4_NewCompensationFill.EditBenefits(
+                    fc.z.getValue(),
+                    fc.a.getValue(),
+                    fc.b.getValue(),
+                    fc.c.getValue(),
+                    fc.d.getValue());
+                
+                Modal md = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_EditBenefits.fxml").getParent());
+                md.open();
+                });
+                
+                MenuItem Delete = new MenuItem("Delete");
+                FontAwesomeIconView fx2 = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
+                fx2.getStyleClass().add("fontIconMenu");
+                Delete.setGraphic(fx2);
+                Delete.setOnAction(event -> {HR4_BenefitsModel m = new HR4_BenefitsModel();
+                m.delete().where(new Object[][]{
+                {"title", "=", tbl_benefits.getSelectionModel().getSelectedItem().a.getValue()}
+                }).executeUpdate();
+                });
+                
+                btn.getItems().add(Add);
+                btn.getItems().add(Edit);
+                btn.getItems().add(Delete);
+            }
+
+            @Override
+            protected void updateItem(Boolean t, boolean empty) {
+                super.updateItem(t, empty);
+                if (!empty) {
+                    setGraphic(btn);
+                } else {
+                    setGraphic(null);
+                }
+            }
+
+        });
+
+        btnAction.setCellValueFactory((TableColumn.CellDataFeatures<HR4_BenefitsClass, Boolean> param) -> new SimpleBooleanProperty(false));
+
+        //</editor-fold>
+        tbl_benefits.getColumns().addAll(title, amount, description, days,btnAction);
+    }
+    long DummyCount2 = 0;
+    long GlobalCount2 = 0;
+    public void populateTable2() {
+        CompletableFuture.supplyAsync(() -> {
+            while (Session.CurrentRoute.equals("hr4cnp")) {
+                try {
+                    bm.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(e -> {
+                        DummyCount2 = Long.parseLong(((HashMap) e).get("chk").toString());
+                    });
+                    if (DummyCount2 != GlobalCount2){    
+                        tbl_benefits.getItems();
+                        List rs = bm
+                                    .get(   "id",
+                                            "title",
+                                            "amount",
+                                            "description",
+                                            "days");
+                        AddJobToTable2(rs);
+                        GlobalCount2 = DummyCount2;
+                    }
+
+                    Thread.sleep(3000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(HR4_Compensation_and_PlanningController.class
+                            .getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            return 0;
+        }, Session.SessionThreads);
+
     }
 
-    @FXML
-    private void OtherDeducBtn(MouseEvent event) {
-        Modal md = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_OtherDeduc.fxml").getParent());
+    public void AddJobToTable2(List rs) {
+        obj2.clear();
+        tbl_benefits.getItems().clear();
+        for (Object row : rs) {
+            HashMap crow = (HashMap) row;
+            String id = String.valueOf(crow.get("id"));
+            String title = String.valueOf(crow.get("title"));
+            String amount = (String) crow.get("amount");
+            String description = (String) crow.get("description");
+            String days = (String) crow.get("days");
+            obj2.add(new HR4_BenefitsClass(id, title, amount, description, days));
+        }
+        tbl_benefits.setItems(obj2);
+    }
+    
+    
+    /*public void EditBenefits() {
+                HR4_NewCompensationFill.EditBenefits(tbl_benefits.getSelectionModel().getSelectedItem().z.getValue(),
+                tbl_benefits.getSelectionModel().getSelectedItem().a.getValue(),
+                tbl_benefits.getSelectionModel().getSelectedItem().b.getValue(),
+                tbl_benefits.getSelectionModel().getSelectedItem().c.getValue(),
+                tbl_benefits.getSelectionModel().getSelectedItem().d.getValue());
+
+        Modal md = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_EditBenefits.fxml").getParent());
         md.open();
+
     }
 
-    @FXML
-    private void EditSalaryBtn(ActionEvent event) {
-        Modal md = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_Settings.fxml").getParent());
-        md.open();
-    }
-
-    @FXML
-    private void SelectLoans(ActionEvent event) throws IOException {
-        String LoansType = loans_cbx.getValue();
-        
-        if(LoansType=="SSS"){
-            tbl_sss.setDisable(false);
-            tbl_sss.setVisible(true);
-            
-            tbl_ph.setDisable(true);
-            tbl_ph.setVisible(false);
-            
-            tbl_wh.setDisable(true);
-            tbl_wh.setVisible(false);
-            
-            tbl_pi.setDisable(true);
-            tbl_pi.setVisible(false);
-        }
-        else if(LoansType =="PhilHealth"){
-            tbl_ph.setDisable(false);
-            tbl_ph.setVisible(true);
-            
-            tbl_sss.setDisable(true);
-            tbl_sss.setVisible(false);
-            
-            tbl_wh.setDisable(true);
-            tbl_wh.setVisible(false);
-            
-            tbl_pi.setDisable(true);
-            tbl_pi.setVisible(false);
-          
-        }
-        else if(LoansType =="WithHolding Tax"){
-            tbl_wh.setDisable(false);
-            tbl_wh.setVisible(true);
-            
-            tbl_ph.setDisable(true);
-            tbl_ph.setVisible(false);
-            
-            tbl_sss.setDisable(true);
-            tbl_sss.setVisible(false);
-            
-            tbl_pi.setDisable(true);
-            tbl_pi.setVisible(false);
-        }
-        else if(LoansType =="Pag Ibig"){
-            tbl_pi.setDisable(false);
-            tbl_pi.setVisible(true);
-            
-            tbl_sss.setDisable(true);
-            tbl_sss.setVisible(false);
-            
-            tbl_wh.setDisable(true);
-            tbl_wh.setVisible(false);
-            
-            tbl_ph.setDisable(true);
-            tbl_ph.setVisible(false);
-        }
-    }
+    */
 }

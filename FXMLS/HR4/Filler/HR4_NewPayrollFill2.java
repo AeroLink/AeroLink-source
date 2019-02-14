@@ -10,12 +10,11 @@ package FXMLS.HR4.Filler;
  * @author Jaeeeee
  */
 public class HR4_NewPayrollFill2 {
-    public static String jae, jae1, jae2, jae3, jae4;
-    public static void SendRequest(String pc,String sd, String ed,String ts,String dpt){
+    public static String jae, jae1, jae2, jae3;
+    public static void SendRequest(String pc,String sd, String ed,String ts){
         jae = pc;
         jae1 = sd;
         jae2 = ed;
         jae3 = ts;
-        jae4 = dpt;
     }
 }

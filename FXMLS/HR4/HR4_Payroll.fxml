@@ -3,137 +3,133 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="713.0" prefWidth="1369.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR4.HR4_PayrollController">
+<AnchorPane id="AnchorPane" prefHeight="674.0" prefWidth="1396.0" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR4.HR4_PayrollController">
    <children>
-      <JFXTabPane layoutX="49.0" layoutY="22.0" prefHeight="713.0" prefWidth="993.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <JFXTabPane layoutX="108.0" layoutY="79.0" prefHeight="442.0" prefWidth="754.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <tabs>
             <Tab id="tab" styleClass="tab-label" text="Payroll Registration">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1373.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <BorderPane prefHeight="676.0" prefWidth="1369.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <top>
-                              <HBox prefHeight="64.0" prefWidth="1369.0" BorderPane.alignment="CENTER">
-                                 <children>
-                                    <AnchorPane prefHeight="64.0" prefWidth="1114.0">
-                                       <children>
-                                          <JFXButton buttonType="RAISED" layoutX="882.0" layoutY="16.0" onAction="#addbtn" prefHeight="33.0" prefWidth="217.0" styleClass="btn-primary" text="Add Payroll Item" />
-                                          <FontAwesomeIconView fill="WHITE" glyphName="PLUS" layoutX="933.0" layoutY="38.0" />
-                                          <JFXButton buttonType="RAISED" layoutX="716.0" layoutY="17.0" onAction="#OpenSettings" prefHeight="31.0" prefWidth="159.0" styleClass="btn-primary" text="Payroll Settings" AnchorPane.bottomAnchor="16.0" AnchorPane.rightAnchor="238.0" />
-                                          <FontAwesomeIconView fill="WHITE" glyphName="GEARS" layoutX="737.0" layoutY="37.0" />
-                                       </children>
-                                    </AnchorPane>
-                                    <AnchorPane prefHeight="64.0" prefWidth="257.0">
-                                       <children>
-                                          <JFXButton buttonType="RAISED" layoutX="13.0" layoutY="15.0" onAction="#dltbtn" prefHeight="35.0" prefWidth="230.0" styleClass="btn-danger" text="Delete Payroll Item" />
-                                          <FontAwesomeIconView fill="WHITE" glyphName="TRASH" layoutX="63.0" layoutY="36.0" text="" />
-                                       </children>
-                                    </AnchorPane>
-                                 </children>
-                              </HBox>
-                           </top>
+                        <BorderPane prefHeight="533.0" prefWidth="1032.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <center>
-                              <AnchorPane prefHeight="200.0" prefWidth="1369.0" BorderPane.alignment="CENTER">
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <TableView fx:id="tbl_ps" layoutX="-25.0" layoutY="14.0" prefHeight="612.0" prefWidth="1369.0" stylesheets="@../../Assets/css/MainPanel.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                      <columns>
-                                        <TableColumn prefWidth="75.0" text="C1" />
-                                        <TableColumn prefWidth="75.0" text="C2" />
-                                      </columns>
-                                       <columnResizePolicy>
-                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                       </columnResizePolicy>
-                                    </TableView>
-                                 </children>
-                              </AnchorPane>
+                                    <HBox prefHeight="438.0" prefWidth="1032.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <AnchorPane prefHeight="637.0" prefWidth="823.0">
+                                             <children>
+                                                <TableView fx:id="tbl_selection" layoutX="33.0" layoutY="51.0" prefHeight="586.0" prefWidth="507.0" stylesheets="@../../Assets/css/MainPanel.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="51.0">
+                                                  <columns>
+                                                    <TableColumn prefWidth="250.33334350585938" text="C1" />
+                                                    <TableColumn prefWidth="254.66665649414062" text="C2" />
+                                                  </columns>
+                                                   <columnResizePolicy>
+                                                      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                   </columnResizePolicy>
+                                                </TableView>
+                                                <JFXButton fx:id="AddBtn" buttonType="RAISED" layoutX="278.0" layoutY="10.0" prefHeight="34.0" prefWidth="221.0" styleClass="btn-primary" text="Add New Payroll" AnchorPane.leftAnchor="278.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="10.0" />
+                                                <FontAwesomeIconView fill="WHITE" glyphName="PLUS" layoutX="327.0" layoutY="32.0" size="15" />
+                                                <JFXButton fx:id="DeleteBtn" buttonType="RAISED" layoutX="155.0" layoutY="9.0" prefHeight="34.0" prefWidth="116.0" styleClass="btn-danger" text="Delete" />
+                                                <FontAwesomeIconView fill="WHITE" glyphName="TRASH" layoutX="179.0" layoutY="31.0" size="15" />
+                                             </children>
+                                          </AnchorPane>
+                                          <VBox prefHeight="637.0" prefWidth="1065.0">
+                                             <children>
+                                                <AnchorPane prefHeight="228.0" prefWidth="889.0">
+                                                   <children>
+                                                      <Label layoutX="9.0" layoutY="9.0" text="Payroll Employees :" textFill="#428d47">
+                                                         <font>
+                                                            <Font name="Arial" size="24.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="12.0" layoutY="41.0" text="No of Employees :">
+                                                         <font>
+                                                            <Font name="Arial Italic" size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER_RIGHT" layoutX="152.0" layoutY="39.0" prefHeight="25.0" prefWidth="49.0" text="....">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <JFXButton fx:id="SettingsBtnManual" buttonType="RAISED" layoutX="677.0" layoutY="10.0" prefHeight="31.0" prefWidth="128.0" styleClass="btn-primary" text="Settings" AnchorPane.bottomAnchor="76.0" AnchorPane.leftAnchor="677.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="10.0" />
+                                                      <FontAwesomeIconView fill="WHITE" glyphName="GEAR" layoutX="700.0" layoutY="30.0" size="15" AnchorPane.bottomAnchor="84.5641736984253" AnchorPane.leftAnchor="700.0" AnchorPane.rightAnchor="106.1428575515747" AnchorPane.topAnchor="17.142857551574707" />
+                                                   </children></AnchorPane>
+                                                <TableView fx:id="tbl_employees" prefHeight="632.0" prefWidth="819.0" stylesheets="@../../Assets/css/MainPanel.css">
+                                                  <columns>
+                                                    <TableColumn prefWidth="75.0" text="C1" />
+                                                    <TableColumn prefWidth="75.0" text="C2" />
+                                                  </columns>
+                                                   <columnResizePolicy>
+                                                      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                   </columnResizePolicy>
+                                                </TableView>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children></AnchorPane>
                            </center>
                         </BorderPane>
                      </children>
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab id="tab" styleClass="tab-labe" text="Employee Eearnings Records">
+            <Tab id="tab" styleClass="tab-label" text="Employee Earnings Records">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <BorderPane prefHeight="676.0" prefWidth="1369.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <BorderPane layoutX="181.0" layoutY="25.0" prefHeight="637.0" prefWidth="1396.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <top>
-                              <AnchorPane prefHeight="91.0" prefWidth="1369.0" BorderPane.alignment="CENTER" />
-                           </top>
-                           <center>
-                              <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                                 <children>
-                                    <AnchorPane prefHeight="585.0" prefWidth="564.0">
-                                       <children>
-                                          <TableView fx:id="tbl_eer" prefHeight="585.0" prefWidth="564.0" stylesheets="@../../Assets/css/MainPanel.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                            <columns>
-                                              <TableColumn prefWidth="75.0" text="C1" />
-                                              <TableColumn prefWidth="75.0" text="C2" />
-                                            </columns>
-                                             <columnResizePolicy>
-                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                             </columnResizePolicy>
-                                          </TableView>
-                                       </children>
-                                    </AnchorPane>
-                                    <AnchorPane prefHeight="585.0" prefWidth="812.0">
-                                       <children>
-                                          <TableView fx:id="tlb_eer1" prefHeight="585.0" prefWidth="805.0" stylesheets="@../../Assets/css/MainPanel.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-28.0" AnchorPane.topAnchor="0.0">
-                                            <columns>
-                                              <TableColumn prefWidth="75.0" text="C1" />
-                                              <TableColumn prefWidth="75.0" text="C2" />
-                                            </columns>
-                                             <columnResizePolicy>
-                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                             </columnResizePolicy>
-                                          </TableView>
-                                       </children>
-                                    </AnchorPane>
-                                 </children>
-                              </HBox>
-                           </center>
-                        </BorderPane>
-                     </children></AnchorPane>
-              </content>
-            </Tab>
-            <Tab id="tab" styleClass="tab-label" text="Reports">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <BorderPane prefHeight="676.0" prefWidth="1369.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <top>
-                              <AnchorPane prefHeight="127.0" prefWidth="1369.0" BorderPane.alignment="CENTER" />
+                              <AnchorPane prefHeight="85.0" prefWidth="1396.0" BorderPane.alignment="CENTER" />
                            </top>
                            <center>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <HBox prefHeight="549.0" prefWidth="1369.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <HBox layoutX="122.0" layoutY="47.0" prefHeight="532.0" prefWidth="1396.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <TableView prefHeight="549.0" prefWidth="610.0" stylesheets="@../../Assets/css/MainPanel.css">
-                                            <columns>
-                                              <TableColumn prefWidth="75.0" text="C1" />
-                                              <TableColumn prefWidth="75.0" text="C2" />
-                                            </columns>
-                                             <columnResizePolicy>
-                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                             </columnResizePolicy>
-                                          </TableView>
-                                          <TableView prefHeight="549.0" prefWidth="766.0" stylesheets="@../../Assets/css/MainPanel.css">
-                                            <columns>
-                                              <TableColumn prefWidth="75.0" text="C1" />
-                                              <TableColumn prefWidth="75.0" text="C2" />
-                                            </columns>
-                                             <columnResizePolicy>
-                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                             </columnResizePolicy>
-                                          </TableView>
+                                          <AnchorPane prefHeight="532.0" prefWidth="530.0">
+                                             <children>
+                                                <TableView fx:id="tbl_payroll1" layoutX="137.0" layoutY="101.0" prefHeight="532.0" prefWidth="433.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                  <columns>
+                                                    <TableColumn prefWidth="75.0" text="C1" />
+                                                    <TableColumn prefWidth="75.0" text="C2" />
+                                                  </columns>
+                                                   <columnResizePolicy>
+                                                      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                   </columnResizePolicy>
+                                                </TableView>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="532.0" prefWidth="1060.0">
+                                             <children>
+                                                <VBox layoutX="214.0" layoutY="112.0" prefHeight="552.0" prefWidth="963.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <children>
+                                                      <TableView fx:id="tbl_employees1" prefHeight="182.0" prefWidth="963.0">
+                                                        <columns>
+                                                          <TableColumn prefWidth="75.0" text="C1" />
+                                                          <TableColumn prefWidth="75.0" text="C2" />
+                                                        </columns>
+                                                         <columnResizePolicy>
+                                                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                         </columnResizePolicy>
+                                                      </TableView>
+                                                      <AnchorPane prefHeight="370.0" prefWidth="963.0" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </AnchorPane>
                                        </children>
                                     </HBox>
                                  </children>

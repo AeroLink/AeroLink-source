@@ -116,7 +116,7 @@ public class HR4_ViewJobController implements Initializable {
         }).get("aerolink.tbl_hr4_jobs.population_limit");
 
         jobLimit = new SimpleStringProperty(String.valueOf(limit.get(0).get("population_limit")));
-        txtLimit.textProperty().bind(jobLimit);
+        txtLimit.setText(jobLimit.getValue());
 
         List<HashMap> totalOpen = jobs
                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_limit", "job_id", "=", "job_id")
@@ -190,6 +190,7 @@ public class HR4_ViewJobController implements Initializable {
         txtDesc.setEditable(true);
         populateComboBox();
         btnUpdate.setDisable(false);
+        txtLimit.setDisable(false);
         txtLimit.setEditable(true);
     }
 
