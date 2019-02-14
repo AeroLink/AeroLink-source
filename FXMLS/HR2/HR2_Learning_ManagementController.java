@@ -352,7 +352,7 @@ public class HR2_Learning_ManagementController implements Initializable {
 
         courses_idx.setCellValueFactory(param -> param.getValue().course_id);
         col_course_title.setCellValueFactory((TableColumn.CellDataFeatures<HR2_CoursesClass, String> param) -> param.getValue().job_title);
-        TableColumn<HR2_CoursesClass, Void> addButton = new TableColumn("View Action");
+        /*TableColumn<HR2_CoursesClass, Void> addButton = new TableColumn("View Action");
 
         Callback<TableColumn<HR2_CoursesClass, Void>, TableCell<HR2_CoursesClass, Void>> cellFactory
                 = new Callback<TableColumn<HR2_CoursesClass, Void>, TableCell<HR2_CoursesClass, Void>>() {
@@ -398,7 +398,7 @@ public class HR2_Learning_ManagementController implements Initializable {
         };
 
         addButton.setCellFactory(cellFactory);
-        tbl_courses.getColumns().add(addButton);
+        tbl_courses.getColumns().add(addButton);*/
 
         TableColumn<HR2_CoursesClass, Void> addExam = new TableColumn("Add Exam");
 
