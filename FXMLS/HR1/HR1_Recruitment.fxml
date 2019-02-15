@@ -116,14 +116,6 @@
                                                                   <Font name="System Bold" size="13.0" />
                                                                </font>
                                                             </JFXButton>
-                                                            <JFXButton fx:id="btnExport" alignment="TOP_LEFT" buttonType="RAISED" graphicTextGap="10.0" layoutX="12.0" layoutY="77.0" prefHeight="29.0" prefWidth="161.0" styleClass="btn-primary" text="EXPORT">
-                                                               <graphic>
-                                                                  <FontAwesomeIconView fill="WHITE" glyphName="DOWNLOAD" />
-                                                               </graphic>
-                                                               <font>
-                                                                  <Font name="System Bold" size="13.0" />
-                                                               </font>
-                                                            </JFXButton>
                                                          </children>
                                                       </AnchorPane>
                                                    </children>
@@ -164,48 +156,17 @@
                                     <AnchorPane prefHeight="195.0" prefWidth="1426.0" BorderPane.alignment="CENTER">
                                        <children>
                                           <Label layoutX="300.0" layoutY="33.0" />
-                                          <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="175.0" prefWidth="317.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-background-color: white;">
+                                          <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="175.0" prefWidth="241.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-background-color: white;">
                                              <children>
-                                                <JFXButton fx:id="btnSearchPostings" alignment="TOP_LEFT" buttonType="RAISED" graphicTextGap="10.0" layoutX="221.0" layoutY="45.0" prefHeight="29.0" prefWidth="85.0" styleClass="btn-primary" text="Search">
-                                                   <graphic>
-                                                      <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" />
-                                                   </graphic>
-                                                   <font>
-                                                      <Font name="System Bold" size="13.0" />
-                                                   </font>
-                                                </JFXButton>
-                                                <CustomTextField fx:id="txtSearchPostings" layoutX="12.0" layoutY="43.0" prefHeight="32.0" prefWidth="202.0" promptText="Search A Job" />
-                                                <Label layoutX="14.0" layoutY="20.0" text="Search Job">
-                                                   <font>
-                                                      <Font name="System Bold" size="12.0" />
-                                                   </font>
-                                                </Label>
-                                                <JFXCheckBox fx:id="chkFilterPostings" layoutX="14.0" layoutY="88.0" text="Apply Filter ?" />
-                                                <JFXToggleButton fx:id="switchEmpStatusPostings" alignment="CENTER_LEFT" disable="true" layoutX="5.0" layoutY="107.0" prefHeight="58.0" prefWidth="198.0" text="Employment Status Filter" toggleColor="#0f9d58">
+                                                <JFXCheckBox fx:id="chkFilterPostings" layoutX="14.0" layoutY="21.0" text="Apply Filter ?" />
+                                                <JFXToggleButton fx:id="switchEmpStatusPostings" alignment="CENTER_LEFT" disable="true" layoutX="14.0" layoutY="45.0" prefHeight="58.0" prefWidth="198.0" text="Employment Status Filter" toggleColor="#0f9d58">
                                                    <font>
                                                       <Font size="11.0" />
                                                    </font>
                                                 </JFXToggleButton>
-                                             </children>
-                                          </AnchorPane>
-                                          <AnchorPane layoutX="414.0" layoutY="14.0" prefHeight="175.0" prefWidth="183.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-background-color: white;" AnchorPane.rightAnchor="10.0">
-                                             <children>
-                                                <Label layoutX="14.0" layoutY="14.0" text="Other Functionalities">
-                                                   <font>
-                                                      <Font name="System Bold" size="12.0" />
-                                                   </font>
-                                                </Label>
-                                                <JFXButton fx:id="btnRefreshPostings" alignment="TOP_LEFT" buttonType="RAISED" graphicTextGap="10.0" layoutX="12.0" layoutY="42.0" prefHeight="29.0" prefWidth="161.0" styleClass="btn-primary" text="REFRESH TABLE">
+                                                <JFXButton fx:id="btnRefreshPostings" alignment="TOP_LEFT" buttonType="RAISED" graphicTextGap="10.0" layoutX="14.0" layoutY="123.0" prefHeight="29.0" prefWidth="220.0" styleClass="btn-primary" text="REFRESH TABLE">
                                                    <graphic>
                                                       <FontAwesomeIconView fill="WHITE" glyphName="REFRESH" />
-                                                   </graphic>
-                                                   <font>
-                                                      <Font name="System Bold" size="13.0" />
-                                                   </font>
-                                                </JFXButton>
-                                                <JFXButton fx:id="btnExportPostings" alignment="TOP_LEFT" buttonType="RAISED" graphicTextGap="10.0" layoutX="12.0" layoutY="77.0" prefHeight="29.0" prefWidth="161.0" styleClass="btn-primary" text="EXPORT">
-                                                   <graphic>
-                                                      <FontAwesomeIconView fill="WHITE" glyphName="DOWNLOAD" />
                                                    </graphic>
                                                    <font>
                                                       <Font name="System Bold" size="13.0" />

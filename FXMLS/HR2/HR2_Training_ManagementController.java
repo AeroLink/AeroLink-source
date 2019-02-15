@@ -603,19 +603,21 @@ public class HR2_Training_ManagementController implements Initializable {
         tbl_training_req.getSelectionModel().selectFirst();
     }
 
+    @FXML
     public void LoadFacilities() {
         try {
             HR2_Temp_Facilities facilities = new HR2_Temp_Facilities();
 
             List f = facilities.join(Model.JOIN.INNER, "aerolink.tbl_log1_AssetBuilding", "BuildingID", "ab", "=", "BuildingID")
                     .where(new Object[][]{{"FacilityType", "=", "training"}})
-                    .get("FacilityID, FacilityName, FacilityStatus, FacilityRoomNumber, FacilityCapacity, ab.BuildingName");
+                    .get("FacilityID, FacilityName, FacilityStatus, FacilityRoomNumber, FacilityDimension, ab.BuildingName");
             DisplayFacilities(f);
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
+    @FXML
     public void LoadVehicles() {
         try {
             HR2_Temp_Vehicles vehicles = new HR2_Temp_Vehicles();
@@ -665,7 +667,7 @@ public class HR2_Training_ManagementController implements Initializable {
                                 String.valueOf(hmf.get("FacilityID")),
                                 String.valueOf(hmf.get("FacilityName")),
                                 String.valueOf(hmf.get("FacilityRoomNumber")),
-                                String.valueOf(hmf.get("FacilityCapacity")),
+                                String.valueOf(hmf.get("FacilityDimension")),
                                 String.valueOf(hmf.get("BuildingName")),
                                 String.valueOf(hmf.get("FacilityStatus"))
                         ));
@@ -679,6 +681,7 @@ public class HR2_Training_ManagementController implements Initializable {
         tbl_req_facility.getSelectionModel().selectFirst();
     }
 
+    @FXML
     public void LoadBudget() {
         try {
             Financial_budget_request budget = new Financial_budget_request();

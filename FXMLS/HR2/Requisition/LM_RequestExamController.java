@@ -80,13 +80,13 @@ public class LM_RequestExamController implements Initializable {
 
     }
     String rq_id = "";
+
     @FXML
     public void SubmitRequest() {
 
         if (!cbox_position.getValue().toString().isEmpty() || !txt_reason.getText().isEmpty()) {
             HR2_LM_Exam_Request rs = new HR2_LM_Exam_Request();
-            
-            
+
             List<HashMap> list = STORED_PROC.executeCall("EIS_CreateRequest", new Object[][]{
                 {"request", "Exam Request"},
                 {"request_description", txt_reason.getText()},
@@ -110,6 +110,9 @@ public class LM_RequestExamController implements Initializable {
                 Alert saved = new Alert(Alert.AlertType.INFORMATION);
                 saved.setContentText("Data Submitted");
                 saved.showAndWait();
+                cbox_department.setValue(null);
+                cbox_position.setValue(null);
+                txt_reason.setText(null);
             } catch (Exception e) {
                 System.err.println(e);
             }

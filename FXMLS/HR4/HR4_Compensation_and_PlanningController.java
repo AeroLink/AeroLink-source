@@ -96,6 +96,7 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
     private ComboBox<String> stepcombobox;
     @FXML
     private ComboBox<String> gradecombobox;
+
     
     public void initialize(URL url, ResourceBundle rb) {
     this.generateTable();
@@ -104,7 +105,7 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
     this.populateTable1();
     this.generateTable2();
     this.populateTable2();
-    
+
     for (String str : StepCbx) {
         stepcombobox.getItems().add(str);
     }

@@ -99,10 +99,6 @@ public class HR1_RecruitmentController implements Initializable {
     @FXML
     private JFXButton btnSearch;
     @FXML
-    private CustomTextField txtSearchPostings;
-    @FXML
-    private JFXButton btnSearchPostings;
-    @FXML
     private TableView<TableModel_jPosted> tblPostingJobs;
     @FXML
     private ContextMenu contextPostingsJobs;
@@ -129,15 +125,11 @@ public class HR1_RecruitmentController implements Initializable {
     @FXML
     private JFXButton btnRefresh;
     @FXML
-    private JFXButton btnExport;
-    @FXML
     private JFXCheckBox chkFilterPostings;
     @FXML
     private JFXToggleButton switchEmpStatusPostings;
     @FXML
     private JFXButton btnRefreshPostings;
-    @FXML
-    private JFXButton btnExportPostings;
 
     /**
      * Initializes the controller class.

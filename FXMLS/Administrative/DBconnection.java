@@ -20,7 +20,7 @@ public class DBconnection {
         Connection con = null;
     try{
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        String url = "jdbc:sqlserver://localhost:1433;databaseName = Aerolink;username = pota; password = pota";
+        String url = "jdbc:sqlserver://139.99.62.2:8420;databaseName = Aerolink;username = sa; password = PYWETgMDWTaS834fo9ijGkENpl43yrFtXpcJ9ovB0$yPS38; ";
         con = DriverManager.getConnection(url);
     
     
