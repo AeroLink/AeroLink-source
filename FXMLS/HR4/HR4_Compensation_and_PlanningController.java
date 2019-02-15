@@ -142,9 +142,52 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
         fnn.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SalaryGradeUpClass, String> param) -> param.getValue().d);
         grade.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SalaryGradeUpClass, String> param) -> param.getValue().b);
         status.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SalaryGradeUpClass, String> param) -> param.getValue().c);
+        TableColumn<HR4_SalaryGradeUpClass, Boolean> btnAction = new TableColumn<>("Actions");
+
+        btnAction.setSortable(false);
+
+        btnAction.setCellFactory((TableColumn<HR4_SalaryGradeUpClass, Boolean> param) -> new TableCell<HR4_SalaryGradeUpClass, Boolean>() {
+
+            FontAwesomeIconView f = new FontAwesomeIconView(FontAwesomeIcon.COGS);
+            private final MenuButton btn = new MenuButton("Actions", f);
+            {
+                f.getStyleClass().add("fontIconTable");
+                btn.getStyleClass().add("btnTable");
+                
+                MenuItem view = new MenuItem("View");
+                FontAwesomeIconView fx = new FontAwesomeIconView(FontAwesomeIcon.EYE);
+                fx.getStyleClass().add("fontIconMenu");
+                view.setGraphic(fx);
+                view.setOnAction(event -> {
+                });
+                
+                MenuItem reject = new MenuItem("Declined");
+                FontAwesomeIconView fx1 = new FontAwesomeIconView(FontAwesomeIcon.HAND_ALT_DOWN);
+                fx1.getStyleClass().add("fontIconMenu");
+                reject.setGraphic(fx1);
+                reject.setOnAction(event -> {
+                });
+                
+                btn.getItems().add(view);
+                btn.getItems().add(reject);
+            }
+
+            @Override
+            protected void updateItem(Boolean t, boolean empty) {
+                super.updateItem(t, empty);
+                if (!empty) {
+                    setGraphic(btn);
+                } else {
+                    setGraphic(null);
+                }
+            }
+
+        });
+
+        btnAction.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SalaryGradeUpClass, Boolean> param) -> new SimpleBooleanProperty(false));
 
         //</editor-fold>
-        tbl_salary_up.getColumns().addAll(emp_code, fnn, grade, status);
+        tbl_salary_up.getColumns().addAll(emp_code, fnn, grade, status,btnAction);
     }
     long DummyCount = 0;
     long GlobalCount = 0;

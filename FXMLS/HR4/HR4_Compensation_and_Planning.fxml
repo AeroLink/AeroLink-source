@@ -27,7 +27,7 @@
                      <children>
                         <HBox prefHeight="692.0" prefWidth="1380.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <VBox prefHeight="676.0" prefWidth="399.0">
+                              <VBox prefHeight="692.0" prefWidth="489.0">
                                  <children>
                                     <AnchorPane prefHeight="64.0" prefWidth="399.0">
                                        <children>
@@ -43,9 +43,9 @@
                                           </Label>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane prefHeight="621.0" prefWidth="399.0">
+                                    <AnchorPane prefHeight="621.0" prefWidth="433.0">
                                        <children>
-                                          <TableView fx:id="tbl_salary_up" layoutX="71.0" layoutY="96.0" prefHeight="623.0" prefWidth="399.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <TableView fx:id="tbl_salary_up" layoutX="71.0" layoutY="96.0" prefHeight="613.0" prefWidth="419.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="0.0">
                                             <columns>
                                               <TableColumn prefWidth="75.0" text="C1" />
                                               <TableColumn prefWidth="75.0" text="C2" />
@@ -69,9 +69,9 @@
                                           </Label>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane prefHeight="286.0" prefWidth="984.0">
+                                    <AnchorPane prefHeight="301.0" prefWidth="960.0">
                                        <children>
-                                          <TableView fx:id="tbl_salarygrade" layoutX="1.0" layoutY="18.0" prefHeight="288.0" prefWidth="976.0" AnchorPane.bottomAnchor="-20.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-13.0" AnchorPane.topAnchor="18.0">
+                                          <TableView fx:id="tbl_salarygrade" layoutX="7.0" layoutY="18.0" prefHeight="303.0" prefWidth="958.0" AnchorPane.bottomAnchor="-20.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="18.0">
                                             <columns>
                                               <TableColumn prefWidth="75.0" text="C1" />
                                               <TableColumn prefWidth="75.0" text="C2" />
@@ -82,9 +82,9 @@
                                           </TableView>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane prefHeight="273.0" prefWidth="953.0">
+                                    <AnchorPane prefHeight="350.0" prefWidth="952.0">
                                        <children>
-                                          <AnchorPane layoutX="5.0" layoutY="29.0" prefHeight="321.0" prefWidth="959.0" style="-fx-border-color: black; -fx-border-radius: 10;">
+                                          <AnchorPane layoutX="5.0" layoutY="22.0" prefHeight="328.0" prefWidth="959.0" style="-fx-border-color: black; -fx-border-radius: 10;">
                                              <children>
                                                 <HBox layoutX="3.0" layoutY="3.0" prefHeight="289.0" prefWidth="969.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
                                                    <children>
@@ -134,7 +134,7 @@
                                                             </GridPane>
                                                          </children>
                                                       </AnchorPane>
-                                                      <AnchorPane prefHeight="311.0" prefWidth="509.0">
+                                                      <AnchorPane prefHeight="318.0" prefWidth="504.0">
                                                          <children>
                                                             <GridPane layoutX="33.0" layoutY="117.0" prefHeight="231.0" prefWidth="539.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-32.0" AnchorPane.topAnchor="0.0">
                                                               <columnConstraints>
