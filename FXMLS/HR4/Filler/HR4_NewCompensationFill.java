@@ -10,9 +10,10 @@ package FXMLS.HR4.Filler;
  * @author Jaeeeee
  */
 public class HR4_NewCompensationFill {
-    public static String z, a, b, c, d;
-    public static void EditBenefits(String idx,String tt,String amt, String desc,String dd){
+    public static String z, idxx, a, b, c, d;
+    public static void EditBenefits(String idx,String bidx,String tt,String amt, String desc,String dd){
         z = idx;
+        idxx = bidx;
         a = tt;
         b = amt;
         c = desc;

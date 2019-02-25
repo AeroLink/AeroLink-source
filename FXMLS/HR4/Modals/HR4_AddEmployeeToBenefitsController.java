@@ -5,8 +5,10 @@
  */
 package FXMLS.HR4.Modals;
 
+import FXMLS.HR4.ClassFiles.HR4_BenefitsClass;
 import FXMLS.HR4.ClassFiles.HR4_EmpInfoClass;
 import FXMLS.HR4.ClassFiles.HR4_NewPayrollClass;
+import FXMLS.HR4.Filler.HR4_EmployeeFill;
 import FXMLS.HR4.Filler.HR4_NewCompensationFill;
 import FXMLS.HR4.Filler.HR4_NewPayrollFill;
 import FXMLS.HR4.Filler.HR4_NewPayrollFill2;
@@ -19,6 +21,7 @@ import Synapse.Model;
 import Synapse.Session;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +33,10 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
@@ -39,6 +45,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 
@@ -55,16 +62,28 @@ public class HR4_AddEmployeeToBenefitsController implements Initializable {
     private TableView<HR4_EmpInfoClass> tbl_AddBen;
     @FXML
     private TextField z;
-    @FXML
     private TextField b;
-
+    private TextField a;
+    @FXML
+    private TextField bal;
+    @FXML
+    private TextField idx;
+    @FXML
+    private TextField title;
+    @FXML
+    private TextField days;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        b.setText(HR4_NewCompensationFill.b);
+        
+        bal.setText(HR4_NewCompensationFill.b);
         z.setText(HR4_NewCompensationFill.z);
+        idx.setText(HR4_NewCompensationFill.idxx);
+        title.setText(HR4_NewCompensationFill.a);
+        days.setText(HR4_NewCompensationFill.d);
         this.generateTable1();
         this.populateTable1();
     
@@ -113,7 +132,29 @@ public class HR4_AddEmployeeToBenefitsController implements Initializable {
                 btn.getStyleClass().add("btnTable");
                 btn.setGraphic(f);
                 btn.setOnAction(event -> {
+                String idxx = idx.getText();
+                String balC = bal.getText();
+                String dd = days.getText();
+                String tt = title.getText();
+                HR4_EmpInfoClass fc = (HR4_EmpInfoClass) getTableRow().getItem();
+                HR4_EmployeeFill.EmpFill(
+                fc.employee_code.getValue(),
+                fc.fnn.getValue());
                 
+                FXMLLoader Loader = new FXMLLoader();
+                Loader.setLocation(getClass().getResource("HR4_Saving.fxml"));
+                try{
+                Loader.load();
+                }catch(IOException ex){
+                    Logger.getLogger(HR4_AddEmployeeToBenefitsController.class.getName()).log(Level.SEVERE,null,ex);
+                }
+                HR4_SavingController sc = Loader.getController();
+                sc.setText(idxx, balC, dd, tt);
+                
+                Parent p = Loader.getRoot();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(p));
+                stage.showAndWait();
                 });}
                     public void updateItem(Void item, boolean empty) {
                         super.updateItem(item, empty);
