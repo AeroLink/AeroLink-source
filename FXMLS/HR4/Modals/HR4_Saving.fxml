@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="384.0" prefWidth="399.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR4.Modals.HR4_SavingController">
+   <children>
+      <AnchorPane layoutX="9.0" layoutY="14.0" prefHeight="358.0" prefWidth="381.0" style="-fx-border-color: green; -fx-border-radius: 10;">
+         <children>
+            <JFXButton buttonType="RAISED" layoutX="192.0" layoutY="320.0" prefHeight="25.0" prefWidth="76.0" styleClass="btn-danger" text="Cancel" />
+            <JFXButton fx:id="submit" buttonType="RAISED" layoutX="276.0" layoutY="320.0" prefHeight="25.0" prefWidth="91.0" styleClass="btn-primary" text="Submit" />
+            <JFXButton buttonType="RAISED" layoutX="15.0" layoutY="289.0" prefHeight="25.0" prefWidth="352.0" styleClass="btn-primary" text="Add File" />
+            <TextField alignment="CENTER" editable="false" layoutX="15.0" layoutY="260.0" prefHeight="25.0" prefWidth="352.0" />
+            <Label layoutX="15.0" layoutY="10.0" text="Are you sure you want add benefits in this employee?" textFill="RED">
+               <font>
+                  <Font name="Arial Italic" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="15.0" layoutY="241.0" text="Agreement Document :" textFill="RED">
+               <font>
+                  <Font name="Arial Italic" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="15.0" layoutY="28.0" text="Employee Code :">
+               <font>
+                  <Font name="Arial Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="a" editable="false" layoutX="15.0" layoutY="45.0" />
+            <TextField fx:id="b" editable="false" layoutX="15.0" layoutY="91.0" prefHeight="25.0" prefWidth="352.0" />
+            <Label layoutX="15.0" layoutY="74.0" text="Full Name :">
+               <font>
+                  <Font name="Arial Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="15.0" layoutY="121.0" text="Benefit :">
+               <font>
+                  <Font name="Arial Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tiT" editable="false" layoutX="143.0" layoutY="156.0" prefHeight="25.0" prefWidth="224.0" />
+            <FontAwesomeIconView fill="WHITE" glyphName="PAPER_PLANE" layoutX="286.0" layoutY="337.0" />
+            <Label layoutX="140.0" layoutY="139.0" text="Title :">
+               <font>
+                  <Font name="Arial Italic" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="15.0" layoutY="138.0" text="Benefit Code :">
+               <font>
+                  <Font name="Arial Italic" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="benC" layoutX="15.0" layoutY="156.0" prefHeight="25.0" prefWidth="124.0" />
+            <Label layoutX="15.0" layoutY="185.0" text="Balance :">
+               <font>
+                  <Font name="Arial Italic" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="Bal" layoutX="15.0" layoutY="203.0" />
+            <TextField fx:id="valD" layoutX="168.0" layoutY="203.0" prefHeight="25.0" prefWidth="198.0" />
+            <Label layoutX="169.0" layoutY="184.0" text="Valid Days :">
+               <font>
+                  <Font name="Arial Italic" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

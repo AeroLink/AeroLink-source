@@ -5,6 +5,7 @@
  */
 package FXMLS.HR4;
 
+import FXMLS.HR4.ClassFiles.HR4_Benefits1Class;
 import FXMLS.HR4.ClassFiles.HR4_BenefitsClass;
 import FXMLS.HR4.ClassFiles.HR4_EmpInfoClass;
 import FXMLS.HR4.ClassFiles.HR4_NewPayrollClass;
@@ -15,11 +16,14 @@ import FXMLS.HR4.ClassFiles.HR4_SalaryGradeUpClass;
 import FXMLS.HR4.ClassFiles.HR4_TaxClass;
 import FXMLS.HR4.ClassFiles.TableModel_Jobs;
 import FXMLS.HR4.Filler.HR4_NewCompensationFill;
+import static FXMLS.HR4.Filler.HR4_NewCompensationFill.idxx;
 import FXMLS.HR4.Filler.HR4_NewPayrollFill;
 import FXMLS.HR4.Filler.HR4_NewPayrollFill2;
+import FXMLS.HR4.Model.HR4_Benefits1Model;
 import FXMLS.HR4.Model.HR4_BenefitsModel;
 import FXMLS.HR4.Model.HR4_NewPayrollModel;
 import FXMLS.HR4.Model.HR4_PHModel;
+import FXMLS.HR4.Model.HR4_PayrollEmployeeModel;
 import FXMLS.HR4.Model.HR4_SSSModel;
 import FXMLS.HR4.Model.HR4_SalaryGradeUpModel;
 import FXMLS.HR4.Model.HR4_SalaryModel;
@@ -51,6 +55,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuButton;
@@ -61,6 +66,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -96,6 +102,9 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
     private ComboBox<String> stepcombobox;
     @FXML
     private ComboBox<String> gradecombobox;
+    @FXML
+    private TableView<HR4_Benefits1Class> tbl_benEmp;
+    ObservableList<HR4_Benefits1Class> data;
 
     
     public void initialize(URL url, ResourceBundle rb) {
@@ -105,6 +114,11 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
     this.populateTable1();
     this.generateTable2();
     this.populateTable2();
+    this.generateTable1010();
+            tbl_benefits.getSelectionModel().selectFirst();
+            tbl_benefits.setOnMouseClicked(e -> {
+            populate();
+            });
 
     for (String str : StepCbx) {
         stepcombobox.getItems().add(str);
@@ -143,7 +157,6 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
         grade.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SalaryGradeUpClass, String> param) -> param.getValue().b);
         status.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SalaryGradeUpClass, String> param) -> param.getValue().c);
         TableColumn<HR4_SalaryGradeUpClass, Boolean> btnAction = new TableColumn<>("Actions");
-
         btnAction.setSortable(false);
 
         btnAction.setCellFactory((TableColumn<HR4_SalaryGradeUpClass, Boolean> param) -> new TableCell<HR4_SalaryGradeUpClass, Boolean>() {
@@ -160,14 +173,13 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
                 view.setGraphic(fx);
                 view.setOnAction(event -> {
                 });
-                
                 MenuItem reject = new MenuItem("Declined");
                 FontAwesomeIconView fx1 = new FontAwesomeIconView(FontAwesomeIcon.HAND_ALT_DOWN);
                 fx1.getStyleClass().add("fontIconMenu");
                 reject.setGraphic(fx1);
                 reject.setOnAction(event -> {
-                });
                 
+                });
                 btn.getItems().add(view);
                 btn.getItems().add(reject);
             }
@@ -363,6 +375,7 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
                       HR4_BenefitsClass fc = (HR4_BenefitsClass) getTableRow().getItem();
                       HR4_NewCompensationFill.EditBenefits(
                     fc.z.getValue(),
+                    fc.idxx.getValue(),
                     fc.a.getValue(),
                     fc.b.getValue(),
                     fc.c.getValue(),
@@ -379,6 +392,7 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
                     HR4_BenefitsClass fc = (HR4_BenefitsClass) getTableRow().getItem();
                     HR4_NewCompensationFill.EditBenefits(
                     fc.z.getValue(),
+                    fc.idxx.getValue(),
                     fc.a.getValue(),
                     fc.b.getValue(),
                     fc.c.getValue(),
@@ -433,6 +447,7 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
                         tbl_benefits.getItems();
                         List rs = bm
                                     .get(   "id",
+                                            "benefits_id",
                                             "title",
                                             "amount",
                                             "description",
@@ -459,11 +474,12 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
         for (Object row : rs) {
             HashMap crow = (HashMap) row;
             String id = String.valueOf(crow.get("id"));
+            String benefits_id = String.valueOf(crow.get("benefits_id"));
             String title = String.valueOf(crow.get("title"));
             String amount = (String) crow.get("amount");
             String description = (String) crow.get("description");
             String days = (String) crow.get("days");
-            obj2.add(new HR4_BenefitsClass(id, title, amount, description, days));
+            obj2.add(new HR4_BenefitsClass(id, benefits_id, title, amount, description, days));
         }
         tbl_benefits.setItems(obj2);
     }
@@ -482,4 +498,76 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
     }
 
     */
+    public void generateTable1010(){
+        tbl_benEmp.getItems().clear();
+        tbl_benEmp.getColumns().removeAll(tbl_benEmp.getColumns());
+        TableColumn<HR4_Benefits1Class, String> benefits_id = new TableColumn<>("Benefits Code");
+        TableColumn<HR4_Benefits1Class, String> benN = new TableColumn<>("Benefits Name");
+        TableColumn<HR4_Benefits1Class, String> emp_code = new TableColumn<>("Employee Code");
+        TableColumn<HR4_Benefits1Class, String> fnN = new TableColumn<>("Fullname");
+        TableColumn<HR4_Benefits1Class, String> balance = new TableColumn<>("Balance");
+        TableColumn<HR4_Benefits1Class, String> araw = new TableColumn<>("Days");
+        TableColumn<HR4_Benefits1Class, String> files = new TableColumn<>("Files");
+        
+        //<editor-fold defaultstate="collapsed" desc="Cell value factories">
+        benefits_id.setCellValueFactory((TableColumn.CellDataFeatures<HR4_Benefits1Class, String> param) -> param.getValue().a);
+        benN.setCellValueFactory((TableColumn.CellDataFeatures<HR4_Benefits1Class, String> param) -> param.getValue().b);
+        emp_code.setCellValueFactory((TableColumn.CellDataFeatures<HR4_Benefits1Class, String> param) -> param.getValue().c);
+        fnN.setCellValueFactory((TableColumn.CellDataFeatures<HR4_Benefits1Class, String> param) -> param.getValue().d);
+        balance.setCellValueFactory((TableColumn.CellDataFeatures<HR4_Benefits1Class, String> param) -> param.getValue().e);
+        araw.setCellValueFactory((TableColumn.CellDataFeatures<HR4_Benefits1Class, String> param) -> param.getValue().f);
+        files.setCellValueFactory((TableColumn.CellDataFeatures<HR4_Benefits1Class, String> param) -> param.getValue().g);
+        
+        //</editor-fold>
+        tbl_benEmp.getColumns()
+        .addAll(benefits_id,benN,emp_code,fnN,balance,araw,files);
+   }
+    public void populate() {
+
+        try {
+            //tbl employees
+            HR4_Benefits1Model pem = new HR4_Benefits1Model();
+
+            List e = pem.join(Model.JOIN.INNER, "aerolink.tbl_hr4_benefits", "benefits_id", "tblD", "=", "benefits_id")
+                    .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "tblDD", "=", "emp_code")
+                    .where(new Object[][]{{"tblD.benefits_id", "=", tbl_benefits.getSelectionModel().getSelectedItem().idxx.getValue()}})
+                    .get("tblD.benefits_id as benefits_id",
+                         "tblD.title as benN",
+                         "tblDD.employee_code as emp_code",
+                         "CONCAT(tblDD.lastname,', ',tblDD.firstname,' ',tblDD.middlename,'.') as fnN",
+                         "balance",
+                         "araw",
+                         "files");
+            Stored(e);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+   public void Stored(List b1) {
+        ObservableList<HR4_Benefits1Class> obj3 = FXCollections.observableArrayList();
+        obj3.clear();
+        try {
+            for (Object d : b1) {
+
+                HashMap hm = (HashMap) d;
+                obj3.add(
+                        new HR4_Benefits1Class(
+                                String.valueOf(hm.get("benefits_id")),
+                                String.valueOf(hm.get("benN")),
+                                String.valueOf(hm.get("emp_code")),
+                                String.valueOf(hm.get("fnN")),
+                                String.valueOf(hm.get("balance")),
+                                String.valueOf(hm.get("araw")),
+                                String.valueOf(hm.get("files"))
+                        ));
+
+            }
+            tbl_benEmp.setItems(obj3);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }

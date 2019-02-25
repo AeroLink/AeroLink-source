@@ -5,14 +5,16 @@
  */
 package FXMLS.HR4.Model;
 
+import static Synapse.Model.setColumns;
+
 /**
  *
  * @author Jaeeeee
  */
-public class HR4_BenefitsModel extends Synapse.Model{
-     public HR4_BenefitsModel()
+public class HR4_Benefits1Model extends Synapse.Model{
+    public HR4_Benefits1Model()
     {
-        setColumns("id","benefits_id","title","amout","description","days");
-        this.initTable("tbl_hr4_benefits");
+        setColumns("id","benefits_id","emp_code","balance","araw","files");
+        this.initTable("tbl_hr4_benefits1");
     }
 }

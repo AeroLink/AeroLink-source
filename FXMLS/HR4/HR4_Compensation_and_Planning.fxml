@@ -27,9 +27,9 @@
                      <children>
                         <HBox prefHeight="692.0" prefWidth="1380.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <VBox prefHeight="692.0" prefWidth="489.0">
+                              <VBox prefHeight="690.0" prefWidth="482.0">
                                  <children>
-                                    <AnchorPane prefHeight="64.0" prefWidth="399.0">
+                                    <AnchorPane prefHeight="64.0" prefWidth="451.0">
                                        <children>
                                           <TextField layoutX="181.0" layoutY="18.0" prefHeight="27.0" prefWidth="206.0">
                                              <font>
@@ -45,7 +45,7 @@
                                     </AnchorPane>
                                     <AnchorPane prefHeight="621.0" prefWidth="433.0">
                                        <children>
-                                          <TableView fx:id="tbl_salary_up" layoutX="71.0" layoutY="96.0" prefHeight="613.0" prefWidth="419.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="0.0">
+                                          <TableView fx:id="tbl_salary_up" layoutX="71.0" layoutY="96.0" prefHeight="613.0" prefWidth="485.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-69.0" AnchorPane.topAnchor="0.0">
                                             <columns>
                                               <TableColumn prefWidth="75.0" text="C1" />
                                               <TableColumn prefWidth="75.0" text="C2" />
@@ -58,11 +58,11 @@
                                     </AnchorPane>
                                  </children>
                               </VBox>
-                              <VBox prefHeight="583.0" prefWidth="929.0">
+                              <VBox prefHeight="692.0" prefWidth="737.0">
                                  <children>
-                                    <AnchorPane prefHeight="49.0" prefWidth="651.0">
+                                    <AnchorPane prefHeight="45.0" prefWidth="861.0">
                                        <children>
-                                          <Label layoutX="30.0" layoutY="12.0" text="Salary Grade Table :" textFill="#31d741">
+                                          <Label layoutX="77.0" layoutY="11.0" text="Salary Grade Table :" textFill="#31d741">
                                              <font>
                                                 <Font name="Arial Italic" size="18.0" />
                                              </font>
@@ -71,7 +71,7 @@
                                     </AnchorPane>
                                     <AnchorPane prefHeight="301.0" prefWidth="960.0">
                                        <children>
-                                          <TableView fx:id="tbl_salarygrade" layoutX="7.0" layoutY="18.0" prefHeight="303.0" prefWidth="958.0" AnchorPane.bottomAnchor="-20.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="18.0">
+                                          <TableView fx:id="tbl_salarygrade" layoutX="75.0" layoutY="18.0" prefHeight="301.0" prefWidth="890.0" AnchorPane.bottomAnchor="-20.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="18.0">
                                             <columns>
                                               <TableColumn prefWidth="75.0" text="C1" />
                                               <TableColumn prefWidth="75.0" text="C2" />
@@ -82,9 +82,9 @@
                                           </TableView>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane prefHeight="350.0" prefWidth="952.0">
+                                    <AnchorPane prefHeight="335.0" prefWidth="889.0">
                                        <children>
-                                          <AnchorPane layoutX="5.0" layoutY="22.0" prefHeight="328.0" prefWidth="959.0" style="-fx-border-color: black; -fx-border-radius: 10;">
+                                          <AnchorPane layoutX="75.0" layoutY="22.0" prefHeight="307.0" prefWidth="889.0" style="-fx-border-color: black; -fx-border-radius: 10;">
                                              <children>
                                                 <HBox layoutX="3.0" layoutY="3.0" prefHeight="289.0" prefWidth="969.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
                                                    <children>
@@ -190,18 +190,54 @@
             </Tab>
             <Tab id="tab" text="Salary Deductions">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <HBox layoutX="56.0" layoutY="69.0" prefHeight="701.0" prefWidth="1380.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <AnchorPane prefHeight="701.0" prefWidth="617.0">
+                                 <children>
+                                    <TableView layoutX="140.0" layoutY="49.0" prefHeight="652.0" prefWidth="480.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="49.0">
+                                      <columns>
+                                        <TableColumn prefWidth="241.0" text="C1" />
+                                        <TableColumn prefWidth="237.0" text="C2" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                    <JFXButton layoutX="227.0" layoutY="14.0" prefHeight="25.0" prefWidth="55.0" styleClass="btn-primary" text="Edit" />
+                                    <JFXButton buttonType="RAISED" layoutX="289.0" layoutY="14.0" prefHeight="25.0" prefWidth="177.0" styleClass="btn-primary" text="Add Another Deductions" />
+                                    <JFXButton layoutX="147.0" layoutY="14.0" prefHeight="25.0" prefWidth="73.0" styleClass="btn-danger" text="Delete" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="701.0" prefWidth="1038.0">
+                                 <children>
+                                    <VBox layoutX="204.0" layoutY="219.0" prefHeight="701.0" prefWidth="901.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <TableView prefHeight="458.0" prefWidth="901.0">
+                                            <columns>
+                                              <TableColumn prefWidth="75.0" text="C1" />
+                                              <TableColumn prefWidth="75.0" text="C2" />
+                                            </columns>
+                                          </TableView>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                     </children></AnchorPane>
               </content>
             </Tab>
             <Tab id="tab" styleClass="tab-label" text="Company Benefits">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1380.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="667.0" prefWidth="1380.0">
                      <children>
                         <HBox layoutX="189.0" layoutY="222.0" prefHeight="691.0" prefWidth="1380.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <AnchorPane prefHeight="669.0" prefWidth="433.0">
+                              <AnchorPane prefHeight="673.0" prefWidth="474.0">
                                  <children>
-                                    <AnchorPane layoutX="8.0" layoutY="10.0" prefHeight="665.0" prefWidth="419.0" style="-fx-border-color: black; -fx-border-radius: 10;">
+                                    <AnchorPane layoutX="8.0" layoutY="10.0" prefHeight="665.0" prefWidth="466.0" style="-fx-border-color: black; -fx-border-radius: 10;">
                                        <children>
                                           <TableView fx:id="tbl_benefits" layoutX="5.0" layoutY="62.0" prefHeight="567.0" prefWidth="411.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="61.0">
                                             <columns>
@@ -218,29 +254,29 @@
                                     </AnchorPane>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane prefHeight="683.0" prefWidth="948.0">
+                              <AnchorPane prefHeight="649.0" prefWidth="937.0">
                                  <children>
                                     <VBox layoutX="118.0" layoutY="147.0" prefHeight="683.0" prefWidth="950.0" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0">
                                        <children>
                                           <AnchorPane prefHeight="100.0" prefWidth="939.0">
                                              <children>
-                                                <Label layoutX="6.0" layoutY="77.0" text="List of Employees that has :" textFill="#30ab53">
+                                                <Label layoutX="14.0" layoutY="78.0" text="List of Employees that has :" textFill="#30ab53">
                                                    <font>
                                                       <Font name="Arial Bold Italic" size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <JFXButton buttonType="RAISED" layoutX="849.0" layoutY="66.0" prefHeight="28.0" prefWidth="90.0" styleClass="btn-danger" text="Delete" />
-                                                <Label layoutX="9.0" layoutY="13.0" text="Company Benefits :" textFill="#35b855">
+                                                <JFXButton buttonType="RAISED" layoutX="802.0" layoutY="65.0" prefHeight="28.0" prefWidth="90.0" styleClass="btn-danger" text="Delete" />
+                                                <Label layoutX="17.0" layoutY="14.0" text="Company Benefits :" textFill="#35b855">
                                                    <font>
                                                       <Font name="Arial Bold" size="24.0" />
                                                    </font>
                                                 </Label>
-                                                <FontAwesomeIconView fill="WHITE" glyphName="TRASH" layoutX="863.0" layoutY="84.0" />
+                                                <FontAwesomeIconView fill="WHITE" glyphName="TRASH" layoutX="815.0" layoutY="83.0" />
                                              </children>
                                           </AnchorPane>
-                                          <AnchorPane prefHeight="273.0" prefWidth="617.0">
+                                          <AnchorPane prefHeight="590.0" prefWidth="939.0">
                                              <children>
-                                                <TableView layoutX="266.0" layoutY="9.0" prefHeight="273.0" prefWidth="949.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0">
+                                                <TableView fx:id="tbl_benEmp" layoutX="10.0" layoutY="9.0" prefHeight="437.0" prefWidth="939.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                   <columns>
                                                     <TableColumn prefWidth="75.0" text="C1" />
                                                     <TableColumn prefWidth="75.0" text="C2" />
@@ -249,116 +285,6 @@
                                                       <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                                    </columnResizePolicy>
                                                 </TableView>
-                                             </children>
-                                          </AnchorPane>
-                                          <AnchorPane prefHeight="310.0" prefWidth="950.0">
-                                             <children>
-                                                <HBox layoutX="10.0" layoutY="8.0" prefHeight="309.0" prefWidth="928.0" style="-fx-border-color: black; -fx-border-radius: 10;" AnchorPane.bottomAnchor="-11.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="8.0">
-                                                   <children>
-                                                      <AnchorPane prefHeight="271.0" prefWidth="512.0">
-                                                         <children>
-                                                            <GridPane layoutX="181.0" layoutY="91.0" prefHeight="271.0" prefWidth="495.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                              <columnConstraints>
-                                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="159.666748046875" minWidth="0.0" prefWidth="33.333251953125" />
-                                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="363.0" minWidth="10.0" prefWidth="172.33349609375" />
-                                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="417.0" minWidth="10.0" prefWidth="269.66650390625" />
-                                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="326.666748046875" minWidth="1.0" prefWidth="51.66650390625" />
-                                                              </columnConstraints>
-                                                              <rowConstraints>
-                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                              </rowConstraints>
-                                                               <children>
-                                                                  <Label text="Employee Code :" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                                                     <font>
-                                                                        <Font name="Arial Bold Italic" size="15.0" />
-                                                                     </font>
-                                                                  </Label>
-                                                                  <Label text="Full Name :" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                                                     <font>
-                                                                        <Font name="Arial Bold Italic" size="15.0" />
-                                                                     </font>
-                                                                  </Label>
-                                                                  <Label text="Position :" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                                                     <font>
-                                                                        <Font name="Arial Bold Italic" size="15.0" />
-                                                                     </font>
-                                                                  </Label>
-                                                                  <Label text="Classification :" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                                                                     <font>
-                                                                        <Font name="Arial Bold Italic" size="15.0" />
-                                                                     </font>
-                                                                  </Label>
-                                                                  <TextField GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                                                     <font>
-                                                                        <Font name="Arial" size="15.0" />
-                                                                     </font>
-                                                                  </TextField>
-                                                                  <TextField GridPane.columnIndex="2" GridPane.rowIndex="2">
-                                                                     <font>
-                                                                        <Font name="Arial" size="15.0" />
-                                                                     </font>
-                                                                  </TextField>
-                                                                  <TextField GridPane.columnIndex="2" GridPane.rowIndex="4">
-                                                                     <font>
-                                                                        <Font name="Arial" size="15.0" />
-                                                                     </font>
-                                                                  </TextField>
-                                                                  <TextField GridPane.columnIndex="2" GridPane.rowIndex="3">
-                                                                     <font>
-                                                                        <Font name="Arial" size="15.0" />
-                                                                     </font>
-                                                                  </TextField>
-                                                               </children>
-                                                            </GridPane>
-                                                         </children>
-                                                      </AnchorPane>
-                                                      <AnchorPane prefHeight="271.0" prefWidth="465.0">
-                                                         <children>
-                                                            <GridPane layoutX="100.0" layoutY="74.0" prefHeight="221.0" prefWidth="448.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                              <columnConstraints>
-                                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="210.33349609375" minWidth="10.0" prefWidth="167.6669921875" />
-                                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="293.0" minWidth="10.0" prefWidth="250.3330078125" />
-                                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.33349609375" minWidth="5.0" prefWidth="5.0" />
-                                                              </columnConstraints>
-                                                              <rowConstraints>
-                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                              </rowConstraints>
-                                                               <children>
-                                                                  <Label text="Balance :" GridPane.rowIndex="1">
-                                                                     <font>
-                                                                        <Font name="Arial Bold Italic" size="15.0" />
-                                                                     </font>
-                                                                  </Label>
-                                                                  <Label text="Remaining Days :" GridPane.rowIndex="2">
-                                                                     <font>
-                                                                        <Font name="Arial Bold Italic" size="15.0" />
-                                                                     </font>
-                                                                  </Label>
-                                                                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                                                     <font>
-                                                                        <Font name="Arial" size="15.0" />
-                                                                     </font>
-                                                                  </TextField>
-                                                                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                                                     <font>
-                                                                        <Font name="Arial" size="15.0" />
-                                                                     </font>
-                                                                  </TextField>
-                                                               </children>
-                                                            </GridPane>
-                                                         </children>
-                                                      </AnchorPane>
-                                                   </children>
-                                                </HBox>
                                              </children>
                                           </AnchorPane>
                                        </children>

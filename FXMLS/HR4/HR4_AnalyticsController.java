@@ -33,13 +33,8 @@ import javafx.scene.control.TableView;
  */
 public class HR4_AnalyticsController implements Initializable {
     
-    @FXML
     private PieChart pieChart1;
     private final ObservableList<PieChart.Data> pie = FXCollections.observableArrayList();
-    @FXML
-    private PieChart pieChart2;
-    @FXML
-    private PieChart pieChart3;
     @FXML
     private Label employee_label;
     @FXML

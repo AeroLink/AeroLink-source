@@ -13,12 +13,14 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class HR4_BenefitsClass {
     public SimpleStringProperty z;
+    public SimpleStringProperty idxx;
     public SimpleStringProperty a;
     public SimpleStringProperty b;
     public SimpleStringProperty c;
     public SimpleStringProperty d;
-    public HR4_BenefitsClass(String id,String title,String amount,String description,String days){
+    public HR4_BenefitsClass(String id,String benefits_id, String title,String amount,String description,String days){
      this.z = new SimpleStringProperty(id);
+     this.idxx = new SimpleStringProperty(benefits_id);
      this.a = new SimpleStringProperty(title);
      this.b = new SimpleStringProperty(amount);
      this.c = new SimpleStringProperty(description);
