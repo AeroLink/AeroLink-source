@@ -196,7 +196,7 @@
                            <children>
                               <AnchorPane prefHeight="701.0" prefWidth="617.0">
                                  <children>
-                                    <TableView layoutX="140.0" layoutY="49.0" prefHeight="652.0" prefWidth="480.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="49.0">
+                                    <TableView fx:id="tbl_selection_deducs" layoutX="140.0" layoutY="49.0" prefHeight="652.0" prefWidth="480.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="49.0">
                                       <columns>
                                         <TableColumn prefWidth="241.0" text="C1" />
                                         <TableColumn prefWidth="237.0" text="C2" />
@@ -205,16 +205,15 @@
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy>
                                     </TableView>
-                                    <JFXButton layoutX="227.0" layoutY="14.0" prefHeight="25.0" prefWidth="55.0" styleClass="btn-primary" text="Edit" />
-                                    <JFXButton buttonType="RAISED" layoutX="289.0" layoutY="14.0" prefHeight="25.0" prefWidth="177.0" styleClass="btn-primary" text="Add Another Deductions" />
-                                    <JFXButton layoutX="147.0" layoutY="14.0" prefHeight="25.0" prefWidth="73.0" styleClass="btn-danger" text="Delete" />
+                                    <JFXButton fx:id="AddDeductionBtn" buttonType="RAISED" layoutX="289.0" layoutY="14.0" prefHeight="25.0" prefWidth="177.0" styleClass="btn-primary" text="Add Another Deductions" />
+                                    <JFXButton fx:id="DeleteBtn" buttonType="RAISED" layoutX="206.0" layoutY="14.0" prefHeight="25.0" prefWidth="73.0" styleClass="btn-danger" text="Delete" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane prefHeight="701.0" prefWidth="1038.0">
                                  <children>
                                     <VBox layoutX="204.0" layoutY="219.0" prefHeight="701.0" prefWidth="901.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <TableView prefHeight="458.0" prefWidth="901.0">
+                                          <TableView fx:id="tbl_deducs" prefHeight="701.0" prefWidth="901.0">
                                             <columns>
                                               <TableColumn prefWidth="75.0" text="C1" />
                                               <TableColumn prefWidth="75.0" text="C2" />
@@ -248,8 +247,8 @@
                                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                              </columnResizePolicy>
                                           </TableView>
-                                          <JFXButton fx:id="AddNewBenefitsBtn" buttonType="RAISED" layoutX="242.0" layoutY="14.0" prefHeight="26.0" prefWidth="163.0" styleClass="btn-primary" text="Add New Benefits" />
-                                          <FontAwesomeIconView fill="WHITE" glyphName="PLUS" layoutX="259.0" layoutY="31.0" />
+                                          <JFXButton fx:id="AddNewBenefitsBtn" buttonType="RAISED" layoutX="289.0" layoutY="29.0" prefHeight="26.0" prefWidth="163.0" styleClass="btn-primary" text="Add New Benefits" />
+                                          <FontAwesomeIconView fill="WHITE" glyphName="PLUS" layoutX="306.0" layoutY="46.0" />
                                        </children>
                                     </AnchorPane>
                                  </children>
@@ -265,18 +264,18 @@
                                                       <Font name="Arial Bold Italic" size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <JFXButton buttonType="RAISED" layoutX="802.0" layoutY="65.0" prefHeight="28.0" prefWidth="90.0" styleClass="btn-danger" text="Delete" />
+                                                <JFXButton buttonType="RAISED" layoutX="787.0" layoutY="65.0" prefHeight="28.0" prefWidth="90.0" styleClass="btn-danger" text="Delete" />
                                                 <Label layoutX="17.0" layoutY="14.0" text="Company Benefits :" textFill="#35b855">
                                                    <font>
                                                       <Font name="Arial Bold" size="24.0" />
                                                    </font>
                                                 </Label>
-                                                <FontAwesomeIconView fill="WHITE" glyphName="TRASH" layoutX="815.0" layoutY="83.0" />
+                                                <FontAwesomeIconView fill="WHITE" glyphName="TRASH" layoutX="800.0" layoutY="83.0" />
                                              </children>
                                           </AnchorPane>
                                           <AnchorPane prefHeight="590.0" prefWidth="939.0">
                                              <children>
-                                                <TableView fx:id="tbl_benEmp" layoutX="10.0" layoutY="9.0" prefHeight="437.0" prefWidth="939.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <TableView fx:id="tbl_benEmp" layoutX="10.0" layoutY="27.0" prefHeight="574.0" prefWidth="908.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                   <columns>
                                                     <TableColumn prefWidth="75.0" text="C1" />
                                                     <TableColumn prefWidth="75.0" text="C2" />

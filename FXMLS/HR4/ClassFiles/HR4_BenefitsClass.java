@@ -26,5 +26,8 @@ public class HR4_BenefitsClass {
      this.c = new SimpleStringProperty(description);
      this.d = new SimpleStringProperty(days);
     }
+    public String getAmount(){
+       return b.get();
+             }
     
 }
