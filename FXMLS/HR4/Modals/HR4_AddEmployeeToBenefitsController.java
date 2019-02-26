@@ -87,23 +87,7 @@ public class HR4_AddEmployeeToBenefitsController implements Initializable {
         this.generateTable1();
         this.populateTable1();
     
-    }    
-    public void SaveNewBenefits(){
-        /*HR4_BenefitsModel1 bm1 = new HR4_BenefitsModel1();
-        HR4_BenefitsModel bm = new HR4_BenefitsModel();
-        
-        int emp_code = bm1.insert(new Object[][]{
-                {"emp_code", "PAYROLL000"},
-                {"benefits_id", z.getText().toString()},
-                {"balance" , b.getText().toString()},}, true);
-        String PayCode = "PAYROLL000" + id;
-            bm1.update(new Object[][]{
-                {"payroll_code", PayCode}
-            }).where(new Object[][]{
-                {"id", "=", id}
-        }).executeUpdate();*/
-            
-     }
+    }
     public void generateTable1() {
 
         tbl_AddBen.getItems().clear();

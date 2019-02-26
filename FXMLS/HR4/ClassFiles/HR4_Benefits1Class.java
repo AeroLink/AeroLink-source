@@ -19,7 +19,8 @@ public class HR4_Benefits1Class {
     public SimpleStringProperty e;
     public SimpleStringProperty f;
     public SimpleStringProperty g;
-    public HR4_Benefits1Class(String benefits_id, String benN, String emp_code, String fnN, String balance,String araw,String files){
+    public SimpleStringProperty ff;
+    public HR4_Benefits1Class(String benefits_id, String benN, String emp_code, String fnN, String balance,String araw,String files,String Amt){
      this.a = new SimpleStringProperty(benefits_id);
      this.b = new SimpleStringProperty(benN);
      this.c = new SimpleStringProperty(emp_code);
@@ -27,5 +28,6 @@ public class HR4_Benefits1Class {
      this.e = new SimpleStringProperty(balance);
      this.f = new SimpleStringProperty(araw);
      this.g = new SimpleStringProperty(files);
+     this.ff = new SimpleStringProperty(Amt);
     }
 }

@@ -23,8 +23,6 @@ import javafx.stage.StageStyle;
  */
 public class HR4_SavingController implements Initializable {
     HR4_AddEmployeeToBenefitsController ae = new HR4_AddEmployeeToBenefitsController();
-    
-    
     @FXML
     private TextField a;
     @FXML

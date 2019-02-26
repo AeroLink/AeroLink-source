@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="132.0" prefWidth="288.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR4.Modals.HR4_AddNewDeductionsController">
+   <children>
+      <AnchorPane layoutX="3.0" layoutY="3.0" prefHeight="125.0" prefWidth="282.0" style="-fx-border-color: green; -fx-border-radius: 10;" stylesheets="@../../../Assets/css/MainPanel.css">
+         <children>
+            <Label layoutX="7.0" layoutY="6.0" text="Create New Deduction :" textFill="#32ab3e">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="16.0" layoutY="26.0" text="Title :">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="title_lbx" layoutX="16.0" layoutY="41.0" prefHeight="25.0" prefWidth="249.0" />
+            <JFXButton fx:id="submitBtn" layoutX="31.0" layoutY="88.0" prefHeight="25.0" prefWidth="218.0" styleClass="btn-primary" text="Submit">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </JFXButton>
+            <FontAwesomeIconView fill="WHITE" glyphName="PAPER_PLANE" layoutX="105.0" layoutY="105.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

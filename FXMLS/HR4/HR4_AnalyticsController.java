@@ -53,6 +53,7 @@ public class HR4_AnalyticsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+    /*
         //employee
         addtableEmp();
         loadTableEMP();
@@ -64,8 +65,8 @@ public class HR4_AnalyticsController implements Initializable {
         //female
         addtableFgender();
         loadTableFgender();
-    }
-    HR4_InfoChartModel gcm = new HR4_InfoChartModel();
+    */}
+    /*HR4_InfoChartModel gcm = new HR4_InfoChartModel();
     
     public void Piechart1() {
 
@@ -210,8 +211,8 @@ public class HR4_AnalyticsController implements Initializable {
     }
     
      
-     
-     
+    */
+    
 }
 
    
