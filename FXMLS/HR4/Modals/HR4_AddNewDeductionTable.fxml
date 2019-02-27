@@ -29,6 +29,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="275.0" prefWidth="791.0">
                <children>
+                  <Label fx:id="ddxd" text="Label" />
                   <TableView fx:id="tbl_dd" layoutX="93.0" layoutY="24.0" prefHeight="268.0" prefWidth="761.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                       <TableColumn prefWidth="75.0" text="C1" />
@@ -40,7 +41,6 @@
                   </TableView>
                </children>
             </AnchorPane>
-            <Label fx:id="ddxd" text="Label" />
             <AnchorPane prefHeight="213.0" prefWidth="761.0">
                <children>
                   <AnchorPane layoutX="5.0" layoutY="5.0" prefHeight="194.0" prefWidth="752.0" style="-fx-border-color: green; -fx-border-radius: 10;">

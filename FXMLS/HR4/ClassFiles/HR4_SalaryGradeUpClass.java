@@ -18,30 +18,40 @@ public class HR4_SalaryGradeUpClass {
     public SimpleStringProperty d;
     public SimpleStringProperty e;
     public SimpleStringProperty f;
-  public HR4_SalaryGradeUpClass(String emp_code, String fnn, String grade, String status,String job_id,String dept_id){
-      this.a = new SimpleStringProperty(emp_code);
-      this.b = new SimpleStringProperty(grade);
-      this.c = new SimpleStringProperty(status);
-      this.d = new SimpleStringProperty(fnn);
-      this.e = new SimpleStringProperty(job_id);
-      this.f = new SimpleStringProperty(dept_id);
+    public SimpleStringProperty g;
+    public SimpleStringProperty h;
+    public SimpleStringProperty i;
+    public SimpleStringProperty j;
+    public SimpleStringProperty k;
+    public SimpleStringProperty l;
+    public SimpleStringProperty m;
+    public SimpleStringProperty n;
+    public SimpleStringProperty job;
+    public SimpleStringProperty classification;
+    public SimpleStringProperty dept;
+    public SimpleStringProperty designation;
+    public SimpleStringProperty idxx;
+  public HR4_SalaryGradeUpClass(String req_code,String emp_code, String fnn, String job_id,String classification_id,String dept_id,String designation_id, String req_job_id, String req_classification_id, String req_dept_id, String req_designation_id,String productivity,String qualityofwork,String initiative,String teamwork,String prob_solv,String attendance,String ave,String status){
+   this.a = new SimpleStringProperty(emp_code);
+   this.b = new SimpleStringProperty(fnn);
+   this.job = new SimpleStringProperty(job_id);
+   this.classification = new SimpleStringProperty(classification_id);
+   this.dept = new SimpleStringProperty(dept_id);
+   this.designation = new SimpleStringProperty(designation_id);
+   this.c = new SimpleStringProperty(req_job_id);
+   this.d = new SimpleStringProperty(req_classification_id);
+   this.e = new SimpleStringProperty(req_dept_id);
+   this.f = new SimpleStringProperty(req_designation_id);
+   this.g = new SimpleStringProperty(productivity);
+   this.h = new SimpleStringProperty(qualityofwork);
+   this.i = new SimpleStringProperty(initiative);
+   this.j = new SimpleStringProperty(teamwork);
+   this.k = new SimpleStringProperty(prob_solv);
+   this.l = new SimpleStringProperty(attendance);
+   this.m = new SimpleStringProperty(ave);
+   this.n = new SimpleStringProperty(status);
+   this.idxx = new SimpleStringProperty(req_code);
+   
   }
-   public String getEmpCode(){
-       return a.get();
-             }
-   public String getGrade(){
-       return b.get();
-             }
-   public String getStats(){
-       return c.get();
-             }
-   public String getFN(){
-       return d.get();
-             }
-   public String getJobs(){
-       return e.get();
-             }
-   public String getDept(){
-       return f.get();
-             }
+  
 }
