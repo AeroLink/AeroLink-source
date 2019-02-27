@@ -6,12 +6,11 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -19,164 +18,348 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="560.0" prefWidth="425.0" stylesheets="@../../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Log1.AssetManagement.Modal.AddVehicleController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.Log1.AssetManagement.Modal.AddVehicleController">
    <children>
-      <TitledPane animated="false" collapsible="false" text="Register Vehicle" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <content>
-            <AnchorPane style="-fx-background-color: white;">
+      <BorderPane prefHeight="535.0" prefWidth="800.0" style="-fx-border-color: GREEN;" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
+         <top>
+            <AnchorPane prefHeight="28.0" prefWidth="790.0" style="-fx-border-color: GREEN;" BorderPane.alignment="CENTER">
                <children>
-                  <GridPane prefHeight="575.0" prefWidth="398.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="221.0" minWidth="0.0" prefWidth="0.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="403.0" minWidth="10.0" prefWidth="403.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <children>
-                        <VBox alignment="CENTER_LEFT" GridPane.columnIndex="1">
-                           <children>
-                              <Label text="Type:">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font></Label>
-                              <TextField fx:id="VehicleType_txt" prefHeight="25.0" prefWidth="292.0" />
-                           </children>
-                        </VBox>
-                        <HBox alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <children>
-                              <VBox alignment="CENTER_LEFT">
-                                 <children>
-                                    <Label text="Model:">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font></Label>
-                                    <TextField fx:id="VehicleModel_txt" prefHeight="25.0" prefWidth="292.0" />
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER_LEFT">
-                                 <children>
-                                    <Label text="Color:">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font></Label>
-                                    <TextField fx:id="VehicleColor_txt" prefHeight="25.0" prefWidth="292.0" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <HBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                           <children>
-                              <VBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="292.0">
-                                 <children>
-                                    <Label text="Serial Number:">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font></Label>
-                                    <TextField fx:id="VehicleSerialNumber_txt" prefHeight="25.0" prefWidth="292.0" />
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER_LEFT" prefWidth="292.0">
-                                 <children>
-                                    <Label text="Chassis Number:">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font></Label>
-                                    <TextField fx:id="VehicleChassisNumber_txt" prefHeight="25.0" prefWidth="292.0" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <HBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                           <children>
-                              <VBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="292.0">
-                                 <children>
-                                    <Label text="Year Purchased:">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font></Label>
-                                    <TextField fx:id="yearBought_txt" prefWidth="292.0" />
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER_LEFT" prefWidth="292.0">
-                                 <children>
-                                    <Label text="Warranty date:">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font></Label>
-                                    <DatePicker fx:id="warranty_datepicker" prefHeight="25.0" prefWidth="338.0" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <VBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                           <children>
-                              <Label text="Purchased Price:">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font></Label>
-                              <TextField fx:id="PurchasedPrize_txt" prefHeight="25.0" prefWidth="292.0" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                           <children>
-                              <Label text="Fuel Type:">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font></Label>
-                              <TextField fx:id="fuelType_txt" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
-                           <children>
-                              <Label text="Vehicle Usability:">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font></Label>
-                              <HBox alignment="CENTER_LEFT" spacing="20.0">
-                                 <children>
-                                    <RadioButton fx:id="private_RadioBtn" mnemonicParsing="false" text="Private">
-                                       <toggleGroup>
-                                          <ToggleGroup fx:id="VehicleuUablity" />
-                                       </toggleGroup>
-                                    </RadioButton>
-                                    <RadioButton fx:id="Public_RadioBtn" layoutX="156.0" layoutY="10.0" mnemonicParsing="false" text="Public" toggleGroup="$VehicleuUablity" />
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets left="10.0" top="5.0" />
-                                 </VBox.margin></HBox>
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                           <children>
-                              <Label text="Building Located:">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font></Label>
-                              <ComboBox fx:id="building_combox" prefHeight="25.0" prefWidth="417.0" />
-                           </children>
-                        </VBox>
-                        <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                        <Label fx:id="radioButtonLabel_txt" prefHeight="6.0" prefWidth="28.0" text="Label" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                  <ToolBar prefHeight="40.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <items>
+                        <FontAwesomeIconView fill="GREEN" glyphName="CAR" size="21" />
+                        <Label text="Register Vehicle" textFill="GREEN">
                            <font>
-                              <Font size="2.0" />
+                              <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="buildingID_txt" text="Label" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                        <Label fx:id="AssetVehicleCount_txt" disable="true" text="Label" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                     </children>
-                  </GridPane>
-                  <HBox alignment="CENTER" layoutY="475.0" prefHeight="530.0" prefWidth="398.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="470.0">
+                     </items>
+                  </ToolBar>
+               </children>
+               <BorderPane.margin>
+                  <Insets left="2.0" right="2.0" top="2.0" />
+               </BorderPane.margin>
+            </AnchorPane>
+         </top>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox layoutY="-6.0" prefHeight="425.0" prefWidth="800.0" spacing="10.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                      <children>
-                        <JFXButton fx:id="save_btn" prefHeight="35.0" prefWidth="90.0" styleClass="btn-primary" text="Save">
+                        <GridPane prefWidth="400.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.rowIndex="1">
+                                 <children>
+                                    <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="400.0">
+                                       <children>
+                                          <Label text="Asset Number:">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="AssetNumber_txt" editable="false" opacity="0.5">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="400.0">
+                                       <children>
+                                          <Label text="Vehicle ID:">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="VehicleID_txt" editable="false" opacity="0.5">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+                                 <children>
+                                    <Label text="Asset Title:">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="AssetTitle_txt" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
+                                 <children>
+                                    <Label text="Description:">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <TextArea fx:id="description_txt" prefHeight="200.0" prefWidth="200.0" />
+                                 </children>
+                              </VBox>
+                              <HBox spacing="5.0" GridPane.rowIndex="4">
+                                 <children>
+                                    <VBox alignment="CENTER_LEFT">
+                                       <children>
+                                          <Label text="Vehicle Type:">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="VehicleType_txt" prefHeight="25.0" prefWidth="292.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0">
+                                       <children>
+                                          <Label text="ORC Number:">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="ORC_txt" prefHeight="25.0" prefWidth="292.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" spacing="5.0" GridPane.rowIndex="5">
+                                 <children>
+                                    <VBox alignment="CENTER_LEFT">
+                                       <children>
+                                          <Label text="Brand:">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="brand_txt" prefHeight="25.0" prefWidth="292.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER_LEFT">
+                                       <children>
+                                          <Label text="Model:">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="model_txt" prefHeight="25.0" prefWidth="292.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox spacing="5.0" GridPane.rowIndex="6">
+                                 <children>
+                                    <VBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="292.0">
+                                       <children>
+                                          <Label text="Color:">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="color_txt" prefHeight="25.0" prefWidth="292.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER_LEFT" prefWidth="292.0">
+                                       <children>
+                                          <Label text="Capacity:">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="capacity_txt" prefHeight="25.0" prefWidth="292.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="638.0" spacing="7.0">
+                                 <children>
+                                    <Label text="Date Today:">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="DateDisplayer_label" text="0" underline="true" />
+                                 </children>
+                              </HBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets bottom="10.0" />
+                           </HBox.margin>
+                        </GridPane>
+                        <GridPane prefWidth="400.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="403.0" minWidth="10.0" prefWidth="403.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <HBox spacing="5.0" GridPane.rowIndex="1">
+                                 <children>
+                                    <VBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="292.0">
+                                       <children>
+                                          <Label text="Plate Number:">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="plateNum_txt" prefWidth="292.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="42.0" prefWidth="292.0">
+                                       <children>
+                                          <Label text="Chassis Number:">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="chassisNum_txt" prefWidth="292.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <VBox alignment="CENTER_LEFT" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                                 <children>
+                                    <HBox spacing="5.0">
+                                       <children>
+                                          <VBox alignment="CENTER_LEFT">
+                                             <children>
+                                                <Label text="Purchased Price:">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="purchasePrice_txt" prefHeight="25.0" prefWidth="292.0" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0">
+                                             <children>
+                                                <Label text="Estimated usesful years:">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="lifeSpan_txt" prefHeight="25.0" prefWidth="292.0" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <HBox spacing="5.0" GridPane.rowIndex="4">
+                                 <children>
+                                    <VBox alignment="CENTER_LEFT" prefWidth="400.0">
+                                       <children>
+                                          <Label text="Fuel Type:">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="FuelType_txt" />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefWidth="400.0">
+                                       <children>
+                                          <Label text="Fuel Capacity:">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="FuelCapacity_txt" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <VBox alignment="CENTER_LEFT">
+                                 <children>
+                                    <HBox spacing="5.0">
+                                       <children>
+                                          <VBox alignment="CENTER_LEFT" prefWidth="292.0">
+                                             <children>
+                                                <Label text="Year Bought:">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="yearBought_txt" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefWidth="292.0">
+                                             <children>
+                                                <Label text="Warranty date:">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <DatePicker fx:id="warranty_txt" editable="false" opacity="0.8" prefHeight="25.0" prefWidth="338.0" promptText="Select Date" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="400.0" spacing="5.0" GridPane.rowIndex="5">
+                                 <children>
+                                    <Label text="Core Location:">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="coreLocation_txt" prefHeight="25.0" prefWidth="417.0" promptText="Select location" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" GridPane.rowIndex="6">
+                                 <children>
+                                    <Label fx:id="warning_lbl" text="Label" underline="true" visible="false" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
+                                 <children>
+                                    <Label text="Salvage Value(Estimated):">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="salvageVal_txt" />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets top="8.0" />
+                           </HBox.margin>
+                        </GridPane>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </center>
+         <bottom>
+            <AnchorPane prefHeight="30.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ToolBar prefHeight="45.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <items>
+                        <JFXButton fx:id="save_btn" prefHeight="25.0" prefWidth="70.0" styleClass="btn-primary" text="Save">
                            <graphic>
                               <FontAwesomeIconView fill="WHITE" glyphName="CHECK" size="14" />
                            </graphic>
@@ -184,7 +367,7 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </JFXButton>
-                        <JFXButton fx:id="cancel_btn" layoutX="10.0" layoutY="10.0" prefHeight="35.0" prefWidth="90.0" styleClass="btn-danger" text="Clear">
+                        <JFXButton fx:id="cancel_btn" prefHeight="25.0" prefWidth="70.0" styleClass="btn-danger" text="Close">
                            <graphic>
                               <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" size="14" />
                            </graphic>
@@ -192,11 +375,18 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </JFXButton>
-                     </children>
-                  </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="5.0">
+                           <children>
+                              <Label fx:id="AssetCount_txt" text="Label" visible="false" />
+                              <Label fx:id="buildingID_txt" text="Label" visible="false" />
+                              <Label fx:id="AssetVehicleCount_txt" disable="true" text="Label" visible="false" />
+                           </children>
+                        </HBox>
+                     </items>
+                  </ToolBar>
                </children>
             </AnchorPane>
-         </content>
-      </TitledPane>
+         </bottom>
+      </BorderPane>
    </children>
 </AnchorPane>

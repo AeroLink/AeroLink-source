@@ -5,7 +5,7 @@
  */
 package FXMLS.Log1.util;
 
-import FXMLS.Log1.WarehouseManagementController;
+import FXMLS.Log1.WarehousingController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
@@ -28,13 +28,14 @@ public class Log1Util {
             if(parentStage != null){
                 stage = parentStage;
             }else{
-                stage = new Stage(StageStyle.DECORATED);
+                stage = new Stage(StageStyle.UTILITY);
             }
+            stage.setResizable(false);
             stage.setTitle(title);
             stage.setScene(new Scene(parent));
             stage.show();
         } catch (IOException ex) {
-            Logger.getLogger(WarehouseManagementController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WarehousingController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
