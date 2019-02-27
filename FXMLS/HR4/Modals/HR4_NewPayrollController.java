@@ -10,12 +10,15 @@ import FXMLS.HR4.ClassFiles.HR4_NewPayrollClass;
 import FXMLS.HR4.Filler.HR4_NewPayrollFill;
 import FXMLS.HR4.ClassFiles.HR4_PayrollClass;
 import FXMLS.HR4.HR4_Core_Human_Capital_ManagementController;
+import FXMLS.HR4.Model.HR4_BenefitsModel;
 import FXMLS.HR4.Model.HR4_EmployeeInfo;
+import FXMLS.HR4.Model.HR4_PayrollEmployeeModel;
 import FXMLS.HR4.Model.HR4_PayrollModel;
 import Synapse.Components.Modal.Modal;
 import Synapse.Form;
 import Synapse.Model;
 import Synapse.Session;
+import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -27,14 +30,17 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 
 /**
@@ -46,21 +52,17 @@ public class HR4_NewPayrollController implements Initializable {
 
     @FXML
     private TextField lbl_pc;
-    @FXML
-    private TextField lbl_sd;
-    @FXML
-    private TextField lbl_ed;
-    
     ObservableList<HR4_EmpInfoClass> obj1 = FXCollections.observableArrayList();
     HR4_PayrollModel payroll = new HR4_PayrollModel();
     HR4_EmployeeInfo emp = new HR4_EmployeeInfo();
     long DummyCount = 0;
     long GlobalCount = 0;
+    ObservableList<HR4_EmpInfoClass> data;
     @FXML
     private TableView<HR4_EmpInfoClass> tbl_payroll_emp;
-    @FXML
-    private TextField lbl_dpt;
     Boolean searchStatus = false;
+    @FXML
+    private JFXButton SubmiBtn;
     
     
     @Override
@@ -68,9 +70,7 @@ public class HR4_NewPayrollController implements Initializable {
         generateTable1();
         populateTable1();
         lbl_pc.setText(HR4_NewPayrollFill.jae);
-        lbl_sd.setText(HR4_NewPayrollFill.jae1);
-        lbl_ed.setText(HR4_NewPayrollFill.jae2);
-        lbl_dpt.setText(HR4_NewPayrollFill.jae3);
+        SubmiBtn.setOnMouseClicked(e -> BtnAdded());
         
     
     }
@@ -155,5 +155,41 @@ public class HR4_NewPayrollController implements Initializable {
         tbl_payroll_emp.setItems(obj1);
 
     }
+    public void BtnAdded(){
+        HR4_PayrollEmployeeModel fba = new HR4_PayrollEmployeeModel();
+        for(HR4_EmpInfoClass select : data)
+        {
+            if(select.getSelect().isSelected()){
+                
+          try
+        {
+           String[][] fba_table =
+        {
+        {"payroll_code" , lbl_pc.getText().toString()},
+        {"employee_code", "=", tbl_payroll_emp.getSelectionModel().getSelectedItem().employee_code.get().toString()}};           
+           
+           
+        if(fba.insert(fba_table)){
+         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+             alert.initStyle(StageStyle.UNDECORATED);
+             alert.setTitle("Saved");
+             alert.setContentText("Data has been saved"); 
+             alert.showAndWait();
+            
+        }else{
+             Alert alert = new Alert(Alert.AlertType.ERROR);
+             alert.initStyle(StageStyle.UNDECORATED);
+             alert.setTitle("ERROR");
+             alert.setContentText("PLEASE FILL THE EMPTY FIELDS"); 
+             alert.showAndWait();
+        }
+                                       
+            }catch(Exception e)
+               {
+            e.printStackTrace();
+               }
     
+            }
+        }
+    }
 }

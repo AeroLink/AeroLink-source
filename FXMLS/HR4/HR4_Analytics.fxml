@@ -2,16 +2,13 @@
 
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="686.0" prefWidth="1347.0" style="-fx-background-color: 000;" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR4.HR4_AnalyticsController">
+<AnchorPane id="AnchorPane" prefHeight="686.0" prefWidth="1324.0" style="-fx-background-color: 000;" stylesheets="@../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR4.HR4_AnalyticsController">
    <children>
       <BorderPane prefHeight="686.0" prefWidth="1203.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -31,46 +28,84 @@
                <children>
                   <JFXTabPane prefHeight="642.0" prefWidth="1203.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <tabs>
-                        <Tab id="tab" styleClass="tab-label" text="Applicant and Trainees Data">
+                        <Tab id="tab" styleClass="tab-label" text="Overall Data">
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <VBox layoutX="126.0" layoutY="116.0" prefHeight="605.0" prefWidth="1203.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <AnchorPane layoutX="60.0" layoutY="53.0" prefHeight="237.0" prefWidth="222.0" style="-fx-border-color: green;" AnchorPane.bottomAnchor="315.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="1042.0" AnchorPane.topAnchor="53.0">
                                        <children>
-                                          <HBox prefHeight="614.0" prefWidth="1203.0">
-                                             <children>
-                                                <AnchorPane prefHeight="605.0" prefWidth="753.0" style="-fx-background-color: WHITE;">
-                                                   <children>
-                                                      <PieChart fx:id="pieChart1" layoutX="14.0" layoutY="14.0" prefHeight="583.0" prefWidth="730.0" style="-fx-background-color: #ffffb3;" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="13.0" />
-                                                   </children>
-                                                </AnchorPane>
-                                                <AnchorPane prefHeight="605.0" prefWidth="592.0">
-                                                   <children>
-                                                      <VBox layoutX="225.0" layoutY="148.0" prefHeight="605.0" prefWidth="450.0" style="-fx-background-color: WHITE;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                         <children>
-                                                            <AnchorPane prefHeight="304.0" prefWidth="450.0" style="-fx-background-color: WHITE;">
-                                                               <children>
-                                                                  <PieChart fx:id="pieChart2" layoutX="12.0" layoutY="13.0" prefHeight="278.0" prefWidth="559.0" style="-fx-background-color: #ffffb3;" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="13.0" />
-                                                               </children>
-                                                            </AnchorPane>
-                                                            <AnchorPane prefHeight="302.0" prefWidth="450.0" style="-fx-background-color: WHITE;">
-                                                               <children>
-                                                                  <PieChart fx:id="pieChart3" layoutX="14.0" layoutY="14.0" prefHeight="276.0" prefWidth="561.0" style="-fx-background-color: #ffffb3;" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="13.0" />
-                                                               </children>
-                                                            </AnchorPane>
-                                                         </children>
-                                                      </VBox>
-                                                   </children>
-                                                </AnchorPane>
-                                             </children>
-                                          </HBox>
+                                          <Label layoutX="74.0" layoutY="105.0" prefHeight="27.0" prefWidth="74.0" text="Employees">
+                                             <font>
+                                                <Font name="Arial Bold" size="13.0" />
+                                             </font></Label>
+                                          <Label fx:id="employee_label" alignment="CENTER" layoutX="79.0" layoutY="132.0" prefHeight="55.0" prefWidth="59.0" text="0" textAlignment="CENTER">
+                                             <font>
+                                                <Font name="Arial Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <FontAwesomeIconView glyphName="USER" layoutX="82.0" layoutY="95.0" size="70" AnchorPane.bottomAnchor="129.6328125" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="35.0" />
                                        </children>
-                                    </VBox>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="331.0" layoutY="53.0" prefHeight="237.0" prefWidth="222.0" style="-fx-border-color: green;">
+                                       <children>
+                                          <Label fx:id="male_label" alignment="CENTER" layoutX="30.0" layoutY="159.0" prefHeight="32.0" prefWidth="53.0" text="0" textAlignment="CENTER">
+                                             <font>
+                                                <Font name="Arial Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="43.0" layoutY="134.0" prefHeight="17.0" prefWidth="28.0" text="Male">
+                                             <font>
+                                                <Font name="Arial Bold" size="11.0" />
+                                             </font></Label>
+                                          <Label layoutX="151.0" layoutY="132.0" prefHeight="21.0" prefWidth="40.0" text="Female">
+                                             <font>
+                                                <Font name="Arial Bold" size="11.0" />
+                                             </font></Label>
+                                          <Label fx:id="female_label" alignment="CENTER" layoutX="144.0" layoutY="159.0" prefHeight="32.0" prefWidth="53.0" text="0" textAlignment="CENTER">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="87.0" layoutY="105.0" prefHeight="27.0" prefWidth="49.0" text="Gender">
+                                             <font>
+                                                <Font name="Arial Bold" size="13.0" />
+                                             </font>
+                                          </Label>
+                                          <FontAwesomeIconView glyphName="MARS" layoutX="62.0" layoutY="90.0" size="50" />
+                                          <FontAwesomeIconView glyphName="VENUS" layoutX="115.0" layoutY="89.0" size="50" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children></AnchorPane>
+                          </content>
+                        </Tab>
+                        <Tab id="tab" styleClass="tab-label" text="Applicants Data">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <AnchorPane layoutX="116.0" layoutY="125.0" prefHeight="605.0" prefWidth="1324.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <AnchorPane layoutX="55.0" layoutY="66.0" prefHeight="237.0" prefWidth="222.0" style="-fx-border-color: green;" AnchorPane.rightAnchor="1042.0" AnchorPane.topAnchor="53.0">
+                                             <children>
+                                                <FontAwesomeIconView glyphName="USER" layoutX="84.0" layoutY="107.0" size="70" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="35.0" />
+                                                <Label layoutX="75.0" layoutY="119.0" text="Applicants" AnchorPane.rightAnchor="80.0">
+                                                   <font>
+                                                      <Font name="Arial Bold" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="applicants_label" alignment="CENTER" layoutX="78.0" layoutY="135.0" prefHeight="55.0" prefWidth="59.0" text="0" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font name="Arial Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </AnchorPane>
                                  </children>
                               </AnchorPane>
                           </content>
                         </Tab>
-                        <Tab id="tab" styleClass="tab-label" text="Department Data">
+                        <Tab id="tab" styleClass="tab-label" text="Employee Data">
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                           </content>

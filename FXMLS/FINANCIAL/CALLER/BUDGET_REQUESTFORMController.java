@@ -45,8 +45,6 @@ public class BUDGET_REQUESTFORMController implements Initializable {
                                                                             "Logistic - Procurement");
     @FXML
     private JFXTextField lastname;
-    @FXML
-    private JFXComboBox<?> combo_emp;
      
     
     /**
@@ -62,7 +60,7 @@ public class BUDGET_REQUESTFORMController implements Initializable {
     
      public void submitRequest(){
         
-                Financial_budget_request fbr = new Financial_budget_request();
+          Financial_budget_request fbr = new Financial_budget_request();
           try
         {
            String[][] b_tbl =

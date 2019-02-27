@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="292.0" prefWidth="419.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR4.Modals.HR4_DeducBenefitController">
+   <children>
+      <VBox layoutX="99.0" layoutY="-13.0" prefHeight="294.0" prefWidth="419.0" AnchorPane.bottomAnchor="-6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane prefHeight="173.0" prefWidth="419.0" stylesheets="@../../../Assets/css/MainPanel.css">
+               <children>
+                  <AnchorPane layoutX="5.0" layoutY="8.0" prefHeight="278.0" prefWidth="409.0" style="-fx-border-color: green; -fx-border-radius: 10;">
+                     <children>
+                        <Label layoutX="11.0" layoutY="30.0" text="Benefits Code :">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="benC" disable="true" editable="false" layoutX="12.0" layoutY="45.0" prefHeight="25.0" prefWidth="147.0" />
+                        <Label layoutX="9.0" layoutY="7.0" text="Deduc Benefits Salary :">
+                           <font>
+                              <Font name="Arial Italic" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="167.0" layoutY="29.0" text="Title :">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="benT" disable="true" editable="false" layoutX="167.0" layoutY="45.0" prefHeight="25.0" prefWidth="230.0" />
+                        <Label layoutX="11.0" layoutY="77.0" text="Employee Code :">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="empC" disable="true" editable="false" layoutX="11.0" layoutY="92.0" />
+                        <TextField fx:id="empN" disable="true" editable="false" layoutX="167.0" layoutY="92.0" prefHeight="25.0" prefWidth="230.0" />
+                        <Label layoutX="167.0" layoutY="76.0" text="Employee Name :">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="124.0" text="Benefit Amount :">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="benA" disable="true" editable="false" layoutX="11.0" layoutY="139.0" />
+                        <TextField fx:id="empB" disable="true" editable="false" layoutX="167.0" layoutY="139.0" />
+                        <Label layoutX="167.0" layoutY="123.0" text="Employee Balance :">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <AnchorPane layoutX="6.0" layoutY="171.0" prefHeight="103.0" prefWidth="397.0" style="-fx-border-color: green; -fx-border-radius: 10;">
+                           <children>
+                              <JFXButton layoutX="12.0" layoutY="69.0" prefHeight="25.0" prefWidth="373.0" styleClass="btn-primary" text="Submit" />
+                              <TextField fx:id="sal" layoutX="16.0" layoutY="35.0" prefHeight="25.0" prefWidth="180.0" />
+                              <TextField fx:id="futB" disable="true" editable="false" layoutX="201.0" layoutY="35.0" prefHeight="25.0" prefWidth="180.0" />
+                              <Label layoutX="16.0" layoutY="7.0" text="Salary :">
+                                 <font>
+                                    <Font name="Arial Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="16.0" layoutY="22.0" text="(Total money that employee will take)" textFill="RED">
+                                 <font>
+                                    <Font name="Arial Italic" size="10.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="201.0" layoutY="7.0" text="Future Balance :">
+                                 <font>
+                                    <Font name="Arial Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="201.0" layoutY="22.0" text="(The future balance of the employee)" textFill="RED">
+                                 <font>
+                                    <Font name="Arial Italic" size="10.0" />
+                                 </font>
+                              </Label>
+                              <FontAwesomeIconView fill="WHITE" glyphName="PAPER_PLANE" layoutX="162.0" layoutY="86.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

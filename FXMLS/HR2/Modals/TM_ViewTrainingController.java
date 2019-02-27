@@ -204,12 +204,12 @@ public class TM_ViewTrainingController implements Initializable {
 
     public void Data(List b) {
         b.stream().forEach(row -> {
+            txt_date_requested.setText(((HashMap) row).get("date_requested").toString());
             txt_training_title.setText(((HashMap) row).get("training_title").toString());
             txt_hrs.setText(((HashMap) row).get("total_hours").toString());
             txt_reason.setText(((HashMap) row).get("reason").toString());
             cbox_edit_status.setValue(((HashMap) row).get("request_status").toString());
             txt_req_by.setText(((HashMap) row).get("requested_by").toString());
-            txt_date_requested.setText(((HashMap) row).get("date_requested").toString());
             cbox_edit_trainor.setValue(((HashMap) row).get("trainor").toString());
             txt_from_time.setValue(LocalTime.parse(((HashMap) row).get("start_time").toString()));
             txt_to_time.setValue(LocalTime.parse(((HashMap) row).get("end_time").toString()));

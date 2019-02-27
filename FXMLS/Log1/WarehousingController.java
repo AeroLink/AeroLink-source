@@ -1,3 +1,4 @@
+
 package FXMLS.Log1;
 
 
@@ -1011,9 +1012,6 @@ public class WarehousingController implements Initializable {
 
     
 
-    
-
-    
 
     
 }

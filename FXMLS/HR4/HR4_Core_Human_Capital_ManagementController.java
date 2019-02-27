@@ -21,11 +21,15 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import FXMLS.HR4.Model.HR4_Jobs;
 import FXMLS.HR4.Model.HR4_Status;
+import Model.HR4_Classification;
+import Model.HR4_Departments;
+import Model.HR4_Designation;
 import Synapse.Components.Modal.Modal;
 import Synapse.Form;
 import Synapse.Model;
 import Synapse.Session;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 import java.util.HashMap;
 import java.util.List;
@@ -49,6 +53,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
+import org.controlsfx.control.textfield.CustomTextField;
 
 /**
  * FXML Controller class
@@ -57,13 +62,6 @@ import javafx.util.Callback;
  */
 public class HR4_Core_Human_Capital_ManagementController implements Initializable {
 
-    @FXML
-    private TableView<TableModel_Jobs> tbl_jobs;
-    @FXML
-    private JFXButton btnNewJob;
-
-    @FXML
-    private ContextMenu contextMenuJobs;
     ObservableList<TableModel_Jobs> obj = FXCollections.observableArrayList();
     ObservableList<HR4_EmpInfoClass> obj1 = FXCollections.observableArrayList();
     int Global_Count = 0;
@@ -72,18 +70,25 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
     HR4_EmployeeInfo emp = new HR4_EmployeeInfo();
     Boolean searchStatus = false;
 
+    HR4_Departments dept = new HR4_Departments();
+    HR4_Classification classification = new HR4_Classification();
+
+    @FXML
+    private TableView<TableModel_Jobs> tbl_jobs;
+    @FXML
+    private JFXButton btnNewJob;
+    @FXML
+    private ContextMenu contextMenuJobs;
+
     @FXML
     private JFXButton btnNewDept;
     @FXML
     private TableView<HR4_EmpInfoClass> tbl_chc;
     @FXML
     private ComboBox statcb;
-    @FXML
     private ComboBox ckasscb;
     @FXML
     private JFXTextField srch1;
-    @FXML
-    private JFXTextField Search_Job;
     @FXML
     private PieChart pieChartGender;
     private final ObservableList<PieChart.Data> pie = FXCollections.observableArrayList();
@@ -92,55 +97,72 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
     private final ObservableList<PieChart.Data> piee = FXCollections.observableArrayList();
     @FXML
     private PieChart pieChartAge;
+    @FXML
+    private JFXButton btnNewEmployee;
+    @FXML
+    private JFXButton btnSearch;
+    @FXML
+    private CustomTextField txtSearch;
+    @FXML
+    private JFXCheckBox chkFilter;
+    @FXML
+    private ComboBox btnDepts;
+    @FXML
+    private ComboBox btnClassifications;
+    @FXML
+    private JFXButton btnRefresh;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO -> TRYING TO ENTER THE QUANTUM REALM (https://youtu.be/nN6VR92V70M)
-        //For Jobs
-        weabo();
-        weabo1();
-
-        statcb.getSelectionModel().selectedItemProperty().addListener(listener -> {
-            GlobalCount = 0;
-            DummyCount = 0;
-        });
-
-        ckasscb.getSelectionModel().selectedItemProperty().addListener(listener -> {
-            GlobalCount2 = 0;
-            DummyCount2 = 0;
-        });
+        //re write all codes of HR4 CHC 
+        //kapag mag cocode ka ayusin mo ang naming convention mo para di ka naliligaw kapag nag dedebug ka
 
         this.generateTable();
         this.populateTable();
 
-        tbl_jobs.setContextMenu(contextMenuJobs);
-        //SearchOfJob
+        //creating combo box list for filter
+        this.createComboBoxList();
 
-        //Search_Job.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-          //  if (!Search_Job.getText().equals("")) {
-            //    searchStatus = true;
-              //  SearchJOB();
-            //}
-        //});
-        ///////2ndobj
-
-        obj1.addListener((ListChangeListener.Change<? extends Object> c) -> {
-            tbl_chc.setItems(obj1);
+        //refresh button -> if atat na atat na ang user mag refresh
+        this.btnRefresh.setOnAction(value -> {
+            GlobalCount = 0;
         });
 
-        srch1.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-            Search();
+        //filtering checkbox toggle
+        this.chkFilter.setOnAction(value -> {
+            if (chkFilter.isSelected()) {
+                btnClassifications.setDisable(false);
+                btnDepts.setDisable(false);
+            } else {
+                btnClassifications.setDisable(true);
+                btnDepts.setDisable(true);
+            }
         });
-        srch1.setOnMouseClicked(event -> Search());
 
-        this.generateTable1();
-        this.populateTable1();        
-        this.Piechart1(); 
-        this.Piechart2();
+    }
 
+    public void createComboBoxList() {
+        List dept_list = dept.get();
+        List classification_list = classification.get();
+
+        btnDepts.getItems().add("DEPT00A - ALL DEPARTMENTS");
+        btnClassifications.getItems().add("CLASS00A - ALL CLASSIFICATIONS");
+
+        for (Object o : dept_list) {
+            HashMap hm = (HashMap) o;
+            btnDepts.getItems().add("DEPT00" + hm.get("id") + " - " + hm.get("dept_name"));
+        }
+
+        for (Object o : classification_list) {
+            HashMap hm = (HashMap) o;
+            btnClassifications.getItems().add("CLASS00" + hm.get("id") + " - " + hm.get("class_name"));
+        }
+
+        btnDepts.getSelectionModel().selectFirst();
+        btnClassifications.getSelectionModel().selectFirst();
 
     }
 
@@ -193,7 +215,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         this.AddJobToTable(rs);
     }*/
     HR4_InfoChartModel gcm = new HR4_InfoChartModel();
-    
+
     public void Piechart1() {
 
         pie.clear();
@@ -209,6 +231,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         pieChartGender.setStartAngle(90);
 
     }
+
     public void Piechart2() {
         HR4_Jobs jobs = new HR4_Jobs();
         piee.clear();
@@ -218,13 +241,14 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         list3x.forEach((row) -> {
             piee.add(new PieChart.Data(row.get("dept_name").toString(),
                     Double.parseDouble(row.get("Total").toString())));
-        
+
         });
         pieChartDept.setData(piee);
         pieChartDept.setLegendSide(Side.BOTTOM);
         pieChartDept.setStartAngle(90);
 
     }
+
     public void Piechart3() {
         HR4_Jobs jobs = new HR4_Jobs();
         piee.clear();
@@ -234,7 +258,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         list3x.forEach((row) -> {
             piee.add(new PieChart.Data(row.get("dept_name").toString(),
                     Double.parseDouble(row.get("Total").toString())));
-        
+
         });
         pieChartDept.setData(piee);
         pieChartDept.setLegendSide(Side.BOTTOM);
@@ -292,11 +316,23 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
                         DummyCount = Long.parseLong(((HashMap) e).get("chk").toString());
                     });
 
-                    if ((DummyCount != GlobalCount) && !searchStatus) {
-                        List rs = jobs
+                    if (DummyCount != GlobalCount) {
+
+                        Model builder = jobs
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "tblD", "=", "dept_id")
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_classifications", "id", "tblC", "=", "classification_id")
-                                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_designations", "id", "tblDD", "=", "designation_id")
+                                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_designations", "id", "tblDD", "=", "designation_id");
+
+                        if (chkFilter.isSelected()) {
+                            String dept_id = btnDepts.getSelectionModel().getSelectedItem().toString().split(" - ")[0].replace("DEPT00", "");
+                            String class_id = btnClassifications.getSelectionModel().getSelectedItem().toString().split(" - ")[0].replace("CLASS00", "");
+
+                            builder = builder.where(new Object[][]{
+                                {"tblD.id", (dept_id.equals("A") ? "like" : "="), dept_id.equals("A") ? "%%" : dept_id},
+                                {"tblC.id", (class_id.equals("A") ? "like" : "="), class_id.equals("A") ? "%%" : class_id}
+                            });
+                        }
+                        List rs = builder
                                 .get(
                                         "job_id",
                                         "title",
@@ -353,7 +389,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         dept_id.setCellValueFactory((TableColumn.CellDataFeatures<HR4_EmpInfoClass, String> param) -> param.getValue().dept_id);
         status_id.setCellValueFactory((TableColumn.CellDataFeatures<HR4_EmpInfoClass, String> param) -> param.getValue().status_id);
 
-        /*TableColumn<HR4_EmpInfoClass, Void> addButton = new TableColumn("More Options");
+        TableColumn<HR4_EmpInfoClass, Void> addButton = new TableColumn("More Options");
 
         Callback<TableColumn<HR4_EmpInfoClass, Void>, TableCell<HR4_EmpInfoClass, Void>> cellFactory
                 = new Callback<TableColumn<HR4_EmpInfoClass, Void>, TableCell<HR4_EmpInfoClass, Void>>() {
@@ -410,64 +446,11 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
         };
 
         addButton.setCellFactory(cellFactory);
-        tbl_chc.getColumns().add(addButton);*/
+        tbl_chc.getColumns().add(addButton);
         //</editor-fold>
         tbl_chc.getColumns()
-        .addAll(employee_code, fnn, job_id, dept_id, status_id);
+                .addAll(employee_code, fnn, job_id, dept_id, status_id);
     }
-    /*
-    
-    System.err.println("a");
-                        Modal md = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_InfoCHC.fxml").getParent());
-                        md.open();
-    
-    TableColumn<HR2_ExaminationClass, Void> listOfQuestions = new TableColumn("List of Questions");
-
-        Callback<TableColumn<HR2_ExaminationClass, Void>, TableCell<HR2_ExaminationClass, Void>> cellFactory
-                = new Callback<TableColumn<HR2_ExaminationClass, Void>, TableCell<HR2_ExaminationClass, Void>>() {
-            @Override
-            public TableCell<HR2_ExaminationClass, Void> call(final TableColumn<HR2_ExaminationClass, Void> param) {
-
-                final TableCell<HR2_ExaminationClass, Void> cell = new TableCell<HR2_ExaminationClass, Void>() {
-                    private final Button btn_q_list = new Button("List of Questions");
-
-                    {
-                        try {
-                            btn_q_list.setOnAction(e
-                                    -> {
-                                HR2_LMClass_For_AddQuestion_Modal.initCourseTitle(
-                                        tbl_exam.getSelectionModel().getSelectedItem().exam_id.get(),
-                                        tbl_exam.getSelectionModel().getSelectedItem().exam_name.get(),
-                                        tbl_exam.getSelectionModel().getSelectedItem().exam_desc.get(),
-                                        tbl_exam.getSelectionModel().getSelectedItem().id.get());
-                                Modal md = Modal.getInstance(new Form("/FXMLS/HR2/Modals/List_Of_Questions.fxml").getParent());
-                                md.open();
-                            });
-                            btn_q_list.setStyle("-fx-text-fill: #fff; -fx-background-color:#00cc66");
-                            btn_q_list.setCursor(javafx.scene.Cursor.HAND);
-                        } catch (Exception ex) {
-                            System.out.println(ex);
-                        }
-
-                    }
-
-                    public void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            setGraphic(btn_q_list);
-                        }
-                    }
-                };
-                return cell;
-            }
-
-        };
-
-        listOfQuestions.setCellFactory(cellFactory);
-        tbl_exam.getColumns().add(listOfQuestions);
-     */
 
     long DummyCount = 0;
     long GlobalCount = 0;

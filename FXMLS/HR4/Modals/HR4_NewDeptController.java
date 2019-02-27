@@ -25,6 +25,7 @@ import javafx.stage.StageStyle;
  * @author JaeJae
  */
 public class HR4_NewDeptController implements Initializable {
+
     HR4_Departments hrd = new HR4_Departments();
 
     @FXML
@@ -41,53 +42,47 @@ public class HR4_NewDeptController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    SubmitBtn.setOnMouseClicked(e -> save());
-    }    
+        SubmitBtn.setOnMouseClicked(e -> save());
+    }
 
     @FXML
     private void SubmitAction(ActionEvent event) {
-        
+
     }
-    public void save(){
-           
-            
+
+    public void save() {
+
         HR4_Departments cpp = new HR4_Departments();
-            
-          try
-        {
-           String[][] cpp_table =
-        {
-        {"dept_name" , dn.getText()},
-        {"dept_desc" , dd.getText()}
-        
-        
-        
-        };           
-           
-           
-        if(cpp.insert(cpp_table)){
-         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-             alert.initStyle(StageStyle.UNDECORATED);
-             alert.setTitle("Saved");
-             alert.setContentText("DATA HAS BEEN SAVE"); 
-             alert.showAndWait();
-             dn.clear();
-             dd.clear();
-             
-             
-        }else{
-              Alert alert = new Alert(Alert.AlertType.ERROR);
-             alert.initStyle(StageStyle.UNDECORATED);
-             alert.setTitle("ERROR");
-             alert.setContentText("PLEASE FILL THE EMPTY FIELDS"); 
-             alert.showAndWait();
-            
-        }
-                                       
-            }catch(Exception e)
-               {
+
+        try {
+            String[][] cpp_table
+                    = {
+                        {"dept_name", dn.getText()},
+                        {"dept_desc", dd.getText()}
+
+                    };
+
+            if (cpp.insert(cpp_table)) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.initStyle(StageStyle.UNDECORATED);
+                alert.setTitle("Saved");
+                alert.setContentText("DATA HAS BEEN SAVE");
+                alert.showAndWait();
+                dn.clear();
+                dd.clear();
+
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.initStyle(StageStyle.UNDECORATED);
+                alert.setTitle("ERROR");
+                alert.setContentText("PLEASE FILL THE EMPTY FIELDS");
+                alert.showAndWait();
+
+            }
+
+        } catch (Exception e) {
             e.printStackTrace();
-               }
+        }
     }
-    
+
 }

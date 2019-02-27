@@ -40,6 +40,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
@@ -68,6 +69,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  * FXML Controller class
@@ -280,9 +282,12 @@ public class HR1_ViewApplicantController implements Initializable {
                 menuER.setDisable(false);
             }
 
+            if (Integer.parseInt(StageID.getValue()) < 2 || Integer.parseInt(StageID.getValue()) > 2) {
+                panelExamResult.setVisible(false);
+            }
+
             if (Integer.parseInt(StageID.getValue()) == 2) {
                 panelExamResult.setVisible(true);
-                btnSubmit.setDisable(true);
                 checkExam();
             }
 
@@ -321,26 +326,45 @@ public class HR1_ViewApplicantController implements Initializable {
 
     public void checkExam() {
         CompletableFuture.supplyAsync(() -> {
-            while (StageID.getValue().equals("2")) {
+
+            while (true) {
                 exam_result.get("CHECKSUM_AGG(BINARY_CHECKSUM(*)) as chk").stream().forEach(row -> {
                     DummyC = Long.parseLong(((HashMap) row).get("chk").toString());
                 });
 
                 if (GlobalC != DummyC) {
-                    List<HashMap> exr = exam_result.where(new Object[][]{
+                    List<HashMap> count = exam_result.where(new Object[][]{
                         {"applicant_id", "=", HR1_Applicant.app_id}
-                    }).get();
+                    }).groupBy("applicant_id").get("COUNT(*) as cox");
 
-                    exr.stream().forEach(e -> {
-                        if (e.get("isTaken").toString().equals("0")) {
-                            lblExamResult.setText("Exam was not yet taken by the applicant");
+                    if (Integer.parseInt(count.get(0).get("cox").toString()) > 0) {
+                        List<HashMap> exr = exam_result.where(new Object[][]{
+                            {"applicant_id", "=", HR1_Applicant.app_id}
+                        }).get();
+
+                        exr.stream().forEach(e -> {
+                            if (e.get("isTaken").toString().equals("0")) {
+                                Platform.runLater(() -> {
+                                    panelExamResult.setVisible(true);
+                                    lblExamResult.setText("Exam was not yet taken by the applicant");
+                                    btnSubmit.setDisable(true);
+                                });
+                            } else {
+                                Platform.runLater(() -> {
+                                    panelExamResult.setVisible(true);
+                                    lblExamResult.setText("The Applicant got " + e.get("score").toString() + "% of score");
+                                    txtPercentage.setText(e.get("score").toString());
+                                    btnSubmit.setDisable(false);
+                                });
+                            }
+                        });
+                    } else {
+
+                        Platform.runLater(() -> {
+                            lblExamResult.setText("Please, Apply an Examination for the Applicant : 'Workflow Procedures > Apply an examination' ");
                             btnSubmit.setDisable(true);
-                        } else {
-                            lblExamResult.setText("The Applicant got " + e.get("score").toString() + "% of score");
-                            txtPercentage.setText(e.get("score").toString());
-                            btnSubmit.setDisable(false);
-                        }
-                    });
+                        });
+                    }
 
                     GlobalC = DummyC;
                 }
@@ -351,7 +375,7 @@ public class HR1_ViewApplicantController implements Initializable {
                     Logger.getLogger(HR1_ViewApplicantController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            return null;
+
         }, Session.SessionThreads);
     }
     String jid = "";
@@ -648,7 +672,7 @@ public class HR1_ViewApplicantController implements Initializable {
                     Helpers.EIS_Response.SuccessResponse("Success", "Applicant was successfully transfered to Initial Interview Stage");
                     dialog.close();
                     closeWind();
-                            
+
                 }
             } else {
                 Helpers.EIS_Response.ErrorResponse("Halt!", "You could not select date before the current date \n" + LocalDate.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
@@ -929,7 +953,8 @@ public class HR1_ViewApplicantController implements Initializable {
 
             int uid = u.insert(new Object[][]{
                 {"username", EmpCode},
-                {"password", Synapse.Crypt.Encrypt(EmpCode)}
+                {"password", Synapse.Crypt.Encrypt(EmpCode)},
+                {"webPass", BCrypt.hashpw(EmpCode, BCrypt.gensalt())}
             }, true);
 
             if (uid != 0) {
@@ -1017,16 +1042,30 @@ public class HR1_ViewApplicantController implements Initializable {
                 {"job_id", real_jobID}
             });
 
-            jv.update(new Object[][]{
-                {"jobOpen", returnPositions},
-                {"isPosted", (returnPositions <= 0 ? 0 : 1)}
-            }).where(new Object[][]{
-                {"id", "=", job_id}
-            }).executeUpdate();
-
             if (returnPositions <= 0) {
-                jp.delete().where(new Object[][]{
-                    {"id", "=", HR1_Applicant.jobPosted_id}
+
+                List<HashMap> list = STORED_PROC.executeCall("HR1_UnpostJob", new Object[][]{
+                    {"posting_id", HR1_Applicant.jobPosted_id},
+                    {"vacancy_id", job_id},
+                    {"trigger", 1}
+                });
+
+                list.stream().forEach((HashMap e) -> {
+                    if (e.get("id").toString().equals("0")) {
+                        Notifications nBuilder = Notifications.create()
+                                .title("Success")
+                                .text("Transaction Complete!")
+                                .hideAfter(Duration.seconds(3))
+                                .position(Pos.BOTTOM_RIGHT);
+                        nBuilder.show();
+                    }
+                });
+
+            } else {
+                jv.update(new Object[][]{
+                    {"jobOpen", returnPositions}
+                }).where(new Object[][]{
+                    {"id", "=", job_id}
                 }).executeUpdate();
             }
 

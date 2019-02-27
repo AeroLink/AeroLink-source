@@ -12,6 +12,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -43,6 +44,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.opencv.highgui.HighGui;
 
@@ -53,16 +56,6 @@ import org.opencv.highgui.HighGui;
  */
 public class Facility_ReservationController implements Initializable {
 
-    @FXML
-    private JFXButton edit;
-    @FXML
-    private JFXButton edit1;
-    @FXML
-    private JFXTimePicker starttime;
-    @FXML
-    private JFXTimePicker endtime;
-    @FXML
-    private JFXButton edit2;
 
     ADMIN_Facility_Reservation afr = new ADMIN_Facility_Reservation();
     ObservableList<String> faci = FXCollections.observableArrayList();
@@ -72,16 +65,7 @@ public class Facility_ReservationController implements Initializable {
     
     
     
-    @FXML
-    private JFXComboBox<String> urgencybox;
-    @FXML
     private JFXComboBox<String> facilitybox;
-    @FXML
-    private JFXDatePicker startdate;
-    @FXML
-    private JFXDatePicker enddate;
-    @FXML
-    private JFXTextField reservedby;
     @FXML
     private TableColumn<?, ?> cfacility;
     @FXML
@@ -98,36 +82,25 @@ public class Facility_ReservationController implements Initializable {
     private Connection con = DBconnection.con();
     private PreparedStatement pst= null;
     private ResultSet rs = null;
-    private ObservableList<ADMINfacility> adminfrr;
-    private  ObservableList<ADMINfacility> adminfrapproved;
+    private ObservableList<ADMINfacility> adminfrr = FXCollections.observableArrayList();
+    private  ObservableList<ADMINfacility> adminfrapproved = FXCollections.observableArrayList();
     @FXML
     private TableView<ADMINfacility> tablefr;
     @FXML
     private JFXButton frapproved;
-    @FXML
     private JFXComboBox<String> Fmanagerbox;
-    @FXML
     private JFXTextField locationfield;
-    @FXML
     private JFXTextField capacityfield;
-    @FXML
     private ImageView frimageview;
     private Image image,image2;
     private OutputStream output;
     private InputStream input;
-    @FXML
     private ImageView frreservationiview;
-    @FXML
-    private JFXButton frbuttonen;
-    @FXML
-    private JFXButton frbuttonds;
     @FXML
     private TableColumn<?, ?> FRreservationid;
     @FXML
     private JFXTextField frid;
-    @FXML
     private JFXTextField locationfield1;
-    @FXML
     private JFXTextField capacityfield1;
     @FXML
     private TableColumn<?, ?> FRreservationid1;
@@ -143,8 +116,6 @@ public class Facility_ReservationController implements Initializable {
     private TableColumn<?, ?> crby1;
     @FXML
     private TableColumn<?, ?> cstatus1;
-    @FXML
-    private JFXComboBox<String> purposebox;
     @FXML
     public  TableView<ADMINfacility> tablefrapproved;
     @FXML
@@ -171,42 +142,73 @@ public class Facility_ReservationController implements Initializable {
     private CheckBox chk11;
     @FXML
     private CheckBox chk12;
-    @FXML
     private JFXTextField facilityidtxt;
     @FXML
     private JFXTextField fordisplaytxt;
     @FXML
     private JFXButton viewbtn;
-    
+    @FXML
+    private JFXButton refreshbtn;
+    @FXML
+    private AnchorPane registerbtn;
+    @FXML
+    private FontAwesomeIconView showvisitorreq;
+    @FXML
+    private TableColumn<?, ?> factid;
+    @FXML
+    private TableColumn<?, ?> factname;
+    @FXML
+    private TableColumn<?, ?> facttype;
+    @FXML
+    private TextField facilityidtext;
+    @FXML
+    private TextField facilitynametext;
+    @FXML
+    private TextField capacitytext;
+    @FXML
+    private JFXTextField imagetext;
+    @FXML
+    private JFXButton frapproved1;
+    @FXML
+    private TableView<tbl_facility> facilitytable;
+    ObservableList<tbl_facility> facilitytable1 = FXCollections.observableArrayList();
+    @FXML
+    private TableView<tbl_registered_facility> registeredfacility;
+    ObservableList<tbl_registered_facility> registeredfacility1 = FXCollections.observableArrayList();
+    @FXML
+    private TableColumn<?, ?> factid1;
+    @FXML
+    private TableColumn<?, ?> factname1;
+    @FXML
+    private TableColumn<?, ?> facttype1;
+    @FXML
+    private TableColumn<?, ?> factstatus1;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        urgencybox.setItems(urgent);
-        Fmanagerbox.setItems(fmbox);
-        adminfrr = FXCollections.observableArrayList();
-        adminfrapproved = FXCollections.observableArrayList();
-        purposebox.setItems(fbox);
         FRTable();
         loaddataFRpending();
         loaddataFRapproved();
-        choosefacility();
-        choosefacilityFR();
+     
+        displayfacility();
         tableclick();
         displayinfo();
+        factclick();
+        facilityregistered();
     }    
     
     List b = afr.get();
     
     
    //For inserting reservation
-    @FXML
+   /* @FXML
     public void saveFR(){
     try{
 
      Object facility_request[][] = {
-               {"Facility_ID",facilityidtxt.getText()},
+                {"Facility_ID",facilityidtxt.getText()},
                 {"Purpose", purposebox.getSelectionModel().getSelectedItem()},
                 {"Start_Date", ((TextField)startdate.getEditor()).getText()},
                 {"End_Date", ((TextField)enddate.getEditor()).getText()},
@@ -222,7 +224,7 @@ public class Facility_ReservationController implements Initializable {
                     }    
     }catch(Exception ex){ System.out.print(ex.getMessage());}
     
-    }
+    }*/
     
     //for table retrieve
     private void FRTable(){
@@ -249,10 +251,10 @@ public class Facility_ReservationController implements Initializable {
     private void loaddataFRpending(){
         adminfrr.clear();
         try {
-            pst = con.prepareStatement("Select * from aerolink.admin_facility_reservation inner join aerolink.admin_facility on aerolink.admin_facility_reservation.Facility_ID = aerolink.admin_facility.Facility_ID where aerolink.admin_facility_reservation.Status = 'Pending' ");
+            pst = con.prepareStatement("Select * from aerolink.admin_facility_reservation as aafr inner join aerolink.tbl_log1_AssetFacility as atla on aafr.FacilityID = atla.FacilityID where Status = 'Pending' ");
             rs = pst.executeQuery();
             while(rs.next()){
-            adminfrr.add(new ADMINfacility(""+rs.getInt("Facility_Reservation_ID"),rs.getString("Facility_ID"),rs.getString("Purpose"),""+rs.getDate("Start_Date"),""+rs.getTime("Start_Time"),rs.getString("Reserved_By"),rs.getString("Status")));
+            adminfrr.add(new ADMINfacility(""+rs.getString("Facility_Reservation_ID"),rs.getString("FacilityID"),rs.getString("Purpose"),""+rs.getDate("Start_Date"),""+rs.getTime("Start_Time"),rs.getString("Reserved_By"),rs.getString("Status")));
         } 
         } catch (SQLException ex) {
             Logger.getLogger(Facility_ReservationController.class.getName()).log(Level.SEVERE, null, ex);
@@ -261,6 +263,7 @@ public class Facility_ReservationController implements Initializable {
     }
     
       //Load data from database
+    @FXML
     public void loaddataFRapproved(){
         
        
@@ -269,7 +272,7 @@ public class Facility_ReservationController implements Initializable {
             pst = con.prepareStatement("Select * from aerolink.admin_facility_reservation where Status = 'Approved' or Status = 'Canceled' ");
             rs = pst.executeQuery();
             while(rs.next()){
-            adminfrapproved.add(new ADMINfacility(""+rs.getInt("Facility_Reservation_ID"),""+rs.getInt("Facility_ID"),rs.getString("Purpose"),""+rs.getDate("Start_Date"),""+rs.getTime("Start_Time"),rs.getString("Reserved_By"),rs.getString("Status")));
+            adminfrapproved.add(new ADMINfacility(""+rs.getInt("Facility_Reservation_ID"),""+rs.getInt("FacilityID"),rs.getString("Purpose"),""+rs.getDate("Start_Date"),""+rs.getTime("Start_Time"),rs.getString("Reserved_By"),rs.getString("Status")));
         } 
         } catch (SQLException ex) {
             Logger.getLogger(Facility_ReservationController.class.getName()).log(Level.SEVERE, null, ex);
@@ -281,7 +284,7 @@ public class Facility_ReservationController implements Initializable {
     
     
     //For Facility Reservation box
-      public void choosefacilityFR(){
+     /* public void choosefacilityFR(){
           faci.clear();
         String query = "Select Facility_Name from aerolink.admin_facility where Status = 'Enable' ";
         try {
@@ -297,10 +300,10 @@ public class Facility_ReservationController implements Initializable {
             Logger.getLogger(Facility_ReservationController.class.getName()).log(Level.SEVERE, null, ex);
         }
         facilitybox.setItems(faci);
-    }
+    }*/
       
     //For filling Combobox 
-    public void choosefacility(){
+    /*public void choosefacility(){
         String query = "Select Facility_Name from aerolink.admin_facility ";
         try {
             pst = con.prepareStatement(query);
@@ -314,11 +317,10 @@ public class Facility_ReservationController implements Initializable {
             Logger.getLogger(Facility_ReservationController.class.getName()).log(Level.SEVERE, null, ex);
         }
  
-    }
+    }*/
     
     //Facility display the value in textfield
-    @FXML
-    public void facilityselection(){
+    /*public void facilityselection(){
         String query = "Select * from aerolink.admin_facility where Facility_Name = ? ";
         try {
             pst = con.prepareStatement(query);
@@ -352,11 +354,10 @@ public class Facility_ReservationController implements Initializable {
             Logger.getLogger(Facility_ReservationController.class.getName()).log(Level.SEVERE, null, ex);
         }
     
-    }
+    }*/
     
     //Facility Resrvation Combobox
-    @FXML
-      public void facilityreservationselect(){
+     /* public void facilityreservationselect(){
         String query = "Select * from aerolink.admin_facility where Facility_Name = ? ";
         try {
             pst = con.prepareStatement(query);
@@ -392,15 +393,14 @@ public class Facility_ReservationController implements Initializable {
             Logger.getLogger(Facility_ReservationController.class.getName()).log(Level.SEVERE, null, ex);
         }
     
-    }
+    }*/
     
     
    
     
     
     //update the button disable
-    @FXML
-    public void updateds(){
+   /* public void updateds(){
         try{
             String query = "update aerolink.admin_facility set Status = 'Disable' where Facility_Name = '"+Fmanagerbox.getSelectionModel().getSelectedItem()+"' ";
             pst = con.prepareStatement(query);
@@ -410,12 +410,11 @@ public class Facility_ReservationController implements Initializable {
         }catch(Exception ex){
             System.out.println(ex.getMessage());
         }  
-        choosefacilityFR();
-    }
+      
+    }*/
     
     //update the button enable
-    @FXML
-    public void updateen(){
+    /*public void updateen(){
         try{
             String query = "update aerolink.admin_facility set Status = 'Enable' where Facility_Name = '"+Fmanagerbox.getSelectionModel().getSelectedItem()+"' ";
             pst = con.prepareStatement(query);
@@ -424,8 +423,8 @@ public class Facility_ReservationController implements Initializable {
         }catch(Exception ex){
             System.out.println(ex.getMessage());
         }
-        choosefacilityFR();
-    }
+   
+    }*/
     
     //button for approved reservation
     @FXML
@@ -467,6 +466,7 @@ public class Facility_ReservationController implements Initializable {
         
     }
     
+    @FXML
     public void view(){
       
         FXMLLoader load = new FXMLLoader();
@@ -486,7 +486,128 @@ public class Facility_ReservationController implements Initializable {
         fri.displayinfo();
     }
     
+    @FXML
+   public void showvisitorreq(){
+       AlertBox ab = new AlertBox();
+       
+       RequestForm_FacilityController rf = new RequestForm_FacilityController();
+       ab.loadfxml("RequestForm_Facility.fxml", rf);
+   }
    
+   
+   private void displayfacility(){
+        factid.setCellValueFactory(new PropertyValueFactory<>("fid"));
+        factname.setCellValueFactory(new PropertyValueFactory<>("fname"));
+        facttype.setCellValueFactory(new PropertyValueFactory<>("ftype"));
+        
+        facilitytable1.clear();
+                try{
+                    String select = "select * from aerolink.tbl_log1_AssetFacility where FacilityStatus = 'Vacant'";
+                    pst = con.prepareStatement(select);
+                    rs = pst.executeQuery();
+                    while(rs.next()){
+                        facilitytable1.add(new tbl_facility(""+rs.getString("FacilityID"),rs.getString("FacilityName"),rs.getString("FacilityType")));
+                    }
+                    facilitytable.setItems(facilitytable1);
+                }catch(Exception ex){
+                    System.out.println(ex.getMessage());
+                }
+   }
+   
+   
+    private void factclick(){
+        facilitytable.setOnMouseClicked(e->{
+        
+        tbl_facility tf = facilitytable.getItems().get(facilitytable.getSelectionModel().getSelectedIndex());
+            try{
+                String select  = "select * from aerolink.tbl_log1_AssetFacility where FacilityID = '"+tf.getFid()+"'";
+                pst = con.prepareStatement(select);
+                rs = pst.executeQuery();
+                while(rs.next()){
+                    facilityidtext.setText(rs.getString("FacilityID"));
+                    facilitynametext.setText(rs.getString("FacilityName"));
+                }
+            }catch(Exception ex){
+                System.out.println(ex.getMessage());
+            }
+            
+        });
+        
+    }
     
+    
+    public void registerfacility(){
+        try{
+            String insert = "insert into aerolink.admin_facility_reservation_facility values(?,?,?,?)";
+            pst = con.prepareStatement(insert);
+            pst.setString(1, facilityidtext.getText());
+            pst.setString(2, capacitytext.getText());
+            
+            File f = new File(""+imagetext.getText());
+            FileInputStream fs = new FileInputStream(f);
+            pst.setBinaryStream(3, fs);
+            
+            pst.setString(4, "Ready to Use");
+            pst.execute();
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        
+        try{
+                 tbl_facility tf = facilitytable.getItems().get(facilitytable.getSelectionModel().getSelectedIndex());
+          
+                String update = "update aerolink.tbl_log1_AssetFacility set FacilityStatus = 'Registered' where FacilityID = '"+tf.getFid()+"' ";
+                pst = con.prepareStatement(update);
+                pst.execute();
+                AlertBox.display("Alert", "Facility is now Ready to Use");
+                
+            }catch(Exception ex){
+                    System.out.println(ex.getMessage());
+               }
+        
+            
+        displayfacility();
+        facilityregistered();
+    }
+    
+    @FXML
+    public void openfile(){
+        FileChooser fc = new FileChooser();
+            FileChooser.ExtensionFilter exf1 = new FileChooser.ExtensionFilter("PNG Files", "*.PNG");
+            FileChooser.ExtensionFilter ext2 = new FileChooser.ExtensionFilter("JPG Files", "*.jpg");
+            FileChooser.ExtensionFilter ext3 = new FileChooser.ExtensionFilter("JPEG Files", "*.jpeg");
+            fc.getExtensionFilters().addAll(exf1,ext2,ext3);
+            File f = fc.showOpenDialog(null);
+            
+            if(f != null){
+           
+                imagetext.setText(""+f);
+            }
+            else{
+               AlertBox.display("Alert", "No File Selected");
+            }
+    }
+    
+    
+    private void facilityregistered(){
+        factid1.setCellValueFactory(new PropertyValueFactory<>("facilitytd"));
+        factname1.setCellValueFactory(new PropertyValueFactory<>("facilityname"));
+        facttype1.setCellValueFactory(new PropertyValueFactory<>("facilitytype"));
+        factstatus1.setCellValueFactory(new PropertyValueFactory<>("facilitystatus"));
+        
+        registeredfacility1.clear();
+            try{
+                String select = "select *,aafrf.FacilityID from aerolink.admin_facility_reservation_facility as aafrf inner join aerolink.tbl_log1_AssetFacility as atla on aafrf.FacilityID = atla.FacilityID ";
+                pst = con.prepareStatement(select);
+                rs = pst.executeQuery();
+                while(rs.next()){
+                    registeredfacility1.add(new tbl_registered_facility(""+rs.getString("FacilityID"),rs.getString("FacilityName"),rs.getString("FacilityType"),rs.getString("Status")));
+                }
+                registeredfacility.setItems(registeredfacility1);
+            
+            }catch(Exception ex){
+                System.out.println(ex.getMessage());
+            }
+    }
     
 }

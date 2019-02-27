@@ -65,7 +65,7 @@ public class AssetManagementController implements Initializable {
     
     long DummyCount = 0;
     long GlobalCount = 0;
-    
+   
     @FXML
     private Label totalOfBuildings_txt;
     @FXML

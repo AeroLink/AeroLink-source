@@ -120,7 +120,7 @@ public class CM_Skill_Req_DetailsController implements Initializable {
             });
 
             Alert saved = new Alert(Alert.AlertType.INFORMATION);
-            saved.setContentText("Saved");
+            saved.setContentText("Submitted");
             saved.showAndWait();
         } catch (Exception e) {
             System.err.println(e);

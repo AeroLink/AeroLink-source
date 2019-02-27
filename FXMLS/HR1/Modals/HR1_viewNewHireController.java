@@ -197,7 +197,7 @@ public class HR1_viewNewHireController implements Initializable {
 
     HR1_NewHire_Task tasks = new HR1_NewHire_Task();
 
-    public void renderTable() {
+ void renderTable() {
 
         ObservableList ob = FXCollections.observableArrayList();
 
