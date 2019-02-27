@@ -25,6 +25,7 @@ import FXMLS.HR4.Filler.HR4_NewPayrollFill;
 import FXMLS.HR4.Filler.HR4_NewPayrollFill2;
 import FXMLS.HR4.Model.HR4_Benefits1Model;
 import FXMLS.HR4.Model.HR4_BenefitsModel;
+import FXMLS.HR4.Model.HR4_StatusModel;
 import FXMLS.HR4.Model.HR4_Deductions1Model;
 import FXMLS.HR4.Model.HR4_DeductionsModel;
 import FXMLS.HR4.Model.HR4_NewPayrollModel;
@@ -80,7 +81,6 @@ import javafx.stage.StageStyle;
  * @author JaeJae
  */
 public class HR4_Compensation_and_PlanningController implements Initializable {
-    String[] StepCbx = {"Step 1","Step 2","Step 3","Step 4","Step 5","Step 6","Step 7","Step 8"};
     ObservableList<HR4_SalaryGradeUpClass> obj = FXCollections.observableArrayList();
     ObservableList<HR4_SalaryClass> obj1 = FXCollections.observableArrayList();
     ObservableList<HR4_BenefitsClass> obj2 = FXCollections.observableArrayList();
@@ -88,6 +88,7 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
     HR4_SalaryGradeUpModel sgm = new HR4_SalaryGradeUpModel();
     HR4_SalaryModel sm = new HR4_SalaryModel();
     HR4_BenefitsModel bm = new HR4_BenefitsModel();
+    HR4_StatusModel sms = new HR4_StatusModel();
     Boolean searchStatus = false;
     HR4_DeductionsModel dm = new HR4_DeductionsModel();
     @FXML
@@ -99,18 +100,6 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
     @FXML
     private JFXButton AddNewBenefitsBtn;
     @FXML
-    private TextField a;
-    @FXML
-    private TextField b;
-    @FXML
-    private TextField c;
-    @FXML
-    private TextField d;
-    @FXML
-    private ComboBox<String> stepcombobox;
-    @FXML
-    private ComboBox<String> gradecombobox;
-    @FXML
     private TableView<HR4_Benefits1Class> tbl_benEmp;
     ObservableList<HR4_Benefits1Class> data;
     @FXML
@@ -119,6 +108,10 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
     private TableView<HR4_Deductions1Class> tbl_deducs;
     @FXML
     private JFXButton AddDeductionBtn;
+    @FXML
+    private JFXButton DeleteBtn;
+    @FXML
+    private ComboBox cbx_status;
 
     
     public void initialize(URL url, ResourceBundle rb) {
@@ -147,23 +140,12 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
             populateDeductionsTable1();
             });
             
-    for (String str : StepCbx) {
-        stepcombobox.getItems().add(str);
-    }
-    
-    gradecombobox.getSelectionModel().selectedItemProperty().addListener(listener -> {
-        GlobalCount = 0;
-        DummyCount = 0;
-    });
-    
-    tbl_salary_up.setOnMouseClicked(e -> {
-        HR4_SalaryGradeUpClass r = tbl_salary_up.getSelectionModel().getSelectedItem();
-            a.setText(r.getEmpCode());
-            b.setText(r.getFN());
-            c.setText(r.getJobs());
-            d.setText(r.getDept());
-    });
-    AddNewBenefitsBtn.setOnMouseClicked(e -> BenefitsModal()); 
+            AddNewBenefitsBtn.setOnMouseClicked(e -> BenefitsModal()); 
+            
+            sms.get().stream().forEach(action -> {
+            HashMap row = (HashMap) action;
+            cbx_status.getItems().add(row.get("status_name").toString());
+        });
     }
     public void AddNewDeductionsModal(){
         Modal md = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_AddNewDeductions.fxml").getParent());
@@ -180,14 +162,16 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
         tbl_salary_up.getColumns().removeAll(tbl_salary_up.getColumns());
         TableColumn<HR4_SalaryGradeUpClass, String> emp_code = new TableColumn<>("Employee Code");
         TableColumn<HR4_SalaryGradeUpClass, String> fnn = new TableColumn<>("Full Name");
-        TableColumn<HR4_SalaryGradeUpClass, String> grade = new TableColumn<>("Grade");
+        TableColumn<HR4_SalaryGradeUpClass, String> job_id = new TableColumn<>("Position");
+        TableColumn<HR4_SalaryGradeUpClass, String> ave = new TableColumn<>("Grade");
         TableColumn<HR4_SalaryGradeUpClass, String> status = new TableColumn<>("Status");
 
         //<editor-fold defaultstate="collapsed" desc="Cell value factories">
         emp_code.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SalaryGradeUpClass, String> param) -> param.getValue().a);
-        fnn.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SalaryGradeUpClass, String> param) -> param.getValue().d);
-        grade.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SalaryGradeUpClass, String> param) -> param.getValue().b);
-        status.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SalaryGradeUpClass, String> param) -> param.getValue().c);
+        fnn.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SalaryGradeUpClass, String> param) -> param.getValue().b);
+        job_id.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SalaryGradeUpClass, String> param) -> param.getValue().job);
+        ave.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SalaryGradeUpClass, String> param) -> param.getValue().m);
+        status.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SalaryGradeUpClass, String> param) -> param.getValue().n);
         TableColumn<HR4_SalaryGradeUpClass, Boolean> btnAction = new TableColumn<>("Actions");
         btnAction.setSortable(false);
 
@@ -199,20 +183,30 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
                 f.getStyleClass().add("fontIconTable");
                 btn.getStyleClass().add("btnTable");
                 
-                MenuItem view = new MenuItem("View");
-                FontAwesomeIconView fx = new FontAwesomeIconView(FontAwesomeIcon.EYE);
+                MenuItem update = new MenuItem("Update");
+                FontAwesomeIconView fx = new FontAwesomeIconView(FontAwesomeIcon.ADJUST);
                 fx.getStyleClass().add("fontIconMenu");
-                view.setGraphic(fx);
-                view.setOnAction(event -> {
+                update.setGraphic(fx);
+                update.setOnAction(event -> {
+                Modal md = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_UpdateEmployeeSalary.fxml").getParent());
+                md.open();
                 });
+                
                 MenuItem reject = new MenuItem("Declined");
                 FontAwesomeIconView fx1 = new FontAwesomeIconView(FontAwesomeIcon.HAND_ALT_DOWN);
                 fx1.getStyleClass().add("fontIconMenu");
                 reject.setGraphic(fx1);
                 reject.setOnAction(event -> {
-                
+                HR4_SalaryGradeUpClass fc = (HR4_SalaryGradeUpClass) getTableRow().getItem();
+                HR4_SalaryGradeUpModel m = new HR4_SalaryGradeUpModel();
+                Boolean ab = m.where(new Object[][]{
+                {"req_code", "=", fc.idxx.getValue()}
+                }).update(new Object[][]{
+                {"status", "3"}
+                }).executeUpdate();
                 });
-                btn.getItems().add(view);
+                
+                btn.getItems().add(update);
                 btn.getItems().add(reject);
             }
 
@@ -231,7 +225,7 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
         btnAction.setCellValueFactory((TableColumn.CellDataFeatures<HR4_SalaryGradeUpClass, Boolean> param) -> new SimpleBooleanProperty(false));
 
         //</editor-fold>
-        tbl_salary_up.getColumns().addAll(emp_code, fnn, grade, status,btnAction);
+        tbl_salary_up.getColumns().addAll(emp_code, fnn, job_id, ave, status,btnAction);
     }
     
     long DummyCount = 0;
@@ -249,14 +243,35 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_profiles", "employee_code", "tblDD", "=", "emp_code")
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_employee_jobs", "employee_code", "tblD", "=", "emp_code")
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "=", "tblD", "job_id", true)
+                                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_classifications", "class_level", "=", "aerolink.tbl_hr4_jobs", "classification_id", true)
                                 .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "=", "aerolink.tbl_hr4_jobs", "dept_id", true)
+                                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_designations", "id", "=", "aerolink.tbl_hr4_jobs", "designation_id", true)
+                                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_jobs", "job_id", "Jobs", "=", "req_job_id")
+                                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_classifications", "class_level", "Classification", "=", "req_classification_id")
+                                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_department", "id", "Dept", "=", "req_dept_id")
+                                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_job_designations", "id", "Designations", "=", "req_designation_id")
+                                .join(Model.JOIN.INNER, "aerolink.tbl_hr4_status", "id", "Stat", "=", "status")
                                  .get(
+                                            "req_code",
                                             "tblD.employee_code as emp_code",
                                             "CONCAT(tblDD.lastname,', ',tblDD.firstname,' ',tblDD.middlename,'.') as fnn",
                                             "aerolink.tbl_hr4_jobs.title as job_id",
+                                            "aerolink.tbl_hr4_job_classifications.class_name as classification_id",
                                             "aerolink.tbl_hr4_department.dept_name as dept_id",
-                                            "grade",
-                                            "status"
+                                            "aerolink.tbl_hr4_job_designations.designation as designation_id",
+                                            "Jobs.title as req_job_id",
+                                            "Classification.class_name as req_classification_id",
+                                            "Dept.dept_name as req_dept_id",
+                                            "Designations.designation as req_designation_id",
+                                            "productivity",
+                                            "qualityofwork",
+                                            "initiative",
+                                            "teamwork",
+                                            "prob_solv",
+                                            "attendance",
+                                            "ave",
+                                            "Stat.status_name as status"
+                                            
                                             );
                         AddJobToTable(rs);
                         GlobalCount = DummyCount;
@@ -279,13 +294,26 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
         tbl_salary_up.getItems().clear();
         for (Object row : rs) {
             HashMap crow = (HashMap) row;
+            String req_code = String.valueOf(crow.get("req_code"));
             String emp_code = String.valueOf(crow.get("emp_code"));
             String fnn = (String) crow.get("fnn");
-            String grade = (String) crow.get("grade");
-            String status = (String) crow.get("status");
             String job_id = (String) crow.get("job_id");
+            String classification_id = (String) crow.get("classification_id");
             String dept_id = (String) crow.get("dept_id");
-            obj.add(new HR4_SalaryGradeUpClass(emp_code, fnn, grade, status, job_id, dept_id));
+            String designation_id = (String) crow.get("designation_id");
+            String req_job_id = (String) crow.get("req_job_id");
+            String req_classification_id = (String) crow.get("req_classification_id");
+            String req_dept_id = (String) crow.get("req_dept_id");
+            String req_designation_id = (String) crow.get("req_designation_id");
+            String productivity = (String) crow.get("productivity");
+            String qualityofwork = (String) crow.get("qualityofwork");
+            String initiative = (String) crow.get("initiative");
+            String teamwork = (String) crow.get("teamwork");
+            String prob_solv = (String) crow.get("prob_solv");
+            String attendance = (String) crow.get("attendance");
+            String ave = (String) crow.get("ave");
+            String status = (String) crow.get("status");
+            obj.add(new HR4_SalaryGradeUpClass(req_code,emp_code ,fnn,job_id,classification_id,dept_id,designation_id,req_job_id ,req_classification_id ,req_dept_id ,req_designation_id ,productivity ,qualityofwork ,initiative ,teamwork ,prob_solv ,attendance ,ave , status));
         }
         tbl_salary_up.setItems(obj);
     }
@@ -442,9 +470,11 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
                 FontAwesomeIconView fx2 = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
                 fx2.getStyleClass().add("fontIconMenu");
                 Delete.setGraphic(fx2);
-                Delete.setOnAction(event -> {HR4_BenefitsModel m = new HR4_BenefitsModel();
+                Delete.setOnAction(event -> {
+                HR4_BenefitsClass fc = (HR4_BenefitsClass) getTableRow().getItem();
+                HR4_BenefitsModel m = new HR4_BenefitsModel();
                 m.delete().where(new Object[][]{
-                {"title", "=", tbl_benefits.getSelectionModel().getSelectedItem().a.getValue()}
+                {"benefits_id", "=", fc.idxx.getValue()}
                 }).executeUpdate();
                 });
                 
@@ -551,8 +581,20 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
                 Modal lq = Modal.getInstance(new Form("/FXMLS/HR4/Modals/HR4_AddNewDeductionTable.fxml").getParent());
                 lq.open();  
                 });
+                MenuItem delete = new MenuItem("Delete");
+                FontAwesomeIconView fx2 = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
+                fx2.getStyleClass().add("fontIconMenu");
+                delete.setGraphic(fx2);
+                delete.setOnAction(event -> {
+                HR4_DeductionsClass fc = (HR4_DeductionsClass) getTableRow().getItem();
+                HR4_DeductionsModel m = new HR4_DeductionsModel();
+                m.delete().where(new Object[][]{
+                {"deduc_code", "=", fc.a.getValue()}
+                }).executeUpdate();
+                });
                 btn.getItems().add(edit);
                 btn.getItems().add(add);
+                btn.getItems().add(delete);
             }
 
             @Override
@@ -812,6 +854,7 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
                     .join(Model.JOIN.INNER, "aerolink.tbl_hr4_deductions", "deduc_code", "tblD", "=", "deduc_code")
                     .where(new Object[][]{{"tblD.deduc_code", "=", tbl_selection_deducs.getSelectionModel().getSelectedItem().a.getValue()}})
                                         .get(
+                                            "aerolink.tbl_hr4_deductions1.id as id",
                                             "tblD.deduc_code as deduc_code",
                                             "C1",      
                                             "C2",
@@ -827,8 +870,7 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
                                             "C12",
                                             "C13",
                                             "C14",
-                                            "C15",
-                                            "aerolink.tbl_hr4_deductions1.id");
+                                            "C15");
             Stored1(e);
 
         } catch (Exception e) {
@@ -846,6 +888,7 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
                 HashMap hm = (HashMap) d;
                 obj4.add(
                         new HR4_Deductions1Class(
+                                String.valueOf(hm.get("id")),
                                 String.valueOf(hm.get("deduc_code")),
                                 String.valueOf(hm.get("C1")),
                                 String.valueOf(hm.get("C2")),
@@ -861,8 +904,7 @@ public class HR4_Compensation_and_PlanningController implements Initializable {
                                 String.valueOf(hm.get("C12")),
                                 String.valueOf(hm.get("C13")),
                                 String.valueOf(hm.get("C14")),
-                                String.valueOf(hm.get("C15")),
-                                String.valueOf(hm.get("id"))
+                                String.valueOf(hm.get("C15"))
                         ));
 
             }
