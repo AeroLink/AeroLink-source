@@ -13,73 +13,107 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class Log1_AssetVehiclesClassfiles {
     public SimpleStringProperty VehicleID;
-    public SimpleStringProperty BuildingName;
+    public SimpleStringProperty AssetID;
+    public SimpleStringProperty vAssetTitle;
+    public SimpleStringProperty vAssetDescription;
     public SimpleStringProperty VehicleType;
+    public SimpleStringProperty VehicleBrand;
     public SimpleStringProperty VehicleModel;
     public SimpleStringProperty VehicleColor;
-    public SimpleStringProperty VehicleSerialNumber;
-    public SimpleStringProperty VehicleChassisNumber;
+    public SimpleStringProperty VehicleCapacity;
+    public SimpleStringProperty VehicleYearSpan;
     public SimpleStringProperty VehicleYearBought;
     public SimpleStringProperty VehicleWarrantyDate;
+    public SimpleStringProperty VehiclePlateNumber;
+    public SimpleStringProperty VehicleChassisNumber;
+    public SimpleStringProperty ORCnumber;
     public SimpleStringProperty VehiclePurchasedPrice;
+    public SimpleStringProperty AssetSalvageValue;
     public SimpleStringProperty VehicleFuelType;
-    public SimpleStringProperty VehicleUsability;
+    public SimpleStringProperty VehicleFuelCapacity;
+    public SimpleStringProperty vAssetCoreLocation;
+    public SimpleStringProperty AssetRegisteredDate;
     public SimpleStringProperty VehicleStatus;
     public SimpleStringProperty PriceUpdatedAt;
     public SimpleStringProperty CurrentPrice;
+    public SimpleStringProperty PriceCurrency;
     
     public Log1_AssetVehiclesClassfiles(
             String VehicleID,
-            String BuildingName,
-            String AssetCategory,
+            String AssetID,
+            String vAssetTitle,
+            String vAssetDescription,
             String VehicleType,
+            String VehicleBrand,
             String VehicleModel,
             String VehicleColor,
-            String VehicleSerialNumber,
-            String VehicleChassisNumber,
+            String VehicleCapacity,
+            String VehicleYearSpan,
             String VehicleYearBought,
             String VehicleWarrantyDate,
+            String VehiclePlateNumber,
+            String VehicleChassisNumber,
+            String ORCnumber,
             String VehiclePurchasedPrice,
+            String AssetSalvageValue,
             String VehicleFuelType,
-            String VehicleUsability,
+            String VehicleFuelCapacity,
+            String vAssetCoreLocation,
+            String AssetRegisteredDate,
             String VehicleStatus,
             String PriceUpdatedAt,
-            String CurrentPrice
+            String CurrentPrice,
+            String PriceCurrency
     ){
         this.VehicleID = new SimpleStringProperty(VehicleID);
-        this.BuildingName = new SimpleStringProperty(BuildingName);
+        this.AssetID = new SimpleStringProperty(AssetID);
+        this.vAssetTitle = new SimpleStringProperty(vAssetTitle);
+        this.vAssetDescription = new SimpleStringProperty(vAssetDescription);
         this.VehicleType = new SimpleStringProperty(VehicleType);
+        this.VehicleBrand = new SimpleStringProperty(VehicleBrand);
         this.VehicleModel = new SimpleStringProperty(VehicleModel);
         this.VehicleColor = new SimpleStringProperty(VehicleColor);
-        this.VehicleSerialNumber = new SimpleStringProperty(VehicleSerialNumber);
-        this.VehicleChassisNumber = new SimpleStringProperty(VehicleChassisNumber);
+        this.VehicleCapacity = new SimpleStringProperty(VehicleCapacity);
+        this.VehicleYearSpan = new SimpleStringProperty(VehicleYearSpan);
         this.VehicleYearBought = new SimpleStringProperty(VehicleYearBought);
         this.VehicleWarrantyDate = new SimpleStringProperty(VehicleWarrantyDate);
+        this.VehiclePlateNumber = new SimpleStringProperty(VehiclePlateNumber);
+        this.VehicleChassisNumber = new SimpleStringProperty(VehicleChassisNumber);
+        this.ORCnumber = new SimpleStringProperty(ORCnumber);
         this.VehiclePurchasedPrice = new SimpleStringProperty(VehiclePurchasedPrice);
+        this.AssetSalvageValue = new SimpleStringProperty(AssetSalvageValue);
         this.VehicleFuelType = new SimpleStringProperty(VehicleFuelType);
-        this.VehicleUsability = new SimpleStringProperty(VehicleUsability);
+        this.VehicleFuelCapacity = new SimpleStringProperty(VehicleFuelCapacity);
+        this.vAssetCoreLocation = new SimpleStringProperty(vAssetCoreLocation);
+        this.AssetRegisteredDate = new SimpleStringProperty(AssetRegisteredDate);
         this.VehicleStatus = new SimpleStringProperty(VehicleStatus);
         this.PriceUpdatedAt = new SimpleStringProperty(PriceUpdatedAt);
         this.CurrentPrice = new SimpleStringProperty(CurrentPrice);
-    }
-    
-    public String getPriceUpdatedAt(){
-        return PriceUpdatedAt.get();
-    }
-    public String getCurrentPrice(){
-        return CurrentPrice.get();
+        this.PriceCurrency = new SimpleStringProperty(PriceCurrency);
     }
 
     public String getVehicleID() {
         return VehicleID.get();
     }
 
-    public String getBuildingName() {
-        return BuildingName.get();
+    public String getAssetID() {
+        return AssetID.get();
+    }
+
+    public String getvAssetTitle() {
+        return vAssetTitle.get();
+    }
+
+    public String getvAssetDescription() {
+        return vAssetDescription.get();
     }
 
     public String getVehicleType() {
         return VehicleType.get();
+    }
+
+    public String getVehicleBrand() {
+        return VehicleBrand.get();
     }
 
     public String getVehicleModel() {
@@ -90,14 +124,13 @@ public class Log1_AssetVehiclesClassfiles {
         return VehicleColor.get();
     }
 
-    public String getVehicleSerialNumber() {
-        return VehicleSerialNumber.get();
+    public String getVehicleCapacity() {
+        return VehicleCapacity.get();
     }
 
-    public String getVehicleChassisNumber() {
-        return VehicleChassisNumber.get();
+    public String getVehicleYearSpan() {
+        return VehicleYearSpan.get();
     }
-
 
     public String getVehicleYearBought() {
         return VehicleYearBought.get();
@@ -107,21 +140,56 @@ public class Log1_AssetVehiclesClassfiles {
         return VehicleWarrantyDate.get();
     }
 
+    public String getVehiclePlateNumber() {
+        return VehiclePlateNumber.get();
+    }
+
+    public String getVehicleChassisNumber() {
+        return VehicleChassisNumber.get();
+    }
+
+    public String getORCnumber() {
+        return ORCnumber.get();
+    }
+
     public String getVehiclePurchasedPrice() {
         return VehiclePurchasedPrice.get();
+    }
+
+    public String getAssetSalvageValue() {
+        return AssetSalvageValue.get();
     }
 
     public String getVehicleFuelType() {
         return VehicleFuelType.get();
     }
 
-    public String getVehicleUsability() {
-        return VehicleUsability.get();
+    public String getVehicleFuelCapacity() {
+        return VehicleFuelCapacity.get();
+    }
+
+    public String getvAssetCoreLocation() {
+        return vAssetCoreLocation.get();
+    }
+
+    public String getAssetRegisteredDate() {
+        return AssetRegisteredDate.get();
     }
 
     public String getVehicleStatus() {
         return VehicleStatus.get();
     }
 
-    
+    public String getPriceUpdatedAt() {
+        return PriceUpdatedAt.get();
+    }
+
+    public String getCurrentPrice() {
+        return CurrentPrice.get();
+    }
+
+    public String getPriceCurrency() {
+        return PriceCurrency.get();
+    }
+
 }

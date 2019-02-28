@@ -11,6 +11,6 @@ package Model.Log1;
  */
 public class Log1_AssetDisposalModel extends Synapse.Model {
     public Log1_AssetDisposalModel(){
-        this.initTable("tbl_log1_AssetDispose");
+        this.initTable("tbl_log1_AssetDisposal");
     }
 }

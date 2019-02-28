@@ -95,7 +95,7 @@ and open the template in the editor.
 
 
 .menu-bar {
-    -fx-background-color: #212121;
+    -fx-background-color: white;
     -fx-font-size: 10pt;
 }
 
@@ -106,19 +106,20 @@ and open the template in the editor.
 
 
 .menu .context-menu {
-    -fx-background-color: #212121;
+    -fx-background-color: #34A853;
 }
 
 .menu .label{    
-    -fx-text-fill:  white;
+    -fx-text-fill:  #34A853;
 }
 
 .menu-button {
-    -fx-background-color: #212121;
+    -fx-background-color: white;
+    /*-fx-text-fill: white;*/
 }
 
 .menuButton > .label {
-    -fx-text-fill: #34a853;
+    -fx-text-fill: white;
 }
 
 .menuButtonWorkflow {
@@ -132,13 +133,13 @@ and open the template in the editor.
 .menu-button:hover,
 .menu-button:selected,
 .menu-button:showing{
-    -fx-background-color: #212121;
+    -fx-background-color:  #34A853 ;
 }
 
 .menu-button:hover > .label,
 .menu-button:selected > .label,
 .menu-button:showing > .label{
-    -fx-text-fill: #34A853;
+    -fx-text-fill: white;
 }
 
 .menu-button:hover  .fontIcon,
@@ -150,8 +151,8 @@ and open the template in the editor.
 .menu-item:hover,
 .menu-item:selected,
 .menu-item:showing{
-    -fx-background-color: #212121;
-    -fx-text-fill: #34A853 !important;
+    -fx-background-color: #34A853;
+    -fx-text-fill: white !important;
 }
 
 .menu-item:hover .fontIcon,

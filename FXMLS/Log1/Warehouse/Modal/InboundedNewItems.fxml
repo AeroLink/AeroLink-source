@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1000.0" stylesheets="@../../../../Assets/css/MainPanel.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="FXMLS.Log1.Warehouse.Modal.InboundedNewItemsController">
+   <children>
+      <BorderPane prefHeight="700.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="700.0" spacing="5.0" styleClass="btn-primary" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <FontAwesomeIconView fill="WHITE" glyphName="TRUCK" size="21">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" top="5.0" />
+                           </HBox.margin>
+                        </FontAwesomeIconView>
+                        <Label text="Inbounded new items" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </top>
+         <center>
+            <AnchorPane BorderPane.alignment="CENTER">
+               <children>
+                  <BorderPane prefHeight="469.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <top>
+                        <AnchorPane BorderPane.alignment="CENTER">
+                           <children>
+                              <ToolBar prefHeight="35.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <items>
+                                    <JFXButton styleClass="btn-primary" text="Inbound items logs">
+                                       <graphic>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="COGS" />
+                                       </graphic>
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <Separator orientation="VERTICAL">
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </Separator>
+                                    <Label text="Filter by date:" textFill="GREEN">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <DatePicker editable="false" prefHeight="25.0" prefWidth="152.0" promptText="Select date" />
+                                    <JFXButton contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" styleClass="btn-primary">
+                                       <graphic>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="SORT" size="12" />
+                                       </graphic>
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <Separator layoutX="156.0" layoutY="10.0" orientation="VERTICAL">
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </Separator>
+                                    <Label layoutX="176.0" layoutY="14.0" text="Search Item:" textFill="GREEN">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField promptText="Item Name" />
+                                    <JFXButton contentDisplay="GRAPHIC_ONLY" layoutX="414.0" layoutY="10.0" styleClass="btn-primary">
+                                       <graphic>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="12" />
+                                       </graphic>
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <Separator layoutX="156.0" layoutY="10.0" orientation="VERTICAL">
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </Separator>
+                                    <JFXButton layoutX="414.0" layoutY="10.0" styleClass="btn-primary" text="Refresh table">
+                                       <graphic>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="REFRESH" />
+                                       </graphic>
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </JFXButton>
+                                 </items>
+                              </ToolBar>
+                           </children>
+                        </AnchorPane>
+                     </top>
+                     <center>
+                        <AnchorPane BorderPane.alignment="CENTER">
+                           <children>
+                              <TableView layoutX="49.0" layoutY="47.0" prefHeight="584.0" prefWidth="900.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                                 <contextMenu>
+                                    <ContextMenu>
+                                       <items>
+                                          <MenuItem mnemonicParsing="false" text="Register this Item to Warehouse" />
+                                          <MenuItem mnemonicParsing="false" text="View full details" />
+                                       </items>
+                                    </ContextMenu>
+                                 </contextMenu>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                     </center>
+                  </BorderPane>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
