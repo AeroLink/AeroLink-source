@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="620.0" prefWidth="381.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR4.Modals.HR4_SalaryUpRequisitionController">
+   <children>
+      <AnchorPane layoutX="5.0" layoutY="5.0" prefHeight="613.0" prefWidth="371.0" style="-fx-border-color: green; -fx-border-radius: 10;">
+         <children>
+            <AnchorPane layoutX="5.0" layoutY="274.0" prefHeight="335.0" prefWidth="359.0" style="-fx-border-color: green; -fx-border-radius: 10;">
+               <children>
+                  <JFXButton fx:id="SubmitBtn" buttonType="RAISED" layoutX="14.0" layoutY="303.0" prefHeight="25.0" prefWidth="332.0" styleClass="btn-primary" text="Submit" />
+                  <Label layoutX="7.0" layoutY="5.0" text="Performance :">
+                     <font>
+                        <Font name="Arial Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="189.0" layoutY="111.0" text="Average :">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="ave" disable="true" editable="false" layoutX="189.0" layoutY="126.0" prefHeight="25.0" prefWidth="156.0" />
+                  <TextArea fx:id="desc" layoutX="14.0" layoutY="220.0" prefHeight="73.0" prefWidth="332.0" />
+                  <Label layoutX="14.0" layoutY="204.0" text="Message :">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="21.0" text="Productivity :">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="prod" disable="true" editable="false" layoutX="14.0" layoutY="36.0" prefHeight="25.0" prefWidth="156.0" />
+                  <Label layoutX="14.0" layoutY="65.0" text="Quality of work :">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="qow" disable="true" editable="false" layoutX="14.0" layoutY="80.0" prefHeight="25.0" prefWidth="156.0" />
+                  <Label layoutX="14.0" layoutY="111.0" text="Initiative :">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="init" disable="true" editable="false" layoutX="14.0" layoutY="126.0" prefHeight="25.0" prefWidth="156.0" />
+                  <Label layoutX="14.0" layoutY="157.0" text="Teamwork :">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tw" disable="true" editable="false" layoutX="14.0" layoutY="172.0" prefHeight="25.0" prefWidth="156.0" />
+                  <Label layoutX="189.0" layoutY="21.0" text="Problem Solving :">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="ps" disable="true" editable="false" layoutX="189.0" layoutY="36.0" prefHeight="25.0" prefWidth="156.0" />
+                  <TextField fx:id="att" disable="true" editable="false" layoutX="189.0" layoutY="80.0" prefHeight="25.0" prefWidth="156.0" />
+                  <Label layoutX="189.0" layoutY="65.0" text="Attendance :">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </Label>
+                  <FontAwesomeIconView fill="WHITE" glyphName="PAPER_PLANE" layoutX="144.0" layoutY="320.0" />
+               </children>
+            </AnchorPane>
+            <Label layoutX="7.0" layoutY="5.0" text="Employee Information :">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="22.0" text="Employee Code :">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Label>
+            <TextField disable="true" editable="false" layoutX="14.0" layoutY="37.0" prefHeight="25.0" prefWidth="126.0" />
+            <TextField disable="true" editable="false" layoutX="147.0" layoutY="37.0" prefHeight="25.0" prefWidth="208.0" />
+            <Label layoutX="149.0" layoutY="21.0" text="Employee Full Name :">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="68.0" text="Current Department :">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Label>
+            <TextField disable="true" editable="false" layoutX="14.0" layoutY="83.0" prefHeight="25.0" prefWidth="164.0" />
+            <TextField disable="true" editable="false" layoutX="193.0" layoutY="83.0" prefHeight="25.0" prefWidth="164.0" />
+            <Label layoutX="195.0" layoutY="67.0" text="Current Position :">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="114.0" text="Current Classification :">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Label>
+            <TextField disable="true" editable="false" layoutX="15.0" layoutY="131.0" prefHeight="25.0" prefWidth="164.0" />
+            <AnchorPane layoutX="5.0" layoutY="159.0" prefHeight="112.0" prefWidth="359.0" style="-fx-border-color: green; -fx-border-radius: 10;">
+               <children>
+                  <Label layoutX="7.0" layoutY="4.0" text="Promotional Changes :">
+                     <font>
+                        <Font name="Arial Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="19.0" text="Requested Position :">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="req_pos" layoutX="14.0" layoutY="35.0" prefHeight="25.0" prefWidth="332.0" />
+                  <TextField fx:id="classification" disable="true" editable="false" layoutX="14.0" layoutY="78.0" prefHeight="25.0" prefWidth="101.0" />
+                  <TextField fx:id="dept" disable="true" editable="false" layoutX="129.0" layoutY="78.0" prefHeight="25.0" prefWidth="101.0" />
+                  <TextField fx:id="designation" disable="true" editable="false" layoutX="244.0" layoutY="78.0" prefHeight="25.0" prefWidth="101.0" />
+                  <Label layoutX="15.0" layoutY="63.0" text="Classification :">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="130.0" layoutY="63.0" text="Department :">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="245.0" layoutY="63.0" text="Designation :">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <TextField disable="true" editable="false" layoutX="193.0" layoutY="130.0" prefHeight="25.0" prefWidth="164.0" />
+            <Label layoutX="195.0" layoutY="114.0" text="Current Designation :">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

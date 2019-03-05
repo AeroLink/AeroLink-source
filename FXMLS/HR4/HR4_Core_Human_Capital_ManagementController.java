@@ -86,7 +86,6 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
     private TableView<HR4_EmpInfoClass> tbl_chc;
     @FXML
     private ComboBox statcb;
-  
     private ComboBox ckasscb;
     @FXML
     private JFXTextField srch1;
@@ -513,7 +512,7 @@ public class HR4_Core_Human_Capital_ManagementController implements Initializabl
     public void AddJobToTable1(List rs) {
 
         obj1.clear();
-        tbl_chc.getItems().clear();
+        tbl_chc.refresh();
 
         for (Object row : rs) {
             HashMap crow = (HashMap) row;

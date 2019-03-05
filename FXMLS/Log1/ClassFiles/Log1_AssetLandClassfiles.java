@@ -13,77 +13,116 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class Log1_AssetLandClassfiles {
         public SimpleStringProperty LandID;
-        public SimpleStringProperty LandName;
+        public SimpleStringProperty AssetID;
+        public SimpleStringProperty LAssetTitle;
+        public SimpleStringProperty LAssetDescription;
+        public SimpleStringProperty LAssetCoreLocation;
+        public SimpleStringProperty LandYearBought;
         public SimpleStringProperty LandArea;
-        public SimpleStringProperty LandAddress;
         public SimpleStringProperty LandPricePerSqMeters;
-        public SimpleStringProperty LandPurchasedDate;
-        public SimpleStringProperty AssetCategory;
-        public SimpleStringProperty LandStatus;
-        public SimpleStringProperty LandCurrentPrice;
-        public SimpleStringProperty LandPriceUpdated;
+        public SimpleStringProperty LAssetPurchasedPrice;
+        public SimpleStringProperty LAssetPurchasedDate;
+        public SimpleStringProperty LAssetStatus;
+        public SimpleStringProperty LAssetPriceCurrency;
+        public SimpleStringProperty CurrentPrice;
+        public SimpleStringProperty PriceUpdatedAt;
+        public SimpleStringProperty AssetRegisteredDate;
         
         public Log1_AssetLandClassfiles(
                 String LandID,
-                String AssetCategory,
-                String LandName,
-                String LaneArea,
-                String LandAddress,
+                String AssetID,
+                String LAssetTitle,
+                String LAssetDescription,
+                String LAssetCoreLocation,
+                String LandYearBought,
+                String LandArea,
                 String LandPricePerSqMeters,
-                String LandPurchasedDate,
-                String LandStatus,
-                String LandCurrentPrice,
-                String LandPriceUpdated
+                String LAssetPurchasedPrice,
+                String LAssetPurchasedDate,
+                String LAssetStatus,
+                String LAssetPriceCurrency,
+                String CurrentPrice,
+                String PriceUpdatedAt,
+                String AssetRegisteredDate
                 
             )
         {
             this.LandID = new SimpleStringProperty(LandID);
-            this.LandName = new SimpleStringProperty(LandName);
-            this.LandArea = new SimpleStringProperty(LaneArea);
-            this.LandAddress = new SimpleStringProperty(LandAddress);
+            this.AssetID = new SimpleStringProperty(AssetID);
+            this.LAssetTitle = new SimpleStringProperty(LAssetTitle);
+            this.LAssetDescription = new SimpleStringProperty(LAssetDescription);
+            this.LAssetCoreLocation = new SimpleStringProperty(LAssetCoreLocation);
+            this.LandYearBought = new SimpleStringProperty(LandYearBought);
+            this.LandArea = new SimpleStringProperty(LandArea);
             this.LandPricePerSqMeters = new SimpleStringProperty(LandPricePerSqMeters);
-            this.LandPurchasedDate = new SimpleStringProperty(LandPurchasedDate);
-            this.AssetCategory = new SimpleStringProperty(AssetCategory);
-            this.LandStatus = new SimpleStringProperty(LandStatus);
-            this.LandCurrentPrice = new SimpleStringProperty(LandCurrentPrice);
-            this.LandPriceUpdated = new SimpleStringProperty(LandPriceUpdated);
+            this.LAssetPurchasedPrice = new SimpleStringProperty(LAssetPurchasedPrice);
+            this.LAssetPurchasedDate = new SimpleStringProperty(LAssetPurchasedDate);
+            this.LAssetStatus = new SimpleStringProperty(LAssetStatus);
+            this.LAssetPriceCurrency = new SimpleStringProperty(LAssetPriceCurrency);
+            this.CurrentPrice = new SimpleStringProperty(CurrentPrice);
+            this.PriceUpdatedAt = new SimpleStringProperty(PriceUpdatedAt);
+            this.AssetRegisteredDate = new SimpleStringProperty(AssetRegisteredDate);
         }
-        
-    public String getAssetCategory(){
-        return AssetCategory.get();
-    }    
 
     public String getLandID() {
         return LandID.get();
     }
 
-    public String getLandName() {
-        return LandName.get();
+    public String getAssetID() {
+        return AssetID.get();
+    }
+
+    public String getLAssetTitle() {
+        return LAssetTitle.get();
+    }
+
+    public String getLAssetDescription() {
+        return LAssetDescription.get();
+    }
+
+    public String getLAssetCoreLocation() {
+        return LAssetCoreLocation.get();
+    }
+
+    public String getLandYearBought() {
+        return LandYearBought.get();
     }
 
     public String getLandArea() {
         return LandArea.get();
     }
 
-    public String getLandAddress() {
-        return LandAddress.get();
-    }
-
     public String getLandPricePerSqMeters() {
         return LandPricePerSqMeters.get();
     }
 
-    public String getLandPurchasedDate() {
-        return LandPurchasedDate.get();
+    public String getLAssetPurchasedPrice() {
+        return LAssetPurchasedPrice.get();
     }
-    
-    public String getLandStatus(){
-        return LandStatus.get();
+
+    public String getLAssetPurchasedDate() {
+        return LAssetPurchasedDate.get();
     }
-    public String getLandCurrentPrice(){
-        return LandCurrentPrice.get();
+
+    public String getLAssetStatus() {
+        return LAssetStatus.get();
     }
-    public String getLandPriceUpdated(){
-        return LandPriceUpdated.get();
+
+    public String getLAssetPriceCurrency() {
+        return LAssetPriceCurrency.get();
     }
+
+    public String getCurrentPrice() {
+        return CurrentPrice.get();
+    }
+
+    public String getPriceUpdatedAt() {
+        return PriceUpdatedAt.get();
+    }
+
+    public String getAssetRegisteredDate() {
+        return AssetRegisteredDate.get();
+    }
+        
+
 }

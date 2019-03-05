@@ -30,17 +30,11 @@ public class MaintenanceRepairOHController implements Initializable {
             "4",
             "5");
 
-    @FXML
     private ComboBox<String> howManyEmployees_combox;
-    @FXML
     private ComboBox employee_1;
-    @FXML
     private ComboBox employee_2;
-    @FXML
     private ComboBox employee_3;
-    @FXML
     private ComboBox employee_4;
-    @FXML
     private ComboBox employee_5;
 
     /**
@@ -48,16 +42,9 @@ public class MaintenanceRepairOHController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        howManyEmployees_combox.setItems(numberOfEmployeeNeeded);
-        employee_1.setDisable(true);
-        employee_2.setDisable(true);
-        employee_3.setDisable(true);
-        employee_4.setDisable(true);
-        employee_5.setDisable(true);        
+        // TODO       
     }    
 
-    @FXML
     private void numberOfEmployeeAction(ActionEvent event) {
         String num = howManyEmployees_combox.getValue();
         

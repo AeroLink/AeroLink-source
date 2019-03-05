@@ -13,49 +13,79 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class Log1_AssetDisposalClassfiles {
     public SimpleStringProperty DisposeID;
-    public SimpleStringProperty AssetName;
-    public SimpleStringProperty DisposalValue;
-    public SimpleStringProperty Quantity;
+    public SimpleStringProperty AssetID;
+    public SimpleStringProperty CategoryID;
+    public SimpleStringProperty DisposedBy;
+    public SimpleStringProperty Remarks;
     public SimpleStringProperty DisposalDate;
-    public SimpleStringProperty Note;
+    public SimpleStringProperty AssetTitle;
+    public SimpleStringProperty AssetCategory;
+    public SimpleStringProperty AssetSerialNumber;
+    public SimpleStringProperty CurrentPrice;
     
     public Log1_AssetDisposalClassfiles(
             String DisposeID,
-            String AssetName,
-            String DisposalValue,
-            String Quantity,
+            String AssetID,
+            String CategoryID,
+            String DisposedBy,
+            String Remarks,
             String DisposalDate,
-            String Note
+            String AssetTitle,
+            String AssetCategory,
+            String AssetSerialNumber,
+            String CurrentPrice
     ){
         this.DisposeID = new SimpleStringProperty(DisposeID);
-        this.AssetName = new SimpleStringProperty(AssetName);
-        this.DisposalValue = new SimpleStringProperty(DisposalValue);
-        this.Quantity = new SimpleStringProperty(Quantity);
+        this.AssetID = new SimpleStringProperty(AssetID);
+        this.CategoryID = new SimpleStringProperty(CategoryID);
+        this.DisposedBy = new SimpleStringProperty(DisposedBy);
+        this.Remarks = new SimpleStringProperty(Remarks);
         this.DisposalDate = new SimpleStringProperty(DisposalDate);
-        this.Note = new SimpleStringProperty(Note);
+        this.AssetTitle = new SimpleStringProperty(AssetTitle);
+        this.AssetCategory = new SimpleStringProperty(AssetCategory);
+        this.AssetSerialNumber = new SimpleStringProperty(AssetSerialNumber);
+        this.CurrentPrice = new SimpleStringProperty(CurrentPrice);
     }
 
     public String getDisposeID() {
         return DisposeID.get();
     }
-
-    public String getAssetName() {
-        return AssetName.get();
+    
+    public String getCategoryID() {
+        return CategoryID.get();
     }
 
-    public String getDisposalValue() {
-        return DisposalValue.get();
+    public String getAssetID() {
+        return AssetID.get();
     }
 
-    public String getQuantity() {
-        return Quantity.get();
+    public String getDisposedBy() {
+        return DisposedBy.get();
+    }
+
+    public String getRemarks() {
+        return Remarks.get();
     }
 
     public String getDisposalDate() {
         return DisposalDate.get();
     }
 
-    public String getNote() {
-        return Note.get();
+    public String getAssetTitle() {
+        return AssetTitle.get();
     }
+
+    public String getAssetCategory() {
+        return AssetCategory.get();
+    }
+
+    public String getAssetSerialNumber() {
+        return AssetSerialNumber.get();
+    }
+
+    public String getCurrentPrice() {
+        return CurrentPrice.get();
+    }
+
+    
 }

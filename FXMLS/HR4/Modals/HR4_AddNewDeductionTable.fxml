@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="529.0" prefWidth="761.0" stylesheets="@../../../Assets/css/MainPanel.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLS.HR4.Modals.HR4_AddNewDeductionTableController">
+   <children>
+      <VBox layoutX="109.0" layoutY="32.0" prefHeight="482.0" prefWidth="761.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane prefHeight="70.0" prefWidth="761.0">
+               <children>
+                  <Label fx:id="idxx" layoutX="14.0" layoutY="19.0" prefHeight="21.0" prefWidth="120.0" text="Label">
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="title" layoutX="134.0" layoutY="19.0" prefHeight="21.0" prefWidth="149.0" text="Label">
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="275.0" prefWidth="791.0">
+               <children>
+                  <Label fx:id="ddxd" text="Label" />
+                  <TableView fx:id="tbl_dd" layoutX="93.0" layoutY="24.0" prefHeight="268.0" prefWidth="761.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="213.0" prefWidth="761.0">
+               <children>
+                  <AnchorPane layoutX="5.0" layoutY="5.0" prefHeight="194.0" prefWidth="752.0" style="-fx-border-color: green; -fx-border-radius: 10;">
+                     <children>
+                        <TextField fx:id="a" layoutX="92.0" layoutY="8.0" />
+                        <Label layoutX="21.0" layoutY="13.0" text="Column 1 :">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="b" layoutX="92.0" layoutY="37.0" />
+                        <Label layoutX="21.0" layoutY="42.0" text="Column 2 :">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="c" layoutX="92.0" layoutY="66.0" />
+                        <Label layoutX="21.0" layoutY="71.0" text="Column 3 :">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="d" layoutX="92.0" layoutY="94.0" />
+                        <Label layoutX="21.0" layoutY="99.0" text="Column 4 :">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="e" layoutX="92.0" layoutY="122.0" />
+                        <Label layoutX="21.0" layoutY="127.0" text="Column 5 :">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="f" layoutX="92.0" layoutY="150.0" />
+                        <Label layoutX="21.0" layoutY="155.0" text="Column 6 :">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="g" layoutX="333.0" layoutY="8.0" />
+                        <Label layoutX="262.0" layoutY="13.0" text="Column 7 :">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="h" layoutX="333.0" layoutY="37.0" />
+                        <Label layoutX="262.0" layoutY="42.0" text="Column 8 :">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="i" layoutX="333.0" layoutY="66.0" />
+                        <Label layoutX="262.0" layoutY="71.0" text="Column 9 :">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="j" layoutX="333.0" layoutY="94.0" />
+                        <Label layoutX="262.0" layoutY="99.0" text="Column 10 :">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="k" layoutX="333.0" layoutY="122.0" />
+                        <Label layoutX="262.0" layoutY="127.0" text="Column 11 :">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="l" layoutX="333.0" layoutY="150.0" />
+                        <Label layoutX="262.0" layoutY="155.0" text="Column 12 :">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="m" layoutX="578.0" layoutY="8.0" />
+                        <Label layoutX="507.0" layoutY="13.0" text="Column 13 :">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="n" layoutX="578.0" layoutY="37.0" />
+                        <Label layoutX="507.0" layoutY="42.0" text="Column 14 :">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="o" layoutX="578.0" layoutY="66.0" />
+                        <Label layoutX="507.0" layoutY="71.0" text="Column 15 :">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <JFXButton fx:id="saveBtn" layoutX="528.0" layoutY="122.0" prefHeight="25.0" prefWidth="97.0" styleClass="btn-primary" text="Save" />
+                        <JFXButton fx:id="updateBtn" layoutX="630.0" layoutY="122.0" prefHeight="25.0" prefWidth="97.0" styleClass="btn-primary" text="Update" />
+                        <JFXButton fx:id="deleteBtn" layoutX="630.0" layoutY="150.0" prefHeight="25.0" prefWidth="97.0" styleClass="btn-danger" text="Delete" />
+                        <JFXButton fx:id="clearBtn" layoutX="528.0" layoutY="150.0" prefHeight="25.0" prefWidth="97.0" styleClass="btn-primary" text="Clear" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

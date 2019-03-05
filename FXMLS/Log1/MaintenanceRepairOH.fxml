@@ -2,23 +2,18 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
-<?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -56,243 +51,136 @@
                                  <children>
                                     <BorderPane prefHeight="615.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <center>
-                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                                             <children>
-                                                <TableView prefHeight="581.0" prefWidth="1225.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                   <columns>
-                                                      <TableColumn prefWidth="75.0" text="Date Requested" />
-                                                      <TableColumn prefWidth="75.0" text="Maintenance Type" />
-                                                      <TableColumn prefWidth="75.0" text="Description" />
-                                                      <TableColumn prefWidth="75.0" text="Requestor" />
-                                                      <TableColumn prefWidth="75.0" text="Building" />
-                                                      <TableColumn prefWidth="75.0" text="Location" />
-                                                      <TableColumn prefWidth="75.0" text="Status" />
-                                                   </columns>
-                                                   <columnResizePolicy>
-                                                      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                                   </columnResizePolicy>
-                                                </TableView>
-                                             </children>
+                                          <BorderPane BorderPane.alignment="CENTER">
                                              <BorderPane.margin>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" />
+                                                <Insets />
                                              </BorderPane.margin>
-                                          </AnchorPane>
-                                       </center>
-                                       <top>
-                                          <AnchorPane BorderPane.alignment="CENTER">
-                                             <children>
-                                                <BorderPane prefHeight="35.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                   <right>
-                                                      <HBox alignment="CENTER_RIGHT" spacing="7.0" BorderPane.alignment="CENTER_LEFT">
-                                                         <BorderPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </BorderPane.margin>
-                                                      </HBox>
-                                                   </right>
-                                                   <left>
-                                                      <AnchorPane BorderPane.alignment="CENTER">
+                                             <center>
+                                                <BorderPane>
+                                                   <center>
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                                          <children>
-                                                            <HBox layoutX="5.0" prefHeight="40.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                               <children>
-                                                                  <JFXButton prefHeight="31.0" prefWidth="145.0" styleClass="btn-primary" text="Approve Request">
-                                                                     <graphic>
-                                                                        <FontAwesomeIconView fill="WHITE" glyphName="THUMBS_UP" size="13" />
-                                                                     </graphic>
-                                                                     <HBox.margin>
-                                                                        <Insets left="5.0" top="5.0" />
-                                                                     </HBox.margin>
-                                                                  </JFXButton>
-                                                               </children>
-                                                            </HBox>
+                                                            <TableView prefHeight="581.0" prefWidth="1225.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <columns>
+                                                                  <TableColumn prefWidth="75.0" text="Request Title" />
+                                                                  <TableColumn prefWidth="75.0" text="Requestor" />
+                                                                  <TableColumn prefWidth="75.0" text="Request Type" />
+                                                                  <TableColumn prefWidth="75.0" text="Priority Level" />
+                                                                  <TableColumn prefWidth="75.0" text="Date Requested" />
+                                                               </columns>
+                                                               <columnResizePolicy>
+                                                                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                               </columnResizePolicy>
+                                                            </TableView>
                                                          </children>
                                                       </AnchorPane>
-                                                   </left>
+                                                   </center>
+                                                   <top>
+                                                      <ToolBar prefHeight="25.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                                         <items>
+                                                            <TextField promptText="Search" />
+                                                            <JFXButton styleClass="btn-primary" text="Search">
+                                                               <graphic>
+                                                                  <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" />
+                                                               </graphic>
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </JFXButton>
+                                                            <JFXButton styleClass="btn-primary" text="Refresh">
+                                                               <graphic>
+                                                                  <FontAwesomeIconView fill="WHITE" glyphName="REFRESH" />
+                                                               </graphic>
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </JFXButton>
+                                                         </items>
+                                                      </ToolBar>
+                                                   </top>
+                                                   <BorderPane.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </BorderPane.margin>
                                                 </BorderPane>
-                                             </children>
-                                          </AnchorPane>
+                                             </center>
+                                             <top>
+                                                <ToolBar prefHeight="25.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                                   <items>
+                                                      <JFXButton prefHeight="25.0" styleClass="btn-primary" text="Approve Request">
+                                                         <graphic>
+                                                            <FontAwesomeIconView fill="WHITE" glyphName="THUMBS_UP" />
+                                                         </graphic>
+                                                      </JFXButton>
+                                                   </items>
+                                                </ToolBar>
+                                             </top>
+                                             <bottom>
+                                                <ToolBar prefHeight="25.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                                   <items>
+                                                      <Label prefHeight="17.0" prefWidth="143.0" text="Number of Requests:">
+                                                         <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="0" underline="true">
+                                                         <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </items>
+                                                </ToolBar>
+                                             </bottom>
+                                          </BorderPane>
+                                       </center>
+                                       <top>
+                                          <AnchorPane BorderPane.alignment="CENTER" />
                                        </top>
                                     </BorderPane>
                                  </children>
                               </AnchorPane>
                           </content>
                         </Tab>
-                        <Tab id="tab" text="Create Schedule">
+                        <Tab id="tab" text="Schedules">
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
                                     <BorderPane prefHeight="615.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <left>
-                                          <AnchorPane BorderPane.alignment="CENTER">
-                                             <children>
-                                                <VBox prefHeight="586.0" prefWidth="403.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                   <children>
-                                                      <Label text="Approved Requests">
-                                                         <VBox.margin>
-                                                            <Insets bottom="5.0" left="5.0" top="5.0" />
-                                                         </VBox.margin>
-                                                         <font>
-                                                            <Font name="System Bold Italic" size="12.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <TableView prefHeight="308.0" prefWidth="389.0">
-                                                         <columns>
-                                                            <TableColumn prefWidth="75.0" text="Date Requested" />
-                                                            <TableColumn prefWidth="75.0" text="Request Description" />
-                                                         </columns>
-                                                         <columnResizePolicy>
-                                                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                                         </columnResizePolicy>
-                                                         <VBox.margin>
-                                                            <Insets bottom="7.0" left="7.0" right="7.0" />
-                                                         </VBox.margin>
-                                                      </TableView>
-                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="243.0" prefWidth="403.0">
-                                                         <children>
-                                                            <VBox prefHeight="243.0" prefWidth="403.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                               <children>
-                                                                  <Label text="Request Details">
-                                                                     <VBox.margin>
-                                                                        <Insets left="5.0" top="5.0" />
-                                                                     </VBox.margin>
-                                                                     <font>
-                                                                        <Font name="System Bold" size="13.0" />
-                                                                     </font>
-                                                                  </Label>
-                                                                  <GridPane prefHeight="191.0" prefWidth="383.0">
-                                                                     <columnConstraints>
-                                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.0" minWidth="10.0" prefWidth="75.0" />
-                                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="326.0" minWidth="10.0" prefWidth="203.0" />
-                                                                     </columnConstraints>
-                                                                     <rowConstraints>
-                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                     </rowConstraints>
-                                                                     <children>
-                                                                        <Label text="Maintenance Type:" GridPane.rowIndex="1" />
-                                                                        <Label text="Building:" GridPane.rowIndex="2" />
-                                                                        <Label text="Location:" GridPane.rowIndex="3" />
-                                                                        <JFXTextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                                        <JFXTextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                                        <JFXTextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                                        <Label text="Date Requested" />
-                                                                        <JFXTextField GridPane.columnIndex="1" />
-                                                                     </children>
-                                                                     <VBox.margin>
-                                                                        <Insets left="10.0" right="10.0" />
-                                                                     </VBox.margin>
-                                                                  </GridPane>
-                                                               </children>
-                                                            </VBox>
-                                                         </children>
-                                                      </AnchorPane>
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </AnchorPane>
-                                       </left>
+                                       <top>
+                                          <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                             <items>
+                                                <DatePicker editable="false" promptText="Select Date" />
+                                                <JFXButton buttonType="RAISED" styleClass="btn-primary" text="Filter">
+                                                   <graphic>
+                                                      <FontAwesomeIconView fill="WHITE" glyphName="FILTER" />
+                                                   </graphic>
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </JFXButton>
+                                                <JFXButton buttonType="RAISED" layoutX="188.0" layoutY="13.0" styleClass="btn-primary" text="Filter">
+                                                   <graphic>
+                                                      <FontAwesomeIconView fill="WHITE" glyphName="REFRESH" />
+                                                   </graphic>
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </JFXButton>
+                                             </items>
+                                          </ToolBar>
+                                       </top>
                                        <center>
-                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                                             <children>
-                                                <VBox prefHeight="586.0" prefWidth="967.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                   <children>
-                                                      <Label text="Maintenance Planning">
-                                                         <VBox.margin>
-                                                            <Insets left="7.0" top="5.0" />
-                                                         </VBox.margin>
-                                                         <font>
-                                                            <Font name="System Bold" size="13.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <GridPane prefHeight="573.0" prefWidth="937.0">
-                                                         <columnConstraints>
-                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.0" minWidth="0.0" prefWidth="172.0" />
-                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="802.0" minWidth="10.0" prefWidth="765.0" />
-                                                         </columnConstraints>
-                                                         <rowConstraints>
-                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                         </rowConstraints>
-                                                         <children>
-                                                            <Label text="Employees to Deploy:" GridPane.rowIndex="1" />
-                                                            <Label text="Select Employee/s:" GridPane.rowIndex="2" />
-                                                            <Label text="Duration:" GridPane.rowIndex="3" />
-                                                            <Label text="Activity 1:" GridPane.rowIndex="4" />
-                                                            <Label text="Activity 2:" GridPane.rowIndex="5" />
-                                                            <ComboBox fx:id="howManyEmployees_combox1" onAction="#numberOfEmployeeAction" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                                               <children>
-                                                                  <ComboBox fx:id="employee_11" prefWidth="150.0" visibleRowCount="100" />
-                                                                  <ComboBox fx:id="employee_21" prefWidth="150.0" visibleRowCount="100" />
-                                                                  <ComboBox fx:id="employee_31" layoutX="160.0" layoutY="10.0" prefWidth="150.0" visibleRowCount="100" />
-                                                                  <ComboBox fx:id="employee_41" layoutX="310.0" layoutY="10.0" prefWidth="150.0" visibleRowCount="100" />
-                                                                  <ComboBox fx:id="employee_51" layoutX="490.0" layoutY="26.0" prefWidth="150.0" visibleRowCount="100" />
-                                                               </children>
-                                                            </HBox>
-                                                            <Label text="Activity 3:" GridPane.rowIndex="6" />
-                                                            <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                                               <children>
-                                                                  <TextField prefWidth="160.0" />
-                                                               </children>
-                                                            </HBox>
-                                                            <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                                                               <children>
-                                                                  <TextField prefWidth="600.0" />
-                                                               </children>
-                                                            </HBox>
-                                                            <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                                                               <children>
-                                                                  <TextField prefWidth="600.0" />
-                                                               </children>
-                                                            </HBox>
-                                                            <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                                                               <children>
-                                                                  <TextField prefWidth="600.0" />
-                                                               </children>
-                                                            </HBox>
-                                                            <Label text="Note:" GridPane.rowIndex="7" />
-                                                            <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="641.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
-                                                               <children>
-                                                                  <TextField prefHeight="25.0" prefWidth="600.0" />
-                                                               </children>
-                                                            </HBox>
-                                                            <Label text="Date of Deployment:" />
-                                                            <DatePicker GridPane.columnIndex="1" />
-                                                         </children>
-                                                         <VBox.margin>
-                                                            <Insets left="15.0" right="15.0" top="15.0" />
-                                                         </VBox.margin>
-                                                      </GridPane>
-                                                      <HBox alignment="CENTER" prefHeight="134.0" prefWidth="967.0" spacing="10.0">
-                                                         <children>
-                                                            <JFXButton prefHeight="40.0" prefWidth="120.0" styleClass="btn-primary" text="Save">
-                                                               <font>
-                                                                  <Font name="System Bold" size="13.0" />
-                                                               </font>
-                                                            </JFXButton>
-                                                            <JFXButton layoutX="369.0" layoutY="25.0" prefHeight="40.0" prefWidth="151.0" styleClass="btn-primary" text="Print Authorization">
-                                                               <font>
-                                                                  <Font name="System Bold" size="13.0" />
-                                                               </font>
-                                                            </JFXButton>
-                                                            <JFXButton prefHeight="40.0" prefWidth="120.0" styleClass="btn-danger" text="Cancel">
-                                                               <font>
-                                                                  <Font name="System Bold" size="13.0" />
-                                                               </font>
-                                                            </JFXButton>
-                                                         </children>
-                                                      </HBox>
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </AnchorPane>
+                                          <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                            <columns>
+                                              <TableColumn prefWidth="75.0" text="Request title" />
+                                              <TableColumn prefWidth="75.0" text="Request Type" />
+                                                <TableColumn prefWidth="75.0" text="Location" />
+                                                <TableColumn prefWidth="75.0" text="Department" />
+                                                <TableColumn prefWidth="75.0" text="Date" />
+                                            </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                          </TableView>
                                        </center>
                                     </BorderPane>
                                  </children></AnchorPane>
@@ -302,279 +190,51 @@
                           <content>
                             <AnchorPane prefWidth="1370.0">
                                  <children>
-                                    <TabPane prefHeight="615.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <tabs>
-                                          <Tab closable="false">
-                                            <content>
-                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                   <children>
-                                                      <BorderPane prefHeight="586.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                         <left>
-                                                            <AnchorPane BorderPane.alignment="CENTER">
-                                                               <children>
-                                                                  <VBox prefHeight="586.0" prefWidth="403.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                                     <children>
-                                                                        <Label text="Select Asset">
-                                                                           <VBox.margin>
-                                                                              <Insets bottom="5.0" left="5.0" top="5.0" />
-                                                                           </VBox.margin>
-                                                                           <font>
-                                                                              <Font name="System Bold Italic" size="12.0" />
-                                                                           </font>
-                                                                        </Label>
-                                                                        <TableView prefHeight="308.0" prefWidth="389.0">
-                                                                           <columns>
-                                                                              <TableColumn prefWidth="75.0" text="Asset" />
-                                                                           </columns>
-                                                                           <columnResizePolicy>
-                                                                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                                                           </columnResizePolicy>
-                                                                           <VBox.margin>
-                                                                              <Insets bottom="7.0" left="7.0" right="7.0" />
-                                                                           </VBox.margin>
-                                                                        </TableView>
-                                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="243.0" prefWidth="403.0">
-                                                                           <children>
-                                                                              <VBox prefHeight="243.0" prefWidth="403.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                                                 <children>
-                                                                                    <Label text="Asset Details">
-                                                                                       <VBox.margin>
-                                                                                          <Insets left="5.0" top="5.0" />
-                                                                                       </VBox.margin>
-                                                                                       <font>
-                                                                                          <Font name="System Bold" size="13.0" />
-                                                                                       </font>
-                                                                                    </Label>
-                                                                                    <GridPane prefHeight="191.0" prefWidth="383.0">
-                                                                                       <columnConstraints>
-                                                                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.0" minWidth="10.0" prefWidth="75.0" />
-                                                                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="326.0" minWidth="10.0" prefWidth="203.0" />
-                                                                                       </columnConstraints>
-                                                                                       <rowConstraints>
-                                                                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                                       </rowConstraints>
-                                                                                       <children>
-                                                                                          <Label text="Asset Code:" />
-                                                                                          <Label text="Asset Name:" GridPane.rowIndex="1" />
-                                                                                          <Label text="Asset Type:" GridPane.rowIndex="2" />
-                                                                                          <Label text="Building:" GridPane.rowIndex="3" />
-                                                                                          <Label text="Location:" GridPane.rowIndex="4" />
-                                                                                          <JFXTextField GridPane.columnIndex="1" />
-                                                                                          <JFXTextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                                                          <JFXTextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                                                          <JFXTextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                                                          <JFXTextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                                                                       </children>
-                                                                                       <VBox.margin>
-                                                                                          <Insets left="10.0" right="10.0" />
-                                                                                       </VBox.margin>
-                                                                                    </GridPane>
-                                                                                 </children>
-                                                                              </VBox>
-                                                                           </children>
-                                                                        </AnchorPane>
-                                                                     </children>
-                                                                  </VBox>
-                                                               </children>
-                                                            </AnchorPane>
-                                                         </left>
-                                                         <center>
-                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                                                               <children>
-                                                                  <VBox prefHeight="586.0" prefWidth="967.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                                     <children>
-                                                                        <Label text="Maintenance Planning">
-                                                                           <VBox.margin>
-                                                                              <Insets left="7.0" top="5.0" />
-                                                                           </VBox.margin>
-                                                                           <font>
-                                                                              <Font name="System Bold" size="13.0" />
-                                                                           </font>
-                                                                        </Label>
-                                                                        <HBox alignment="CENTER_LEFT" spacing="5.0">
-                                                                           <children>
-                                                                              <Label text="Note:">
-                                                                                 <font>
-                                                                                    <Font name="System Bold" size="13.0" />
-                                                                                 </font>
-                                                                              </Label>
-                                                                              <Label layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="337.0" text="Will be listed in &quot;Daily&quot; Maintenance Activity upon saving.">
-                                                                                 <font>
-                                                                                    <Font size="13.0" />
-                                                                                 </font>
-                                                                              </Label>
-                                                                           </children>
-                                                                           <VBox.margin>
-                                                                              <Insets left="10.0" top="15.0" />
-                                                                           </VBox.margin>
-                                                                        </HBox>
-                                                                        <GridPane prefHeight="448.0" prefWidth="829.0">
-                                                                           <columnConstraints>
-                                                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.0" minWidth="0.0" prefWidth="172.0" />
-                                                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="802.0" minWidth="10.0" prefWidth="765.0" />
-                                                                           </columnConstraints>
-                                                                           <rowConstraints>
-                                                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                           </rowConstraints>
-                                                                           <children>
-                                                                              <Label text="Employees to Deploy:" />
-                                                                              <Label text="Select Employee/s:" GridPane.rowIndex="1" />
-                                                                              <Label text="Duration:" GridPane.rowIndex="2" />
-                                                                              <Label text="Activity 1:" GridPane.rowIndex="3" />
-                                                                              <Label text="Activity 2:" GridPane.rowIndex="4" />
-                                                                              <ComboBox fx:id="howManyEmployees_combox" onAction="#numberOfEmployeeAction" prefWidth="150.0" GridPane.columnIndex="1" />
-                                                                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                                                                 <children>
-                                                                                    <ComboBox fx:id="employee_1" prefWidth="150.0" visibleRowCount="100" />
-                                                                                    <ComboBox fx:id="employee_2" prefWidth="150.0" visibleRowCount="100" />
-                                                                                    <ComboBox fx:id="employee_3" layoutX="160.0" layoutY="10.0" prefWidth="150.0" visibleRowCount="100" />
-                                                                                    <ComboBox fx:id="employee_4" layoutX="310.0" layoutY="10.0" prefWidth="150.0" visibleRowCount="100" />
-                                                                                    <ComboBox fx:id="employee_5" layoutX="490.0" layoutY="26.0" prefWidth="150.0" visibleRowCount="100" />
-                                                                                 </children>
-                                                                              </HBox>
-                                                                              <Label text="Activity 3:" GridPane.rowIndex="5" />
-                                                                              <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                                                                 <children>
-                                                                                    <TextField prefWidth="160.0" />
-                                                                                 </children>
-                                                                              </HBox>
-                                                                              <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                                                                 <children>
-                                                                                    <TextField prefWidth="600.0" />
-                                                                                 </children>
-                                                                              </HBox>
-                                                                              <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                                                                                 <children>
-                                                                                    <TextField prefWidth="600.0" />
-                                                                                 </children>
-                                                                              </HBox>
-                                                                              <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                                                                                 <children>
-                                                                                    <TextField prefWidth="600.0" />
-                                                                                 </children>
-                                                                              </HBox>
-                                                                              <Label text="Note:" GridPane.rowIndex="6" />
-                                                                              <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="641.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                                                                                 <children>
-                                                                                    <TextField prefHeight="25.0" prefWidth="600.0" />
-                                                                                 </children>
-                                                                              </HBox>
-                                                                           </children>
-                                                                           <VBox.margin>
-                                                                              <Insets left="15.0" right="15.0" top="15.0" />
-                                                                           </VBox.margin>
-                                                                        </GridPane>
-                                                                        <HBox alignment="CENTER" prefHeight="81.0" prefWidth="785.0" spacing="10.0">
-                                                                           <children>
-                                                                              <JFXButton prefHeight="40.0" prefWidth="120.0" styleClass="btn-primary" text="Save">
-                                                                                 <font>
-                                                                                    <Font name="System Bold" size="13.0" />
-                                                                                 </font>
-                                                                              </JFXButton>
-                                                                              <JFXButton prefHeight="40.0" prefWidth="120.0" styleClass="btn-danger" text="Cancel">
-                                                                                 <font>
-                                                                                    <Font name="System Bold" size="13.0" />
-                                                                                 </font>
-                                                                              </JFXButton>
-                                                                           </children>
-                                                                        </HBox>
-                                                                     </children>
-                                                                  </VBox>
-                                                               </children>
-                                                            </AnchorPane>
-                                                         </center>
-                                                      </BorderPane>
-                                                   </children>
-                                                </AnchorPane>
-                                            </content>
-                                             <graphic>
-                                                <Label text="Daily">
-                                                   <font>
-                                                      <Font name="System Bold" size="11.0" />
-                                                   </font>
-                                                </Label>
-                                             </graphic>
-                                          </Tab>
-                                          <Tab closable="false">
-                                             <content>
-                                                <AnchorPane>
-                                                   <children>
-                                                      <BorderPane prefHeight="586.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                         <top>
-                                                            <AnchorPane BorderPane.alignment="CENTER">
-                                                               <children>
-                                                                  <HBox prefHeight="40.0" prefWidth="1360.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                                     <children>
-                                                                        <JFXButton prefHeight="40.0" prefWidth="101.0" styleClass="btn-primary" text="Update">
-                                                                           <graphic>
-                                                                              <FontAwesomeIconView fill="WHITE" glyphName="PENCIL" size="15" />
-                                                                           </graphic>
-                                                                        </JFXButton>
-                                                                        <JFXButton prefHeight="40.0" prefWidth="101.0" styleClass="btn-primary" text="Print">
-                                                                           <graphic>
-                                                                              <FontAwesomeIconView fill="WHITE" glyphName="PRINT" size="15" />
-                                                                           </graphic>
-                                                                        </JFXButton>
-                                                                     </children>
-                                                                  </HBox>
-                                                               </children>
-                                                               <BorderPane.margin>
-                                                                  <Insets left="10.0" top="10.0" />
-                                                               </BorderPane.margin>
-                                                            </AnchorPane>
-                                                         </top>
-                                                         <center>
-                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                                                               <children>
-                                                                  <TableView prefHeight="526.0" prefWidth="1350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                                     <columns>
-                                                                        <TableColumn prefWidth="75.0" text="Asset Name" />
-                                                                        <TableColumn prefWidth="75.0" text="Employees" />
-                                                                        <TableColumn prefWidth="75.0" text="Activity 1" />
-                                                                        <TableColumn prefWidth="75.0" text="Activity 2" />
-                                                                        <TableColumn prefWidth="75.0" text="Activity 3" />
-                                                                        <TableColumn prefWidth="75.0" text="Building" />
-                                                                        <TableColumn prefWidth="75.0" text="Location" />
-                                                                        <TableColumn prefWidth="75.0" text="Note" />
-                                                                        <TableColumn prefWidth="75.0" text="Duration" />
-                                                                        <TableColumn prefWidth="75.0" text="Status" />
-                                                                     </columns>
-                                                                     <columnResizePolicy>
-                                                                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                                                     </columnResizePolicy>
-                                                                  </TableView>
-                                                               </children>
-                                                               <BorderPane.margin>
-                                                                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                                               </BorderPane.margin>
-                                                            </AnchorPane>
-                                                         </center>
-                                                      </BorderPane>
-                                                   </children>
-                                                </AnchorPane>
-                                             </content>
-                                             <graphic>
-                                                <Label text="Print Report">
-                                                   <font>
-                                                      <Font name="System Bold" size="11.0" />
-                                                   </font>
-                                                </Label>
-                                             </graphic>
-                                          </Tab>
-                                       </tabs>
-                                    </TabPane>
-                                 </children>
-                              </AnchorPane>
+                                    <BorderPane prefHeight="615.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <top>
+                                          <AnchorPane BorderPane.alignment="CENTER">
+                                             <children>
+                                                <ToolBar prefHeight="40.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <items>
+                                                      <JFXButton styleClass="btn-primary" text="Create Report">
+                                                         <graphic>
+                                                            <FontAwesomeIconView fill="WHITE" glyphName="PENCIL" />
+                                                         </graphic>
+                                                         <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                         </font>
+                                                      </JFXButton>
+                                                      <JFXButton styleClass="btn-primary" text="Print report">
+                                                         <graphic>
+                                                            <FontAwesomeIconView fill="WHITE" glyphName="PRINT" />
+                                                         </graphic>
+                                                         <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                         </font>
+                                                      </JFXButton>
+                                                   </items>
+                                                </ToolBar>
+                                             </children>
+                                          </AnchorPane>
+                                       </top>
+                                       <center>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <TableView prefHeight="575.0" prefWidth="1370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                  <columns>
+                                                    <TableColumn prefWidth="75.0" text="Equipment Name" />
+                                                    <TableColumn prefWidth="75.0" text="Location" />
+                                                      <TableColumn prefWidth="75.0" text="Activities" />
+                                                  </columns>
+                                                   <columnResizePolicy>
+                                                      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                   </columnResizePolicy>
+                                                </TableView>
+                                             </children>
+                                          </AnchorPane>
+                                       </center>
+                                    </BorderPane>
+                                 </children></AnchorPane>
                           </content>
                         </Tab>
                      </tabs>

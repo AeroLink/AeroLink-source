@@ -5,77 +5,214 @@
  */
 package FXMLS.HR4;
 
+
+import FXMLS.HR4.ClassFiles.HR4_EmployeeClass;
+import FXMLS.HR4.ClassFiles.HR4_FemaleClass;
+import FXMLS.HR4.ClassFiles.HR4_MaleClass;
+import FXMLS.HR4.Model.HR4_EmployeeInfo;
+import FXMLS.HR4.Model.HR4_InfoChartModel;
+import FXMLS.HR4.Model.HR4_EmployeesProfileModel;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.geometry.Side;
+import javafx.scene.chart.PieChart;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
-// POGI SI JUSWA <3 
 /**
  * FXML Controller class
  *
  * @author JaeJae
  */
 public class HR4_AnalyticsController implements Initializable {
-    Button bt = new Button();
-    ChoiceBox<String> cb = new ChoiceBox<>();
+    
+    private PieChart pieChart1;
+    private final ObservableList<PieChart.Data> pie = FXCollections.observableArrayList();
     @FXML
-    private BarChart<?, ?> emp_chart;
+    private Label employee_label;
     @FXML
-    private NumberAxis y;
+    private Label male_label;
     @FXML
-    private CategoryAxis x;
+    private Label female_label;
     @FXML
-    private BarChart<?, ?> peg_barchart;
+    private TableView<HR4_EmployeeClass> tbl_countemployee;
     @FXML
-    private BarChart<?, ?> tag_barchart;
+    private TableView<HR4_MaleClass> male_tbl;
     @FXML
-    private BarChart<?, ?> pegg_barchart;
-
+    private TableView<HR4_FemaleClass> female_tbl;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        /*cb.getItems().add("Gender");
-        cb.getItems().add("Employees");
-        cb.getItems().add("Trainees");
-        cb.getItems().add("Applicants");
-        cb.getItems().addAll("Passed","Failes","Ongoing");
+    /*
+        //employee
+        addtableEmp();
+        loadTableEMP();
         
-        cb.setValue("Gender");
-        bt.setOnAction(e -> getChoice(cb));
-        */
+        //male
+        addtablegender();
+        loadTablegender();
         
-        XYChart.Series set1 = new XYChart.Series<>();
-        XYChart.Series set2 = new XYChart.Series<>();
-        XYChart.Series set3 = new XYChart.Series<>();
-        XYChart.Series set4 = new XYChart.Series<>();
-        set1.getData().add(new XYChart.Data("Male",3));
-        set1.getData().add(new XYChart.Data("Female",2));
-        set2.getData().add(new XYChart.Data("Approved",5));
-        set2.getData().add(new XYChart.Data("Rejected",2));
-        set2.getData().add(new XYChart.Data("Complete",5));
-        set2.getData().add(new XYChart.Data("On Process",10));
-        set3.getData().add(new XYChart.Data("Passed",5));
-        set3.getData().add(new XYChart.Data("Failed",5));
-        set4.getData().add(new XYChart.Data("Male",20));
-        set4.getData().add(new XYChart.Data("Female",15));
-        emp_chart.getData().addAll(set1);
-        peg_barchart.getData().addAll(set2);
-        pegg_barchart.getData().addAll(set3);
-        tag_barchart.getData().addAll(set4);
+        //female
+        addtableFgender();
+        loadTableFgender();
+    */}
+    /*HR4_InfoChartModel gcm = new HR4_InfoChartModel();
+    
+    public void Piechart1() {
+
+        pie.clear();
+        List<HashMap> list3x = gcm
+                .groupBy("gender")
+                .get("gender,COUNT(gender) as Total");
+        list3x.forEach((row) -> {
+            pie.add(new PieChart.Data(row.get("gender").toString(),
+                    Double.parseDouble(row.get("Total").toString())));
+        });
+        pieChart1.setData(pie);
+        pieChart1.setLegendSide(Side.BOTTOM);
+        pieChart1.setStartAngle(90);
+
+    }
+      ObservableList<HR4_EmployeeClass> ec = FXCollections.observableArrayList();
+    
+    public void addtableEmp(){
+          tbl_countemployee.getItems().clear();
+          tbl_countemployee.getColumns().removeAll(tbl_countemployee.getColumns());
+        
+        TableColumn<HR4_EmployeeClass, String> e = new TableColumn<>("Employee");
+        e.setCellValueFactory((TableColumn.CellDataFeatures<HR4_EmployeeClass, String> param) -> param.getValue().emp);
+       
+        tbl_countemployee.getColumns().addAll(e);
+    }
+    public void loadTableEMP(){
+        HR4_EmployeeInfo cm = new HR4_EmployeeInfo();
+          List rs = cm.get();
+                     emp(rs);
+                     
+         int a = tbl_countemployee.getItems().size();
+         employee_label.setText(String.valueOf(a));
+        
         
     }
-    /*public void getChoice(ChoiceBox<String> cb){
-        String type = cb.getValue();
-        System.out.println(type);*/
+    private int emp(List employee){
+        tbl_countemployee.getItems().clear();
+        try {
+              for(Object d : employee)
+            {
+              HashMap hm = (HashMap) d;   //exquisite casting
+             ec.add(new HR4_EmployeeClass(
+                            String.valueOf(hm.get("id"))
+                ));   
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        tbl_countemployee.setItems(ec);
+        return 0;
         
+    }
+    
+    
+    
+    //Male
+    public void addtablegender(){
+         male_tbl.getItems().clear();
+         male_tbl.getColumns().removeAll(male_tbl.getColumns());
+        
+        TableColumn<HR4_MaleClass, String> e = new TableColumn<>("Male");
+        e.setCellValueFactory((TableColumn.CellDataFeatures<HR4_MaleClass, String> param) -> param.getValue().gen);
+       
+        male_tbl.getColumns().addAll(e);
+    }
+    
+    public void loadTablegender(){
+        HR4_EmployeesProfileModel em = new HR4_EmployeesProfileModel();
+         List g = em.where(new Object[][]{
+             {"gender","=","Male"}
+         }).get("gender");
+                     gen(g);
+                     
+         int a = male_tbl.getItems().size();
+         male_label.setText(String.valueOf(a));
+    }
+     ObservableList<HR4_MaleClass> gg = FXCollections.observableArrayList();
+    
+    private int gen(List g){
+         male_tbl.getItems().clear();
+        try {
+              for(Object d : g)
+            {
+              HashMap hm = (HashMap) d;   //exquisite casting
+             gg.add(new HR4_MaleClass(
+                            String.valueOf(hm.get("gender"))
+                ));   
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        male_tbl.setItems(gg);
+        return 0;
+        
+    }
+    
+    
+    //female
+    ObservableList<HR4_FemaleClass> gens1 = FXCollections.observableArrayList();
+    public void addtableFgender(){
+         female_tbl.getItems().clear();
+         female_tbl.getColumns().removeAll(female_tbl.getColumns());
+        
+        TableColumn<HR4_FemaleClass, String> e = new TableColumn<>("female");
+        e.setCellValueFactory((TableColumn.CellDataFeatures<HR4_FemaleClass, String> param) -> param.getValue().gen1);
+       
+        female_tbl.getColumns().addAll(e);
+    }
+    
+     public void loadTableFgender(){
+        HR4_EmployeesProfileModel em1 = new HR4_EmployeesProfileModel();
+         List g = em1.where(new Object[][]{
+             {"gender","=","Female"}
+         }).get("gender");
+                     gen1(g);
+                     
+         int a = female_tbl.getItems().size();
+         female_label.setText(String.valueOf(a));
+    }
+    
+    private int gen1(List g1){
+         female_tbl.getItems().clear();
+        try {
+              for(Object d : g1)
+            {
+              HashMap hm = (HashMap) d;   //exquisite casting
+             gens1.add(new HR4_FemaleClass(
+                            String.valueOf(hm.get("gender"))
+                ));   
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        female_tbl.setItems(gens1);
+        return 0;
+        
+    }
+    
+     
+    */
     
 }
+
+   

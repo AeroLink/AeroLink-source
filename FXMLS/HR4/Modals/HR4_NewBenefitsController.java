@@ -44,37 +44,20 @@ public class HR4_NewBenefitsController implements Initializable {
     SubmitBtn.setOnMouseClicked(e ->SaveNewBenefits());
     }    
     public void SaveNewBenefits(){
-        HR4_BenefitsModel fba = new HR4_BenefitsModel();
-            
-          try
-        {
-           String[][] fba_table =
-        {
+        HR4_BenefitsModel bm = new HR4_BenefitsModel();
+        int benefits_id = bm.insert(new Object[][]{
+        {"benefits_id", "BFTS00"},
         {"title" , title.getText().toString()},
         {"amount" , amount.getText().toString()},
         {"description" , description.getText().toString()},
-        {"days" , days.getText().toString()}
-        };           
-           
-           
-        if(fba.insert(fba_table)){
-         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-             alert.initStyle(StageStyle.UNDECORATED);
-             alert.setTitle("Saved");
-             alert.setContentText("Data has been saved"); 
-             alert.showAndWait();
-            
-        }else{
-             Alert alert = new Alert(Alert.AlertType.ERROR);
-             alert.initStyle(StageStyle.UNDECORATED);
-             alert.setTitle("ERROR");
-             alert.setContentText("PLEASE FILL THE EMPTY FIELDS"); 
-             alert.showAndWait();
-        }
-                                       
-            }catch(Exception e)
-               {
-            e.printStackTrace();
-               }
+        {"days" , days.getText().toString()},},
+        true);      
+        String BenCode = "BFTS00" + benefits_id;
+            bm.update(new Object[][]{
+                {"benefits_id", BenCode}
+            }).where(new Object[][]{
+                {"id", "=", benefits_id}
+            }).executeUpdate();
     }
+    
 }

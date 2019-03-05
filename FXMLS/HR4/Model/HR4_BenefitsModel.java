@@ -12,7 +12,7 @@ package FXMLS.HR4.Model;
 public class HR4_BenefitsModel extends Synapse.Model{
      public HR4_BenefitsModel()
     {
-        setColumns("id","title","amout","description","days");
+        setColumns("id","benefits_id","title","amout","description","days");
         this.initTable("tbl_hr4_benefits");
     }
 }
