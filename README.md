@@ -1,5 +1,6 @@
 # AeroLink-source
-AeroLink - Freight Management System
+
+   AeroLink - Freight Management System is an Enterprise Information System built to be a project study of using Agile   Methodology in developing Enterprise Information Systems 
 
 
 # Synapse DB Operations Framework
